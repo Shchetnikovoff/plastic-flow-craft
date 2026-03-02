@@ -21,6 +21,7 @@ const ProductContent = () => {
   const [quantities, setQuantities] = useState<Record<string, number>>({});
   const [selectedImage, setSelectedImage] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
+  const productImages = getProductImages(selectedConnection);
 
   const darkFilter = (_i: number) => undefined;
 
