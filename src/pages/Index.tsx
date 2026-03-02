@@ -3,7 +3,7 @@ import { CartProvider } from "@/contexts/CartContext";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import Header from "@/components/Header";
 import CartSheet from "@/components/CartSheet";
-import { productImages, materials, materialSpecs, getSizesForColor, connectionTypes, type ProductSize, type MaterialColor, type ConnectionType } from "@/data/products";
+import { getProductImages, materials, materialSpecs, getSizesForColor, connectionTypes, type ProductSize, type MaterialColor, type ConnectionType } from "@/data/products";
 import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
