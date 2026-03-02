@@ -1,25 +1,33 @@
 
 
-## Plan: Add article decoding scheme above tables
+## Plan: Enhanced article decoding scheme
 
-Add a visual legend/diagram that explains the article format structure, placed right above the table for each material.
+Replace the current minimal decoding row with a richer, more informative breakdown that includes descriptions and a live example article.
 
-### Article formats
-- Multi-color: `ОТВ-90-PPC-7032-200` → Тип–Угол–Материал–RAL–Диаметр
-- Single-color: `ОТВ-90-PE100-200` → Тип–Угол–Материал–Диаметр
+### Current state
+Simple row: `ОТВ – 90 – PPC – 7032 – DN` with one-word labels underneath.
 
-### Implementation
+### Proposed design
 
-**`src/pages/Index.tsx`** — Add a styled decoding block between the table heading and the `<Table>`, showing the article broken into labeled segments with arrows/brackets. Use the currently selected material and color to render a live example:
+**`src/pages/Index.tsx`** — Replace the current decoding block with an enhanced version:
 
-```text
-ОТВ  -  90  -  PPC  -  7032  -  200
- │       │      │       │        │
- Тип   Угол  Материал  RAL    Диаметр
-```
+1. **Live example article** at the top — show a full real article like `ОТВ-90-PPC-7032-200` using the first size from the current table, styled as a highlighted mono string
 
-- Render as a `flex` row of labeled segments with colored underlines/badges
-- For single-color materials (PE100, PPH, PPs), hide the RAL segment
-- Use `font-mono` for the article parts, `text-muted-foreground text-xs` for labels below
-- Wrap in a rounded border card with `bg-muted/30` background, placed between heading and table
+2. **Segment cards** below — each segment as a mini-card in a flex row with:
+   - The value in bold mono (e.g. `PPC`)
+   - Short label (e.g. "Материал")  
+   - Description line explaining what it means (e.g. "Полипропилен блок-сополимер")
+   - For RAL: show the color swatch dot next to the value
+   - For DN: show "Номинальный диаметр трубы"
+
+3. **Segment descriptions**:
+   - `ОТВ` → "Тип изделия" / "Отвод вентиляционный"
+   - `90` → "Угол поворота" / "90 градусов"
+   - `{code}` → "Материал" / full material name
+   - `{RAL}` → "Цвет (RAL)" / color name + swatch (only for multi-color)
+   - `{DN}` → "Диаметр" / "Номинальный диаметр, мм"
+
+4. Layout: keep the `rounded-lg border bg-muted/30` wrapper, use a responsive grid (`grid-cols-4` or `grid-cols-5` depending on RAL presence) for the segment cards
+
+Only changes to `src/pages/Index.tsx` — replace the existing IIFE decoding block (~lines 209–237).
 
