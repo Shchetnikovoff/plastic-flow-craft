@@ -12,6 +12,7 @@ import { Plus, Minus, ShoppingCart, ChevronLeft, ChevronRight, FileDown } from "
 import { useCart } from "@/contexts/CartContext";
 import { toast } from "sonner";
 import { generateTablePdf } from "@/lib/generateTablePdf";
+import { generateFullPagePdf } from "@/lib/generateFullPagePdf";
 
 const ProductContent = () => {
   const { addItem } = useCart();
@@ -317,7 +318,7 @@ const ProductContent = () => {
           </Table>
         </div>
 
-        <div className="mt-4 flex justify-center">
+        <div className="mt-4 flex justify-center gap-3">
           <Button
             variant="outline"
             className="gap-2"
@@ -336,6 +337,41 @@ const ProductContent = () => {
           >
             <FileDown className="h-4 w-4" />
             Скачать таблицу (PDF)
+          </Button>
+          <Button
+            variant="outline"
+            className="gap-2"
+            onClick={() => {
+              const conn = connectionTypes.find(c => c.id === selectedConnection);
+              const mat = materials.find(m => m.name === selectedMaterial);
+              const hasMultipleColors = specs && specs.colors.length > 1;
+              const firstSize = currentSizes[0];
+
+              const articleSegments = [
+                { value: conn?.articlePrefix || "ОТВР", label: "Тип изделия", desc: selectedConnection === "flanec" ? "Фланец" : "Раструб" },
+                { value: "90", label: "Угол", desc: "90 градусов" },
+                { value: mat?.code || "—", label: "Материал", desc: mat?.name.replace(/\s*\(.*\)/, "") || "—" },
+                ...(hasMultipleColors && selectedColor
+                  ? [{ value: selectedColor.colorCode, label: "Цвет", desc: selectedColor.name }]
+                  : []),
+                { value: firstSize ? String(firstSize.diameter) : "DN", label: "Диаметр", desc: "мм" },
+              ];
+
+              generateFullPagePdf({
+                sizes: currentSizes,
+                materialName: selectedMaterial,
+                connectionName: conn?.name || "",
+                colorName: selectedColor?.name,
+                colors: specs?.colors,
+                workingTemp: specs?.workingTemp,
+                chemicalResistance: specs?.chemicalResistance,
+                articleSegments,
+              });
+              toast.success("PDF каталога скачан");
+            }}
+          >
+            <FileDown className="h-4 w-4" />
+            Скачать страницу (PDF)
           </Button>
         </div>
       </div>
