@@ -3,7 +3,7 @@ import { CartProvider } from "@/contexts/CartContext";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import Header from "@/components/Header";
 import CartSheet from "@/components/CartSheet";
-import { productImages, materials, materialSpecs, getSizesForColor, connectionTypes, type ProductSize, type MaterialColor, type ConnectionType } from "@/data/products";
+import { getProductImages, materials, materialSpecs, getSizesForColor, connectionTypes, type ProductSize, type MaterialColor, type ConnectionType } from "@/data/products";
 import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
@@ -21,6 +21,7 @@ const ProductContent = () => {
   const [quantities, setQuantities] = useState<Record<string, number>>({});
   const [selectedImage, setSelectedImage] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
+  const productImages = getProductImages(selectedConnection);
 
   const darkFilter = (_i: number) => undefined;
 
@@ -127,7 +128,7 @@ const ProductContent = () => {
                 {connectionTypes.map((conn) => (
                   <button
                     key={conn.id}
-                    onClick={() => { setSelectedConnection(conn.id); setQuantities({}); }}
+                    onClick={() => { setSelectedConnection(conn.id); setQuantities({}); setSelectedImage(0); }}
                     className={`text-xs font-semibold px-2 py-0.5 rounded-full border transition-colors ${
                       selectedConnection === conn.id
                         ? "border-primary text-primary bg-primary/10"
