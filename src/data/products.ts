@@ -81,6 +81,13 @@ export const materialSpecs: Record<string, MaterialSpecs> = {
       { name: "Чёрный", ral: "—", application: "улица и помещение, морозостоек" },
     ],
   },
+  "Листовой полипропилен гомополимер (PPH)": {
+    workingTemp: "от −5 до +100 °C (хрупкость ниже −15 °C, не для холодного климата)",
+    chemicalResistance: "кислоты, щёлочи, соли",
+    colors: [
+      { name: "Серый", ral: "RAL 7032", application: "внутри помещения" },
+    ],
+  },
 };
 
 export const productImages = [
