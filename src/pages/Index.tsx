@@ -3,7 +3,7 @@ import { CartProvider } from "@/contexts/CartContext";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import Header from "@/components/Header";
 import CartSheet from "@/components/CartSheet";
-import { productImages, productSizes } from "@/data/products";
+import { productImages, productSizesByMaterial, materials, type ProductSize } from "@/data/products";
 import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
@@ -13,19 +13,13 @@ import { toast } from "sonner";
 
 const ProductContent = () => {
   const { addItem } = useCart();
-  const [quantities, setQuantities] = useState<Record<string, number>>(
-    Object.fromEntries(productSizes.map((s) => [s.article, 1]))
-  );
+  const [selectedMaterial, setSelectedMaterial] = useState(materials[0].name);
+  const currentSizes = productSizesByMaterial[selectedMaterial];
+  const [quantities, setQuantities] = useState<Record<string, number>>({});
   const [selectedImage, setSelectedImage] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
-  const [selectedMaterial, setSelectedMaterial] = useState("Листовой полипропилен блок-сополимер (PPC)");
 
-  const materials = [
-    "Листовой полипропилен блок-сополимер (PPC)",
-    "Листовой полиэтилен (PE 100)",
-    "Листовой полипропилен гомополимер (PPH)",
-    "Листовой полипропилен, не распространяющий горение (PPs)",
-  ];
+  
 
   const setQty = (article: string, delta: number) => {
     setQuantities((prev) => ({
@@ -34,12 +28,13 @@ const ProductContent = () => {
     }));
   };
 
-  const handleAdd = (size: typeof productSizes[0]) => {
+  const handleAdd = (size: ProductSize) => {
+    const qty = quantities[size.article] || 1;
     addItem(
       { article: size.article, diameter: size.diameter, wallThickness: size.wallThickness },
-      quantities[size.article]
+      qty
     );
-    toast.success(`${size.article} (${quantities[size.article]} шт.) добавлен в корзину`);
+    toast.success(`${size.article} (${qty} шт.) добавлен в корзину`);
   };
 
   return (
@@ -142,16 +137,16 @@ const ProductContent = () => {
         <div className="flex flex-wrap gap-2">
           {materials.map((mat) => (
             <Badge
-              key={mat}
+              key={mat.name}
               variant="outline"
               className={`rounded-full px-4 py-1.5 text-xs font-medium cursor-pointer transition-colors ${
-                selectedMaterial === mat
+                selectedMaterial === mat.name
                   ? "border-primary text-primary bg-primary/5"
                   : "hover:border-primary/50 hover:text-primary/80"
               }`}
-              onClick={() => setSelectedMaterial(mat)}
+              onClick={() => setSelectedMaterial(mat.name)}
             >
-              {mat}
+              {mat.name}
             </Badge>
           ))}
         </div>
@@ -176,7 +171,7 @@ const ProductContent = () => {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {productSizes.map((size, i) => (
+              {currentSizes.map((size, i) => (
                 <TableRow
                   key={size.article}
                   className={`cursor-pointer transition-colors hover:bg-primary/5 ${i % 2 === 0 ? "bg-card" : "bg-muted/30"}`}
@@ -191,7 +186,7 @@ const ProductContent = () => {
                       <Button variant="outline" size="icon" className="h-6 w-6" onClick={() => setQty(size.article, -1)}>
                         <Minus className="h-3 w-3" />
                       </Button>
-                      <span className="w-7 text-center text-xs font-medium">{quantities[size.article]}</span>
+                      <span className="w-7 text-center text-xs font-medium">{quantities[size.article] || 1}</span>
                       <Button variant="outline" size="icon" className="h-6 w-6" onClick={() => setQty(size.article, 1)}>
                         <Plus className="h-3 w-3" />
                       </Button>

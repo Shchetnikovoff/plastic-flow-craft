@@ -6,7 +6,19 @@ export interface ProductSize {
   article: string;
 }
 
-export const productSizes: ProductSize[] = [
+export interface MaterialInfo {
+  name: string;
+  code: string;
+}
+
+export const materials: MaterialInfo[] = [
+  { name: "Листовой полипропилен блок-сополимер (PPC)", code: "PPC" },
+  { name: "Листовой полиэтилен (PE 100)", code: "PE100" },
+  { name: "Листовой полипропилен гомополимер (PPH)", code: "PPH" },
+  { name: "Листовой полипропилен, не распространяющий горение (PPs)", code: "PPs" },
+];
+
+const baseSizes = [
   { diameter: 200, wallThickness: 3, availableLength: 200, socketThickness: 3 },
   { diameter: 225, wallThickness: 3, availableLength: 225, socketThickness: 3 },
   { diameter: 250, wallThickness: 3, availableLength: 250, socketThickness: 3 },
@@ -25,10 +37,20 @@ export const productSizes: ProductSize[] = [
   { diameter: 900, wallThickness: 10, availableLength: 900, socketThickness: 10 },
   { diameter: 1000, wallThickness: 10, availableLength: 1000, socketThickness: 10 },
   { diameter: 1200, wallThickness: 10, availableLength: 1200, socketThickness: 10 },
-].map((item) => ({
-  ...item,
-  article: `ОТВ-90-PPC-${item.diameter}`,
-}));
+];
+
+export const productSizesByMaterial: Record<string, ProductSize[]> = Object.fromEntries(
+  materials.map((mat) => [
+    mat.name,
+    baseSizes.map((item) => ({
+      ...item,
+      article: `ОТВ-90-${mat.code}-${item.diameter}`,
+    })),
+  ])
+);
+
+// Keep backward compat
+export const productSizes = productSizesByMaterial[materials[0].name];
 
 export const productImages = [
   "/images/product-1.png",
