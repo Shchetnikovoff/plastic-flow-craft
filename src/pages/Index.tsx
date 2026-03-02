@@ -19,6 +19,10 @@ const ProductContent = () => {
   const [selectedImage, setSelectedImage] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
 
+  const isPE100 = selectedMaterial === "Листовой полиэтилен (PE 100)";
+  const darkFilter = (i: number) =>
+    isPE100 && i < 3 ? { filter: "brightness(0.15) contrast(1.2)" } : undefined;
+
   
 
   const setQty = (article: string, delta: number) => {
@@ -49,7 +53,7 @@ const ProductContent = () => {
               i === selectedImage ? "border-primary shadow-md" : "border-border hover:border-muted-foreground"
             }`}
           >
-            <img src={src} alt={`Фото ${i + 1}`} className="h-full w-full object-contain p-2" />
+            <img src={src} alt={`Фото ${i + 1}`} className="h-full w-full object-contain p-2 transition-all duration-300" style={darkFilter(i)} />
           </button>
         ))}
       </div>
@@ -61,6 +65,7 @@ const ProductContent = () => {
             <img
               src={productImages[selectedImage]}
               alt={`Фото ${selectedImage + 1}`}
+              style={darkFilter(selectedImage)}
               className="w-full h-auto object-contain max-h-[80vh]"
             />
             <Button
@@ -89,7 +94,7 @@ const ProductContent = () => {
                   i === selectedImage ? "border-primary" : "border-border hover:border-muted-foreground"
                 }`}
               >
-                <img src={src} alt={`Миниатюра ${i + 1}`} className="h-full w-full object-contain p-1" />
+                <img src={src} alt={`Миниатюра ${i + 1}`} className="h-full w-full object-contain p-1 transition-all duration-300" style={darkFilter(i)} />
               </button>
             ))}
           </div>
