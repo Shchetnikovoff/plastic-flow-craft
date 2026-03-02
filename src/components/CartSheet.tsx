@@ -1,9 +1,11 @@
+import { useState } from "react";
 import { Trash2, Plus, Minus, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription, SheetFooter } from "@/components/ui/sheet";
 import { Separator } from "@/components/ui/separator";
 import { useCart } from "@/contexts/CartContext";
 import { toast } from "sonner";
+import ContactFormFields, { type ContactFormData, type ContactFormErrors, validateContactForm } from "@/components/ContactFormFields";
 
 interface CartSheetProps {
   open: boolean;
@@ -12,13 +14,28 @@ interface CartSheetProps {
 
 const CartSheet = ({ open, onOpenChange }: CartSheetProps) => {
   const { items, removeItem, updateQuantity, clearCart } = useCart();
+  const [contactData, setContactData] = useState<ContactFormData>({ name: "", email: "", phone: "", inn: "" });
+  const [contactErrors, setContactErrors] = useState<ContactFormErrors>({});
+
+  const handleContactChange = (field: keyof ContactFormData, value: string) => {
+    setContactData((prev) => ({ ...prev, [field]: value }));
+    if (contactErrors[field]) {
+      setContactErrors((prev) => ({ ...prev, [field]: undefined }));
+    }
+  };
 
   const handleSubmit = () => {
+    const errors = validateContactForm(contactData);
+    setContactErrors(errors);
+    if (Object.keys(errors).length > 0) return;
+
     toast.success(
-      "Заявка сформирована! Свяжитесь с нами: +7 963 322-55-40 или osobenkov@list.ru",
+      "Заявка сформирована! Свяжемся с вами для уточнения деталей.",
       { duration: 6000 }
     );
     clearCart();
+    setContactData({ name: "", email: "", phone: "", inn: "" });
+    setContactErrors({});
     onOpenChange(false);
   };
 
@@ -55,6 +72,14 @@ const CartSheet = ({ open, onOpenChange }: CartSheetProps) => {
               </div>
             </div>
           ))}
+
+          {items.length > 0 && (
+            <div className="pt-3">
+              <Separator className="mb-4" />
+              <p className="text-sm font-semibold text-foreground mb-3">Контактные данные</p>
+              <ContactFormFields data={contactData} errors={contactErrors} onChange={handleContactChange} />
+            </div>
+          )}
         </div>
 
         {items.length > 0 && (

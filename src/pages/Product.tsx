@@ -1,15 +1,17 @@
 import { useState } from "react";
-import { useParams, useNavigate, Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { CartProvider, useCart } from "@/contexts/CartContext";
 import Header from "@/components/Header";
 import CartSheet from "@/components/CartSheet";
 import { materials, materialSpecs, connectionTypes, baseSizes, type ConnectionType } from "@/data/products";
 import { getProductImages } from "@/data/products";
 import { Button } from "@/components/ui/button";
-import { ShoppingCart, Plus, Minus, ChevronLeft, ChevronRight } from "lucide-react";
+import { ShoppingCart, Plus, Minus, ChevronLeft, ChevronRight, FileDown } from "lucide-react";
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { toast } from "sonner";
+import ContactFormFields, { type ContactFormData, type ContactFormErrors, validateContactForm } from "@/components/ContactFormFields";
+import { generateSpecPdf } from "@/lib/generateSpecPdf";
 
 /** Parse article to extract product params */
 function parseArticle(article: string) {
@@ -36,11 +38,13 @@ function parseArticle(article: string) {
 
 const ProductDetailContent = () => {
   const { article } = useParams<{ article: string }>();
-  const navigate = useNavigate();
   const { addItem } = useCart();
   const [qty, setQty] = useState(1);
   const [selectedImage, setSelectedImage] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [pdfDialogOpen, setPdfDialogOpen] = useState(false);
+  const [contactData, setContactData] = useState<ContactFormData>({ name: "", email: "", phone: "", inn: "" });
+  const [contactErrors, setContactErrors] = useState<ContactFormErrors>({});
 
   if (!article) return <div className="p-8 text-center text-muted-foreground">Артикул не указан</div>;
 
@@ -76,6 +80,38 @@ const ProductDetailContent = () => {
       qty
     );
     toast.success(`${article} (${qty} шт.) добавлен в корзину`);
+  };
+
+  const handleDownloadPdf = () => {
+    const errors = validateContactForm(contactData);
+    setContactErrors(errors);
+    if (Object.keys(errors).length > 0) return;
+
+    generateSpecPdf(
+      {
+        article,
+        diameter,
+        wallThickness: sizeData?.wallThickness || 0,
+        socketThickness: sizeData?.socketThickness || 0,
+        availableLength: sizeData?.availableLength ?? null,
+        connectionName: conn?.name || "",
+        materialName: material.name,
+        workingTemp: specs?.workingTemp,
+        chemicalResistance: specs?.chemicalResistance,
+        colorName: color?.name,
+        colorRal: color?.ral,
+      },
+      contactData
+    );
+    toast.success("PDF-спецификация скачана");
+    setPdfDialogOpen(false);
+  };
+
+  const handleContactChange = (field: keyof ContactFormData, value: string) => {
+    setContactData((prev) => ({ ...prev, [field]: value }));
+    if (contactErrors[field]) {
+      setContactErrors((prev) => ({ ...prev, [field]: undefined }));
+    }
   };
 
   return (
@@ -189,6 +225,10 @@ const ProductDetailContent = () => {
               В корзину
             </Button>
           </div>
+          <Button variant="outline" className="gap-2 w-full mt-3" onClick={() => setPdfDialogOpen(true)}>
+            <FileDown className="h-4 w-4" />
+            Скачать спецификацию (PDF)
+          </Button>
         </div>
       </div>
 
@@ -218,6 +258,23 @@ const ProductDetailContent = () => {
               <ChevronRight className="h-5 w-5" />
             </Button>
           </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* PDF Download Dialog */}
+      <Dialog open={pdfDialogOpen} onOpenChange={setPdfDialogOpen}>
+        <DialogContent className="max-w-md">
+          <DialogHeader>
+            <DialogTitle>Скачать спецификацию</DialogTitle>
+            <DialogDescription>
+              Заполните контактные данные для скачивания PDF-спецификации
+            </DialogDescription>
+          </DialogHeader>
+          <ContactFormFields data={contactData} errors={contactErrors} onChange={handleContactChange} />
+          <Button className="w-full gap-2 mt-2" onClick={handleDownloadPdf}>
+            <FileDown className="h-4 w-4" />
+            Скачать PDF
+          </Button>
         </DialogContent>
       </Dialog>
     </main>
