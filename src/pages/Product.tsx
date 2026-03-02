@@ -1,12 +1,13 @@
 import { useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { CartProvider, useCart } from "@/contexts/CartContext";
 import Header from "@/components/Header";
 import CartSheet from "@/components/CartSheet";
 import { materials, materialSpecs, connectionTypes, baseSizes, type ConnectionType } from "@/data/products";
 import { getProductImages } from "@/data/products";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, ShoppingCart, Plus, Minus, ChevronLeft, ChevronRight } from "lucide-react";
+import { ShoppingCart, Plus, Minus, ChevronLeft, ChevronRight } from "lucide-react";
+import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { toast } from "sonner";
 
@@ -47,9 +48,19 @@ const ProductDetailContent = () => {
   if (!parsed) {
     return (
       <main className="mx-auto max-w-[960px] px-6 py-8">
-        <Button variant="ghost" className="mb-4 gap-2" onClick={() => navigate("/")}>
-          <ArrowLeft className="h-4 w-4" /> Назад к каталогу
-        </Button>
+        <Breadcrumb className="mb-6">
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbLink asChild>
+                <Link to="/">Каталог</Link>
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbPage>{article}</BreadcrumbPage>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
         <p className="text-center text-muted-foreground">Товар с артикулом «{article}» не найден</p>
       </main>
     );
@@ -69,9 +80,19 @@ const ProductDetailContent = () => {
 
   return (
     <main className="mx-auto max-w-[960px] px-6 py-8">
-      <Button variant="ghost" className="mb-6 gap-2 text-muted-foreground hover:text-foreground" onClick={() => navigate("/")}>
-        <ArrowLeft className="h-4 w-4" /> Назад к каталогу
-      </Button>
+      <Breadcrumb className="mb-6">
+        <BreadcrumbList>
+          <BreadcrumbItem>
+            <BreadcrumbLink asChild>
+              <Link to="/">Каталог</Link>
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbPage>{article}</BreadcrumbPage>
+          </BreadcrumbItem>
+        </BreadcrumbList>
+      </Breadcrumb>
 
       <div className="grid gap-8 md:grid-cols-2">
         {/* Left: Gallery */}
