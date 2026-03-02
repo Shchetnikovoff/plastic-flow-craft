@@ -1,28 +1,25 @@
 
 
-## Plan: Clickable color selection with article codes for PPC
+## Plan: Add article decoding scheme above tables
 
-### What changes
+Add a visual legend/diagram that explains the article format structure, placed right above the table for each material.
 
-**`src/data/products.ts`**
-- Add `colorCode` field to `MaterialColor` interface (e.g. `"7032"`, `"9003"`, `"5012"`)
-- Add `colorCode` values to all color entries
-- Change `productSizesByMaterial` to be keyed by `material + colorCode` combo, or add a helper function that generates articles with color code: `ОТВ-90-PPC-7032-200`
+### Article formats
+- Multi-color: `ОТВ-90-PPC-7032-200` → Тип–Угол–Материал–RAL–Диаметр
+- Single-color: `ОТВ-90-PE100-200` → Тип–Угол–Материал–Диаметр
 
-**`src/pages/Index.tsx`**
-- Add `selectedColor` state (defaults to first color of current material)
-- Reset `selectedColor` when material changes
-- Make color cards clickable with active/inactive styling (border highlight on selected)
-- Update article generation in the table: when the material has multiple colors, include the RAL code number in the article (e.g. `ОТВ-90-PPC-7032-200`)
-- Update table heading to show selected color name
-- For materials with only one color, auto-select it (no visual change needed)
+### Implementation
 
-### Article format
-- Multi-color materials: `ОТВ-90-{materialCode}-{ralNumber}-{diameter}` (e.g. `ОТВ-90-PPC-7032-200`)
-- Single-color materials: keep current format `ОТВ-90-{materialCode}-{diameter}`
+**`src/pages/Index.tsx`** — Add a styled decoding block between the table heading and the `<Table>`, showing the article broken into labeled segments with arrows/brackets. Use the currently selected material and color to render a live example:
 
-### UI behavior
-- Color cards get `cursor-pointer` and highlighted border when selected
-- Table dynamically regenerates rows based on selected color
-- Quantities reset when color changes
+```text
+ОТВ  -  90  -  PPC  -  7032  -  200
+ │       │      │       │        │
+ Тип   Угол  Материал  RAL    Диаметр
+```
+
+- Render as a `flex` row of labeled segments with colored underlines/badges
+- For single-color materials (PE100, PPH, PPs), hide the RAL segment
+- Use `font-mono` for the article parts, `text-muted-foreground text-xs` for labels below
+- Wrap in a rounded border card with `bg-muted/30` background, placed between heading and table
 
