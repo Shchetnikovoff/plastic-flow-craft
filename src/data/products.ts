@@ -49,6 +49,20 @@ export const productSizesByMaterial: Record<string, ProductSize[]> = Object.from
   ])
 );
 
+// Generate sizes with color code in article for multi-color materials
+export function getSizesForColor(materialName: string, colorCode: string): ProductSize[] {
+  const mat = materials.find((m) => m.name === materialName);
+  if (!mat) return [];
+  const specs = materialSpecs[materialName];
+  const hasMultipleColors = specs && specs.colors.length > 1;
+  return baseSizes.map((item) => ({
+    ...item,
+    article: hasMultipleColors
+      ? `ОТВ-90-${mat.code}-${colorCode}-${item.diameter}`
+      : `ОТВ-90-${mat.code}-${item.diameter}`,
+  }));
+}
+
 // Keep backward compat
 export const productSizes = productSizesByMaterial[materials[0].name];
 
@@ -56,6 +70,7 @@ export interface MaterialColor {
   name: string;
   ral: string;
   hex: string;
+  colorCode: string;
   application: string;
 }
 
@@ -70,30 +85,30 @@ export const materialSpecs: Record<string, MaterialSpecs> = {
     workingTemp: "от −10 до +100 °C",
     chemicalResistance: "кислоты, щёлочи, соли",
     colors: [
-      { name: "Серый", ral: "RAL 7032", hex: "#B8B799", application: "внутри помещения" },
-      { name: "Натуральный", ral: "RAL 9003", hex: "#F4F8F4", application: "внутри помещения" },
-      { name: "Голубой", ral: "RAL 5012", hex: "#3B83BD", application: "улица, УФ-защита" },
+      { name: "Серый", ral: "RAL 7032", hex: "#B8B799", colorCode: "7032", application: "внутри помещения" },
+      { name: "Натуральный", ral: "RAL 9003", hex: "#F4F8F4", colorCode: "9003", application: "внутри помещения" },
+      { name: "Голубой", ral: "RAL 5012", hex: "#3B83BD", colorCode: "5012", application: "улица, УФ-защита" },
     ],
   },
   "Листовой полиэтилен (PE 100)": {
     workingTemp: "от −60 до +80 °C",
     chemicalResistance: "кислоты, щёлочи, солевые растворы, спирты",
     colors: [
-      { name: "Чёрный", ral: "—", hex: "#1C1C1C", application: "улица и помещение, морозостоек" },
+      { name: "Чёрный", ral: "—", hex: "#1C1C1C", colorCode: "", application: "улица и помещение, морозостоек" },
     ],
   },
   "Листовой полипропилен гомополимер (PPH)": {
     workingTemp: "от −5 до +100 °C (хрупкость ниже −15 °C, не для холодного климата)",
     chemicalResistance: "кислоты, щёлочи, соли",
     colors: [
-      { name: "Серый", ral: "RAL 7032", hex: "#B8B799", application: "внутри помещения" },
+      { name: "Серый", ral: "RAL 7032", hex: "#B8B799", colorCode: "7032", application: "внутри помещения" },
     ],
   },
   "Листовой полипропилен, не распространяющий горение (PPs)": {
     workingTemp: "от 0 до +100 °C",
     chemicalResistance: "кислоты, щёлочи, соли",
     colors: [
-      { name: "Серый", ral: "RAL 7032", hex: "#B8B799", application: "внутри помещения" },
+      { name: "Серый", ral: "RAL 7032", hex: "#B8B799", colorCode: "7032", application: "внутри помещения" },
     ],
   },
 };
