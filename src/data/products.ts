@@ -1,12 +1,16 @@
 export interface ProductSize {
   diameter: number;
   wallThickness: number;
-  availableLength: number;
+  availableLength: number | null;
   socketThickness: number;
   article: string;
 }
 
 export const productSizes: ProductSize[] = [
+  { diameter: 100, wallThickness: 2, availableLength: null, socketThickness: 2 },
+  { diameter: 125, wallThickness: 2, availableLength: null, socketThickness: 2 },
+  { diameter: 160, wallThickness: 2, availableLength: null, socketThickness: 2 },
+  { diameter: 180, wallThickness: 2, availableLength: null, socketThickness: 2 },
   { diameter: 200, wallThickness: 3, availableLength: 200, socketThickness: 3 },
   { diameter: 225, wallThickness: 3, availableLength: 225, socketThickness: 3 },
   { diameter: 250, wallThickness: 3, availableLength: 250, socketThickness: 3 },
@@ -27,7 +31,7 @@ export const productSizes: ProductSize[] = [
   { diameter: 1200, wallThickness: 10, availableLength: 1200, socketThickness: 10 },
 ].map((item) => ({
   ...item,
-  article: `ОТВ-90-РС-${item.diameter}`,
+  article: `ОТВ-90-PPC-${item.diameter}`,
 }));
 
 export const productImages = [
