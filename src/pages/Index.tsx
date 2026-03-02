@@ -18,6 +18,14 @@ const ProductContent = () => {
   );
   const [selectedImage, setSelectedImage] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [selectedMaterial, setSelectedMaterial] = useState("Листовой полипропилен блок-сополимер (PPC)");
+
+  const materials = [
+    "Листовой полипропилен блок-сополимер (PPC)",
+    "Листовой полиэтилен (PE 100)",
+    "Листовой полипропилен гомополимер (PPH)",
+    "Листовой полипропилен, не распространяющий горение (PPs)",
+  ];
 
   const setQty = (article: string, delta: number) => {
     setQuantities((prev) => ({
@@ -132,25 +140,27 @@ const ProductContent = () => {
       <div className="mb-10">
         <h2 className="text-lg font-bold text-foreground mb-3 tracking-wide uppercase">Материалы</h2>
         <div className="flex flex-wrap gap-2">
-          <Badge variant="outline" className="rounded-full px-4 py-1.5 text-xs font-medium border-primary text-primary bg-primary/5">
-            Листовой полипропилен блок-сополимер (PPC)
-          </Badge>
-          <Badge variant="outline" className="rounded-full px-4 py-1.5 text-xs font-medium">
-            Листовой полиэтилен (PE 100)
-          </Badge>
-          <Badge variant="outline" className="rounded-full px-4 py-1.5 text-xs font-medium">
-            Листовой полипропилен гомополимер (PPH)
-          </Badge>
-          <Badge variant="outline" className="rounded-full px-4 py-1.5 text-xs font-medium">
-            Листовой полипропилен, не распространяющий горение (PPs)
-          </Badge>
+          {materials.map((mat) => (
+            <Badge
+              key={mat}
+              variant="outline"
+              className={`rounded-full px-4 py-1.5 text-xs font-medium cursor-pointer transition-colors ${
+                selectedMaterial === mat
+                  ? "border-primary text-primary bg-primary/5"
+                  : "hover:border-primary/50 hover:text-primary/80"
+              }`}
+              onClick={() => setSelectedMaterial(mat)}
+            >
+              {mat}
+            </Badge>
+          ))}
         </div>
       </div>
 
       {/* === ТАБЛИЦА === */}
       <div>
         <h2 className="text-sm font-bold text-foreground mb-4 tracking-wide uppercase text-center">
-          Технические характеристики — Листовой полипропилен блок-сополимер (PPC)
+          Технические характеристики — {selectedMaterial}
         </h2>
         <div className="rounded-lg border overflow-hidden">
           <Table>
