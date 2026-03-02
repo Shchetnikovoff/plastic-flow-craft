@@ -74,6 +74,13 @@ export const materialSpecs: Record<string, MaterialSpecs> = {
       { name: "Голубой", ral: "RAL 5012", application: "улица, УФ-защита" },
     ],
   },
+  "Листовой полиэтилен (PE 100)": {
+    workingTemp: "от −60 до +80 °C",
+    chemicalResistance: "кислоты, щёлочи, солевые растворы, спирты",
+    colors: [
+      { name: "Чёрный", ral: "—", application: "универсальное применение" },
+    ],
+  },
 };
 
 export const productImages = [
