@@ -230,7 +230,7 @@ const ProductContent = () => {
           const exampleArticle = firstSize?.article || "—";
 
           const segments = [
-            { value: conn?.articlePrefix || "ОТВ", label: "Тип изделия", desc: selectedConnection === "flanec" ? "Отвод вентиляционный фланцевый" : "Отвод вентиляционный" },
+            { value: conn?.articlePrefix || "ОТВР", label: "Тип изделия", desc: selectedConnection === "flanec" ? "Отвод вентиляционный фланцевый" : "Отвод вентиляционный раструбный" },
             { value: "90", label: "Угол поворота", desc: "90 градусов" },
             { value: mat?.code || "—", label: "Материал", desc: mat?.name.replace(/\s*\(.*\)/, "") || "—" },
             ...(hasMultipleColors && selectedColor

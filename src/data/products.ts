@@ -7,7 +7,7 @@ export interface ConnectionInfo {
 }
 
 export const connectionTypes: ConnectionInfo[] = [
-  { id: "rastrub", name: "Раструб", articlePrefix: "ОТВ" },
+  { id: "rastrub", name: "Раструб", articlePrefix: "ОТВР" },
   { id: "flanec", name: "Фланец", articlePrefix: "ОТВФ" },
 ];
 
