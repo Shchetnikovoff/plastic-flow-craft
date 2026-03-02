@@ -7,7 +7,7 @@ import { productImages, productSizes } from "@/data/products";
 import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-import { Plus, Minus, ShoppingCart } from "lucide-react";
+import { Plus, Minus, ShoppingCart, ChevronLeft, ChevronRight } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
 import { toast } from "sonner";
 
@@ -54,11 +54,29 @@ const ProductContent = () => {
       {/* === LIGHTBOX === */}
       <Dialog open={lightboxOpen} onOpenChange={setLightboxOpen}>
         <DialogContent className="max-w-3xl p-2 bg-background">
-          <img
-            src={productImages[selectedImage]}
-            alt={`Фото ${selectedImage + 1}`}
-            className="w-full h-auto object-contain max-h-[80vh]"
-          />
+          <div className="relative">
+            <img
+              src={productImages[selectedImage]}
+              alt={`Фото ${selectedImage + 1}`}
+              className="w-full h-auto object-contain max-h-[80vh]"
+            />
+            <Button
+              variant="outline"
+              size="icon"
+              className="absolute left-2 top-1/2 -translate-y-1/2 h-10 w-10 rounded-full bg-background/80 backdrop-blur-sm"
+              onClick={() => setSelectedImage((prev) => (prev - 1 + productImages.length) % productImages.length)}
+            >
+              <ChevronLeft className="h-5 w-5" />
+            </Button>
+            <Button
+              variant="outline"
+              size="icon"
+              className="absolute right-2 top-1/2 -translate-y-1/2 h-10 w-10 rounded-full bg-background/80 backdrop-blur-sm"
+              onClick={() => setSelectedImage((prev) => (prev + 1) % productImages.length)}
+            >
+              <ChevronRight className="h-5 w-5" />
+            </Button>
+          </div>
           <div className="flex justify-center gap-2 pt-2">
             {productImages.map((src, i) => (
               <button
