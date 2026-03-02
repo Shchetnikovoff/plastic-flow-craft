@@ -210,24 +210,38 @@ const ProductContent = () => {
         {(() => {
           const mat = materials.find((m) => m.name === selectedMaterial);
           const hasMultipleColors = specs && specs.colors.length > 1;
+          const firstSize = currentSizes[0];
+          const exampleArticle = firstSize?.article || "—";
+
           const segments = [
-            { value: "ОТВ", label: "Тип" },
-            { value: "90", label: "Угол" },
-            { value: mat?.code || "—", label: "Материал" },
-            ...(hasMultipleColors && selectedColor ? [{ value: selectedColor.colorCode, label: "RAL" }] : []),
-            { value: "DN", label: "Диаметр" },
-          ];
+            { value: "ОТВ", label: "Тип изделия", desc: "Отвод вентиляционный" },
+            { value: "90", label: "Угол поворота", desc: "90 градусов" },
+            { value: mat?.code || "—", label: "Материал", desc: mat?.name.replace(/\s*\(.*\)/, "") || "—" },
+            ...(hasMultipleColors && selectedColor
+              ? [{ value: selectedColor.colorCode, label: "Цвет (RAL)", desc: selectedColor.name, hex: selectedColor.hex }]
+              : []),
+            { value: firstSize ? String(firstSize.diameter) : "DN", label: "Диаметр", desc: "Номинальный диаметр, мм" },
+          ] as Array<{ value: string; label: string; desc: string; hex?: string }>;
+
+          const gridCols = hasMultipleColors ? "grid-cols-5" : "grid-cols-4";
+
           return (
-            <div className="mb-4 rounded-lg border bg-muted/30 px-4 py-3">
-              <p className="text-xs text-muted-foreground mb-2 text-center">Расшифровка артикула</p>
-              <div className="flex items-start justify-center gap-0 font-mono text-sm">
-                {segments.map((seg, i) => (
-                  <div key={seg.label} className="flex items-start">
-                    {i > 0 && <span className="text-muted-foreground mx-0.5 pt-0.5">–</span>}
-                    <div className="flex flex-col items-center">
-                      <span className="font-semibold text-foreground px-1">{seg.value}</span>
-                      <span className="text-[10px] text-muted-foreground mt-1">{seg.label}</span>
+            <div className="mb-4 rounded-lg border bg-muted/30 px-4 py-4">
+              <p className="text-xs text-muted-foreground mb-1 text-center">Расшифровка артикула</p>
+              <p className="text-center font-mono text-sm font-bold text-foreground tracking-wider mb-3">
+                {exampleArticle}
+              </p>
+              <div className={`grid ${gridCols} gap-2`}>
+                {segments.map((seg) => (
+                  <div key={seg.label} className="rounded-md border bg-card px-3 py-2 text-center">
+                    <div className="flex items-center justify-center gap-1.5 mb-0.5">
+                      {seg.hex && (
+                        <span className="w-3.5 h-3.5 rounded-full border border-border shrink-0" style={{ backgroundColor: seg.hex }} />
+                      )}
+                      <span className="font-mono text-sm font-bold text-foreground">{seg.value}</span>
                     </div>
+                    <span className="block text-[10px] font-semibold text-primary uppercase tracking-wide">{seg.label}</span>
+                    <span className="block text-[10px] text-muted-foreground mt-0.5 leading-tight">{seg.desc}</span>
                   </div>
                 ))}
               </div>
