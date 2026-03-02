@@ -21,7 +21,7 @@ const ProductContent = () => {
 
   const isPE100 = selectedMaterial === "Листовой полиэтилен (PE 100)";
   const darkFilter = (i: number) =>
-    isPE100 && i < 3 ? { filter: "brightness(0.15) contrast(1.2)" } : undefined;
+    isPE100 && i < 3 ? { filter: "saturate(0) brightness(0.35) contrast(1.4)" } : undefined;
 
   
 
