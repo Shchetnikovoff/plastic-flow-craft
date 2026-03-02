@@ -3,7 +3,7 @@ import { CartProvider } from "@/contexts/CartContext";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import Header from "@/components/Header";
 import CartSheet from "@/components/CartSheet";
-import { productImages, productSizesByMaterial, materials, materialSpecs, type ProductSize } from "@/data/products";
+import { productImages, materials, materialSpecs, getSizesForColor, type ProductSize, type MaterialColor } from "@/data/products";
 import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
@@ -14,7 +14,9 @@ import { toast } from "sonner";
 const ProductContent = () => {
   const { addItem } = useCart();
   const [selectedMaterial, setSelectedMaterial] = useState(materials[0].name);
-  const currentSizes = productSizesByMaterial[selectedMaterial];
+  const specs = materialSpecs[selectedMaterial];
+  const [selectedColor, setSelectedColor] = useState<MaterialColor>(specs?.colors[0]);
+  const currentSizes = getSizesForColor(selectedMaterial, selectedColor?.colorCode || "");
   const [quantities, setQuantities] = useState<Record<string, number>>({});
   const [selectedImage, setSelectedImage] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
@@ -147,7 +149,12 @@ const ProductContent = () => {
                   ? "border-primary text-primary bg-primary/5"
                   : "hover:border-primary/50 hover:text-primary/80"
               }`}
-              onClick={() => setSelectedMaterial(mat.name)}
+              onClick={() => {
+                setSelectedMaterial(mat.name);
+                const newSpecs = materialSpecs[mat.name];
+                if (newSpecs) setSelectedColor(newSpecs.colors[0]);
+                setQuantities({});
+              }}
             >
               {mat.name}
             </Badge>
@@ -172,7 +179,15 @@ const ProductContent = () => {
           <h3 className="text-sm font-semibold text-foreground mb-2">Доступные цвета</h3>
           <div className="grid gap-2 sm:grid-cols-3">
             {materialSpecs[selectedMaterial].colors.map((c) => (
-              <div key={c.ral} className="rounded-lg border bg-card p-3">
+              <div
+                key={c.ral}
+                onClick={() => { setSelectedColor(c); setQuantities({}); }}
+                className={`rounded-lg border bg-card p-3 cursor-pointer transition-all ${
+                  selectedColor?.colorCode === c.colorCode
+                    ? "border-primary ring-1 ring-primary shadow-sm"
+                    : "hover:border-muted-foreground"
+                }`}
+              >
                 <div className="flex items-center gap-2">
                   <span className="w-5 h-5 rounded-full border border-border shrink-0" style={{ backgroundColor: c.hex }} />
                   <span className="text-sm font-semibold text-foreground">{c.name}</span>
@@ -188,7 +203,7 @@ const ProductContent = () => {
       {/* === ТАБЛИЦА === */}
       <div>
         <h2 className="text-sm font-bold text-foreground mb-4 tracking-wide uppercase text-center">
-          Технические характеристики — {selectedMaterial}
+          Технические характеристики — {selectedMaterial}{selectedColor && specs?.colors.length > 1 ? ` — ${selectedColor.name}` : ""}
         </h2>
         <div className="rounded-lg border overflow-hidden">
           <Table>
