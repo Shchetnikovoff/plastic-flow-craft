@@ -88,6 +88,13 @@ export const materialSpecs: Record<string, MaterialSpecs> = {
       { name: "Серый", ral: "RAL 7032", application: "внутри помещения" },
     ],
   },
+  "Листовой полипропилен, не распространяющий горение (PPs)": {
+    workingTemp: "от 0 до +100 °C",
+    chemicalResistance: "кислоты, щёлочи, соли",
+    colors: [
+      { name: "Серый", ral: "RAL 7032", application: "внутри помещения" },
+    ],
+  },
 };
 
 export const productImages = [
