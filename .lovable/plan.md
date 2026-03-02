@@ -1,14 +1,23 @@
 
 
-## Plan: Add breadcrumbs to the product detail page
+## Plan: Download full page as PDF
 
-Add a breadcrumb navigation to `src/pages/Product.tsx` using the existing `src/components/ui/breadcrumb.tsx` component.
+Create a new utility `src/lib/generateFullPagePdf.ts` that builds a comprehensive PDF containing all visible sections of the Index page: product images, description, specs, material info, plastic characteristics, and the full sizes table.
 
-**Changes in `src/pages/Product.tsx`:**
-- Import breadcrumb components and `Link` from react-router-dom
-- Replace the "Назад к каталогу" button with a breadcrumb: `Каталог / {article}`
-- Use `BreadcrumbLink` with `asChild` + `Link` for the "Каталог" item to enable client-side navigation
-- Use `BreadcrumbPage` for the current article
+**New file: `src/lib/generateFullPagePdf.ts`**
+- Accept all current page state: selected material, connection type, color, sizes, product images, specs
+- Build a multi-page landscape jsPDF document with sections:
+  1. Title + subtitle (material, connection, color)
+  2. Description block
+  3. Specifications grid (diameter range, connection, wall, angle)
+  4. Material/plastic characteristics (working temp, chemical resistance, available colors)
+  5. Article decoding legend
+  6. Full sizes table (reuse logic from `generateTablePdf`)
+  7. Footer with company contacts
+- Export as `Каталог_{material}_{connection}.pdf`
 
-**Result:** `Каталог > ОТВР-90-ПП-СР-100` style navigation at the top of the product page.
+**Edit: `src/pages/Index.tsx`**
+- Import the new generator
+- Add a "Скачать страницу (PDF)" button next to the existing "Скачать таблицу (PDF)" button
+- Pass all relevant state (material, connection, color, specs, sizes, images) to the generator
 
