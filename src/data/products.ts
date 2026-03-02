@@ -135,3 +135,15 @@ export const productImages = [
   "/images/product-4.png",
   "/images/product-5.png",
 ];
+
+export const flanecProductImages = [
+  "/images/flanec-1.png",
+  "/images/flanec-2.png",
+  "/images/flanec-3.png",
+  "/images/flanec-4.png",
+  "/images/flanec-5.png",
+];
+
+export function getProductImages(connectionType: ConnectionType): string[] {
+  return connectionType === "flanec" ? flanecProductImages : productImages;
+}
