@@ -78,7 +78,7 @@ export const materialSpecs: Record<string, MaterialSpecs> = {
     workingTemp: "от −60 до +80 °C",
     chemicalResistance: "кислоты, щёлочи, солевые растворы, спирты",
     colors: [
-      { name: "Чёрный", ral: "—", application: "универсальное применение" },
+      { name: "Чёрный", ral: "—", application: "улица и помещение, морозостоек, УФ-стойкий" },
     ],
   },
 };
