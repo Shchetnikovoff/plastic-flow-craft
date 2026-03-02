@@ -173,8 +173,11 @@ const ProductContent = () => {
           <div className="grid gap-2 sm:grid-cols-3">
             {materialSpecs[selectedMaterial].colors.map((c) => (
               <div key={c.ral} className="rounded-lg border bg-card p-3">
-                <span className="text-sm font-semibold text-foreground">{c.name}</span>
-                <span className="ml-2 text-xs text-muted-foreground">{c.ral}</span>
+                <div className="flex items-center gap-2">
+                  <span className="w-5 h-5 rounded-full border border-border shrink-0" style={{ backgroundColor: c.hex }} />
+                  <span className="text-sm font-semibold text-foreground">{c.name}</span>
+                  <span className="text-xs text-muted-foreground">{c.ral}</span>
+                </div>
                 <p className="text-xs text-muted-foreground mt-1">{c.application}</p>
               </div>
             ))}
