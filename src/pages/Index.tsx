@@ -8,9 +8,10 @@ import { getProductImages, materials, materialSpecs, getSizesForColor, connectio
 import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-import { Plus, Minus, ShoppingCart, ChevronLeft, ChevronRight } from "lucide-react";
+import { Plus, Minus, ShoppingCart, ChevronLeft, ChevronRight, FileDown } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
 import { toast } from "sonner";
+import { generateTablePdf } from "@/lib/generateTablePdf";
 
 const ProductContent = () => {
   const { addItem } = useCart();
@@ -314,6 +315,28 @@ const ProductContent = () => {
               ))}
             </TableBody>
           </Table>
+        </div>
+
+        <div className="mt-4 flex justify-center">
+          <Button
+            variant="outline"
+            className="gap-2"
+            onClick={() => {
+              const conn = connectionTypes.find(c => c.id === selectedConnection);
+              generateTablePdf({
+                sizes: currentSizes,
+                materialName: selectedMaterial,
+                connectionName: conn?.name || "",
+                colorName: selectedColor?.name,
+                workingTemp: specs?.workingTemp,
+                chemicalResistance: specs?.chemicalResistance,
+              });
+              toast.success("PDF с таблицей характеристик скачан");
+            }}
+          >
+            <FileDown className="h-4 w-4" />
+            Скачать таблицу (PDF)
+          </Button>
         </div>
       </div>
     </main>
