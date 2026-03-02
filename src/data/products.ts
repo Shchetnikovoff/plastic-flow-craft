@@ -1,3 +1,16 @@
+export type ConnectionType = "rastrub" | "flanec";
+
+export interface ConnectionInfo {
+  id: ConnectionType;
+  name: string;
+  articlePrefix: string;
+}
+
+export const connectionTypes: ConnectionInfo[] = [
+  { id: "rastrub", name: "Раструб", articlePrefix: "ОТВ" },
+  { id: "flanec", name: "Фланец", articlePrefix: "ОТВФ" },
+];
+
 export interface ProductSize {
   diameter: number;
   wallThickness: number;
@@ -50,16 +63,18 @@ export const productSizesByMaterial: Record<string, ProductSize[]> = Object.from
 );
 
 // Generate sizes with color code in article for multi-color materials
-export function getSizesForColor(materialName: string, colorCode: string): ProductSize[] {
+export function getSizesForColor(materialName: string, colorCode: string, connectionType: ConnectionType = "rastrub"): ProductSize[] {
   const mat = materials.find((m) => m.name === materialName);
   if (!mat) return [];
   const specs = materialSpecs[materialName];
   const hasMultipleColors = specs && specs.colors.length > 1;
+  const conn = connectionTypes.find((c) => c.id === connectionType);
+  const prefix = conn?.articlePrefix || "ОТВ";
   return baseSizes.map((item) => ({
     ...item,
     article: hasMultipleColors
-      ? `ОТВ-90-${mat.code}-${colorCode}-${item.diameter}`
-      : `ОТВ-90-${mat.code}-${item.diameter}`,
+      ? `${prefix}-90-${mat.code}-${colorCode}-${item.diameter}`
+      : `${prefix}-90-${mat.code}-${item.diameter}`,
   }));
 }
 
