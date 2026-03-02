@@ -1,12 +1,10 @@
 
 
-## Plan: Add "Р" to rastrub article prefix
+## Plan: Update article decoding description for connection type
 
-Two small changes:
+One small change in `src/pages/Index.tsx` (line 233):
 
-### 1. `src/data/products.ts` (line 10)
-Change rastrub prefix from `"ОТВ"` to `"ОТВР"`.
-
-### 2. `src/pages/Index.tsx`
-In the article decoding scheme, update the description for rastrub connection type from "Отвод вентиляционный" to "Отвод вентиляционный раструбный" (to explain the "Р").
+Change the description text for the "Тип изделия" segment:
+- **Раструб**: "Отвод вентиляционный раструбный" → "Отвод вентиляционный, тип соединения — раструб"
+- **Фланец**: "Отвод вентиляционный фланцевый" → "Отвод вентиляционный, тип соединения — фланец"
 
