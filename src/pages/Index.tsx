@@ -128,7 +128,7 @@ const ProductContent = () => {
                 {connectionTypes.map((conn) => (
                   <button
                     key={conn.id}
-                    onClick={() => { setSelectedConnection(conn.id); setQuantities({}); }}
+                    onClick={() => { setSelectedConnection(conn.id); setQuantities({}); setSelectedImage(0); }}
                     className={`text-xs font-semibold px-2 py-0.5 rounded-full border transition-colors ${
                       selectedConnection === conn.id
                         ? "border-primary text-primary bg-primary/10"
