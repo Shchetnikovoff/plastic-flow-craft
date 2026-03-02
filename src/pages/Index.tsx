@@ -19,9 +19,7 @@ const ProductContent = () => {
   const [selectedImage, setSelectedImage] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
 
-  const isPE100 = selectedMaterial === "Листовой полиэтилен (PE 100)";
-  const darkFilter = (i: number) =>
-    isPE100 && i < 3 ? { filter: "saturate(0) brightness(0.35) contrast(1.4)" } : undefined;
+  const darkFilter = (_i: number) => undefined;
 
   
 
