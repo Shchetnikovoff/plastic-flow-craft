@@ -3,7 +3,6 @@ import { CartProvider } from "@/contexts/CartContext";
 import Header from "@/components/Header";
 import ProductGallery from "@/components/ProductGallery";
 import ProductInfo from "@/components/ProductInfo";
-import ProductTable from "@/components/ProductTable";
 import CartSheet from "@/components/CartSheet";
 
 const Index = () => {
@@ -18,7 +17,6 @@ const Index = () => {
             <ProductGallery />
             <ProductInfo />
           </div>
-          <ProductTable />
         </main>
         <CartSheet open={cartOpen} onOpenChange={setCartOpen} />
       </div>
