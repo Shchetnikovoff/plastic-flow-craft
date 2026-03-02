@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { CartProvider } from "@/contexts/CartContext";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 import Header from "@/components/Header";
 import CartSheet from "@/components/CartSheet";
 import { productImages, productSizes } from "@/data/products";
@@ -16,6 +17,7 @@ const ProductContent = () => {
     Object.fromEntries(productSizes.map((s) => [s.article, 1]))
   );
   const [selectedImage, setSelectedImage] = useState(0);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
 
   const setQty = (article: string, delta: number) => {
     setQuantities((prev) => ({
@@ -39,8 +41,8 @@ const ProductContent = () => {
         {productImages.map((src, i) => (
           <button
             key={i}
-            onClick={() => setSelectedImage(i)}
-            className={`aspect-square overflow-hidden rounded border-2 bg-card transition-all ${
+            onClick={() => { setSelectedImage(i); setLightboxOpen(true); }}
+            className={`aspect-square overflow-hidden rounded border-2 bg-card transition-all cursor-zoom-in ${
               i === selectedImage ? "border-primary shadow-md" : "border-border hover:border-muted-foreground"
             }`}
           >
@@ -48,6 +50,30 @@ const ProductContent = () => {
           </button>
         ))}
       </div>
+
+      {/* === LIGHTBOX === */}
+      <Dialog open={lightboxOpen} onOpenChange={setLightboxOpen}>
+        <DialogContent className="max-w-3xl p-2 bg-background">
+          <img
+            src={productImages[selectedImage]}
+            alt={`Фото ${selectedImage + 1}`}
+            className="w-full h-auto object-contain max-h-[80vh]"
+          />
+          <div className="flex justify-center gap-2 pt-2">
+            {productImages.map((src, i) => (
+              <button
+                key={i}
+                onClick={() => setSelectedImage(i)}
+                className={`h-14 w-14 overflow-hidden rounded border-2 transition-all ${
+                  i === selectedImage ? "border-primary" : "border-border hover:border-muted-foreground"
+                }`}
+              >
+                <img src={src} alt={`Миниатюра ${i + 1}`} className="h-full w-full object-contain p-1" />
+              </button>
+            ))}
+          </div>
+        </DialogContent>
+      </Dialog>
 
       {/* === ОПИСАНИЕ + ХАРАКТЕРИСТИКИ === */}
       <div className="grid gap-8 md:grid-cols-2 mb-10">
