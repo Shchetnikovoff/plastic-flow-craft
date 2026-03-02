@@ -205,6 +205,36 @@ const ProductContent = () => {
         <h2 className="text-sm font-bold text-foreground mb-4 tracking-wide uppercase text-center">
           Технические характеристики — {selectedMaterial}{selectedColor && specs?.colors.length > 1 ? ` — ${selectedColor.name}` : ""}
         </h2>
+
+        {/* === РАСШИФРОВКА АРТИКУЛА === */}
+        {(() => {
+          const mat = materials.find((m) => m.name === selectedMaterial);
+          const hasMultipleColors = specs && specs.colors.length > 1;
+          const segments = [
+            { value: "ОТВ", label: "Тип" },
+            { value: "90", label: "Угол" },
+            { value: mat?.code || "—", label: "Материал" },
+            ...(hasMultipleColors && selectedColor ? [{ value: selectedColor.colorCode, label: "RAL" }] : []),
+            { value: "DN", label: "Диаметр" },
+          ];
+          return (
+            <div className="mb-4 rounded-lg border bg-muted/30 px-4 py-3">
+              <p className="text-xs text-muted-foreground mb-2 text-center">Расшифровка артикула</p>
+              <div className="flex items-start justify-center gap-0 font-mono text-sm">
+                {segments.map((seg, i) => (
+                  <div key={seg.label} className="flex items-start">
+                    {i > 0 && <span className="text-muted-foreground mx-0.5 pt-0.5">–</span>}
+                    <div className="flex flex-col items-center">
+                      <span className="font-semibold text-foreground px-1">{seg.value}</span>
+                      <span className="text-[10px] text-muted-foreground mt-1">{seg.label}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          );
+        })()}
+
         <div className="rounded-lg border overflow-hidden">
           <Table>
             <TableHeader>
