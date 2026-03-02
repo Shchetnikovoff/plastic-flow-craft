@@ -3,7 +3,7 @@ import { CartProvider } from "@/contexts/CartContext";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import Header from "@/components/Header";
 import CartSheet from "@/components/CartSheet";
-import { productImages, materials, materialSpecs, getSizesForColor, type ProductSize, type MaterialColor } from "@/data/products";
+import { productImages, materials, materialSpecs, getSizesForColor, connectionTypes, type ProductSize, type MaterialColor, type ConnectionType } from "@/data/products";
 import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
@@ -14,9 +14,10 @@ import { toast } from "sonner";
 const ProductContent = () => {
   const { addItem } = useCart();
   const [selectedMaterial, setSelectedMaterial] = useState(materials[0].name);
+  const [selectedConnection, setSelectedConnection] = useState<ConnectionType>("rastrub");
   const specs = materialSpecs[selectedMaterial];
   const [selectedColor, setSelectedColor] = useState<MaterialColor>(specs?.colors[0]);
-  const currentSizes = getSizesForColor(selectedMaterial, selectedColor?.colorCode || "");
+  const currentSizes = getSizesForColor(selectedMaterial, selectedColor?.colorCode || "", selectedConnection);
   const [quantities, setQuantities] = useState<Record<string, number>>({});
   const [selectedImage, setSelectedImage] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
@@ -121,8 +122,22 @@ const ProductContent = () => {
               <span className="text-sm font-semibold text-foreground">100–1200 мм</span>
             </div>
             <div className="bg-card p-3">
-              <span className="block text-xs text-muted-foreground">Соединение</span>
-              <span className="text-sm font-semibold text-foreground">Раструб</span>
+              <span className="block text-xs text-muted-foreground mb-1">Соединение</span>
+              <div className="flex gap-1.5">
+                {connectionTypes.map((conn) => (
+                  <button
+                    key={conn.id}
+                    onClick={() => { setSelectedConnection(conn.id); setQuantities({}); }}
+                    className={`text-xs font-semibold px-2 py-0.5 rounded-full border transition-colors ${
+                      selectedConnection === conn.id
+                        ? "border-primary text-primary bg-primary/10"
+                        : "border-border text-muted-foreground hover:border-primary/50 hover:text-foreground"
+                    }`}
+                  >
+                    {conn.name}
+                  </button>
+                ))}
+              </div>
             </div>
             <div className="bg-card p-3 border-t">
               <span className="block text-xs text-muted-foreground">Стенка</span>
@@ -203,18 +218,19 @@ const ProductContent = () => {
       {/* === ТАБЛИЦА === */}
       <div>
         <h2 className="text-sm font-bold text-foreground mb-4 tracking-wide uppercase text-center">
-          Технические характеристики — {selectedMaterial}{selectedColor && specs?.colors.length > 1 ? ` — ${selectedColor.name}` : ""}
+          Технические характеристики — {selectedMaterial}{selectedColor && specs?.colors.length > 1 ? ` — ${selectedColor.name}` : ""} — {connectionTypes.find(c => c.id === selectedConnection)?.name}
         </h2>
 
         {/* === РАСШИФРОВКА АРТИКУЛА === */}
         {(() => {
           const mat = materials.find((m) => m.name === selectedMaterial);
+          const conn = connectionTypes.find((c) => c.id === selectedConnection);
           const hasMultipleColors = specs && specs.colors.length > 1;
           const firstSize = currentSizes[0];
           const exampleArticle = firstSize?.article || "—";
 
           const segments = [
-            { value: "ОТВ", label: "Тип изделия", desc: "Отвод вентиляционный" },
+            { value: conn?.articlePrefix || "ОТВ", label: "Тип изделия", desc: selectedConnection === "flanec" ? "Отвод вентиляционный фланцевый" : "Отвод вентиляционный" },
             { value: "90", label: "Угол поворота", desc: "90 градусов" },
             { value: mat?.code || "—", label: "Материал", desc: mat?.name.replace(/\s*\(.*\)/, "") || "—" },
             ...(hasMultipleColors && selectedColor
