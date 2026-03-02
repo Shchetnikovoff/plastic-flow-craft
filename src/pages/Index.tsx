@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { CartProvider } from "@/contexts/CartContext";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import Header from "@/components/Header";
@@ -13,6 +14,7 @@ import { toast } from "sonner";
 
 const ProductContent = () => {
   const { addItem } = useCart();
+  const navigate = useNavigate();
   const [selectedMaterial, setSelectedMaterial] = useState(materials[0].name);
   const [selectedConnection, setSelectedConnection] = useState<ConnectionType>("rastrub");
   const specs = materialSpecs[selectedMaterial];
@@ -284,13 +286,14 @@ const ProductContent = () => {
                 <TableRow
                   key={size.article}
                   className={`cursor-pointer transition-colors hover:bg-primary/5 ${i % 2 === 0 ? "bg-card" : "bg-muted/30"}`}
+                  onClick={() => navigate(`/product/${encodeURIComponent(size.article)}`)}
                 >
-                  <TableCell className="font-mono text-xs">{size.article}</TableCell>
+                  <TableCell className="font-mono text-xs text-primary underline underline-offset-2">{size.article}</TableCell>
                   <TableCell className="text-center text-sm font-medium">{size.diameter}</TableCell>
                   <TableCell className="text-center text-sm">{size.wallThickness}</TableCell>
                   <TableCell className="text-center text-sm text-primary">{size.availableLength ?? "—"}</TableCell>
                   <TableCell className="text-center text-sm font-medium">{size.socketThickness}</TableCell>
-                  <TableCell>
+                  <TableCell onClick={(e) => e.stopPropagation()}>
                     <div className="flex items-center justify-center gap-1">
                       <Button variant="outline" size="icon" className="h-6 w-6" onClick={() => setQty(size.article, -1)}>
                         <Minus className="h-3 w-3" />
@@ -301,7 +304,7 @@ const ProductContent = () => {
                       </Button>
                     </div>
                   </TableCell>
-                  <TableCell className="text-center">
+                  <TableCell className="text-center" onClick={(e) => e.stopPropagation()}>
                     <Button size="sm" className="h-7 gap-1 text-xs" onClick={() => handleAdd(size)}>
                       <ShoppingCart className="h-3 w-3" />
                       <span className="hidden sm:inline">В корзину</span>

@@ -31,7 +31,7 @@ export const materials: MaterialInfo[] = [
   { name: "Листовой полипропилен, не распространяющий горение (PPs)", code: "PPs" },
 ];
 
-const baseSizes = [
+export const baseSizes = [
   { diameter: 200, wallThickness: 3, availableLength: 200, socketThickness: 3 },
   { diameter: 225, wallThickness: 3, availableLength: 225, socketThickness: 3 },
   { diameter: 250, wallThickness: 3, availableLength: 250, socketThickness: 3 },
