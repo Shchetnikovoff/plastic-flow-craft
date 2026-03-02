@@ -3,7 +3,7 @@ import { CartProvider } from "@/contexts/CartContext";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import Header from "@/components/Header";
 import CartSheet from "@/components/CartSheet";
-import { productImages, productSizesByMaterial, materials, type ProductSize } from "@/data/products";
+import { productImages, productSizesByMaterial, materials, materialSpecs, type ProductSize } from "@/data/products";
 import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
@@ -154,6 +154,33 @@ const ProductContent = () => {
           ))}
         </div>
       </div>
+
+      {/* === ХАРАКТЕРИСТИКИ ПЛАСТИКА === */}
+      {materialSpecs[selectedMaterial] && (
+        <div className="mb-10">
+          <h2 className="text-lg font-bold text-foreground mb-3 tracking-wide uppercase">Характеристики пластика</h2>
+          <div className="grid grid-cols-2 gap-px rounded-lg border overflow-hidden mb-4">
+            <div className="bg-card p-3">
+              <span className="block text-xs text-muted-foreground">Рабочая температура</span>
+              <span className="text-sm font-semibold text-foreground">{materialSpecs[selectedMaterial].workingTemp}</span>
+            </div>
+            <div className="bg-card p-3">
+              <span className="block text-xs text-muted-foreground">Химическая стойкость</span>
+              <span className="text-sm font-semibold text-foreground">{materialSpecs[selectedMaterial].chemicalResistance}</span>
+            </div>
+          </div>
+          <h3 className="text-sm font-semibold text-foreground mb-2">Доступные цвета</h3>
+          <div className="grid gap-2 sm:grid-cols-3">
+            {materialSpecs[selectedMaterial].colors.map((c) => (
+              <div key={c.ral} className="rounded-lg border bg-card p-3">
+                <span className="text-sm font-semibold text-foreground">{c.name}</span>
+                <span className="ml-2 text-xs text-muted-foreground">{c.ral}</span>
+                <p className="text-xs text-muted-foreground mt-1">{c.application}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* === ТАБЛИЦА === */}
       <div>
