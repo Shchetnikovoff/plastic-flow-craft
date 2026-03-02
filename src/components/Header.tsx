@@ -11,35 +11,41 @@ const Header = ({ onCartOpen }: HeaderProps) => {
   const { totalItems } = useCart();
 
   return (
-    <header className="sticky top-0 z-40 border-b bg-card shadow-sm">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3">
-        {/* Logo + Company */}
+    <header className="border-b bg-card">
+      <div className="mx-auto flex max-w-[960px] items-center justify-between px-6 py-4">
+        {/* Left: Logo + Title */}
         <div className="flex items-center gap-4">
           <img
             src="/images/logo.png"
             alt="Логотип Пласт-Металл Про"
             className="h-14 w-auto object-contain"
           />
-          <div className="hidden sm:block">
-            <h2 className="text-sm font-bold text-foreground leading-tight">
-              ООО СЗПК «Пласт-Металл Про»
-            </h2>
-            <p className="flex items-center gap-1 text-xs text-muted-foreground">
-              <MapPin className="h-3 w-3" />
-              Ленинградская обл., д. Разметелево, ул. Строителей 27
+          <div>
+            <h1 className="text-xl font-bold text-foreground leading-tight">
+              Отвод вентиляционный круглого сечения 90°
+            </h1>
+            <p className="text-xs text-muted-foreground mt-0.5">
+              Карточка товара • ООО СЗПК «Пласт-Металл Про»
             </p>
+            <div className="flex items-center gap-3 mt-1 text-[11px] text-muted-foreground">
+              <a href="tel:+79633225540" className="flex items-center gap-1 hover:text-primary transition-colors">
+                <Phone className="h-3 w-3" /> +7 963 322-55-40
+              </a>
+              <a href="mailto:osobenkov@list.ru" className="flex items-center gap-1 hover:text-primary transition-colors">
+                <Mail className="h-3 w-3" /> osobenkov@list.ru
+              </a>
+              <span className="flex items-center gap-1">
+                <MapPin className="h-3 w-3" /> Ленинградская обл., д. Разметелево, ул. Строителей, 27
+              </span>
+            </div>
           </div>
         </div>
 
-        {/* Contacts + Cart */}
-        <div className="flex items-center gap-4">
-          <div className="hidden md:flex flex-col items-end gap-0.5 text-xs text-muted-foreground">
-            <a href="tel:+79633225540" className="flex items-center gap-1 hover:text-primary transition-colors">
-              <Phone className="h-3 w-3" /> +7 963 322-55-40
-            </a>
-            <a href="mailto:osobenkov@list.ru" className="flex items-center gap-1 hover:text-primary transition-colors">
-              <Mail className="h-3 w-3" /> osobenkov@list.ru
-            </a>
+        {/* Right: 90° badge + Cart */}
+        <div className="flex items-center gap-3">
+          <div className="hidden md:flex flex-col items-center">
+            <span className="text-3xl font-black text-primary leading-none">90°</span>
+            <span className="text-[10px] text-muted-foreground">раструб</span>
           </div>
           <Button variant="outline" size="icon" className="relative" onClick={onCartOpen}>
             <ShoppingCart className="h-5 w-5" />
