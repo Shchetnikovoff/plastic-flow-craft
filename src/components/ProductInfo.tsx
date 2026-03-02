@@ -32,15 +32,6 @@ const ProductInfo = () => {
         </div>
       </div>
 
-      {/* Schema image */}
-      <div className="rounded-lg border bg-card p-4">
-        <h3 className="mb-3 font-semibold text-foreground">Схема отвода</h3>
-        <img
-          src="/images/schema.png"
-          alt="Схема отвода 90° с обозначением размеров"
-          className="mx-auto max-h-64 object-contain"
-        />
-      </div>
     </div>
   );
 };
