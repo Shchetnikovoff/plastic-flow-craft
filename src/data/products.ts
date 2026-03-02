@@ -52,6 +52,30 @@ export const productSizesByMaterial: Record<string, ProductSize[]> = Object.from
 // Keep backward compat
 export const productSizes = productSizesByMaterial[materials[0].name];
 
+export interface MaterialColor {
+  name: string;
+  ral: string;
+  application: string;
+}
+
+export interface MaterialSpecs {
+  workingTemp: string;
+  chemicalResistance: string;
+  colors: MaterialColor[];
+}
+
+export const materialSpecs: Record<string, MaterialSpecs> = {
+  "Листовой полипропилен блок-сополимер (PPC)": {
+    workingTemp: "от −10 до +100 °C",
+    chemicalResistance: "кислоты, щёлочи, соли",
+    colors: [
+      { name: "Серый", ral: "RAL 7032", application: "внутри помещения" },
+      { name: "Натуральный", ral: "RAL 9003", application: "внутри помещения" },
+      { name: "Голубой", ral: "RAL 5012", application: "улица, УФ-защита" },
+    ],
+  },
+};
+
 export const productImages = [
   "/images/product-1.png",
   "/images/product-2.png",
