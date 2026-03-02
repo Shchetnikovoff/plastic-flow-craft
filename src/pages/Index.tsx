@@ -35,35 +35,18 @@ const ProductContent = () => {
   return (
     <main className="mx-auto max-w-[960px] px-6 py-8">
       {/* === IMAGE ROW === */}
-      <div className="flex items-start gap-3 mb-10">
-        {/* First 3: small thumbnails */}
-        <div className="flex gap-2">
-          {productImages.slice(0, 3).map((src, i) => (
-            <button
-              key={i}
-              onClick={() => setSelectedImage(i)}
-              className={`h-32 w-32 shrink-0 overflow-hidden rounded border-2 bg-card transition-all ${
-                i === selectedImage ? "border-primary shadow-md" : "border-border hover:border-muted-foreground"
-              }`}
-            >
-              <img src={src} alt={`Фото ${i + 1}`} className="h-full w-full object-contain p-2" />
-            </button>
-          ))}
-        </div>
-        {/* Last 2: larger */}
-        <div className="flex gap-3 flex-1">
-          {productImages.slice(3).map((src, i) => (
-            <button
-              key={i + 3}
-              onClick={() => setSelectedImage(i + 3)}
-              className={`aspect-square flex-1 overflow-hidden rounded border-2 bg-card transition-all ${
-                i + 3 === selectedImage ? "border-primary shadow-md" : "border-border hover:border-muted-foreground"
-              }`}
-            >
-              <img src={src} alt={`Фото ${i + 4}`} className="h-full w-full object-contain p-2" />
-            </button>
-          ))}
-        </div>
+      <div className="grid grid-cols-5 gap-3 mb-10">
+        {productImages.map((src, i) => (
+          <button
+            key={i}
+            onClick={() => setSelectedImage(i)}
+            className={`aspect-square overflow-hidden rounded border-2 bg-card transition-all ${
+              i === selectedImage ? "border-primary shadow-md" : "border-border hover:border-muted-foreground"
+            }`}
+          >
+            <img src={src} alt={`Фото ${i + 1}`} className="h-full w-full object-contain p-2" />
+          </button>
+        ))}
       </div>
 
       {/* === ОПИСАНИЕ + ХАРАКТЕРИСТИКИ === */}
