@@ -126,7 +126,7 @@ const ProductContent = () => {
             </div>
             <div className="bg-card p-3 border-t">
               <span className="block text-xs text-muted-foreground">Стенка</span>
-              <span className="text-sm font-semibold text-foreground">2–10 мм</span>
+              <span className="text-sm font-semibold text-foreground">3–10 мм</span>
             </div>
             <div className="bg-card p-3 border-t">
               <span className="block text-xs text-muted-foreground">Угол</span>
