@@ -42,11 +42,11 @@ const ProductContent = () => {
             <button
               key={i}
               onClick={() => setSelectedImage(i)}
-              className={`h-20 w-20 shrink-0 overflow-hidden rounded border-2 bg-card transition-all ${
+              className={`h-32 w-32 shrink-0 overflow-hidden rounded border-2 bg-card transition-all ${
                 i === selectedImage ? "border-primary shadow-md" : "border-border hover:border-muted-foreground"
               }`}
             >
-              <img src={src} alt={`Фото ${i + 1}`} className="h-full w-full object-contain p-1.5" />
+              <img src={src} alt={`Фото ${i + 1}`} className="h-full w-full object-contain p-2" />
             </button>
           ))}
         </div>
