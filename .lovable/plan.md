@@ -1,20 +1,38 @@
 
 
-## Plan: Add flanged tee gallery images with connection-type switching
+## Plan: Add "Раздвижной элемент" (Sliding Element) product page
 
-The flanged tee data and table already work correctly. What's missing is **dedicated gallery images** for the flanged tee variant -- the uploaded images (3 renders + 2 technical drawings) should display when "Фланец" is selected, similar to how elbows switch images.
+A new product — a straight ventilation duct with 3 sections and adjustable length (up to 2x). Socket connection only. Follow the Troynik page template.
 
-### Changes
+### 1. Save 5 uploaded images to `public/images/`
+- `razdvizhnoy-1.png` through `razdvizhnoy-3.png` (renders from image-69, 70, 71)
+- `razdvizhnoy-4.png` (technical drawing from image-72)
+- `razdvizhnoy-5.png` (wireframe from image-73)
 
-1. **Copy 5 uploaded images** to `public/images/`:
-   - `troynik-flanec-1.png` through `troynik-flanec-3.png` (renders from image-64, 65, 66)
-   - `troynik-flanec-4.png`, `troynik-flanec-5.png` (technical drawings from image-67, 68)
+### 2. Create `src/data/razdvizhnoyProducts.ts`
+- **Interface** `RazdvizhnoySize`: `diameter`, `wallThickness`, `lMin`, `lMax`, `socket`, `article`
+- **Size table** derived from existing `baseSizes` (200–1200mm), with `lMin = diameter`, `lMax = 2 * diameter`, same wall thickness / socket logic
+- Article prefix: `РЭ` (Раздвижной элемент)
+- `getRazdvizhnoySizes(materialName, colorCode)` — generates articles with material/color codes
+- `razdvizhnoyImages` array (5 paths)
 
-2. **Update `src/data/troynikProducts.ts`**:
-   - Add `troynikFlanecImages` array (5 paths)
-   - Add `getTroynikImages(connectionType)` helper function
+### 3. Create `src/pages/Razdvizhnoy.tsx`
+Follow Troynik template structure:
+- Image gallery row with lightbox
+- Description: "Раздвижной элемент — воздуховод из трёх секций с возможностью регулировки длины до двух раз"
+- Characteristics grid: Diameter 200–1200mm, Connection: Раструб, Type: Раздвижной элемент
+- **No connection type switcher** (socket only)
+- Material selector + plastic specs + color picker
+- Article decoder (РЭ — prefix)
+- Table columns: Артикул, Dn мм, L min мм, L max мм, Раструб мм, S мм, Кол-во, Действие
+- Cart integration + row click → `/product/:article`
 
-3. **Update `src/pages/Troynik.tsx`**:
-   - Use `getTroynikImages(selectedConnection)` instead of static `troynikImages`
-   - Reset `selectedImage` to 0 when connection type changes
+### 4. Update `src/App.tsx`
+- Add route: `/razdvizhnoy` → `<Razdvizhnoy />`
+
+### 5. Update `src/components/Header.tsx`
+- Extend `ProductType` to include `"razdvizhnoy"`
+- Add nav link "Раздвижной" pointing to `/razdvizhnoy`
+- Show "РЭ" badge when productType is razdvizhnoy
+- Update title for razdvizhnoy: "Раздвижной элемент вентиляционный"
 
