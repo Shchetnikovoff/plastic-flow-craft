@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Plus, Minus, ShoppingCart, ChevronLeft, ChevronRight, FileDown } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
 import { toast } from "sonner";
-import { generateTablePdf } from "@/lib/generateTablePdf";
+
 import { generateFullPagePdf } from "@/lib/generateFullPagePdf";
 
 const ProductContent = () => {
@@ -319,25 +319,6 @@ const ProductContent = () => {
         </div>
 
         <div className="mt-4 flex justify-center gap-3">
-          <Button
-            variant="outline"
-            className="gap-2"
-            onClick={() => {
-              const conn = connectionTypes.find(c => c.id === selectedConnection);
-              generateTablePdf({
-                sizes: currentSizes,
-                materialName: selectedMaterial,
-                connectionName: conn?.name || "",
-                colorName: selectedColor?.name,
-                workingTemp: specs?.workingTemp,
-                chemicalResistance: specs?.chemicalResistance,
-              });
-              toast.success("PDF с таблицей характеристик скачан");
-            }}
-          >
-            <FileDown className="h-4 w-4" />
-            Скачать таблицу (PDF)
-          </Button>
           <Button
             variant="outline"
             className="gap-2"
