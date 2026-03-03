@@ -280,3 +280,15 @@ export const troynikImages = [
   "/images/troynik-4.png",
   "/images/troynik-5.png",
 ];
+
+export const troynikFlanecImages = [
+  "/images/troynik-flanec-1.png",
+  "/images/troynik-flanec-2.png",
+  "/images/troynik-flanec-3.png",
+  "/images/troynik-flanec-4.png",
+  "/images/troynik-flanec-5.png",
+];
+
+export function getTroynikImages(connectionType: ConnectionType): string[] {
+  return connectionType === "flanec" ? troynikFlanecImages : troynikImages;
+}

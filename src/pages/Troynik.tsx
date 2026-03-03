@@ -5,7 +5,7 @@ import { Dialog, DialogContent } from "@/components/ui/dialog";
 import Header from "@/components/Header";
 import CartSheet from "@/components/CartSheet";
 import { materials, materialSpecs, connectionTypes, type MaterialColor, type ConnectionType } from "@/data/products";
-import { getTroynikSizes, troynikImages, type TroynikSize } from "@/data/troynikProducts";
+import { getTroynikSizes, getTroynikImages, type TroynikSize } from "@/data/troynikProducts";
 import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
@@ -23,6 +23,7 @@ const TroynikContent = () => {
   const currentSizes = getTroynikSizes(selectedMaterial, selectedColor?.colorCode || "", selectedConnection);
   const [quantities, setQuantities] = useState<Record<string, number>>({});
   const [selectedImage, setSelectedImage] = useState(0);
+  const images = getTroynikImages(selectedConnection);
   const [lightboxOpen, setLightboxOpen] = useState(false);
 
   const connectionLabel = selectedConnection === "flanec" ? "Фланец" : "Раструб";
@@ -48,7 +49,7 @@ const TroynikContent = () => {
     <main className="mx-auto max-w-[960px] px-4 sm:px-6 py-6 sm:py-8">
       {/* === IMAGE ROW === */}
       <div className="grid grid-cols-3 sm:grid-cols-5 gap-2 sm:gap-3 mb-8">
-        {troynikImages.map((src, i) => (
+        {images.map((src, i) => (
           <button
             key={i}
             onClick={() => { setSelectedImage(i); setLightboxOpen(true); }}
@@ -65,16 +66,16 @@ const TroynikContent = () => {
       <Dialog open={lightboxOpen} onOpenChange={setLightboxOpen}>
         <DialogContent className="max-w-3xl p-2 bg-background">
           <div className="relative">
-            <img src={troynikImages[selectedImage]} alt={`Фото ${selectedImage + 1}`} className="w-full h-auto object-contain max-h-[80vh]" />
-            <Button variant="outline" size="icon" className="absolute left-2 top-1/2 -translate-y-1/2 h-10 w-10 rounded-full bg-background/80 backdrop-blur-sm" onClick={() => setSelectedImage((prev) => (prev - 1 + troynikImages.length) % troynikImages.length)}>
+            <img src={images[selectedImage]} alt={`Фото ${selectedImage + 1}`} className="w-full h-auto object-contain max-h-[80vh]" />
+            <Button variant="outline" size="icon" className="absolute left-2 top-1/2 -translate-y-1/2 h-10 w-10 rounded-full bg-background/80 backdrop-blur-sm" onClick={() => setSelectedImage((prev) => (prev - 1 + images.length) % images.length)}>
               <ChevronLeft className="h-5 w-5" />
             </Button>
-            <Button variant="outline" size="icon" className="absolute right-2 top-1/2 -translate-y-1/2 h-10 w-10 rounded-full bg-background/80 backdrop-blur-sm" onClick={() => setSelectedImage((prev) => (prev + 1) % troynikImages.length)}>
+            <Button variant="outline" size="icon" className="absolute right-2 top-1/2 -translate-y-1/2 h-10 w-10 rounded-full bg-background/80 backdrop-blur-sm" onClick={() => setSelectedImage((prev) => (prev + 1) % images.length)}>
               <ChevronRight className="h-5 w-5" />
             </Button>
           </div>
           <div className="flex justify-center gap-2 pt-2">
-            {troynikImages.map((src, i) => (
+            {images.map((src, i) => (
               <button key={i} onClick={() => setSelectedImage(i)} className={`h-14 w-14 overflow-hidden rounded border-2 transition-all ${i === selectedImage ? "border-primary" : "border-border hover:border-muted-foreground"}`}>
                 <img src={src} alt={`Миниатюра ${i + 1}`} className="h-full w-full object-contain p-1" />
               </button>
@@ -128,7 +129,7 @@ const TroynikContent = () => {
                   ? "border-primary text-primary bg-primary/5"
                   : "hover:border-primary/50 hover:text-primary/80"
               }`}
-              onClick={() => { setSelectedConnection(ct.id); setQuantities({}); }}
+              onClick={() => { setSelectedConnection(ct.id); setQuantities({}); setSelectedImage(0); }}
             >
               {ct.name}
             </Badge>
