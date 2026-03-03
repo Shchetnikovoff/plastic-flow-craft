@@ -18,7 +18,7 @@ const Header = ({ onCartOpen }: HeaderProps) => {
           <img
             src="/images/logo.png"
             alt="Логотип Пласт-Металл Про"
-            className="h-20 sm:h-36 md:h-56 w-auto object-contain shrink-0"
+            className="h-20 sm:h-36 md:h-40 w-auto object-contain shrink-0"
           />
           <div className="min-w-0">
             <h1 className="text-sm sm:text-lg md:text-xl font-bold text-foreground leading-tight">

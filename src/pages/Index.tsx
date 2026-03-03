@@ -50,7 +50,7 @@ const ProductContent = () => {
   return (
     <main className="mx-auto max-w-[960px] px-4 sm:px-6 py-6 sm:py-8">
       {/* === IMAGE ROW === */}
-      <div className="grid grid-cols-3 sm:grid-cols-5 gap-2 sm:gap-3 mb-8 sm:mb-10">
+      <div className="grid grid-cols-3 sm:grid-cols-5 gap-2 sm:gap-3 mb-8">
         {productImages.map((src, i) => (
           <button
             key={i}
@@ -108,10 +108,10 @@ const ProductContent = () => {
       </Dialog>
 
       {/* === ОПИСАНИЕ + ХАРАКТЕРИСТИКИ === */}
-      <div className="grid gap-6 sm:gap-8 md:grid-cols-2 mb-8 sm:mb-10">
+      <div className="grid gap-6 sm:gap-8 md:grid-cols-2 mb-8">
         {/* Left: описание */}
         <div>
-          <h2 className="text-lg font-bold text-foreground mb-3 tracking-wide uppercase">Описание</h2>
+          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">Описание</h2>
           <p className="text-sm text-muted-foreground leading-relaxed">
             Отвод вентиляционный круглого сечения служит для плавного поворота системы под углом 90°.
             Обеспечивает надёжное соединение элементов вентиляционной системы благодаря раструбному типу соединения.
@@ -120,7 +120,7 @@ const ProductContent = () => {
 
         {/* Right: характеристики */}
         <div>
-          <h2 className="text-lg font-bold text-foreground mb-3 tracking-wide uppercase">Характеристики</h2>
+          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">Характеристики</h2>
           <div className="grid grid-cols-2 gap-px rounded-lg border overflow-hidden">
             <div className="bg-card p-3">
               <span className="block text-xs text-muted-foreground">Диаметр</span>
@@ -157,8 +157,8 @@ const ProductContent = () => {
       </div>
 
       {/* === МАТЕРИАЛЫ === */}
-      <div className="mb-10">
-        <h2 className="text-lg font-bold text-foreground mb-3 tracking-wide uppercase">Материалы</h2>
+      <div className="mb-8">
+        <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">Материалы</h2>
         <div className="flex flex-wrap gap-2">
           {materials.map((mat) => (
             <Badge
@@ -184,8 +184,8 @@ const ProductContent = () => {
 
       {/* === ХАРАКТЕРИСТИКИ ПЛАСТИКА === */}
       {materialSpecs[selectedMaterial] && (
-        <div className="mb-10">
-          <h2 className="text-lg font-bold text-foreground mb-3 tracking-wide uppercase">Характеристики пластика</h2>
+        <div className="mb-8">
+          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">Характеристики пластика</h2>
           <div className="grid grid-cols-2 gap-px rounded-lg border overflow-hidden mb-4">
             <div className="bg-card p-3">
               <span className="block text-xs text-muted-foreground">Рабочая температура</span>
@@ -222,7 +222,7 @@ const ProductContent = () => {
 
       {/* === ТАБЛИЦА === */}
       <div>
-        <h2 className="text-sm font-bold text-foreground mb-4 tracking-wide uppercase text-center">
+        <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase text-center">
           Технические характеристики — {selectedMaterial}{selectedColor && specs?.colors.length > 1 ? ` — ${selectedColor.name}` : ""} — {connectionTypes.find(c => c.id === selectedConnection)?.name}
         </h2>
 
