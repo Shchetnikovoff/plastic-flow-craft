@@ -5,7 +5,7 @@ import { Dialog, DialogContent } from "@/components/ui/dialog";
 import Header from "@/components/Header";
 import CartSheet from "@/components/CartSheet";
 import { materials, materialSpecs, type MaterialColor } from "@/data/products";
-import { getRazdvizhnoySizes, razdvizhnoyImages, type RazdvizhnoySize } from "@/data/razdvizhnoyProducts";
+import { getRazdvizhnoySizes, razdvizhnoyImages, razdvizhnoyFlanecImages, type RazdvizhnoySize } from "@/data/razdvizhnoyProducts";
 import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
@@ -16,14 +16,15 @@ import { toast } from "sonner";
 const RazdvizhnoyContent = () => {
   const { addItem } = useCart();
   const navigate = useNavigate();
+  const [connectionType, setConnectionType] = useState<"rastrub" | "flanec">("rastrub");
   const [selectedMaterial, setSelectedMaterial] = useState(materials[0].name);
   const specs = materialSpecs[selectedMaterial];
   const [selectedColor, setSelectedColor] = useState<MaterialColor>(specs?.colors[0]);
-  const currentSizes = getRazdvizhnoySizes(selectedMaterial, selectedColor?.colorCode || "");
+  const currentSizes = getRazdvizhnoySizes(selectedMaterial, selectedColor?.colorCode || "", connectionType);
   const [quantities, setQuantities] = useState<Record<string, number>>({});
   const [selectedImage, setSelectedImage] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
-  const images = razdvizhnoyImages;
+  const images = connectionType === "flanec" ? razdvizhnoyFlanecImages : razdvizhnoyImages;
 
   const setQty = (article: string, delta: number) => {
     setQuantities((prev) => ({
@@ -80,6 +81,32 @@ const RazdvizhnoyContent = () => {
         </DialogContent>
       </Dialog>
 
+      {/* === ПЕРЕКЛЮЧАТЕЛЬ СОЕДИНЕНИЯ === */}
+      <div className="flex gap-2 mb-8">
+        <Badge
+          variant="outline"
+          className={`rounded-full px-4 py-1.5 text-xs font-medium cursor-pointer transition-colors ${
+            connectionType === "rastrub"
+              ? "border-primary text-primary bg-primary/5"
+              : "hover:border-primary/50 hover:text-primary/80"
+          }`}
+          onClick={() => { setConnectionType("rastrub"); setQuantities({}); setSelectedImage(0); }}
+        >
+          Раструб
+        </Badge>
+        <Badge
+          variant="outline"
+          className={`rounded-full px-4 py-1.5 text-xs font-medium cursor-pointer transition-colors ${
+            connectionType === "flanec"
+              ? "border-primary text-primary bg-primary/5"
+              : "hover:border-primary/50 hover:text-primary/80"
+          }`}
+          onClick={() => { setConnectionType("flanec"); setQuantities({}); setSelectedImage(0); }}
+        >
+          Фланец
+        </Badge>
+      </div>
+
       {/* === ОПИСАНИЕ + ХАРАКТЕРИСТИКИ === */}
       <div className="grid gap-6 sm:gap-8 md:grid-cols-2 mb-8">
         <div>
@@ -98,7 +125,7 @@ const RazdvizhnoyContent = () => {
             </div>
             <div className="bg-card p-3">
               <span className="block text-xs text-muted-foreground">Соединение</span>
-              <span className="text-sm font-semibold text-foreground">Раструб</span>
+              <span className="text-sm font-semibold text-foreground">{connectionType === "flanec" ? "Фланец" : "Раструб"}</span>
             </div>
             <div className="bg-card p-3 border-t">
               <span className="block text-xs text-muted-foreground">Стенка</span>
@@ -184,7 +211,7 @@ const RazdvizhnoyContent = () => {
         const exampleArticle = firstSize?.article || "—";
 
         const segments = [
-          { value: "РЭ", label: "Тип изделия", desc: "Раздвижной элемент" },
+          { value: connectionType === "flanec" ? "РЭ-Ф" : "РЭ", label: "Тип изделия", desc: connectionType === "flanec" ? "Раздвижной элемент (фланец)" : "Раздвижной элемент" },
           { value: mat?.code || "—", label: "Материал", desc: mat?.name.replace(/\s*\(.*\)/, "") || "—" },
           ...(hasMultipleColors && selectedColor
             ? [{ value: selectedColor.colorCode, label: "Цвет (RAL)", desc: selectedColor.name, hex: selectedColor.hex }]
