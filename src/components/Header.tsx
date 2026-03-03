@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { useCart } from "@/contexts/CartContext";
 import { supportedAngles, connectionTypes, type AngleType, type ConnectionType } from "@/data/products";
 
-export type ProductType = "otvod" | "troynik";
+export type ProductType = "otvod" | "troynik" | "razdvizhnoy";
 
 interface HeaderProps {
   onCartOpen: () => void;
@@ -29,7 +29,7 @@ const Header = ({ onCartOpen, angle = 90, connectionType = "rastrub", productTyp
           />
           <div className="min-w-0">
             <h1 className="text-sm sm:text-lg md:text-xl font-bold text-foreground leading-tight">
-              {productType === "troynik" ? "Тройник вентиляционный круглого сечения" : `Отвод вентиляционный круглого сечения ${angle}°`}
+              {productType === "razdvizhnoy" ? "Раздвижной элемент вентиляционный" : productType === "troynik" ? "Тройник вентиляционный круглого сечения" : `Отвод вентиляционный круглого сечения ${angle}°`}
             </h1>
             <p className="text-[10px] sm:text-xs text-muted-foreground mt-0.5 truncate">
               Карточка товара • ООО СЗПК «Пласт-Металл Про»
@@ -67,6 +67,16 @@ const Header = ({ onCartOpen, angle = 90, connectionType = "rastrub", productTyp
               >
                 Тройник
               </Link>
+              <Link
+                to="/razdvizhnoy"
+                className={`text-xs font-semibold px-2 py-0.5 rounded-full border transition-colors ${
+                  productType === "razdvizhnoy"
+                    ? "border-primary text-primary bg-primary/10"
+                    : "border-border text-muted-foreground hover:border-primary/50 hover:text-foreground"
+                }`}
+              >
+                Раздвижной
+              </Link>
               {productType === "otvod" && (
                 <>
                   <span className="text-muted-foreground text-xs">|</span>
@@ -92,7 +102,9 @@ const Header = ({ onCartOpen, angle = 90, connectionType = "rastrub", productTyp
         {/* Right: angle badge + Cart */}
         <div className="flex items-center gap-2 sm:gap-3 shrink-0">
           <div className="hidden md:flex flex-col items-center">
-            {productType === "troynik" ? (
+            {productType === "razdvizhnoy" ? (
+              <span className="text-2xl font-black text-primary leading-none">РЭ</span>
+            ) : productType === "troynik" ? (
               <span className="text-2xl font-black text-primary leading-none">ТР</span>
             ) : (
               <>
