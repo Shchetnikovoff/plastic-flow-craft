@@ -3,14 +3,15 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useCart } from "@/contexts/CartContext";
-import { supportedAngles, type AngleType } from "@/data/products";
+import { supportedAngles, connectionTypes, type AngleType, type ConnectionType } from "@/data/products";
 
 interface HeaderProps {
   onCartOpen: () => void;
   angle?: AngleType;
+  connectionType?: ConnectionType;
 }
 
-const Header = ({ onCartOpen, angle = 90 }: HeaderProps) => {
+const Header = ({ onCartOpen, angle = 90, connectionType = "rastrub" }: HeaderProps) => {
   const { totalItems } = useCart();
 
   return (
@@ -64,7 +65,7 @@ const Header = ({ onCartOpen, angle = 90 }: HeaderProps) => {
         <div className="flex items-center gap-2 sm:gap-3 shrink-0">
           <div className="hidden md:flex flex-col items-center">
             <span className="text-3xl font-black text-primary leading-none">{angle}°</span>
-            <span className="text-[10px] text-muted-foreground">раструб</span>
+            <span className="text-[10px] text-muted-foreground">{connectionTypes.find(c => c.id === connectionType)?.name?.toLowerCase() || "раструб"}</span>
           </div>
           <Button variant="outline" size="icon" className="relative" onClick={onCartOpen}>
             <ShoppingCart className="h-5 w-5" />
