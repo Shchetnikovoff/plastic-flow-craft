@@ -5,13 +5,16 @@ import { Badge } from "@/components/ui/badge";
 import { useCart } from "@/contexts/CartContext";
 import { supportedAngles, connectionTypes, type AngleType, type ConnectionType } from "@/data/products";
 
+export type ProductType = "otvod" | "troynik";
+
 interface HeaderProps {
   onCartOpen: () => void;
   angle?: AngleType;
   connectionType?: ConnectionType;
+  productType?: ProductType;
 }
 
-const Header = ({ onCartOpen, angle = 90, connectionType = "rastrub" }: HeaderProps) => {
+const Header = ({ onCartOpen, angle = 90, connectionType = "rastrub", productType = "otvod" }: HeaderProps) => {
   const { totalItems } = useCart();
 
   return (
@@ -26,7 +29,7 @@ const Header = ({ onCartOpen, angle = 90, connectionType = "rastrub" }: HeaderPr
           />
           <div className="min-w-0">
             <h1 className="text-sm sm:text-lg md:text-xl font-bold text-foreground leading-tight">
-              Отвод вентиляционный круглого сечения {angle}°
+              {productType === "troynik" ? "Тройник вентиляционный круглого сечения" : `Отвод вентиляционный круглого сечения ${angle}°`}
             </h1>
             <p className="text-[10px] sm:text-xs text-muted-foreground mt-0.5 truncate">
               Карточка товара • ООО СЗПК «Пласт-Металл Про»
@@ -42,21 +45,46 @@ const Header = ({ onCartOpen, angle = 90, connectionType = "rastrub" }: HeaderPr
                 <MapPin className="h-3 w-3 shrink-0" /> Ленинградская обл., д. Разметелево
               </span>
             </div>
-            {/* Navigation to other angles */}
-            <div className="flex items-center gap-2 mt-1.5">
-              {supportedAngles.map((a) => (
-                <Link
-                  key={a}
-                  to={a === 90 ? "/" : `/${a}`}
-                  className={`text-xs font-semibold px-2 py-0.5 rounded-full border transition-colors ${
-                    a === angle
-                      ? "border-primary text-primary bg-primary/10"
-                      : "border-border text-muted-foreground hover:border-primary/50 hover:text-foreground"
-                  }`}
-                >
-                  {a}°
-                </Link>
-              ))}
+            {/* Navigation: product types + angles */}
+            <div className="flex items-center gap-2 mt-1.5 flex-wrap">
+              <Link
+                to="/"
+                className={`text-xs font-semibold px-2 py-0.5 rounded-full border transition-colors ${
+                  productType === "otvod"
+                    ? "border-primary text-primary bg-primary/10"
+                    : "border-border text-muted-foreground hover:border-primary/50 hover:text-foreground"
+                }`}
+              >
+                Отвод
+              </Link>
+              <Link
+                to="/troynik"
+                className={`text-xs font-semibold px-2 py-0.5 rounded-full border transition-colors ${
+                  productType === "troynik"
+                    ? "border-primary text-primary bg-primary/10"
+                    : "border-border text-muted-foreground hover:border-primary/50 hover:text-foreground"
+                }`}
+              >
+                Тройник
+              </Link>
+              {productType === "otvod" && (
+                <>
+                  <span className="text-muted-foreground text-xs">|</span>
+                  {supportedAngles.map((a) => (
+                    <Link
+                      key={a}
+                      to={a === 90 ? "/" : `/${a}`}
+                      className={`text-xs font-semibold px-2 py-0.5 rounded-full border transition-colors ${
+                        a === angle
+                          ? "border-primary text-primary bg-primary/10"
+                          : "border-border text-muted-foreground hover:border-primary/50 hover:text-foreground"
+                      }`}
+                    >
+                      {a}°
+                    </Link>
+                  ))}
+                </>
+              )}
             </div>
           </div>
         </div>
@@ -64,8 +92,14 @@ const Header = ({ onCartOpen, angle = 90, connectionType = "rastrub" }: HeaderPr
         {/* Right: angle badge + Cart */}
         <div className="flex items-center gap-2 sm:gap-3 shrink-0">
           <div className="hidden md:flex flex-col items-center">
-            <span className="text-3xl font-black text-primary leading-none">{angle}°</span>
-            <span className="text-[10px] text-muted-foreground">{connectionTypes.find(c => c.id === connectionType)?.name?.toLowerCase() || "раструб"}</span>
+            {productType === "troynik" ? (
+              <span className="text-2xl font-black text-primary leading-none">ТР</span>
+            ) : (
+              <>
+                <span className="text-3xl font-black text-primary leading-none">{angle}°</span>
+                <span className="text-[10px] text-muted-foreground">{connectionTypes.find(c => c.id === connectionType)?.name?.toLowerCase() || "раструб"}</span>
+              </>
+            )}
           </div>
           <Button variant="outline" size="icon" className="relative" onClick={onCartOpen}>
             <ShoppingCart className="h-5 w-5" />
