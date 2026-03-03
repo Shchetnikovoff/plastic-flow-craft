@@ -6,7 +6,7 @@ import CartSheet from "@/components/CartSheet";
 import { materials, materialSpecs, connectionTypes, baseSizes, type ConnectionType } from "@/data/products";
 import { getProductImages } from "@/data/products";
 import { baseTroynikSizes, troynikImages } from "@/data/troynikProducts";
-import { razdvizhnoyImages, getRazdvizhnoySizes } from "@/data/razdvizhnoyProducts";
+import { razdvizhnoyImages, razdvizhnoyFlanecImages, getRazdvizhnoySizes } from "@/data/razdvizhnoyProducts";
 import { Button } from "@/components/ui/button";
 import { ShoppingCart, Plus, Minus, ChevronLeft, ChevronRight, FileDown } from "lucide-react";
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
@@ -44,22 +44,25 @@ function parseArticle(article: string) {
     };
   }
 
-  // Razdvizhnoy format: РЭ-MATERIAL[-COLOR]-DIAMETER
+  // Razdvizhnoy format: РЭ-MATERIAL[-COLOR]-DIAMETER or РЭ-Ф-MATERIAL[-COLOR]-DIAMETER (flanec)
   if (article.startsWith("РЭ-")) {
-    const parts = article.split("-");
-    const materialCode = parts[1];
+    const isFlanec = article.startsWith("РЭ-Ф-");
+    const stripped = isFlanec ? article.replace("РЭ-Ф-", "") : article.replace("РЭ-", "");
+    const parts = stripped.split("-");
+    const materialCode = parts[0];
     const material = materials.find((m) => m.code === materialCode);
     if (!material) return null;
     const specs = materialSpecs[material.name];
     const diameter = parseInt(parts[parts.length - 1]);
-    const colorCode = parts.length === 4 ? parts[2] : specs?.colors[0]?.colorCode || "";
-    const color = parts.length === 4 ? specs?.colors.find((c) => c.colorCode === colorCode) : specs?.colors[0];
+    const hasColor = parts.length === 3;
+    const colorCode = hasColor ? parts[1] : specs?.colors[0]?.colorCode || "";
+    const color = hasColor ? specs?.colors.find((c) => c.colorCode === colorCode) : specs?.colors[0];
     const sizes = getRazdvizhnoySizes(material.name, colorCode);
     const sizeEntry = sizes.find((s) => s.diameter === diameter);
     const sizeData = sizeEntry ? { wallThickness: sizeEntry.wallThickness, socketThickness: sizeEntry.socket, availableLength: null as number | null } : null;
     return {
       productType: "razdvizhnoy" as const,
-      connectionType: "rastrub" as ConnectionType,
+      connectionType: (isFlanec ? "flanec" : "rastrub") as ConnectionType,
       angle: 90 as const,
       material,
       color,
@@ -126,7 +129,7 @@ const ProductDetailContent = () => {
   const conn = connectionTypes.find((c) => c.id === connectionType);
   const isTroynik = productType === "troynik";
   const isRazdvizhnoy = productType === "razdvizhnoy";
-  const productImages = isRazdvizhnoy ? razdvizhnoyImages : isTroynik ? troynikImages : getProductImages(connectionType, angle);
+  const productImages = isRazdvizhnoy ? (connectionType === "flanec" ? razdvizhnoyFlanecImages : razdvizhnoyImages) : isTroynik ? troynikImages : getProductImages(connectionType, angle);
 
   const handleAdd = () => {
     addItem(

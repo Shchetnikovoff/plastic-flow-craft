@@ -17,6 +17,14 @@ export const razdvizhnoyImages = [
   "/images/razdvizhnoy-5.png",
 ];
 
+export const razdvizhnoyFlanecImages = [
+  "/images/razdvizhnoy-flanec-1.png",
+  "/images/razdvizhnoy-flanec-2.png",
+  "/images/razdvizhnoy-flanec-3.png",
+  "/images/razdvizhnoy-flanec-4.png",
+  "/images/razdvizhnoy-flanec-5.png",
+];
+
 export function getRazdvizhnoySizes(materialName: string, colorCode: string): RazdvizhnoySize[] {
   const mat = materials.find((m) => m.name === materialName);
   if (!mat) return [];
