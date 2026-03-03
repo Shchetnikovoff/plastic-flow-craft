@@ -1,33 +1,53 @@
 
 
-## Plan: Remove blue text and whiten backgrounds on tee renders
+## Plan: Add "Тройник вентиляционный круглый" product
 
-Use client-side canvas pixel manipulation to process `troynik-1.png`, `troynik-2.png`, `troynik-3.png` at render time, removing blue-colored text and ensuring a white background.
+A new product type (tee fitting) with a different data structure: two diameters (D, D1) and additional dimensions (L, L1, A, B). Follows the same visual template as the elbow product.
 
-### Approach
+### 1. Save uploaded images to `public/images/`
 
-Create a React hook or utility that:
-1. Loads each image onto a hidden canvas
-2. Scans all pixels — any pixel where blue channel dominates (high blue, low red/green) gets replaced with white `(255,255,255)`
-3. Light/near-white pixels (all channels > 240) also become pure white for a clean background
-4. Returns processed image as a data URL
+- `image-55.png` → `public/images/troynik-1.png` (render 1)
+- `image-56.png` → `public/images/troynik-2.png` (render 2)
+- `image-57.png` → `public/images/troynik-3.png` (render 3)
+- `image-58.png` → `public/images/troynik-4.png` (technical drawing)
+- `image-59.png` → `public/images/troynik-5.png` (line drawing)
 
-### Implementation
+Images 51-54 are reference tables (not saved as assets).
 
-1. **Create `src/lib/processImage.ts`** — a function `removeBlueTextAndWhiten(src: string): Promise<string>` that:
-   - Draws image to canvas
-   - Iterates pixel data: if `b > r + 30 && b > g + 30 && b > 100` → set to white
-   - If `r > 230 && g > 230 && b > 230` → set to pure white (clean background)
-   - Returns `canvas.toDataURL()`
+### 2. Create `src/data/troynikProducts.ts`
 
-2. **Create `src/hooks/useProcessedImages.ts`** — hook that takes an image array and indices to process (0, 1, 2), returns processed URLs via `useEffect` + `useState`
+New data file with:
+- `TroynikSize` interface: `{ d: number, d1: number, l: number, l1: number, a: number, b: number, socket: number, wallThickness: number, article: string }`
+- Full size table (~130 rows) from the uploaded data
+- `getTroynikSizes(materialName, colorCode)` function generating articles like `ТР-PPC-7032-200x100`
+- `troynikImages` array with the 5 image paths
+- Reuse `materials`, `materialSpecs`, `connectionTypes` from existing `products.ts`
 
-3. **Update `src/pages/Troynik.tsx`** — use the hook to process the first 3 troynik images, display processed versions in gallery
+### 3. Create `src/pages/Troynik.tsx`
 
-4. **Update `src/pages/Product.tsx`** — apply same processing when displaying troynik product images
+New page following the same layout as `Index.tsx`:
+- Image gallery row (5 thumbnails + lightbox)
+- Description: "Тройник вентиляционный круглого сечения используется для присоединения ответвлений к основной магистрали воздуховода круглого сечения."
+- Characteristics grid (Диаметр 100-1200, Соединение раструб, Стенка 2-10)
+- Material selector + plastic specs + color selector (same as elbows)
+- SKU decoder adapted for tee format
+- Product table with columns: Артикул, D, D1, L, L1, A, B, Раструб, Стенка, Кол-во, Действие
+- PDF export button
+- Cart integration
+
+### 4. Update `src/App.tsx`
+
+Add route: `<Route path="/troynik" element={<Troynik />} />`
+
+### 5. Update `src/components/Header.tsx`
+
+Add navigation link to Тройник alongside the angle selector, or add a product type selector above the angle row. The simplest approach: add a "Тройник" link next to the angle badges.
 
 ### Technical notes
-- Processing happens once on mount, cached in state
-- Only images at indices 0-2 are processed (renders); indices 3-4 (technical drawings) are left as-is
-- Threshold values may need tuning if blue shades vary
+
+- Article format: `ТР-{MaterialCode}-{ColorCode}-{D}x{D1}` (e.g., `ТР-PPC-7032-200x100`)
+- The tee has no angle variants — only one configuration
+- Only rastrub connection initially (no flanec)
+- Same materials/colors/specs as the elbow product
+- Table has ~130 rows vs ~18 for elbows, so the table will be longer
 
