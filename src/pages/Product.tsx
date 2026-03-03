@@ -7,6 +7,7 @@ import { materials, materialSpecs, connectionTypes, baseSizes, type ConnectionTy
 import { getProductImages } from "@/data/products";
 import { baseTroynikSizes, troynikImages } from "@/data/troynikProducts";
 import { razdvizhnoyImages, razdvizhnoyFlanecImages, getRazdvizhnoySizes } from "@/data/razdvizhnoyProducts";
+import { vozdukhovodImages, getVozdukhovodSizes, vozdukhovodAvailableLengths } from "@/data/vozdukhovodProducts";
 import { Button } from "@/components/ui/button";
 import { ShoppingCart, Plus, Minus, ChevronLeft, ChevronRight, FileDown } from "lucide-react";
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
@@ -41,6 +42,37 @@ function parseArticle(article: string) {
       sizeData: sizeData ? { wallThickness: sizeData.wallThickness, socketThickness: sizeData.socket, availableLength: sizeData.l } : null,
       troynikSize: sizeData || null,
       razdvizhnoySize: null,
+      vozdukhovodSize: null,
+    };
+  }
+
+  // Vozdukhovod format: ВК-MATERIAL[-COLOR]-DIAMETER
+  if (article.startsWith("ВК-")) {
+    const stripped = article.replace("ВК-", "");
+    const parts = stripped.split("-");
+    const materialCode = parts[0];
+    const material = materials.find((m) => m.code === materialCode);
+    if (!material) return null;
+    const specs = materialSpecs[material.name];
+    const diameter = parseInt(parts[parts.length - 1]);
+    const hasColor = parts.length === 3;
+    const colorCode = hasColor ? parts[1] : specs?.colors[0]?.colorCode || "";
+    const color = hasColor ? specs?.colors.find((c) => c.colorCode === colorCode) : specs?.colors[0];
+    const sizes = getVozdukhovodSizes(material.name, colorCode);
+    const sizeEntry = sizes.find((s) => s.diameter === diameter);
+    const sizeData = sizeEntry ? { wallThickness: sizeEntry.wallThickness, socketThickness: sizeEntry.socketThickness, availableLength: null as number | null } : null;
+    return {
+      productType: "vozdukhovod" as const,
+      connectionType: "rastrub" as ConnectionType,
+      angle: 90 as const,
+      material,
+      color,
+      diameter,
+      sizeData,
+      troynikSize: null,
+      razdvizhnoySize: null,
+      vozdukhovodSize: sizeEntry ? { availableLengths: vozdukhovodAvailableLengths } : null,
+      specs,
     };
   }
 
@@ -70,6 +102,7 @@ function parseArticle(article: string) {
       sizeData,
       troynikSize: null,
       razdvizhnoySize: sizeEntry ? { lMin: sizeEntry.lMin, lMax: sizeEntry.lMax } : null,
+      vozdukhovodSize: null,
       specs,
     };
   }
@@ -88,7 +121,7 @@ function parseArticle(article: string) {
   const specs = materialSpecs[material.name];
   const color = colorCode ? specs?.colors.find((c) => c.colorCode === colorCode) : specs?.colors[0];
   const sizeData = baseSizes.find((s) => s.diameter === diameter);
-  return { productType: "otvod" as const, connectionType, angle, material, color, diameter, sizeData, troynikSize: null, razdvizhnoySize: null, specs };
+  return { productType: "otvod" as const, connectionType, angle, material, color, diameter, sizeData, troynikSize: null, razdvizhnoySize: null, vozdukhovodSize: null, specs };
 }
 
 const ProductDetailContent = () => {
@@ -125,11 +158,12 @@ const ProductDetailContent = () => {
     );
   }
 
-  const { productType, connectionType, angle, material, color, diameter, sizeData, troynikSize, razdvizhnoySize, specs } = parsed;
+  const { productType, connectionType, angle, material, color, diameter, sizeData, troynikSize, razdvizhnoySize, vozdukhovodSize, specs } = parsed;
   const conn = connectionTypes.find((c) => c.id === connectionType);
   const isTroynik = productType === "troynik";
   const isRazdvizhnoy = productType === "razdvizhnoy";
-  const productImages = isRazdvizhnoy ? (connectionType === "flanec" ? razdvizhnoyFlanecImages : razdvizhnoyImages) : isTroynik ? troynikImages : getProductImages(connectionType, angle);
+  const isVozdukhovod = productType === "vozdukhovod";
+  const productImages = isVozdukhovod ? vozdukhovodImages : isRazdvizhnoy ? (connectionType === "flanec" ? razdvizhnoyFlanecImages : razdvizhnoyImages) : isTroynik ? troynikImages : getProductImages(connectionType, angle);
 
   const handleAdd = () => {
     addItem(
@@ -177,7 +211,7 @@ const ProductDetailContent = () => {
         <BreadcrumbList>
           <BreadcrumbItem>
             <BreadcrumbLink asChild>
-              <Link to={isRazdvizhnoy ? "/razdvizhnoy" : isTroynik ? "/troynik" : "/"}>Каталог</Link>
+              <Link to={isVozdukhovod ? "/vozdukhovod" : isRazdvizhnoy ? "/razdvizhnoy" : isTroynik ? "/troynik" : "/"}>Каталог</Link>
             </BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
@@ -218,7 +252,7 @@ const ProductDetailContent = () => {
         {/* Right: Info */}
         <div>
           <h1 className="text-xl sm:text-2xl font-bold text-foreground mb-1">
-            {isRazdvizhnoy ? "Раздвижной элемент вентиляционный" : isTroynik ? "Тройник вентиляционный" : `Отвод вентиляционный ${angle}°`}
+            {isVozdukhovod ? "Воздуховод вентиляционный круглый" : isRazdvizhnoy ? "Раздвижной элемент вентиляционный" : isTroynik ? "Тройник вентиляционный" : `Отвод вентиляционный ${angle}°`}
           </h1>
           <p className="font-mono text-sm text-muted-foreground mb-6">{article}</p>
 
@@ -241,7 +275,18 @@ const ProductDetailContent = () => {
               <span className="block text-xs text-muted-foreground">Толщина стенки (S)</span>
               <span className="text-sm font-semibold text-foreground">{sizeData?.wallThickness} мм</span>
             </div>
-            {isRazdvizhnoy && razdvizhnoySize ? (
+            {isVozdukhovod && vozdukhovodSize ? (
+              <>
+                <div className="bg-card p-3 border-t">
+                  <span className="block text-xs text-muted-foreground">Длина (L)</span>
+                  <span className="text-sm font-semibold text-foreground">{vozdukhovodSize.availableLengths.join(", ")} мм</span>
+                </div>
+                <div className="bg-card p-3 border-t">
+                  <span className="block text-xs text-muted-foreground">Толщина раструба (Sp)</span>
+                  <span className="text-sm font-semibold text-foreground">{sizeData?.socketThickness} мм</span>
+                </div>
+              </>
+            ) : isRazdvizhnoy && razdvizhnoySize ? (
               <>
                 <div className="bg-card p-3 border-t">
                   <span className="block text-xs text-muted-foreground">L min</span>
@@ -274,7 +319,7 @@ const ProductDetailContent = () => {
                 </div>
               </>
             )}
-            {!isTroynik && !isRazdvizhnoy && (
+            {!isTroynik && !isRazdvizhnoy && !isVozdukhovod && (
               <>
                 <div className="bg-card p-3 border-t">
                   <span className="block text-xs text-muted-foreground">Толщина раструба (Sp)</span>
