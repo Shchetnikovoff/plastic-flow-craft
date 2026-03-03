@@ -82,12 +82,12 @@ const ProductDetailContent = () => {
     toast.success(`${article} (${qty} шт.) добавлен в корзину`);
   };
 
-  const handleDownloadPdf = () => {
+  const handleDownloadPdf = async () => {
     const errors = validateContactForm(contactData);
     setContactErrors(errors);
     if (Object.keys(errors).length > 0) return;
 
-    generateSpecPdf(
+    await generateSpecPdf(
       {
         article,
         diameter,

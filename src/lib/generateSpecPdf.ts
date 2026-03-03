@@ -1,5 +1,6 @@
 import { jsPDF } from "jspdf";
 import type { ContactFormData } from "@/components/ContactFormFields";
+import { loadImageAsBase64 } from "./imageUtils";
 
 interface ProductSpec {
   article: string;
@@ -15,25 +16,43 @@ interface ProductSpec {
   colorRal?: string;
 }
 
-export function generateSpecPdf(product: ProductSpec, contact: ContactFormData) {
+export async function generateSpecPdf(product: ProductSpec, contact: ContactFormData) {
   const doc = new jsPDF();
   const pageWidth = doc.internal.pageSize.getWidth();
 
+  // Load logo
+  let logoData: string | null = null;
+  try {
+    logoData = await loadImageAsBase64("/images/logo.png");
+  } catch { /* skip logo if failed */ }
+
+  // Header with logo
+  if (logoData) {
+    doc.addImage(logoData, "PNG", 20, 8, 35, 16);
+  }
+  doc.setFontSize(8);
+  doc.setTextColor(128);
+  doc.text("ООО СЗПК «Пласт-Металл Про»", pageWidth - 20, 14, { align: "right" });
+  doc.text("+7 963 322-55-40 | osobenkov@list.ru", pageWidth - 20, 18, { align: "right" });
+
   // Title
   doc.setFontSize(18);
-  doc.text("Спецификация изделия", pageWidth / 2, 25, { align: "center" });
+  doc.setTextColor(30, 58, 95);
+  doc.text("Спецификация изделия", pageWidth / 2, 38, { align: "center" });
 
   // Article
   doc.setFontSize(14);
-  doc.text(product.article, pageWidth / 2, 35, { align: "center" });
+  doc.setTextColor(60);
+  doc.text(product.article, pageWidth / 2, 48, { align: "center" });
 
   // Separator
   doc.setDrawColor(200);
-  doc.line(20, 40, pageWidth - 20, 40);
+  doc.line(20, 53, pageWidth - 20, 53);
 
   // Product details
   doc.setFontSize(11);
-  let y = 52;
+  doc.setTextColor(0);
+  let y = 64;
   const labelX = 25;
   const valueX = 95;
 
@@ -94,10 +113,14 @@ export function generateSpecPdf(product: ProductSpec, contact: ContactFormData) 
   }
 
   // Footer
-  y += 15;
   doc.setFontSize(9);
   doc.setTextColor(128);
-  doc.text("ООО СЗПК «Пласт-Металл Про» | +7 963 322-55-40 | osobenkov@list.ru", pageWidth / 2, y, { align: "center" });
+  doc.text(
+    "ООО СЗПК «Пласт-Металл Про» | +7 963 322-55-40 | osobenkov@list.ru",
+    pageWidth / 2,
+    doc.internal.pageSize.getHeight() - 10,
+    { align: "center" }
+  );
 
   doc.save(`${product.article}_specification.pdf`);
 }

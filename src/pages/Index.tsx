@@ -48,9 +48,9 @@ const ProductContent = () => {
   };
 
   return (
-    <main className="mx-auto max-w-[960px] px-6 py-8">
+    <main className="mx-auto max-w-[960px] px-4 sm:px-6 py-6 sm:py-8">
       {/* === IMAGE ROW === */}
-      <div className="grid grid-cols-5 gap-3 mb-10">
+      <div className="grid grid-cols-3 sm:grid-cols-5 gap-2 sm:gap-3 mb-8 sm:mb-10">
         {productImages.map((src, i) => (
           <button
             key={i}
@@ -108,7 +108,7 @@ const ProductContent = () => {
       </Dialog>
 
       {/* === ОПИСАНИЕ + ХАРАКТЕРИСТИКИ === */}
-      <div className="grid gap-8 md:grid-cols-2 mb-10">
+      <div className="grid gap-6 sm:gap-8 md:grid-cols-2 mb-8 sm:mb-10">
         {/* Left: описание */}
         <div>
           <h2 className="text-lg font-bold text-foreground mb-3 tracking-wide uppercase">Описание</h2>
@@ -244,12 +244,12 @@ const ProductContent = () => {
             { value: firstSize ? String(firstSize.diameter) : "DN", label: "Диаметр", desc: "Номинальный диаметр, мм" },
           ] as Array<{ value: string; label: string; desc: string; hex?: string }>;
 
-          const gridCols = hasMultipleColors ? "grid-cols-5" : "grid-cols-4";
+          const gridCols = hasMultipleColors ? "sm:grid-cols-5 grid-cols-2" : "sm:grid-cols-4 grid-cols-2";
 
           return (
-            <div className="mb-4 rounded-lg border bg-muted/30 px-4 py-4">
+            <div className="mb-4 rounded-lg border bg-muted/30 px-3 sm:px-4 py-3 sm:py-4">
               <p className="text-xs text-muted-foreground mb-1 text-center">Расшифровка артикула</p>
-              <p className="text-center font-mono text-sm font-bold text-foreground tracking-wider mb-3">
+              <p className="text-center font-mono text-xs sm:text-sm font-bold text-foreground tracking-wider mb-3">
                 {exampleArticle}
               </p>
               <div className={`grid ${gridCols} gap-2`}>
@@ -270,8 +270,8 @@ const ProductContent = () => {
           );
         })()}
 
-        <div className="rounded-lg border overflow-hidden">
-          <Table>
+        <div className="rounded-lg border overflow-x-auto">
+          <Table className="min-w-[640px]">
             <TableHeader>
               <TableRow className="bg-primary text-primary-foreground hover:bg-primary">
                 <TableHead className="text-primary-foreground font-semibold text-xs">Артикул</TableHead>
@@ -279,7 +279,7 @@ const ProductContent = () => {
                 <TableHead className="text-primary-foreground font-semibold text-xs text-center">S, мм</TableHead>
                 <TableHead className="text-primary-foreground font-semibold text-xs text-center">L, мм</TableHead>
                 <TableHead className="text-primary-foreground font-semibold text-xs text-center">Sp, мм</TableHead>
-                <TableHead className="text-primary-foreground font-semibold text-xs text-center">Кол-во</TableHead>
+                <TableHead className="text-primary-foreground font-semibold text-xs text-center whitespace-nowrap">Кол-во</TableHead>
                 <TableHead className="text-primary-foreground font-semibold text-xs text-center">Действие</TableHead>
               </TableRow>
             </TableHeader>
@@ -290,7 +290,7 @@ const ProductContent = () => {
                   className={`cursor-pointer transition-colors hover:bg-primary/5 ${i % 2 === 0 ? "bg-card" : "bg-muted/30"}`}
                   onClick={() => navigate(`/product/${encodeURIComponent(size.article)}`)}
                 >
-                  <TableCell className="font-mono text-xs text-primary underline underline-offset-2">{size.article}</TableCell>
+                  <TableCell className="font-mono text-xs text-primary underline underline-offset-2 whitespace-nowrap">{size.article}</TableCell>
                   <TableCell className="text-center text-sm font-medium">{size.diameter}</TableCell>
                   <TableCell className="text-center text-sm">{size.wallThickness}</TableCell>
                   <TableCell className="text-center text-sm text-primary">{size.availableLength ?? "—"}</TableCell>
@@ -307,7 +307,7 @@ const ProductContent = () => {
                     </div>
                   </TableCell>
                   <TableCell className="text-center" onClick={(e) => e.stopPropagation()}>
-                    <Button size="sm" className="h-7 gap-1 text-xs" onClick={() => handleAdd(size)}>
+                    <Button size="sm" className="h-7 gap-1 text-xs whitespace-nowrap" onClick={() => handleAdd(size)}>
                       <ShoppingCart className="h-3 w-3" />
                       <span className="hidden sm:inline">В корзину</span>
                     </Button>
@@ -322,7 +322,7 @@ const ProductContent = () => {
           <Button
             variant="outline"
             className="gap-2"
-            onClick={() => {
+            onClick={async () => {
               const conn = connectionTypes.find(c => c.id === selectedConnection);
               const mat = materials.find(m => m.name === selectedMaterial);
               const hasMultipleColors = specs && specs.colors.length > 1;
@@ -338,7 +338,7 @@ const ProductContent = () => {
                 { value: firstSize ? String(firstSize.diameter) : "DN", label: "Диаметр", desc: "мм" },
               ];
 
-              generateFullPagePdf({
+              await generateFullPagePdf({
                 sizes: currentSizes,
                 materialName: selectedMaterial,
                 connectionName: conn?.name || "",

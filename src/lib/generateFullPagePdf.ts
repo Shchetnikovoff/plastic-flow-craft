@@ -1,5 +1,6 @@
 import { jsPDF } from "jspdf";
 import type { ProductSize, MaterialColor } from "@/data/products";
+import { loadImageAsBase64 } from "./imageUtils";
 
 interface FullPagePdfOptions {
   sizes: ProductSize[];
@@ -13,7 +14,7 @@ interface FullPagePdfOptions {
   articleSegments?: Array<{ value: string; label: string; desc: string }>;
 }
 
-export function generateFullPagePdf(options: FullPagePdfOptions) {
+export async function generateFullPagePdf(options: FullPagePdfOptions) {
   const {
     sizes, materialName, connectionName, colorName,
     colors, workingTemp, chemicalResistance,
@@ -24,6 +25,22 @@ export function generateFullPagePdf(options: FullPagePdfOptions) {
   const pw = doc.internal.pageSize.getWidth();
   const ph = doc.internal.pageSize.getHeight();
   const margin = 20;
+
+  // Load logo
+  let logoData: string | null = null;
+  try {
+    logoData = await loadImageAsBase64("/images/logo.png");
+  } catch { /* skip logo if failed */ }
+
+  const drawHeader = () => {
+    if (logoData) {
+      doc.addImage(logoData, "PNG", margin, 4, 30, 14);
+    }
+    doc.setFontSize(8);
+    doc.setTextColor(128);
+    doc.text("ООО СЗПК «Пласт-Металл Про»", pw - margin, 10, { align: "right" });
+    doc.text("+7 963 322-55-40 | osobenkov@list.ru", pw - margin, 14, { align: "right" });
+  };
 
   const drawFooter = () => {
     doc.setFontSize(8);
@@ -38,27 +55,33 @@ export function generateFullPagePdf(options: FullPagePdfOptions) {
     if (y + need > ph - 20) {
       drawFooter();
       doc.addPage();
-      return 20;
+      drawHeader();
+      return 24;
     }
     return y;
   };
 
-  // === PAGE 1: Title ===
+  // === PAGE 1 ===
+  drawHeader();
+
+  let y = 26;
   doc.setFontSize(20);
   doc.setTextColor(30, 58, 95);
-  doc.text("Каталог продукции", pw / 2, 22, { align: "center" });
+  doc.text("Каталог продукции", pw / 2, y, { align: "center" });
+  y += 10;
 
   doc.setFontSize(14);
   doc.setTextColor(60);
-  doc.text("Отвод вентиляционный круглого сечения 90°", pw / 2, 32, { align: "center" });
+  doc.text("Отвод вентиляционный круглого сечения 90°", pw / 2, y, { align: "center" });
+  y += 8;
 
   doc.setFontSize(11);
   doc.setTextColor(100);
   const sub = `${materialName} — ${connectionName}${colorName ? ` — ${colorName}` : ""}`;
-  doc.text(sub, pw / 2, 40, { align: "center" });
+  doc.text(sub, pw / 2, y, { align: "center" });
+  y += 12;
 
   // === Description ===
-  let y = 52;
   doc.setFontSize(12);
   doc.setTextColor(30, 58, 95);
   doc.text("Описание", margin, y);
