@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { CartProvider } from "@/contexts/CartContext";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import Header from "@/components/Header";
@@ -14,6 +15,7 @@ import { toast } from "sonner";
 
 const TroynikContent = () => {
   const { addItem } = useCart();
+  const navigate = useNavigate();
   const [selectedMaterial, setSelectedMaterial] = useState(materials[0].name);
   const specs = materialSpecs[selectedMaterial];
   const [selectedColor, setSelectedColor] = useState<MaterialColor>(specs?.colors[0]);
@@ -242,9 +244,10 @@ const TroynikContent = () => {
               {currentSizes.map((size, i) => (
                 <TableRow
                   key={size.article}
-                  className={`transition-colors hover:bg-primary/5 ${i % 2 === 0 ? "bg-card" : "bg-muted/30"}`}
+                  className={`cursor-pointer transition-colors hover:bg-primary/5 ${i % 2 === 0 ? "bg-card" : "bg-muted/30"}`}
+                  onClick={() => navigate(`/product/${encodeURIComponent(size.article)}`)}
                 >
-                  <TableCell className="font-mono text-xs whitespace-nowrap">{size.article}</TableCell>
+                  <TableCell className="font-mono text-xs text-primary underline underline-offset-2 whitespace-nowrap">{size.article}</TableCell>
                   <TableCell className="text-center text-sm font-medium">{size.d}</TableCell>
                   <TableCell className="text-center text-sm font-medium">{size.d1}</TableCell>
                   <TableCell className="text-center text-sm">{size.l}</TableCell>

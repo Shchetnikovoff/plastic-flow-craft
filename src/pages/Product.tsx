@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import CartSheet from "@/components/CartSheet";
 import { materials, materialSpecs, connectionTypes, baseSizes, type ConnectionType } from "@/data/products";
 import { getProductImages } from "@/data/products";
+import { baseTroynikSizes, troynikImages } from "@/data/troynikProducts";
 import { Button } from "@/components/ui/button";
 import { ShoppingCart, Plus, Minus, ChevronLeft, ChevronRight, FileDown } from "lucide-react";
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
@@ -15,25 +16,48 @@ import { generateSpecPdf } from "@/lib/generateSpecPdf";
 
 /** Parse article to extract product params */
 function parseArticle(article: string) {
-  // Format: PREFIX-ANGLE-MATERIAL[-COLOR]-DIAMETER
+  // Troynik format: ТР-MATERIAL[-COLOR]-DxD1
+  if (article.startsWith("ТР-")) {
+    const parts = article.split("-");
+    const materialCode = parts[1];
+    const material = materials.find((m) => m.code === materialCode);
+    if (!material) return null;
+    const specs = materialSpecs[material.name];
+    const lastPart = parts[parts.length - 1]; // "DxD1"
+    const [dStr, d1Str] = lastPart.split("x");
+    const d = parseInt(dStr);
+    const d1 = parseInt(d1Str);
+    const colorCode = parts.length === 4 ? parts[2] : null;
+    const color = colorCode ? specs?.colors.find((c) => c.colorCode === colorCode) : specs?.colors[0];
+    const sizeData = baseTroynikSizes.find((s) => s.d === d && s.d1 === d1);
+    return {
+      productType: "troynik" as const,
+      connectionType: "rastrub" as ConnectionType,
+      angle: 90 as const,
+      material,
+      color,
+      diameter: d,
+      sizeData: sizeData ? { wallThickness: sizeData.wallThickness, socketThickness: sizeData.socket, availableLength: sizeData.l } : null,
+      troynikSize: sizeData || null,
+      specs,
+    };
+  }
+
+  // Elbow format: PREFIX-ANGLE-MATERIAL[-COLOR]-DIAMETER
   const parts = article.split("-");
   if (parts.length < 4) return null;
-
-  const prefix = parts[0]; // ОТВР or ОТВФ
+  const prefix = parts[0];
   const connectionType: ConnectionType = prefix === "ОТВФ" ? "flanec" : "rastrub";
-  const angle = parseInt(parts[1]) as 90 | 60; // 90 or 60
+  const angle = parseInt(parts[1]) as 90 | 60;
   const materialCode = parts[2];
   const diameter = parseInt(parts[parts.length - 1]);
   const colorCode = parts.length === 5 ? parts[3] : null;
-
   const material = materials.find((m) => m.code === materialCode);
   if (!material) return null;
-
   const specs = materialSpecs[material.name];
   const color = colorCode ? specs?.colors.find((c) => c.colorCode === colorCode) : specs?.colors[0];
   const sizeData = baseSizes.find((s) => s.diameter === diameter);
-
-  return { connectionType, angle, material, color, diameter, sizeData, specs };
+  return { productType: "otvod" as const, connectionType, angle, material, color, diameter, sizeData, troynikSize: null, specs };
 }
 
 const ProductDetailContent = () => {
@@ -70,9 +94,10 @@ const ProductDetailContent = () => {
     );
   }
 
-  const { connectionType, angle, material, color, diameter, sizeData, specs } = parsed;
+  const { productType, connectionType, angle, material, color, diameter, sizeData, troynikSize, specs } = parsed;
   const conn = connectionTypes.find((c) => c.id === connectionType);
-  const productImages = getProductImages(connectionType, angle);
+  const isTroynik = productType === "troynik";
+  const productImages = isTroynik ? troynikImages : getProductImages(connectionType, angle);
 
   const handleAdd = () => {
     addItem(
@@ -120,7 +145,7 @@ const ProductDetailContent = () => {
         <BreadcrumbList>
           <BreadcrumbItem>
             <BreadcrumbLink asChild>
-              <Link to="/">Каталог</Link>
+              <Link to={isTroynik ? "/troynik" : "/"}>Каталог</Link>
             </BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
@@ -160,14 +185,22 @@ const ProductDetailContent = () => {
 
         {/* Right: Info */}
         <div>
-          <h1 className="text-xl sm:text-2xl font-bold text-foreground mb-1">Отвод вентиляционный {angle}°</h1>
+          <h1 className="text-xl sm:text-2xl font-bold text-foreground mb-1">
+            {isTroynik ? "Тройник вентиляционный" : `Отвод вентиляционный ${angle}°`}
+          </h1>
           <p className="font-mono text-sm text-muted-foreground mb-6">{article}</p>
 
           <div className="grid grid-cols-2 gap-px rounded-lg border overflow-hidden mb-6">
             <div className="bg-card p-3">
-              <span className="block text-xs text-muted-foreground">Диаметр (DN)</span>
+              <span className="block text-xs text-muted-foreground">{isTroynik ? "Диаметр D" : "Диаметр (DN)"}</span>
               <span className="text-sm font-semibold text-foreground">{diameter} мм</span>
             </div>
+            {isTroynik && troynikSize && (
+              <div className="bg-card p-3">
+                <span className="block text-xs text-muted-foreground">Диаметр D1</span>
+                <span className="text-sm font-semibold text-foreground">{troynikSize.d1} мм</span>
+              </div>
+            )}
             <div className="bg-card p-3">
               <span className="block text-xs text-muted-foreground">Соединение</span>
               <span className="text-sm font-semibold text-foreground">{conn?.name}</span>
@@ -180,14 +213,34 @@ const ProductDetailContent = () => {
               <span className="block text-xs text-muted-foreground">Длина (L)</span>
               <span className="text-sm font-semibold text-foreground">{sizeData?.availableLength ?? "—"} мм</span>
             </div>
-            <div className="bg-card p-3 border-t">
-              <span className="block text-xs text-muted-foreground">Толщина раструба (Sp)</span>
-              <span className="text-sm font-semibold text-foreground">{sizeData?.socketThickness} мм</span>
-            </div>
-            <div className="bg-card p-3 border-t">
-              <span className="block text-xs text-muted-foreground">Угол</span>
-              <span className="text-sm font-semibold text-foreground">{angle}°</span>
-            </div>
+            {isTroynik && troynikSize && (
+              <>
+                <div className="bg-card p-3 border-t">
+                  <span className="block text-xs text-muted-foreground">L1, мм</span>
+                  <span className="text-sm font-semibold text-foreground">{troynikSize.l1}</span>
+                </div>
+                <div className="bg-card p-3 border-t">
+                  <span className="block text-xs text-muted-foreground">A, мм</span>
+                  <span className="text-sm font-semibold text-foreground">{troynikSize.a}</span>
+                </div>
+                <div className="bg-card p-3 border-t">
+                  <span className="block text-xs text-muted-foreground">B, мм</span>
+                  <span className="text-sm font-semibold text-foreground">{troynikSize.b}</span>
+                </div>
+              </>
+            )}
+            {!isTroynik && (
+              <>
+                <div className="bg-card p-3 border-t">
+                  <span className="block text-xs text-muted-foreground">Толщина раструба (Sp)</span>
+                  <span className="text-sm font-semibold text-foreground">{sizeData?.socketThickness} мм</span>
+                </div>
+                <div className="bg-card p-3 border-t">
+                  <span className="block text-xs text-muted-foreground">Угол</span>
+                  <span className="text-sm font-semibold text-foreground">{angle}°</span>
+                </div>
+              </>
+            )}
           </div>
 
           {/* Material info */}
