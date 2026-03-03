@@ -1,4 +1,7 @@
 export type ConnectionType = "rastrub" | "flanec";
+export type AngleType = 90 | 60;
+
+export const supportedAngles: AngleType[] = [90, 60];
 
 export interface ConnectionInfo {
   id: ConnectionType;
@@ -63,7 +66,7 @@ export const productSizesByMaterial: Record<string, ProductSize[]> = Object.from
 );
 
 // Generate sizes with color code in article for multi-color materials
-export function getSizesForColor(materialName: string, colorCode: string, connectionType: ConnectionType = "rastrub"): ProductSize[] {
+export function getSizesForColor(materialName: string, colorCode: string, connectionType: ConnectionType = "rastrub", angle: AngleType = 90): ProductSize[] {
   const mat = materials.find((m) => m.name === materialName);
   if (!mat) return [];
   const specs = materialSpecs[materialName];
@@ -73,8 +76,8 @@ export function getSizesForColor(materialName: string, colorCode: string, connec
   return baseSizes.map((item) => ({
     ...item,
     article: hasMultipleColors
-      ? `${prefix}-90-${mat.code}-${colorCode}-${item.diameter}`
-      : `${prefix}-90-${mat.code}-${item.diameter}`,
+      ? `${prefix}-${angle}-${mat.code}-${colorCode}-${item.diameter}`
+      : `${prefix}-${angle}-${mat.code}-${item.diameter}`,
   }));
 }
 
@@ -144,6 +147,15 @@ export const flanecProductImages = [
   "/images/flanec-5.png",
 ];
 
-export function getProductImages(connectionType: ConnectionType): string[] {
+export const product60Images = [
+  "/images/product-60-1.png",
+  "/images/product-60-2.png",
+  "/images/product-60-3.png",
+  "/images/product-60-4.png",
+  "/images/product-60-5.png",
+];
+
+export function getProductImages(connectionType: ConnectionType, angle: AngleType = 90): string[] {
+  if (angle === 60) return product60Images;
   return connectionType === "flanec" ? flanecProductImages : productImages;
 }

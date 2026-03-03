@@ -4,7 +4,7 @@ import { CartProvider } from "@/contexts/CartContext";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import Header from "@/components/Header";
 import CartSheet from "@/components/CartSheet";
-import { getProductImages, materials, materialSpecs, getSizesForColor, connectionTypes, type ProductSize, type MaterialColor, type ConnectionType } from "@/data/products";
+import { getProductImages, materials, materialSpecs, getSizesForColor, connectionTypes, type ProductSize, type MaterialColor, type ConnectionType, type AngleType } from "@/data/products";
 import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
@@ -14,22 +14,24 @@ import { toast } from "sonner";
 
 import { generateFullPagePdf } from "@/lib/generateFullPagePdf";
 
-const ProductContent = () => {
+interface ProductContentProps {
+  angle: AngleType;
+}
+
+const ProductContent = ({ angle }: ProductContentProps) => {
   const { addItem } = useCart();
   const navigate = useNavigate();
   const [selectedMaterial, setSelectedMaterial] = useState(materials[0].name);
   const [selectedConnection, setSelectedConnection] = useState<ConnectionType>("rastrub");
   const specs = materialSpecs[selectedMaterial];
   const [selectedColor, setSelectedColor] = useState<MaterialColor>(specs?.colors[0]);
-  const currentSizes = getSizesForColor(selectedMaterial, selectedColor?.colorCode || "", selectedConnection);
+  const currentSizes = getSizesForColor(selectedMaterial, selectedColor?.colorCode || "", selectedConnection, angle);
   const [quantities, setQuantities] = useState<Record<string, number>>({});
   const [selectedImage, setSelectedImage] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
-  const productImages = getProductImages(selectedConnection);
+  const productImages = getProductImages(selectedConnection, angle);
 
   const darkFilter = (_i: number) => undefined;
-
-  
 
   const setQty = (article: string, delta: number) => {
     setQuantities((prev) => ({
@@ -113,7 +115,7 @@ const ProductContent = () => {
         <div>
           <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">Описание</h2>
           <p className="text-sm text-muted-foreground leading-relaxed">
-            Отвод вентиляционный круглого сечения служит для плавного поворота системы под углом 90°.
+            Отвод вентиляционный круглого сечения служит для плавного поворота системы под углом {angle}°.
             Обеспечивает надёжное соединение элементов вентиляционной системы благодаря раструбному типу соединения.
           </p>
         </div>
@@ -124,12 +126,12 @@ const ProductContent = () => {
           <div className="grid grid-cols-2 gap-px rounded-lg border overflow-hidden">
             <div className="bg-card p-3">
               <span className="block text-xs text-muted-foreground">Диаметр</span>
-              <span className="text-sm font-semibold text-foreground">100–1200 мм</span>
+              <span className="text-sm font-semibold text-foreground">200–1200 мм</span>
             </div>
             <div className="bg-card p-3">
               <span className="block text-xs text-muted-foreground mb-1">Соединение</span>
               <div className="flex gap-1.5">
-                {connectionTypes.map((conn) => (
+                {(angle === 90 ? connectionTypes : connectionTypes.filter(c => c.id === "rastrub")).map((conn) => (
                   <button
                     key={conn.id}
                     onClick={() => { setSelectedConnection(conn.id); setQuantities({}); setSelectedImage(0); }}
@@ -150,7 +152,7 @@ const ProductContent = () => {
             </div>
             <div className="bg-card p-3 border-t">
               <span className="block text-xs text-muted-foreground">Угол</span>
-              <span className="text-sm font-semibold text-foreground">90°</span>
+              <span className="text-sm font-semibold text-foreground">{angle}°</span>
             </div>
           </div>
         </div>
@@ -236,7 +238,7 @@ const ProductContent = () => {
 
           const segments = [
             { value: conn?.articlePrefix || "ОТВР", label: "Тип изделия", desc: selectedConnection === "flanec" ? "Отвод вентиляционный, тип соединения — фланец" : "Отвод вентиляционный, тип соединения — раструб" },
-            { value: "90", label: "Угол поворота", desc: "90 градусов" },
+            { value: String(angle), label: "Угол поворота", desc: `${angle} градусов` },
             { value: mat?.code || "—", label: "Материал", desc: mat?.name.replace(/\s*\(.*\)/, "") || "—" },
             ...(hasMultipleColors && selectedColor
               ? [{ value: selectedColor.colorCode, label: "Цвет (RAL)", desc: selectedColor.name, hex: selectedColor.hex }]
@@ -330,7 +332,7 @@ const ProductContent = () => {
 
               const articleSegments = [
                 { value: conn?.articlePrefix || "ОТВР", label: "Тип изделия", desc: selectedConnection === "flanec" ? "Фланец" : "Раструб" },
-                { value: "90", label: "Угол", desc: "90 градусов" },
+                { value: String(angle), label: "Угол", desc: `${angle} градусов` },
                 { value: mat?.code || "—", label: "Материал", desc: mat?.name.replace(/\s*\(.*\)/, "") || "—" },
                 ...(hasMultipleColors && selectedColor
                   ? [{ value: selectedColor.colorCode, label: "Цвет", desc: selectedColor.name }]
@@ -360,14 +362,18 @@ const ProductContent = () => {
   );
 };
 
-const Index = () => {
+interface IndexProps {
+  angle?: AngleType;
+}
+
+const Index = ({ angle = 90 }: IndexProps) => {
   const [cartOpen, setCartOpen] = useState(false);
 
   return (
     <CartProvider>
       <div className="min-h-screen bg-background">
-        <Header onCartOpen={() => setCartOpen(true)} />
-        <ProductContent />
+        <Header onCartOpen={() => setCartOpen(true)} angle={angle} />
+        <ProductContent angle={angle} />
         <CartSheet open={cartOpen} onOpenChange={setCartOpen} />
       </div>
     </CartProvider>

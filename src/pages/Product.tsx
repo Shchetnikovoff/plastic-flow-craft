@@ -15,13 +15,13 @@ import { generateSpecPdf } from "@/lib/generateSpecPdf";
 
 /** Parse article to extract product params */
 function parseArticle(article: string) {
-  // Format: PREFIX-90-MATERIAL[-COLOR]-DIAMETER
+  // Format: PREFIX-ANGLE-MATERIAL[-COLOR]-DIAMETER
   const parts = article.split("-");
   if (parts.length < 4) return null;
 
   const prefix = parts[0]; // ОТВР or ОТВФ
   const connectionType: ConnectionType = prefix === "ОТВФ" ? "flanec" : "rastrub";
-  const angle = parts[1]; // 90
+  const angle = parseInt(parts[1]) as 90 | 60; // 90 or 60
   const materialCode = parts[2];
   const diameter = parseInt(parts[parts.length - 1]);
   const colorCode = parts.length === 5 ? parts[3] : null;
@@ -70,9 +70,9 @@ const ProductDetailContent = () => {
     );
   }
 
-  const { connectionType, material, color, diameter, sizeData, specs } = parsed;
+  const { connectionType, angle, material, color, diameter, sizeData, specs } = parsed;
   const conn = connectionTypes.find((c) => c.id === connectionType);
-  const productImages = getProductImages(connectionType);
+  const productImages = getProductImages(connectionType, angle);
 
   const handleAdd = () => {
     addItem(
@@ -160,7 +160,7 @@ const ProductDetailContent = () => {
 
         {/* Right: Info */}
         <div>
-          <h1 className="text-xl sm:text-2xl font-bold text-foreground mb-1">Отвод вентиляционный 90°</h1>
+          <h1 className="text-xl sm:text-2xl font-bold text-foreground mb-1">Отвод вентиляционный {angle}°</h1>
           <p className="font-mono text-sm text-muted-foreground mb-6">{article}</p>
 
           <div className="grid grid-cols-2 gap-px rounded-lg border overflow-hidden mb-6">
@@ -186,7 +186,7 @@ const ProductDetailContent = () => {
             </div>
             <div className="bg-card p-3 border-t">
               <span className="block text-xs text-muted-foreground">Угол</span>
-              <span className="text-sm font-semibold text-foreground">90°</span>
+              <span className="text-sm font-semibold text-foreground">{angle}°</span>
             </div>
           </div>
 
