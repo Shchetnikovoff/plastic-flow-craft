@@ -19,6 +19,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/60" element={<Index angle={60} />} />
           <Route path="/45" element={<Index angle={45} />} />
+          <Route path="/30" element={<Index angle={30} />} />
           <Route path="/product/:article" element={<Product />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
