@@ -16,13 +16,14 @@ import { generateFullPagePdf } from "@/lib/generateFullPagePdf";
 
 interface ProductContentProps {
   angle: AngleType;
+  selectedConnection: ConnectionType;
+  setSelectedConnection: (c: ConnectionType) => void;
 }
 
-const ProductContent = ({ angle }: ProductContentProps) => {
+const ProductContent = ({ angle, selectedConnection, setSelectedConnection }: ProductContentProps) => {
   const { addItem } = useCart();
   const navigate = useNavigate();
   const [selectedMaterial, setSelectedMaterial] = useState(materials[0].name);
-  const [selectedConnection, setSelectedConnection] = useState<ConnectionType>("rastrub");
   const specs = materialSpecs[selectedMaterial];
   const [selectedColor, setSelectedColor] = useState<MaterialColor>(specs?.colors[0]);
   const currentSizes = getSizesForColor(selectedMaterial, selectedColor?.colorCode || "", selectedConnection, angle);
@@ -131,7 +132,7 @@ const ProductContent = ({ angle }: ProductContentProps) => {
             <div className="bg-card p-3">
               <span className="block text-xs text-muted-foreground mb-1">Соединение</span>
               <div className="flex gap-1.5">
-                {(angle === 90 ? connectionTypes : connectionTypes.filter(c => c.id === "rastrub")).map((conn) => (
+                {connectionTypes.map((conn) => (
                   <button
                     key={conn.id}
                     onClick={() => { setSelectedConnection(conn.id); setQuantities({}); setSelectedImage(0); }}
@@ -368,12 +369,13 @@ interface IndexProps {
 
 const Index = ({ angle = 90 }: IndexProps) => {
   const [cartOpen, setCartOpen] = useState(false);
+  const [selectedConnection, setSelectedConnection] = useState<ConnectionType>("rastrub");
 
   return (
     <CartProvider>
       <div className="min-h-screen bg-background">
-        <Header onCartOpen={() => setCartOpen(true)} angle={angle} />
-        <ProductContent angle={angle} />
+        <Header onCartOpen={() => setCartOpen(true)} angle={angle} connectionType={selectedConnection} />
+        <ProductContent angle={angle} selectedConnection={selectedConnection} setSelectedConnection={setSelectedConnection} />
         <CartSheet open={cartOpen} onOpenChange={setCartOpen} />
       </div>
     </CartProvider>
