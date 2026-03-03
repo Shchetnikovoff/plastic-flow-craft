@@ -26,8 +26,8 @@ export function getRazdvizhnoySizes(materialName: string, colorCode: string): Ra
   return baseSizes.map((item) => ({
     diameter: item.diameter,
     wallThickness: item.wallThickness,
-    lMin: item.diameter,
-    lMax: item.diameter * 2,
+    lMin: 1000,
+    lMax: 1800,
     socket: item.socketThickness,
     article: hasMultipleColors
       ? `РЭ-${mat.code}-${colorCode}-${item.diameter}`
