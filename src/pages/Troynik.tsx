@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CartProvider } from "@/contexts/CartContext";
+import { useProcessedImages } from "@/hooks/useProcessedImages";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import Header from "@/components/Header";
 import CartSheet from "@/components/CartSheet";
@@ -23,6 +24,7 @@ const TroynikContent = () => {
   const [quantities, setQuantities] = useState<Record<string, number>>({});
   const [selectedImage, setSelectedImage] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
+  const displayImages = useProcessedImages(troynikImages, [0, 1, 2]);
 
   const setQty = (article: string, delta: number) => {
     setQuantities((prev) => ({
@@ -44,7 +46,7 @@ const TroynikContent = () => {
     <main className="mx-auto max-w-[960px] px-4 sm:px-6 py-6 sm:py-8">
       {/* === IMAGE ROW === */}
       <div className="grid grid-cols-3 sm:grid-cols-5 gap-2 sm:gap-3 mb-8">
-        {troynikImages.map((src, i) => (
+        {displayImages.map((src, i) => (
           <button
             key={i}
             onClick={() => { setSelectedImage(i); setLightboxOpen(true); }}
@@ -61,7 +63,7 @@ const TroynikContent = () => {
       <Dialog open={lightboxOpen} onOpenChange={setLightboxOpen}>
         <DialogContent className="max-w-3xl p-2 bg-background">
           <div className="relative">
-            <img src={troynikImages[selectedImage]} alt={`Фото ${selectedImage + 1}`} className="w-full h-auto object-contain max-h-[80vh]" />
+            <img src={displayImages[selectedImage]} alt={`Фото ${selectedImage + 1}`} className="w-full h-auto object-contain max-h-[80vh]" />
             <Button variant="outline" size="icon" className="absolute left-2 top-1/2 -translate-y-1/2 h-10 w-10 rounded-full bg-background/80 backdrop-blur-sm" onClick={() => setSelectedImage((prev) => (prev - 1 + troynikImages.length) % troynikImages.length)}>
               <ChevronLeft className="h-5 w-5" />
             </Button>
@@ -70,7 +72,7 @@ const TroynikContent = () => {
             </Button>
           </div>
           <div className="flex justify-center gap-2 pt-2">
-            {troynikImages.map((src, i) => (
+            {displayImages.map((src, i) => (
               <button key={i} onClick={() => setSelectedImage(i)} className={`h-14 w-14 overflow-hidden rounded border-2 transition-all ${i === selectedImage ? "border-primary" : "border-border hover:border-muted-foreground"}`}>
                 <img src={src} alt={`Миниатюра ${i + 1}`} className="h-full w-full object-contain p-1" />
               </button>

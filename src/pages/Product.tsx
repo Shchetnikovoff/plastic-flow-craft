@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { CartProvider, useCart } from "@/contexts/CartContext";
+import { useProcessedImages } from "@/hooks/useProcessedImages";
 import Header from "@/components/Header";
 import CartSheet from "@/components/CartSheet";
 import { materials, materialSpecs, connectionTypes, baseSizes, type ConnectionType } from "@/data/products";
@@ -97,7 +98,8 @@ const ProductDetailContent = () => {
   const { productType, connectionType, angle, material, color, diameter, sizeData, troynikSize, specs } = parsed;
   const conn = connectionTypes.find((c) => c.id === connectionType);
   const isTroynik = productType === "troynik";
-  const productImages = isTroynik ? troynikImages : getProductImages(connectionType, angle);
+  const rawImages = isTroynik ? troynikImages : getProductImages(connectionType, angle);
+  const productImages = useProcessedImages(rawImages, isTroynik ? [0, 1, 2] : []);
 
   const handleAdd = () => {
     addItem(
