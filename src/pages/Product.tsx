@@ -51,7 +51,7 @@ const ProductDetailContent = () => {
   const parsed = parseArticle(article);
   if (!parsed) {
     return (
-      <main className="mx-auto max-w-[960px] px-6 py-8">
+      <main className="mx-auto max-w-[960px] px-4 sm:px-6 py-6 sm:py-8">
         <Breadcrumb className="mb-6">
           <BreadcrumbList>
             <BreadcrumbItem>
@@ -115,7 +115,7 @@ const ProductDetailContent = () => {
   };
 
   return (
-    <main className="mx-auto max-w-[960px] px-6 py-8">
+    <main className="mx-auto max-w-[960px] px-4 sm:px-6 py-6 sm:py-8">
       <Breadcrumb className="mb-6">
         <BreadcrumbList>
           <BreadcrumbItem>
@@ -160,7 +160,7 @@ const ProductDetailContent = () => {
 
         {/* Right: Info */}
         <div>
-          <h1 className="text-xl font-bold text-foreground mb-1">Отвод вентиляционный 90°</h1>
+          <h1 className="text-xl sm:text-2xl font-bold text-foreground mb-1">Отвод вентиляционный 90°</h1>
           <p className="font-mono text-sm text-muted-foreground mb-6">{article}</p>
 
           <div className="grid grid-cols-2 gap-px rounded-lg border overflow-hidden mb-6">
@@ -192,7 +192,7 @@ const ProductDetailContent = () => {
 
           {/* Material info */}
           <div className="mb-6">
-            <h2 className="text-sm font-bold text-foreground mb-2 uppercase tracking-wide">Материал</h2>
+            <h2 className="text-base font-bold text-foreground mb-2 uppercase tracking-wide">Материал</h2>
             <p className="text-sm text-foreground mb-1">{material.name}</p>
             {specs && (
               <div className="text-xs text-muted-foreground space-y-0.5">
