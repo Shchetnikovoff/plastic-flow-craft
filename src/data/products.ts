@@ -1,7 +1,7 @@
 export type ConnectionType = "rastrub" | "flanec";
-export type AngleType = 90 | 60 | 45 | 30;
+export type AngleType = 90 | 60 | 45 | 30 | 15;
 
-export const supportedAngles: AngleType[] = [90, 60, 45, 30];
+export const supportedAngles: AngleType[] = [90, 60, 45, 30, 15];
 
 export interface ConnectionInfo {
   id: ConnectionType;
@@ -195,7 +195,16 @@ export const flanec30Images = [
   "/images/flanec-30-5.png",
 ];
 
+export const product15Images = [
+  "/images/product-15-1.png",
+  "/images/product-15-2.png",
+  "/images/product-15-3.png",
+  "/images/product-15-4.png",
+  "/images/product-15-5.png",
+];
+
 export function getProductImages(connectionType: ConnectionType, angle: AngleType = 90): string[] {
+  if (angle === 15) return product15Images;
   if (angle === 30) return connectionType === "flanec" ? flanec30Images : product30Images;
   if (angle === 45) return connectionType === "flanec" ? flanec45Images : product45Images;
   if (angle === 60) return connectionType === "flanec" ? flanec60Images : product60Images;
