@@ -1,27 +1,37 @@
 
 
-## Problem
+## Plan: Add 45° ventilation elbow product
 
-Product images for angles 60°, 45°, 30°, and 15° contain blue text labels and non-white backgrounds. The 90° images are already clean (white background, no text). You want all images to match the 90° style.
+Following the same pattern used for 90° and 60° elbows, add the 45° angle with its own images and route.
 
-## Limitation
+### Changes
 
-I don't have access to an image editing tool in this environment — the previous attempt with the AI image editor also failed. These are raster PNG files, so the text and background are baked into the pixels and cannot be removed via CSS or code changes.
+**1. Copy uploaded images to `public/images/`**
+- `user-uploads://image-23.png` → `public/images/product-45-1.png`
+- `user-uploads://image-24.png` → `public/images/product-45-2.png`
+- `user-uploads://image-25.png` → `public/images/product-45-3.png`
+- `user-uploads://image-26.png` → `public/images/product-45-4.png`
+- `user-uploads://image-27.png` → `public/images/product-45-5.png`
 
-## Options
+(image-28 is a reference table screenshot, not used as product image)
 
-### Option A: You upload cleaned images
-The most reliable approach. You can clean the images using:
-- **Photoshop / Figma** — manually remove text, fill background white
-- **remove.bg** — for background removal, then place on white
-- **Canva** — simple editing tools
+**2. Update `src/data/products.ts`**
+- Change `AngleType` from `90 | 60` to `90 | 60 | 45`
+- Add `45` to `supportedAngles` array
+- Add `product45Images` array with the 5 new image paths
+- Update `getProductImages` to handle `angle === 45`
 
-Upload the cleaned versions through the chat and I'll replace all 40 files instantly.
+**3. Update `src/App.tsx`**
+- Add route: `<Route path="/45" element={<Index angle={45} />} />`
 
-### Option B: CSS visual workaround (partial fix)
-I can add a white background and padding to the image containers, which already partially exists. However, this **will not remove the blue text** baked into the PNG files — it only ensures the surrounding area is white.
+**4. Update `src/pages/Product.tsx`**
+- No changes needed — `parseArticle` already parses angle dynamically from article string
 
-### Recommendation
+**5. Update `src/components/Header.tsx`**
+- No changes needed — navigation already renders from `supportedAngles` array dynamically
 
-**Option A** is the only way to truly remove the blue labels from the images. If you can provide cleaned versions of even one angle set (e.g., 60°), I can verify and apply the rest as you upload them.
+### Technical details
+- The `baseSizes` table is identical for 45° (same diameters 200-1200, same wall thicknesses), so no new size data needed
+- Article format: `ОТВР-45-PPC-7032-200` (follows existing pattern)
+- Only raструб connection initially (user can add flanec images later)
 
