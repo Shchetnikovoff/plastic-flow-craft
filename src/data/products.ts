@@ -171,8 +171,16 @@ export const product45Images = [
   "/images/product-45-5.png",
 ];
 
+export const flanec45Images = [
+  "/images/flanec-45-1.png",
+  "/images/flanec-45-2.png",
+  "/images/flanec-45-3.png",
+  "/images/flanec-45-4.png",
+  "/images/flanec-45-5.png",
+];
+
 export function getProductImages(connectionType: ConnectionType, angle: AngleType = 90): string[] {
-  if (angle === 45) return product45Images;
+  if (angle === 45) return connectionType === "flanec" ? flanec45Images : product45Images;
   if (angle === 60) return connectionType === "flanec" ? flanec60Images : product60Images;
   return connectionType === "flanec" ? flanecProductImages : productImages;
 }
