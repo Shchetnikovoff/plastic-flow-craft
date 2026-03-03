@@ -1,30 +1,37 @@
 
 
-## Plan: Clean up all product images — remove labels, white background
+## Plan: Add 45° ventilation elbow product
 
-### Scope
-50 product images across all angles (90°, 60°, 45°, 30°, 15°) and connection types (rastrub, flanec). Excludes `logo.png` and `schema.png`.
+Following the same pattern used for 90° and 60° elbows, add the 45° angle with its own images and route.
 
-### Approach
-Use the AI image editing API (Gemini) to process each image with the prompt: "Remove all text, labels, watermarks and annotations from this image. Make the background pure white (#FFFFFF). Keep only the product (pipe elbow) on a clean white background."
+### Changes
 
-### Batch processing
-Images will be processed in parallel batches to stay within API limits:
-- **Batch 1**: `product-{1-5}.png` (90° rastrub)
-- **Batch 2**: `flanec-{1-5}.png` (90° flanec)
-- **Batch 3**: `product-60-{1-5}.png`
-- **Batch 4**: `flanec-60-{1-5}.png`
-- **Batch 5**: `product-45-{1-5}.png`
-- **Batch 6**: `flanec-45-{1-5}.png`
-- **Batch 7**: `product-30-{1-5}.png`
-- **Batch 8**: `flanec-30-{1-5}.png`
-- **Batch 9**: `product-15-{1-5}.png`
+**1. Copy uploaded images to `public/images/`**
+- `user-uploads://image-23.png` → `public/images/product-45-1.png`
+- `user-uploads://image-24.png` → `public/images/product-45-2.png`
+- `user-uploads://image-25.png` → `public/images/product-45-3.png`
+- `user-uploads://image-26.png` → `public/images/product-45-4.png`
+- `user-uploads://image-27.png` → `public/images/product-45-5.png`
 
-Total: 45 images (flanec-15 reuses flanec-30, so no separate files).
+(image-28 is a reference table screenshot, not used as product image)
 
-### Notes
-- Each image will be edited individually via the AI image editing endpoint
-- The edited images replace the originals in `public/images/`
-- No code changes needed — only asset replacement
-- After processing, visual verification on each angle page will confirm quality
+**2. Update `src/data/products.ts`**
+- Change `AngleType` from `90 | 60` to `90 | 60 | 45`
+- Add `45` to `supportedAngles` array
+- Add `product45Images` array with the 5 new image paths
+- Update `getProductImages` to handle `angle === 45`
+
+**3. Update `src/App.tsx`**
+- Add route: `<Route path="/45" element={<Index angle={45} />} />`
+
+**4. Update `src/pages/Product.tsx`**
+- No changes needed — `parseArticle` already parses angle dynamically from article string
+
+**5. Update `src/components/Header.tsx`**
+- No changes needed — navigation already renders from `supportedAngles` array dynamically
+
+### Technical details
+- The `baseSizes` table is identical for 45° (same diameters 200-1200, same wall thicknesses), so no new size data needed
+- Article format: `ОТВР-45-PPC-7032-200` (follows existing pattern)
+- Only raструб connection initially (user can add flanec images later)
 
