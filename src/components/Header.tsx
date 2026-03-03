@@ -1,13 +1,16 @@
 import { ShoppingCart, Phone, Mail, MapPin } from "lucide-react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useCart } from "@/contexts/CartContext";
+import { supportedAngles, type AngleType } from "@/data/products";
 
 interface HeaderProps {
   onCartOpen: () => void;
+  angle?: AngleType;
 }
 
-const Header = ({ onCartOpen }: HeaderProps) => {
+const Header = ({ onCartOpen, angle = 90 }: HeaderProps) => {
   const { totalItems } = useCart();
 
   return (
@@ -22,7 +25,7 @@ const Header = ({ onCartOpen }: HeaderProps) => {
           />
           <div className="min-w-0">
             <h1 className="text-sm sm:text-lg md:text-xl font-bold text-foreground leading-tight">
-              Отвод вентиляционный круглого сечения 90°
+              Отвод вентиляционный круглого сечения {angle}°
             </h1>
             <p className="text-[10px] sm:text-xs text-muted-foreground mt-0.5 truncate">
               Карточка товара • ООО СЗПК «Пласт-Металл Про»
@@ -38,13 +41,29 @@ const Header = ({ onCartOpen }: HeaderProps) => {
                 <MapPin className="h-3 w-3 shrink-0" /> Ленинградская обл., д. Разметелево
               </span>
             </div>
+            {/* Navigation to other angles */}
+            <div className="flex items-center gap-2 mt-1.5">
+              {supportedAngles.map((a) => (
+                <Link
+                  key={a}
+                  to={a === 90 ? "/" : `/${a}`}
+                  className={`text-xs font-semibold px-2 py-0.5 rounded-full border transition-colors ${
+                    a === angle
+                      ? "border-primary text-primary bg-primary/10"
+                      : "border-border text-muted-foreground hover:border-primary/50 hover:text-foreground"
+                  }`}
+                >
+                  {a}°
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
 
-        {/* Right: 90° badge + Cart */}
+        {/* Right: angle badge + Cart */}
         <div className="flex items-center gap-2 sm:gap-3 shrink-0">
           <div className="hidden md:flex flex-col items-center">
-            <span className="text-3xl font-black text-primary leading-none">90°</span>
+            <span className="text-3xl font-black text-primary leading-none">{angle}°</span>
             <span className="text-[10px] text-muted-foreground">раструб</span>
           </div>
           <Button variant="outline" size="icon" className="relative" onClick={onCartOpen}>
