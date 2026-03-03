@@ -25,11 +25,12 @@ export const razdvizhnoyFlanecImages = [
   "/images/razdvizhnoy-flanec-5.png",
 ];
 
-export function getRazdvizhnoySizes(materialName: string, colorCode: string): RazdvizhnoySize[] {
+export function getRazdvizhnoySizes(materialName: string, colorCode: string, connectionType: "rastrub" | "flanec" = "rastrub"): RazdvizhnoySize[] {
   const mat = materials.find((m) => m.name === materialName);
   if (!mat) return [];
   const specs = materialSpecs[materialName];
   const hasMultipleColors = specs && specs.colors.length > 1;
+  const prefix = connectionType === "flanec" ? "РЭ-Ф" : "РЭ";
 
   return baseSizes.map((item) => ({
     diameter: item.diameter,
@@ -38,7 +39,7 @@ export function getRazdvizhnoySizes(materialName: string, colorCode: string): Ra
     lMax: 1800,
     socket: item.socketThickness,
     article: hasMultipleColors
-      ? `РЭ-${mat.code}-${colorCode}-${item.diameter}`
-      : `РЭ-${mat.code}-${item.diameter}`,
+      ? `${prefix}-${mat.code}-${colorCode}-${item.diameter}`
+      : `${prefix}-${mat.code}-${item.diameter}`,
   }));
 }
