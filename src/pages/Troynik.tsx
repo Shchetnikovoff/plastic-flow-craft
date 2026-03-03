@@ -4,7 +4,7 @@ import { CartProvider } from "@/contexts/CartContext";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import Header from "@/components/Header";
 import CartSheet from "@/components/CartSheet";
-import { materials, materialSpecs, type MaterialColor } from "@/data/products";
+import { materials, materialSpecs, connectionTypes, type MaterialColor, type ConnectionType } from "@/data/products";
 import { getTroynikSizes, troynikImages, type TroynikSize } from "@/data/troynikProducts";
 import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
@@ -17,12 +17,16 @@ const TroynikContent = () => {
   const { addItem } = useCart();
   const navigate = useNavigate();
   const [selectedMaterial, setSelectedMaterial] = useState(materials[0].name);
+  const [selectedConnection, setSelectedConnection] = useState<ConnectionType>("rastrub");
   const specs = materialSpecs[selectedMaterial];
   const [selectedColor, setSelectedColor] = useState<MaterialColor>(specs?.colors[0]);
-  const currentSizes = getTroynikSizes(selectedMaterial, selectedColor?.colorCode || "");
+  const currentSizes = getTroynikSizes(selectedMaterial, selectedColor?.colorCode || "", selectedConnection);
   const [quantities, setQuantities] = useState<Record<string, number>>({});
   const [selectedImage, setSelectedImage] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
+
+  const connectionLabel = selectedConnection === "flanec" ? "Фланец" : "Раструб";
+  const socketColumnLabel = selectedConnection === "flanec" ? "Фланец" : "Раструб";
 
   const setQty = (article: string, delta: number) => {
     setQuantities((prev) => ({
@@ -85,7 +89,7 @@ const TroynikContent = () => {
           <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">Описание</h2>
           <p className="text-sm text-muted-foreground leading-relaxed">
             Тройник вентиляционный круглого сечения используется для присоединения ответвлений к основной магистрали воздуховода круглого сечения.
-            Обеспечивает надёжное соединение элементов вентиляционной системы благодаря раструбному типу соединения.
+            Обеспечивает надёжное соединение элементов вентиляционной системы.
           </p>
         </div>
         <div>
@@ -97,17 +101,38 @@ const TroynikContent = () => {
             </div>
             <div className="bg-card p-3">
               <span className="block text-xs text-muted-foreground">Соединение</span>
-              <span className="text-sm font-semibold text-foreground">Раструб</span>
+              <span className="text-sm font-semibold text-foreground">{connectionLabel}</span>
             </div>
             <div className="bg-card p-3 border-t">
               <span className="block text-xs text-muted-foreground">Стенка</span>
-              <span className="text-sm font-semibold text-foreground">3–10 мм</span>
+              <span className="text-sm font-semibold text-foreground">2–10 мм</span>
             </div>
             <div className="bg-card p-3 border-t">
               <span className="block text-xs text-muted-foreground">Тип</span>
               <span className="text-sm font-semibold text-foreground">Тройник</span>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* === ТИП СОЕДИНЕНИЯ === */}
+      <div className="mb-8">
+        <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">Тип соединения</h2>
+        <div className="flex flex-wrap gap-2">
+          {connectionTypes.map((ct) => (
+            <Badge
+              key={ct.id}
+              variant="outline"
+              className={`rounded-full px-4 py-1.5 text-xs font-medium cursor-pointer transition-colors ${
+                selectedConnection === ct.id
+                  ? "border-primary text-primary bg-primary/5"
+                  : "hover:border-primary/50 hover:text-primary/80"
+              }`}
+              onClick={() => { setSelectedConnection(ct.id); setQuantities({}); }}
+            >
+              {ct.name}
+            </Badge>
+          ))}
         </div>
       </div>
 
@@ -181,9 +206,11 @@ const TroynikContent = () => {
         const hasMultipleColors = specs && specs.colors.length > 1;
         const firstSize = currentSizes[0];
         const exampleArticle = firstSize?.article || "—";
+        const prefix = selectedConnection === "flanec" ? "ТРФ" : "ТР";
+        const prefixDesc = selectedConnection === "flanec" ? "Тройник вентиляционный, фланец" : "Тройник вентиляционный, раструб";
 
         const segments = [
-          { value: "ТР", label: "Тип изделия", desc: "Тройник вентиляционный, раструб" },
+          { value: prefix, label: "Тип изделия", desc: prefixDesc },
           { value: mat?.code || "—", label: "Материал", desc: mat?.name.replace(/\s*\(.*\)/, "") || "—" },
           ...(hasMultipleColors && selectedColor
             ? [{ value: selectedColor.colorCode, label: "Цвет (RAL)", desc: selectedColor.name, hex: selectedColor.hex }]
@@ -234,7 +261,7 @@ const TroynikContent = () => {
                 <TableHead className="text-primary-foreground font-semibold text-xs text-center">L1, мм</TableHead>
                 <TableHead className="text-primary-foreground font-semibold text-xs text-center">A, мм</TableHead>
                 <TableHead className="text-primary-foreground font-semibold text-xs text-center">B, мм</TableHead>
-                <TableHead className="text-primary-foreground font-semibold text-xs text-center">Раструб</TableHead>
+                <TableHead className="text-primary-foreground font-semibold text-xs text-center">{socketColumnLabel}</TableHead>
                 <TableHead className="text-primary-foreground font-semibold text-xs text-center">S, мм</TableHead>
                 <TableHead className="text-primary-foreground font-semibold text-xs text-center whitespace-nowrap">Кол-во</TableHead>
                 <TableHead className="text-primary-foreground font-semibold text-xs text-center">Действие</TableHead>
