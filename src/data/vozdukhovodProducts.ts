@@ -36,7 +36,6 @@ export const vozdukhovodBaseSizes = [
 export const vozdukhovodAvailableLengths = [500, 1000, 1500, 2000];
 
 export const vozdukhovodImages = [
-  "/images/vozdukhovod-1.png",
   "/images/vozdukhovod-2.png",
   "/images/vozdukhovod-3.png",
   "/images/vozdukhovod-4.png",
