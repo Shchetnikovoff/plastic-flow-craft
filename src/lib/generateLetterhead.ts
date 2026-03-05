@@ -89,7 +89,7 @@ export async function generateLetterhead() {
                 alignment: AlignmentType.CENTER,
                 children: [
                   new TextRun({
-                    text: "ООО СЗПК «Пласт-Металл Про»  |  ИНН: уточняйте  |  Ленинградская обл., д. Разметелево, ул. Строителей 27",
+                    text: "ООО СЗПК «Пласт-Металл Про»  |  ИНН: 7806634460  |  Ленинградская обл., д. Разметелево, ул. Строителей 27",
                     size: 14,
                     color: "999999",
                     font: "Arial",
