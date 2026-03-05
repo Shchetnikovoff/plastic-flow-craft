@@ -1,10 +1,17 @@
-import { ShoppingCart, Phone, Mail, MapPin, FileText } from "lucide-react";
+import { ShoppingCart, Phone, Mail, MapPin, FileText, ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { useCart } from "@/contexts/CartContext";
 import { supportedAngles, connectionTypes, type AngleType, type ConnectionType } from "@/data/products";
 import { generateLetterhead } from "@/lib/generateLetterhead";
+import { generateLetterheadPdf } from "@/lib/generateLetterheadPdf";
 
 export type ProductType = "otvod" | "troynik" | "razdvizhnoy" | "vozdukhovod";
 
@@ -126,15 +133,25 @@ const Header = ({ onCartOpen, angle = 90, connectionType = "rastrub", productTyp
               </>
             )}
           </div>
-          <Button
-            variant="outline"
-            size="icon"
-            className="relative"
-            onClick={() => generateLetterhead()}
-            title="Скачать бланк КП"
-          >
-            <FileText className="h-5 w-5" />
-          </Button>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button
+                variant="outline"
+                size="icon"
+                title="Скачать бланк КП"
+              >
+                <FileText className="h-5 w-5" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuItem onClick={() => generateLetterhead()}>
+                Скачать Word (.docx)
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => generateLetterheadPdf()}>
+                Скачать PDF (.pdf)
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
           <Button variant="outline" size="icon" className="relative" onClick={onCartOpen}>
             <ShoppingCart className="h-5 w-5" />
             {totalItems > 0 && (
