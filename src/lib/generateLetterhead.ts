@@ -1,4 +1,4 @@
-import { Document, Packer, Paragraph, TextRun, ImageRun, Header, Footer, AlignmentType, TabStopPosition, TabStopType, BorderStyle } from "docx";
+import { Document, Packer, Paragraph, TextRun, ImageRun, Header, Footer, AlignmentType, TabStopPosition, TabStopType, BorderStyle, Table, TableRow, TableCell, WidthType, VerticalAlign, TableBorders } from "docx";
 import { saveAs } from "file-saver";
 
 async function loadImageAsArrayBuffer(url: string): Promise<ArrayBuffer> {
@@ -26,13 +26,65 @@ export async function generateLetterhead() {
         headers: {
           default: new Header({
             children: [
-              new Paragraph({
-                alignment: AlignmentType.LEFT,
-                children: [
-                  new ImageRun({
-                    data: logoBuffer,
-                    transformation: { width: 100, height: 46 },
-                    type: "png",
+              new Table({
+                borders: TableBorders.NONE,
+                rows: [
+                  new TableRow({
+                    children: [
+                      new TableCell({
+                        width: { size: 1500, type: WidthType.DXA },
+                        verticalAlign: VerticalAlign.CENTER,
+                        borders: {
+                          top: { style: BorderStyle.NONE, size: 0 },
+                          bottom: { style: BorderStyle.NONE, size: 0 },
+                          left: { style: BorderStyle.NONE, size: 0 },
+                          right: { style: BorderStyle.NONE, size: 0 },
+                        },
+                        children: [
+                          new Paragraph({
+                            children: [
+                              new ImageRun({
+                                data: logoBuffer,
+                                transformation: { width: 80, height: 37 },
+                                type: "png",
+                              }),
+                            ],
+                          }),
+                        ],
+                      }),
+                      new TableCell({
+                        verticalAlign: VerticalAlign.CENTER,
+                        borders: {
+                          top: { style: BorderStyle.NONE, size: 0 },
+                          bottom: { style: BorderStyle.NONE, size: 0 },
+                          left: { style: BorderStyle.NONE, size: 0 },
+                          right: { style: BorderStyle.NONE, size: 0 },
+                        },
+                        children: [
+                          new Paragraph({
+                            children: [
+                              new TextRun({
+                                text: "ООО СЗПК «Пласт-Металл Про»",
+                                bold: true,
+                                size: 20,
+                                color: "1E3A5F",
+                                font: "Arial",
+                              }),
+                            ],
+                          }),
+                          new Paragraph({
+                            children: [
+                              new TextRun({
+                                text: "+7 963 322-55-40  |  osobenkov@list.ru",
+                                size: 16,
+                                color: "666666",
+                                font: "Arial",
+                              }),
+                            ],
+                          }),
+                        ],
+                      }),
+                    ],
                   }),
                 ],
               }),
@@ -45,31 +97,8 @@ export async function generateLetterhead() {
                     size: 6,
                   },
                 },
-                spacing: { after: 100 },
-                children: [
-                  new TextRun({
-                    text: "ООО СЗПК «Пласт-Металл Про»",
-                    bold: true,
-                    size: 20,
-                    color: "1E3A5F",
-                    font: "Arial",
-                  }),
-                  new TextRun({
-                    text: "\t",
-                  }),
-                  new TextRun({
-                    text: "+7 963 322-55-40  |  osobenkov@list.ru",
-                    size: 16,
-                    color: "666666",
-                    font: "Arial",
-                  }),
-                ],
-                tabStops: [
-                  {
-                    type: TabStopType.RIGHT,
-                    position: TabStopPosition.MAX,
-                  },
-                ],
+                spacing: { before: 60, after: 100 },
+                children: [],
               }),
             ],
           }),
