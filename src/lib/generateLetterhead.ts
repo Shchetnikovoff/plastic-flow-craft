@@ -132,17 +132,33 @@ export async function generateLetterhead() {
             spacing: { after: 200 },
             children: [
               new TextRun({
-                text: `Дата: «____» ______________ 20____ г.`,
+                text: "Дата: ",
+                bold: true,
                 size: 22,
                 color: "333333",
                 font: "Arial",
               }),
+              new TextRun({
+                text: "[укажите дату]",
+                size: 22,
+                color: "AAAAAA",
+                font: "Arial",
+                italics: true,
+              }),
               new TextRun({ text: "\t" }),
               new TextRun({
-                text: "№ ___________",
+                text: "№ ",
+                bold: true,
                 size: 22,
                 color: "333333",
                 font: "Arial",
+              }),
+              new TextRun({
+                text: "[номер]",
+                size: 22,
+                color: "AAAAAA",
+                font: "Arial",
+                italics: true,
               }),
             ],
             tabStops: [
@@ -164,10 +180,11 @@ export async function generateLetterhead() {
                 font: "Arial",
               }),
               new TextRun({
-                text: "_______________________________________________",
+                text: "[ФИО получателя]",
                 size: 22,
-                color: "999999",
+                color: "AAAAAA",
                 font: "Arial",
+                italics: true,
               }),
             ],
           }),
@@ -182,10 +199,11 @@ export async function generateLetterhead() {
                 font: "Arial",
               }),
               new TextRun({
-                text: "________________________________________",
+                text: "[название организации]",
                 size: 22,
-                color: "999999",
+                color: "AAAAAA",
                 font: "Arial",
+                italics: true,
               }),
             ],
           }),
@@ -194,14 +212,27 @@ export async function generateLetterhead() {
             spacing: { after: 200 },
             children: [
               new TextRun({
-                text: "Уважаемый(ая) ___________________________!",
+                text: "Уважаемый(ая) ",
+                size: 22,
+                color: "333333",
+                font: "Arial",
+              }),
+              new TextRun({
+                text: "[имя отчество]",
+                size: 22,
+                color: "AAAAAA",
+                font: "Arial",
+                italics: true,
+              }),
+              new TextRun({
+                text: "!",
                 size: 22,
                 color: "333333",
                 font: "Arial",
               }),
             ],
           }),
-          // Body placeholder
+          // Body
           new Paragraph({
             spacing: { after: 200 },
             children: [
@@ -213,10 +244,23 @@ export async function generateLetterhead() {
               }),
             ],
           }),
-          // Empty lines for content
-          ...Array.from({ length: 20 }, () =>
+          // Editable content area
+          new Paragraph({
+            spacing: { after: 200 },
+            children: [
+              new TextRun({
+                text: "[Введите описание продукции, условия поставки, цены и сроки]",
+                size: 22,
+                color: "AAAAAA",
+                font: "Arial",
+                italics: true,
+              }),
+            ],
+          }),
+          // Empty paragraphs for spacing
+          ...Array.from({ length: 8 }, () =>
             new Paragraph({
-              spacing: { after: 60 },
+              spacing: { after: 120 },
               children: [
                 new TextRun({
                   text: "",
@@ -252,10 +296,24 @@ export async function generateLetterhead() {
           new Paragraph({
             children: [
               new TextRun({
-                text: "_________________ / _________________ /",
+                text: "[подпись]",
+                size: 22,
+                color: "AAAAAA",
+                font: "Arial",
+                italics: true,
+              }),
+              new TextRun({
+                text: " / ",
                 size: 22,
                 color: "999999",
                 font: "Arial",
+              }),
+              new TextRun({
+                text: "[расшифровка]",
+                size: 22,
+                color: "AAAAAA",
+                font: "Arial",
+                italics: true,
               }),
             ],
           }),
