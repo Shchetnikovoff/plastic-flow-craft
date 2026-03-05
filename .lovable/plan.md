@@ -1,6 +1,8 @@
 
 
-## Plan: Remove first vozdukhovod image
+## Plan: Add INN 7806634460 to company details
 
-Remove `/images/vozdukhovod-1.png` from the `vozdukhovodImages` array in `src/data/vozdukhovodProducts.ts`, leaving images 2–5.
+Replace the placeholder "ИНН: уточняйте" with the actual INN "7806634460" in `src/lib/generateLetterhead.ts` (footer of the .docx letterhead).
+
+**File**: `src/lib/generateLetterhead.ts`, line 92 — change `ИНН: уточняйте` → `ИНН: 7806634460`.
 
