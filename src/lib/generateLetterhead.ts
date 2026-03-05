@@ -27,10 +27,11 @@ export async function generateLetterhead() {
           default: new Header({
             children: [
               new Paragraph({
+                alignment: AlignmentType.LEFT,
                 children: [
                   new ImageRun({
                     data: logoBuffer,
-                    transformation: { width: 120, height: 55 },
+                    transformation: { width: 100, height: 46 },
                     type: "png",
                   }),
                 ],
