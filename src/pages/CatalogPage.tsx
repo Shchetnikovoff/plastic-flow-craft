@@ -4,7 +4,7 @@ import { ArrowRight, Construction, ImageOff } from "lucide-react";
 import Header from "@/components/Header";
 import CartSheet from "@/components/CartSheet";
 import { CartProvider } from "@/contexts/CartContext";
-import { catalog, findCategory, findSubcategory, type CatalogCategory } from "@/data/catalog";
+import { catalog, findCategory, findSubcategory } from "@/data/catalog";
 import {
   Breadcrumb,
   BreadcrumbList,
@@ -17,6 +17,7 @@ import {
 const CatalogPageInner = () => {
   const { categorySlug, subSlug } = useParams<{ categorySlug: string; subSlug?: string }>();
   const [cartOpen, setCartOpen] = useState(false);
+  const [selectedSubId, setSelectedSubId] = useState<string | null>(null);
 
   // Category listing (no slug)
   if (!categorySlug) {
