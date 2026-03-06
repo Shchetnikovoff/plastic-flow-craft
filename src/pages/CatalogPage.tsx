@@ -99,7 +99,6 @@ const CatalogPageInner = () => {
   // Category page with list of subcategories
   // Find category index for numbering (1-based)
   const catIndex = catalog.findIndex((c) => c.slug === category.slug) + 1;
-  const [selectedSubId, setSelectedSubId] = useState<string | null>(null);
 
   const selectedSub = category.subcategories.find((s) => s.id === selectedSubId);
 
