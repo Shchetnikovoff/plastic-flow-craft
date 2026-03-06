@@ -1,52 +1,55 @@
 
 
-## Plan: Add Product Images and Size Tables to Ёмкости Page
+## Plan: Add "Ёмкости подземные из спиральновитой трубы" Subcategory Page
 
-### What's Being Added
+### What We're Building
 
-1. **Two product images** (3D renders of containers) to the hero section of the Ёмкости page
-2. **Product specification tables** from the Excel file — 10 tables covering vertical and horizontal containers in PP and PE materials
-
-### Data from Excel (Summary)
-
-The Excel contains standardized size tables for containers (1000–50000 liters) across these types:
-
-**Vertical (Page 1-2):**
-- PP плоская крыша/плоское дно (ЕВПП-xxxx)
-- PP наклонное дно (ЕВПП-НД-xxxx)
-- PP коническая крыша (ЕВПП-КК-xxxx)
-- ПНД плоская крыша/плоское дно (ЕВПНД-xxxx)
-- ПНД наклонное дно (ЕВПНД-НД-xxxx)
-- ПНД коническая крыша (ЕВПНД-КК-xxxx)
-
-**Horizontal (Page 4-5):**
-- PP низкие ложементы (ЕГППЛСТ-xxxx)
-- PP высокие ложементы (ЕГППЛВ-xxxx)
-- ПНД низкие ложементы (ЕГПНДЛСТ-xxxx)
-- ПНД высокие ложементы (ЕГПНДЛВ-xxxx)
-
-Each table has columns: Артикул, Объём (л), Ø (мм), H/L (мм). All share the same 17 size rows.
+A new dedicated landing page for the underground containers subcategory (item "e3" in catalog: "Ёмкости подземные") at `/catalog/emkosti/podzemnye`. This is a full content page similar to EmkostiPage but focused on spiral-wound pipe underground containers.
 
 ### Changes
 
-#### 1. Copy images to project
-- Copy `image_1.png` → `public/images/emkosti-hero-1.png` (white containers render)
-- Copy `image-85.png` → `public/images/emkosti-hero-2.png` (dark containers cutaway)
+#### 1. Copy uploaded images to project
+- `alexander-tortsev-9-1.jpg` → `public/images/emkosti-podzemnye-1.jpg`
+- `alexander-tortsev-8-4.jpg` → `public/images/emkosti-podzemnye-2.jpg`
+- `yomkosti-i-rezervuaryi.png` → `public/images/emkosti-podzemnye-3.png`
 
-#### 2. Create data file `src/data/emkostiProducts.ts`
-- Define all 10 product tables as typed arrays with `{ article, volume, diameter, height }` entries
-- Group them by orientation (vertical/horizontal) and material (PP/ПНД) and type (flat/sloped/conical)
+#### 2. Create data file `src/data/podzemnyeProducts.ts`
+Size table (from polycorr.ru reference, 12 rows):
 
-#### 3. Update `src/pages/EmkostiPage.tsx`
-- Add hero images as a gallery/carousel between hero text and intro block
-- Add a new **"Типоразмерный ряд"** section after the modifications accordion, with:
-  - Tabs or accordion to switch between container types (vertical PP, vertical ПНД, horizontal PP, horizontal ПНД)
-  - Sub-tabs for subtypes (плоская крыша, наклонное дно, коническая крыша / низкие ложементы, высокие ложементы)
-  - Each showing a table with columns: Артикул | Объём (л) | Ø (мм) | H (мм)
-  - Description text for each subtype from the Excel
+| Объём, м³ | Ø корпуса, мм | Длина (L), мм |
+|-----------|---------------|---------------|
+| 20 | 2400 | 4500 |
+| 25 | 2400 | 5600 |
+| 30 | 2400 | 6700 |
+| 40 | 2400 | 8800 |
+| 50 | 2400 | 11000 |
+| 60 | 3000 | 8500 |
+| 70 | 3000 | 9900 |
+| 80 | 3000 | 11400 |
+| 90 | 3200 | 11200 |
+| 100 | 3200 | 12500 |
+| 120 | 3500 | 12500 |
+| 150 | 3600 | 14700 |
+
+#### 3. Create `src/pages/EmkostiPodzemnye.tsx`
+Full landing page with all provided text structured into sections:
+- **Hero**: company name, title "Подземные ёмкости из спиральновитых труб", 3 product images in grid
+- **Intro**: description + "Почему выбирают нас" checklist (6 items)
+- **Раздел 1 — Назначение**: 8 application areas as card grid
+- **Раздел 2 — Технология и материалы**: materials (ПНД, PP, армированные), key specs (diameter, length, pressure, temperature, ring stiffness, seismic), advantages of spiral-wound construction
+- **Раздел 3 — Виды и модификации**: accordion sections (по назначению, по конструкции, по способу монтажа, дополнительные опции)
+- **Типоразмерный ряд**: table from the data file
+- **Раздел 4 — Преимущества сотрудничества**: 6 advantage cards
+- **CTA form**: contact form (name, phone, email, description)
+
+#### 4. Update `src/App.tsx`
+Add route: `/catalog/emkosti/podzemnye` → `EmkostiPodzemnye`
+
+#### 5. Update `src/data/catalog.ts`
+Add `externalPath: "/catalog/emkosti/podzemnye"` to the "e3" subcategory entry so clicking it navigates to the dedicated page.
 
 ### Files
-- **Copy**: 2 images to `public/images/`
-- **Create**: `src/data/emkostiProducts.ts`
-- **Modify**: `src/pages/EmkostiPage.tsx`
+- **Copy**: 3 images to `public/images/`
+- **Create**: `src/data/podzemnyeProducts.ts`, `src/pages/EmkostiPodzemnye.tsx`
+- **Modify**: `src/App.tsx`, `src/data/catalog.ts`
 
