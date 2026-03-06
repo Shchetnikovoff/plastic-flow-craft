@@ -10,6 +10,7 @@ import Razdvizhnoy from "./pages/Razdvizhnoy";
 import Vozdukhovod from "./pages/Vozdukhovod";
 import CatalogPage from "./pages/CatalogPage";
 import EmkostiPage from "./pages/EmkostiPage";
+import EmkostiPodzemnye from "./pages/EmkostiPodzemnye";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -30,6 +31,7 @@ const App = () => (
           <Route path="/razdvizhnoy" element={<Razdvizhnoy />} />
           <Route path="/vozdukhovod" element={<Vozdukhovod />} />
           <Route path="/product/:article" element={<Product />} />
+          <Route path="/catalog/emkosti/podzemnye" element={<EmkostiPodzemnye />} />
           <Route path="/catalog/emkosti" element={<EmkostiPage />} />
           <Route path="/catalog" element={<CatalogPage />} />
           <Route path="/catalog/:categorySlug" element={<CatalogPage />} />
