@@ -23,6 +23,7 @@ export const catalog: CatalogCategory[] = [
     name: "Гальваника",
     slug: "galvanika",
     description: "Гальваническое оборудование. Проектирование, производство и монтаж.",
+
     subcategories: [
       { id: "g1", name: "Гальванические линии ручные", slug: "linii-ruchnye" },
       { id: "g2", name: "Гальванические линии механизированные", slug: "linii-mekhanizirovannye" },
@@ -84,6 +85,7 @@ export const catalog: CatalogCategory[] = [
     id: "emkosti",
     name: "Ёмкости",
     slug: "emkosti",
+    description: "Промышленные ёмкости из листового полипропилена и полиэтилена — надёжность, проверенная временем!",
     subcategories: [
       { id: "e1", name: "Ёмкости цилиндрические вертикальные", slug: "tsilindricheskie-vertikalnye" },
       { id: "e2", name: "Ёмкости цилиндрические горизонтальные", slug: "tsilindricheskie-gorizontalnye" },
