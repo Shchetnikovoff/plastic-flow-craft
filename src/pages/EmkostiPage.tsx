@@ -4,24 +4,18 @@ import Header from "@/components/Header";
 import CartSheet from "@/components/CartSheet";
 import { CartProvider } from "@/contexts/CartContext";
 import { findCategory } from "@/data/catalog";
-import { emkostGroups } from "@/data/emkostiProducts";
-import { ImageOff, Check, Droplets, Flame, FlaskConical, Truck, ShieldCheck, Clock, Wrench, ChevronDown } from "lucide-react";
+import { ImageOff, Check, Droplets, FlaskConical, Truck, ShieldCheck, Clock, Wrench } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { Badge } from "@/components/ui/badge";
 import {
   Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import {
   Accordion, AccordionContent, AccordionItem, AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
-} from "@/components/ui/table";
 import { toast } from "sonner";
 
 const whyUs = [
