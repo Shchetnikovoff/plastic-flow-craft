@@ -1,5 +1,6 @@
-import { ShoppingCart, Phone, Mail, MapPin, FileText, ChevronDown } from "lucide-react";
-import { Link } from "react-router-dom";
+import { ShoppingCart, Phone, Mail, MapPin, FileText, ChevronDown, Menu, X } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
+import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -10,6 +11,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useCart } from "@/contexts/CartContext";
 import { supportedAngles, connectionTypes, type AngleType, type ConnectionType } from "@/data/products";
+import { catalog } from "@/data/catalog";
 import { generateLetterhead } from "@/lib/generateLetterhead";
 import { generateLetterheadPdf } from "@/lib/generateLetterheadPdf";
 
@@ -24,23 +26,55 @@ interface HeaderProps {
 
 const Header = ({ onCartOpen, angle = 90, connectionType = "rastrub", productType = "otvod" }: HeaderProps) => {
   const { totalItems } = useCart();
+  const location = useLocation();
+  const [openCat, setOpenCat] = useState<string | null>(null);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const navRef = useRef<HTMLDivElement>(null);
+
+  // Close dropdown on outside click
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (navRef.current && !navRef.current.contains(e.target as Node)) {
+        setOpenCat(null);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
+
+  // Close on route change
+  useEffect(() => {
+    setOpenCat(null);
+    setMobileOpen(false);
+  }, [location.pathname]);
+
+  const isActiveCat = (catSlug: string) => {
+    if (catSlug === "ventilyatsiya") {
+      return ["/", "/60", "/45", "/30", "/15", "/troynik", "/razdvizhnoy", "/vozdukhovod"].some(
+        (p) => location.pathname === p
+      );
+    }
+    return location.pathname.startsWith(`/catalog/${catSlug}`);
+  };
 
   return (
     <header className="border-b bg-card">
+      {/* Top bar */}
       <div className="mx-auto flex max-w-[960px] items-center justify-between px-4 sm:px-6 py-3 sm:py-4">
-        {/* Left: Logo + Title */}
         <div className="flex items-center gap-3 sm:gap-4 min-w-0">
-          <img
-            src="/images/logo.png"
-            alt="Логотип Пласт-Металл Про"
-            className="h-20 sm:h-36 md:h-40 w-auto object-contain shrink-0"
-          />
+          <Link to="/catalog">
+            <img
+              src="/images/logo.png"
+              alt="Логотип Пласт-Металл Про"
+              className="h-16 sm:h-28 md:h-32 w-auto object-contain shrink-0"
+            />
+          </Link>
           <div className="min-w-0">
-            <h1 className="text-sm sm:text-lg md:text-xl font-bold text-foreground leading-tight">
-              {productType === "vozdukhovod" ? "Воздуховод вентиляционный круглый" : productType === "razdvizhnoy" ? "Раздвижной элемент вентиляционный" : productType === "troynik" ? "Тройник вентиляционный круглого сечения" : `Отвод вентиляционный круглого сечения ${angle}°`}
+            <h1 className="text-sm sm:text-base md:text-lg font-bold text-foreground leading-tight">
+              ООО СЗПК «Пласт-Металл Про»
             </h1>
-            <p className="text-[10px] sm:text-xs text-muted-foreground mt-0.5 truncate">
-              Карточка товара • ООО СЗПК «Пласт-Металл Про»
+            <p className="text-[10px] sm:text-xs text-muted-foreground mt-0.5">
+              Производство оборудования из полимеров
             </p>
             <div className="hidden sm:flex items-center gap-3 mt-1 text-[11px] text-muted-foreground flex-wrap">
               <a href="tel:+79633225540" className="flex items-center gap-1 hover:text-primary transition-colors">
@@ -53,103 +87,19 @@ const Header = ({ onCartOpen, angle = 90, connectionType = "rastrub", productTyp
                 <MapPin className="h-3 w-3 shrink-0" /> Ленинградская обл., д. Разметелево
               </span>
             </div>
-            {/* Navigation: product types + angles */}
-            <div className="flex items-center gap-2 mt-1.5 flex-wrap">
-              <Link
-                to="/"
-                className={`text-xs font-semibold px-2 py-0.5 rounded-full border transition-colors ${
-                  productType === "otvod"
-                    ? "border-primary text-primary bg-primary/10"
-                    : "border-border text-muted-foreground hover:border-primary/50 hover:text-foreground"
-                }`}
-              >
-                Отвод
-              </Link>
-              <Link
-                to="/troynik"
-                className={`text-xs font-semibold px-2 py-0.5 rounded-full border transition-colors ${
-                  productType === "troynik"
-                    ? "border-primary text-primary bg-primary/10"
-                    : "border-border text-muted-foreground hover:border-primary/50 hover:text-foreground"
-                }`}
-              >
-                Тройник
-              </Link>
-              <Link
-                to="/razdvizhnoy"
-                className={`text-xs font-semibold px-2 py-0.5 rounded-full border transition-colors ${
-                  productType === "razdvizhnoy"
-                    ? "border-primary text-primary bg-primary/10"
-                    : "border-border text-muted-foreground hover:border-primary/50 hover:text-foreground"
-                }`}
-              >
-                Раздвижной
-              </Link>
-              <Link
-                to="/vozdukhovod"
-                className={`text-xs font-semibold px-2 py-0.5 rounded-full border transition-colors ${
-                  productType === "vozdukhovod"
-                    ? "border-primary text-primary bg-primary/10"
-                    : "border-border text-muted-foreground hover:border-primary/50 hover:text-foreground"
-                }`}
-              >
-                Воздуховод
-              </Link>
-              {productType === "otvod" && (
-                <>
-                  <span className="text-muted-foreground text-xs">|</span>
-                  {supportedAngles.map((a) => (
-                    <Link
-                      key={a}
-                      to={a === 90 ? "/" : `/${a}`}
-                      className={`text-xs font-semibold px-2 py-0.5 rounded-full border transition-colors ${
-                        a === angle
-                          ? "border-primary text-primary bg-primary/10"
-                          : "border-border text-muted-foreground hover:border-primary/50 hover:text-foreground"
-                      }`}
-                    >
-                      {a}°
-                    </Link>
-                  ))}
-                </>
-              )}
-            </div>
           </div>
         </div>
 
-        {/* Right: angle badge + Cart */}
         <div className="flex items-center gap-2 sm:gap-3 shrink-0">
-          <div className="hidden md:flex flex-col items-center">
-            {productType === "vozdukhovod" ? (
-              <span className="text-2xl font-black text-primary leading-none">ВК</span>
-            ) : productType === "razdvizhnoy" ? (
-              <span className="text-2xl font-black text-primary leading-none">РЭ</span>
-            ) : productType === "troynik" ? (
-              <span className="text-2xl font-black text-primary leading-none">ТР</span>
-            ) : (
-              <>
-                <span className="text-3xl font-black text-primary leading-none">{angle}°</span>
-                <span className="text-[10px] text-muted-foreground">{connectionTypes.find(c => c.id === connectionType)?.name?.toLowerCase() || "раструб"}</span>
-              </>
-            )}
-          </div>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button
-                variant="outline"
-                size="icon"
-                title="Скачать бланк КП"
-              >
+              <Button variant="outline" size="icon" title="Скачать бланк КП">
                 <FileText className="h-5 w-5" />
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              <DropdownMenuItem onClick={() => generateLetterhead()}>
-                Скачать Word (.docx)
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => generateLetterheadPdf()}>
-                Скачать PDF (.pdf)
-              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => generateLetterhead()}>Скачать Word (.docx)</DropdownMenuItem>
+              <DropdownMenuItem onClick={() => generateLetterheadPdf()}>Скачать PDF (.pdf)</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
           <Button variant="outline" size="icon" className="relative" onClick={onCartOpen}>
@@ -160,8 +110,97 @@ const Header = ({ onCartOpen, angle = 90, connectionType = "rastrub", productTyp
               </Badge>
             )}
           </Button>
+          {/* Mobile menu toggle */}
+          <Button
+            variant="ghost"
+            size="icon"
+            className="md:hidden"
+            onClick={() => setMobileOpen(!mobileOpen)}
+          >
+            {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </Button>
         </div>
       </div>
+
+      {/* Desktop category navigation */}
+      <div ref={navRef} className="hidden md:block border-t border-border bg-muted/30">
+        <div className="mx-auto max-w-[960px] px-4 sm:px-6">
+          <nav className="flex items-center gap-0 overflow-x-auto scrollbar-none">
+            {catalog.map((cat) => (
+              <div key={cat.id} className="relative">
+                <button
+                  onClick={() => setOpenCat(openCat === cat.slug ? null : cat.slug)}
+                  className={`whitespace-nowrap px-3 py-2.5 text-xs font-semibold transition-colors border-b-2 ${
+                    isActiveCat(cat.slug)
+                      ? "border-primary text-primary"
+                      : openCat === cat.slug
+                      ? "border-primary/50 text-foreground"
+                      : "border-transparent text-muted-foreground hover:text-foreground hover:border-border"
+                  }`}
+                >
+                  {cat.name}
+                  <ChevronDown className={`inline-block ml-1 h-3 w-3 transition-transform ${openCat === cat.slug ? "rotate-180" : ""}`} />
+                </button>
+                {openCat === cat.slug && (
+                  <div className="absolute left-0 top-full z-50 min-w-[280px] rounded-b-lg border border-t-0 border-border bg-card shadow-lg py-1">
+                    {cat.subcategories.map((sub) => {
+                      const href = sub.externalPath || `/catalog/${cat.slug}/${sub.slug}`;
+                      return (
+                        <Link
+                          key={sub.id}
+                          to={href}
+                          className="block px-4 py-2 text-sm text-foreground hover:bg-muted transition-colors"
+                        >
+                          {sub.name}
+                        </Link>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+            ))}
+          </nav>
+        </div>
+      </div>
+
+      {/* Mobile navigation */}
+      {mobileOpen && (
+        <div className="md:hidden border-t border-border bg-card max-h-[70vh] overflow-y-auto">
+          <div className="px-4 py-3 space-y-1">
+            {catalog.map((cat) => (
+              <div key={cat.id}>
+                <button
+                  onClick={() => setOpenCat(openCat === cat.slug ? null : cat.slug)}
+                  className={`w-full flex items-center justify-between px-3 py-2 text-sm font-semibold rounded-lg transition-colors ${
+                    isActiveCat(cat.slug)
+                      ? "text-primary bg-primary/5"
+                      : "text-foreground hover:bg-muted"
+                  }`}
+                >
+                  {cat.name}
+                  <ChevronDown className={`h-4 w-4 transition-transform ${openCat === cat.slug ? "rotate-180" : ""}`} />
+                </button>
+                {openCat === cat.slug && (
+                  <div className="ml-3 border-l-2 border-border pl-3 py-1 space-y-0.5">
+                    {cat.subcategories.map((sub) => {
+                      const href = sub.externalPath || `/catalog/${cat.slug}/${sub.slug}`;
+                      return (
+                        <Link
+                          key={sub.id}
+                          to={href}
+                          className="block px-3 py-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                        >
+                          {sub.name}
+                        </Link>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </header>
   );
 };
