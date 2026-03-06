@@ -1,37 +1,52 @@
 
 
-## Plan: Create Dedicated "Ёмкости" Landing Page
+## Plan: Add Product Images and Size Tables to Ёмкости Page
 
-### What We're Building
+### What's Being Added
 
-A full-featured landing page for the "Ёмкости" (Containers) category at `/catalog/emkosti` — a rich content page with all the provided text content, structured into visual sections matching our existing design system (dark cards, borders, primary accents).
+1. **Two product images** (3D renders of containers) to the hero section of the Ёмкости page
+2. **Product specification tables** from the Excel file — 10 tables covering vertical and horizontal containers in PP and PE materials
 
-### Approach
+### Data from Excel (Summary)
 
-Create a new dedicated page component `src/pages/EmkostiPage.tsx` that renders all the user-provided content as a well-structured landing page with the following sections:
+The Excel contains standardized size tables for containers (1000–50000 liters) across these types:
 
-1. **Hero section** — title "Промышленные ёмкости из листового полипропилена и полиэтилена" + tagline + CTA button "Получить расчёт стоимости"
-2. **Intro block** — "Промышленные ёмкости на заказ: от эскиза до монтажа" + description + "Почему выбирают нас" checklist (5 items with check icons)
-3. **Section 1: Назначение** — bulleted list of 7 application areas, styled as a grid of small cards
-4. **Section 2: Материалы** — two material cards (PP and HDPE) with specs in a grid, plus shared "Оба материала" benefits
-5. **Section 3: Виды и модификации** — grouped lists (По форме, По объёму, По назначению, Дополнительные опции) as accordion or card sections
-6. **Section 4: Преимущества** — 5 advantage cards with icons
-7. **Subcategories grid** — the existing sidebar + image card grid showing the 10 subcategories (reuse current layout from CatalogPage)
-8. **CTA block** — "Готовы заказать ёмкость?" with a contact form (name, phone, email, description) using existing ContactFormFields pattern
-9. **Footer info** — company details, address, phone
+**Vertical (Page 1-2):**
+- PP плоская крыша/плоское дно (ЕВПП-xxxx)
+- PP наклонное дно (ЕВПП-НД-xxxx)
+- PP коническая крыша (ЕВПП-КК-xxxx)
+- ПНД плоская крыша/плоское дно (ЕВПНД-xxxx)
+- ПНД наклонное дно (ЕВПНД-НД-xxxx)
+- ПНД коническая крыша (ЕВПНД-КК-xxxx)
 
-### Files to Create/Modify
+**Horizontal (Page 4-5):**
+- PP низкие ложементы (ЕГППЛСТ-xxxx)
+- PP высокие ложементы (ЕГППЛВ-xxxx)
+- ПНД низкие ложементы (ЕГПНДЛСТ-xxxx)
+- ПНД высокие ложементы (ЕГПНДЛВ-xxxx)
 
-- **Create** `src/pages/EmkostiPage.tsx` — the full landing page component with all sections
-- **Modify** `src/App.tsx` — add route `/catalog/emkosti` pointing to the new page (before the generic `/catalog/:categorySlug` route)
-- **Modify** `src/data/catalog.ts` — add `description` to the Ёмкости category
+Each table has columns: Артикул, Объём (л), Ø (мм), H/L (мм). All share the same 17 size rows.
 
-### Design Notes
-- Reuse existing UI primitives: `Card`, `Badge`, `Button`, `Input`, `Textarea`, `Accordion`
-- Section headings: uppercase, `text-base font-bold tracking-wide` (matching Index.tsx style)
-- Cards: `rounded-lg border border-border bg-card` pattern
-- CTA buttons: primary variant
-- The subcategories grid at the bottom links to existing `/catalog/emkosti/:subSlug` placeholder pages
-- Contact form uses the existing validation pattern from ContactFormFields
-- Wrapped in `CartProvider` with Header and CartSheet like other pages
+### Changes
+
+#### 1. Copy images to project
+- Copy `image_1.png` → `public/images/emkosti-hero-1.png` (white containers render)
+- Copy `image-85.png` → `public/images/emkosti-hero-2.png` (dark containers cutaway)
+
+#### 2. Create data file `src/data/emkostiProducts.ts`
+- Define all 10 product tables as typed arrays with `{ article, volume, diameter, height }` entries
+- Group them by orientation (vertical/horizontal) and material (PP/ПНД) and type (flat/sloped/conical)
+
+#### 3. Update `src/pages/EmkostiPage.tsx`
+- Add hero images as a gallery/carousel between hero text and intro block
+- Add a new **"Типоразмерный ряд"** section after the modifications accordion, with:
+  - Tabs or accordion to switch between container types (vertical PP, vertical ПНД, horizontal PP, horizontal ПНД)
+  - Sub-tabs for subtypes (плоская крыша, наклонное дно, коническая крыша / низкие ложементы, высокие ложементы)
+  - Each showing a table with columns: Артикул | Объём (л) | Ø (мм) | H (мм)
+  - Description text for each subtype from the Excel
+
+### Files
+- **Copy**: 2 images to `public/images/`
+- **Create**: `src/data/emkostiProducts.ts`
+- **Modify**: `src/pages/EmkostiPage.tsx`
 
