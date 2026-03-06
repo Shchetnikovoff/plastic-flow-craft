@@ -1,55 +1,25 @@
 
 
-## Plan: Add "Ёмкости подземные из спиральновитой трубы" Subcategory Page
+## Problem
 
-### What We're Building
+The `CatalogPage` (generic catalog route `/catalog/:categorySlug`) is missing a footer section. The `EmkostiPage` has both a Header and footer, but `CatalogPage` ends abruptly after the subcategory grid/detail card without any footer.
 
-A new dedicated landing page for the underground containers subcategory (item "e3" in catalog: "Ёмкости подземные") at `/catalog/emkosti/podzemnye`. This is a full content page similar to EmkostiPage but focused on spiral-wound pipe underground containers.
+## Solution
 
-### Changes
+Add the same company footer block to `CatalogPage.tsx` (the category view with the sidebar), matching the style used in `EmkostiPage.tsx` (lines 438-443):
 
-#### 1. Copy uploaded images to project
-- `alexander-tortsev-9-1.jpg` → `public/images/emkosti-podzemnye-1.jpg`
-- `alexander-tortsev-8-4.jpg` → `public/images/emkosti-podzemnye-2.jpg`
-- `yomkosti-i-rezervuaryi.png` → `public/images/emkosti-podzemnye-3.png`
+### File: `src/pages/CatalogPage.tsx`
 
-#### 2. Create data file `src/data/podzemnyeProducts.ts`
-Size table (from polycorr.ru reference, 12 rows):
+Add a footer section after the closing `</div>` of the two-column layout (after line ~210), before `</main>`:
 
-| Объём, м³ | Ø корпуса, мм | Длина (L), мм |
-|-----------|---------------|---------------|
-| 20 | 2400 | 4500 |
-| 25 | 2400 | 5600 |
-| 30 | 2400 | 6700 |
-| 40 | 2400 | 8800 |
-| 50 | 2400 | 11000 |
-| 60 | 3000 | 8500 |
-| 70 | 3000 | 9900 |
-| 80 | 3000 | 11400 |
-| 90 | 3200 | 11200 |
-| 100 | 3200 | 12500 |
-| 120 | 3500 | 12500 |
-| 150 | 3600 | 14700 |
+```
+<footer className="border-t border-border pt-6 pb-4 mt-10 text-center text-xs text-muted-foreground space-y-1">
+  <p className="font-semibold text-foreground">ООО СЗПК «Пласт-Металл ПРО»</p>
+  <p>Ленинградская область, д. Разметелево, ул. Строителей 27</p>
+  <p>Телефон: +7 (963) 322-55-40 · E-mail: osobenkov@list.ru</p>
+  <p>Режим работы: пн.–пт. 9:00–18:00</p>
+</footer>
+```
 
-#### 3. Create `src/pages/EmkostiPodzemnye.tsx`
-Full landing page with all provided text structured into sections:
-- **Hero**: company name, title "Подземные ёмкости из спиральновитых труб", 3 product images in grid
-- **Intro**: description + "Почему выбирают нас" checklist (6 items)
-- **Раздел 1 — Назначение**: 8 application areas as card grid
-- **Раздел 2 — Технология и материалы**: materials (ПНД, PP, армированные), key specs (diameter, length, pressure, temperature, ring stiffness, seismic), advantages of spiral-wound construction
-- **Раздел 3 — Виды и модификации**: accordion sections (по назначению, по конструкции, по способу монтажа, дополнительные опции)
-- **Типоразмерный ряд**: table from the data file
-- **Раздел 4 — Преимущества сотрудничества**: 6 advantage cards
-- **CTA form**: contact form (name, phone, email, description)
-
-#### 4. Update `src/App.tsx`
-Add route: `/catalog/emkosti/podzemnye` → `EmkostiPodzemnye`
-
-#### 5. Update `src/data/catalog.ts`
-Add `externalPath: "/catalog/emkosti/podzemnye"` to the "e3" subcategory entry so clicking it navigates to the dedicated page.
-
-### Files
-- **Copy**: 3 images to `public/images/`
-- **Create**: `src/data/podzemnyeProducts.ts`, `src/pages/EmkostiPodzemnye.tsx`
-- **Modify**: `src/App.tsx`, `src/data/catalog.ts`
+This applies to the main category view (the one with the sidebar + detail card). The Header is already present on all views.
 
