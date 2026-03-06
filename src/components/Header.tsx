@@ -123,44 +123,51 @@ const Header = ({ onCartOpen, angle = 90, connectionType = "rastrub", productTyp
       </div>
 
       {/* Desktop category navigation */}
-      <div ref={navRef} className="hidden md:block border-t border-border bg-muted/30">
-        <div className="mx-auto max-w-[960px] px-4 sm:px-6">
-          <nav className="flex items-center gap-0 overflow-x-auto scrollbar-none">
+      <div ref={navRef} className="hidden md:block border-t border-border bg-muted/30 relative">
+        <div className="mx-auto max-w-[960px] px-4 sm:px-6 overflow-x-auto scrollbar-none">
+          <nav className="flex items-center gap-0">
             {catalog.map((cat) => (
-              <div key={cat.id} className="relative">
-                <button
-                  onClick={() => setOpenCat(openCat === cat.slug ? null : cat.slug)}
-                  className={`whitespace-nowrap px-3 py-2.5 text-xs font-semibold transition-colors border-b-2 ${
-                    isActiveCat(cat.slug)
-                      ? "border-primary text-primary"
-                      : openCat === cat.slug
-                      ? "border-primary/50 text-foreground"
-                      : "border-transparent text-muted-foreground hover:text-foreground hover:border-border"
-                  }`}
-                >
-                  {cat.name}
-                  <ChevronDown className={`inline-block ml-1 h-3 w-3 transition-transform ${openCat === cat.slug ? "rotate-180" : ""}`} />
-                </button>
-                {openCat === cat.slug && (
-                  <div className="absolute left-0 top-full z-50 min-w-[280px] rounded-b-lg border border-t-0 border-border bg-card shadow-lg py-1">
-                    {cat.subcategories.map((sub) => {
-                      const href = sub.externalPath || `/catalog/${cat.slug}/${sub.slug}`;
-                      return (
-                        <Link
-                          key={sub.id}
-                          to={href}
-                          className="block px-4 py-2 text-sm text-foreground hover:bg-muted transition-colors"
-                        >
-                          {sub.name}
-                        </Link>
-                      );
-                    })}
-                  </div>
-                )}
-              </div>
+              <button
+                key={cat.id}
+                onClick={() => setOpenCat(openCat === cat.slug ? null : cat.slug)}
+                className={`whitespace-nowrap px-3 py-2.5 text-xs font-semibold transition-colors border-b-2 ${
+                  isActiveCat(cat.slug)
+                    ? "border-primary text-primary"
+                    : openCat === cat.slug
+                    ? "border-primary/50 text-foreground"
+                    : "border-transparent text-muted-foreground hover:text-foreground hover:border-border"
+                }`}
+              >
+                {cat.name}
+                <ChevronDown className={`inline-block ml-1 h-3 w-3 transition-transform ${openCat === cat.slug ? "rotate-180" : ""}`} />
+              </button>
             ))}
           </nav>
         </div>
+        {openCat && (() => {
+          const cat = catalog.find((c) => c.slug === openCat);
+          if (!cat) return null;
+          return (
+            <div className="absolute left-0 right-0 top-full z-50 border-t border-border bg-card shadow-lg">
+              <div className="mx-auto max-w-[960px] px-4 sm:px-6 py-2">
+                <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-0.5">
+                  {cat.subcategories.map((sub) => {
+                    const href = sub.externalPath || `/catalog/${cat.slug}/${sub.slug}`;
+                    return (
+                      <Link
+                        key={sub.id}
+                        to={href}
+                        className="block px-3 py-1.5 text-sm text-foreground hover:bg-muted rounded transition-colors"
+                      >
+                        {sub.name}
+                      </Link>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          );
+        })()}
       </div>
 
       {/* Mobile navigation */}
