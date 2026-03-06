@@ -127,34 +127,18 @@ const Header = ({ onCartOpen, angle = 90, connectionType = "rastrub", productTyp
         <div className="mx-auto max-w-[960px] px-4 sm:px-6 overflow-x-auto scrollbar-none">
           <nav className="flex items-center gap-0">
             {catalog.map((cat) => {
-              const dedicatedPath = cat.slug === "emkosti" ? "/catalog/emkosti" : null;
               return (
                 <div key={cat.id} className="flex items-center">
-                  {dedicatedPath ? (
-                    <Link
-                      to={dedicatedPath}
-                      className={`whitespace-nowrap pl-3 pr-1 py-2.5 text-xs font-semibold transition-colors border-b-2 ${
-                        isActiveCat(cat.slug)
-                          ? "border-primary text-primary"
-                          : "border-transparent text-muted-foreground hover:text-foreground hover:border-border"
-                      }`}
-                    >
-                      {cat.name}
-                    </Link>
-                  ) : (
-                    <button
-                      onClick={() => setOpenCat(openCat === cat.slug ? null : cat.slug)}
-                      className={`whitespace-nowrap pl-3 pr-1 py-2.5 text-xs font-semibold transition-colors border-b-2 ${
-                        isActiveCat(cat.slug)
-                          ? "border-primary text-primary"
-                          : openCat === cat.slug
-                          ? "border-primary/50 text-foreground"
-                          : "border-transparent text-muted-foreground hover:text-foreground hover:border-border"
-                      }`}
-                    >
-                      {cat.name}
-                    </button>
-                  )}
+                  <Link
+                    to={`/catalog/${cat.slug}`}
+                    className={`whitespace-nowrap pl-3 pr-1 py-2.5 text-xs font-semibold transition-colors border-b-2 ${
+                      isActiveCat(cat.slug)
+                        ? "border-primary text-primary"
+                        : "border-transparent text-muted-foreground hover:text-foreground hover:border-border"
+                    }`}
+                  >
+                    {cat.name}
+                  </Link>
                   <button
                     onClick={() => setOpenCat(openCat === cat.slug ? null : cat.slug)}
                     className={`pr-3 py-2.5 border-b-2 ${
@@ -201,28 +185,16 @@ const Header = ({ onCartOpen, angle = 90, connectionType = "rastrub", productTyp
             {catalog.map((cat) => (
               <div key={cat.id}>
                 {(() => {
-                  const dedicatedPath = cat.slug === "emkosti" ? "/catalog/emkosti" : null;
                   return (
                     <div className="flex items-center">
-                      {dedicatedPath ? (
-                        <Link
-                          to={dedicatedPath}
-                          className={`flex-1 px-3 py-2 text-sm font-semibold rounded-lg transition-colors ${
-                            isActiveCat(cat.slug) ? "text-primary bg-primary/5" : "text-foreground hover:bg-muted"
-                          }`}
-                        >
-                          {cat.name}
-                        </Link>
-                      ) : (
-                        <button
-                          onClick={() => setOpenCat(openCat === cat.slug ? null : cat.slug)}
-                          className={`flex-1 text-left px-3 py-2 text-sm font-semibold rounded-lg transition-colors ${
-                            isActiveCat(cat.slug) ? "text-primary bg-primary/5" : "text-foreground hover:bg-muted"
-                          }`}
-                        >
-                          {cat.name}
-                        </button>
-                      )}
+                      <Link
+                        to={`/catalog/${cat.slug}`}
+                        className={`flex-1 px-3 py-2 text-sm font-semibold rounded-lg transition-colors ${
+                          isActiveCat(cat.slug) ? "text-primary bg-primary/5" : "text-foreground hover:bg-muted"
+                        }`}
+                      >
+                        {cat.name}
+                      </Link>
                       <button
                         onClick={() => setOpenCat(openCat === cat.slug ? null : cat.slug)}
                         className="px-2 py-2"
