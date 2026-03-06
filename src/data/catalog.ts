@@ -91,7 +91,7 @@ export const catalog: CatalogCategory[] = [
       { id: "e2", name: "Ёмкости цилиндрические горизонтальные", slug: "tsilindricheskie-gorizontalnye" },
       { id: "e3", name: "Ёмкости подземные", slug: "podzemnye", externalPath: "/catalog/emkosti/podzemnye" },
       { id: "e4", name: "Ёмкости прямоугольные", slug: "pryamougolnye", externalPath: "/catalog/emkosti/pryamougolnye" },
-      { id: "e5", name: "Ёмкости пожарные", slug: "pozharnye" },
+      { id: "e5", name: "Ёмкости пожарные", slug: "pozharnye", externalPath: "/catalog/emkosti/pozharnye" },
       { id: "e6", name: "Ёмкости для сейсмоактивных районов", slug: "sejsmoaktivnye" },
       { id: "e7", name: "Ёмкости с коническим дном", slug: "konicheskoe-dno" },
       { id: "e8", name: "Ёмкость для щёлочи", slug: "dlya-shelochi" },

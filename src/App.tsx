@@ -12,6 +12,7 @@ import CatalogPage from "./pages/CatalogPage";
 import EmkostiPage from "./pages/EmkostiPage";
 import EmkostiPodzemnye from "./pages/EmkostiPodzemnye";
 import EmkostiPryamougolnye from "./pages/EmkostiPryamougolnye";
+import EmkostiPozharnye from "./pages/EmkostiPozharnye";
 import EmkostiCatalog from "./pages/EmkostiCatalog";
 import NotFound from "./pages/NotFound";
 
@@ -36,6 +37,7 @@ const App = () => (
           <Route path="/catalog/emkosti/konfigurator" element={<EmkostiCatalog />} />
           <Route path="/catalog/emkosti/podzemnye" element={<EmkostiPodzemnye />} />
           <Route path="/catalog/emkosti/pryamougolnye" element={<EmkostiPryamougolnye />} />
+          <Route path="/catalog/emkosti/pozharnye" element={<EmkostiPozharnye />} />
           <Route path="/catalog/emkosti" element={<EmkostiPage />} />
           <Route path="/catalog" element={<CatalogPage />} />
           <Route path="/catalog/:categorySlug" element={<CatalogPage />} />
