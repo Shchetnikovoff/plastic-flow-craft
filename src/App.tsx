@@ -9,6 +9,7 @@ import Troynik from "./pages/Troynik";
 import Razdvizhnoy from "./pages/Razdvizhnoy";
 import Vozdukhovod from "./pages/Vozdukhovod";
 import CatalogPage from "./pages/CatalogPage";
+import EmkostiPage from "./pages/EmkostiPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -29,6 +30,7 @@ const App = () => (
           <Route path="/razdvizhnoy" element={<Razdvizhnoy />} />
           <Route path="/vozdukhovod" element={<Vozdukhovod />} />
           <Route path="/product/:article" element={<Product />} />
+          <Route path="/catalog/emkosti" element={<EmkostiPage />} />
           <Route path="/catalog" element={<CatalogPage />} />
           <Route path="/catalog/:categorySlug" element={<CatalogPage />} />
           <Route path="/catalog/:categorySlug/:subSlug" element={<CatalogPage />} />
