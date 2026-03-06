@@ -1,43 +1,55 @@
 
 
-## Plan: Update Fire Containers page with detailed content
+## Plan: Add "Ёмкости подземные из спиральновитой трубы" Subcategory Page
 
-### Goal
-Replace all text content on `EmkostiPozharnye.tsx` with the detailed copy provided by the user — updated headings, descriptions, normative references, materials section, modified classifications, advantages, and CTA text.
+### What We're Building
 
-### Changes — single file: `src/pages/EmkostiPozharnye.tsx`
+A new dedicated landing page for the underground containers subcategory (item "e3" in catalog: "Ёмкости подземные") at `/catalog/emkosti/podzemnye`. This is a full content page similar to EmkostiPage but focused on spiral-wound pipe underground containers.
 
-#### 1. Hero section
-- Title: "Пожарные ёмкости и резервуары из листового полиэтилена и полипропилена"
-- Slogan: "Пожарные резервуары из полипропилена и полиэтилена — надёжное обеспечение пожарной безопасности объектов любого масштаба!"
+### Changes
 
-#### 2. Intro block
-- Heading: "Пожарные резервуары: проектирование, производство и монтаж под ключ"
-- Updated description text referencing СП 31.13330.2012, СНиП 2.04.02-84, ГОСТ 12.4.009-83
-- Updated "Почему выбирают нас" list (7 items with new normatives, 7-year warranty, 30+ year lifespan, certificates)
+#### 1. Copy uploaded images to project
+- `alexander-tortsev-9-1.jpg` → `public/images/emkosti-podzemnye-1.jpg`
+- `alexander-tortsev-8-4.jpg` → `public/images/emkosti-podzemnye-2.jpg`
+- `yomkosti-i-rezervuaryi.png` → `public/images/emkosti-podzemnye-3.png`
 
-#### 3. Applications (Раздел 1)
-- Replace 8 items with 7 new items from user text (гидранты, пожарные краны, автоматическое пожаротушение, коттеджные посёлки, etc.)
+#### 2. Create data file `src/data/podzemnyeProducts.ts`
+Size table (from polycorr.ru reference, 12 rows):
 
-#### 4. New section: Materials & Construction (Раздел 2)
-- Add detailed materials subsection: PP specs (temp range, density, melting point) and HDPE specs
-- Construction features: wall thickness 8–25mm, vacuum test, multi-chamber option
-- Placement variants: underground (with anchors), above-ground (insulated), embankment
+| Объём, м³ | Ø корпуса, мм | Длина (L), мм |
+|-----------|---------------|---------------|
+| 20 | 2400 | 4500 |
+| 25 | 2400 | 5600 |
+| 30 | 2400 | 6700 |
+| 40 | 2400 | 8800 |
+| 50 | 2400 | 11000 |
+| 60 | 3000 | 8500 |
+| 70 | 3000 | 9900 |
+| 80 | 3000 | 11400 |
+| 90 | 3200 | 11200 |
+| 100 | 3200 | 12500 |
+| 120 | 3500 | 12500 |
+| 150 | 3600 | 14700 |
 
-#### 5. Modifications (Раздел 3) — replace existing accordion
-- "По объёму" (малые 5–20м³, средние 20–50м³, крупные 50–200м³+)
-- "По конструкции" (однокамерные, многокамерные, модульные)
-- "По типу установки" (горизонтальные подземные, вертикальные наземные, комбинированные)
-- "Стандартная комплектация" (смотровой колодец, люк-лаз, патрубки, лестница, крепления)
-- "Дополнительные опции" (гидрант, датчики, теплоизоляция, насосы, разметка по ГОСТ)
+#### 3. Create `src/pages/EmkostiPodzemnye.tsx`
+Full landing page with all provided text structured into sections:
+- **Hero**: company name, title "Подземные ёмкости из спиральновитых труб", 3 product images in grid
+- **Intro**: description + "Почему выбирают нас" checklist (6 items)
+- **Раздел 1 — Назначение**: 8 application areas as card grid
+- **Раздел 2 — Технология и материалы**: materials (ПНД, PP, армированные), key specs (diameter, length, pressure, temperature, ring stiffness, seismic), advantages of spiral-wound construction
+- **Раздел 3 — Виды и модификации**: accordion sections (по назначению, по конструкции, по способу монтажа, дополнительные опции)
+- **Типоразмерный ряд**: table from the data file
+- **Раздел 4 — Преимущества сотрудничества**: 6 advantage cards
+- **CTA form**: contact form (name, phone, email, description)
 
-#### 6. Advantages (Раздел 4) — update cards
-- 7 cards instead of 6: Соответствие нормам, Индивидуальный проект, Контроль качества, Оперативность (14–21 день / 3–7 дней), Логистика, Сервис, Гибкость
+#### 4. Update `src/App.tsx`
+Add route: `/catalog/emkosti/podzemnye` → `EmkostiPodzemnye`
 
-#### 7. CTA form
-- Updated heading and description (3D-модель, 24 часа, доставка и монтаж)
+#### 5. Update `src/data/catalog.ts`
+Add `externalPath: "/catalog/emkosti/podzemnye"` to the "e3" subcategory entry so clicking it navigates to the dedicated page.
 
-#### 8. Size tables — keep as-is (already correct)
-
-### No other files changed
+### Files
+- **Copy**: 3 images to `public/images/`
+- **Create**: `src/data/podzemnyeProducts.ts`, `src/pages/EmkostiPodzemnye.tsx`
+- **Modify**: `src/App.tsx`, `src/data/catalog.ts`
 
