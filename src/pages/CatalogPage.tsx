@@ -98,6 +98,9 @@ const CatalogPageInner = () => {
   // Category page with list of subcategories
   // Find category index for numbering (1-based)
   const catIndex = catalog.findIndex((c) => c.slug === category.slug) + 1;
+  const [selectedSubId, setSelectedSubId] = useState<string | null>(null);
+
+  const selectedSub = category.subcategories.find((s) => s.id === selectedSubId);
 
   return (
     <>
@@ -129,66 +132,97 @@ const CatalogPageInner = () => {
           <h2 className="text-2xl font-bold text-foreground mb-6">{category.name}</h2>
         )}
 
-        {/* Two-column layout: sidebar + grid */}
+        {/* Two-column layout: sidebar + detail card */}
         <div className="flex flex-col md:flex-row gap-6">
           {/* Left sidebar — numbered list */}
-          <nav className="md:w-[220px] shrink-0">
+          <nav className="md:w-[260px] shrink-0">
             <ul className="space-y-0.5">
               {category.subcategories.map((sub, i) => {
-                const href = sub.externalPath || `/catalog/${category.slug}/${sub.slug}`;
+                const isSelected = selectedSubId === sub.id;
                 return (
                   <li key={sub.id}>
-                    <Link
-                      to={href}
-                      className="group flex items-baseline gap-2 rounded-md px-3 py-2 text-sm hover:bg-muted transition-colors"
+                    <button
+                      onClick={() => setSelectedSubId(isSelected ? null : sub.id)}
+                      className={`group flex items-baseline gap-2 rounded-md px-3 py-2 text-sm w-full text-left transition-colors ${
+                        isSelected
+                          ? "bg-primary/10 border border-primary/30"
+                          : "hover:bg-muted border border-transparent"
+                      }`}
                     >
-                      <span className="text-xs font-semibold text-muted-foreground shrink-0">
+                      <span className={`text-xs font-semibold shrink-0 ${isSelected ? "text-primary" : "text-muted-foreground"}`}>
                         {catIndex}.{i + 1}
                       </span>
-                      <span className="text-foreground group-hover:text-primary transition-colors">
+                      <span className={`transition-colors ${isSelected ? "text-primary font-semibold" : "text-foreground group-hover:text-primary"}`}>
                         {sub.name}
                       </span>
-                    </Link>
+                    </button>
                   </li>
                 );
               })}
             </ul>
           </nav>
 
-          {/* Right content — image card grid */}
-          <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {category.subcategories.map((sub, i) => {
-              const href = sub.externalPath || `/catalog/${category.slug}/${sub.slug}`;
-              return (
-                <Link
-                  key={sub.id}
-                  to={href}
-                  className="group rounded-lg border border-border bg-card overflow-hidden hover:border-primary/50 hover:shadow-md transition-all"
-                >
-                  {/* Image area */}
-                  <div className="aspect-[4/3] bg-muted flex items-center justify-center">
-                    {sub.image ? (
-                      <img
-                        src={sub.image}
-                        alt={sub.name}
-                        className="w-full h-full object-cover"
-                      />
-                    ) : (
-                      <ImageOff className="h-10 w-10 text-muted-foreground/40" />
-                    )}
-                  </div>
-                  {/* Caption */}
-                  <div className="px-3 py-2.5">
-                    <p className="text-xs text-muted-foreground font-semibold">
-                      {catIndex}.{i + 1}
-                    </p>
-                    <p className="text-sm font-medium text-foreground group-hover:text-primary transition-colors mt-0.5">
-                      {sub.name}
-                    </p>
-                  </div>
-                </Link>
-              );
-            })}
+          {/* Right content — selected item detail or card grid */}
+          <div className="flex-1">
+            {selectedSub ? (
+              <div className="rounded-xl border border-border bg-card overflow-hidden animate-in fade-in-0 slide-in-from-top-2 duration-200">
+                {/* Image */}
+                <div className="aspect-[16/9] bg-muted flex items-center justify-center">
+                  {selectedSub.image ? (
+                    <img
+                      src={selectedSub.image}
+                      alt={selectedSub.name}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <ImageOff className="h-12 w-12 text-muted-foreground/40" />
+                  )}
+                </div>
+                {/* Info */}
+                <div className="p-5">
+                  <p className="text-xs text-muted-foreground font-semibold mb-1">
+                    {catIndex}.{category.subcategories.findIndex((s) => s.id === selectedSub.id) + 1}
+                  </p>
+                  <h3 className="text-lg font-bold text-foreground mb-2">{selectedSub.name}</h3>
+                  <p className="text-sm text-muted-foreground mb-4">
+                    Раздел в разработке. Информация появится в ближайшее время.
+                  </p>
+                  {selectedSub.externalPath && (
+                    <Link
+                      to={selectedSub.externalPath}
+                      className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline"
+                    >
+                      Перейти на страницу
+                      <ArrowRight className="h-3.5 w-3.5" />
+                    </Link>
+                  )}
+                </div>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {category.subcategories.map((sub, i) => (
+                  <button
+                    key={sub.id}
+                    onClick={() => setSelectedSubId(sub.id)}
+                    className="group rounded-lg border border-border bg-card overflow-hidden hover:border-primary/50 hover:shadow-md transition-all text-left"
+                  >
+                    <div className="aspect-[4/3] bg-muted flex items-center justify-center">
+                      {sub.image ? (
+                        <img src={sub.image} alt={sub.name} className="w-full h-full object-cover" />
+                      ) : (
+                        <ImageOff className="h-10 w-10 text-muted-foreground/40" />
+                      )}
+                    </div>
+                    <div className="px-3 py-2.5">
+                      <p className="text-xs text-muted-foreground font-semibold">{catIndex}.{i + 1}</p>
+                      <p className="text-sm font-medium text-foreground group-hover:text-primary transition-colors mt-0.5">
+                        {sub.name}
+                      </p>
+                    </div>
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </main>
