@@ -1,0 +1,414 @@
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import Header from "@/components/Header";
+import CartSheet from "@/components/CartSheet";
+import { CartProvider } from "@/contexts/CartContext";
+import { pryamougolnyeProducts } from "@/data/pryamougolnyeProducts";
+import { Check, Box, Wrench, ShieldCheck, Clock, Truck, Beaker, Settings } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+import {
+  Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
+import {
+  Accordion, AccordionContent, AccordionItem, AccordionTrigger,
+} from "@/components/ui/accordion";
+import {
+  Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
+} from "@/components/ui/table";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { toast } from "sonner";
+
+const whyUs = [
+  "Собственное производство с применением экструзионной сварки",
+  "Изготовление по типовым и индивидуальным проектам (любые размеры и комплектация)",
+  "Гарантия 5 лет, срок службы — до 50 лет",
+  "Полный цикл: проектирование, производство, доставка, монтаж, сервис",
+  "Соответствие ГОСТ, ТУ и международным стандартам качества",
+  "Возможность усиления конструкции под специфические нагрузки",
+];
+
+const applications = [
+  "Хранение питьевой и технической воды, в т. ч. пожарных запасов",
+  "Работа с агрессивными средами: кислотами, щелочами, солевыми растворами, реагентами",
+  "Пищевая промышленность (сиропы, растительные масла, молочные продукты, закваски)",
+  "Сбор и временное хранение промышленных стоков",
+  "Системы водоподготовки и водоочистки",
+  "Хранение ГСМ, отработанных масел, топлива",
+  "Транспортировка и хранение сыпучих материалов (удобрения, зерно, строительные смеси)",
+  "Технологические процессы в химической, фармацевтической и гальванической промышленности",
+];
+
+const constructionAdvantages = [
+  "Компактность — эффективное использование площади за счёт прямоугольной формы",
+  "Устойчивость — металлический каркас предотвращает деформацию при заполнении",
+  "Ремонтопригодность — локальный ремонт без демонтажа всей системы",
+  "Универсальность — подходит для наземной и частично заглублённой установки",
+  "Герметичность — исключает утечки и соответствует требованиям к хранению пищевых и химических продуктов",
+];
+
+const modifications = [
+  {
+    title: "По объёму",
+    items: [
+      "Малые (от 100 л до 1 м³) — для лабораторий и локальных систем",
+      "Средние (1–10 м³) — для промышленных и сельскохозяйственных задач",
+      "Крупные (10–100 м³) — для масштабных производственных нужд",
+    ],
+  },
+  {
+    title: "По назначению",
+    items: [
+      "Пищевые (с санитарно‑эпидемиологическими заключениями)",
+      "Химические (для кислот, щелочей, растворителей)",
+      "Пожарные и накопительные",
+      "Дренажные и канализационные",
+      "Технологические (для гальванических линий, реакторов)",
+      "Для сыпучих материалов (с усиленным дном и углами)",
+    ],
+  },
+  {
+    title: "По комплектации",
+    items: [
+      "Стандартные — с базовой обрешёткой и горловиной",
+      "Усиленные — с дополнительными поясами жёсткости и рёбрами",
+      "Модульные — сборные системы из нескольких соединённых резервуаров",
+    ],
+  },
+  {
+    title: "Дополнительные опции",
+    items: [
+      "Теплоизоляция (минеральная вата, ППУ)",
+      "Нагревательные элементы (греющий кабель или рубашка)",
+      "Мешалки и перемешивающие устройства",
+      "Смотровые окна и уровнемеры",
+      "Датчики температуры, давления, уровня",
+      "Ревизионные люки и патрубки",
+      "Системы автоматического контроля и дозирования",
+      "Индивидуальная окраска и маркировка",
+    ],
+  },
+];
+
+const advantages = [
+  { icon: Settings, title: "Индивидуальный подход", text: "Разработаем проект под ваши задачи, включая нестандартные формы и комплектацию." },
+  { icon: ShieldCheck, title: "Контроль качества", text: "Каждый шов проходит проверку на герметичность (вакуумный тест, опрессовка)." },
+  { icon: Clock, title: "Оперативность", text: "Средний срок изготовления — 10–14 дней, монтаж — 2–5 дней." },
+  { icon: Truck, title: "Логистика", text: "Организуем доставку по РФ, включая погрузочно‑разгрузочные работы." },
+  { icon: Wrench, title: "Сервис", text: "Монтаж «под ключ», пусконаладка, гарантийное и постгарантийное обслуживание." },
+  { icon: Beaker, title: "Гибкость", text: "Возможность доработки конструкции в процессе эксплуатации." },
+];
+
+const ppImages = [
+  { src: "/images/emkost-pryam-pp-1.png", alt: "Ёмкость прямоугольная из полипропилена в обрешётке" },
+  { src: "/images/emkost-pryam-pp-3.png", alt: "Ёмкость прямоугольная ПП в металлообрешётке" },
+  { src: "/images/emkost-pryam-pp-4.png", alt: "Рендер ёмкости прямоугольной из полипропилена" },
+];
+
+const pndImages = [
+  { src: "/images/emkost-pryam-pnd-1.jpg", alt: "Ёмкость прямоугольная из полиэтилена в обрешётке" },
+  { src: "/images/emkost-pryam-pnd-2.png", alt: "Рендер ёмкости прямоугольной из полиэтилена" },
+  { src: "/images/emkost-pryam-pp-2.png", alt: "Ёмкость прямоугольная в обрешётке" },
+];
+
+const EmkostiPryamougolnyeInner = () => {
+  const [cartOpen, setCartOpen] = useState(false);
+  const [form, setForm] = useState({ name: "", phone: "", email: "", description: "" });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!form.name.trim() || !form.phone.trim()) {
+      toast.error("Заполните обязательные поля (имя, телефон)");
+      return;
+    }
+    toast.success("Заявка отправлена! Мы свяжемся с вами в ближайшее время.");
+    setForm({ name: "", phone: "", email: "", description: "" });
+  };
+
+  const scrollToForm = () => {
+    document.getElementById("cta-form")?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  return (
+    <>
+      <Header onCartOpen={() => setCartOpen(true)} productType="otvod" />
+      <CartSheet open={cartOpen} onOpenChange={setCartOpen} />
+
+      <main className="mx-auto max-w-[960px] px-4 sm:px-6 py-6 sm:py-8">
+        {/* Breadcrumbs */}
+        <Breadcrumb className="mb-6">
+          <BreadcrumbList>
+            <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog">Каталог</Link></BreadcrumbLink></BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog/emkosti">Ёмкости</Link></BreadcrumbLink></BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem><BreadcrumbPage>Прямоугольные ёмкости в обрешётке</BreadcrumbPage></BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
+
+        {/* Hero */}
+        <section className="mb-10">
+          <p className="text-xs text-muted-foreground uppercase tracking-wider mb-2">ООО СЗПК «Пласт-Металл ПРО»</p>
+          <h1 className="text-2xl sm:text-3xl font-bold text-foreground leading-tight mb-3">
+            Прямоугольные промышленные ёмкости в обрешётке
+          </h1>
+          <p className="text-sm text-muted-foreground mb-5">
+            Оптимальное решение для компактного и надёжного хранения жидкостей и сыпучих материалов!
+          </p>
+          <Button onClick={scrollToForm} className="gap-2">
+            Получить расчёт стоимости
+          </Button>
+
+          {/* Hero images */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
+            <div className="rounded-lg border border-border overflow-hidden bg-card">
+              <img src="/images/emkost-pryam-pp-1.png" alt="Ёмкость прямоугольная из ПП в обрешётке" className="w-full h-48 object-cover" />
+            </div>
+            <div className="rounded-lg border border-border overflow-hidden bg-card">
+              <img src="/images/emkost-pryam-pnd-1.jpg" alt="Ёмкость прямоугольная из ПНД в обрешётке" className="w-full h-48 object-cover" />
+            </div>
+            <div className="rounded-lg border border-border overflow-hidden bg-card">
+              <img src="/images/emkost-pryam-pnd-2.png" alt="Рендер прямоугольной ёмкости" className="w-full h-48 object-cover" />
+            </div>
+          </div>
+        </section>
+
+        {/* Intro */}
+        <section className="mb-10">
+          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">
+            Прямоугольные ёмкости в металлическом каркасе: от проектирования до монтажа
+          </h2>
+          <p className="text-sm text-muted-foreground leading-relaxed mb-4">
+            Мы производим промышленные прямоугольные ёмкости из листового полипропилена (PP) и полиэтилена (ПНД/HDPE) с усилением в виде наружной металлической обрешётки. Конструкции идеально подходят для хранения химически активных веществ, воды, пищевых продуктов и сыпучих материалов в условиях ограниченного пространства.
+          </p>
+          <h3 className="text-sm font-semibold text-foreground mb-2">Почему выбирают нас:</h3>
+          <ul className="space-y-2">
+            {whyUs.map((item, i) => (
+              <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
+                <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        {/* Назначение */}
+        <section className="mb-10">
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Назначение прямоугольных ёмкостей в обрешётке</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            {applications.map((app, i) => (
+              <div key={i} className="flex items-start gap-2 rounded-lg border border-border bg-card p-3">
+                <Box className="h-4 w-4 text-primary shrink-0 mt-0.5" />
+                <span className="text-sm text-foreground">{app}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Материалы и конструкция */}
+        <section className="mb-10">
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Описание материалов и конструкции</h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+            <Card>
+              <CardContent className="p-4">
+                <p className="text-sm font-semibold text-foreground mb-2">Полипропилен (PP)</p>
+                <ul className="space-y-1 text-xs text-muted-foreground">
+                  <li>Температура: от −20 °C до +100 °C (кратковр. +110 °C)</li>
+                  <li>Высокая химическая стойкость к кислотам, щелочам, растворителям</li>
+                  <li>Плотность 0,90–0,92 г/см³, t плавл. 160–170 °C</li>
+                </ul>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardContent className="p-4">
+                <p className="text-sm font-semibold text-foreground mb-2">Полиэтилен (ПНД/HDPE)</p>
+                <ul className="space-y-1 text-xs text-muted-foreground">
+                  <li>Температура: от −50 °C до +60 °C (кратковр. +80 °C)</li>
+                  <li>Устойчивость к УФ‑излучению и замерзанию</li>
+                  <li>Плотность 0,93–0,97 г/см³, t плавл. ~120–135 °C</li>
+                </ul>
+              </CardContent>
+            </Card>
+          </div>
+
+          <h3 className="text-sm font-semibold text-foreground mb-2">Конструкция:</h3>
+          <ul className="space-y-1.5 text-sm text-muted-foreground mb-6">
+            <li className="flex items-start gap-2"><Check className="h-3.5 w-3.5 text-primary shrink-0 mt-0.5" /><span>Прямоугольный корпус из листового пластика, изготовленный методом экструзионной сварки</span></li>
+            <li className="flex items-start gap-2"><Check className="h-3.5 w-3.5 text-primary shrink-0 mt-0.5" /><span>Наружная металлическая обрешётка для равномерного распределения нагрузки</span></li>
+            <li className="flex items-start gap-2"><Check className="h-3.5 w-3.5 text-primary shrink-0 mt-0.5" /><span>Толщина стенок: от 5 до 25 мм (подбирается в зависимости от назначения)</span></li>
+            <li className="flex items-start gap-2"><Check className="h-3.5 w-3.5 text-primary shrink-0 mt-0.5" /><span>Возможность установки внутренних перегородок и отсеков</span></li>
+          </ul>
+
+          {/* Schema images */}
+          <h3 className="text-sm font-semibold text-foreground mb-3">Чертежи и схемы:</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+            <div className="rounded-lg border border-border overflow-hidden bg-card">
+              <img src="/images/emkost-pryam-schema-1.jpg" alt="Схема прямоугольной ёмкости" className="w-full object-contain bg-white p-2" />
+            </div>
+            <div className="rounded-lg border border-border overflow-hidden bg-card">
+              <img src="/images/emkost-pryam-schema-2.png" alt="Эскиз прямоугольной ёмкости с размерами" className="w-full object-contain bg-white p-2" />
+            </div>
+          </div>
+
+          <h3 className="text-sm font-semibold text-foreground mb-2">Преимущества конструкции:</h3>
+          <ul className="space-y-1.5">
+            {constructionAdvantages.map((item, i) => (
+              <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
+                <Check className="h-3.5 w-3.5 text-primary shrink-0 mt-0.5" />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        {/* Виды и модификации */}
+        <section className="mb-10">
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Виды и модификации</h2>
+          <Accordion type="multiple" defaultValue={["По объёму"]} className="space-y-2">
+            {modifications.map((mod) => (
+              <AccordionItem key={mod.title} value={mod.title} className="rounded-lg border border-border bg-card px-4">
+                <AccordionTrigger className="text-sm font-semibold text-foreground hover:no-underline">
+                  {mod.title}
+                </AccordionTrigger>
+                <AccordionContent>
+                  <ul className="space-y-1.5 pb-2">
+                    {mod.items.map((item, i) => (
+                      <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
+                        <span className="text-primary mt-1">•</span>
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </section>
+
+        {/* Типоразмерный ряд — with tabs for PP and PND */}
+        <section className="mb-10">
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Типоразмерный ряд</h2>
+
+          <Tabs defaultValue="pp" className="w-full">
+            <TabsList className="mb-4">
+              <TabsTrigger value="pp">Полипропилен (ПП)</TabsTrigger>
+              <TabsTrigger value="pnd">Полиэтилен (ПНД)</TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="pp">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
+                {ppImages.map((img, i) => (
+                  <div key={i} className="rounded-lg border border-border overflow-hidden bg-card">
+                    <img src={img.src} alt={img.alt} className="w-full h-40 object-cover" />
+                  </div>
+                ))}
+              </div>
+              <ProductTable />
+            </TabsContent>
+
+            <TabsContent value="pnd">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
+                {pndImages.map((img, i) => (
+                  <div key={i} className="rounded-lg border border-border overflow-hidden bg-card">
+                    <img src={img.src} alt={img.alt} className="w-full h-40 object-cover" />
+                  </div>
+                ))}
+              </div>
+              <ProductTable />
+            </TabsContent>
+          </Tabs>
+        </section>
+
+        {/* Преимущества сотрудничества */}
+        <section className="mb-10">
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Преимущества сотрудничества</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            {advantages.map((adv) => (
+              <Card key={adv.title}>
+                <CardContent className="p-4 flex items-start gap-3">
+                  <adv.icon className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                  <div>
+                    <p className="text-sm font-semibold text-foreground mb-1">{adv.title}</p>
+                    <p className="text-xs text-muted-foreground leading-relaxed">{adv.text}</p>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </section>
+
+        {/* CTA Form */}
+        <section id="cta-form" className="mb-10 scroll-mt-8">
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-lg">Готовы заказать прямоугольную ёмкость в обрешётке?</CardTitle>
+              <p className="text-sm text-muted-foreground">
+                Оставьте заявку, и наш инженер бесплатно проконсультирует, подготовит 3D‑модель и расчёт стоимости в течение 24 часов.
+              </p>
+            </CardHeader>
+            <CardContent>
+              <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="name" className="text-sm">Имя *</Label>
+                  <Input id="name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Ваше имя" />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="phone" className="text-sm">Телефон *</Label>
+                  <Input id="phone" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} placeholder="+7 (___) ___-__-__" />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="email" className="text-sm">E-mail</Label>
+                  <Input id="email" type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="mail@example.com" />
+                </div>
+                <div className="space-y-2 sm:col-span-2">
+                  <Label htmlFor="description" className="text-sm">Описание задачи</Label>
+                  <Textarea id="description" value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} placeholder="Опишите вашу задачу..." rows={3} />
+                </div>
+                <div className="sm:col-span-2">
+                  <Button type="submit" className="w-full sm:w-auto">Оставить заявку</Button>
+                </div>
+              </form>
+            </CardContent>
+          </Card>
+        </section>
+      </main>
+    </>
+  );
+};
+
+const ProductTable = () => (
+  <div className="rounded-lg border border-border overflow-auto">
+    <Table>
+      <TableHeader>
+        <TableRow>
+          <TableHead className="text-xs">Объём, л</TableHead>
+          <TableHead className="text-xs text-right">Длина (Д), мм</TableHead>
+          <TableHead className="text-xs text-right">Ширина (Ш), мм</TableHead>
+          <TableHead className="text-xs text-right">Высота (В), мм</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {pryamougolnyeProducts.map((item) => (
+          <TableRow key={item.volume}>
+            <TableCell className="text-xs font-medium">{item.volume.toLocaleString()}</TableCell>
+            <TableCell className="text-xs text-right">{item.length.toLocaleString()}</TableCell>
+            <TableCell className="text-xs text-right">{item.width.toLocaleString()}</TableCell>
+            <TableCell className="text-xs text-right">{item.height.toLocaleString()}</TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
+  </div>
+);
+
+const EmkostiPryamougolnye = () => (
+  <CartProvider>
+    <EmkostiPryamougolnyeInner />
+  </CartProvider>
+);
+
+export default EmkostiPryamougolnye;
