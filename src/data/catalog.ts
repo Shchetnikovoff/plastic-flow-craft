@@ -4,12 +4,16 @@ export interface CatalogSubcategory {
   slug: string;
   /** If set, navigates to this path instead of /catalog/:cat/:sub */
   externalPath?: string;
+  /** Optional image path */
+  image?: string;
 }
 
 export interface CatalogCategory {
   id: string;
   name: string;
   slug: string;
+  /** Optional description shown on the category page */
+  description?: string;
   subcategories: CatalogSubcategory[];
 }
 
@@ -18,6 +22,7 @@ export const catalog: CatalogCategory[] = [
     id: "galvanika",
     name: "Гальваника",
     slug: "galvanika",
+    description: "Гальваническое оборудование. Проектирование, производство и монтаж.",
     subcategories: [
       { id: "g1", name: "Гальванические линии ручные", slug: "linii-ruchnye" },
       { id: "g2", name: "Гальванические линии механизированные", slug: "linii-mekhanizirovannye" },

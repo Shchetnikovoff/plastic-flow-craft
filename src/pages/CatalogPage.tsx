@@ -1,10 +1,10 @@
 import { useParams, Link, Navigate } from "react-router-dom";
 import { useState } from "react";
-import { ArrowRight, Construction } from "lucide-react";
+import { ArrowRight, Construction, ImageOff } from "lucide-react";
 import Header from "@/components/Header";
 import CartSheet from "@/components/CartSheet";
 import { CartProvider } from "@/contexts/CartContext";
-import { catalog, findCategory, findSubcategory } from "@/data/catalog";
+import { catalog, findCategory, findSubcategory, type CatalogCategory } from "@/data/catalog";
 import {
   Breadcrumb,
   BreadcrumbList,
@@ -96,6 +96,9 @@ const CatalogPageInner = () => {
   }
 
   // Category page with list of subcategories
+  // Find category index for numbering (1-based)
+  const catIndex = catalog.findIndex((c) => c.slug === category.slug) + 1;
+
   return (
     <>
       <Header onCartOpen={() => setCartOpen(true)} productType="otvod" />
@@ -115,23 +118,78 @@ const CatalogPageInner = () => {
           </BreadcrumbList>
         </Breadcrumb>
 
-        <h2 className="text-2xl font-bold text-foreground mb-6">{category.name}</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          {category.subcategories.map((sub) => {
-            const href = sub.externalPath || `/catalog/${category.slug}/${sub.slug}`;
-            return (
-              <Link
-                key={sub.id}
-                to={href}
-                className="group flex items-center justify-between rounded-lg border border-border bg-card px-5 py-4 hover:border-primary/50 hover:shadow-sm transition-all"
-              >
-                <span className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">
-                  {sub.name}
-                </span>
-                <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-primary shrink-0 ml-3 transition-colors" />
-              </Link>
-            );
-          })}
+        {/* Description banner */}
+        {category.description && (
+          <div className="mb-6">
+            <h2 className="text-xl sm:text-2xl font-bold text-foreground">{category.name}</h2>
+            <p className="text-sm text-muted-foreground mt-1">{category.description}</p>
+          </div>
+        )}
+        {!category.description && (
+          <h2 className="text-2xl font-bold text-foreground mb-6">{category.name}</h2>
+        )}
+
+        {/* Two-column layout: sidebar + grid */}
+        <div className="flex flex-col md:flex-row gap-6">
+          {/* Left sidebar — numbered list */}
+          <nav className="md:w-[220px] shrink-0">
+            <ul className="space-y-0.5">
+              {category.subcategories.map((sub, i) => {
+                const href = sub.externalPath || `/catalog/${category.slug}/${sub.slug}`;
+                return (
+                  <li key={sub.id}>
+                    <Link
+                      to={href}
+                      className="group flex items-baseline gap-2 rounded-md px-3 py-2 text-sm hover:bg-muted transition-colors"
+                    >
+                      <span className="text-xs font-semibold text-muted-foreground shrink-0">
+                        {catIndex}.{i + 1}
+                      </span>
+                      <span className="text-foreground group-hover:text-primary transition-colors">
+                        {sub.name}
+                      </span>
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
+
+          {/* Right content — image card grid */}
+          <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {category.subcategories.map((sub, i) => {
+              const href = sub.externalPath || `/catalog/${category.slug}/${sub.slug}`;
+              return (
+                <Link
+                  key={sub.id}
+                  to={href}
+                  className="group rounded-lg border border-border bg-card overflow-hidden hover:border-primary/50 hover:shadow-md transition-all"
+                >
+                  {/* Image area */}
+                  <div className="aspect-[4/3] bg-muted flex items-center justify-center">
+                    {sub.image ? (
+                      <img
+                        src={sub.image}
+                        alt={sub.name}
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <ImageOff className="h-10 w-10 text-muted-foreground/40" />
+                    )}
+                  </div>
+                  {/* Caption */}
+                  <div className="px-3 py-2.5">
+                    <p className="text-xs text-muted-foreground font-semibold">
+                      {catIndex}.{i + 1}
+                    </p>
+                    <p className="text-sm font-medium text-foreground group-hover:text-primary transition-colors mt-0.5">
+                      {sub.name}
+                    </p>
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
         </div>
       </main>
     </>
