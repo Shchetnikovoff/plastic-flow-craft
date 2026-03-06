@@ -4,24 +4,18 @@ import Header from "@/components/Header";
 import CartSheet from "@/components/CartSheet";
 import { CartProvider } from "@/contexts/CartContext";
 import { findCategory } from "@/data/catalog";
-import { emkostGroups } from "@/data/emkostiProducts";
-import { ImageOff, Check, Droplets, Flame, FlaskConical, Truck, ShieldCheck, Clock, Wrench, ChevronDown } from "lucide-react";
+import { ImageOff, Check, Droplets, FlaskConical, Truck, ShieldCheck, Clock, Wrench } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { Badge } from "@/components/ui/badge";
 import {
   Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import {
   Accordion, AccordionContent, AccordionItem, AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
-} from "@/components/ui/table";
 import { toast } from "sonner";
 
 const whyUs = [
@@ -233,58 +227,22 @@ const EmkostiPageInner = () => {
           </Accordion>
         </section>
 
-        {/* Section: Типоразмерный ряд */}
+        {/* CTA to configurator */}
         <section className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Типоразмерный ряд ёмкостей</h2>
-          <Tabs defaultValue={emkostGroups[0].id}>
-            <TabsList className="flex flex-wrap h-auto gap-1 mb-4">
-              {emkostGroups.map((group) => (
-                <TabsTrigger key={group.id} value={group.id} className="text-xs">
-                  {group.title}
-                </TabsTrigger>
-              ))}
-            </TabsList>
-            {emkostGroups.map((group) => (
-              <TabsContent key={group.id} value={group.id}>
-                <Tabs defaultValue={group.categories[0].id}>
-                  <TabsList className="flex flex-wrap h-auto gap-1 mb-3">
-                    {group.categories.map((cat) => (
-                      <TabsTrigger key={cat.id} value={cat.id} className="text-xs">
-                        {cat.title}
-                      </TabsTrigger>
-                    ))}
-                  </TabsList>
-                  {group.categories.map((cat) => (
-                    <TabsContent key={cat.id} value={cat.id}>
-                      <p className="text-sm text-muted-foreground mb-3">{cat.description}</p>
-                      <div className="rounded-lg border border-border overflow-auto">
-                        <Table>
-                          <TableHeader>
-                            <TableRow>
-                              <TableHead className="text-xs">Артикул</TableHead>
-                              <TableHead className="text-xs text-right">Объём, л</TableHead>
-                              <TableHead className="text-xs text-right">Ø, мм</TableHead>
-                              <TableHead className="text-xs text-right">{cat.heightLabel}</TableHead>
-                            </TableRow>
-                          </TableHeader>
-                          <TableBody>
-                            {cat.items.map((item) => (
-                              <TableRow key={item.article}>
-                                <TableCell className="text-xs font-medium">{item.article}</TableCell>
-                                <TableCell className="text-xs text-right">{item.volume.toLocaleString()}</TableCell>
-                                <TableCell className="text-xs text-right">{item.diameter.toLocaleString()}</TableCell>
-                                <TableCell className="text-xs text-right">{item.height.toLocaleString()}</TableCell>
-                              </TableRow>
-                            ))}
-                          </TableBody>
-                        </Table>
-                      </div>
-                    </TabsContent>
-                  ))}
-                </Tabs>
-              </TabsContent>
-            ))}
-          </Tabs>
+          <Link
+            to="/catalog/emkosti/konfigurator"
+            className="block rounded-xl border-2 border-primary/30 bg-primary/5 p-6 sm:p-8 text-center hover:border-primary/60 hover:bg-primary/10 transition-all group"
+          >
+            <h2 className="text-lg sm:text-xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
+              Конфигуратор ёмкостей
+            </h2>
+            <p className="text-sm text-muted-foreground mb-4">
+              Подберите тип, материал и размер ёмкости. Добавьте в корзину и оформите заявку.
+            </p>
+            <span className="inline-flex items-center gap-2 text-sm font-semibold text-primary">
+              Перейти к конфигуратору →
+            </span>
+          </Link>
         </section>
 
         {/* Section 4: Преимущества */}
