@@ -199,8 +199,17 @@ const CatalogPageInner = () => {
                 </div>
               </div>
             ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {category.subcategories.map((sub, i) => {
+              (() => {
+                const groups = category.subcategories.reduce<Record<string, typeof category.subcategories>>((acc, sub) => {
+                  const key = sub.group || "";
+                  if (!acc[key]) acc[key] = [];
+                  acc[key].push(sub);
+                  return acc;
+                }, {});
+                const groupKeys = Object.keys(groups);
+                const hasGroups = groupKeys.length > 1 || (groupKeys.length === 1 && groupKeys[0] !== "");
+
+                const renderCard = (sub: typeof category.subcategories[number], i: number) => {
                   const cardContent = (
                     <>
                       <div className="aspect-[4/3] bg-muted flex items-center justify-center">
@@ -240,8 +249,37 @@ const CatalogPageInner = () => {
                       {cardContent}
                     </button>
                   );
-                })}
-              </div>
+                };
+
+                if (!hasGroups) {
+                  return (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      {category.subcategories.map((sub, i) => renderCard(sub, i))}
+                    </div>
+                  );
+                }
+
+                let globalIndex = 0;
+                return (
+                  <div className="space-y-6">
+                    {groupKeys.map((groupName) => {
+                      const items = groups[groupName];
+                      const startIndex = globalIndex;
+                      globalIndex += items.length;
+                      return (
+                        <div key={groupName}>
+                          {groupName && (
+                            <h3 className="text-sm font-bold text-foreground mb-3 uppercase tracking-wide">{groupName}</h3>
+                          )}
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            {items.map((sub, i) => renderCard(sub, startIndex + i))}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                );
+              })()
             )}
           </div>
         </div>
