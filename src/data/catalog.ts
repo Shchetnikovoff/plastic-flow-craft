@@ -96,16 +96,9 @@ export const catalog: CatalogCategory[] = [
     slug: "emkosti",
     description: "Промышленные ёмкости из листового полипропилена и полиэтилена — надёжность, проверенная временем!",
     subcategories: [
-      { id: "e1", name: "Ёмкости цилиндрические вертикальные", slug: "tsilindricheskie-vertikalnye", image: "/images/emkosti-hero-1.png" },
-      { id: "e2", name: "Ёмкости цилиндрические горизонтальные", slug: "tsilindricheskie-gorizontalnye", image: "/images/emkosti-hero-2.png" },
       { id: "e3", name: "Ёмкости подземные", slug: "podzemnye", externalPath: "/catalog/emkosti/podzemnye", image: "/images/emkosti-podzemnye-1.jpg" },
       { id: "e4", name: "Ёмкости прямоугольные", slug: "pryamougolnye", externalPath: "/catalog/emkosti/pryamougolnye", image: "/images/emkost-pryam-pp-1.png" },
       { id: "e5", name: "Ёмкости пожарные", slug: "pozharnye", externalPath: "/catalog/emkosti/pozharnye", image: "/images/emkost-pryam-pp-2.png" },
-      { id: "e6", name: "Ёмкости для сейсмоактивных районов", slug: "sejsmoaktivnye", image: "/images/emkosti-podzemnye-2.jpg" },
-      { id: "e7", name: "Ёмкости с коническим дном", slug: "konicheskoe-dno", image: "/images/emkost-pryam-pp-3.png" },
-      { id: "e8", name: "Ёмкость для щёлочи", slug: "dlya-shelochi", image: "/images/emkost-pryam-pnd-1.jpg" },
-      { id: "e9", name: "Ёмкость для кислоты", slug: "dlya-kisloty", image: "/images/emkost-pryam-pnd-2.png" },
-      { id: "e10", name: "Переливные ёмкости для бассейнов", slug: "perelivnye-basseiny", image: "/images/emkosti-podzemnye-3.png" },
     ],
   },
   {
