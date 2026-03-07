@@ -1,55 +1,55 @@
 
 
-## Plan: Create Lamella Settler (Ламельный отстойник) landing page
+## Plan: Add "Ёмкости подземные из спиральновитой трубы" Subcategory Page
 
-### What we're building
-A new page at `/catalog/vodoochistka/lamelnyj-otstojnik` — same pattern as `VodoochistkaFfu.tsx`.
+### What We're Building
+
+A new dedicated landing page for the underground containers subcategory (item "e3" in catalog: "Ёмкости подземные") at `/catalog/emkosti/podzemnye`. This is a full content page similar to EmkostiPage but focused on spiral-wound pipe underground containers.
 
 ### Changes
 
-#### 1. Save 8 uploaded images
-- `user-uploads://ламельный_отстйник_на_главную_страницу.jpg` → `public/images/lamelnyj-hero-1.jpg`
-- `user-uploads://1fe37eb88a449d077c84ab20c44949b7.jpg` → `public/images/lamelnyj-hero-2.jpg`
-- `user-uploads://a585ec1cf9b30e2524a1f089c24830d3.png` → `public/images/lamelnyj-3.png`
-- `user-uploads://2_1.png` → `public/images/lamelnyj-4.png`
-- `user-uploads://psxsb37y86b6rgex5hn1tpi15n5rlt7b.jpg` → `public/images/lamelnyj-5.jpg`
-- `user-uploads://1649898375994.jpg` → `public/images/lamelnyj-6.jpg`
-- `user-uploads://d05843faadf01ee4efc3379b0180482a.png` → `public/images/lamelnyj-schema-1.png`
-- `user-uploads://2020-03-24_16-04-29.png` → `public/images/lamelnyj-schema-2.png`
+#### 1. Copy uploaded images to project
+- `alexander-tortsev-9-1.jpg` → `public/images/emkosti-podzemnye-1.jpg`
+- `alexander-tortsev-8-4.jpg` → `public/images/emkosti-podzemnye-2.jpg`
+- `yomkosti-i-rezervuaryi.png` → `public/images/emkosti-podzemnye-3.png`
 
-#### 2. New file: `src/pages/VodoochistkaLamelnyj.tsx` (~400 lines)
-Following `VodoochistkaFfu.tsx` structure:
+#### 2. Create data file `src/data/podzemnyeProducts.ts`
+Size table (from polycorr.ru reference, 12 rows):
 
-- **Breadcrumbs**: Каталог → Водоочистка → Ламельный отстойник
-- **Hero**: Title, subtitle, CTA button, image gallery (8 images)
-- **Intro**: "Почему выбирают наши ламельные отстойники" (7 bullets)
-- **Section 1 — Назначение**: 6 purpose items, pollutant types, 6 application areas
-- **Section 2 — Принцип работы**: 5-step process + construction elements + lamella module features
-- **Section 3 — Модельный ряд**: Model table:
+| Объём, м³ | Ø корпуса, мм | Длина (L), мм |
+|-----------|---------------|---------------|
+| 20 | 2400 | 4500 |
+| 25 | 2400 | 5600 |
+| 30 | 2400 | 6700 |
+| 40 | 2400 | 8800 |
+| 50 | 2400 | 11000 |
+| 60 | 3000 | 8500 |
+| 70 | 3000 | 9900 |
+| 80 | 3000 | 11400 |
+| 90 | 3200 | 11200 |
+| 100 | 3200 | 12500 |
+| 120 | 3500 | 12500 |
+| 150 | 3600 | 14700 |
 
-| Модель | м³/ч | Площадь, м² | Габариты | Масса |
-|--------|------|-------------|----------|-------|
-| ЛО-5 | 5 | 7 | 2.0×1.5×2.5 | 0.8 т |
-| ЛО-10 | 10 | 14 | 3.0×2.0×2.8 | 1.2 т |
-| ЛО-20 | 20 | 28 | 4.0×2.5×3.0 | 1.8 т |
-| ЛО-50 | 50 | 70 | 6.0×3.5×3.2 | 3.5 т |
-| ЛО-100 | 100 | 135 | 8.0×4.0×3.5 | 5.2 т |
+#### 3. Create `src/pages/EmkostiPodzemnye.tsx`
+Full landing page with all provided text structured into sections:
+- **Hero**: company name, title "Подземные ёмкости из спиральновитых труб", 3 product images in grid
+- **Intro**: description + "Почему выбирают нас" checklist (6 items)
+- **Раздел 1 — Назначение**: 8 application areas as card grid
+- **Раздел 2 — Технология и материалы**: materials (ПНД, PP, армированные), key specs (diameter, length, pressure, temperature, ring stiffness, seismic), advantages of spiral-wound construction
+- **Раздел 3 — Виды и модификации**: accordion sections (по назначению, по конструкции, по способу монтажа, дополнительные опции)
+- **Типоразмерный ряд**: table from the data file
+- **Раздел 4 — Преимущества сотрудничества**: 6 advantage cards
+- **CTA form**: contact form (name, phone, email, description)
 
-Plus cleanup performance table (взвешенные вещества 90-95%, нефтепродукты 70-80%, БПКполн 60-70%).
+#### 4. Update `src/App.tsx`
+Add route: `/catalog/emkosti/podzemnye` → `EmkostiPodzemnye`
 
-- **Section 4 — Модификации и опции**: 4 modifications + 7 optional extras
-- **Section 5 — Преимущества сотрудничества**: 6 cards with icons
-- **CTA form**: Contact form (name, phone, email, description)
+#### 5. Update `src/data/catalog.ts`
+Add `externalPath: "/catalog/emkosti/podzemnye"` to the "e3" subcategory entry so clicking it navigates to the dedicated page.
 
-#### 3. Update `src/App.tsx`
-Add route: `<Route path="/catalog/vodoochistka/lamelnyj-otstojnik" element={<VodoochistkaLamelnyj />} />`
-
-#### 4. Update `src/data/catalog.ts`
-Change v3 `externalPath` from `/catalog/vodoochistka` to `/catalog/vodoochistka/lamelnyj-otstojnik`.
-
-### Files modified
-- 8 new images in `public/images/`
-- `src/pages/VodoochistkaLamelnyj.tsx` (new)
-- `src/App.tsx` (add route + import)
-- `src/data/catalog.ts` (update v3 externalPath)
+### Files
+- **Copy**: 3 images to `public/images/`
+- **Create**: `src/data/podzemnyeProducts.ts`, `src/pages/EmkostiPodzemnye.tsx`
+- **Modify**: `src/App.tsx`, `src/data/catalog.ts`
 
