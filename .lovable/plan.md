@@ -1,55 +1,30 @@
 
 
-## Plan: Add "Ёмкости подземные из спиральновитой трубы" Subcategory Page
+## Plan: Clean up catalog structure — keep only ready subcategories
 
-### What We're Building
-
-A new dedicated landing page for the underground containers subcategory (item "e3" in catalog: "Ёмкости подземные") at `/catalog/emkosti/podzemnye`. This is a full content page similar to EmkostiPage but focused on spiral-wound pipe underground containers.
+### Goal
+Simplify the catalog data to match the schema: each category shows only subcategories that have (or will have) dedicated pages. Remove placeholder/unfinished items to avoid confusion as we build out sections.
 
 ### Changes
 
-#### 1. Copy uploaded images to project
-- `alexander-tortsev-9-1.jpg` → `public/images/emkosti-podzemnye-1.jpg`
-- `alexander-tortsev-8-4.jpg` → `public/images/emkosti-podzemnye-2.jpg`
-- `yomkosti-i-rezervuaryi.png` → `public/images/emkosti-podzemnye-3.png`
+#### 1. `src/data/catalog.ts` — trim Ёмкости to 3 ready subcategories
 
-#### 2. Create data file `src/data/podzemnyeProducts.ts`
-Size table (from polycorr.ru reference, 12 rows):
+Remove subcategories e1, e2, e6, e7, e8, e9, e10. Keep only:
+- **e3** — Ёмкости подземные (has page at `/catalog/emkosti/podzemnye`)
+- **e4** — Ёмкости прямоугольные (has page at `/catalog/emkosti/pryamougolnye`)
+- **e5** — Ёмкости пожарные (has page at `/catalog/emkosti/pozharnye`)
 
-| Объём, м³ | Ø корпуса, мм | Длина (L), мм |
-|-----------|---------------|---------------|
-| 20 | 2400 | 4500 |
-| 25 | 2400 | 5600 |
-| 30 | 2400 | 6700 |
-| 40 | 2400 | 8800 |
-| 50 | 2400 | 11000 |
-| 60 | 3000 | 8500 |
-| 70 | 3000 | 9900 |
-| 80 | 3000 | 11400 |
-| 90 | 3200 | 11200 |
-| 100 | 3200 | 12500 |
-| 120 | 3500 | 12500 |
-| 150 | 3600 | 14700 |
+All three already have `externalPath` and `image` set — tiles will link directly to their pages.
 
-#### 3. Create `src/pages/EmkostiPodzemnye.tsx`
-Full landing page with all provided text structured into sections:
-- **Hero**: company name, title "Подземные ёмкости из спиральновитых труб", 3 product images in grid
-- **Intro**: description + "Почему выбирают нас" checklist (6 items)
-- **Раздел 1 — Назначение**: 8 application areas as card grid
-- **Раздел 2 — Технология и материалы**: materials (ПНД, PP, армированные), key specs (diameter, length, pressure, temperature, ring stiffness, seismic), advantages of spiral-wound construction
-- **Раздел 3 — Виды и модификации**: accordion sections (по назначению, по конструкции, по способу монтажа, дополнительные опции)
-- **Типоразмерный ряд**: table from the data file
-- **Раздел 4 — Преимущества сотрудничества**: 6 advantage cards
-- **CTA form**: contact form (name, phone, email, description)
+#### 2. No other file changes needed
 
-#### 4. Update `src/App.tsx`
-Add route: `/catalog/emkosti/podzemnye` → `EmkostiPodzemnye`
+The CatalogPage rendering already handles `externalPath` links and image display. EmkostiPage (`/catalog/emkosti`) also reads from this same catalog data, so it will automatically show only 3 tiles.
 
-#### 5. Update `src/data/catalog.ts`
-Add `externalPath: "/catalog/emkosti/podzemnye"` to the "e3" subcategory entry so clicking it navigates to the dedicated page.
+### Navigation flow (matches schema)
+```text
+Каталог → Ёмкости (3 плитки) → клик → Посадочная страница с описанием + таблица типоразмеров
+```
 
-### Files
-- **Copy**: 3 images to `public/images/`
-- **Create**: `src/data/podzemnyeProducts.ts`, `src/pages/EmkostiPodzemnye.tsx`
-- **Modify**: `src/App.tsx`, `src/data/catalog.ts`
+### Files modified
+- `src/data/catalog.ts` — remove 7 subcategories from емкости, keep 3
 
