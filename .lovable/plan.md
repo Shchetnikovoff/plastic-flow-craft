@@ -1,55 +1,58 @@
 
 
-## Plan: Add "Ёмкости подземные из спиральновитой трубы" Subcategory Page
+## Plan: Restructure Ventilation into "Round" and "Square" sections + fix images
 
-### What We're Building
-
-A new dedicated landing page for the underground containers subcategory (item "e3" in catalog: "Ёмкости подземные") at `/catalog/emkosti/podzemnye`. This is a full content page similar to EmkostiPage but focused on spiral-wound pipe underground containers.
+### Problem
+1. Ventilation subcategory cards show broken image placeholders despite having `image` paths in catalog data
+2. User wants ventilation split into two groups: **Круглые** (round) and **Квадратные** (square), similar to how containers (Ёмкости) has subcategories leading to dedicated pages
 
 ### Changes
 
-#### 1. Copy uploaded images to project
-- `alexander-tortsev-9-1.jpg` → `public/images/emkosti-podzemnye-1.jpg`
-- `alexander-tortsev-8-4.jpg` → `public/images/emkosti-podzemnye-2.jpg`
-- `yomkosti-i-rezervuaryi.png` → `public/images/emkosti-podzemnye-3.png`
+#### 1. `src/data/catalog.ts` — restructure ventilation subcategories
 
-#### 2. Create data file `src/data/podzemnyeProducts.ts`
-Size table (from polycorr.ru reference, 12 rows):
+Split current 4 items into two groups. Add two new top-level subcategories acting as group headers:
 
-| Объём, м³ | Ø корпуса, мм | Длина (L), мм |
-|-----------|---------------|---------------|
-| 20 | 2400 | 4500 |
-| 25 | 2400 | 5600 |
-| 30 | 2400 | 6700 |
-| 40 | 2400 | 8800 |
-| 50 | 2400 | 11000 |
-| 60 | 3000 | 8500 |
-| 70 | 3000 | 9900 |
-| 80 | 3000 | 11400 |
-| 90 | 3200 | 11200 |
-| 100 | 3200 | 12500 |
-| 120 | 3500 | 12500 |
-| 150 | 3600 | 14700 |
+```
+subcategories: [
+  { id: "ve-round", name: "Круглого сечения", slug: "kruglye", subcategories with externalPath... },
+  { id: "ve-square", name: "Прямоугольного сечения", slug: "kvadratnye", ... },
+]
+```
 
-#### 3. Create `src/pages/EmkostiPodzemnye.tsx`
-Full landing page with all provided text structured into sections:
-- **Hero**: company name, title "Подземные ёмкости из спиральновитых труб", 3 product images in grid
-- **Intro**: description + "Почему выбирают нас" checklist (6 items)
-- **Раздел 1 — Назначение**: 8 application areas as card grid
-- **Раздел 2 — Технология и материалы**: materials (ПНД, PP, армированные), key specs (diameter, length, pressure, temperature, ring stiffness, seismic), advantages of spiral-wound construction
-- **Раздел 3 — Виды и модификации**: accordion sections (по назначению, по конструкции, по способу монтажа, дополнительные опции)
-- **Типоразмерный ряд**: table from the data file
-- **Раздел 4 — Преимущества сотрудничества**: 6 advantage cards
-- **CTA form**: contact form (name, phone, email, description)
+Since the catalog data model is flat (no nested subcategories), we use two approaches:
+- **Option A**: Keep flat list but add a `group` field to each subcategory for visual grouping
+- **Option B**: Create two separate "section" entries that link to dedicated pages listing their children
 
-#### 4. Update `src/App.tsx`
-Add route: `/catalog/emkosti/podzemnye` → `EmkostiPodzemnye`
+Given the existing pattern (containers use `externalPath` for navigation), **Option A** is simpler — add a `group` property and render grouped headings in `CatalogPage.tsx`.
 
-#### 5. Update `src/data/catalog.ts`
-Add `externalPath: "/catalog/emkosti/podzemnye"` to the "e3" subcategory entry so clicking it navigates to the dedicated page.
+Ventilation subcategories become:
+- Group "Круглого сечения": Отвод (ve1), Тройник (ve2), Раздвижной элемент (ve3), Воздуховод круглый (ve4)
+- Group "Прямоугольного сечения": (placeholder items for future — or empty for now)
 
-### Files
-- **Copy**: 3 images to `public/images/`
-- **Create**: `src/data/podzemnyeProducts.ts`, `src/pages/EmkostiPodzemnye.tsx`
-- **Modify**: `src/App.tsx`, `src/data/catalog.ts`
+#### 2. `src/data/catalog.ts` — fix image paths
+
+The image files exist in `/public/images/` but the cards show ImageOff. Verify the exact filenames match. Current paths:
+- `/images/product-1.png` — exists
+- `/images/troynik-1.png` — exists  
+- `/images/razdvizhnoy-1.png` — exists
+- `/images/vozdukhovod-1.png` — exists
+
+These should work. The issue may be in `CatalogPage.tsx` rendering logic — need to verify the `sub.image` property is being read correctly after the recent edits.
+
+#### 3. `src/pages/CatalogPage.tsx` — render grouped subcategories
+
+When a category has subcategories with a `group` field, render them under group headings:
+
+```
+Круглого сечения
+  [card] [card]
+  [card] [card]
+
+Прямоугольного сечения
+  [card] [card]
+```
+
+### Files modified
+- `src/data/catalog.ts` — add `group` field to ventilation subcategories, add square section placeholders
+- `src/pages/CatalogPage.tsx` — support grouped rendering (~15 lines added)
 
