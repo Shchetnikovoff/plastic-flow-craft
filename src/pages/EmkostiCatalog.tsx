@@ -19,10 +19,10 @@ import {
 
 /* ── image sets per group ── */
 const groupImages: Record<string, string[]> = {
-  "vertical-pp": ["/images/emkosti-hero-1.png", "/images/emkosti-hero-2.png", "/images/emkost-pryam-pp-1.png", "/images/emkost-pryam-pp-2.png", "/images/emkost-pryam-schema-1.jpg"],
-  "vertical-pnd": ["/images/emkost-pryam-pnd-1.jpg", "/images/emkost-pryam-pnd-2.png", "/images/emkosti-hero-1.png", "/images/emkosti-hero-2.png", "/images/emkost-pryam-schema-2.png"],
-  "horizontal-pp": ["/images/emkosti-hero-2.png", "/images/emkost-pryam-pp-3.png", "/images/emkost-pryam-pp-4.png", "/images/emkost-pryam-schema-1.jpg", "/images/emkosti-hero-1.png"],
-  "horizontal-pnd": ["/images/emkost-pryam-pnd-1.jpg", "/images/emkost-pryam-pnd-2.png", "/images/emkost-pryam-schema-2.png", "/images/emkosti-hero-2.png", "/images/emkosti-hero-1.png"],
+  "vertical-pp": ["/images/emkosti-hero-1.png", "/images/emkosti-hero-2.png", "/images/emkost-pryam-pp-1.png", "/images/emkost-pryam-pp-2.png"],
+  "vertical-pnd": ["/images/emkost-pryam-pnd-1.jpg", "/images/emkost-pryam-pnd-2.png", "/images/emkosti-hero-1.png"],
+  "horizontal-pp": ["/images/emkost-pryam-pp-3.png", "/images/emkost-pryam-pp-4.png", "/images/emkost-pryam-schema-1.jpg"],
+  "horizontal-pnd": ["/images/emkost-pryam-pnd-1.jpg", "/images/emkost-pryam-pnd-2.png", "/images/emkost-pryam-schema-2.png"],
 };
 
 const orientationLabels: Record<string, string> = {
