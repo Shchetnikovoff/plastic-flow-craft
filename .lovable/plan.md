@@ -1,51 +1,55 @@
 
 
-## Plan: Create "Шкафы и стойки дозировочные" landing page
+## Plan: Add "Ёмкости подземные из спиральновитой трубы" Subcategory Page
 
-### What we're building
-A landing page at `/catalog/vodoochistka/shkafy-dozirovaniya` for dosing cabinets and racks used in reagent management systems. Save 4 uploaded product photos. Follow the same pattern as VodoochistkaDozirovanie.tsx.
+### What We're Building
+
+A new dedicated landing page for the underground containers subcategory (item "e3" in catalog: "Ёмкости подземные") at `/catalog/emkosti/podzemnye`. This is a full content page similar to EmkostiPage but focused on spiral-wound pipe underground containers.
 
 ### Changes
 
-#### 1. Save 4 uploaded images
-- `user-uploads://шкаф_дозировочный.jpg` → `public/images/shkaf-dozirovochnyj-1.jpg`
-- `user-uploads://Шкаф_дозирования_гипохлорида_натрия..jpg` → `public/images/shkaf-dozirovochnyj-2.jpg`
-- `user-uploads://система_дозирования.jpg` → `public/images/shkaf-dozirovochnyj-3.jpg`
-- `user-uploads://Смесительный_узел_для_линии_емкостей..jpg` → `public/images/shkaf-dozirovochnyj-4.jpg`
+#### 1. Copy uploaded images to project
+- `alexander-tortsev-9-1.jpg` → `public/images/emkosti-podzemnye-1.jpg`
+- `alexander-tortsev-8-4.jpg` → `public/images/emkosti-podzemnye-2.jpg`
+- `yomkosti-i-rezervuaryi.png` → `public/images/emkosti-podzemnye-3.png`
 
-#### 2. New file: `src/pages/VodoochistkaShkafyDozirovaniya.tsx` (~420 lines)
-Same structure as VodoochistkaDozirovanie.tsx:
+#### 2. Create data file `src/data/podzemnyeProducts.ts`
+Size table (from polycorr.ru reference, 12 rows):
 
-- **Breadcrumbs**: Каталог → Водоочистка → Шкафы и стойки дозировочные
-- **Hero**: Title "Шкафы и стойки дозировочные для реагентных хозяйств", image gallery (4 photos), CTA button
-- **Intro**: Description of purpose + "Почему выбирают" bullets (точное дозирование, IP65, химстойкие корпуса, интеграция в АСУ ТП, взрывозащищённое исполнение, полный цикл)
+| Объём, м³ | Ø корпуса, мм | Длина (L), мм |
+|-----------|---------------|---------------|
+| 20 | 2400 | 4500 |
+| 25 | 2400 | 5600 |
+| 30 | 2400 | 6700 |
+| 40 | 2400 | 8800 |
+| 50 | 2400 | 11000 |
+| 60 | 3000 | 8500 |
+| 70 | 3000 | 9900 |
+| 80 | 3000 | 11400 |
+| 90 | 3200 | 11200 |
+| 100 | 3200 | 12500 |
+| 120 | 3500 | 12500 |
+| 150 | 3600 | 14700 |
 
-- **Section 1 — Основные компоненты**: List of 8 components (дозировочные насосы, ПЛК, датчики, HMI, защитные устройства, гальванические изоляторы, клеммные колодки, кабельные вводы)
-
-- **Section 2 — Функции**: 8 items as process steps (пропорциональное дозирование, аналоговое управление, постоянное дозирование, контроль уровня, защита от протечек, блокировка при отсутствии потока, управление мешалками, архивирование данных)
-
-- **Section 3 — Типы шкафов**: Accordion with 4 items:
-  - ШУ БДР — управление блоком дозирования
-  - ШУ УДР — малые расходы, агрессивные среды
-  - КРХ — типовые шкафы с опциями (рама, бак, датчики pH)
-  - БДР — блочные решения (ёмкости + насосы + вентиляция)
-
-- **Section 4 — Особенности конструкции**: Cards for key specs (корпус полиэстер/AISI 316L, IP65+, PVDF кабельные вводы, взрывозащита, маркировка термоусадкой)
-
-- **Section 5 — Области применения**: 7 application areas (очистные, питьевое водоснабжение, энергетика, металлургия/гальваника, пищевая промышленность, бассейны, нефтегаз)
-
-- **Section 6 — Преимущества сотрудничества**: 6 cards (same pattern)
-- **CTA form**: Contact form (name, phone, email, description)
-
-#### 3. Update `src/data/catalog.ts`
-Update v9 externalPath: `"/catalog/vodoochistka"` → `"/catalog/vodoochistka/shkafy-dozirovaniya"`
+#### 3. Create `src/pages/EmkostiPodzemnye.tsx`
+Full landing page with all provided text structured into sections:
+- **Hero**: company name, title "Подземные ёмкости из спиральновитых труб", 3 product images in grid
+- **Intro**: description + "Почему выбирают нас" checklist (6 items)
+- **Раздел 1 — Назначение**: 8 application areas as card grid
+- **Раздел 2 — Технология и материалы**: materials (ПНД, PP, армированные), key specs (diameter, length, pressure, temperature, ring stiffness, seismic), advantages of spiral-wound construction
+- **Раздел 3 — Виды и модификации**: accordion sections (по назначению, по конструкции, по способу монтажа, дополнительные опции)
+- **Типоразмерный ряд**: table from the data file
+- **Раздел 4 — Преимущества сотрудничества**: 6 advantage cards
+- **CTA form**: contact form (name, phone, email, description)
 
 #### 4. Update `src/App.tsx`
-Add route + lazy import: `/catalog/vodoochistka/shkafy-dozirovaniya` → `VodoochistkaShkafyDozirovaniya`
+Add route: `/catalog/emkosti/podzemnye` → `EmkostiPodzemnye`
 
-### Files modified
-- 4 images in `public/images/`
-- `src/pages/VodoochistkaShkafyDozirovaniya.tsx` (new)
-- `src/App.tsx` (add route + import)
-- `src/data/catalog.ts` (update v9 externalPath)
+#### 5. Update `src/data/catalog.ts`
+Add `externalPath: "/catalog/emkosti/podzemnye"` to the "e3" subcategory entry so clicking it navigates to the dedicated page.
+
+### Files
+- **Copy**: 3 images to `public/images/`
+- **Create**: `src/data/podzemnyeProducts.ts`, `src/pages/EmkostiPodzemnye.tsx`
+- **Modify**: `src/App.tsx`, `src/data/catalog.ts`
 
