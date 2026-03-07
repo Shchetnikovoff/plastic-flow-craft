@@ -45,7 +45,7 @@ export const catalog: CatalogCategory[] = [
     subcategories: [
       { id: "v2", name: "ФФУ флотационно-фильтровальная установка", slug: "ffu", externalPath: "/catalog/vodoochistka/ffu" },
       { id: "v3", name: "Ламельный тонкослойный отстойник-сепаратор", slug: "lamelnyj-otstojnik", externalPath: "/catalog/vodoochistka/lamelnyj-otstojnik" },
-      { id: "v4", name: "Мешочный обезвоживатель осадка", slug: "meshochnyj-obezvozhivatel", externalPath: "/catalog/vodoochistka" },
+      { id: "v4", name: "Мешочный обезвоживатель осадка", slug: "meshochnyj-obezvozhivatel", externalPath: "/catalog/vodoochistka/meshochnyj-obezvozhivatel" },
       { id: "v5", name: "Станция приготовления коагулянта", slug: "stantsiya-koagulyanta", externalPath: "/catalog/vodoochistka" },
       { id: "v7", name: "Жироуловители промышленные", slug: "zhirouloviteli", externalPath: "/catalog/vodoochistka" },
       { id: "v8", name: "КОС — комплексные очистные сооружения", slug: "kos", externalPath: "/catalog/vodoochistka" },
