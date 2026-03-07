@@ -15,6 +15,7 @@ import EmkostiPryamougolnye from "./pages/EmkostiPryamougolnye";
 import EmkostiPozharnye from "./pages/EmkostiPozharnye";
 import EmkostiCatalog from "./pages/EmkostiCatalog";
 import Vodoochistka from "./pages/Vodoochistka";
+import VodoochistkaFfu from "./pages/VodoochistkaFfu";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -40,6 +41,7 @@ const App = () => (
           <Route path="/catalog/emkosti/pryamougolnye" element={<EmkostiPryamougolnye />} />
           <Route path="/catalog/emkosti/pozharnye" element={<EmkostiPozharnye />} />
           <Route path="/catalog/emkosti" element={<EmkostiPage />} />
+          <Route path="/catalog/vodoochistka/ffu" element={<VodoochistkaFfu />} />
           <Route path="/catalog/vodoochistka" element={<Vodoochistka />} />
           <Route path="/catalog" element={<CatalogPage />} />
           <Route path="/catalog/:categorySlug" element={<CatalogPage />} />

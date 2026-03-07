@@ -43,7 +43,7 @@ export const catalog: CatalogCategory[] = [
     slug: "vodoochistka",
     description: "Полимерное водоочистное оборудование — эффективность, долговечность и устойчивость к агрессивным средам!",
     subcategories: [
-      { id: "v2", name: "ФФУ флотационно-фильтровальная установка", slug: "ffu", externalPath: "/catalog/vodoochistka" },
+      { id: "v2", name: "ФФУ флотационно-фильтровальная установка", slug: "ffu", externalPath: "/catalog/vodoochistka/ffu" },
       { id: "v3", name: "Ламельный тонкослойный отстойник-сепаратор", slug: "lamelnyj-otstojnik", externalPath: "/catalog/vodoochistka" },
       { id: "v4", name: "Мешочный обезвоживатель осадка", slug: "meshochnyj-obezvozhivatel", externalPath: "/catalog/vodoochistka" },
       { id: "v5", name: "Станция приготовления коагулянта", slug: "stantsiya-koagulyanta", externalPath: "/catalog/vodoochistka" },
