@@ -1,24 +1,28 @@
 
 
-## Plan: Fix image gallery to show only relevant photos per container type
+## Plan: Fix images by section + add clickable rows on Fire Containers page
 
 ### Problem
-The `EmkostiCatalog.tsx` configurator mixes images across all 4 groups — vertical tanks show rectangular container photos, and vice versa. Each group should display only images matching that container type.
+1. The hero images on `EmkostiPozharnye.tsx` show a mix — need each image to correspond to the three tab types (rectangular, underground, horizontal)
+2. Table rows are not clickable — other configurator pages (Index, Troynik, Razdvizhnoy, Vozdukhovod) use `useNavigate` to go to `/product/{article}` on row click
 
-### Changes — single file: `src/pages/EmkostiCatalog.tsx`
+### Changes — single file: `src/pages/EmkostiPozharnye.tsx`
 
-Update the `groupImages` mapping (lines 21-26):
+#### 1. Fix hero images to match the three container types
+Currently shows: `emkost-pryam-pp-1.png`, `emkosti-podzemnye-1.jpg`, `emkosti-hero-1.png`
 
-- **vertical-pp**: Only vertical/cylindrical PP images — `emkosti-hero-1.png`, `emkosti-hero-2.png`, `emkost-pryam-pp-1.png` (this one actually shows a vertical PP tank despite the filename), `emkost-pryam-pp-2.png`
-- **vertical-pnd**: Only vertical/cylindrical PND images — `emkost-pryam-pnd-1.jpg`, `emkost-pryam-pnd-2.png`, `emkosti-hero-1.png`
-- **horizontal-pp**: Only horizontal PP images — `emkost-pryam-pp-3.png`, `emkost-pryam-pp-4.png`, `emkost-pryam-schema-1.jpg`
-- **horizontal-pnd**: Only horizontal PND images — `emkost-pryam-pnd-1.jpg`, `emkost-pryam-pnd-2.png`, `emkost-pryam-schema-2.png`
+Replace with labeled images matching each tab:
+- **Прямоугольные**: `emkost-pryam-pp-1.png` (rectangular tank in frame)
+- **Подземные**: `emkosti-podzemnye-1.jpg` (underground tank)
+- **Горизонтальные**: `emkosti-hero-2.png` (horizontal cylindrical tank on supports)
 
-**However**, the actual image content is unclear from filenames alone — I need to verify which photos actually depict which container types. The user's screenshot shows the gallery has 4 thumbnails mixing cylindrical and rectangular tanks.
+Add text labels under each image indicating the type.
 
-### Question for user
-Since I cannot see the actual image content, I need clarification: which specific image files correspond to which container types? Or should I check the images visually first?
+#### 2. Make all table rows clickable
+Add `useNavigate` from react-router-dom. For each `<TableRow>` in all 3 tabs:
+- Add `cursor-pointer` class and `onClick={() => navigate(`/product/${encodeURIComponent(item.article)}`)}`
+- Style the article cell with `underline underline-offset-2` to indicate clickability
+- Same pattern used in Index.tsx, Troynik.tsx, Razdvizhnoy.tsx, Vozdukhovod.tsx
 
-### Alternative approach
-If the current image set doesn't have enough unique photos per group, each group could show a reduced set of only truly matching images (even 2-3 per group is fine).
+### No other files changed
 
