@@ -20,6 +20,7 @@ import VodoochistkaLamelnyj from "./pages/VodoochistkaLamelnyj";
 import VodoochistkaObezvozhivatel from "./pages/VodoochistkaObezvozhivatel";
 import VodoochistkaDozirovanie from "./pages/VodoochistkaDozirovanie";
 import VodoochistkaZhirouloviteli from "./pages/VodoochistkaZhirouloviteli";
+import VodoochistkaLos from "./pages/VodoochistkaLos";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
