@@ -1,28 +1,32 @@
 
 
-## Plan: Fix images by section + add clickable rows on Fire Containers page
+## Plan: Add images to subcategory cards + make them navigable
 
 ### Problem
-1. The hero images on `EmkostiPozharnye.tsx` show a mix — need each image to correspond to the three tab types (rectangular, underground, horizontal)
-2. Table rows are not clickable — other configurator pages (Index, Troynik, Razdvizhnoy, Vozdukhovod) use `useNavigate` to go to `/product/{article}` on row click
+The subcategory cards on `/catalog/emkosti` show broken image placeholders (ImageOff icons) and only toggle inline selection instead of navigating to dedicated pages.
 
-### Changes — single file: `src/pages/EmkostiPozharnye.tsx`
+### Changes
 
-#### 1. Fix hero images to match the three container types
-Currently shows: `emkost-pryam-pp-1.png`, `emkosti-podzemnye-1.jpg`, `emkosti-hero-1.png`
+#### 1. `src/data/catalog.ts` — add `image` to each емкости subcategory
+Map available photos to matching container types:
+- e1 (вертикальные): `/images/emkosti-hero-1.png`
+- e2 (горизонтальные): `/images/emkosti-hero-2.png`
+- e3 (подземные): `/images/emkosti-podzemnye-1.jpg`
+- e4 (прямоугольные): `/images/emkost-pryam-pp-1.png`
+- e5 (пожарные): `/images/emkost-pryam-pp-2.png`
+- e6 (сейсмоактивные): `/images/emkosti-podzemnye-2.jpg`
+- e7 (коническое дно): `/images/emkost-pryam-pp-3.png`
+- e8 (щёлочь): `/images/emkost-pryam-pnd-1.jpg`
+- e9 (кислота): `/images/emkost-pryam-pnd-2.png`
+- e10 (переливные): `/images/emkosti-podzemnye-3.png`
 
-Replace with labeled images matching each tab:
-- **Прямоугольные**: `emkost-pryam-pp-1.png` (rectangular tank in frame)
-- **Подземные**: `emkosti-podzemnye-1.jpg` (underground tank)
-- **Горизонтальные**: `emkosti-hero-2.png` (horizontal cylindrical tank on supports)
+#### 2. `src/pages/EmkostiPage.tsx` — make cards navigate to pages
+Change the grid card behavior (lines 323-344):
+- Cards with `externalPath` → wrap in `<Link to={sub.externalPath}>` for direct navigation
+- Cards without `externalPath` → keep current inline selection (click to show details)
+- Remove the intermediate "selected" detail view for items with externalPath — clicking goes straight to the page
 
-Add text labels under each image indicating the type.
-
-#### 2. Make all table rows clickable
-Add `useNavigate` from react-router-dom. For each `<TableRow>` in all 3 tabs:
-- Add `cursor-pointer` class and `onClick={() => navigate(`/product/${encodeURIComponent(item.article)}`)}`
-- Style the article cell with `underline underline-offset-2` to indicate clickability
-- Same pattern used in Index.tsx, Troynik.tsx, Razdvizhnoy.tsx, Vozdukhovod.tsx
-
-### No other files changed
+### Files modified
+- `src/data/catalog.ts` (add image fields to 10 subcategories)
+- `src/pages/EmkostiPage.tsx` (update card click behavior ~20 lines)
 
