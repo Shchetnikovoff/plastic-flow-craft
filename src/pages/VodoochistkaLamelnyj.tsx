@@ -428,7 +428,7 @@ const VodoochistkaLamelnyjInner = () => {
 };
 
 const VodoochistkaLamelnyj = () => (
-  <CartProvider productType="otvod">
+  <CartProvider>
     <VodoochistkaLamelnyjInner />
   </CartProvider>
 );
