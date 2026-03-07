@@ -64,10 +64,10 @@ export const catalog: CatalogCategory[] = [
     name: "Вентиляция",
     slug: "ventilyatsiya",
     subcategories: [
-      { id: "ve1", name: "Отвод вентиляционный", slug: "otvod", externalPath: "/" },
-      { id: "ve2", name: "Тройник вентиляционный", slug: "troynik", externalPath: "/troynik" },
-      { id: "ve3", name: "Раздвижной элемент", slug: "razdvizhnoy", externalPath: "/razdvizhnoy" },
-      { id: "ve4", name: "Воздуховод круглый", slug: "vozdukhovod", externalPath: "/vozdukhovod" },
+      { id: "ve1", name: "Отвод вентиляционный", slug: "otvod", externalPath: "/", image: "/images/product-1.png" },
+      { id: "ve2", name: "Тройник вентиляционный", slug: "troynik", externalPath: "/troynik", image: "/images/troynik-1.png" },
+      { id: "ve3", name: "Раздвижной элемент", slug: "razdvizhnoy", externalPath: "/razdvizhnoy", image: "/images/razdvizhnoy-1.png" },
+      { id: "ve4", name: "Воздуховод круглый", slug: "vozdukhovod", externalPath: "/vozdukhovod", image: "/images/vozdukhovod-1.png" },
     ],
   },
   {
