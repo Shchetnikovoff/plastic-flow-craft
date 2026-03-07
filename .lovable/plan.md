@@ -1,55 +1,48 @@
 
 
-## Plan: Add "Ёмкости подземные из спиральновитой трубы" Subcategory Page
+## Plan: Create Мешочный обезвоживатель осадка landing page
 
-### What We're Building
-
-A new dedicated landing page for the underground containers subcategory (item "e3" in catalog: "Ёмкости подземные") at `/catalog/emkosti/podzemnye`. This is a full content page similar to EmkostiPage but focused on spiral-wound pipe underground containers.
+### What we're building
+A new page at `/catalog/vodoochistka/meshochnyj-obezvozhivatel` following the same pattern as `VodoochistkaFfu.tsx` / `VodoochistkaLamelnyj.tsx`.
 
 ### Changes
 
-#### 1. Copy uploaded images to project
-- `alexander-tortsev-9-1.jpg` → `public/images/emkosti-podzemnye-1.jpg`
-- `alexander-tortsev-8-4.jpg` → `public/images/emkosti-podzemnye-2.jpg`
-- `yomkosti-i-rezervuaryi.png` → `public/images/emkosti-podzemnye-3.png`
+#### 1. Save 2 uploaded images
+- `user-uploads://обезвоживатель_осадка.jpg` → `public/images/obezvozhivatel-hero-1.jpg`
+- `user-uploads://image_16.webp` → `public/images/obezvozhivatel-schema-1.webp`
 
-#### 2. Create data file `src/data/podzemnyeProducts.ts`
-Size table (from polycorr.ru reference, 12 rows):
+#### 2. New file: `src/pages/VodoochistkaObezvozhivatel.tsx` (~400 lines)
 
-| Объём, м³ | Ø корпуса, мм | Длина (L), мм |
-|-----------|---------------|---------------|
-| 20 | 2400 | 4500 |
-| 25 | 2400 | 5600 |
-| 30 | 2400 | 6700 |
-| 40 | 2400 | 8800 |
-| 50 | 2400 | 11000 |
-| 60 | 3000 | 8500 |
-| 70 | 3000 | 9900 |
-| 80 | 3000 | 11400 |
-| 90 | 3200 | 11200 |
-| 100 | 3200 | 12500 |
-| 120 | 3500 | 12500 |
-| 150 | 3600 | 14700 |
+- **Breadcrumbs**: Каталог → Водоочистка → Мешочный обезвоживатель
+- **Hero**: Title "Мешочный обезвоживатель осадка", subtitle, CTA button, 2 images
+- **Intro**: User's provided text about dewatering + "Почему выбирают" bullets (простота обслуживания, низкие энергозатраты, компактность, no moving parts, works on gravity)
+- **Section 1 — Назначение**: Снижение влажности шлама после очистки стоков; applies to хозбыт, ливневка, производственные стоки
+- **Section 2 — Принцип работы**: Gravity-based filtration through polymer bag filters with varying permeability
+- **Section 3 — Модельный ряд**: 7 models from meshkovoi-obezvozhivatel.ru:
 
-#### 3. Create `src/pages/EmkostiPodzemnye.tsx`
-Full landing page with all provided text structured into sections:
-- **Hero**: company name, title "Подземные ёмкости из спиральновитых труб", 3 product images in grid
-- **Intro**: description + "Почему выбирают нас" checklist (6 items)
-- **Раздел 1 — Назначение**: 8 application areas as card grid
-- **Раздел 2 — Технология и материалы**: materials (ПНД, PP, армированные), key specs (diameter, length, pressure, temperature, ring stiffness, seismic), advantages of spiral-wound construction
-- **Раздел 3 — Виды и модификации**: accordion sections (по назначению, по конструкции, по способу монтажа, дополнительные опции)
-- **Типоразмерный ряд**: table from the data file
-- **Раздел 4 — Преимущества сотрудничества**: 6 advantage cards
-- **CTA form**: contact form (name, phone, email, description)
+| Модель | Производительность, м³/сут | Кол-во мешков | Габариты, мм |
+|--------|---------------------------|---------------|--------------|
+| ОНИКС-1 | 1.5 | 1 | 700×500×1420 |
+| ОНИКС-2 | 3 | 2 | 1100×500×1480 |
+| ОНИКС-3 | 4.5 | 3 | 1650×500×1480 |
+| ОНИКС-4 | 6 | 4 | 2200×500×1480 |
+| ОНИКС-5 | 7.5 | 5 | 2750×500×1480 |
+| ОНИКС-6 | 9 | 6 | 3300×500×1480 |
+| ОНИКС-12 | 12 | 12 | 6600×500×1480 |
 
-#### 4. Update `src/App.tsx`
-Add route: `/catalog/emkosti/podzemnye` → `EmkostiPodzemnye`
+- **Section 4 — FAQ**: 5 FAQ items from the source (selecting model, bag replacement, applicability, documentation, delivery)
+- **Section 5 — Преимущества сотрудничества**: 6 cards (same pattern)
+- **CTA form**: Contact form (name, phone, email, description)
 
-#### 5. Update `src/data/catalog.ts`
-Add `externalPath: "/catalog/emkosti/podzemnye"` to the "e3" subcategory entry so clicking it navigates to the dedicated page.
+#### 3. Update `src/App.tsx`
+Add route + import for `/catalog/vodoochistka/meshochnyj-obezvozhivatel`
 
-### Files
-- **Copy**: 3 images to `public/images/`
-- **Create**: `src/data/podzemnyeProducts.ts`, `src/pages/EmkostiPodzemnye.tsx`
-- **Modify**: `src/App.tsx`, `src/data/catalog.ts`
+#### 4. Update `src/data/catalog.ts`
+Change v4 `externalPath` from `/catalog/vodoochistka` to `/catalog/vodoochistka/meshochnyj-obezvozhivatel`
+
+### Files modified
+- 2 new images in `public/images/`
+- `src/pages/VodoochistkaObezvozhivatel.tsx` (new)
+- `src/App.tsx` (add route + import)
+- `src/data/catalog.ts` (update v4 externalPath)
 
