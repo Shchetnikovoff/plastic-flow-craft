@@ -1,55 +1,47 @@
 
 
-## Plan: Add "Ёмкости подземные из спиральновитой трубы" Subcategory Page
+## Plan: Create "Станция дозирования" landing page
 
-### What We're Building
-
-A new dedicated landing page for the underground containers subcategory (item "e3" in catalog: "Ёмкости подземные") at `/catalog/emkosti/podzemnye`. This is a full content page similar to EmkostiPage but focused on spiral-wound pipe underground containers.
+### What we're building
+A new page at `/catalog/vodoochistka/stantsiya-dozirovaniya` combining coagulant and flocculant dosing stations into one unified product page. Rename catalog entry "Станция приготовления коагулянта" → "Станция дозирования".
 
 ### Changes
 
-#### 1. Copy uploaded images to project
-- `alexander-tortsev-9-1.jpg` → `public/images/emkosti-podzemnye-1.jpg`
-- `alexander-tortsev-8-4.jpg` → `public/images/emkosti-podzemnye-2.jpg`
-- `yomkosti-i-rezervuaryi.png` → `public/images/emkosti-podzemnye-3.png`
+#### 1. Update `src/data/catalog.ts`
+- Rename v5: `"Станция приготовления коагулянта"` → `"Станция дозирования"`, slug → `"stantsiya-dozirovaniya"`, externalPath → `"/catalog/vodoochistka/stantsiya-dozirovaniya"`
 
-#### 2. Create data file `src/data/podzemnyeProducts.ts`
-Size table (from polycorr.ru reference, 12 rows):
+#### 2. New file: `src/pages/VodoochistkaDozirovanie.tsx` (~380 lines)
+Following the same pattern as `VodoochistkaFfu.tsx`:
 
-| Объём, м³ | Ø корпуса, мм | Длина (L), мм |
-|-----------|---------------|---------------|
-| 20 | 2400 | 4500 |
-| 25 | 2400 | 5600 |
-| 30 | 2400 | 6700 |
-| 40 | 2400 | 8800 |
-| 50 | 2400 | 11000 |
-| 60 | 3000 | 8500 |
-| 70 | 3000 | 9900 |
-| 80 | 3000 | 11400 |
-| 90 | 3200 | 11200 |
-| 100 | 3200 | 12500 |
-| 120 | 3500 | 12500 |
-| 150 | 3600 | 14700 |
+- **Breadcrumbs**: Каталог → Водоочистка → Станция дозирования
+- **Hero**: Title "Станция дозирования реагентов", subtitle about coagulants/flocculants/polyelectrolytes. No uploaded images — will use placeholder or descriptive icon-based hero.
+- **Intro**: What coagulation/flocculation is (from pumpen.ru content), "Почему выбирают" bullets (3-chamber system, auto/manual modes, powder & liquid polymers, up to 10,000 l/h, control panel with display, level control, full service cycle)
+- **Section 1 — Назначение**: 9 application areas from pumpen.ru (сточные воды, питьевая вода, солевые растворы, гальваника, бумажное производство, etc.)
+- **Section 2 — Принцип работы**: 3-chamber continuous-flow system description, 11 construction elements from the EASYPURE parts diagram
+- **Section 3 — Модельный ряд**: 8 models from pumpen.ru:
 
-#### 3. Create `src/pages/EmkostiPodzemnye.tsx`
-Full landing page with all provided text structured into sections:
-- **Hero**: company name, title "Подземные ёмкости из спиральновитых труб", 3 product images in grid
-- **Intro**: description + "Почему выбирают нас" checklist (6 items)
-- **Раздел 1 — Назначение**: 8 application areas as card grid
-- **Раздел 2 — Технология и материалы**: materials (ПНД, PP, армированные), key specs (diameter, length, pressure, temperature, ring stiffness, seismic), advantages of spiral-wound construction
-- **Раздел 3 — Виды и модификации**: accordion sections (по назначению, по конструкции, по способу монтажа, дополнительные опции)
-- **Типоразмерный ряд**: table from the data file
-- **Раздел 4 — Преимущества сотрудничества**: 6 advantage cards
-- **CTA form**: contact form (name, phone, email, description)
+| Модель | Подача воды, л/ч | Габариты (A×B×C), мм |
+|--------|-----------------|---------------------|
+| EASYPURE 500 | 500 | 1700×1200×1540 |
+| EASYPURE 1000 | 1000 | 2000×1350×1540 |
+| EASYPURE 2000 | 2000 | 2300×1450×1940 |
+| EASYPURE 3000 | 3000 | 2700×1600×1940 |
+| EASYPURE 4000 | 4000 | 3200×1750×1940 |
+| EASYPURE 5000 | 5000 | 3300×1850×1940 |
+| EASYPURE 6000 | 6000 | 3500×1850×2140 |
+| EASYPURE 10000 | 10000 | 3900×1850×2140 |
 
-#### 4. Update `src/App.tsx`
-Add route: `/catalog/emkosti/podzemnye` → `EmkostiPodzemnye`
+Common specs: pressure 2–6 bar, hold time 60 min, concentration 0.1–0.5%, IP54, temp +5…+40°C, max viscosity 2500 mPa·s.
 
-#### 5. Update `src/data/catalog.ts`
-Add `externalPath: "/catalog/emkosti/podzemnye"` to the "e3" subcategory entry so clicking it navigates to the dedicated page.
+- **Section 4 — Модификации и опции**: Individual configurations, powder/liquid feed options, additional mixing in 3rd chamber
+- **Section 5 — Преимущества сотрудничества**: 6 cards (same pattern as other pages)
+- **CTA form**: Contact form (name, phone, email, description)
 
-### Files
-- **Copy**: 3 images to `public/images/`
-- **Create**: `src/data/podzemnyeProducts.ts`, `src/pages/EmkostiPodzemnye.tsx`
-- **Modify**: `src/App.tsx`, `src/data/catalog.ts`
+#### 3. Update `src/App.tsx`
+Add route + import: `/catalog/vodoochistka/stantsiya-dozirovaniya` → `VodoochistkaDozirovanie`
+
+### Files modified
+- `src/pages/VodoochistkaDozirovanie.tsx` (new, ~380 lines)
+- `src/App.tsx` (add route + import)
+- `src/data/catalog.ts` (rename v5, update slug + externalPath)
 
