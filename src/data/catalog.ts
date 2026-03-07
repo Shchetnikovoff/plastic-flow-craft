@@ -49,7 +49,7 @@ export const catalog: CatalogCategory[] = [
       { id: "v5", name: "Станция дозирования", slug: "stantsiya-dozirovaniya", externalPath: "/catalog/vodoochistka/stantsiya-dozirovaniya" },
       { id: "v7", name: "Жироуловители промышленные", slug: "zhirouloviteli", externalPath: "/catalog/vodoochistka/zhirouloviteli" },
       { id: "v8", name: "ЛОС — локальные очистные сооружения", slug: "los", externalPath: "/catalog/vodoochistka/los" },
-      { id: "v9", name: "Реагентные шкафы и стойки", slug: "shkafy-dozirovaniya", externalPath: "/catalog/vodoochistka" },
+      { id: "v9", name: "Реагентные шкафы и стойки", slug: "shkafy-dozirovaniya", externalPath: "/catalog/vodoochistka/shkafy-dozirovaniya" },
     ],
   },
   {
