@@ -1,53 +1,55 @@
 
 
-## Plan: Create "Промышленные жироуловители" landing page
+## Plan: Add "Ёмкости подземные из спиральновитой трубы" Subcategory Page
 
-### What we're building
-A landing page at `/catalog/vodoochistka/zhirouloviteli` for industrial grease traps, with product model table extracted from zasorov-net.ru and AI-generated hero image.
+### What We're Building
+
+A new dedicated landing page for the underground containers subcategory (item "e3" in catalog: "Ёмкости подземные") at `/catalog/emkosti/podzemnye`. This is a full content page similar to EmkostiPage but focused on spiral-wound pipe underground containers.
 
 ### Changes
 
-#### 1. Generate hero image via AI
-Use Nano banana to generate an industrial grease trap illustration → save to `public/images/zhiroulovitel-hero-1.png`.
+#### 1. Copy uploaded images to project
+- `alexander-tortsev-9-1.jpg` → `public/images/emkosti-podzemnye-1.jpg`
+- `alexander-tortsev-8-4.jpg` → `public/images/emkosti-podzemnye-2.jpg`
+- `yomkosti-i-rezervuaryi.png` → `public/images/emkosti-podzemnye-3.png`
 
-#### 2. New file: `src/pages/VodoochistkaZhirouloviteli.tsx` (~380 lines)
-Same pattern as other vodoochistka pages:
+#### 2. Create data file `src/data/podzemnyeProducts.ts`
+Size table (from polycorr.ru reference, 12 rows):
 
-- **Breadcrumbs**: Каталог → Водоочистка → Жироуловители промышленные
-- **Hero**: Title "Промышленные жироуловители", subtitle about grease/fat removal from industrial wastewater
-- **Intro**: "Почему выбирают" bullets (protection of sewage, food safety compliance, nazemное/подземное installation, polypropylene construction, 5-year warranty)
-- **Section 1 — Назначение**: Restaurants, food factories, meat processing, canteens. Removes non-emulsified fats, oils, grease from wastewater
-- **Section 2 — Виды**: 4 types as cards (подземные вертикальные, вертикальные наземные, подземные горизонтальные, прямоугольные наземные) with brief descriptions
-- **Section 3 — Модельный ряд**: Table with 12 models from the scraped data:
+| Объём, м³ | Ø корпуса, мм | Длина (L), мм |
+|-----------|---------------|---------------|
+| 20 | 2400 | 4500 |
+| 25 | 2400 | 5600 |
+| 30 | 2400 | 6700 |
+| 40 | 2400 | 8800 |
+| 50 | 2400 | 11000 |
+| 60 | 3000 | 8500 |
+| 70 | 3000 | 9900 |
+| 80 | 3000 | 11400 |
+| 90 | 3200 | 11200 |
+| 100 | 3200 | 12500 |
+| 120 | 3500 | 12500 |
+| 150 | 3600 | 14700 |
 
-| Артикул | Производительность, л/с | Пиковый сброс, л | Ø корпуса, мм | Высота, мм |
-|---------|------------------------|-------------------|---------------|------------|
-| ЖУ-3,5-500 | 1 | 500 | 800 | 1300 |
-| ЖУ-7-1000 | 2 | 1000 | 1000 | 1600 |
-| ЖУ-11-1500 | 3 | 1500 | 1200 | 1500 |
-| ЖУ-15-2000 | 4 | 2000 | 1350 | 1550 |
-| ЖУ-18-2500 | 5 | 2500 | 1350 | 2000 |
-| ЖУ-22-3000 | 6 | 3000 | 1450 | 2000 |
-| ЖУ-25-3500 | 7 | 3500 | 1550 | 2000 |
-| ЖУ-29-4000 | 8 | 4000 | 1650 | 2000 |
-| ЖУ-32-4500 | 9 | 4500 | 1750 | 2000 |
-| ЖУ-36-5000 | 10 | 5000 | 1850 | 2000 |
-| ЖУ-54-7500 | 15 | 7500 | 2200 | 2000 |
+#### 3. Create `src/pages/EmkostiPodzemnye.tsx`
+Full landing page with all provided text structured into sections:
+- **Hero**: company name, title "Подземные ёмкости из спиральновитых труб", 3 product images in grid
+- **Intro**: description + "Почему выбирают нас" checklist (6 items)
+- **Раздел 1 — Назначение**: 8 application areas as card grid
+- **Раздел 2 — Технология и материалы**: materials (ПНД, PP, армированные), key specs (diameter, length, pressure, temperature, ring stiffness, seismic), advantages of spiral-wound construction
+- **Раздел 3 — Виды и модификации**: accordion sections (по назначению, по конструкции, по способу монтажа, дополнительные опции)
+- **Типоразмерный ряд**: table from the data file
+- **Раздел 4 — Преимущества сотрудничества**: 6 advantage cards
+- **CTA form**: contact form (name, phone, email, description)
 
-- **Section 4 — Принцип работы**: Gravitational separation — fat rises, solids settle, clean water exits mid-level
-- **Section 5 — Доп. опции**: Sump pump, fat level sensor, ladder for maintenance, inspection well extension, heated version
-- **Section 6 — Преимущества сотрудничества**: 6 cards (same pattern)
-- **CTA form**: Contact form
+#### 4. Update `src/App.tsx`
+Add route: `/catalog/emkosti/podzemnye` → `EmkostiPodzemnye`
 
-#### 3. Update `src/App.tsx`
-Add route + import: `/catalog/vodoochistka/zhirouloviteli` → `VodoochistkaZhirouloviteli`
+#### 5. Update `src/data/catalog.ts`
+Add `externalPath: "/catalog/emkosti/podzemnye"` to the "e3" subcategory entry so clicking it navigates to the dedicated page.
 
-#### 4. Update `src/data/catalog.ts`
-Change v7 externalPath from `/catalog/vodoochistka` to `/catalog/vodoochistka/zhirouloviteli`
-
-### Files modified
-- `public/images/zhiroulovitel-hero-1.png` (AI-generated)
-- `src/pages/VodoochistkaZhirouloviteli.tsx` (new)
-- `src/App.tsx` (add route + import)
-- `src/data/catalog.ts` (update v7 externalPath)
+### Files
+- **Copy**: 3 images to `public/images/`
+- **Create**: `src/data/podzemnyeProducts.ts`, `src/pages/EmkostiPodzemnye.tsx`
+- **Modify**: `src/App.tsx`, `src/data/catalog.ts`
 
