@@ -18,6 +18,7 @@ import Vodoochistka from "./pages/Vodoochistka";
 import VodoochistkaFfu from "./pages/VodoochistkaFfu";
 import VodoochistkaLamelnyj from "./pages/VodoochistkaLamelnyj";
 import VodoochistkaObezvozhivatel from "./pages/VodoochistkaObezvozhivatel";
+import VodoochistkaDozirovanie from "./pages/VodoochistkaDozirovanie";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -46,6 +47,7 @@ const App = () => (
           <Route path="/catalog/vodoochistka/ffu" element={<VodoochistkaFfu />} />
           <Route path="/catalog/vodoochistka/lamelnyj-otstojnik" element={<VodoochistkaLamelnyj />} />
           <Route path="/catalog/vodoochistka/meshochnyj-obezvozhivatel" element={<VodoochistkaObezvozhivatel />} />
+          <Route path="/catalog/vodoochistka/stantsiya-dozirovaniya" element={<VodoochistkaDozirovanie />} />
           <Route path="/catalog/vodoochistka" element={<Vodoochistka />} />
           <Route path="/catalog" element={<CatalogPage />} />
           <Route path="/catalog/:categorySlug" element={<CatalogPage />} />
