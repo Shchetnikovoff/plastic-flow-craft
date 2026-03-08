@@ -27,14 +27,14 @@ export const catalog: CatalogCategory[] = [
     description: "Гальваническое оборудование. Проектирование, производство и монтаж.",
 
     subcategories: [
-      { id: "g1", name: "Гальванические линии ручные", slug: "linii-ruchnye" },
-      { id: "g2", name: "Гальванические линии механизированные", slug: "linii-mekhanizirovannye" },
-      { id: "g3", name: "Гальванические линии автоматические", slug: "linii-avtomaticheskie" },
-      { id: "g5", name: "Линия подготовки поверхности", slug: "podgotovka-poverhnosti" },
-      { id: "g6", name: "Гальванические ванны", slug: "vanny" },
-      { id: "g7", name: "Колокольные ванны", slug: "kolokolnye-vanny" },
-      { id: "g8", name: "Гальванические барабаны", slug: "barabany" },
-      { id: "g9", name: "Запчасти и комплектующие для гальваники", slug: "zapchasti" },
+      { id: "g1", name: "Гальванические линии ручные", slug: "linii-ruchnye", image: "/images/galvanika-linii-ruchnye.png" },
+      { id: "g2", name: "Гальванические линии механизированные", slug: "linii-mekhanizirovannye", image: "/images/galvanika-linii-mekh.png" },
+      { id: "g3", name: "Гальванические линии автоматические", slug: "linii-avtomaticheskie", image: "/images/galvanika-linii-avto.png" },
+      { id: "g5", name: "Линия подготовки поверхности", slug: "podgotovka-poverhnosti", image: "/images/galvanika-podgotovka.png" },
+      { id: "g6", name: "Гальванические ванны", slug: "vanny", image: "/images/galvanika-vanny.png" },
+      { id: "g7", name: "Колокольные ванны", slug: "kolokolnye-vanny", image: "/images/galvanika-kolokolnye.png" },
+      { id: "g8", name: "Гальванические барабаны", slug: "barabany", image: "/images/galvanika-barabany.png" },
+      { id: "g9", name: "Запчасти и комплектующие для гальваники", slug: "zapchasti", image: "/images/galvanika-zapchasti.png" },
     ],
   },
   {
@@ -43,13 +43,13 @@ export const catalog: CatalogCategory[] = [
     slug: "vodoochistka",
     description: "Полимерное водоочистное оборудование — эффективность, долговечность и устойчивость к агрессивным средам!",
     subcategories: [
-      { id: "v2", name: "ФФУ флотационно-фильтровальная установка", slug: "ffu", externalPath: "/catalog/vodoochistka/ffu" },
-      { id: "v3", name: "Ламельный тонкослойный отстойник-сепаратор", slug: "lamelnyj-otstojnik", externalPath: "/catalog/vodoochistka/lamelnyj-otstojnik" },
-      { id: "v4", name: "Мешочный обезвоживатель осадка", slug: "meshochnyj-obezvozhivatel", externalPath: "/catalog/vodoochistka/meshochnyj-obezvozhivatel" },
-      { id: "v5", name: "Станция дозирования", slug: "stantsiya-dozirovaniya", externalPath: "/catalog/vodoochistka/stantsiya-dozirovaniya" },
-      { id: "v7", name: "Жироуловители промышленные", slug: "zhirouloviteli", externalPath: "/catalog/vodoochistka/zhirouloviteli" },
-      { id: "v8", name: "ЛОС — локальные очистные сооружения", slug: "los", externalPath: "/catalog/vodoochistka/los" },
-      { id: "v9", name: "Реагентные шкафы и стойки", slug: "shkafy-dozirovaniya", externalPath: "/catalog/vodoochistka/shkafy-dozirovaniya" },
+      { id: "v2", name: "ФФУ флотационно-фильтровальная установка", slug: "ffu", externalPath: "/catalog/vodoochistka/ffu", image: "/images/ffu-thumb.png" },
+      { id: "v3", name: "Ламельный тонкослойный отстойник-сепаратор", slug: "lamelnyj-otstojnik", externalPath: "/catalog/vodoochistka/lamelnyj-otstojnik", image: "/images/lamelnyj-thumb.png" },
+      { id: "v4", name: "Мешочный обезвоживатель осадка", slug: "meshochnyj-obezvozhivatel", externalPath: "/catalog/vodoochistka/meshochnyj-obezvozhivatel", image: "/images/obezvozhivatel-thumb.png" },
+      { id: "v5", name: "Станция дозирования", slug: "stantsiya-dozirovaniya", externalPath: "/catalog/vodoochistka/stantsiya-dozirovaniya", image: "/images/dozirovanie-thumb.png" },
+      { id: "v7", name: "Жироуловители промышленные", slug: "zhirouloviteli", externalPath: "/catalog/vodoochistka/zhirouloviteli", image: "/images/zhiroulovitel-thumb.png" },
+      { id: "v8", name: "ЛОС — локальные очистные сооружения", slug: "los", externalPath: "/catalog/vodoochistka/los", image: "/images/los-thumb.png" },
+      { id: "v9", name: "Реагентные шкафы и стойки", slug: "shkafy-dozirovaniya", externalPath: "/catalog/vodoochistka/shkafy-dozirovaniya", image: "/images/shkafy-thumb.png" },
     ],
   },
   {
@@ -57,7 +57,7 @@ export const catalog: CatalogCategory[] = [
     name: "Водоподготовка",
     slug: "vodopodgotovka",
     subcategories: [
-      { id: "vp1", name: "Система подготовки воды / обратный осмос", slug: "obratnyj-osmos" },
+      { id: "vp1", name: "Система подготовки воды / обратный осмос", slug: "obratnyj-osmos", image: "/images/vodopodgotovka-osmos.png" },
     ],
   },
   {
@@ -72,10 +72,10 @@ export const catalog: CatalogCategory[] = [
       { id: "ve3", name: "Раздвижной элемент", slug: "razdvizhnoy", externalPath: "/razdvizhnoy", image: "/images/razdvizhnoy-1.png", group: "Круглого сечения" },
       { id: "ve4", name: "Воздуховод круглый", slug: "vozdukhovod", externalPath: "/vozdukhovod", image: "/images/vozdukhovod-1.png", group: "Круглого сечения" },
       // — Прямоугольного сечения —
-      { id: "ve5", name: "Воздуховод прямоугольный", slug: "vozdukhovod-pryamougolnyy", group: "Прямоугольного сечения" },
-      { id: "ve6", name: "Отвод прямоугольный", slug: "otvod-pryamougolnyy", group: "Прямоугольного сечения" },
-      { id: "ve7", name: "Тройник прямоугольный", slug: "troynik-pryamougolnyy", group: "Прямоугольного сечения" },
-      { id: "ve8", name: "Переход круглый-прямоугольный", slug: "perekhod-kruglyy-pryamougolnyy", group: "Прямоугольного сечения" },
+      { id: "ve5", name: "Воздуховод прямоугольный", slug: "vozdukhovod-pryamougolnyy", group: "Прямоугольного сечения", image: "/images/vent-vozdukhovod-pryam.png" },
+      { id: "ve6", name: "Отвод прямоугольный", slug: "otvod-pryamougolnyy", group: "Прямоугольного сечения", image: "/images/vent-otvod-pryam.png" },
+      { id: "ve7", name: "Тройник прямоугольный", slug: "troynik-pryamougolnyy", group: "Прямоугольного сечения", image: "/images/vent-troynik-pryam.png" },
+      { id: "ve8", name: "Переход круглый-прямоугольный", slug: "perekhod-kruglyy-pryamougolnyy", group: "Прямоугольного сечения", image: "/images/vent-perekhod.png" },
     ],
   },
   {
@@ -85,8 +85,8 @@ export const catalog: CatalogCategory[] = [
     subcategories: [
       { id: "go1", name: "Скрубберы вертикальные", slug: "skrubbery-vertikalnye", externalPath: "/catalog/gazoochistka/skrubbery", image: "/images/skrubber-vertikalnyj-1.jpg" },
       { id: "go2", name: "Скрубберы горизонтальные", slug: "skrubbery-gorizontalnye", externalPath: "/catalog/gazoochistka/skrubbery", image: "/images/skrubber-gorizontalnyj-1.jpg" },
-      { id: "go3", name: "ФВГ — фильтры волокнистые гальванические", slug: "fvg", externalPath: "/catalog/gazoochistka/fvg" },
-      { id: "go4", name: "Каплеуловители", slug: "kapleuloviteli", externalPath: "/catalog/gazoochistka/kapleuloviteli" },
+      { id: "go3", name: "ФВГ — фильтры волокнистые гальванические", slug: "fvg", externalPath: "/catalog/gazoochistka/fvg", image: "/images/fvg-thumb.png" },
+      { id: "go4", name: "Каплеуловители", slug: "kapleuloviteli", externalPath: "/catalog/gazoochistka/kapleuloviteli", image: "/images/kapleulovitel-thumb.png" },
     ],
   },
   {
@@ -105,9 +105,9 @@ export const catalog: CatalogCategory[] = [
     name: "Химические реакторы",
     slug: "reaktory",
     subcategories: [
-      { id: "r1", name: "Химические реакторы из полипропилена", slug: "iz-polipropilena" },
-      { id: "r2", name: "Химические реакторы из полиэтилена", slug: "iz-polietilena" },
-      { id: "r3", name: "Реактор для гидрометаллургии", slug: "gidrometallurgiya" },
+      { id: "r1", name: "Химические реакторы из полипропилена", slug: "iz-polipropilena", image: "/images/reaktor-pp.png" },
+      { id: "r2", name: "Химические реакторы из полиэтилена", slug: "iz-polietilena", image: "/images/reaktor-pe.png" },
+      { id: "r3", name: "Реактор для гидрометаллургии", slug: "gidrometallurgiya", image: "/images/reaktor-gidro.png" },
     ],
   },
   {
@@ -115,10 +115,10 @@ export const catalog: CatalogCategory[] = [
     name: "Гидрометаллургия",
     slug: "gidrometallurgiya",
     subcategories: [
-      { id: "gm1", name: "Реактор химического осаждения металла", slug: "reaktor-osazhdeniya" },
-      { id: "gm2", name: "Нутч-фильтр", slug: "nutch-filtr" },
-      { id: "gm3", name: "Установки выщелачивания", slug: "vyshchelachivaniye" },
-      { id: "gm4", name: "Установки сорбционные", slug: "sorbtsionnye" },
+      { id: "gm1", name: "Реактор химического осаждения металла", slug: "reaktor-osazhdeniya", image: "/images/gm-reaktor.png" },
+      { id: "gm2", name: "Нутч-фильтр", slug: "nutch-filtr", image: "/images/gm-nutch.png" },
+      { id: "gm3", name: "Установки выщелачивания", slug: "vyshchelachivaniye", image: "/images/gm-vyshchelach.png" },
+      { id: "gm4", name: "Установки сорбционные", slug: "sorbtsionnye", image: "/images/gm-sorbtsionnye.png" },
     ],
   },
   {
@@ -126,8 +126,8 @@ export const catalog: CatalogCategory[] = [
     name: "КНС",
     slug: "kns",
     subcategories: [
-      { id: "k1", name: "КНС в корпусе SVT", slug: "v-korpuse-svt" },
-      { id: "k2", name: "КНС в корпусе из полипропилена", slug: "v-korpuse-polipropilen" },
+      { id: "k1", name: "КНС в корпусе SVT", slug: "v-korpuse-svt", image: "/images/kns-svt.png" },
+      { id: "k2", name: "КНС в корпусе из полипропилена", slug: "v-korpuse-polipropilen", image: "/images/kns-pp.png" },
     ],
   },
   {
@@ -135,14 +135,14 @@ export const catalog: CatalogCategory[] = [
     name: "Лабораторная мебель",
     slug: "labmebel",
     subcategories: [
-      { id: "l1", name: "Лабораторная мебель из полипропилена", slug: "iz-polipropilena" },
-      { id: "l2", name: "Шкафы хранения реактивов", slug: "shkafy-reaktivov" },
-      { id: "l3", name: "Вытяжные шкафы", slug: "vytyazhnye-shkafy" },
-      { id: "l4", name: "Мойки лабораторные", slug: "mojki" },
-      { id: "l5", name: "Стол лабораторный моечный", slug: "stol-moechnyj" },
-      { id: "l6", name: "Тумба лабораторная", slug: "tumba" },
-      { id: "l7", name: "Тумба лабораторная с мойкой", slug: "tumba-s-mojkoj" },
-      { id: "l8", name: "Тумба лабораторная с мойкой и сушилкой", slug: "tumba-s-mojkoj-sushilkoj" },
+      { id: "l1", name: "Лабораторная мебель из полипропилена", slug: "iz-polipropilena", image: "/images/lab-mebel.png" },
+      { id: "l2", name: "Шкафы хранения реактивов", slug: "shkafy-reaktivov", image: "/images/lab-shkaf.png" },
+      { id: "l3", name: "Вытяжные шкафы", slug: "vytyazhnye-shkafy", image: "/images/lab-vytyazhnoy.png" },
+      { id: "l4", name: "Мойки лабораторные", slug: "mojki", image: "/images/lab-moyka.png" },
+      { id: "l5", name: "Стол лабораторный моечный", slug: "stol-moechnyj", image: "/images/lab-stol.png" },
+      { id: "l6", name: "Тумба лабораторная", slug: "tumba", image: "/images/lab-tumba.png" },
+      { id: "l7", name: "Тумба лабораторная с мойкой", slug: "tumba-s-mojkoj", image: "/images/lab-tumba-moyka.png" },
+      { id: "l8", name: "Тумба лабораторная с мойкой и сушилкой", slug: "tumba-s-mojkoj-sushilkoj", image: "/images/lab-tumba-sushilka.png" },
     ],
   },
   {
@@ -150,9 +150,9 @@ export const catalog: CatalogCategory[] = [
     name: "Шкафы управления",
     slug: "shkafy-upravleniya",
     subcategories: [
-      { id: "su1", name: "Шкафы управления гальванической линией", slug: "galvanicheskoy-liniey" },
-      { id: "su2", name: "Шкафы управления очистными", slug: "ochistnymi" },
-      { id: "su3", name: "Шкафы управления насосами", slug: "nasosami" },
+      { id: "su1", name: "Шкафы управления гальванической линией", slug: "galvanicheskoy-liniey", image: "/images/su-galvanika.png" },
+      { id: "su2", name: "Шкафы управления очистными", slug: "ochistnymi", image: "/images/su-ochistnye.png" },
+      { id: "su3", name: "Шкафы управления насосами", slug: "nasosami", image: "/images/su-nasosy.png" },
     ],
   },
   {
@@ -160,10 +160,10 @@ export const catalog: CatalogCategory[] = [
     name: "Услуги",
     slug: "uslugi",
     subcategories: [
-      { id: "u1", name: "Проектирование водоподготовительного и водоочистного оборудования", slug: "proektirovanie-vodoochistki" },
-      { id: "u2", name: "Проектирование КНС", slug: "proektirovanie-kns" },
-      { id: "u3", name: "Монтаж ёмкостей", slug: "montazh-emkostej" },
-      { id: "u4", name: "Монтаж КНС", slug: "montazh-kns" },
+      { id: "u1", name: "Проектирование водоподготовительного и водоочистного оборудования", slug: "proektirovanie-vodoochistki", image: "/images/uslugi-proekt-vodo.png" },
+      { id: "u2", name: "Проектирование КНС", slug: "proektirovanie-kns", image: "/images/uslugi-proekt-kns.png" },
+      { id: "u3", name: "Монтаж ёмкостей", slug: "montazh-emkostej", image: "/images/uslugi-montazh-emk.png" },
+      { id: "u4", name: "Монтаж КНС", slug: "montazh-kns", image: "/images/uslugi-montazh-kns.png" },
     ],
   },
 ];

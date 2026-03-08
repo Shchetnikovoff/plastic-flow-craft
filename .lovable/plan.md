@@ -1,72 +1,55 @@
 
 
-## Plan: Generate images for all placeholder spots in the project
+## Plan: Add "Ёмкости подземные из спиральновитой трубы" Subcategory Page
 
-### Problem
-~40 catalog items show an empty `ImageOff` icon instead of a product image, and 3 landing pages (ФВГ, Каплеуловители, Дозирование) have no hero images at all.
+### What We're Building
 
-### Approach
-Use the AI image generation model (Nano banana / gemini-2.5-flash-image) to generate product images for each category, then save them as PNG files in `public/images/`. For catalog thumbnails, generate one representative image per subcategory. For landing pages, generate 2 hero images each.
+A new dedicated landing page for the underground containers subcategory (item "e3" in catalog: "Ёмкости подземные") at `/catalog/emkosti/podzemnye`. This is a full content page similar to EmkostiPage but focused on spiral-wound pipe underground containers.
 
-### Images to generate (~45 total)
+### Changes
 
-**Landing page hero images (6):**
-- `fvg-hero-1.png`, `fvg-hero-2.png` — galvanic fiber filter (ФВГ), industrial air filtration unit, polypropylene body
-- `kapleulovitel-hero-1.png`, `kapleulovitel-hero-2.png` — polypropylene droplet separator, cylindrical ventilation unit
-- `dozirovanie-hero-1.png`, `dozirovanie-hero-2.png` — dosing station, three-chamber polymer unit with pumps
+#### 1. Copy uploaded images to project
+- `alexander-tortsev-9-1.jpg` → `public/images/emkosti-podzemnye-1.jpg`
+- `alexander-tortsev-8-4.jpg` → `public/images/emkosti-podzemnye-2.jpg`
+- `yomkosti-i-rezervuaryi.png` → `public/images/emkosti-podzemnye-3.png`
 
-**Catalog thumbnails (39):**
+#### 2. Create data file `src/data/podzemnyeProducts.ts`
+Size table (from polycorr.ru reference, 12 rows):
 
-Гальваника (8):
-- `galvanika-linii-ruchnye.png` — manual galvanic line
-- `galvanika-linii-mekh.png` — mechanized galvanic line
-- `galvanika-linii-avto.png` — automatic galvanic line
-- `galvanika-podgotovka.png` — surface preparation line
-- `galvanika-vanny.png` — galvanic bath
-- `galvanika-kolokolnye.png` — bell-shaped bath
-- `galvanika-barabany.png` — galvanic drum
-- `galvanika-zapchasti.png` — galvanic spare parts
+| Объём, м³ | Ø корпуса, мм | Длина (L), мм |
+|-----------|---------------|---------------|
+| 20 | 2400 | 4500 |
+| 25 | 2400 | 5600 |
+| 30 | 2400 | 6700 |
+| 40 | 2400 | 8800 |
+| 50 | 2400 | 11000 |
+| 60 | 3000 | 8500 |
+| 70 | 3000 | 9900 |
+| 80 | 3000 | 11400 |
+| 90 | 3200 | 11200 |
+| 100 | 3200 | 12500 |
+| 120 | 3500 | 12500 |
+| 150 | 3600 | 14700 |
 
-Водоподготовка (1):
-- `vodopodgotovka-osmos.png` — reverse osmosis system
+#### 3. Create `src/pages/EmkostiPodzemnye.tsx`
+Full landing page with all provided text structured into sections:
+- **Hero**: company name, title "Подземные ёмкости из спиральновитых труб", 3 product images in grid
+- **Intro**: description + "Почему выбирают нас" checklist (6 items)
+- **Раздел 1 — Назначение**: 8 application areas as card grid
+- **Раздел 2 — Технология и материалы**: materials (ПНД, PP, армированные), key specs (diameter, length, pressure, temperature, ring stiffness, seismic), advantages of spiral-wound construction
+- **Раздел 3 — Виды и модификации**: accordion sections (по назначению, по конструкции, по способу монтажа, дополнительные опции)
+- **Типоразмерный ряд**: table from the data file
+- **Раздел 4 — Преимущества сотрудничества**: 6 advantage cards
+- **CTA form**: contact form (name, phone, email, description)
 
-Вентиляция прямоугольная (4):
-- `vent-vozdukhovod-pryam.png`, `vent-otvod-pryam.png`, `vent-troynik-pryam.png`, `vent-perekhod.png`
+#### 4. Update `src/App.tsx`
+Add route: `/catalog/emkosti/podzemnye` → `EmkostiPodzemnye`
 
-Газоочистка (2):
-- `fvg-thumb.png`, `kapleulovitel-thumb.png`
+#### 5. Update `src/data/catalog.ts`
+Add `externalPath: "/catalog/emkosti/podzemnye"` to the "e3" subcategory entry so clicking it navigates to the dedicated page.
 
-Водоочистка (7):
-- `ffu-thumb.png`, `lamelnyj-thumb.png`, `obezvozhivatel-thumb.png`, `dozirovanie-thumb.png`, `zhiroulovitel-thumb.png`, `los-thumb.png`, `shkafy-thumb.png`
-
-Реакторы (3):
-- `reaktor-pp.png`, `reaktor-pe.png`, `reaktor-gidro.png`
-
-Гидрометаллургия (4):
-- `gm-reaktor.png`, `gm-nutch.png`, `gm-vyshchelach.png`, `gm-sorbtsionnye.png`
-
-КНС (2):
-- `kns-svt.png`, `kns-pp.png`
-
-Лабораторная мебель (8):
-- `lab-mebel.png`, `lab-shkaf.png`, `lab-vytyazhnoy.png`, `lab-moyka.png`, `lab-stol.png`, `lab-tumba.png`, `lab-tumba-moyka.png`, `lab-tumba-sushilka.png`
-
-Шкафы управления (3):
-- `su-galvanika.png`, `su-ochistnye.png`, `su-nasosy.png`
-
-Услуги (4):
-- `uslugi-proekt-vodo.png`, `uslugi-proekt-kns.png`, `uslugi-montazh-emk.png`, `uslugi-montazh-kns.png`
-
-### Files modified
-1. **~45 new PNG files** in `public/images/` — AI-generated product images
-2. **`src/data/catalog.ts`** — add `image` property to all subcategories without one
-3. **`src/pages/GazoochistkaFvg.tsx`** — add hero image grid section
-4. **`src/pages/GazoochistkaKapleuloviteli.tsx`** — add hero image grid section
-5. **`src/pages/VodoochistkaDozirovanie.tsx`** — add hero image grid section
-
-### Implementation
-Each image will be generated with a prompt describing the specific industrial equipment on a clean white/light background, photorealistic style, suitable for a product catalog. Images will be generated in batches and saved to `public/images/`.
-
-### Note
-This is a large operation (~45 API calls). Generation will be done in parallel batches to optimize speed.
+### Files
+- **Copy**: 3 images to `public/images/`
+- **Create**: `src/data/podzemnyeProducts.ts`, `src/pages/EmkostiPodzemnye.tsx`
+- **Modify**: `src/App.tsx`, `src/data/catalog.ts`
 
