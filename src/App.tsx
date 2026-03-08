@@ -24,6 +24,7 @@ import VodoochistkaLos from "./pages/VodoochistkaLos";
 import VodoochistkaShkafyDozirovaniya from "./pages/VodoochistkaShkafyDozirovaniya";
 import GazoochistkaSkrubbery from "./pages/GazoochistkaSkrubbery";
 import GazoochistkaFvg from "./pages/GazoochistkaFvg";
+import GazoochistkaKapleuloviteli from "./pages/GazoochistkaKapleuloviteli";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -59,6 +60,7 @@ const App = () => (
           <Route path="/catalog/vodoochistka" element={<Vodoochistka />} />
           <Route path="/catalog/gazoochistka/skrubbery" element={<GazoochistkaSkrubbery />} />
           <Route path="/catalog/gazoochistka/fvg" element={<GazoochistkaFvg />} />
+          <Route path="/catalog/gazoochistka/kapleuloviteli" element={<GazoochistkaKapleuloviteli />} />
           <Route path="/catalog" element={<CatalogPage />} />
           <Route path="/catalog/:categorySlug" element={<CatalogPage />} />
           <Route path="/catalog/:categorySlug/:subSlug" element={<CatalogPage />} />
