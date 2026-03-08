@@ -17,6 +17,7 @@ import {
   Accordion, AccordionContent, AccordionItem, AccordionTrigger,
 } from "@/components/ui/accordion";
 import { toast } from "sonner";
+import PageFooter from "@/components/PageFooter";
 
 const whyUs = [
   "Собственное производство с ЧПУ-оборудованием и экструзионной сваркой",
