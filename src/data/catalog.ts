@@ -27,14 +27,14 @@ export const catalog: CatalogCategory[] = [
     description: "Гальваническое оборудование. Проектирование, производство и монтаж.",
 
     subcategories: [
-      { id: "g1", name: "Гальванические линии ручные", slug: "linii-ruchnye" },
-      { id: "g2", name: "Гальванические линии механизированные", slug: "linii-mekhanizirovannye" },
-      { id: "g3", name: "Гальванические линии автоматические", slug: "linii-avtomaticheskie" },
-      { id: "g5", name: "Линия подготовки поверхности", slug: "podgotovka-poverhnosti" },
-      { id: "g6", name: "Гальванические ванны", slug: "vanny" },
-      { id: "g7", name: "Колокольные ванны", slug: "kolokolnye-vanny" },
-      { id: "g8", name: "Гальванические барабаны", slug: "barabany" },
-      { id: "g9", name: "Запчасти и комплектующие для гальваники", slug: "zapchasti" },
+      { id: "g1", name: "Гальванические линии ручные", slug: "linii-ruchnye", image: "/images/galvanika-linii-ruchnye.png" },
+      { id: "g2", name: "Гальванические линии механизированные", slug: "linii-mekhanizirovannye", image: "/images/galvanika-linii-mekh.png" },
+      { id: "g3", name: "Гальванические линии автоматические", slug: "linii-avtomaticheskie", image: "/images/galvanika-linii-avto.png" },
+      { id: "g5", name: "Линия подготовки поверхности", slug: "podgotovka-poverhnosti", image: "/images/galvanika-podgotovka.png" },
+      { id: "g6", name: "Гальванические ванны", slug: "vanny", image: "/images/galvanika-vanny.png" },
+      { id: "g7", name: "Колокольные ванны", slug: "kolokolnye-vanny", image: "/images/galvanika-kolokolnye.png" },
+      { id: "g8", name: "Гальванические барабаны", slug: "barabany", image: "/images/galvanika-barabany.png" },
+      { id: "g9", name: "Запчасти и комплектующие для гальваники", slug: "zapchasti", image: "/images/galvanika-zapchasti.png" },
     ],
   },
   {
