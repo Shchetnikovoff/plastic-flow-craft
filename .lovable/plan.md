@@ -1,55 +1,54 @@
 
 
-## Plan: Add "Ёмкости подземные из спиральновитой трубы" Subcategory Page
+## Plan: Create "Каплеуловители" landing page
 
-### What We're Building
-
-A new dedicated landing page for the underground containers subcategory (item "e3" in catalog: "Ёмкости подземные") at `/catalog/emkosti/podzemnye`. This is a full content page similar to EmkostiPage but focused on spiral-wound pipe underground containers.
+### What we're building
+A landing page at `/catalog/gazoochistka/kapleuloviteli` for polypropylene droplet separators (КУ series) used in ventilation systems. Two model series: КУ.1 (14 sizes, 300–27500 m³/h) and КУ.6 (1 size, 125 m³/h). No user-uploaded images — we'll use reference images from the afxpro.ru site directly or text/icon layout.
 
 ### Changes
 
-#### 1. Copy uploaded images to project
-- `alexander-tortsev-9-1.jpg` → `public/images/emkosti-podzemnye-1.jpg`
-- `alexander-tortsev-8-4.jpg` → `public/images/emkosti-podzemnye-2.jpg`
-- `yomkosti-i-rezervuaryi.png` → `public/images/emkosti-podzemnye-3.png`
+#### 1. New file: `src/pages/GazoochistkaKapleuloviteli.tsx` (~350 lines)
+Following GazoochistkaFvg.tsx pattern:
 
-#### 2. Create data file `src/data/podzemnyeProducts.ts`
-Size table (from polycorr.ru reference, 12 rows):
+- **Breadcrumbs**: Каталог > Газоочистка > Каплеуловители
+- **Hero**: Title "Каплеуловители из полипропилена", subtitle about removing excess moisture and droplets from ventilation systems
+- **"Почему выбирают"** bullets: эффективность 99,9%, скорость 2,5–3 м/с, полимерные материалы (коррозиестойкость), работа в агрессивных средах, круглое и прямоугольное сечение, производство в России (СПб)
 
-| Объём, м³ | Ø корпуса, мм | Длина (L), мм |
-|-----------|---------------|---------------|
-| 20 | 2400 | 4500 |
-| 25 | 2400 | 5600 |
-| 30 | 2400 | 6700 |
-| 40 | 2400 | 8800 |
-| 50 | 2400 | 11000 |
-| 60 | 3000 | 8500 |
-| 70 | 3000 | 9900 |
-| 80 | 3000 | 11400 |
-| 90 | 3200 | 11200 |
-| 100 | 3200 | 12500 |
-| 120 | 3500 | 12500 |
-| 150 | 3600 | 14700 |
+- **Область применения**: 2 use cases — общеобменная вентиляция (удаление влаги из приточного воздуха), местная вентиляция (после скрубберов, абсорберов, гальванических линий)
 
-#### 3. Create `src/pages/EmkostiPodzemnye.tsx`
-Full landing page with all provided text structured into sections:
-- **Hero**: company name, title "Подземные ёмкости из спиральновитых труб", 3 product images in grid
-- **Intro**: description + "Почему выбирают нас" checklist (6 items)
-- **Раздел 1 — Назначение**: 8 application areas as card grid
-- **Раздел 2 — Технология и материалы**: materials (ПНД, PP, армированные), key specs (diameter, length, pressure, temperature, ring stiffness, seismic), advantages of spiral-wound construction
-- **Раздел 3 — Виды и модификации**: accordion sections (по назначению, по конструкции, по способу монтажа, дополнительные опции)
-- **Типоразмерный ряд**: table from the data file
-- **Раздел 4 — Преимущества сотрудничества**: 6 advantage cards
-- **CTA form**: contact form (name, phone, email, description)
+- **Принцип работы**: воздух проходит вдоль ламелей, деформированных в двух плоскостях → центробежные силы → капли оседают на ребристой поверхности
 
-#### 4. Update `src/App.tsx`
-Add route: `/catalog/emkosti/podzemnye` → `EmkostiPodzemnye`
+- **Устройство и преимущества**: лёгкость конструкции, простота монтажа, отсутствие коррозии, ревизия и замена блока ламелей, индивидуальный подход, заказ от 1 шт., любое монтажное исполнение
 
-#### 5. Update `src/data/catalog.ts`
-Add `externalPath: "/catalog/emkosti/podzemnye"` to the "e3" subcategory entry so clicking it navigates to the dedicated page.
+- **Как подобрать**: подбор по расходу воздуха в меньшую сторону, переходные камеры под имеющиеся размеры, поворотные/несоосные камеры
 
-### Files
-- **Copy**: 3 images to `public/images/`
-- **Create**: `src/data/podzemnyeProducts.ts`, `src/pages/EmkostiPodzemnye.tsx`
-- **Modify**: `src/App.tsx`, `src/data/catalog.ts`
+- **Типоразмерный ряд КУ.1** (table, 14 rows):
+
+  | Типоразмер | Расход, м³/ч | Д, мм | А, мм | Б, мм | В, мм | Масса, кг |
+  |------------|-------------|-------|-------|-------|-------|-----------|
+  | 300 | 300 | 125–250 | 672–532 | 308 | 299 | 6 |
+  | 500 | 500 | 125–250 | 732–532 | 308 | 402 | 7 |
+  | ... through 27500 |
+
+- **Типоразмерный ряд КУ.6** (table, 1 row):
+
+  | Типоразмер | Расход, м³/ч | Д, мм | А, мм | Б, мм | В, мм | Масса, кг |
+  |------------|-------------|-------|-------|-------|-------|-----------|
+  | 125 | 125 | 100–125 | 530 | 150 | 174 | 1,5 |
+
+- **Note**: аэродинамическое сопротивление 50–300 Па в зависимости от расхода; для прямоугольного сечения — переходные камеры под размер заказчика
+
+- **Преимущества сотрудничества**: 6 standard cards
+- **CTA form**: Contact form
+
+#### 2. Update `src/data/catalog.ts`
+- go4: add `externalPath: "/catalog/gazoochistka/kapleuloviteli"`
+
+#### 3. Update `src/App.tsx`
+Add route + import: `/catalog/gazoochistka/kapleuloviteli` → `GazoochistkaKapleuloviteli`
+
+### Files modified
+- `src/pages/GazoochistkaKapleuloviteli.tsx` (new)
+- `src/App.tsx` (add route + import)
+- `src/data/catalog.ts` (update go4 externalPath)
 
