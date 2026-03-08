@@ -24,6 +24,7 @@ import {
   Accordion, AccordionContent, AccordionItem, AccordionTrigger,
 } from "@/components/ui/accordion";
 import { toast } from "sonner";
+import PageFooter from "@/components/PageFooter";
 
 /* ── static data ── */
 
