@@ -126,8 +126,8 @@ export const catalog: CatalogCategory[] = [
     name: "КНС",
     slug: "kns",
     subcategories: [
-      { id: "k1", name: "КНС в корпусе SVT", slug: "v-korpuse-svt" },
-      { id: "k2", name: "КНС в корпусе из полипропилена", slug: "v-korpuse-polipropilen" },
+      { id: "k1", name: "КНС в корпусе SVT", slug: "v-korpuse-svt", image: "/images/kns-svt.png" },
+      { id: "k2", name: "КНС в корпусе из полипропилена", slug: "v-korpuse-polipropilen", image: "/images/kns-pp.png" },
     ],
   },
   {
