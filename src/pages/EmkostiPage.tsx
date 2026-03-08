@@ -413,13 +413,7 @@ const EmkostiPageInner = () => {
           </div>
         </section>
 
-        {/* Footer info */}
-        <footer className="border-t border-border pt-6 pb-4 text-center text-xs text-muted-foreground space-y-1">
-          <p className="font-semibold text-foreground">ООО СЗПК «Пласт-Металл ПРО»</p>
-          <p>Ленинградская область, д. Разметелево, ул. Строителей 27</p>
-          <p>Телефон: <a href="tel:+79633225540" className="text-primary hover:underline">+7 (963) 322-55-40</a> · E-mail: <a href="mailto:osobenkov@list.ru" className="text-primary hover:underline">osobenkov@list.ru</a></p>
-          <p>Режим работы: пн.–пт. 9:00–18:00</p>
-        </footer>
+        <PageFooter />
       </main>
     </>
   );

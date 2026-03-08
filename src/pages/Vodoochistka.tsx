@@ -347,22 +347,7 @@ const VodoochistkaInner = () => {
           </Card>
         </section>
 
-        {/* Footer */}
-        <footer className="border-t border-border pt-6 pb-10">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-xs text-muted-foreground">
-            <div>
-              <p className="font-semibold text-foreground mb-1">ООО СЗПК «Пласт-Металл ПРО»</p>
-              <p>ИНН: 7811614030</p>
-              <p>ОГРН: 1167847349498</p>
-              <p>196626, СПб, п. Шушары, Московское шоссе, д. 244</p>
-            </div>
-            <div className="sm:text-right">
-              <p>Тел.: +7 (812) 507-85-77</p>
-              <p>E-mail: info@plast-metall.pro</p>
-              <p>www.plast-metall.pro</p>
-            </div>
-          </div>
-        </footer>
+        <PageFooter />
       </main>
     </>
   );

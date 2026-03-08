@@ -342,6 +342,8 @@ const GazoochistkaFvgInner = () => {
             </CardContent>
           </Card>
         </section>
+
+        <PageFooter />
       </main>
     </>
   );

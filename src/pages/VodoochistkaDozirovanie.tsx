@@ -340,12 +340,7 @@ const VodoochistkaDozirovanieInner = () => {
           </Card>
         </section>
 
-        {/* Footer */}
-        <footer className="border-t border-border pt-6 pb-10 text-center space-y-1">
-          <p className="text-xs text-muted-foreground">ООО СЗПК «Пласт-Металл ПРО»</p>
-          <p className="text-xs text-muted-foreground">ИНН 7801396709 · ОГРН 1089847099753</p>
-          <p className="text-xs text-muted-foreground">info@plast-metall.pro · 8 (800) 555-48-06</p>
-        </footer>
+        <PageFooter />
       </main>
     </>
   );
