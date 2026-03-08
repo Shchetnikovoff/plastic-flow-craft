@@ -168,11 +168,11 @@ const GazoochistkaKapleuloviteliInner = () => {
           <p className="text-sm text-muted-foreground mb-5">
             Удаление капельной влаги и аэрозолей из вентиляционных потоков. Эффективность улавливания — 99,9%. Круглое и прямоугольное сечение, производительность от 125 до 27 500 м³/ч.
           </p>
-          <div className="grid grid-cols-2 gap-3 mb-5">
+          <Button onClick={scrollToForm} className="gap-2">Получить расчёт стоимости</Button>
+          <div className="grid grid-cols-2 gap-3 mt-6">
             <img src="/images/kapleulovitel-hero-1.png" alt="Каплеуловитель круглого сечения" className="rounded-lg border border-border object-cover w-full aspect-[4/3]" />
             <img src="/images/kapleulovitel-hero-2.png" alt="Каплеуловитель — ламельный блок" className="rounded-lg border border-border object-cover w-full aspect-[4/3]" />
           </div>
-          <Button onClick={scrollToForm} className="gap-2">Получить расчёт стоимости</Button>
         </section>
 
         {/* Why us */}
