@@ -22,6 +22,7 @@ import {
   Accordion, AccordionContent, AccordionItem, AccordionTrigger,
 } from "@/components/ui/accordion";
 import { toast } from "sonner";
+import PageFooter from "@/components/PageFooter";
 
 /* ── static data ── */
 
@@ -156,15 +157,15 @@ const VodoochistkaShkafyDozirovaniyaInner = () => {
             Специализированные системы автоматизации для точного дозирования химических реагентов в процессах водоподготовки, очистки сточных вод и химической обработки.
           </p>
 
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-5">
+          <Button onClick={scrollToForm} className="gap-2">
+            Получить коммерческое предложение
+          </Button>
+
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mt-6">
             {heroImages.map((src, i) => (
               <img key={i} src={src} alt={`Шкаф дозировочный ${i + 1}`} className="w-full aspect-[4/3] object-cover rounded-lg border border-border" />
             ))}
           </div>
-
-          <Button onClick={scrollToForm} className="gap-2">
-            Получить коммерческое предложение
-          </Button>
         </section>
 
         {/* Intro */}
@@ -306,6 +307,8 @@ const VodoochistkaShkafyDozirovaniyaInner = () => {
             </CardContent>
           </Card>
         </section>
+
+        <PageFooter />
       </main>
     </>
   );

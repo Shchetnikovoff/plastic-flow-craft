@@ -20,6 +20,7 @@ import {
   Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
 } from "@/components/ui/table";
 import { toast } from "sonner";
+import PageFooter from "@/components/PageFooter";
 
 /* ── static data ── */
 
@@ -311,21 +312,7 @@ const VodoochistkaZhirouloviteliInner = () => {
           </form>
         </section>
 
-        {/* Footer */}
-        <footer className="border-t border-border pt-6 pb-10">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs text-muted-foreground">
-            <div>
-              <p className="font-semibold text-foreground mb-1">ООО СЗПК «Пласт-Металл ПРО»</p>
-              <p>ИНН 4706048501 / КПП 470601001</p>
-              <p>ОГРН 1214700006498</p>
-              <p>188508, Ленинградская обл., г. Ломоносов, Загородная ул., д. 21, лит. Б</p>
-            </div>
-            <div className="sm:text-right">
-              <p>+7 (921) 932-81-12</p>
-              <p>plastmetallpro@bk.ru</p>
-            </div>
-          </div>
-        </footer>
+        <PageFooter />
       </main>
     </>
   );

@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
+import PageFooter from "@/components/PageFooter";
 
 const whyUs = [
   "Собственное производство с применением экструзионной сварки",
@@ -375,6 +376,8 @@ const EmkostiPryamougolnyeInner = () => {
             </CardContent>
           </Card>
         </section>
+
+        <PageFooter />
       </main>
     </>
   );

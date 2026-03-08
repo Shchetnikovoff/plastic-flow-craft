@@ -24,6 +24,7 @@ import {
   Accordion, AccordionContent, AccordionItem, AccordionTrigger,
 } from "@/components/ui/accordion";
 import { toast } from "sonner";
+import PageFooter from "@/components/PageFooter";
 
 /* ── static data ── */
 
@@ -166,13 +167,13 @@ const VodoochistkaDozirovanieInner = () => {
           <p className="text-sm text-muted-foreground mb-5">
             Автоматическое приготовление и дозирование коагулянтов, флокулянтов и полиэлектролитов для систем водоочистки.
           </p>
-          <div className="grid grid-cols-2 gap-3 mb-5">
-            <img src="/images/dozirovanie-hero-1.png" alt="Станция дозирования — общий вид" className="rounded-lg border border-border object-cover w-full aspect-[4/3]" />
-            <img src="/images/dozirovanie-hero-2.png" alt="Дозирующие насосы" className="rounded-lg border border-border object-cover w-full aspect-[4/3]" />
-          </div>
           <Button onClick={scrollToForm} className="gap-2">
             Получить расчёт стоимости
           </Button>
+          <div className="grid grid-cols-2 gap-3 mt-6">
+            <img src="/images/dozirovanie-hero-1.png" alt="Станция дозирования — общий вид" className="rounded-lg border border-border object-cover w-full aspect-[4/3]" />
+            <img src="/images/dozirovanie-hero-2.png" alt="Дозирующие насосы" className="rounded-lg border border-border object-cover w-full aspect-[4/3]" />
+          </div>
         </section>
 
         {/* Intro */}
@@ -339,12 +340,7 @@ const VodoochistkaDozirovanieInner = () => {
           </Card>
         </section>
 
-        {/* Footer */}
-        <footer className="border-t border-border pt-6 pb-10 text-center space-y-1">
-          <p className="text-xs text-muted-foreground">ООО СЗПК «Пласт-Металл ПРО»</p>
-          <p className="text-xs text-muted-foreground">ИНН 7801396709 · ОГРН 1089847099753</p>
-          <p className="text-xs text-muted-foreground">info@plast-metall.pro · 8 (800) 555-48-06</p>
-        </footer>
+        <PageFooter />
       </main>
     </>
   );

@@ -20,6 +20,7 @@ import {
   Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
 } from "@/components/ui/table";
 import { toast } from "sonner";
+import PageFooter from "@/components/PageFooter";
 
 const whyUs = [
   "Собственное производство спиральновитых конструкций",
@@ -351,6 +352,8 @@ const EmkostiPodzemnyeInner = () => {
             </CardContent>
           </Card>
         </section>
+
+        <PageFooter />
       </main>
     </>
   );

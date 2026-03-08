@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
+import PageFooter from "@/components/PageFooter";
 
 /* ── static data ── */
 
@@ -346,6 +347,8 @@ const VodoochistkaLosInner = () => {
             </div>
           </form>
         </section>
+
+        <PageFooter />
       </main>
     </>
   );
