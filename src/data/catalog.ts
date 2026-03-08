@@ -115,10 +115,10 @@ export const catalog: CatalogCategory[] = [
     name: "Гидрометаллургия",
     slug: "gidrometallurgiya",
     subcategories: [
-      { id: "gm1", name: "Реактор химического осаждения металла", slug: "reaktor-osazhdeniya" },
-      { id: "gm2", name: "Нутч-фильтр", slug: "nutch-filtr" },
-      { id: "gm3", name: "Установки выщелачивания", slug: "vyshchelachivaniye" },
-      { id: "gm4", name: "Установки сорбционные", slug: "sorbtsionnye" },
+      { id: "gm1", name: "Реактор химического осаждения металла", slug: "reaktor-osazhdeniya", image: "/images/gm-reaktor.png" },
+      { id: "gm2", name: "Нутч-фильтр", slug: "nutch-filtr", image: "/images/gm-nutch.png" },
+      { id: "gm3", name: "Установки выщелачивания", slug: "vyshchelachivaniye", image: "/images/gm-vyshchelach.png" },
+      { id: "gm4", name: "Установки сорбционные", slug: "sorbtsionnye", image: "/images/gm-sorbtsionnye.png" },
     ],
   },
   {
