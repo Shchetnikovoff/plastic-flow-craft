@@ -160,10 +160,10 @@ export const catalog: CatalogCategory[] = [
     name: "Услуги",
     slug: "uslugi",
     subcategories: [
-      { id: "u1", name: "Проектирование водоподготовительного и водоочистного оборудования", slug: "proektirovanie-vodoochistki" },
-      { id: "u2", name: "Проектирование КНС", slug: "proektirovanie-kns" },
-      { id: "u3", name: "Монтаж ёмкостей", slug: "montazh-emkostej" },
-      { id: "u4", name: "Монтаж КНС", slug: "montazh-kns" },
+      { id: "u1", name: "Проектирование водоподготовительного и водоочистного оборудования", slug: "proektirovanie-vodoochistki", image: "/images/uslugi-proekt-vodo.png" },
+      { id: "u2", name: "Проектирование КНС", slug: "proektirovanie-kns", image: "/images/uslugi-proekt-kns.png" },
+      { id: "u3", name: "Монтаж ёмкостей", slug: "montazh-emkostej", image: "/images/uslugi-montazh-emk.png" },
+      { id: "u4", name: "Монтаж КНС", slug: "montazh-kns", image: "/images/uslugi-montazh-kns.png" },
     ],
   },
 ];
