@@ -105,9 +105,9 @@ export const catalog: CatalogCategory[] = [
     name: "Химические реакторы",
     slug: "reaktory",
     subcategories: [
-      { id: "r1", name: "Химические реакторы из полипропилена", slug: "iz-polipropilena" },
-      { id: "r2", name: "Химические реакторы из полиэтилена", slug: "iz-polietilena" },
-      { id: "r3", name: "Реактор для гидрометаллургии", slug: "gidrometallurgiya" },
+      { id: "r1", name: "Химические реакторы из полипропилена", slug: "iz-polipropilena", image: "/images/reaktor-pp.png" },
+      { id: "r2", name: "Химические реакторы из полиэтилена", slug: "iz-polietilena", image: "/images/reaktor-pe.png" },
+      { id: "r3", name: "Реактор для гидрометаллургии", slug: "gidrometallurgiya", image: "/images/reaktor-gidro.png" },
     ],
   },
   {
