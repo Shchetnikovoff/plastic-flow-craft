@@ -83,8 +83,8 @@ export const catalog: CatalogCategory[] = [
     name: "Газоочистка",
     slug: "gazoochistka",
     subcategories: [
-      { id: "go1", name: "Скрубберы вертикальные", slug: "skrubbery-vertikalnye" },
-      { id: "go2", name: "Скрубберы горизонтальные", slug: "skrubbery-gorizontalnye" },
+      { id: "go1", name: "Скрубберы вертикальные", slug: "skrubbery-vertikalnye", externalPath: "/catalog/gazoochistka/skrubbery", image: "/images/skrubber-vertikalnyj-1.jpg" },
+      { id: "go2", name: "Скрубберы горизонтальные", slug: "skrubbery-gorizontalnye", externalPath: "/catalog/gazoochistka/skrubbery", image: "/images/skrubber-gorizontalnyj-1.jpg" },
       { id: "go3", name: "ФВГ — фильтры волокнистые гальванические", slug: "fvg" },
       { id: "go4", name: "Каплеуловители", slug: "kapleuloviteli" },
     ],
