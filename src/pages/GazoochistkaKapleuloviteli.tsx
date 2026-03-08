@@ -314,6 +314,8 @@ const GazoochistkaKapleuloviteliInner = () => {
             </CardContent>
           </Card>
         </section>
+
+        <PageFooter />
       </main>
     </>
   );

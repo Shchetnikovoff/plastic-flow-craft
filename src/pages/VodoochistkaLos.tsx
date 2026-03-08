@@ -347,6 +347,8 @@ const VodoochistkaLosInner = () => {
             </div>
           </form>
         </section>
+
+        <PageFooter />
       </main>
     </>
   );

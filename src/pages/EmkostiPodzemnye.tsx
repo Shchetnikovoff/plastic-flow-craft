@@ -352,6 +352,8 @@ const EmkostiPodzemnyeInner = () => {
             </CardContent>
           </Card>
         </section>
+
+        <PageFooter />
       </main>
     </>
   );

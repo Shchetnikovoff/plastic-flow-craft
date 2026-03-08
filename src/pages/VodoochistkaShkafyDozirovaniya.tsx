@@ -307,6 +307,8 @@ const VodoochistkaShkafyDozirovaniyaInner = () => {
             </CardContent>
           </Card>
         </section>
+
+        <PageFooter />
       </main>
     </>
   );

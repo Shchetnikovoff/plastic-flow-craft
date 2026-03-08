@@ -357,6 +357,8 @@ const GazoochistkaSkrubberyInner = () => {
             </CardContent>
           </Card>
         </section>
+
+        <PageFooter />
       </main>
     </>
   );

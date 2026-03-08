@@ -428,6 +428,8 @@ const EmkostiPozharnyeInner = () => {
             </CardContent>
           </Card>
         </section>
+
+        <PageFooter />
       </main>
     </>
   );

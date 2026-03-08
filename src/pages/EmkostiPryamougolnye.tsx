@@ -376,6 +376,8 @@ const EmkostiPryamougolnyeInner = () => {
             </CardContent>
           </Card>
         </section>
+
+        <PageFooter />
       </main>
     </>
   );
