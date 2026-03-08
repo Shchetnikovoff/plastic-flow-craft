@@ -150,9 +150,9 @@ export const catalog: CatalogCategory[] = [
     name: "Шкафы управления",
     slug: "shkafy-upravleniya",
     subcategories: [
-      { id: "su1", name: "Шкафы управления гальванической линией", slug: "galvanicheskoy-liniey" },
-      { id: "su2", name: "Шкафы управления очистными", slug: "ochistnymi" },
-      { id: "su3", name: "Шкафы управления насосами", slug: "nasosami" },
+      { id: "su1", name: "Шкафы управления гальванической линией", slug: "galvanicheskoy-liniey", image: "/images/su-galvanika.png" },
+      { id: "su2", name: "Шкафы управления очистными", slug: "ochistnymi", image: "/images/su-ochistnye.png" },
+      { id: "su3", name: "Шкафы управления насосами", slug: "nasosami", image: "/images/su-nasosy.png" },
     ],
   },
   {
