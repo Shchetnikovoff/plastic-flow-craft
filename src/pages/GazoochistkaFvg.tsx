@@ -128,6 +128,10 @@ const GazoochistkaFvgInner = () => {
           <p className="text-sm text-muted-foreground mb-5">
             Высокоэффективная очистка воздушных вентиляционных выбросов в гальванических, травильных и химических производствах, из вытяжных шкафов и лабораторных помещений. Производительность от 2 500 до 80 000 м³/ч.
           </p>
+          <div className="grid grid-cols-2 gap-3 mb-5">
+            <img src="/images/fvg-hero-1.png" alt="Фильтр ФВГ — общий вид" className="rounded-lg border border-border object-cover w-full aspect-[4/3]" />
+            <img src="/images/fvg-hero-2.png" alt="Фильтрующие элементы ФВГ" className="rounded-lg border border-border object-cover w-full aspect-[4/3]" />
+          </div>
           <Button onClick={scrollToForm} className="gap-2">Получить расчёт стоимости</Button>
         </section>
 
