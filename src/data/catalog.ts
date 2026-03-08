@@ -57,7 +57,7 @@ export const catalog: CatalogCategory[] = [
     name: "Водоподготовка",
     slug: "vodopodgotovka",
     subcategories: [
-      { id: "vp1", name: "Система подготовки воды / обратный осмос", slug: "obratnyj-osmos" },
+      { id: "vp1", name: "Система подготовки воды / обратный осмос", slug: "obratnyj-osmos", image: "/images/vodopodgotovka-osmos.png" },
     ],
   },
   {
