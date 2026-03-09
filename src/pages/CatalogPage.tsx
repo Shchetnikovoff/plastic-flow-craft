@@ -5,6 +5,13 @@ import Header from "@/components/Header";
 import CartSheet from "@/components/CartSheet";
 import { CartProvider } from "@/contexts/CartContext";
 import { catalog, findCategory, findSubcategory } from "@/data/catalog";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+import { toast } from "sonner";
+import PageFooter from "@/components/PageFooter";
 import {
   Breadcrumb,
   BreadcrumbList,
