@@ -86,6 +86,7 @@ export const catalog: CatalogCategory[] = [
     name: "Ёмкости",
     slug: "emkosti",
     description: "Промышленные ёмкости из листового полипропилена и полиэтилена — надёжность, проверенная временем!",
+    image: "/images/emkosti-hero-1.png",
     subcategories: [
       { id: "e3", name: "Ёмкости подземные", slug: "podzemnye", externalPath: "/catalog/emkosti/podzemnye", image: "/images/emkosti-podzemnye-1.jpg" },
       { id: "e4", name: "Ёмкости прямоугольные", slug: "pryamougolnye", externalPath: "/catalog/emkosti/pryamougolnye", image: "/images/emkost-pryam-pp-1.png" },
