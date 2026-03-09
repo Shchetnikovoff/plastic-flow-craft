@@ -133,6 +133,7 @@ export const catalog: CatalogCategory[] = [
     id: "uslugi",
     name: "Услуги",
     slug: "uslugi",
+    image: "/images/uslugi-hero-1.png",
     subcategories: [],
   },
 ];
