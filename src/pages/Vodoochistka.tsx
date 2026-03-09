@@ -152,6 +152,9 @@ const partnershipAdvantages = [
 const VodoochistkaInner = () => {
   const [cartOpen, setCartOpen] = useState(false);
   const [form, setForm] = useState({ name: "", phone: "", email: "", description: "" });
+  const [selectedSubId, setSelectedSubId] = useState<string | null>(null);
+  const category = findCategory("vodoochistka");
+  const catIndex = 2;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
