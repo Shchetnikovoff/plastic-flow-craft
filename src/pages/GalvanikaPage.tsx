@@ -3,12 +3,13 @@ import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import CartSheet from "@/components/CartSheet";
 import { CartProvider } from "@/contexts/CartContext";
+import { findCategory } from "@/data/catalog";
 import {
-  Check, Wrench, ShieldCheck, Clock, Truck, FlaskConical,
+  Check, Wrench, ShieldCheck, Clock, Truck, FlaskConical, ImageOff,
   Factory, Zap, Beaker, Settings, Shield,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
@@ -78,6 +79,9 @@ const advantages = [
 const GalvanikaPageInner = () => {
   const [cartOpen, setCartOpen] = useState(false);
   const [form, setForm] = useState({ name: "", phone: "", email: "", description: "" });
+  const [selectedSubId, setSelectedSubId] = useState<string | null>(null);
+  const category = findCategory("galvanika");
+  const catIndex = 1;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -158,6 +162,32 @@ const GalvanikaPageInner = () => {
           </div>
         </section>
 
+        {category && (
+          <section className="mb-10">
+            <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Каталог гальванического оборудования</h2>
+            <div className="flex flex-col md:flex-row gap-6">
+              <nav className="md:w-[220px] shrink-0"><ul className="space-y-0.5">
+                {category.subcategories.map((sub, i) => {
+                  const isSelected = selectedSubId === sub.id;
+                  return (<li key={sub.id}><button onClick={() => setSelectedSubId(isSelected ? null : sub.id)} className={`group flex items-baseline gap-2 rounded-md px-3 py-2 text-sm w-full text-left transition-colors ${isSelected ? "bg-primary/10 border border-primary/30" : "hover:bg-muted border border-transparent"}`}><span className={`text-xs font-semibold shrink-0 ${isSelected ? "text-primary" : "text-muted-foreground"}`}>{catIndex}.{i + 1}</span><span className={`transition-colors ${isSelected ? "text-primary font-semibold" : "text-foreground group-hover:text-primary"}`}>{sub.name}</span></button></li>);
+                })}
+              </ul></nav>
+              <div className="flex-1">
+                {(() => {
+                  const selectedSub = category.subcategories.find((s) => s.id === selectedSubId);
+                  if (selectedSub) {
+                    return (<div className="rounded-xl border border-border bg-card overflow-hidden animate-in fade-in-0 slide-in-from-top-2 duration-200"><div className="aspect-[16/9] bg-muted flex items-center justify-center">{selectedSub.image ? <img src={selectedSub.image} alt={selectedSub.name} className="w-full h-full object-cover" /> : <ImageOff className="h-12 w-12 text-muted-foreground/40" />}</div><div className="p-5"><p className="text-xs text-muted-foreground font-semibold mb-1">{catIndex}.{category.subcategories.findIndex((s) => s.id === selectedSub.id) + 1}</p><h3 className="text-lg font-bold text-foreground mb-2">{selectedSub.name}</h3><p className="text-sm text-muted-foreground mb-4">{selectedSub.description || "Описание уточняйте по запросу."}</p>{selectedSub.externalPath ? <Link to={selectedSub.externalPath} className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline">Перейти на страницу →</Link> : <a href="#cta-form" className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline">Запросить расчёт →</a>}</div></div>);
+                  }
+                  return (<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">{category.subcategories.map((sub, i) => {
+                    const cardContent = (<><div className="aspect-[4/3] bg-muted flex items-center justify-center">{sub.image ? <img src={sub.image} alt={sub.name} className="w-full h-full object-cover" /> : <ImageOff className="h-10 w-10 text-muted-foreground/40" />}</div><div className="px-3 py-2.5"><p className="text-xs text-muted-foreground font-semibold">{catIndex}.{i + 1}</p><p className="text-sm font-medium text-foreground group-hover:text-primary transition-colors mt-0.5">{sub.name}</p></div></>);
+                    if (sub.externalPath) return <Link key={sub.id} to={sub.externalPath} className="group rounded-lg border border-border bg-card overflow-hidden hover:border-primary/50 hover:shadow-md transition-all text-left block">{cardContent}</Link>;
+                    return <button key={sub.id} onClick={() => setSelectedSubId(sub.id)} className="group rounded-lg border border-border bg-card overflow-hidden hover:border-primary/50 hover:shadow-md transition-all text-left">{cardContent}</button>;
+                  })}</div>);
+                })()}
+              </div>
+            </div>
+          </section>
+        )}
 
         <section id="cta-form" className="mb-10 scroll-mt-20">
           <Card><CardContent className="p-6">

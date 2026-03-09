@@ -55,7 +55,7 @@ const CatalogPageInner = () => {
             <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Направления</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {catalog.map((cat) => {
-                const thumb = cat.image || cat.subcategories.find((s) => s.image)?.image;
+                const thumb = cat.subcategories.find((s) => s.image)?.image;
                 return (
                   <Link
                     key={cat.id}
@@ -73,11 +73,9 @@ const CatalogPageInner = () => {
                       <h3 className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">
                         {cat.name}
                       </h3>
-                      {cat.description && (
-                        <p className="text-xs text-muted-foreground mt-0.5 line-clamp-2">
-                          {cat.description}
-                        </p>
-                      )}
+                      <p className="text-xs text-muted-foreground mt-0.5">
+                        {cat.subcategories.length} {cat.subcategories.length === 1 ? "позиция" : cat.subcategories.length < 5 ? "позиции" : "позиций"}
+                      </p>
                     </div>
                   </Link>
                 );
