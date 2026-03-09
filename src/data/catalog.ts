@@ -8,6 +8,8 @@ export interface CatalogSubcategory {
   image?: string;
   /** Optional group label for visual grouping within a category */
   group?: string;
+  /** Product/service description shown in detail card */
+  description?: string;
 }
 
 export interface CatalogCategory {
