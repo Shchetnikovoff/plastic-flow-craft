@@ -141,7 +141,7 @@ const Header = ({ onCartOpen, angle = 90, connectionType = "rastrub", productTyp
           <nav className="flex items-center gap-0">
             {catalog.map((cat) => {
               return (
-                <div key={cat.id} className="flex items-center">
+                <div key={cat.id} className="flex items-center" data-active={isActiveCat(cat.slug) || undefined}>
                   <Link
                     to={`/catalog/${cat.slug}`}
                     className={`whitespace-nowrap pl-3 pr-1 py-2.5 text-xs font-semibold transition-colors border-b-2 ${
