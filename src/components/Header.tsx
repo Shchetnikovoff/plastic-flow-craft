@@ -137,7 +137,7 @@ const Header = ({ onCartOpen, angle = 90, connectionType = "rastrub", productTyp
 
       {/* Desktop category navigation */}
       <div ref={navRef} className="hidden md:block border-t border-border bg-muted/30 relative">
-        <div className="mx-auto max-w-[960px] px-4 sm:px-6 overflow-x-auto scrollbar-none">
+        <div ref={scrollNavRef} className="mx-auto max-w-[960px] px-4 sm:px-6 overflow-x-auto scrollbar-none">
           <nav className="flex items-center gap-0">
             {catalog.map((cat) => {
               return (
