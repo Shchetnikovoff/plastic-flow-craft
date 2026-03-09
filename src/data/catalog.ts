@@ -52,6 +52,7 @@ export const catalog: CatalogCategory[] = [
     id: "vodopodgotovka",
     name: "Водоподготовка",
     slug: "vodopodgotovka",
+    image: "/images/vodopodgotovka-hero-1.png",
     subcategories: [],
   },
   {
