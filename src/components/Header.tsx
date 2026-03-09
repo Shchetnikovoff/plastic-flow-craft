@@ -48,6 +48,16 @@ const Header = ({ onCartOpen, angle = 90, connectionType = "rastrub", productTyp
     setMobileOpen(false);
   }, [location.pathname]);
 
+  // Scroll active category tab into view after route change
+  useEffect(() => {
+    const active = catalog.find((cat) => isActiveCat(cat.slug));
+    if (!active) return;
+    const el = navRef.current?.querySelector(`[data-cat-slug="${active.slug}"]`) as HTMLElement | null;
+    if (el) {
+      el.scrollIntoView({ inline: "center", block: "nearest", behavior: "instant" });
+    }
+  }, [location.pathname]);
+
   const isActiveCat = (catSlug: string) => {
     if (catSlug === "ventilyatsiya") {
       return ["/", "/60", "/45", "/30", "/15", "/troynik", "/razdvizhnoy", "/vozdukhovod"].some(
@@ -128,7 +138,7 @@ const Header = ({ onCartOpen, angle = 90, connectionType = "rastrub", productTyp
           <nav className="flex items-center gap-0">
             {catalog.map((cat) => {
               return (
-                <div key={cat.id} className="flex items-center">
+                <div key={cat.id} className="flex items-center" data-cat-slug={cat.slug}>
                   <Link
                     to={`/catalog/${cat.slug}`}
                     className={`whitespace-nowrap pl-3 pr-1 py-2.5 text-xs font-semibold transition-colors border-b-2 ${
