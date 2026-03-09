@@ -141,10 +141,15 @@ const CatalogPageInner = () => {
             </BreadcrumbList>
           </Breadcrumb>
 
-          <div className="rounded-xl border border-border bg-card p-8 text-center">
-            <Construction className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
+          <div className="rounded-xl border border-border bg-card p-8">
+            {result.subcategory.image && (
+              <div className="aspect-[16/9] bg-muted rounded-lg overflow-hidden mb-4">
+                <img src={result.subcategory.image} alt={result.subcategory.name} className="w-full h-full object-cover" />
+              </div>
+            )}
             <h2 className="text-xl font-bold text-foreground mb-2">{result.subcategory.name}</h2>
-            <p className="text-muted-foreground">Раздел в разработке. Информация появится в ближайшее время.</p>
+            <p className="text-sm text-muted-foreground">{result.subcategory.description || "Описание уточняйте по запросу."}</p>
+            <a href="#cta-form" className="inline-flex items-center gap-1.5 mt-4 text-sm font-medium text-primary hover:underline">Запросить расчёт →</a>
           </div>
         </main>
       </>
@@ -240,9 +245,9 @@ const CatalogPageInner = () => {
                   </p>
                   <h3 className="text-lg font-bold text-foreground mb-2">{selectedSub.name}</h3>
                   <p className="text-sm text-muted-foreground mb-4">
-                    Раздел в разработке. Информация появится в ближайшее время.
+                    {selectedSub.description || "Описание уточняйте по запросу."}
                   </p>
-                  {selectedSub.externalPath && (
+                  {selectedSub.externalPath ? (
                     <Link
                       to={selectedSub.externalPath}
                       className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline"
@@ -250,6 +255,10 @@ const CatalogPageInner = () => {
                       Перейти на страницу
                       <ArrowRight className="h-3.5 w-3.5" />
                     </Link>
+                  ) : (
+                    <a href="#cta-form" className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline">
+                      Запросить расчёт →
+                    </a>
                   )}
                 </div>
               </div>
