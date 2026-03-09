@@ -3,9 +3,10 @@ import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import CartSheet from "@/components/CartSheet";
 import { CartProvider } from "@/contexts/CartContext";
+import { findCategory } from "@/data/catalog";
 import {
   Check, Droplets, Factory, Wrench, ShieldCheck, Clock, Truck,
-  FlaskConical, Settings, Beaker, Shield, Leaf, Zap, Building2, Wheat,
+  FlaskConical, Settings, Beaker, Shield, Leaf, Zap, Building2, Wheat, ImageOff,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
