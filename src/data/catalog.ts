@@ -98,6 +98,7 @@ export const catalog: CatalogCategory[] = [
     id: "reaktory",
     name: "Химические реакторы",
     slug: "reaktory",
+    image: "/images/reaktory-hero-1.png",
     subcategories: [],
   },
   {
