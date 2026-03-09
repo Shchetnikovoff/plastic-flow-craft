@@ -1,22 +1,55 @@
 
 
-## Plan: Redesign CatalogPage to match unified template style
+## Plan: Add "Ёмкости подземные из спиральновитой трубы" Subcategory Page
 
-### What changes
-Restyle the root `/catalog` page (the "no categorySlug" branch in `CatalogPage.tsx`, lines 23-49) to match the look of other landing pages like EmkostiPage.
+### What We're Building
 
-### Changes in `src/pages/CatalogPage.tsx`
+A new dedicated landing page for the underground containers subcategory (item "e3" in catalog: "Ёмкости подземные") at `/catalog/emkosti/podzemnye`. This is a full content page similar to EmkostiPage but focused on spiral-wound pipe underground containers.
 
-**Root catalog view (lines 23-49) — replace with:**
+### Changes
 
-1. **Hero section**: Company label "ООО СЗПК «Пласт-Металл ПРО»", H1 "Каталог продукции", subtitle about full range of polymer equipment, CTA button "Получить расчёт стоимости"
-2. **Category grid**: Keep existing 3-col grid but enhance cards — add category images (use first subcategory image or a generic icon), improve spacing and hover states
-3. **CTA form**: Same contact form as other pages (name, phone, email, description) with 3-col layout
-4. **PageFooter**: Replace inline footer with shared `PageFooter` component
+#### 1. Copy uploaded images to project
+- `alexander-tortsev-9-1.jpg` → `public/images/emkosti-podzemnye-1.jpg`
+- `alexander-tortsev-8-4.jpg` → `public/images/emkosti-podzemnye-2.jpg`
+- `yomkosti-i-rezervuaryi.png` → `public/images/emkosti-podzemnye-3.png`
 
-**Also fix the category detail view (lines 105-294):**
-- Replace inline footer (lines 286-291) with `PageFooter` component for consistency
+#### 2. Create data file `src/data/podzemnyeProducts.ts`
+Size table (from polycorr.ru reference, 12 rows):
 
-### Single file modified
-- `src/pages/CatalogPage.tsx`
+| Объём, м³ | Ø корпуса, мм | Длина (L), мм |
+|-----------|---------------|---------------|
+| 20 | 2400 | 4500 |
+| 25 | 2400 | 5600 |
+| 30 | 2400 | 6700 |
+| 40 | 2400 | 8800 |
+| 50 | 2400 | 11000 |
+| 60 | 3000 | 8500 |
+| 70 | 3000 | 9900 |
+| 80 | 3000 | 11400 |
+| 90 | 3200 | 11200 |
+| 100 | 3200 | 12500 |
+| 120 | 3500 | 12500 |
+| 150 | 3600 | 14700 |
+
+#### 3. Create `src/pages/EmkostiPodzemnye.tsx`
+Full landing page with all provided text structured into sections:
+- **Hero**: company name, title "Подземные ёмкости из спиральновитых труб", 3 product images in grid
+- **Intro**: description + "Почему выбирают нас" checklist (6 items)
+- **Раздел 1 — Назначение**: 8 application areas as card grid
+- **Раздел 2 — Технология и материалы**: materials (ПНД, PP, армированные), key specs (diameter, length, pressure, temperature, ring stiffness, seismic), advantages of spiral-wound construction
+- **Раздел 3 — Виды и модификации**: accordion sections (по назначению, по конструкции, по способу монтажа, дополнительные опции)
+- **Типоразмерный ряд**: table from the data file
+- **Раздел 4 — Преимущества сотрудничества**: 6 advantage cards
+- **CTA form**: contact form (name, phone, email, description)
+
+#### 4. Update `src/App.tsx`
+Add route: `/catalog/emkosti/podzemnye` → `EmkostiPodzemnye`
+
+#### 5. Update `src/data/catalog.ts`
+Add `externalPath: "/catalog/emkosti/podzemnye"` to the "e3" subcategory entry so clicking it navigates to the dedicated page.
+
+### Files
+- **Copy**: 3 images to `public/images/`
+- **Create**: `src/data/podzemnyeProducts.ts`, `src/pages/EmkostiPodzemnye.tsx`
+- **Modify**: `src/App.tsx`, `src/data/catalog.ts`
 
