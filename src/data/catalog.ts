@@ -29,7 +29,7 @@ export const catalog: CatalogCategory[] = [
     name: "Гальваника",
     slug: "galvanika",
     description: "Гальваническое оборудование. Проектирование, производство и монтаж.",
-
+    image: "/images/galvanika-hero-1.png",
     subcategories: [],
   },
   {
