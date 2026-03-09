@@ -112,6 +112,7 @@ export const catalog: CatalogCategory[] = [
     id: "kns",
     name: "КНС",
     slug: "kns",
+    image: "/images/kns-hero-1.png",
     subcategories: [],
   },
   {
