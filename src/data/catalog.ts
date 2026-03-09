@@ -60,6 +60,7 @@ export const catalog: CatalogCategory[] = [
     name: "Вентиляция",
     slug: "ventilyatsiya",
     description: "Элементы промышленной вентиляции из полипропилена — круглого и прямоугольного сечения.",
+    image: "/images/ventilyatsiya-hero-1.png",
     subcategories: [
       // — Круглого сечения —
       { id: "ve1", name: "Отвод вентиляционный", slug: "otvod", externalPath: "/", image: "/images/product-1.png", group: "Круглого сечения" },
