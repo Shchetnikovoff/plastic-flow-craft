@@ -69,7 +69,7 @@ const EmkostiPageInner = () => {
   const [form, setForm] = useState({ name: "", phone: "", email: "", description: "" });
   const [selectedSubId, setSelectedSubId] = useState<string | null>(null);
   const category = findCategory("emkosti");
-  const catIndex = 6; // Ёмкости is 6th category
+  const catIndex = 1; // Ёмкости is 1st category
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

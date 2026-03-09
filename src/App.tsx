@@ -26,16 +26,11 @@ import VodoochistkaShkafyDozirovaniya from "./pages/VodoochistkaShkafyDozirovani
 import GazoochistkaSkrubbery from "./pages/GazoochistkaSkrubbery";
 import GazoochistkaFvg from "./pages/GazoochistkaFvg";
 import GazoochistkaKapleuloviteli from "./pages/GazoochistkaKapleuloviteli";
-import GalvanikaPage from "./pages/GalvanikaPage";
 import GazoochistkaPage from "./pages/GazoochistkaPage";
-import VodopodgotovkaPage from "./pages/VodopodgotovkaPage";
 import VentilyatsiyaPage from "./pages/VentilyatsiyaPage";
 import ReaktoryPage from "./pages/ReaktoryPage";
 import GidrometallurgiyaPage from "./pages/GidrometallurgiyaPage";
 import KnsPage from "./pages/KnsPage";
-import LabMebelPage from "./pages/LabMebelPage";
-import ShkafyUpravleniyaPage from "./pages/ShkafyUpravleniyaPage";
-import UslugiPage from "./pages/UslugiPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -73,16 +68,11 @@ const App = () => (
           <Route path="/catalog/gazoochistka/skrubbery" element={<GazoochistkaSkrubbery />} />
           <Route path="/catalog/gazoochistka/fvg" element={<GazoochistkaFvg />} />
           <Route path="/catalog/gazoochistka/kapleuloviteli" element={<GazoochistkaKapleuloviteli />} />
-          <Route path="/catalog/galvanika" element={<GalvanikaPage />} />
           <Route path="/catalog/gazoochistka" element={<GazoochistkaPage />} />
-          <Route path="/catalog/vodopodgotovka" element={<VodopodgotovkaPage />} />
           <Route path="/catalog/ventilyatsiya" element={<VentilyatsiyaPage />} />
           <Route path="/catalog/reaktory" element={<ReaktoryPage />} />
           <Route path="/catalog/gidrometallurgiya" element={<GidrometallurgiyaPage />} />
           <Route path="/catalog/kns" element={<KnsPage />} />
-          <Route path="/catalog/labmebel" element={<LabMebelPage />} />
-          <Route path="/catalog/shkafy-upravleniya" element={<ShkafyUpravleniyaPage />} />
-          <Route path="/catalog/uslugi" element={<UslugiPage />} />
           <Route path="/catalog" element={<CatalogPage />} />
           <Route path="/catalog/:categorySlug" element={<CatalogPage />} />
           <Route path="/catalog/:categorySlug/:subSlug" element={<CatalogPage />} />
