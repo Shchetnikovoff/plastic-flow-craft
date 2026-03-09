@@ -18,6 +18,8 @@ export interface CatalogCategory {
   slug: string;
   /** Optional description shown on the category page */
   description?: string;
+  /** Category thumbnail image */
+  image?: string;
   subcategories: CatalogSubcategory[];
 }
 
