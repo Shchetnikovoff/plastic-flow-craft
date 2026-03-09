@@ -49,6 +49,18 @@ const Header = ({ onCartOpen, angle = 90, connectionType = "rastrub", productTyp
     setMobileOpen(false);
   }, [location.pathname]);
 
+  // Scroll active tab into view after route change
+  useEffect(() => {
+    requestAnimationFrame(() => {
+      const container = scrollNavRef.current;
+      if (!container) return;
+      const active = container.querySelector('[data-active="true"]') as HTMLElement | null;
+      if (active) {
+        active.scrollIntoView({ inline: "center", behavior: "instant", block: "nearest" });
+      }
+    });
+  }, [location.pathname]);
+
   const isActiveCat = (catSlug: string) => {
     if (catSlug === "ventilyatsiya") {
       return ["/", "/60", "/45", "/30", "/15", "/troynik", "/razdvizhnoy", "/vozdukhovod"].some(
