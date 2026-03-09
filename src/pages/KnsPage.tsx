@@ -3,8 +3,7 @@ import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import CartSheet from "@/components/CartSheet";
 import { CartProvider } from "@/contexts/CartContext";
-import { findCategory } from "@/data/catalog";
-import { Check, Wrench, ShieldCheck, Clock, Truck, FlaskConical, ImageOff, Droplets, Factory, Settings, Shield } from "lucide-react";
+import { Check, Wrench, ShieldCheck, Clock, Truck, FlaskConical, Droplets, Factory, Settings, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -51,9 +50,6 @@ const advantages = [
 const Inner = () => {
   const [cartOpen, setCartOpen] = useState(false);
   const [form, setForm] = useState({ name: "", phone: "", email: "", description: "" });
-  const [selectedSubId, setSelectedSubId] = useState<string | null>(null);
-  const category = findCategory("kns");
-  const catIndex = 9;
 
   const handleSubmit = (e: React.FormEvent) => { e.preventDefault(); if (!form.name.trim() || !form.phone.trim()) { toast.error("Заполните обязательные поля"); return; } toast.success("Заявка отправлена!"); setForm({ name: "", phone: "", email: "", description: "" }); };
   const scrollToForm = () => { document.getElementById("cta-form")?.scrollIntoView({ behavior: "smooth" }); };
@@ -100,15 +96,6 @@ const Inner = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">{advantages.map((adv) => (<Card key={adv.title}><CardContent className="p-4 flex items-start gap-3"><adv.icon className="h-5 w-5 text-primary shrink-0 mt-0.5" /><div><p className="text-sm font-semibold text-foreground mb-1">{adv.title}</p><p className="text-xs text-muted-foreground">{adv.text}</p></div></CardContent></Card>))}</div>
         </section>
 
-        {category && (
-          <section className="mb-10">
-            <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Каталог КНС</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">{category.subcategories.map((sub, i) => {
-              const cc = (<><div className="aspect-[4/3] bg-muted flex items-center justify-center">{sub.image ? <img src={sub.image} alt={sub.name} className="w-full h-full object-cover" /> : <ImageOff className="h-10 w-10 text-muted-foreground/40" />}</div><div className="px-3 py-2.5"><p className="text-xs text-muted-foreground font-semibold">{catIndex}.{i + 1}</p><p className="text-sm font-medium text-foreground group-hover:text-primary transition-colors mt-0.5">{sub.name}</p></div></>);
-              return <button key={sub.id} onClick={() => setSelectedSubId(sub.id)} className="group rounded-lg border border-border bg-card overflow-hidden hover:border-primary/50 hover:shadow-md transition-all text-left">{cc}</button>;
-            })}</div>
-          </section>
-        )}
 
         <section id="cta-form" className="mb-10 scroll-mt-20">
           <Card><CardContent className="p-6">
