@@ -25,6 +25,15 @@ const CatalogPageInner = () => {
   const { categorySlug, subSlug } = useParams<{ categorySlug: string; subSlug?: string }>();
   const [cartOpen, setCartOpen] = useState(false);
   const [selectedSubId, setSelectedSubId] = useState<string | null>(null);
+  const [form, setForm] = useState({ name: "", phone: "", email: "", description: "" });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!form.name.trim() || !form.phone.trim()) { toast.error("Заполните обязательные поля"); return; }
+    toast.success("Заявка отправлена!");
+    setForm({ name: "", phone: "", email: "", description: "" });
+  };
+  const scrollToForm = () => { document.getElementById("catalog-cta-form")?.scrollIntoView({ behavior: "smooth" }); };
 
   // Category listing (no slug)
   if (!categorySlug) {
@@ -32,25 +41,64 @@ const CatalogPageInner = () => {
       <>
         <Header onCartOpen={() => setCartOpen(true)} productType="otvod" />
         <CartSheet open={cartOpen} onOpenChange={setCartOpen} />
-        <main className="mx-auto max-w-[960px] px-4 sm:px-6 py-8">
-          <h2 className="text-2xl font-bold text-foreground mb-6">Каталог продукции</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {catalog.map((cat) => (
-              <Link
-                key={cat.id}
-                to={`/catalog/${cat.slug}`}
-                className="group rounded-xl border border-border bg-card p-5 hover:border-primary/50 hover:shadow-md transition-all"
-              >
-                <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors">
-                  {cat.name}
-                </h3>
-                <p className="text-xs text-muted-foreground mt-1">
-                  {cat.subcategories.length} {cat.subcategories.length === 1 ? "позиция" : cat.subcategories.length < 5 ? "позиции" : "позиций"}
-                </p>
-                <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-primary mt-3 transition-colors" />
-              </Link>
-            ))}
-          </div>
+        <main className="mx-auto max-w-[960px] px-4 sm:px-6 py-6 sm:py-8">
+          {/* Hero */}
+          <section className="mb-10">
+            <p className="text-xs text-muted-foreground uppercase tracking-wider mb-2">ООО СЗПК «Пласт-Металл ПРО»</p>
+            <h1 className="text-2xl sm:text-3xl font-bold text-foreground leading-tight mb-3">Каталог продукции</h1>
+            <p className="text-sm text-muted-foreground mb-5">Полный ассортимент полимерного оборудования для промышленных предприятий — от проектирования до монтажа.</p>
+            <Button onClick={scrollToForm}>Получить расчёт стоимости</Button>
+          </section>
+
+          {/* Category grid */}
+          <section className="mb-10">
+            <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Направления</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {catalog.map((cat) => {
+                const thumb = cat.subcategories.find((s) => s.image)?.image;
+                return (
+                  <Link
+                    key={cat.id}
+                    to={`/catalog/${cat.slug}`}
+                    className="group rounded-lg border border-border bg-card overflow-hidden hover:border-primary/50 hover:shadow-md transition-all"
+                  >
+                    <div className="aspect-[4/3] bg-muted flex items-center justify-center">
+                      {thumb ? (
+                        <img src={thumb} alt={cat.name} className="w-full h-full object-cover" />
+                      ) : (
+                        <ImageOff className="h-10 w-10 text-muted-foreground/40" />
+                      )}
+                    </div>
+                    <div className="px-3 py-2.5">
+                      <h3 className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">
+                        {cat.name}
+                      </h3>
+                      <p className="text-xs text-muted-foreground mt-0.5">
+                        {cat.subcategories.length} {cat.subcategories.length === 1 ? "позиция" : cat.subcategories.length < 5 ? "позиции" : "позиций"}
+                      </p>
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+          </section>
+
+          {/* CTA form */}
+          <section id="catalog-cta-form" className="mb-10 scroll-mt-20">
+            <Card><CardContent className="p-6">
+              <h2 className="text-base font-bold text-foreground mb-2 tracking-wide uppercase">Нужна консультация или расчёт?</h2>
+              <p className="text-sm text-muted-foreground mb-5">Оставьте заявку — ответим в течение 24 часов.</p>
+              <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div className="space-y-1.5"><Label className="text-xs">Имя *</Label><Input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Ваше имя" maxLength={100} /></div>
+                <div className="space-y-1.5"><Label className="text-xs">Телефон *</Label><Input value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} placeholder="+7 (___) ___-__-__" maxLength={20} /></div>
+                <div className="space-y-1.5"><Label className="text-xs">E-mail</Label><Input type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="mail@example.com" maxLength={255} /></div>
+                <div className="space-y-1.5 sm:col-span-3"><Label className="text-xs">Описание задачи</Label><Textarea value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} placeholder="Опишите задачу…" rows={3} maxLength={1000} /></div>
+                <div className="sm:col-span-3"><Button type="submit" className="w-full sm:w-auto">Отправить заявку</Button></div>
+              </form>
+            </CardContent></Card>
+          </section>
+
+          <PageFooter />
         </main>
       </>
     );
