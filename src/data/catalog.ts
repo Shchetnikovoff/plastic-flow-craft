@@ -119,6 +119,7 @@ export const catalog: CatalogCategory[] = [
     id: "labmebel",
     name: "Лабораторная мебель",
     slug: "labmebel",
+    image: "/images/labmebel-hero-1.png",
     subcategories: [],
   },
   {
