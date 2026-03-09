@@ -73,6 +73,7 @@ export const catalog: CatalogCategory[] = [
     id: "gazoochistka",
     name: "Газоочистка",
     slug: "gazoochistka",
+    image: "/images/gazoochistka-hero-1.png",
     subcategories: [
       { id: "go1", name: "Скрубберы вертикальные", slug: "skrubbery-vertikalnye", externalPath: "/catalog/gazoochistka/skrubbery", image: "/images/skrubber-vertikalnyj-1.jpg" },
       { id: "go2", name: "Скрубберы горизонтальные", slug: "skrubbery-gorizontalnye", externalPath: "/catalog/gazoochistka/skrubbery", image: "/images/skrubber-gorizontalnyj-1.jpg" },
