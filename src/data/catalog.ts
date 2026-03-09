@@ -18,6 +18,8 @@ export interface CatalogCategory {
   slug: string;
   /** Optional description shown on the category page */
   description?: string;
+  /** Category thumbnail image */
+  image?: string;
   subcategories: CatalogSubcategory[];
 }
 
@@ -27,7 +29,7 @@ export const catalog: CatalogCategory[] = [
     name: "Гальваника",
     slug: "galvanika",
     description: "Гальваническое оборудование. Проектирование, производство и монтаж.",
-
+    image: "/images/galvanika-hero-1.png",
     subcategories: [],
   },
   {
@@ -35,6 +37,7 @@ export const catalog: CatalogCategory[] = [
     name: "Водоочистка",
     slug: "vodoochistka",
     description: "Полимерное водоочистное оборудование — эффективность, долговечность и устойчивость к агрессивным средам!",
+    image: "/images/vodoochistka-hero-1.jpeg",
     subcategories: [
       { id: "v2", name: "ФФУ флотационно-фильтровальная установка", slug: "ffu", externalPath: "/catalog/vodoochistka/ffu", image: "/images/ffu-thumb.png" },
       { id: "v3", name: "Ламельный тонкослойный отстойник-сепаратор", slug: "lamelnyj-otstojnik", externalPath: "/catalog/vodoochistka/lamelnyj-otstojnik", image: "/images/lamelnyj-thumb.png" },
@@ -49,6 +52,7 @@ export const catalog: CatalogCategory[] = [
     id: "vodopodgotovka",
     name: "Водоподготовка",
     slug: "vodopodgotovka",
+    image: "/images/vodopodgotovka-hero-1.png",
     subcategories: [],
   },
   {
@@ -56,6 +60,7 @@ export const catalog: CatalogCategory[] = [
     name: "Вентиляция",
     slug: "ventilyatsiya",
     description: "Элементы промышленной вентиляции из полипропилена — круглого и прямоугольного сечения.",
+    image: "/images/ventilyatsiya-hero-1.png",
     subcategories: [
       // — Круглого сечения —
       { id: "ve1", name: "Отвод вентиляционный", slug: "otvod", externalPath: "/", image: "/images/product-1.png", group: "Круглого сечения" },
@@ -68,6 +73,7 @@ export const catalog: CatalogCategory[] = [
     id: "gazoochistka",
     name: "Газоочистка",
     slug: "gazoochistka",
+    image: "/images/gazoochistka-hero-1.png",
     subcategories: [
       { id: "go1", name: "Скрубберы вертикальные", slug: "skrubbery-vertikalnye", externalPath: "/catalog/gazoochistka/skrubbery", image: "/images/skrubber-vertikalnyj-1.jpg" },
       { id: "go2", name: "Скрубберы горизонтальные", slug: "skrubbery-gorizontalnye", externalPath: "/catalog/gazoochistka/skrubbery", image: "/images/skrubber-gorizontalnyj-1.jpg" },
@@ -80,6 +86,7 @@ export const catalog: CatalogCategory[] = [
     name: "Ёмкости",
     slug: "emkosti",
     description: "Промышленные ёмкости из листового полипропилена и полиэтилена — надёжность, проверенная временем!",
+    image: "/images/emkosti-hero-1.png",
     subcategories: [
       { id: "e3", name: "Ёмкости подземные", slug: "podzemnye", externalPath: "/catalog/emkosti/podzemnye", image: "/images/emkosti-podzemnye-1.jpg" },
       { id: "e4", name: "Ёмкости прямоугольные", slug: "pryamougolnye", externalPath: "/catalog/emkosti/pryamougolnye", image: "/images/emkost-pryam-pp-1.png" },
@@ -91,36 +98,42 @@ export const catalog: CatalogCategory[] = [
     id: "reaktory",
     name: "Химические реакторы",
     slug: "reaktory",
+    image: "/images/reaktory-hero-1.png",
     subcategories: [],
   },
   {
     id: "gidrometallurgiya",
     name: "Гидрометаллургия",
     slug: "gidrometallurgiya",
+    image: "/images/gidrometallurgiya-hero-1.png",
     subcategories: [],
   },
   {
     id: "kns",
     name: "КНС",
     slug: "kns",
+    image: "/images/kns-hero-1.png",
     subcategories: [],
   },
   {
     id: "labmebel",
     name: "Лабораторная мебель",
     slug: "labmebel",
+    image: "/images/labmebel-hero-1.png",
     subcategories: [],
   },
   {
     id: "shkafy-upravleniya",
     name: "Шкафы управления",
     slug: "shkafy-upravleniya",
+    image: "/images/shkafy-hero-1.png",
     subcategories: [],
   },
   {
     id: "uslugi",
     name: "Услуги",
     slug: "uslugi",
+    image: "/images/uslugi-hero-1.png",
     subcategories: [],
   },
 ];
