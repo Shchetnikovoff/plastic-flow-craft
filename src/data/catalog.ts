@@ -115,11 +115,7 @@ export const catalog: CatalogCategory[] = [
     id: "shkafy-upravleniya",
     name: "Шкафы управления",
     slug: "shkafy-upravleniya",
-    subcategories: [
-      { id: "su1", name: "Шкафы управления гальванической линией", slug: "galvanicheskoy-liniey", image: "/images/su-galvanika.png", description: "Шкафы автоматического управления гальваническими линиями. ПЛК-контроллеры, сенсорные панели, управление температурой, током и временем процессов." },
-      { id: "su2", name: "Шкафы управления очистными", slug: "ochistnymi", image: "/images/su-ochistnye.png", description: "Шкафы управления очистными сооружениями: дозирование реагентов, контроль pH, управление насосами и задвижками. Автоматический и ручной режимы." },
-      { id: "su3", name: "Шкафы управления насосами", slug: "nasosami", image: "/images/su-nasosy.png", description: "Шкафы управления насосными станциями: пуск/остановка, защита от сухого хода, контроль уровня. Степень защиты IP54–IP65." },
-    ],
+    subcategories: [],
   },
   {
     id: "uslugi",
