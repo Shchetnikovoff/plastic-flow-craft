@@ -50,8 +50,6 @@ const advantages = [
 const Inner = () => {
   const [cartOpen, setCartOpen] = useState(false);
   const [form, setForm] = useState({ name: "", phone: "", email: "", description: "" });
-  const [selectedSubId, setSelectedSubId] = useState<string | null>(null);
-  const category = findCategory("kns");
   const catIndex = 9;
 
   const handleSubmit = (e: React.FormEvent) => { e.preventDefault(); if (!form.name.trim() || !form.phone.trim()) { toast.error("Заполните обязательные поля"); return; } toast.success("Заявка отправлена!"); setForm({ name: "", phone: "", email: "", description: "" }); };
