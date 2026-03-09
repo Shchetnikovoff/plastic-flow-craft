@@ -78,9 +78,6 @@ const advantages = [
 const GalvanikaPageInner = () => {
   const [cartOpen, setCartOpen] = useState(false);
   const [form, setForm] = useState({ name: "", phone: "", email: "", description: "" });
-  const [selectedSubId, setSelectedSubId] = useState<string | null>(null);
-  const category = findCategory("galvanika");
-  const catIndex = 1;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
