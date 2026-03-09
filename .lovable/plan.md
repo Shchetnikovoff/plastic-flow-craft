@@ -1,79 +1,55 @@
 
 
-## Plan: Restructure all category landing pages to match EmkostiPage template
+## Plan: Add "Ёмкости подземные из спиральновитой трубы" Subcategory Page
 
-### Reference structure (EmkostiPage)
-1. Breadcrumbs
-2. Hero (company label → H1 → subtitle → CTA button → 2 hero images)
-3. Intro (description + "Почему выбирают нас" checklist)
-4. Section: Назначение (application cards grid)
-5. Section: Материалы (material spec cards)
-6. Section: Виды и модификации (accordion)
-7. CTA link card (optional, e.g. to configurator)
-8. Преимущества сотрудничества (icon cards 3-col)
-9. **Subcategories grid** (sidebar nav + image cards from catalog data)
-10. CTA Form
-11. PageFooter
+### What We're Building
 
-### Current state
-- **EmkostiPage** — reference ✅
-- **Vodoochistka** — similar structure but **missing subcategories grid** at bottom
-- **10 other categories** (Гальваника, Газоочистка, Водоподготовка, Вентиляция, Реакторы, Гидрометаллургия, КНС, Лабмебель, Шкафы управления, Услуги) — no dedicated landing pages, only generic CatalogPage view
+A new dedicated landing page for the underground containers subcategory (item "e3" in catalog: "Ёмкости подземные") at `/catalog/emkosti/podzemnye`. This is a full content page similar to EmkostiPage but focused on spiral-wound pipe underground containers.
 
 ### Changes
 
-#### Phase 1: Restructure Vodoochistka (1 file)
-- Add subcategories grid section (sidebar + image cards) before CTA form, pulling data from `findCategory("vodoochistka")`
-- Keep all existing content sections unchanged
+#### 1. Copy uploaded images to project
+- `alexander-tortsev-9-1.jpg` → `public/images/emkosti-podzemnye-1.jpg`
+- `alexander-tortsev-8-4.jpg` → `public/images/emkosti-podzemnye-2.jpg`
+- `yomkosti-i-rezervuaryi.png` → `public/images/emkosti-podzemnye-3.png`
 
-#### Phase 2: Create 10 new category landing pages
-Each page follows the EmkostiPage template with category-specific content:
+#### 2. Create data file `src/data/podzemnyeProducts.ts`
+Size table (from polycorr.ru reference, 12 rows):
 
-| # | Category | File | Content focus |
-|---|----------|------|---------------|
-| 1 | Гальваника | `GalvanikaPage.tsx` | Гальванические линии, ванны, оборудование |
-| 2 | Газоочистка | `GazoochistkaPage.tsx` | Скрубберы, ФВГ, каплеуловители |
-| 3 | Водоподготовка | `VodopodgotovkaPage.tsx` | Обратный осмос, системы подготовки воды |
-| 4 | Вентиляция | `VentilyatsiyaPage.tsx` | Воздуховоды, отводы, тройники из полипропилена |
-| 5 | Химические реакторы | `ReaktoryPage.tsx` | Реакторы из PP, PE, для гидрометаллургии |
-| 6 | Гидрометаллургия | `GidrometallurgiyaPage.tsx` | Реакторы осаждения, нутч-фильтры, выщелачивание |
-| 7 | КНС | `KnsPage.tsx` | КНС в корпусе SVT и из полипропилена |
-| 8 | Лабораторная мебель | `LabMebelPage.tsx` | Мебель, шкафы, мойки из полипропилена |
-| 9 | Шкафы управления | `ShkafyUpravleniyaPage.tsx` | Шкафы для гальваники, очистных, насосов |
-| 10 | Услуги | `UslugiPage.tsx` | Проектирование, монтаж, пусконаладка |
+| Объём, м³ | Ø корпуса, мм | Длина (L), мм |
+|-----------|---------------|---------------|
+| 20 | 2400 | 4500 |
+| 25 | 2400 | 5600 |
+| 30 | 2400 | 6700 |
+| 40 | 2400 | 8800 |
+| 50 | 2400 | 11000 |
+| 60 | 3000 | 8500 |
+| 70 | 3000 | 9900 |
+| 80 | 3000 | 11400 |
+| 90 | 3200 | 11200 |
+| 100 | 3200 | 12500 |
+| 120 | 3500 | 12500 |
+| 150 | 3600 | 14700 |
 
-Each page will include:
-- Breadcrumbs (Каталог → Категория)
-- Hero with 2 generated images + CTA
-- Intro + "Почему выбирают нас"
-- 2-3 content sections relevant to the category
-- Преимущества сотрудничества
-- Subcategories grid (from catalog data)
-- CTA form + PageFooter
+#### 3. Create `src/pages/EmkostiPodzemnye.tsx`
+Full landing page with all provided text structured into sections:
+- **Hero**: company name, title "Подземные ёмкости из спиральновитых труб", 3 product images in grid
+- **Intro**: description + "Почему выбирают нас" checklist (6 items)
+- **Раздел 1 — Назначение**: 8 application areas as card grid
+- **Раздел 2 — Технология и материалы**: materials (ПНД, PP, армированные), key specs (diameter, length, pressure, temperature, ring stiffness, seismic), advantages of spiral-wound construction
+- **Раздел 3 — Виды и модификации**: accordion sections (по назначению, по конструкции, по способу монтажа, дополнительные опции)
+- **Типоразмерный ряд**: table from the data file
+- **Раздел 4 — Преимущества сотрудничества**: 6 advantage cards
+- **CTA form**: contact form (name, phone, email, description)
 
-#### Phase 3: Routing updates (`App.tsx`)
-Add 10 new routes before the generic `/catalog/:categorySlug` catch:
-```
-/catalog/galvanika → GalvanikaPage
-/catalog/gazoochistka → GazoochistkaPage
-/catalog/vodopodgotovka → VodopodgotovkaPage
-/catalog/ventilyatsiya → VentilyatsiyaPage
-/catalog/reaktory → ReaktoryPage
-/catalog/gidrometallurgiya → GidrometallurgiyaPage
-/catalog/kns → KnsPage
-/catalog/labmebel → LabMebelPage
-/catalog/shkafy-upravleniya → ShkafyUpravleniyaPage
-/catalog/uslugi → UslugiPage
-```
+#### 4. Update `src/App.tsx`
+Add route: `/catalog/emkosti/podzemnye` → `EmkostiPodzemnye`
 
-#### Phase 4: Generate hero images
-20 new hero images (2 per category) + update existing if needed.
+#### 5. Update `src/data/catalog.ts`
+Add `externalPath: "/catalog/emkosti/podzemnye"` to the "e3" subcategory entry so clicking it navigates to the dedicated page.
 
 ### Files
-- **Modify**: `src/pages/Vodoochistka.tsx`, `src/App.tsx`
-- **Create**: 10 new page files in `src/pages/`
-- **Create**: ~20 hero images in `public/images/`
-
-### Note
-This is a large task. I recommend implementing it in 2-3 batches to keep changes manageable. Content for each page will be generated based on the category's products and subcategories, matching the industrial polypropylene/polyethylene equipment theme of the site.
+- **Copy**: 3 images to `public/images/`
+- **Create**: `src/data/podzemnyeProducts.ts`, `src/pages/EmkostiPodzemnye.tsx`
+- **Modify**: `src/App.tsx`, `src/data/catalog.ts`
 
