@@ -26,16 +26,11 @@ import VodoochistkaShkafyDozirovaniya from "./pages/VodoochistkaShkafyDozirovani
 import GazoochistkaSkrubbery from "./pages/GazoochistkaSkrubbery";
 import GazoochistkaFvg from "./pages/GazoochistkaFvg";
 import GazoochistkaKapleuloviteli from "./pages/GazoochistkaKapleuloviteli";
-import GalvanikaPage from "./pages/GalvanikaPage";
 import GazoochistkaPage from "./pages/GazoochistkaPage";
-import VodopodgotovkaPage from "./pages/VodopodgotovkaPage";
 import VentilyatsiyaPage from "./pages/VentilyatsiyaPage";
 import ReaktoryPage from "./pages/ReaktoryPage";
 import GidrometallurgiyaPage from "./pages/GidrometallurgiyaPage";
 import KnsPage from "./pages/KnsPage";
-import LabMebelPage from "./pages/LabMebelPage";
-import ShkafyUpravleniyaPage from "./pages/ShkafyUpravleniyaPage";
-import UslugiPage from "./pages/UslugiPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
