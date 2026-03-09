@@ -59,7 +59,7 @@ export const catalog: CatalogCategory[] = [
     name: "Водоподготовка",
     slug: "vodopodgotovka",
     subcategories: [
-      { id: "vp1", name: "Система подготовки воды / обратный осмос", slug: "obratnyj-osmos", image: "/images/vodopodgotovka-osmos.png" },
+      { id: "vp1", name: "Система подготовки воды / обратный осмос", slug: "obratnyj-osmos", image: "/images/vodopodgotovka-osmos.png", description: "Системы обратного осмоса для подготовки воды промышленного и питьевого качества. Мембранные установки в корпусах из полипропилена, устойчивые к коррозии. Производительность от 0,5 до 100 м³/ч." },
     ],
   },
   {
