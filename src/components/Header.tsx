@@ -28,6 +28,7 @@ const Header = ({ onCartOpen, angle = 90, connectionType = "rastrub", productTyp
   const { totalItems } = useCart();
   const location = useLocation();
   const [openCat, setOpenCat] = useState<string | null>(null);
+  const scrollNavRef = useRef<HTMLDivElement>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const navRef = useRef<HTMLDivElement>(null);
 
@@ -46,6 +47,18 @@ const Header = ({ onCartOpen, angle = 90, connectionType = "rastrub", productTyp
   useEffect(() => {
     setOpenCat(null);
     setMobileOpen(false);
+  }, [location.pathname]);
+
+  // Scroll active tab into view after route change
+  useEffect(() => {
+    requestAnimationFrame(() => {
+      const container = scrollNavRef.current;
+      if (!container) return;
+      const active = container.querySelector('[data-active="true"]') as HTMLElement | null;
+      if (active) {
+        active.scrollIntoView({ inline: "center", behavior: "instant", block: "nearest" });
+      }
+    });
   }, [location.pathname]);
 
   const isActiveCat = (catSlug: string) => {
@@ -124,11 +137,11 @@ const Header = ({ onCartOpen, angle = 90, connectionType = "rastrub", productTyp
 
       {/* Desktop category navigation */}
       <div ref={navRef} className="hidden md:block border-t border-border bg-muted/30 relative">
-        <div className="mx-auto max-w-[960px] px-4 sm:px-6 overflow-x-auto scrollbar-none">
+        <div ref={scrollNavRef} className="mx-auto max-w-[960px] px-4 sm:px-6 overflow-x-auto scrollbar-none">
           <nav className="flex items-center gap-0">
             {catalog.map((cat) => {
               return (
-                <div key={cat.id} className="flex items-center">
+                <div key={cat.id} className="flex items-center" data-active={isActiveCat(cat.slug) || undefined}>
                   <Link
                     to={`/catalog/${cat.slug}`}
                     className={`whitespace-nowrap pl-3 pr-1 py-2.5 text-xs font-semibold transition-colors border-b-2 ${
