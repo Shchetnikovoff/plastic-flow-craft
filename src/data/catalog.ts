@@ -74,10 +74,10 @@ export const catalog: CatalogCategory[] = [
       { id: "ve3", name: "Раздвижной элемент", slug: "razdvizhnoy", externalPath: "/razdvizhnoy", image: "/images/razdvizhnoy-1.png", group: "Круглого сечения" },
       { id: "ve4", name: "Воздуховод круглый", slug: "vozdukhovod", externalPath: "/vozdukhovod", image: "/images/vozdukhovod-1.png", group: "Круглого сечения" },
       // — Прямоугольного сечения —
-      { id: "ve5", name: "Воздуховод прямоугольный", slug: "vozdukhovod-pryamougolnyy", group: "Прямоугольного сечения", image: "/images/vent-vozdukhovod-pryam.png" },
-      { id: "ve6", name: "Отвод прямоугольный", slug: "otvod-pryamougolnyy", group: "Прямоугольного сечения", image: "/images/vent-otvod-pryam.png" },
-      { id: "ve7", name: "Тройник прямоугольный", slug: "troynik-pryamougolnyy", group: "Прямоугольного сечения", image: "/images/vent-troynik-pryam.png" },
-      { id: "ve8", name: "Переход круглый-прямоугольный", slug: "perekhod-kruglyy-pryamougolnyy", group: "Прямоугольного сечения", image: "/images/vent-perekhod.png" },
+      { id: "ve5", name: "Воздуховод прямоугольный", slug: "vozdukhovod-pryamougolnyy", group: "Прямоугольного сечения", image: "/images/vent-vozdukhovod-pryam.png", description: "Воздуховоды прямоугольного сечения из полипропилена для промышленной вентиляции. Стойкость к агрессивным газам, лёгкий монтаж. Изготовление по индивидуальным размерам." },
+      { id: "ve6", name: "Отвод прямоугольный", slug: "otvod-pryamougolnyy", group: "Прямоугольного сечения", image: "/images/vent-otvod-pryam.png", description: "Отводы прямоугольного сечения из полипропилена для изменения направления воздуховода. Углы 30°, 45°, 60°, 90°. Сварное соединение, высокая герметичность." },
+      { id: "ve7", name: "Тройник прямоугольный", slug: "troynik-pryamougolnyy", group: "Прямоугольного сечения", image: "/images/vent-troynik-pryam.png", description: "Тройники прямоугольного сечения из полипропилена для разветвления вентиляционных каналов. Различные углы отвода и сечения. Сварное исполнение." },
+      { id: "ve8", name: "Переход круглый-прямоугольный", slug: "perekhod-kruglyy-pryamougolnyy", group: "Прямоугольного сечения", image: "/images/vent-perekhod.png", description: "Переходные элементы для соединения круглых и прямоугольных воздуховодов. Плавный профиль, минимальные потери давления. Из полипропилена." },
     ],
   },
   {
