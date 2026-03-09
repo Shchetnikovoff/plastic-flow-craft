@@ -48,6 +48,16 @@ const Header = ({ onCartOpen, angle = 90, connectionType = "rastrub", productTyp
     setMobileOpen(false);
   }, [location.pathname]);
 
+  // Scroll active category tab into view after route change
+  useEffect(() => {
+    const active = catalog.find((cat) => isActiveCat(cat.slug));
+    if (!active) return;
+    const el = navRef.current?.querySelector(`[data-cat-slug="${active.slug}"]`) as HTMLElement | null;
+    if (el) {
+      el.scrollIntoView({ inline: "center", block: "nearest", behavior: "instant" });
+    }
+  }, [location.pathname]);
+
   const isActiveCat = (catSlug: string) => {
     if (catSlug === "ventilyatsiya") {
       return ["/", "/60", "/45", "/30", "/15", "/troynik", "/razdvizhnoy", "/vozdukhovod"].some(
