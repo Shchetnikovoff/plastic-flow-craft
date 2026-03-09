@@ -163,10 +163,10 @@ export const catalog: CatalogCategory[] = [
     name: "Услуги",
     slug: "uslugi",
     subcategories: [
-      { id: "u1", name: "Проектирование водоподготовительного и водоочистного оборудования", slug: "proektirovanie-vodoochistki", image: "/images/uslugi-proekt-vodo.png" },
-      { id: "u2", name: "Проектирование КНС", slug: "proektirovanie-kns", image: "/images/uslugi-proekt-kns.png" },
-      { id: "u3", name: "Монтаж ёмкостей", slug: "montazh-emkostej", image: "/images/uslugi-montazh-emk.png" },
-      { id: "u4", name: "Монтаж КНС", slug: "montazh-kns", image: "/images/uslugi-montazh-kns.png" },
+      { id: "u1", name: "Проектирование водоподготовительного и водоочистного оборудования", slug: "proektirovanie-vodoochistki", image: "/images/uslugi-proekt-vodo.png", description: "Полный цикл проектирования водоочистных и водоподготовительных систем: технологические схемы, подбор оборудования, рабочая документация. Опыт реализации проектов производительностью до 500 м³/ч." },
+      { id: "u2", name: "Проектирование КНС", slug: "proektirovanie-kns", image: "/images/uslugi-proekt-kns.png", description: "Проектирование канализационных насосных станций: гидравлический расчёт, подбор насосов, разработка конструкции корпуса. Учёт геологических и климатических условий площадки." },
+      { id: "u3", name: "Монтаж ёмкостей", slug: "montazh-emkostej", image: "/images/uslugi-montazh-emk.png", description: "Профессиональный монтаж промышленных ёмкостей: доставка, установка, подключение трубопроводов. Монтаж подземных и наземных ёмкостей с соблюдением СНиП." },
+      { id: "u4", name: "Монтаж КНС", slug: "montazh-kns", image: "/images/uslugi-montazh-kns.png", description: "Монтаж канализационных насосных станций «под ключ»: земляные работы, установка корпуса, подключение насосов и автоматики. Пусконаладочные работы." },
     ],
   },
 ];
