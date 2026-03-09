@@ -126,6 +126,7 @@ export const catalog: CatalogCategory[] = [
     id: "shkafy-upravleniya",
     name: "Шкафы управления",
     slug: "shkafy-upravleniya",
+    image: "/images/shkafy-hero-1.png",
     subcategories: [],
   },
   {
