@@ -49,7 +49,6 @@ const advantages = [
 const Inner = () => {
   const [cartOpen, setCartOpen] = useState(false);
   const [form, setForm] = useState({ name: "", phone: "", email: "", description: "" });
-  const [selectedSubId, setSelectedSubId] = useState<string | null>(null);
   const category = findCategory("ventilyatsiya");
   const catIndex = 4;
 
