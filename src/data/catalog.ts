@@ -29,14 +29,14 @@ export const catalog: CatalogCategory[] = [
     description: "Гальваническое оборудование. Проектирование, производство и монтаж.",
 
     subcategories: [
-      { id: "g1", name: "Гальванические линии ручные", slug: "linii-ruchnye", image: "/images/galvanika-linii-ruchnye.png" },
-      { id: "g2", name: "Гальванические линии механизированные", slug: "linii-mekhanizirovannye", image: "/images/galvanika-linii-mekh.png" },
-      { id: "g3", name: "Гальванические линии автоматические", slug: "linii-avtomaticheskie", image: "/images/galvanika-linii-avto.png" },
-      { id: "g5", name: "Линия подготовки поверхности", slug: "podgotovka-poverhnosti", image: "/images/galvanika-podgotovka.png" },
-      { id: "g6", name: "Гальванические ванны", slug: "vanny", image: "/images/galvanika-vanny.png" },
-      { id: "g7", name: "Колокольные ванны", slug: "kolokolnye-vanny", image: "/images/galvanika-kolokolnye.png" },
-      { id: "g8", name: "Гальванические барабаны", slug: "barabany", image: "/images/galvanika-barabany.png" },
-      { id: "g9", name: "Запчасти и комплектующие для гальваники", slug: "zapchasti", image: "/images/galvanika-zapchasti.png" },
+      { id: "g1", name: "Гальванические линии ручные", slug: "linii-ruchnye", image: "/images/galvanika-linii-ruchnye.png", description: "Ручные гальванические линии для нанесения покрытий на металлические изделия. Ванны из полипропилена и полиэтилена, устойчивые к агрессивным электролитам. Оптимальное решение для мелкосерийного и опытного производства." },
+      { id: "g2", name: "Гальванические линии механизированные", slug: "linii-mekhanizirovannye", image: "/images/galvanika-linii-mekh.png", description: "Механизированные гальванические линии с полуавтоматической транспортировкой деталей. Повышенная производительность при сохранении гибкости техпроцесса. Корпуса ванн из полипропилена и полиэтилена." },
+      { id: "g3", name: "Гальванические линии автоматические", slug: "linii-avtomaticheskie", image: "/images/galvanika-linii-avto.png", description: "Полностью автоматизированные гальванические линии с программным управлением. Максимальная производительность и стабильное качество покрытий. Проектирование под конкретный техпроцесс заказчика." },
+      { id: "g5", name: "Линия подготовки поверхности", slug: "podgotovka-poverhnosti", image: "/images/galvanika-podgotovka.png", description: "Линии подготовки поверхности перед нанесением гальванических покрытий: обезжиривание, травление, промывка. Ванны и ёмкости из химически стойких полимеров." },
+      { id: "g6", name: "Гальванические ванны", slug: "vanny", image: "/images/galvanika-vanny.png", description: "Гальванические ванны из полипропилена и полиэтилена для электрохимических процессов. Устойчивы к кислотам, щелочам и электролитам. Изготовление по индивидуальным размерам." },
+      { id: "g7", name: "Колокольные ванны", slug: "kolokolnye-vanny", image: "/images/galvanika-kolokolnye.png", description: "Колокольные ванны для гальванической обработки мелких деталей насыпью. Равномерное покрытие, высокая производительность. Корпус из полипропилена." },
+      { id: "g8", name: "Гальванические барабаны", slug: "barabany", image: "/images/galvanika-barabany.png", description: "Гальванические барабаны для массовой обработки мелких деталей. Перфорированный корпус из полипропилена, устойчивый к агрессивным средам. Различные объёмы загрузки." },
+      { id: "g9", name: "Запчасти и комплектующие для гальваники", slug: "zapchasti", image: "/images/galvanika-zapchasti.png", description: "Запасные части и комплектующие для гальванических линий: штанги, подвески, анодные корзины, уплотнения, фитинги. Изготовление из полимерных материалов по чертежам заказчика." },
     ],
   },
   {
