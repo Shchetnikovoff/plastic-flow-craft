@@ -105,6 +105,7 @@ export const catalog: CatalogCategory[] = [
     id: "gidrometallurgiya",
     name: "Гидрометаллургия",
     slug: "gidrometallurgiya",
+    image: "/images/gidrometallurgiya-hero-1.png",
     subcategories: [],
   },
   {
