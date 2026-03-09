@@ -91,11 +91,7 @@ export const catalog: CatalogCategory[] = [
     id: "reaktory",
     name: "Химические реакторы",
     slug: "reaktory",
-    subcategories: [
-      { id: "r1", name: "Химические реакторы из полипропилена", slug: "iz-polipropilena", image: "/images/reaktor-pp.png", description: "Химические реакторы из листового полипропилена для проведения реакций в агрессивных средах. Объём от 100 до 25 000 литров. Оснащение мешалками, теплообменниками и датчиками." },
-      { id: "r2", name: "Химические реакторы из полиэтилена", slug: "iz-polietilena", image: "/images/reaktor-pe.png", description: "Химические реакторы из полиэтилена низкого давления (ПНД) для работы с кислотами и щелочами. Высокая химическая стойкость, длительный срок службы." },
-      { id: "r3", name: "Реактор для гидрометаллургии", slug: "gidrometallurgiya", image: "/images/reaktor-gidro.png", description: "Специализированные реакторы для гидрометаллургических процессов: выщелачивание, осаждение, экстракция. Футеровка полимерами, устойчивость к кислотам." },
-    ],
+    subcategories: [],
   },
   {
     id: "gidrometallurgiya",
