@@ -245,9 +245,9 @@ const CatalogPageInner = () => {
                   </p>
                   <h3 className="text-lg font-bold text-foreground mb-2">{selectedSub.name}</h3>
                   <p className="text-sm text-muted-foreground mb-4">
-                    Раздел в разработке. Информация появится в ближайшее время.
+                    {selectedSub.description || "Описание уточняйте по запросу."}
                   </p>
-                  {selectedSub.externalPath && (
+                  {selectedSub.externalPath ? (
                     <Link
                       to={selectedSub.externalPath}
                       className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline"
@@ -255,6 +255,10 @@ const CatalogPageInner = () => {
                       Перейти на страницу
                       <ArrowRight className="h-3.5 w-3.5" />
                     </Link>
+                  ) : (
+                    <a href="#cta-form" className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline">
+                      Запросить расчёт →
+                    </a>
                   )}
                 </div>
               </div>
