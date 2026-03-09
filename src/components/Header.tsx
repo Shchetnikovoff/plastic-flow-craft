@@ -28,6 +28,7 @@ const Header = ({ onCartOpen, angle = 90, connectionType = "rastrub", productTyp
   const { totalItems } = useCart();
   const location = useLocation();
   const [openCat, setOpenCat] = useState<string | null>(null);
+  const scrollNavRef = useRef<HTMLDivElement>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const navRef = useRef<HTMLDivElement>(null);
 
