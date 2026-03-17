@@ -31,6 +31,11 @@ import VentilyatsiyaPage from "./pages/VentilyatsiyaPage";
 import ReaktoryPage from "./pages/ReaktoryPage";
 import GidrometallurgiyaPage from "./pages/GidrometallurgiyaPage";
 import KnsPage from "./pages/KnsPage";
+import GalvanikaPage from "./pages/GalvanikaPage";
+import VodopodgotovkaPage from "./pages/VodopodgotovkaPage";
+import LabMebelPage from "./pages/LabMebelPage";
+import ShkafyUpravleniyaPage from "./pages/ShkafyUpravleniyaPage";
+import UslugiPage from "./pages/UslugiPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -73,6 +78,11 @@ const App = () => (
           <Route path="/catalog/reaktory" element={<ReaktoryPage />} />
           <Route path="/catalog/gidrometallurgiya" element={<GidrometallurgiyaPage />} />
           <Route path="/catalog/kns" element={<KnsPage />} />
+          <Route path="/catalog/galvanika" element={<GalvanikaPage />} />
+          <Route path="/catalog/vodopodgotovka" element={<VodopodgotovkaPage />} />
+          <Route path="/catalog/labmebel" element={<LabMebelPage />} />
+          <Route path="/catalog/shkafy-upravleniya" element={<ShkafyUpravleniyaPage />} />
+          <Route path="/catalog/uslugi" element={<UslugiPage />} />
           <Route path="/catalog" element={<CatalogPage />} />
           <Route path="/catalog/:categorySlug" element={<CatalogPage />} />
           <Route path="/catalog/:categorySlug/:subSlug" element={<CatalogPage />} />

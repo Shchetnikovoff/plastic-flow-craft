@@ -71,8 +71,8 @@ const Inner = () => {
           <p className="text-sm text-muted-foreground mb-5">Реакторы из полипропилена и полиэтилена для химических, гидрометаллургических и технологических процессов!</p>
           <Button onClick={scrollToForm}>Получить расчёт стоимости</Button>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
-            <div className="rounded-lg border border-border overflow-hidden bg-card"><img src="/images/reaktory-hero-1.png" alt="Химический реактор" className="w-full h-56 object-cover" /></div>
-            <div className="rounded-lg border border-border overflow-hidden bg-card"><img src="/images/reaktory-hero-2.png" alt="Реактор из полипропилена" className="w-full h-56 object-cover" /></div>
+            <div className="rounded-lg border border-border overflow-hidden bg-card"><img src="/images/reaktor-hero-1.jpg" alt="Химический реактор — 3D-модель (прозрачный корпус)" className="w-full h-56 object-cover" /></div>
+            <div className="rounded-lg border border-border overflow-hidden bg-card"><img src="/images/reaktor-hero-2.jpg" alt="Реактор из полипропилена — 3D-модель" className="w-full h-56 object-cover" /></div>
           </div>
         </section>
 
