@@ -72,6 +72,23 @@ const ku1Data = [
   { size: "27500", flow: "27 500", D: "800–1250", A: "2040–1490", B: "780", V: "2330", mass: "115" },
 ];
 
+const ku1ProductData = [
+  { model: "КУ.1-300", flow: "250-300", mass: "6" },
+  { model: "КУ.1-500", flow: "250-500", mass: "7" },
+  { model: "КУ.1-900", flow: "400-900", mass: "9" },
+  { model: "КУ.1-1400", flow: "200-1400", mass: "12" },
+  { model: "КУ.1-2200", flow: "250-2200", mass: "16" },
+  { model: "КУ.1-3400", flow: "315-3400", mass: "19" },
+  { model: "КУ.1-5500", flow: "400-5500", mass: "29" },
+  { model: "КУ.1-6900", flow: "450-6900", mass: "35" },
+  { model: "КУ.1-8500", flow: "500-8500", mass: "42" },
+  { model: "КУ.1-10700", flow: "560-10700", mass: "45" },
+  { model: "КУ.1-13500", flow: "630-13500", mass: "50" },
+  { model: "КУ.1-17000", flow: "710-17000", mass: "59" },
+  { model: "КУ.1-22000", flow: "800-22000", mass: "74" },
+  { model: "КУ.1-27500", flow: "900-27500", mass: "92" },
+];
+
 const ku6Data = [
   { size: "125", flow: "125", D: "100–125", A: "530", B: "150", V: "174", mass: "1,5" },
 ];
@@ -281,6 +298,32 @@ const GazoochistkaKapleuloviteliInner = () => {
                 </CardContent>
               </Card>
             ))}
+          </div>
+        </section>
+
+        {/* КУ.1 Product table */}
+        <section className="mb-10">
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Типоразмерный ряд каплеуловителей КУ.1</h2>
+          <p className="text-sm text-muted-foreground mb-3">Эффективность очистки капельной влаги — 99,9%</p>
+          <div className="rounded-lg border border-border overflow-auto">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead className="text-xs">Модель</TableHead>
+                  <TableHead className="text-xs text-right">Расход воздуха, м³/ч</TableHead>
+                  <TableHead className="text-xs text-right">Масса, кг</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {ku1ProductData.map((r, i) => (
+                  <TableRow key={i} className={i % 2 === 1 ? "bg-muted/50" : ""}>
+                    <TableCell className="text-xs font-medium">{r.model}</TableCell>
+                    <TableCell className="text-xs text-right">{r.flow}</TableCell>
+                    <TableCell className="text-xs text-right">{r.mass}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
           </div>
         </section>
 

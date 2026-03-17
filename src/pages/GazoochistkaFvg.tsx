@@ -131,8 +131,8 @@ const GazoochistkaFvgInner = () => {
           </p>
           <Button onClick={scrollToForm} className="gap-2">Получить расчёт стоимости</Button>
           <div className="grid grid-cols-2 gap-3 mt-6">
-            <img src="/images/fvg-hero-1.png" alt="Фильтр ФВГ — общий вид" className="rounded-lg border border-border object-cover w-full aspect-[4/3]" />
-            <img src="/images/fvg-hero-2.png" alt="Фильтрующие элементы ФВГ" className="rounded-lg border border-border object-cover w-full aspect-[4/3]" />
+            <img src="/images/fvg-real-1.png" alt="Фильтр ФВГ — общий вид" className="rounded-lg border border-border object-cover w-full aspect-[4/3]" />
+            <img src="/images/fvg-real-2.png" alt="Фильтрующие элементы ФВГ" className="rounded-lg border border-border object-cover w-full aspect-[4/3]" />
           </div>
         </section>
 
@@ -147,6 +147,19 @@ const GazoochistkaFvgInner = () => {
               </li>
             ))}
           </ul>
+        </section>
+
+        {/* Filter sizes info */}
+        <section className="mb-10">
+          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">Размерный ряд фильтров</h2>
+          <div className="space-y-2 text-sm text-muted-foreground leading-relaxed">
+            <p>
+              Выпускаются 5 типоразмеров фильтров с площадью поверхности фильтрования: <span className="font-semibold text-foreground">0,37</span>, <span className="font-semibold text-foreground">0,74</span>, <span className="font-semibold text-foreground">1,6</span>, <span className="font-semibold text-foreground">3,2</span> и <span className="font-semibold text-foreground">6,4</span> м².
+            </p>
+            <p>
+              Производительность — от <span className="font-semibold text-foreground">2 500</span> до <span className="font-semibold text-foreground">80 000</span> м³/ч, что позволяет подобрать оптимальное решение для любого масштаба производства.
+            </p>
+          </div>
         </section>
 
         {/* Principle */}

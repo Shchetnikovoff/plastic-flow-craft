@@ -27,10 +27,8 @@ import PageFooter from "@/components/PageFooter";
 /* ── static data ── */
 
 const heroImages = [
-  "/images/shkaf-dozirovochnyj-1.jpg",
-  "/images/shkaf-dozirovochnyj-2.jpg",
-  "/images/shkaf-dozirovochnyj-3.jpg",
-  "/images/shkaf-dozirovochnyj-4.jpg",
+  "/images/shkafy-doz-real-1.jpg",
+  "/images/shkafy-doz-real-2.jpg",
 ];
 
 const whyUs = [
@@ -161,7 +159,7 @@ const VodoochistkaShkafyDozirovaniyaInner = () => {
             Получить коммерческое предложение
           </Button>
 
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mt-6">
+          <div className="grid grid-cols-2 gap-3 mt-6">
             {heroImages.map((src, i) => (
               <img key={i} src={src} alt={`Шкаф дозировочный ${i + 1}`} className="w-full aspect-[4/3] object-cover rounded-lg border border-border" />
             ))}
@@ -190,11 +188,11 @@ const VodoochistkaShkafyDozirovaniyaInner = () => {
         {/* Section 1: Основные компоненты */}
         <section className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Основные компоненты</h2>
-          <div className="space-y-2">
+          <div className="rounded-lg border border-border overflow-hidden">
             {components.map((c, i) => (
-              <div key={i} className="flex items-start gap-2 rounded-lg border border-border bg-card p-3">
+              <div key={i} className={`flex items-start gap-2 p-3 text-sm ${i % 2 === 1 ? "bg-muted/50" : "bg-card"}`}>
                 <c.icon className="h-4 w-4 text-primary shrink-0 mt-0.5" />
-                <span className="text-sm text-foreground">{c.text}</span>
+                <span className="text-foreground">{c.text}</span>
               </div>
             ))}
           </div>
@@ -203,9 +201,9 @@ const VodoochistkaShkafyDozirovaniyaInner = () => {
         {/* Section 2: Функции */}
         <section className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Функции шкафов управления</h2>
-          <div className="space-y-3">
-            {functions.map((s) => (
-              <div key={s.step} className="flex gap-3 items-start rounded-lg border border-border bg-card p-3">
+          <div className="rounded-lg border border-border overflow-hidden">
+            {functions.map((s, i) => (
+              <div key={s.step} className={`flex gap-3 items-start p-3 ${i % 2 === 1 ? "bg-muted/50" : "bg-card"}`}>
                 <span className="flex items-center justify-center h-7 w-7 rounded-full bg-primary text-primary-foreground text-xs font-bold shrink-0">
                   {s.step}
                 </span>

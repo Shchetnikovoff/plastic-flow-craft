@@ -35,45 +35,45 @@ const whyUs = [
 ];
 
 const chModels = [
-  { article: "CH-0,1", flow: "100", diameter: "160", dimensions: "1050×1550×3900" },
-  { article: "CH-0,5", flow: "500", diameter: "170", dimensions: "1050×1550×4000" },
-  { article: "CH-1", flow: "1 000", diameter: "190", dimensions: "1050×1550×4100" },
-  { article: "CH-1,5", flow: "1 500", diameter: "230", dimensions: "1050×1650×4200" },
-  { article: "CH-2", flow: "2 000", diameter: "260", dimensions: "1150×1700×4400" },
-  { article: "CH-3", flow: "3 000", diameter: "290", dimensions: "1250×1790×4600" },
-  { article: "CH-4", flow: "4 000", diameter: "320", dimensions: "1350×1900×4700" },
-  { article: "CH-5", flow: "5 000", diameter: "370", dimensions: "1450×2000×4890" },
-  { article: "CH-6", flow: "6 000", diameter: "425", dimensions: "1550×2150×5200" },
-  { article: "CH-8", flow: "8 000", diameter: "475", dimensions: "1680×2300×5400" },
-  { article: "CH-10", flow: "10 000", diameter: "525", dimensions: "1800×2400×5600" },
-  { article: "CH-12", flow: "12 000", diameter: "580", dimensions: "2000×2550×5790" },
-  { article: "CH-15", flow: "15 000", diameter: "650", dimensions: "2150×2850×5910" },
-  { article: "CH-20", flow: "20 000", diameter: "720", dimensions: "2390×3100×6100" },
-  { article: "CH-25", flow: "25 000", diameter: "850", dimensions: "2600×3250×6400" },
-  { article: "CH-30", flow: "30 000", diameter: "950", dimensions: "3000×3600×6700" },
-  { article: "CH-40", flow: "40 000", diameter: "1000", dimensions: "3180×3780×7400" },
+  { model: "СН-0.1", flow: "100", dimensions: "1050×1550×3900" },
+  { model: "СН-0.5", flow: "500", dimensions: "1050×1550×4000" },
+  { model: "СН-1", flow: "1 000", dimensions: "1050×1550×4100" },
+  { model: "СН-1.5", flow: "1 500", dimensions: "1050×1650×4200" },
+  { model: "СН-2", flow: "2 000", dimensions: "1150×1700×4400" },
+  { model: "СН-3", flow: "3 000", dimensions: "1250×1790×4600" },
+  { model: "СН-4", flow: "4 000", dimensions: "1350×1900×4700" },
+  { model: "СН-5", flow: "5 000", dimensions: "1450×2000×4890" },
+  { model: "СН-6", flow: "6 000", dimensions: "1550×2150×5200" },
+  { model: "СН-8", flow: "8 000", dimensions: "1680×2300×5400" },
+  { model: "СН-10", flow: "10 000", dimensions: "1800×2400×5600" },
+  { model: "СН-12", flow: "12 000", dimensions: "2000×2550×5790" },
+  { model: "СН-15", flow: "15 000", dimensions: "2150×2850×5910" },
+  { model: "СН-20", flow: "20 000", dimensions: "2390×3100×6100" },
+  { model: "СН-25", flow: "25 000", dimensions: "2600×3250×6400" },
+  { model: "СН-30", flow: "30 000", dimensions: "3000×3600×6700" },
+  { model: "СН-40", flow: "40 000", dimensions: "3180×3780×7400" },
 ];
 
 const ctModels = [
-  { article: "CT-0,5", flow: "500", diameter: "160", dimensions: "2250×1050×1550" },
-  { article: "CT-1", flow: "1 000", diameter: "170", dimensions: "2250×1050×1550" },
-  { article: "CT-1,5", flow: "1 500", diameter: "190", dimensions: "2400×1100×1600" },
-  { article: "CT-2", flow: "2 000", diameter: "230", dimensions: "2500×1150×1650" },
-  { article: "CT-3", flow: "3 000", diameter: "260", dimensions: "2600×1200×1700" },
-  { article: "CT-4", flow: "4 000", diameter: "290", dimensions: "2700×1300×1790" },
-  { article: "CT-5", flow: "5 000", diameter: "320", dimensions: "2800×1350×1900" },
-  { article: "CT-6", flow: "6 000", diameter: "370", dimensions: "2900×1450×2000" },
-  { article: "CT-8", flow: "8 000", diameter: "425", dimensions: "3000×1550×2150" },
-  { article: "CT-10", flow: "10 000", diameter: "475", dimensions: "3100×1680×2300" },
-  { article: "CT-12", flow: "12 000", diameter: "525", dimensions: "3200×1800×2400" },
-  { article: "CT-15", flow: "15 000", diameter: "580", dimensions: "3300×1900×2500" },
-  { article: "CT-20", flow: "20 000", diameter: "650", dimensions: "3400×2000×2600" },
-  { article: "CT-25", flow: "25 000", diameter: "720", dimensions: "3450×2100×2700" },
-  { article: "CT-30", flow: "30 000", diameter: "850", dimensions: "3500×2150×2800" },
-  { article: "CT-40", flow: "40 000", diameter: "950", dimensions: "3600×2200×2900" },
-  { article: "CT-50", flow: "50 000", diameter: "1000", dimensions: "3650×2300×2950" },
-  { article: "CT-55", flow: "55 000", diameter: "1100", dimensions: "3680×2320×2980" },
-  { article: "CT-60", flow: "60 000", diameter: "1250", dimensions: "3700×2350×3000" },
+  { model: "СТ-0.5", flow: "500", dimensions: "2250×1050×1550" },
+  { model: "СТ-1", flow: "1 000", dimensions: "2250×1050×1550" },
+  { model: "СТ-1.5", flow: "1 500", dimensions: "2250×1050×1550" },
+  { model: "СТ-2", flow: "2 000", dimensions: "2250×1150×1650" },
+  { model: "СТ-2.5", flow: "2 500", dimensions: "2250×1150×1650" },
+  { model: "СТ-3", flow: "3 000", dimensions: "2400×1400×1800" },
+  { model: "СТ-4", flow: "4 000", dimensions: "2400×1450×1800" },
+  { model: "СТ-5", flow: "5 000", dimensions: "2400×1450×1850" },
+  { model: "СТ-6", flow: "6 000", dimensions: "2525×1500×1900" },
+  { model: "СТ-8", flow: "8 000", dimensions: "2575×1600×1990" },
+  { model: "СТ-10", flow: "10 000", dimensions: "2725×1650×2015" },
+  { model: "СТ-12", flow: "12 000", dimensions: "2800×1700×2100" },
+  { model: "СТ-16", flow: "16 000", dimensions: "2850×1750×2200" },
+  { model: "СТ-20", flow: "20 000", dimensions: "2900×1800×2300" },
+  { model: "СТ-25", flow: "25 000", dimensions: "3450×2000×2400" },
+  { model: "СТ-30", flow: "30 000", dimensions: "3600×2200×2500" },
+  { model: "СТ-40", flow: "40 000", dimensions: "3600×2350×2700" },
+  { model: "СТ-50", flow: "50 000", dimensions: "3700×2350×2800" },
+  { model: "СТ-60", flow: "60 000", dimensions: "3700×2350×3000" },
 ];
 
 const applications = [
@@ -133,22 +133,20 @@ const GazoochistkaSkrubberyInner = () => {
   };
 
   const renderTable = (models: typeof chModels) => (
-    <div className="rounded-lg border border-border overflow-auto">
+    <div className="rounded-lg border border-border overflow-auto text-sm">
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead className="text-xs">Артикул</TableHead>
-            <TableHead className="text-xs text-right">Расход, м³/ч</TableHead>
-            <TableHead className="text-xs text-right">Ø D, мм</TableHead>
-            <TableHead className="text-xs text-right">Габариты, мм</TableHead>
+            <TableHead className="text-xs">Модель</TableHead>
+            <TableHead className="text-xs text-right">Произв., м³/ч</TableHead>
+            <TableHead className="text-xs text-right">Габариты (Д×Ш×В), мм</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {models.map((m, i) => (
-            <TableRow key={i}>
-              <TableCell className="text-xs font-medium">{m.article}</TableCell>
+            <TableRow key={i} className={i % 2 === 1 ? "bg-muted/30" : ""}>
+              <TableCell className="text-xs font-medium">{m.model}</TableCell>
               <TableCell className="text-xs text-right">{m.flow}</TableCell>
-              <TableCell className="text-xs text-right">{m.diameter}</TableCell>
               <TableCell className="text-xs text-right">{m.dimensions}</TableCell>
             </TableRow>
           ))}
@@ -189,12 +187,12 @@ const GazoochistkaSkrubberyInner = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-6">
             <div className="rounded-lg border border-border overflow-hidden bg-card">
-              <img src="/images/skrubber-vertikalnyj-1.jpg" alt="Скруббер вертикальный" className="w-full h-56 object-cover" />
-              <p className="text-xs text-muted-foreground p-2 text-center">Скруббер вертикальный (серия CH)</p>
+              <img src="/images/skrubber-vert-real-1.jpg" alt="Скруббер вертикальный" className="w-full h-56 object-cover" />
+              <p className="text-xs text-muted-foreground p-2 text-center">Скруббер вертикальный (серия СН)</p>
             </div>
             <div className="rounded-lg border border-border overflow-hidden bg-card">
-              <img src="/images/skrubber-gorizontalnyj-1.jpg" alt="Скруббер горизонтальный" className="w-full h-56 object-cover" />
-              <p className="text-xs text-muted-foreground p-2 text-center">Скруббер горизонтальный (серия CT)</p>
+              <img src="/images/skrubber-goriz-real-1.jpg" alt="Скруббер горизонтальный" className="w-full h-56 object-cover" />
+              <p className="text-xs text-muted-foreground p-2 text-center">Скруббер горизонтальный (серия СТ)</p>
             </div>
           </div>
         </section>
@@ -224,16 +222,16 @@ const GazoochistkaSkrubberyInner = () => {
 
           <Tabs defaultValue="vertical" className="w-full">
             <TabsList className="w-full grid grid-cols-2 mb-4">
-              <TabsTrigger value="vertical" className="text-xs sm:text-sm">Вертикальные (серия CH)</TabsTrigger>
-              <TabsTrigger value="horizontal" className="text-xs sm:text-sm">Горизонтальные (серия CT)</TabsTrigger>
+              <TabsTrigger value="vertical" className="text-xs sm:text-sm">Вертикальные (серия СН)</TabsTrigger>
+              <TabsTrigger value="horizontal" className="text-xs sm:text-sm">Горизонтальные (серия СТ)</TabsTrigger>
             </TabsList>
 
             {/* Vertical CH tab */}
             <TabsContent value="vertical">
               <div className="flex flex-col sm:flex-row gap-4 mb-4">
-                <img src="/images/skrubber-vertikalnyj-2.jpg" alt="Скруббер вертикальный чертёж" className="w-full sm:w-48 h-36 object-cover rounded-lg border border-border" />
+                <img src="/images/skrubber-vert-real-2.jpg" alt="Скруббер вертикальный" className="w-full sm:w-48 h-36 object-cover rounded-lg border border-border" />
                 <div>
-                  <h3 className="text-sm font-semibold text-foreground mb-1">Скруббер вертикальный со стационарной насадкой (серия CH)</h3>
+                  <h3 className="text-sm font-semibold text-foreground mb-1">Скруббер вертикальный со стационарной насадкой (серия СН)</h3>
                   <p className="text-xs text-muted-foreground">
                     Насадочный абсорбер с неподвижным слоем для очистки от химически активных газов, аэрозолей и туманов. Производительность от 100 до 40 000 м³/ч. Применяется в гальванике, металлургии, химической и нефтехимической промышленности.
                   </p>
@@ -245,9 +243,9 @@ const GazoochistkaSkrubberyInner = () => {
             {/* Horizontal CT tab */}
             <TabsContent value="horizontal">
               <div className="flex flex-col sm:flex-row gap-4 mb-4">
-                <img src="/images/skrubber-gorizontalnyj-2.png" alt="Скруббер горизонтальный чертёж" className="w-full sm:w-48 h-36 object-cover rounded-lg border border-border" />
+                <img src="/images/skrubber-goriz-real-3.png" alt="Скруббер горизонтальный" className="w-full sm:w-48 h-36 object-cover rounded-lg border border-border" />
                 <div>
-                  <h3 className="text-sm font-semibold text-foreground mb-1">Скруббер горизонтальный (серия CT)</h3>
+                  <h3 className="text-sm font-semibold text-foreground mb-1">Скруббер горизонтальный (серия СТ)</h3>
                   <p className="text-xs text-muted-foreground">
                     Компактный горизонтальный абсорбер для объектов с ограниченной высотой помещения (до 3 м). Производительность от 500 до 60 000 м³/ч. Оптимален для встраивания в существующие системы вентиляции.
                   </p>
@@ -256,6 +254,22 @@ const GazoochistkaSkrubberyInner = () => {
               {renderTable(ctModels)}
             </TabsContent>
           </Tabs>
+        </section>
+
+        {/* Vertical scrubber table */}
+        <section className="mb-10">
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">
+            Типоразмерный ряд вертикальных скрубберов
+          </h2>
+          {renderTable(chModels)}
+        </section>
+
+        {/* Horizontal scrubber table */}
+        <section className="mb-10">
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">
+            Типоразмерный ряд горизонтальных скрубберов
+          </h2>
+          {renderTable(ctModels)}
         </section>
 
         {/* Applications */}
