@@ -103,6 +103,25 @@ const advantages = [
   { icon: Beaker, title: "Гибкость", text: "Возможность доработки конструкции в процессе эксплуатации." },
 ];
 
+const sizeTable = [
+  { volume: 1000, length: 1000, width: 1000, height: 1000 },
+  { volume: 2000, length: 2000, width: 1000, height: 1000 },
+  { volume: 3000, length: 2100, width: 1200, height: 1200 },
+  { volume: 4000, length: 1800, width: 1500, height: 1500 },
+  { volume: 5000, length: 2300, width: 1500, height: 1500 },
+  { volume: 6000, length: 2700, width: 1500, height: 1500 },
+  { volume: 8000, length: 3600, width: 1500, height: 1500 },
+  { volume: 10000, length: 4500, width: 1500, height: 1500 },
+  { volume: 15000, length: 4700, width: 1800, height: 1800 },
+  { volume: 20000, length: 5000, width: 2000, height: 2000 },
+  { volume: 25000, length: 6300, width: 2000, height: 2000 },
+  { volume: 30000, length: 6000, width: 2250, height: 2250 },
+  { volume: 35000, length: 7300, width: 2400, height: 2000 },
+  { volume: 40000, length: 8400, width: 2400, height: 2000 },
+  { volume: 45000, length: 9400, width: 2400, height: 2000 },
+  { volume: 50000, length: 10500, width: 2400, height: 2000 },
+];
+
 const ppImages = [
   { src: "/images/emkost-pryam-pp-1.png", alt: "Ёмкость прямоугольная из полипропилена в обрешётке" },
   { src: "/images/emkost-pryam-pp-3.png", alt: "Ёмкость прямоугольная ПП в металлообрешётке" },
@@ -154,7 +173,7 @@ const EmkostiPryamougolnyeInner = () => {
         <section className="mb-10">
           <p className="text-xs text-muted-foreground uppercase tracking-wider mb-2">ООО СЗПК «Пласт-Металл ПРО»</p>
           <h1 className="text-2xl sm:text-3xl font-bold text-foreground leading-tight mb-3">
-            Прямоугольные промышленные ёмкости в обрешётке
+            Прямоугольные ёмкости из полипропилена и полиэтилена в обрешётке
           </h1>
           <p className="text-sm text-muted-foreground mb-5">
             Оптимальное решение для компактного и надёжного хранения жидкостей и сыпучих материалов!
@@ -166,13 +185,13 @@ const EmkostiPryamougolnyeInner = () => {
           {/* Hero images */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
             <div className="rounded-lg border border-border overflow-hidden bg-card">
-              <img src="/images/emkost-pryam-pp-1.png" alt="Ёмкость прямоугольная из ПП в обрешётке" className="w-full h-48 object-cover" />
+              <img src="/images/emkost-pryam-real-4.png" alt="Рендер ёмкости из полипропилена в обрешётке" className="w-full h-48 object-cover" />
             </div>
             <div className="rounded-lg border border-border overflow-hidden bg-card">
-              <img src="/images/emkost-pryam-pnd-1.jpg" alt="Ёмкость прямоугольная из ПНД в обрешётке" className="w-full h-48 object-cover" />
+              <img src="/images/emkost-pryam-real-2.jpg" alt="Ёмкость из полиэтилена в обрешётке — фото" className="w-full h-48 object-cover" />
             </div>
             <div className="rounded-lg border border-border overflow-hidden bg-card">
-              <img src="/images/emkost-pryam-pnd-2.png" alt="Рендер прямоугольной ёмкости" className="w-full h-48 object-cover" />
+              <img src="/images/emkost-pryam-real-3.png" alt="Ёмкость из полипропилена в металлической обрешётке" className="w-full h-48 object-cover" />
             </div>
           </div>
         </section>
@@ -248,10 +267,10 @@ const EmkostiPryamougolnyeInner = () => {
           <h3 className="text-sm font-semibold text-foreground mb-3">Чертежи и схемы:</h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
             <div className="rounded-lg border border-border overflow-hidden bg-card">
-              <img src="/images/emkost-pryam-schema-1.jpg" alt="Схема прямоугольной ёмкости" className="w-full object-contain bg-white p-2" />
+              <img src="/images/emkost-pryam-schema-real.jpg" alt="Схема прямоугольной ёмкости" className="w-full object-contain bg-white p-2" />
             </div>
             <div className="rounded-lg border border-border overflow-hidden bg-card">
-              <img src="/images/emkost-pryam-schema-2.png" alt="Эскиз прямоугольной ёмкости с размерами" className="w-full object-contain bg-white p-2" />
+              <img src="/images/emkost-pryam-eskiz.png" alt="Эскиз прямоугольной ёмкости с размерами" className="w-full object-contain bg-white p-2" />
             </div>
           </div>
 
@@ -339,6 +358,33 @@ const EmkostiPryamougolnyeInner = () => {
                 </CardContent>
               </Card>
             ))}
+          </div>
+        </section>
+
+        {/* Таблица типоразмеров */}
+        <section className="mb-10">
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Таблица типоразмеров прямоугольных ёмкостей</h2>
+          <div className="rounded-lg border border-border overflow-auto">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead className="text-sm">Объём, л</TableHead>
+                  <TableHead className="text-sm text-right">Длина, мм</TableHead>
+                  <TableHead className="text-sm text-right">Ширина, мм</TableHead>
+                  <TableHead className="text-sm text-right">Высота, мм</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {sizeTable.map((row) => (
+                  <TableRow key={row.volume} className="even:bg-muted/30">
+                    <TableCell className="text-sm font-medium">{row.volume.toLocaleString()}</TableCell>
+                    <TableCell className="text-sm text-right">{row.length.toLocaleString()}</TableCell>
+                    <TableCell className="text-sm text-right">{row.width.toLocaleString()}</TableCell>
+                    <TableCell className="text-sm text-right">{row.height.toLocaleString()}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
           </div>
         </section>
 

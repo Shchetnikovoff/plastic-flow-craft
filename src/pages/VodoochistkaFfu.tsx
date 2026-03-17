@@ -25,11 +25,8 @@ import PageFooter from "@/components/PageFooter";
 /* ── static data ── */
 
 const heroImages = [
-  { src: "/images/ffu-hero-1.jpg", alt: "Флотационно-фильтровальная установка ФФУ" },
-  { src: "/images/ffu-hero-2.jpg", alt: "ФФУ общий вид" },
-  { src: "/images/ffu-3.png", alt: "ФФУ конструкция" },
-  { src: "/images/ffu-4.png", alt: "ФФУ чертёж" },
-  { src: "/images/ffu-5.png", alt: "ФФУ схема работы" },
+  { src: "/images/ffu-hero-real.jpg", alt: "ФФУ — 3D-рендер флотационно-фильтровальной установки" },
+  { src: "/images/ffu-hero-real-2.jpg", alt: "ФФУ — фото флотатора" },
 ];
 
 const whyUs = [
@@ -85,19 +82,12 @@ const constructionElements = [
 ];
 
 const models = [
-  { name: "ФФУ-1К", capacity: "1", power: "2,3", dimensions: "1180×1100×1440", massDry: "0,25", massWet: "0,63" },
-  { name: "ФФУ-2М", capacity: "2", power: "2,3", dimensions: "1450×1330×1720", massDry: "0,37", massWet: "1,0" },
-  { name: "ФФУ-4М", capacity: "4", power: "4,2", dimensions: "1785×1530×1700", massDry: "0,65", massWet: "2,28" },
-  { name: "ФФУ-6М", capacity: "6", power: "3,5", dimensions: "2200×1785×1760", massDry: "0,94", massWet: "3,86" },
-  { name: "ФФУ-10", capacity: "10", power: "5,9", dimensions: "2620×1850×2300", massDry: "1,85", massWet: "7,0" },
-  { name: "ФФУ-15", capacity: "15", power: "7,9", dimensions: "3440×2220×2260", massDry: "2,66", massWet: "10,5" },
-  { name: "ФФУ-20", capacity: "20", power: "7,9", dimensions: "3840×2220×2350", massDry: "2,95", massWet: "12,9" },
-  { name: "ФФУ-30", capacity: "30", power: "15,8", dimensions: "5600×2400×2470", massDry: "3,89", massWet: "17,64" },
-  { name: "ФФУ-40", capacity: "40", power: "15,8", dimensions: "6750×2400×2470", massDry: "4,0", massWet: "23,0" },
-  { name: "ФФУ-50", capacity: "50", power: "19", dimensions: "7430×2400×2530", massDry: "4,7", massWet: "23,0" },
-  { name: "ФФУ-65", capacity: "65", power: "18,5", dimensions: "6500×4700×3000", massDry: "8,5", massWet: "36,0" },
-  { name: "ФФУ-80", capacity: "80", power: "31,5", dimensions: "7200×5200×2500", massDry: "9,6", massWet: "42,6" },
-  { name: "ФФУ-100", capacity: "100", power: "42", dimensions: "9600×5600×2585", massDry: "12,2", massWet: "45,6" },
+  { name: "ФФУ-1М", capacity: "1,0", power: "2,2", dimensions: "1,1×1,0×1,5", massDry: "0,25", massWet: "0,6" },
+  { name: "ФФУ-2М", capacity: "2,0", power: "2,3", dimensions: "1,5×1,3×1,7", massDry: "0,5", massWet: "1,0" },
+  { name: "ФФУ-4М", capacity: "4,0", power: "3,5", dimensions: "1,7×1,5×1,8", massDry: "0,6", massWet: "2,2" },
+  { name: "ФФУ-6М", capacity: "6,0", power: "3,5", dimensions: "2,0×1,8×1,8", massDry: "0,9", massWet: "4,2" },
+  { name: "ФФУ-10", capacity: "10,0", power: "5,5", dimensions: "2,6×1,8×2,3", massDry: "1,7", massWet: "6,8" },
+  { name: "ФФУ-30", capacity: "30,0", power: "7,9", dimensions: "3,6×2,2×2,3", massDry: "2,8", massWet: "12,8" },
 ];
 
 const cleanupPerformance = [
@@ -174,7 +164,7 @@ const VodoochistkaFfuInner = () => {
         <section className="mb-10">
           <p className="text-xs text-muted-foreground uppercase tracking-wider mb-2">ООО СЗПК «Пласт-Металл ПРО»</p>
           <h1 className="text-2xl sm:text-3xl font-bold text-foreground leading-tight mb-3">
-            Флотационно-фильтровальные установки (ФФУ)
+            ФФУ — Флотационно-фильтровальная установка
           </h1>
           <p className="text-sm text-muted-foreground mb-5">
             ФФУ — эффективная очистка сточных вод от нефтепродуктов, жиров и взвешенных веществ!
@@ -183,10 +173,10 @@ const VodoochistkaFfuInner = () => {
             Получить расчёт стоимости
           </Button>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mt-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-6">
             {heroImages.map((img, i) => (
-              <div key={i} className={`rounded-lg border border-border overflow-hidden bg-card ${i === 0 ? "col-span-2 sm:col-span-1" : ""}`}>
-                <img src={img.src} alt={img.alt} className="w-full h-48 object-cover" />
+              <div key={i} className="rounded-lg border border-border overflow-hidden bg-card">
+                <img src={img.src} alt={img.alt} className="w-full h-56 object-cover" />
               </div>
             ))}
           </div>
@@ -288,7 +278,7 @@ const VodoochistkaFfuInner = () => {
                   <TableHead className="text-xs">Модель</TableHead>
                   <TableHead className="text-xs text-right">м³/ч</TableHead>
                   <TableHead className="text-xs text-right">кВт</TableHead>
-                  <TableHead className="text-xs text-right">Габариты (Д×Ш×В), мм</TableHead>
+                  <TableHead className="text-xs text-right">Габариты (Д×Ш×В), м</TableHead>
                   <TableHead className="text-xs text-right">Масса сух./с водой, т</TableHead>
                 </TableRow>
               </TableHeader>

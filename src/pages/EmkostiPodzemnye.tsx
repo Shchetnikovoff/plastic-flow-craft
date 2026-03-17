@@ -156,10 +156,10 @@ const EmkostiPodzemnyeInner = () => {
         <section className="mb-10">
           <p className="text-xs text-muted-foreground uppercase tracking-wider mb-2">ООО СЗПК «Пласт-Металл ПРО»</p>
           <h1 className="text-2xl sm:text-3xl font-bold text-foreground leading-tight mb-3">
-            Подземные ёмкости из спиральновитых труб
+            Промышленные подземные ёмкости из спиральновитых труб
           </h1>
           <p className="text-sm text-muted-foreground mb-5">
-            Надёжное решение для долгосрочного хранения жидкостей и стоков!
+            Подземные ёмкости из спиральновитых труб — надёжное решение для долгосрочного хранения жидкостей и стоков!
           </p>
           <Button onClick={scrollToForm} className="gap-2">
             Получить расчёт стоимости
@@ -168,13 +168,13 @@ const EmkostiPodzemnyeInner = () => {
           {/* Hero images */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
             <div className="rounded-lg border border-border overflow-hidden bg-card">
-              <img src="/images/emkosti-podzemnye-1.jpg" alt="Подземная ёмкость из спиральновитой трубы" className="w-full h-48 object-cover" />
+              <img src="/images/emkosti-podzemnye-svt-1.jpg" alt="Многокамерная подземная ёмкость СВТ" className="w-full h-48 object-cover" />
             </div>
             <div className="rounded-lg border border-border overflow-hidden bg-card">
-              <img src="/images/emkosti-podzemnye-2.jpg" alt="Монтаж подземной ёмкости" className="w-full h-48 object-cover" />
+              <img src="/images/emkosti-podzemnye-svt-2.jpg" alt="Подземные резервуары в разрезе" className="w-full h-48 object-cover" />
             </div>
             <div className="rounded-lg border border-border overflow-hidden bg-card">
-              <img src="/images/emkosti-podzemnye-3.png" alt="Подземные ёмкости и резервуары" className="w-full h-48 object-cover" />
+              <img src="/images/emkosti-podzemnye-svt-3.png" alt="Подземные ёмкости на тёмном фоне" className="w-full h-48 object-cover" />
             </div>
           </div>
         </section>
