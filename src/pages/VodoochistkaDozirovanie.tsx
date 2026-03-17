@@ -165,14 +165,14 @@ const VodoochistkaDozirovanieInner = () => {
             Станция дозирования реагентов
           </h1>
           <p className="text-sm text-muted-foreground mb-5">
-            Автоматическое приготовление и дозирование коагулянтов, флокулянтов и полиэлектролитов для систем водоочистки.
+            Автоматическое приготовление и точное дозирование коагулянта и флокулянта для систем водоочистки любой производительности.
           </p>
           <Button onClick={scrollToForm} className="gap-2">
             Получить расчёт стоимости
           </Button>
           <div className="grid grid-cols-2 gap-3 mt-6">
-            <img src="/images/dozirovanie-hero-1.png" alt="Станция дозирования — общий вид" className="rounded-lg border border-border object-cover w-full aspect-[4/3]" />
-            <img src="/images/dozirovanie-hero-2.png" alt="Дозирующие насосы" className="rounded-lg border border-border object-cover w-full aspect-[4/3]" />
+            <img src="/images/dozirovanie-hero-real.jpg" alt="Станция дозирования — общий вид" className="rounded-lg border border-border object-cover w-full aspect-[4/3]" />
+            <img src="/images/dozirovanie-hero-real.jpg" alt="Станция дозирования реагентов" className="rounded-lg border border-border object-cover w-full aspect-[4/3]" />
           </div>
         </section>
 

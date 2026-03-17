@@ -25,14 +25,8 @@ import PageFooter from "@/components/PageFooter";
 /* ── static data ── */
 
 const heroImages = [
-  { src: "/images/lamelnyj-hero-1.jpg", alt: "Ламельный тонкослойный отстойник" },
-  { src: "/images/lamelnyj-hero-2.jpg", alt: "Ламельный отстойник общий вид" },
-  { src: "/images/lamelnyj-3.png", alt: "Ламельный отстойник конструкция" },
-  { src: "/images/lamelnyj-4.png", alt: "Ламельный отстойник чертёж" },
-  { src: "/images/lamelnyj-5.jpg", alt: "Ламельный отстойник фото" },
-  { src: "/images/lamelnyj-6.jpg", alt: "Ламельный отстойник на объекте" },
-  { src: "/images/lamelnyj-schema-1.png", alt: "Схема ламельного отстойника" },
-  { src: "/images/lamelnyj-schema-2.png", alt: "Принцип работы ламельного отстойника" },
+  { src: "/images/lamelnyj-hero-real.jpg", alt: "Ламельный тонкослойный отстойник" },
+  { src: "/images/lamelnyj-photo-1.jpg", alt: "Ламельный отстойник фото" },
 ];
 
 const whyUs = [
@@ -95,11 +89,19 @@ const lamellaFeatures = [
 ];
 
 const models = [
-  { name: "ЛО-5", capacity: "5", area: "7", dimensions: "2000×1500×2500", mass: "0,8" },
-  { name: "ЛО-10", capacity: "10", area: "14", dimensions: "3000×2000×2800", mass: "1,2" },
-  { name: "ЛО-20", capacity: "20", area: "28", dimensions: "4000×2500×3000", mass: "1,8" },
-  { name: "ЛО-50", capacity: "50", area: "70", dimensions: "6000×3500×3200", mass: "3,5" },
-  { name: "ЛО-100", capacity: "100", area: "135", dimensions: "8000×4000×3500", mass: "5,2" },
+  { name: "ОГ-1", capacity: "1", dimensions: "1577×606×1715", mass: "170/670" },
+  { name: "ОГ-2.5", capacity: "2.5", dimensions: "1720×1088×1715", mass: "360/1850" },
+  { name: "ОГ-5", capacity: "5", dimensions: "2285×1088×2400", mass: "855/3410" },
+  { name: "ОГ-10", capacity: "10", dimensions: "2295×2088×2400", mass: "1400/6800" },
+  { name: "ОГ-15", capacity: "15", dimensions: "2780×2088×2400", mass: "1800/9900" },
+  { name: "ОГ-20", capacity: "20", dimensions: "3790×2088×2400", mass: "2100/12900" },
+  { name: "ОГ-25", capacity: "25", dimensions: "4260×2088×2400", mass: "2180/16000" },
+  { name: "ОГ-32.5", capacity: "32.5", dimensions: "4700×2088×2400", mass: "2400/20100" },
+  { name: "ОГ-40", capacity: "40", dimensions: "6500×2088×2400", mass: "3660/25700" },
+  { name: "ОГ-50", capacity: "50", dimensions: "8620×2088×2400", mass: "4360/32000" },
+  { name: "ОГ-65", capacity: "65", dimensions: "9600×2088×2400", mass: "4880/41000" },
+  { name: "ОГ-80", capacity: "80", dimensions: "13200×2088×2400", mass: "7400/51500" },
+  { name: "ОГ-100", capacity: "100", dimensions: "8620×4380×2400", mass: "8600/65000" },
 ];
 
 const cleanupPerformance = [
@@ -175,7 +177,7 @@ const VodoochistkaLamelnyjInner = () => {
         <section className="mb-10">
           <p className="text-xs text-muted-foreground uppercase tracking-wider mb-2">ООО СЗПК «Пласт-Металл ПРО»</p>
           <h1 className="text-2xl sm:text-3xl font-bold text-foreground leading-tight mb-3">
-            Тонкослойные (ламельные) отстойники
+            Тонкослойный (ламельный) отстойник для очистки сточных вод
           </h1>
           <p className="text-sm text-muted-foreground mb-5">
             Ламельный отстойник — экономия площади до 90% по сравнению с традиционными решениями!
@@ -297,18 +299,16 @@ const VodoochistkaLamelnyjInner = () => {
               <TableHeader>
                 <TableRow>
                   <TableHead className="text-xs">Модель</TableHead>
-                  <TableHead className="text-xs text-right">м³/ч</TableHead>
-                  <TableHead className="text-xs text-right">Площадь, м²</TableHead>
+                  <TableHead className="text-xs text-right">Произв., м³/ч</TableHead>
                   <TableHead className="text-xs text-right">Габариты (Д×Ш×В), мм</TableHead>
-                  <TableHead className="text-xs text-right">Масса, т</TableHead>
+                  <TableHead className="text-xs text-right">Масса сух./раб., кг</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {models.map((m) => (
-                  <TableRow key={m.name}>
+                {models.map((m, i) => (
+                  <TableRow key={m.name} className={i % 2 === 1 ? "bg-muted/50" : ""}>
                     <TableCell className="text-xs font-medium">{m.name}</TableCell>
                     <TableCell className="text-xs text-right">{m.capacity}</TableCell>
-                    <TableCell className="text-xs text-right">{m.area}</TableCell>
                     <TableCell className="text-xs text-right">{m.dimensions}</TableCell>
                     <TableCell className="text-xs text-right">{m.mass}</TableCell>
                   </TableRow>
@@ -329,8 +329,8 @@ const VodoochistkaLamelnyjInner = () => {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {cleanupPerformance.map((r) => (
-                  <TableRow key={r.pollutant}>
+                {cleanupPerformance.map((r, i) => (
+                  <TableRow key={r.pollutant} className={i % 2 === 1 ? "bg-muted/50" : ""}>
                     <TableCell className="text-xs font-medium">{r.pollutant}</TableCell>
                     <TableCell className="text-xs text-right">{r.inlet}</TableCell>
                     <TableCell className="text-xs text-right">{r.outlet}</TableCell>

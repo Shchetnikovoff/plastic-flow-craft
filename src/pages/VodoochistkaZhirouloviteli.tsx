@@ -286,6 +286,48 @@ const VodoochistkaZhirouloviteliInner = () => {
           </div>
         </section>
 
+        {/* Section 7: Горизонтальные жироуловители */}
+        <section className="mb-10">
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Горизонтальные жироуловители</h2>
+          <div className="rounded-lg border border-border overflow-auto text-sm">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead className="text-xs">Артикул</TableHead>
+                  <TableHead className="text-xs text-right">Произв., л/с</TableHead>
+                  <TableHead className="text-xs text-right">Габариты, мм</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {[
+                  { article: "ПЭ-3,5-500", throughput: "1", dimensions: "Ø800×L1200" },
+                  { article: "ПЭ-7-1000", throughput: "2", dimensions: "Ø1000×L1500" },
+                  { article: "ПЭ-11-1500", throughput: "3", dimensions: "Ø1000×L2000" },
+                  { article: "ПЭ-15-2000", throughput: "4", dimensions: "Ø1200×L2000" },
+                  { article: "ПЭ-18-2500", throughput: "5", dimensions: "Ø1200×L2400" },
+                  { article: "ПЭ-22-3000", throughput: "6", dimensions: "Ø1280×L2600" },
+                  { article: "ПЭ-25-3500", throughput: "7", dimensions: "Ø1280×L2900" },
+                  { article: "ПЭ-29-4000", throughput: "8", dimensions: "Ø1280×L3300" },
+                  { article: "ПЭ-32-4500", throughput: "9", dimensions: "Ø1280×L3750" },
+                  { article: "ПЭ-36-5000", throughput: "10", dimensions: "Ø1400×L3500" },
+                  { article: "ПЭ-54-7500", throughput: "15", dimensions: "Ø1600×L3900" },
+                  { article: "ПЭ-72-10000", throughput: "20", dimensions: "Ø1600×L5100" },
+                  { article: "ПЭ-90-12500", throughput: "25", dimensions: "Ø1600×L6300" },
+                ].map((m) => (
+                  <TableRow key={m.article} className="even:bg-muted/30">
+                    <TableCell className="text-xs font-medium">{m.article}</TableCell>
+                    <TableCell className="text-xs text-right">{m.throughput}</TableCell>
+                    <TableCell className="text-xs text-right">{m.dimensions}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
+          <p className="text-xs text-muted-foreground mt-2">
+            Возможно изготовление горизонтальных жироуловителей по индивидуальным размерам.
+          </p>
+        </section>
+
         {/* CTA Form */}
         <section id="cta-form" className="mb-10 rounded-lg border border-border bg-card p-6">
           <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Оставить заявку</h2>

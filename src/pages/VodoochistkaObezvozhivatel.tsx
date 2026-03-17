@@ -28,7 +28,7 @@ import PageFooter from "@/components/PageFooter";
 /* ── static data ── */
 
 const heroImages = [
-  { src: "/images/obezvozhivatel-hero-1.jpg", alt: "Мешочный обезвоживатель осадка" },
+  { src: "/images/obezvozhivatel-hero-real.jpg", alt: "Мешочный обезвоживатель осадка" },
   { src: "/images/obezvozhivatel-schema-1.webp", alt: "Схема мешочного обезвоживателя" },
 ];
 
@@ -142,7 +142,7 @@ const VodoochistkaObezvozhivatelInner = () => {
         <section className="mb-10">
           <p className="text-xs text-muted-foreground uppercase tracking-wider mb-2">ООО СЗПК «Пласт-Металл ПРО»</p>
           <h1 className="text-2xl sm:text-3xl font-bold text-foreground leading-tight mb-3">
-            Мешочный обезвоживатель осадка
+            Мешочный обезвоживатель осадка ОНИКС
           </h1>
           <p className="text-sm text-muted-foreground mb-5">
             Эффективное обезвоживание шлама без электроэнергии — компактно, просто, надёжно!
@@ -238,19 +238,19 @@ const VodoochistkaObezvozhivatelInner = () => {
         <section className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Модельный ряд</h2>
 
-          <div className="rounded-lg border border-border overflow-auto">
+          <div className="rounded-lg border border-border overflow-auto text-sm">
             <Table>
               <TableHeader>
                 <TableRow>
                   <TableHead className="text-xs">Модель</TableHead>
-                  <TableHead className="text-xs text-right">м³/сут</TableHead>
-                  <TableHead className="text-xs text-right">Кол-во мешков</TableHead>
+                  <TableHead className="text-xs text-right">Произв., м³/сут</TableHead>
+                  <TableHead className="text-xs text-right">Мешков</TableHead>
                   <TableHead className="text-xs text-right">Габариты (Д×Ш×В), мм</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {models.map((m) => (
-                  <TableRow key={m.name}>
+                  <TableRow key={m.name} className="even:bg-muted/30">
                     <TableCell className="text-xs font-medium">{m.name}</TableCell>
                     <TableCell className="text-xs text-right">{m.capacity}</TableCell>
                     <TableCell className="text-xs text-right">{m.bags}</TableCell>
