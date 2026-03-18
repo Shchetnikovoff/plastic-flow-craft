@@ -119,7 +119,7 @@ const EmkostiPageInner = () => {
               <img src="/images/emkosti-hero-1.png" alt="Промышленные ёмкости из полипропилена" className="w-full h-auto object-contain" />
             </div>
             <div className="rounded-lg border border-border overflow-hidden bg-card">
-              <img src="/images/emkosti-hero-2.png" alt="Ёмкость в разрезе" className="w-full h-auto object-cover" />
+              <img src="/images/emkosti-hero-2.png" alt="Ёмкость в разрезе" className="w-full h-auto object-contain" />
             </div>
           </div>
         </section>
