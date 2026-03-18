@@ -11,6 +11,7 @@ import { vozdukhovodImages, getVozdukhovodSizes, vozdukhovodAvailableLengths } f
 import { emkostGroups } from "@/data/emkostiProducts";
 import { pozharnyeRect, pozharnyePodzem, pozharnyeHoriz } from "@/data/pozharnyeProducts";
 import { perelivnyeProducts, ppColors } from "@/data/perelivnyeProducts";
+import { ffuModels } from "@/data/ffuProducts";
 import { Button } from "@/components/ui/button";
 import { ShoppingCart, Plus, Minus, ChevronLeft, ChevronRight, FileDown } from "lucide-react";
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
@@ -18,6 +19,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 import { toast } from "sonner";
 import ContactFormFields, { type ContactFormData, type ContactFormErrors, validateContactForm } from "@/components/ContactFormFields";
 import { generateSpecPdf } from "@/lib/generateSpecPdf";
+import { generateLetterheadPdf } from "@/lib/generateLetterheadPdf";
 import DimensionOverlay from "@/components/DimensionOverlay";
 
 /** Try to find an emkost (tank) product by article */
