@@ -53,7 +53,7 @@ const CatalogPageInner = () => {
           {/* Category grid */}
           <section className="mb-10">
             <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Направления</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {catalog.map((cat) => {
                 const thumb = cat.subcategories.find((s) => s.image)?.image;
                 return (

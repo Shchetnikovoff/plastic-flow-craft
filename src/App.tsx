@@ -36,6 +36,7 @@ import VodopodgotovkaPage from "./pages/VodopodgotovkaPage";
 import LabMebelPage from "./pages/LabMebelPage";
 import ShkafyUpravleniyaPage from "./pages/ShkafyUpravleniyaPage";
 import UslugiPage from "./pages/UslugiPage";
+import AboutPage from "./pages/AboutPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -83,6 +84,7 @@ const App = () => (
           <Route path="/catalog/labmebel" element={<LabMebelPage />} />
           <Route path="/catalog/shkafy-upravleniya" element={<ShkafyUpravleniyaPage />} />
           <Route path="/catalog/uslugi" element={<UslugiPage />} />
+          <Route path="/about" element={<AboutPage />} />
           <Route path="/catalog" element={<CatalogPage />} />
           <Route path="/catalog/:categorySlug" element={<CatalogPage />} />
           <Route path="/catalog/:categorySlug/:subSlug" element={<CatalogPage />} />

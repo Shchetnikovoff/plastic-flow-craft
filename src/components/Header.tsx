@@ -160,6 +160,16 @@ const Header = ({ onCartOpen, angle = 90, connectionType = "rastrub", productTyp
                 </div>
               );
             })}
+            <Link
+              to="/about"
+              className={`whitespace-nowrap px-3 py-2.5 text-xs font-semibold transition-colors border-b-2 ${
+                location.pathname === "/about"
+                  ? "border-primary text-primary"
+                  : "border-transparent text-muted-foreground hover:text-foreground hover:border-border"
+              }`}
+            >
+              О компании
+            </Link>
           </nav>
         </div>
         {openCat && (() => {
@@ -232,6 +242,14 @@ const Header = ({ onCartOpen, angle = 90, connectionType = "rastrub", productTyp
                 )}
               </div>
             ))}
+            <Link
+              to="/about"
+              className={`block px-3 py-2 text-sm font-semibold rounded-lg transition-colors ${
+                location.pathname === "/about" ? "text-primary bg-primary/5" : "text-foreground hover:bg-muted"
+              }`}
+            >
+              О компании
+            </Link>
           </div>
         </div>
       )}
