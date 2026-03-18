@@ -39,7 +39,6 @@ import ShkafyUpravleniyaPage from "./pages/ShkafyUpravleniyaPage";
 import UslugiPage from "./pages/UslugiPage";
 import AboutPage from "./pages/AboutPage";
 import NotFound from "./pages/NotFound";
-import LayoutDemo from "./pages/LayoutDemo";
 
 const queryClient = new QueryClient();
 
