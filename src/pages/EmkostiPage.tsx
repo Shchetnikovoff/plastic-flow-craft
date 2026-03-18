@@ -295,7 +295,7 @@ const EmkostiPageInner = () => {
                       <div className="rounded-xl border border-border bg-card overflow-hidden animate-in fade-in-0 slide-in-from-top-2 duration-200">
                         <div className="aspect-[16/9] bg-muted flex items-center justify-center">
                           {selectedSub.image ? (
-                            <img src={selectedSub.image} alt={selectedSub.name} className="w-full h-full object-cover" />
+                            <img src={selectedSub.image} alt={selectedSub.name} className="w-full h-full object-contain" />
                           ) : (
                             <ImageOff className="h-12 w-12 text-muted-foreground/40" />
                           )}

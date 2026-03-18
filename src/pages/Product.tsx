@@ -336,7 +336,7 @@ const ProductDetailContent = () => {
                   }
                 />
               ) : (
-                <img src={emkost.image} alt={emkost.title} className="h-full w-full object-cover" />
+                <img src={emkost.image} alt={emkost.title} className="h-full w-full object-contain" />
               )}
             </div>
           </div>

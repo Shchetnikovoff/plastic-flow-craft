@@ -131,8 +131,8 @@ const GazoochistkaFvgInner = () => {
           </p>
           <Button onClick={scrollToForm} className="gap-2">Получить расчёт стоимости</Button>
           <div className="grid grid-cols-2 gap-3 mt-6">
-            <img src="/images/fvg-real-1.png" alt="Фильтр ФВГ — общий вид" className="rounded-lg border border-border object-cover w-full aspect-[4/3]" />
-            <img src="/images/fvg-real-2.png" alt="Фильтрующие элементы ФВГ" className="rounded-lg border border-border object-cover w-full aspect-[4/3]" />
+            <img src="/images/fvg-real-1.png" alt="Фильтр ФВГ — общий вид" className="rounded-lg border border-border object-contain w-full aspect-[4/3]" />
+            <img src="/images/fvg-real-2.png" alt="Фильтрующие элементы ФВГ" className="rounded-lg border border-border object-contain w-full aspect-[4/3]" />
           </div>
         </section>
 
