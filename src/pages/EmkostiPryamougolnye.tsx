@@ -334,7 +334,7 @@ const EmkostiPryamougolnyeInner = () => {
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
                 {pndImages.map((img, i) => (
                   <div key={i} className="rounded-lg border border-border overflow-hidden bg-card">
-                    <img src={img.src} alt={img.alt} className="w-full h-40 object-cover" />
+                    <img src={img.src} alt={img.alt} className="w-full object-contain" />
                   </div>
                 ))}
               </div>

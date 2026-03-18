@@ -71,8 +71,8 @@ const Inner = () => {
           <p className="text-sm text-muted-foreground mb-5">Обратный осмос, фильтрация и умягчение — комплексные решения для подготовки воды любого качества!</p>
           <Button onClick={scrollToForm}>Получить расчёт стоимости</Button>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
-            <div className="rounded-lg border border-border overflow-hidden bg-card"><img src="/images/vodopodgotovka-hero-1.png" alt="Системы водоподготовки" className="w-full h-56 object-cover" /></div>
-            <div className="rounded-lg border border-border overflow-hidden bg-card"><img src="/images/vodopodgotovka-hero-2.png" alt="Обратный осмос" className="w-full h-56 object-cover" /></div>
+<div className="rounded-lg border border-border overflow-hidden bg-card"><img src="/images/vodopodgotovka-hero-1.png" alt="Системы водоподготовки" className="w-full object-contain" /></div>
+            <div className="rounded-lg border border-border overflow-hidden bg-card"><img src="/images/vodopodgotovka-hero-2.png" alt="Обратный осмос" className="w-full object-contain" /></div>
           </div>
         </section>
 

@@ -198,7 +198,7 @@ const EmkostiKislotyShchelochiInner = () => {
 
           <div className="mt-6">
             <div className="rounded-lg border border-border overflow-hidden bg-card">
-              <img src="/images/emkosti-kisloty-shchelochi-clean.jpg" alt="Химически стойкие ёмкости из ПНД с поддоном и уровнемером" className="w-full h-72 object-cover" />
+              <img src="/images/emkosti-kisloty-shchelochi-clean.jpg" alt="Химически стойкие ёмкости из ПНД с поддоном и уровнемером" className="w-full object-contain" />
             </div>
           </div>
         </section>

@@ -174,7 +174,7 @@ const EmkostiPodzemnyeInner = () => {
               <img src="/images/emkosti-podzemnye-svt-2.jpg" alt="Подземные резервуары в разрезе" className="w-full object-contain" />
             </div>
             <div className="rounded-lg border border-border overflow-hidden bg-card">
-              <img src="/images/emkosti-podzemnye-svt-3.png" alt="Подземные ёмкости на тёмном фоне" className="w-full h-48 object-cover" />
+              <img src="/images/emkosti-podzemnye-svt-3.png" alt="Подземные ёмкости на тёмном фоне" className="w-full object-contain" />
             </div>
           </div>
         </section>

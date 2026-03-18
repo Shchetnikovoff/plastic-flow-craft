@@ -161,7 +161,7 @@ const VodoochistkaShkafyDozirovaniyaInner = () => {
 
           <div className="grid grid-cols-2 gap-3 mt-6">
             {heroImages.map((src, i) => (
-              <img key={i} src={src} alt={`Шкаф дозировочный ${i + 1}`} className="w-full aspect-[4/3] object-cover rounded-lg border border-border" />
+              <img key={i} src={src} alt={`Шкаф дозировочный ${i + 1}`} className="w-full aspect-[4/3] object-contain rounded-lg border border-border" />
             ))}
           </div>
         </section>

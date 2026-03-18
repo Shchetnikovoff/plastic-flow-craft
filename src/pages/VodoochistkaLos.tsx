@@ -266,7 +266,7 @@ const VodoochistkaLosInner = () => {
             {/* Нефтеуловитель tab */}
             <TabsContent value="neft">
               <div className="flex flex-col sm:flex-row gap-4 mb-4">
-                <img src="/images/los-nefteulovitel-1.jpg" alt="Нефтеуловитель" className="w-full sm:w-48 h-36 object-cover rounded-lg border border-border" />
+                <img src="/images/los-nefteulovitel-1.jpg" alt="Нефтеуловитель" className="w-full sm:w-48 object-contain rounded-lg border border-border" />
                 <div>
                   <h3 className="text-sm font-semibold text-foreground mb-1">Нефтеуловитель</h3>
                   <p className="text-xs text-muted-foreground">

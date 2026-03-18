@@ -71,8 +71,8 @@ const Inner = () => {
           <p className="text-sm text-muted-foreground mb-5">Столы, шкафы, мойки и тумбы — химически стойкая мебель для лабораторий!</p>
           <Button onClick={scrollToForm}>Получить расчёт стоимости</Button>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
-            <div className="rounded-lg border border-border overflow-hidden bg-card"><img src="/images/labmebel-hero-1.png" alt="Лабораторная мебель" className="w-full h-56 object-cover" /></div>
-            <div className="rounded-lg border border-border overflow-hidden bg-card"><img src="/images/labmebel-hero-2.png" alt="Лабораторные шкафы" className="w-full h-56 object-cover" /></div>
+<div className="rounded-lg border border-border overflow-hidden bg-card"><img src="/images/labmebel-hero-1.png" alt="Лабораторная мебель" className="w-full object-contain" /></div>
+            <div className="rounded-lg border border-border overflow-hidden bg-card"><img src="/images/labmebel-hero-2.png" alt="Лабораторные шкафы" className="w-full object-contain" /></div>
           </div>
         </section>
 
