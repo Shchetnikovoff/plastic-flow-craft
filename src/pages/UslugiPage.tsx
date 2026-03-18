@@ -70,8 +70,8 @@ const Inner = () => {
           <p className="text-sm text-muted-foreground mb-5">Проектирование, монтаж и пусконаладка промышленного оборудования — полный цикл от идеи до ввода в эксплуатацию!</p>
           <Button onClick={scrollToForm}>Оставить заявку</Button>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
-            <div className="rounded-lg border border-border overflow-hidden bg-card"><img src="/images/uslugi-hero-1.png" alt="Монтаж оборудования" className="w-full h-56 object-cover" /></div>
-            <div className="rounded-lg border border-border overflow-hidden bg-card"><img src="/images/uslugi-hero-2.png" alt="Проектирование и пусконаладка" className="w-full h-56 object-cover" /></div>
+<div className="rounded-lg border border-border overflow-hidden bg-card"><img src="/images/uslugi-hero-1.png" alt="Монтаж оборудования" className="w-full object-contain" /></div>
+            <div className="rounded-lg border border-border overflow-hidden bg-card"><img src="/images/uslugi-hero-2.png" alt="Проектирование и пусконаладка" className="w-full object-contain" /></div>
           </div>
         </section>
 
@@ -103,7 +103,7 @@ const Inner = () => {
           <section className="mb-10">
             <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Каталог услуг</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">{category.subcategories.map((sub, i) => {
-              const cc = (<><div className="aspect-[4/3] bg-muted flex items-center justify-center">{sub.image ? <img src={sub.image} alt={sub.name} className="w-full h-full object-cover" /> : <ImageOff className="h-10 w-10 text-muted-foreground/40" />}</div><div className="px-3 py-2.5"><p className="text-xs text-muted-foreground font-semibold">{catIndex}.{i + 1}</p><p className="text-sm font-medium text-foreground group-hover:text-primary transition-colors mt-0.5">{sub.name}</p></div></>);
+              const cc = (<><div className="aspect-[4/3] bg-muted flex items-center justify-center">{sub.image ? <img src={sub.image} alt={sub.name} className="w-full h-full object-contain" /> : <ImageOff className="h-10 w-10 text-muted-foreground/40" />}</div><div className="px-3 py-2.5"><p className="text-xs text-muted-foreground font-semibold">{catIndex}.{i + 1}</p><p className="text-sm font-medium text-foreground group-hover:text-primary transition-colors mt-0.5">{sub.name}</p></div></>);
               return <button key={sub.id} onClick={() => setSelectedSubId(sub.id)} className="group rounded-lg border border-border bg-card overflow-hidden hover:border-primary/50 hover:shadow-md transition-all text-left">{cc}</button>;
             })}</div>
           </section>

@@ -156,13 +156,13 @@ const EmkostiPozharnyeInner = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
             <div className="rounded-lg border border-border overflow-hidden bg-card">
-              <img src="/images/emkost-pryam-pp-1.png" alt="Пожарная ёмкость прямоугольная" className="w-full h-48 object-cover" />
+              <img src="/images/emkost-pryam-pp-1.png" alt="Пожарная ёмкость прямоугольная" className="w-full object-contain" />
             </div>
             <div className="rounded-lg border border-border overflow-hidden bg-card">
-              <img src="/images/emkosti-podzemnye-1.jpg" alt="Подземная пожарная ёмкость" className="w-full h-48 object-cover" />
+              <img src="/images/emkosti-podzemnye-1.jpg" alt="Подземная пожарная ёмкость" className="w-full object-contain" />
             </div>
             <div className="rounded-lg border border-border overflow-hidden bg-card">
-              <img src="/images/emkosti-hero-1.png" alt="Горизонтальная пожарная ёмкость" className="w-full h-48 object-cover" />
+              <img src="/images/emkosti-hero-1.png" alt="Горизонтальная пожарная ёмкость" className="w-full object-contain" />
             </div>
           </div>
         </section>

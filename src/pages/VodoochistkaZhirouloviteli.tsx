@@ -153,7 +153,7 @@ const VodoochistkaZhirouloviteliInner = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-6">
             <div className="rounded-lg border border-border overflow-hidden bg-card">
-              <img src="/images/zhiroulovitel-hero-1.png" alt="Промышленный жироуловитель" className="w-full h-64 object-cover" />
+              <img src="/images/zhiroulovitel-hero-1.png" alt="Промышленный жироуловитель" className="w-full object-contain" />
             </div>
           </div>
         </section>

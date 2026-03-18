@@ -143,15 +143,15 @@ const VodoochistkaLosInner = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-6">
             <div className="rounded-lg border border-border overflow-hidden bg-card">
-              <img src="/images/los-hero-1.jpg" alt="Локальное очистное сооружение ЛОС" className="w-full h-48 object-cover" />
+              <img src="/images/los-hero-1.jpg" alt="Локальное очистное сооружение ЛОС" className="w-full object-contain" />
               <p className="text-xs text-muted-foreground p-2 text-center">ЛОС</p>
             </div>
             <div className="rounded-lg border border-border overflow-hidden bg-card">
-              <img src="/images/los-peskoulovitel-1.jpg" alt="Пескоуловитель" className="w-full h-48 object-cover" />
+              <img src="/images/los-peskoulovitel-1.jpg" alt="Пескоуловитель" className="w-full object-contain" />
               <p className="text-xs text-muted-foreground p-2 text-center">Пескоуловитель</p>
             </div>
             <div className="rounded-lg border border-border overflow-hidden bg-card">
-              <img src="/images/los-nefteulovitel-1.jpg" alt="Нефтеуловитель" className="w-full h-48 object-cover" />
+              <img src="/images/los-nefteulovitel-1.jpg" alt="Нефтеуловитель" className="w-full object-contain" />
               <p className="text-xs text-muted-foreground p-2 text-center">Нефтеуловитель</p>
             </div>
           </div>
@@ -190,7 +190,7 @@ const VodoochistkaLosInner = () => {
             {/* ЛОС tab */}
             <TabsContent value="los">
               <div className="flex flex-col sm:flex-row gap-4 mb-4">
-                <img src="/images/los-hero-1.jpg" alt="ЛОС" className="w-full sm:w-48 h-36 object-cover rounded-lg border border-border" />
+                <img src="/images/los-hero-1.jpg" alt="ЛОС" className="w-full sm:w-48 object-contain rounded-lg border border-border" />
                 <div>
                   <h3 className="text-sm font-semibold text-foreground mb-1">Локальное очистное сооружение (ЛОС)</h3>
                   <p className="text-xs text-muted-foreground">
@@ -229,7 +229,7 @@ const VodoochistkaLosInner = () => {
             {/* Пескоуловитель tab */}
             <TabsContent value="pesk">
               <div className="flex flex-col sm:flex-row gap-4 mb-4">
-                <img src="/images/los-peskoulovitel-1.jpg" alt="Пескоуловитель" className="w-full sm:w-48 h-36 object-cover rounded-lg border border-border" />
+                <img src="/images/los-peskoulovitel-1.jpg" alt="Пескоуловитель" className="w-full sm:w-48 object-contain rounded-lg border border-border" />
                 <div>
                   <h3 className="text-sm font-semibold text-foreground mb-1">Пескоуловитель</h3>
                   <p className="text-xs text-muted-foreground">
@@ -266,7 +266,7 @@ const VodoochistkaLosInner = () => {
             {/* Нефтеуловитель tab */}
             <TabsContent value="neft">
               <div className="flex flex-col sm:flex-row gap-4 mb-4">
-                <img src="/images/los-nefteulovitel-1.jpg" alt="Нефтеуловитель" className="w-full sm:w-48 h-36 object-cover rounded-lg border border-border" />
+                <img src="/images/los-nefteulovitel-1.jpg" alt="Нефтеуловитель" className="w-full sm:w-48 object-contain rounded-lg border border-border" />
                 <div>
                   <h3 className="text-sm font-semibold text-foreground mb-1">Нефтеуловитель</h3>
                   <p className="text-xs text-muted-foreground">

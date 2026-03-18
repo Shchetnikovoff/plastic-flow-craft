@@ -144,7 +144,7 @@ const CatalogPageInner = () => {
           <div className="rounded-xl border border-border bg-card p-8">
             {result.subcategory.image && (
               <div className="aspect-[16/9] bg-muted rounded-lg overflow-hidden mb-4">
-                <img src={result.subcategory.image} alt={result.subcategory.name} className="w-full h-full object-cover" />
+                <img src={result.subcategory.image} alt={result.subcategory.name} className="w-full h-full object-contain" />
               </div>
             )}
             <h2 className="text-xl font-bold text-foreground mb-2">{result.subcategory.name}</h2>
@@ -232,7 +232,7 @@ const CatalogPageInner = () => {
                     <img
                       src={selectedSub.image}
                       alt={selectedSub.name}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-contain"
                     />
                   ) : (
                     <ImageOff className="h-12 w-12 text-muted-foreground/40" />
@@ -278,7 +278,7 @@ const CatalogPageInner = () => {
                     <>
                       <div className="aspect-[4/3] bg-muted flex items-center justify-center">
                         {sub.image ? (
-                          <img src={sub.image} alt={sub.name} className="w-full h-full object-cover" />
+                          <img src={sub.image} alt={sub.name} className="w-full h-full object-contain" />
                         ) : (
                           <ImageOff className="h-10 w-10 text-muted-foreground/40" />
                         )}

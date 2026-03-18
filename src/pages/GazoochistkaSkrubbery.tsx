@@ -187,11 +187,11 @@ const GazoochistkaSkrubberyInner = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-6">
             <div className="rounded-lg border border-border overflow-hidden bg-card">
-              <img src="/images/skrubber-vert-real-1.jpg" alt="Скруббер вертикальный" className="w-full h-56 object-cover" />
+              <img src="/images/skrubber-vert-real-1.jpg" alt="Скруббер вертикальный" className="w-full object-contain" />
               <p className="text-xs text-muted-foreground p-2 text-center">Скруббер вертикальный (серия СН)</p>
             </div>
             <div className="rounded-lg border border-border overflow-hidden bg-card">
-              <img src="/images/skrubber-goriz-real-1.jpg" alt="Скруббер горизонтальный" className="w-full h-56 object-cover" />
+              <img src="/images/skrubber-goriz-real-1.jpg" alt="Скруббер горизонтальный" className="w-full object-contain" />
               <p className="text-xs text-muted-foreground p-2 text-center">Скруббер горизонтальный (серия СТ)</p>
             </div>
           </div>
@@ -229,7 +229,7 @@ const GazoochistkaSkrubberyInner = () => {
             {/* Vertical CH tab */}
             <TabsContent value="vertical">
               <div className="flex flex-col sm:flex-row gap-4 mb-4">
-                <img src="/images/skrubber-vert-real-2.jpg" alt="Скруббер вертикальный" className="w-full sm:w-48 h-36 object-cover rounded-lg border border-border" />
+                <img src="/images/skrubber-vert-real-2.jpg" alt="Скруббер вертикальный" className="w-full sm:w-48 object-contain rounded-lg border border-border" />
                 <div>
                   <h3 className="text-sm font-semibold text-foreground mb-1">Скруббер вертикальный со стационарной насадкой (серия СН)</h3>
                   <p className="text-xs text-muted-foreground">
@@ -243,7 +243,7 @@ const GazoochistkaSkrubberyInner = () => {
             {/* Horizontal CT tab */}
             <TabsContent value="horizontal">
               <div className="flex flex-col sm:flex-row gap-4 mb-4">
-                <img src="/images/skrubber-goriz-real-3.png" alt="Скруббер горизонтальный" className="w-full sm:w-48 h-36 object-cover rounded-lg border border-border" />
+                <img src="/images/skrubber-goriz-real-3.png" alt="Скруббер горизонтальный" className="w-full sm:w-48 object-contain rounded-lg border border-border" />
                 <div>
                   <h3 className="text-sm font-semibold text-foreground mb-1">Скруббер горизонтальный (серия СТ)</h3>
                   <p className="text-xs text-muted-foreground">

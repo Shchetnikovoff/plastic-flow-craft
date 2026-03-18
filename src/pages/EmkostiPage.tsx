@@ -116,10 +116,10 @@ const EmkostiPageInner = () => {
           {/* Hero images */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
             <div className="rounded-lg border border-border overflow-hidden bg-card">
-              <img src="/images/emkosti-hero-1.png" alt="Промышленные ёмкости из полипропилена" className="w-full h-auto object-cover" />
+              <img src="/images/emkosti-hero-1.png" alt="Промышленные ёмкости из полипропилена" className="w-full h-auto object-contain" />
             </div>
             <div className="rounded-lg border border-border overflow-hidden bg-card">
-              <img src="/images/emkosti-hero-2.png" alt="Ёмкость в разрезе" className="w-full h-auto object-cover" />
+              <img src="/images/emkosti-hero-2.png" alt="Ёмкость в разрезе" className="w-full h-auto object-contain" />
             </div>
           </div>
         </section>
@@ -295,7 +295,7 @@ const EmkostiPageInner = () => {
                       <div className="rounded-xl border border-border bg-card overflow-hidden animate-in fade-in-0 slide-in-from-top-2 duration-200">
                         <div className="aspect-[16/9] bg-muted flex items-center justify-center">
                           {selectedSub.image ? (
-                            <img src={selectedSub.image} alt={selectedSub.name} className="w-full h-full object-cover" />
+                            <img src={selectedSub.image} alt={selectedSub.name} className="w-full h-full object-contain" />
                           ) : (
                             <ImageOff className="h-12 w-12 text-muted-foreground/40" />
                           )}

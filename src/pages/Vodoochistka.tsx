@@ -200,10 +200,10 @@ const VodoochistkaInner = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
             <div className="rounded-lg border border-border overflow-hidden bg-card">
-              <img src="/images/vodoochistka-hero-real.jpeg" alt="Водоочистное оборудование из полимеров" className="w-full h-56 object-cover" />
+              <img src="/images/vodoochistka-hero-real.jpeg" alt="Водоочистное оборудование из полимеров" className="w-full object-contain" />
             </div>
             <div className="rounded-lg border border-border overflow-hidden bg-card">
-              <img src="/images/vodoochistka-hero-real-2.jpeg" alt="Системы водоочистки" className="w-full h-56 object-cover" />
+              <img src="/images/vodoochistka-hero-real-2.jpeg" alt="Системы водоочистки" className="w-full object-contain" />
             </div>
           </div>
         </section>
@@ -349,7 +349,7 @@ const VodoochistkaInner = () => {
                       <div className="rounded-xl border border-border bg-card overflow-hidden animate-in fade-in-0 slide-in-from-top-2 duration-200">
                         <div className="aspect-[16/9] bg-muted flex items-center justify-center">
                           {selectedSub.image ? (
-                            <img src={selectedSub.image} alt={selectedSub.name} className="w-full h-full object-cover" />
+                            <img src={selectedSub.image} alt={selectedSub.name} className="w-full h-full object-contain" />
                           ) : (
                             <ImageOff className="h-12 w-12 text-muted-foreground/40" />
                           )}
@@ -382,7 +382,7 @@ const VodoochistkaInner = () => {
                           <>
                             <div className="aspect-[4/3] bg-muted flex items-center justify-center">
                               {sub.image ? (
-                                <img src={sub.image} alt={sub.name} className="w-full h-full object-cover" />
+                                <img src={sub.image} alt={sub.name} className="w-full h-full object-contain" />
                               ) : (
                                 <ImageOff className="h-10 w-10 text-muted-foreground/40" />
                               )}

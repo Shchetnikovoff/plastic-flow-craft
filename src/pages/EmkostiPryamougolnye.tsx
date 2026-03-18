@@ -185,13 +185,13 @@ const EmkostiPryamougolnyeInner = () => {
           {/* Hero images */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
             <div className="rounded-lg border border-border overflow-hidden bg-card">
-              <img src="/images/emkost-pryam-real-4.png" alt="Рендер ёмкости из полипропилена в обрешётке" className="w-full h-48 object-cover" />
+              <img src="/images/emkost-pryam-real-4.png" alt="Рендер ёмкости из полипропилена в обрешётке" className="w-full object-contain" />
             </div>
             <div className="rounded-lg border border-border overflow-hidden bg-card">
-              <img src="/images/emkost-pryam-real-2.jpg" alt="Ёмкость из полиэтилена в обрешётке — фото" className="w-full h-48 object-cover" />
+              <img src="/images/emkost-pryam-real-2.jpg" alt="Ёмкость из полиэтилена в обрешётке — фото" className="w-full object-contain" />
             </div>
             <div className="rounded-lg border border-border overflow-hidden bg-card">
-              <img src="/images/emkost-pryam-real-3.png" alt="Ёмкость из полипропилена в металлической обрешётке" className="w-full h-48 object-cover" />
+              <img src="/images/emkost-pryam-real-3.png" alt="Ёмкость из полипропилена в металлической обрешётке" className="w-full object-contain" />
             </div>
           </div>
         </section>
@@ -323,7 +323,7 @@ const EmkostiPryamougolnyeInner = () => {
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
                 {ppImages.map((img, i) => (
                   <div key={i} className="rounded-lg border border-border overflow-hidden bg-card">
-                    <img src={img.src} alt={img.alt} className="w-full h-40 object-cover" />
+                    <img src={img.src} alt={img.alt} className="w-full object-contain" />
                   </div>
                 ))}
               </div>
@@ -334,7 +334,7 @@ const EmkostiPryamougolnyeInner = () => {
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
                 {pndImages.map((img, i) => (
                   <div key={i} className="rounded-lg border border-border overflow-hidden bg-card">
-                    <img src={img.src} alt={img.alt} className="w-full h-40 object-cover" />
+                    <img src={img.src} alt={img.alt} className="w-full object-contain" />
                   </div>
                 ))}
               </div>
