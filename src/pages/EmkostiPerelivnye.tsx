@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 import CartSheet from "@/components/CartSheet";
 import { CartProvider } from "@/contexts/CartContext";
-import { perelivnyeProducts } from "@/data/perelivnyeProducts";
+import { perelivnyeProducts, ppColors } from "@/data/perelivnyeProducts";
 import { Check, Droplets, Wrench, ShieldCheck, Clock, Truck, FlaskConical, Settings } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -72,16 +72,14 @@ const advantages = [
   { icon: Wrench, title: "Монтаж и сервис", text: "Установка на объекте, подключение к системе водоподготовки, обучение персонала." },
 ];
 
-const ppColors = [
-  { name: "Серый", ral: "RAL 7032", hex: "#b5b0a1", application: "внутри помещения" },
-  { name: "Голубой", ral: "RAL 5012", hex: "#0089bf", application: "улица, УФ-защита" },
-];
 
 const EmkostiPerelivnyeInner = () => {
   const [cartOpen, setCartOpen] = useState(false);
   const navigate = useNavigate();
   const [form, setForm] = useState({ name: "", phone: "", email: "", description: "" });
-  const [selectedColor, setSelectedColor] = useState(ppColors[0]);
+  const [selectedColorCode, setSelectedColorCode] = useState(ppColors[0].code);
+  const selectedColor = ppColors.find((c) => c.code === selectedColorCode) || ppColors[0];
+  const filteredProducts = perelivnyeProducts.filter((p) => p.colorCode === selectedColorCode);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -140,9 +138,9 @@ const EmkostiPerelivnyeInner = () => {
             {ppColors.map((c) => (
               <div
                 key={c.ral}
-                onClick={() => setSelectedColor(c)}
+                onClick={() => setSelectedColorCode(c.code)}
                 className={`rounded-lg border bg-card p-3 cursor-pointer transition-all ${
-                  selectedColor.ral === c.ral
+                  selectedColor.code === c.code
                     ? "border-primary ring-1 ring-primary shadow-sm"
                     : "hover:border-muted-foreground"
                 }`}
@@ -244,7 +242,7 @@ const EmkostiPerelivnyeInner = () => {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {perelivnyeProducts.map((item) => (
+                {filteredProducts.map((item) => (
                   <TableRow key={item.article} className="cursor-pointer hover:bg-muted/70" onClick={() => navigate(`/product/${item.article}`)}>
                       <TableCell className="text-xs font-medium font-mono text-primary">{item.article}</TableCell>
                       <TableCell className="text-xs font-medium">{item.label}</TableCell>

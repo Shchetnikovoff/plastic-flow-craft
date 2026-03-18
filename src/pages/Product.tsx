@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { CartProvider, useCart } from "@/contexts/CartContext";
 import Header from "@/components/Header";
 import CartSheet from "@/components/CartSheet";
@@ -10,7 +10,7 @@ import { razdvizhnoyImages, razdvizhnoyFlanecImages, getRazdvizhnoySizes } from 
 import { vozdukhovodImages, getVozdukhovodSizes, vozdukhovodAvailableLengths } from "@/data/vozdukhovodProducts";
 import { emkostGroups } from "@/data/emkostiProducts";
 import { pozharnyeRect, pozharnyePodzem, pozharnyeHoriz } from "@/data/pozharnyeProducts";
-import { perelivnyeProducts } from "@/data/perelivnyeProducts";
+import { perelivnyeProducts, ppColors } from "@/data/perelivnyeProducts";
 import { Button } from "@/components/ui/button";
 import { ShoppingCart, Plus, Minus, ChevronLeft, ChevronRight, FileDown } from "lucide-react";
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
@@ -110,10 +110,11 @@ function parseEmkostArticle(article: string) {
       image: "/images/emkosti-hero-2.png",
     };
   }
-  // Search in perelivnye (overflow tanks for pools)
+  // Search in perelivnye (overflow tanks for pools) — format: ПЕ-PP-{COLOR}-{VOLUME}
   if (article.startsWith("ПЕ-")) {
     const item = perelivnyeProducts.find((p) => p.article === article);
     if (item) {
+      const color = ppColors.find((c) => c.code === item.colorCode);
       return {
         productType: "emkost" as const,
         emkostType: "rectangular",
@@ -127,6 +128,8 @@ function parseEmkostArticle(article: string) {
         description: `Переливная ёмкость для бассейна ${item.label}, полипропилен PP-H, размеры ${item.length}×${item.width}×${item.height} мм`,
         image: "/images/emkost-perelivnaya-bassein.jpg",
         rectDims: { length: item.length, width: item.width, height: item.height },
+        perelivColor: color || null,
+        perelivPoolVolume: item.poolVolume,
       };
     }
   }
@@ -251,6 +254,8 @@ const ProductDetailContent = () => {
   const [contactData, setContactData] = useState<ContactFormData>({ name: "", email: "", phone: "", inn: "" });
   const [contactErrors, setContactErrors] = useState<ContactFormErrors>({});
 
+  const navigate = useNavigate();
+
   if (!article) return <div className="p-8 text-center text-muted-foreground">Артикул не указан</div>;
 
   // Try emkost first
@@ -341,6 +346,37 @@ const ProductDetailContent = () => {
             <p className="font-mono text-sm text-muted-foreground mb-2">{article}</p>
             <p className="text-sm text-muted-foreground mb-6">{emkost.subtitle}</p>
 
+            {/* Color picker for perelivnye */}
+            {"perelivColor" in emkost && emkost.perelivColor && (
+              <div className="mb-6">
+                <h3 className="text-sm font-semibold text-foreground mb-2">Цвет полипропилена</h3>
+                <div className="grid gap-2 sm:grid-cols-2">
+                  {ppColors.map((c) => (
+                    <div
+                      key={c.code}
+                      onClick={() => {
+                        if (c.code !== emkost.perelivColor!.code) {
+                          navigate(`/product/ПЕ-PP-${c.code}-${emkost.perelivPoolVolume}`, { replace: true });
+                        }
+                      }}
+                      className={`rounded-lg border bg-card p-3 cursor-pointer transition-all ${
+                        emkost.perelivColor!.code === c.code
+                          ? "border-primary ring-1 ring-primary shadow-sm"
+                          : "hover:border-muted-foreground"
+                      }`}
+                    >
+                      <div className="flex items-center gap-2">
+                        <span className="w-5 h-5 rounded-full border border-border shrink-0" style={{ backgroundColor: c.hex }} />
+                        <span className="text-sm font-semibold text-foreground">{c.name}</span>
+                        <span className="text-xs text-muted-foreground">{c.ral}</span>
+                      </div>
+                      <p className="text-xs text-muted-foreground mt-1">{c.application}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
             <div className="grid grid-cols-2 gap-px rounded-lg border overflow-hidden mb-6">
               <div className="bg-card p-3">
                 <span className="block text-xs text-muted-foreground">Объём</span>
@@ -372,6 +408,15 @@ const ProductDetailContent = () => {
                 <span className="block text-xs text-muted-foreground">Материал</span>
                 <span className="text-sm font-semibold text-foreground">{emkost.materialName}</span>
               </div>
+              {"perelivColor" in emkost && emkost.perelivColor && (
+                <div className="bg-card p-3 border-t">
+                  <span className="block text-xs text-muted-foreground">Цвет</span>
+                  <span className="text-sm font-semibold text-foreground flex items-center gap-1.5">
+                    <span className="w-3 h-3 rounded-full border border-border shrink-0" style={{ backgroundColor: emkost.perelivColor.hex }} />
+                    {emkost.perelivColor.name} ({emkost.perelivColor.ral})
+                  </span>
+                </div>
+              )}
             </div>
 
             {emkost.description && (
