@@ -259,12 +259,49 @@ const ProductDetailContent = () => {
       addItem({ article, diameter: emkost.diameter, wallThickness: 0 }, qty);
       toast.success(`${article} (${qty} шт.) добавлен в корзину`);
     };
+
+    const handleEmkostPdf = async () => {
+      const errors = validateContactForm(contactData);
+      setContactErrors(errors);
+      if (Object.keys(errors).length > 0) return;
+
+      await generateSpecPdf(
+        {
+          article,
+          diameter: emkost.diameter,
+          wallThickness: 0,
+          socketThickness: 0,
+          availableLength: null,
+          connectionName: "",
+          materialName: emkost.materialName,
+        },
+        contactData
+      );
+      toast.success("PDF-спецификация скачана");
+      setPdfDialogOpen(false);
+    };
+
+    const handleEmkostContactChange = (field: keyof ContactFormData, value: string) => {
+      setContactData((prev) => ({ ...prev, [field]: value }));
+      if (contactErrors[field]) {
+        setContactErrors((prev) => ({ ...prev, [field]: undefined }));
+      }
+    };
+
+    const isPerelivnaya = article.startsWith("ПЕ-");
+
     return (
       <main className="mx-auto max-w-[960px] px-4 sm:px-6 py-6 sm:py-8">
         <Breadcrumb className="mb-6">
           <BreadcrumbList>
             <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog/emkosti">Ёмкости</Link></BreadcrumbLink></BreadcrumbItem>
             <BreadcrumbSeparator />
+            {isPerelivnaya && (
+              <>
+                <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog/emkosti/perelivnye-bassejny">Переливные</Link></BreadcrumbLink></BreadcrumbItem>
+                <BreadcrumbSeparator />
+              </>
+            )}
             <BreadcrumbItem><BreadcrumbPage>{article}</BreadcrumbPage></BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
@@ -333,8 +370,29 @@ const ProductDetailContent = () => {
                 В корзину
               </Button>
             </div>
+            <Button variant="outline" className="gap-2 w-full mt-3" onClick={() => setPdfDialogOpen(true)}>
+              <FileDown className="h-4 w-4" />
+              Скачать спецификацию (PDF)
+            </Button>
           </div>
         </div>
+
+        {/* PDF Download Dialog */}
+        <Dialog open={pdfDialogOpen} onOpenChange={setPdfDialogOpen}>
+          <DialogContent className="max-w-md">
+            <DialogHeader>
+              <DialogTitle>Скачать спецификацию</DialogTitle>
+              <DialogDescription>
+                Заполните контактные данные для скачивания PDF-спецификации
+              </DialogDescription>
+            </DialogHeader>
+            <ContactFormFields data={contactData} errors={contactErrors} onChange={handleEmkostContactChange} />
+            <Button className="w-full gap-2 mt-2" onClick={handleEmkostPdf}>
+              <FileDown className="h-4 w-4" />
+              Скачать PDF
+            </Button>
+          </DialogContent>
+        </Dialog>
       </main>
     );
   }
