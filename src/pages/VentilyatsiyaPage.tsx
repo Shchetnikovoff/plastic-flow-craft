@@ -70,8 +70,8 @@ const Inner = () => {
           <p className="text-sm text-muted-foreground mb-5">Воздуховоды, отводы, тройники и фасонные изделия — химически стойкие элементы вентиляции!</p>
           <Button onClick={scrollToForm}>Получить расчёт стоимости</Button>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
-            <div className="rounded-lg border border-border overflow-hidden bg-card"><img src="/images/ventilyatsiya-hero-1.png" alt="Вентиляция из полипропилена" className="w-full h-56 object-cover" /></div>
-            <div className="rounded-lg border border-border overflow-hidden bg-card"><img src="/images/ventilyatsiya-hero-2.png" alt="Фасонные элементы вентиляции" className="w-full h-56 object-cover" /></div>
+<div className="rounded-lg border border-border overflow-hidden bg-card"><img src="/images/ventilyatsiya-hero-1.png" alt="Вентиляция из полипропилена" className="w-full object-contain" /></div>
+            <div className="rounded-lg border border-border overflow-hidden bg-card"><img src="/images/ventilyatsiya-hero-2.png" alt="Фасонные элементы вентиляции" className="w-full object-contain" /></div>
           </div>
         </section>
 
