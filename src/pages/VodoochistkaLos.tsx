@@ -190,7 +190,7 @@ const VodoochistkaLosInner = () => {
             {/* ЛОС tab */}
             <TabsContent value="los">
               <div className="flex flex-col sm:flex-row gap-4 mb-4">
-                <img src="/images/los-hero-1.jpg" alt="ЛОС" className="w-full sm:w-48 h-36 object-cover rounded-lg border border-border" />
+                <img src="/images/los-hero-1.jpg" alt="ЛОС" className="w-full sm:w-48 object-contain rounded-lg border border-border" />
                 <div>
                   <h3 className="text-sm font-semibold text-foreground mb-1">Локальное очистное сооружение (ЛОС)</h3>
                   <p className="text-xs text-muted-foreground">
