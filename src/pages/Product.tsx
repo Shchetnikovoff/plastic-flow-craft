@@ -489,8 +489,15 @@ const ProductDetailContent = () => {
           availableLength: null,
           connectionName: "",
           materialName: "Полипропилен / ПВХ / Стеклопластик",
-          workingTemp: "до +60 °C",
-          chemicalResistance: "Нефтепродукты, жиры, ПАВ, взвешенные вещества",
+          productTitle: `Флотационно-фильтровальная установка ${article}`,
+          extraRows: [
+            ["Производительность", `${ffuModel.capacity} м³/ч`],
+            ["Мощность", `${ffuModel.power} кВт`],
+            ["Габариты (Д×Ш×В)", `${ffuModel.dimensions} мм`],
+            ["Масса (сух.)", `${ffuModel.massDry} т`],
+            ["Материал корпуса", "Полипропилен / ПВХ / Стеклопластик"],
+            ["Рабочая температура", "до +60 °C"],
+          ],
         },
         contactData
       );
