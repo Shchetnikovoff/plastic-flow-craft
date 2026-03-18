@@ -147,7 +147,7 @@ const VodoochistkaLosInner = () => {
               <p className="text-xs text-muted-foreground p-2 text-center">ЛОС</p>
             </div>
             <div className="rounded-lg border border-border overflow-hidden bg-card">
-              <img src="/images/los-peskoulovitel-1.jpg" alt="Пескоуловитель" className="w-full h-48 object-cover" />
+              <img src="/images/los-peskoulovitel-1.jpg" alt="Пескоуловитель" className="w-full object-contain" />
               <p className="text-xs text-muted-foreground p-2 text-center">Пескоуловитель</p>
             </div>
             <div className="rounded-lg border border-border overflow-hidden bg-card">
