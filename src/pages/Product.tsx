@@ -317,6 +317,13 @@ const ProductDetailContent = () => {
                   length={emkost.rectDims.length}
                   width={emkost.rectDims.width}
                   height={emkost.rectDims.height}
+                  objectBounds={
+                    emkost.image.includes("perelivnaya")
+                      ? { left: 100, right: 320, top: 100, bottom: 345 }
+                      : emkost.image.includes("pryam")
+                        ? { left: 75, right: 325, top: 45, bottom: 330 }
+                        : undefined
+                  }
                 />
               ) : (
                 <img src={emkost.image} alt={emkost.title} className="h-full w-full object-contain p-4" />
