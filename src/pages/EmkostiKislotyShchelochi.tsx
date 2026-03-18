@@ -196,12 +196,9 @@ const EmkostiKislotyShchelochiInner = () => {
             Получить расчёт стоимости
           </Button>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
+          <div className="mt-6">
             <div className="rounded-lg border border-border overflow-hidden bg-card">
-              <img src="/images/emkosti-kisloty-hero-1.png" alt="Ёмкость для кислот из полипропилена" className="w-full h-56 object-cover" />
-            </div>
-            <div className="rounded-lg border border-border overflow-hidden bg-card">
-              <img src="/images/emkosti-kisloty-hero-2.png" alt="Ёмкость для щелочей из полиэтилена" className="w-full h-56 object-cover" />
+              <img src="/images/emkosti-kisloty-shchelochi-clean.jpg" alt="Химически стойкие ёмкости из ПНД с поддоном и уровнемером" className="w-full h-72 object-cover" />
             </div>
           </div>
         </section>
