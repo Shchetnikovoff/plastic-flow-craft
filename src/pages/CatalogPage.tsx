@@ -62,7 +62,7 @@ const CatalogPageInner = () => {
                     to={`/catalog/${cat.slug}`}
                     className="group rounded-lg border border-border bg-card overflow-hidden hover:border-primary/50 hover:shadow-md transition-all"
                   >
-                    <div className="aspect-[4/3] bg-white flex items-center justify-center">
+                    <div className="aspect-video bg-white flex items-center justify-center">
                       {thumb ? (
                         <img src={thumb} alt={cat.name} className="w-full h-full object-contain" />
                       ) : (
