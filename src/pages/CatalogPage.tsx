@@ -232,7 +232,7 @@ const CatalogPageInner = () => {
                     <img
                       src={selectedSub.image}
                       alt={selectedSub.name}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-contain"
                     />
                   ) : (
                     <ImageOff className="h-12 w-12 text-muted-foreground/40" />
