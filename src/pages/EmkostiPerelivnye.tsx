@@ -77,7 +77,9 @@ const EmkostiPerelivnyeInner = () => {
   const [cartOpen, setCartOpen] = useState(false);
   const navigate = useNavigate();
   const [form, setForm] = useState({ name: "", phone: "", email: "", description: "" });
-  const [selectedColor, setSelectedColor] = useState(ppColors[0]);
+  const [selectedColorCode, setSelectedColorCode] = useState(ppColors[0].code);
+  const selectedColor = ppColors.find((c) => c.code === selectedColorCode) || ppColors[0];
+  const filteredProducts = perelivnyeProducts.filter((p) => p.colorCode === selectedColorCode);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
