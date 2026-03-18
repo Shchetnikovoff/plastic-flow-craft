@@ -138,9 +138,9 @@ const EmkostiPerelivnyeInner = () => {
             {ppColors.map((c) => (
               <div
                 key={c.ral}
-                onClick={() => setSelectedColor(c)}
+                onClick={() => setSelectedColorCode(c.code)}
                 className={`rounded-lg border bg-card p-3 cursor-pointer transition-all ${
-                  selectedColor.ral === c.ral
+                  selectedColor.code === c.code
                     ? "border-primary ring-1 ring-primary shadow-sm"
                     : "hover:border-muted-foreground"
                 }`}
