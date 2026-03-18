@@ -310,7 +310,7 @@ const ProductDetailContent = () => {
         <div className="grid gap-8 md:grid-cols-2">
           <div>
             <div className="aspect-square overflow-hidden rounded-lg border bg-card mb-3">
-              {"rectDims" in emkost && emkost.rectDims ? (
+              {"rectDims" in emkost && emkost.rectDims && !emkost.image.includes("perelivnaya") ? (
                 <DimensionOverlay
                   imageSrc={emkost.image}
                   imageAlt={emkost.title}
@@ -318,27 +318,16 @@ const ProductDetailContent = () => {
                   width={emkost.rectDims.width}
                   height={emkost.rectDims.height}
                   isoCorners={
-                    emkost.image.includes("perelivnaya")
+                    emkost.image.includes("pryam")
                       ? {
-                          // Blue overflow tank in emkost-perelivnaya-bassein.jpg
-                          frontTopLeft:  { x: 128, y: 108 },
-                          frontTopRight: { x: 288, y: 104 },
-                          frontBotLeft:  { x: 128, y: 332 },
-                          frontBotRight: { x: 288, y: 340 },
-                          backTopRight:  { x: 348, y: 78  },
-                          backBotRight:  { x: 348, y: 300 },
+                          frontTopLeft:  { x: 60,  y: 65  },
+                          frontTopRight: { x: 290, y: 45  },
+                          frontBotLeft:  { x: 60,  y: 310 },
+                          frontBotRight: { x: 290, y: 330 },
+                          backTopRight:  { x: 345, y: 30  },
+                          backBotRight:  { x: 345, y: 290 },
                         }
-                      : emkost.image.includes("pryam")
-                        ? {
-                            // Rectangular tank in emkost-pryam-pp-1.png
-                            frontTopLeft:  { x: 60,  y: 65  },
-                            frontTopRight: { x: 290, y: 45  },
-                            frontBotLeft:  { x: 60,  y: 310 },
-                            frontBotRight: { x: 290, y: 330 },
-                            backTopRight:  { x: 345, y: 30  },
-                            backBotRight:  { x: 345, y: 290 },
-                          }
-                        : undefined
+                      : undefined
                   }
                 />
               ) : (
