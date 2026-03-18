@@ -256,6 +256,8 @@ const ProductDetailContent = () => {
 
   const navigate = useNavigate();
 
+  if (!article) return <div className="p-8 text-center text-muted-foreground">Артикул не указан</div>;
+
   // Try emkost first
   const emkost = parseEmkostArticle(article);
   if (emkost) {
