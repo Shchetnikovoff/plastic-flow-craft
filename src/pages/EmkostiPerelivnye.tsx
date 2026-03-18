@@ -214,14 +214,12 @@ const EmkostiPerelivnyeInner = () => {
               </TableHeader>
               <TableBody>
                 {perelivnyeProducts.map((item) => (
-                  <TableRow key={item.article} className="cursor-pointer" asChild>
-                    <Link to={`/product/${item.article}`}>
+                  <TableRow key={item.article} className="cursor-pointer hover:bg-muted/70" onClick={() => navigate(`/product/${item.article}`)}>
                       <TableCell className="text-xs font-medium font-mono text-primary">{item.article}</TableCell>
                       <TableCell className="text-xs font-medium">{item.label}</TableCell>
                       <TableCell className="text-xs text-right">{item.length.toLocaleString()}</TableCell>
                       <TableCell className="text-xs text-right">{item.width.toLocaleString()}</TableCell>
                       <TableCell className="text-xs text-right">{item.height.toLocaleString()}</TableCell>
-                    </Link>
                   </TableRow>
                 ))}
               </TableBody>
