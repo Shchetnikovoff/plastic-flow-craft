@@ -312,7 +312,7 @@ const EmkostiPozharnyeInner = () => {
                   <TableBody>
                     {pozharnyeRect.map((item) => (
                       <TableRow key={item.article}>
-                        <TableCell className="text-xs font-medium">{item.article}</TableCell>
+                        <TableCell className="text-xs font-medium"><Link to={`/product/${item.article}`} className="text-primary hover:underline">{item.article}</Link></TableCell>
                         <TableCell className="text-xs text-right">{item.volume.toLocaleString()}</TableCell>
                         <TableCell className="text-xs text-right">{item.length.toLocaleString()}</TableCell>
                         <TableCell className="text-xs text-right">{item.width.toLocaleString()}</TableCell>
@@ -338,7 +338,7 @@ const EmkostiPozharnyeInner = () => {
                   <TableBody>
                     {pozharnyePodzem.map((item) => (
                       <TableRow key={item.article}>
-                        <TableCell className="text-xs font-medium">{item.article}</TableCell>
+                        <TableCell className="text-xs font-medium"><Link to={`/product/${item.article}`} className="text-primary hover:underline">{item.article}</Link></TableCell>
                         <TableCell className="text-xs text-right">{item.volumeM3}</TableCell>
                         <TableCell className="text-xs text-right">{item.diameter.toLocaleString()}</TableCell>
                         <TableCell className="text-xs text-right">{item.length.toLocaleString()}</TableCell>
@@ -363,7 +363,7 @@ const EmkostiPozharnyeInner = () => {
                   <TableBody>
                     {pozharnyeHoriz.map((item) => (
                       <TableRow key={item.article}>
-                        <TableCell className="text-xs font-medium">{item.article}</TableCell>
+                        <TableCell className="text-xs font-medium"><Link to={`/product/${item.article}`} className="text-primary hover:underline">{item.article}</Link></TableCell>
                         <TableCell className="text-xs text-right">{item.volume.toLocaleString()}</TableCell>
                         <TableCell className="text-xs text-right">{item.diameter.toLocaleString()}</TableCell>
                         <TableCell className="text-xs text-right">{item.length.toLocaleString()}</TableCell>

@@ -150,7 +150,7 @@ const CatalogContent = () => {
             <TableBody>
               {category.items.map((item, i) => (
                 <TableRow key={item.article} className={`transition-colors hover:bg-primary/5 ${i % 2 === 0 ? "bg-card" : "bg-muted/30"}`}>
-                  <TableCell className="font-mono text-xs text-primary whitespace-nowrap">{item.article}</TableCell>
+                  <TableCell className="font-mono text-xs whitespace-nowrap"><Link to={`/product/${item.article}`} className="text-primary hover:underline">{item.article}</Link></TableCell>
                   <TableCell className="text-center text-sm font-medium">{item.volume.toLocaleString()}</TableCell>
                   <TableCell className="text-center text-sm">{item.diameter.toLocaleString()}</TableCell>
                   <TableCell className="text-center text-sm text-primary">{item.height.toLocaleString()}</TableCell>

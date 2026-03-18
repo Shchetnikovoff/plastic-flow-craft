@@ -8,6 +8,8 @@ import { getProductImages } from "@/data/products";
 import { baseTroynikSizes, troynikImages } from "@/data/troynikProducts";
 import { razdvizhnoyImages, razdvizhnoyFlanecImages, getRazdvizhnoySizes } from "@/data/razdvizhnoyProducts";
 import { vozdukhovodImages, getVozdukhovodSizes, vozdukhovodAvailableLengths } from "@/data/vozdukhovodProducts";
+import { emkostGroups } from "@/data/emkostiProducts";
+import { pozharnyeRect, pozharnyePodzem, pozharnyeHoriz } from "@/data/pozharnyeProducts";
 import { Button } from "@/components/ui/button";
 import { ShoppingCart, Plus, Minus, ChevronLeft, ChevronRight, FileDown } from "lucide-react";
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
@@ -15,6 +17,86 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 import { toast } from "sonner";
 import ContactFormFields, { type ContactFormData, type ContactFormErrors, validateContactForm } from "@/components/ContactFormFields";
 import { generateSpecPdf } from "@/lib/generateSpecPdf";
+
+/** Try to find an emkost (tank) product by article */
+function parseEmkostArticle(article: string) {
+  // Search in emkostGroups (vertical/horizontal tanks)
+  for (const group of emkostGroups) {
+    for (const cat of group.categories) {
+      const item = cat.items.find((i) => i.article === article);
+      if (item) {
+        const isHorizontal = group.id.startsWith("horizontal");
+        const materialName = group.id.includes("pnd") ? "Полиэтилен (ПНД/HDPE)" : "Полипропилен (ПП)";
+        return {
+          productType: "emkost" as const,
+          emkostType: isHorizontal ? "horizontal" : "vertical",
+          title: `${isHorizontal ? "Горизонтальная" : "Вертикальная"} ёмкость ${item.volume.toLocaleString()} л`,
+          subtitle: `${cat.title} — ${group.title}`,
+          materialName,
+          volume: item.volume,
+          diameter: item.diameter,
+          heightOrLength: item.height,
+          heightLabel: cat.heightLabel,
+          description: cat.description,
+          image: isHorizontal ? "/images/emkosti-hero-2.png" : "/images/emkosti-real-proizvodstvo.jpg",
+        };
+      }
+    }
+  }
+  // Search in pozharnyeRect
+  const rect = pozharnyeRect.find((p) => p.article === article);
+  if (rect) {
+    return {
+      productType: "emkost" as const,
+      emkostType: "rectangular",
+      title: `Ёмкость пожарная прямоугольная ${rect.volume.toLocaleString()} л`,
+      subtitle: "Пожарная ёмкость прямоугольная",
+      materialName: "Полипропилен (ПП)",
+      volume: rect.volume,
+      diameter: 0,
+      heightOrLength: rect.height,
+      heightLabel: "H, мм",
+      description: `Размеры: ${rect.length}×${rect.width}×${rect.height} мм`,
+      image: "/images/emkost-pryam-pp-1.png",
+      rectDims: { length: rect.length, width: rect.width, height: rect.height },
+    };
+  }
+  // Search in pozharnyePodzem
+  const pdz = pozharnyePodzem.find((p) => p.article === article);
+  if (pdz) {
+    return {
+      productType: "emkost" as const,
+      emkostType: "underground",
+      title: `Ёмкость пожарная подземная ${pdz.volumeM3} м³`,
+      subtitle: "Пожарная ёмкость подземная",
+      materialName: "Полипропилен (ПП)",
+      volume: pdz.volumeM3 * 1000,
+      diameter: pdz.diameter,
+      heightOrLength: pdz.length,
+      heightLabel: "L, мм",
+      description: `Подземная цилиндрическая ёмкость. Диаметр ${pdz.diameter} мм, длина ${pdz.length} мм.`,
+      image: "/images/emkosti-podzemnye-1.jpg",
+    };
+  }
+  // Search in pozharnyeHoriz
+  const horiz = pozharnyeHoriz.find((p) => p.article === article);
+  if (horiz) {
+    return {
+      productType: "emkost" as const,
+      emkostType: "horizontal",
+      title: `Ёмкость пожарная горизонтальная ${horiz.volume.toLocaleString()} л`,
+      subtitle: "Пожарная ёмкость горизонтальная",
+      materialName: "Полипропилен (ПП)",
+      volume: horiz.volume,
+      diameter: horiz.diameter,
+      heightOrLength: horiz.length,
+      heightLabel: "L, мм",
+      description: `Горизонтальная цилиндрическая ёмкость. Диаметр ${horiz.diameter} мм, длина ${horiz.length} мм.`,
+      image: "/images/emkosti-hero-2.png",
+    };
+  }
+  return null;
+}
 
 /** Parse article to extract product params */
 function parseArticle(article: string) {
@@ -135,6 +217,93 @@ const ProductDetailContent = () => {
   const [contactErrors, setContactErrors] = useState<ContactFormErrors>({});
 
   if (!article) return <div className="p-8 text-center text-muted-foreground">Артикул не указан</div>;
+
+  // Try emkost first
+  const emkost = parseEmkostArticle(article);
+  if (emkost) {
+    const handleAddEmkost = () => {
+      addItem({ article, diameter: emkost.diameter, wallThickness: 0 }, qty);
+      toast.success(`${article} (${qty} шт.) добавлен в корзину`);
+    };
+    return (
+      <main className="mx-auto max-w-[960px] px-4 sm:px-6 py-6 sm:py-8">
+        <Breadcrumb className="mb-6">
+          <BreadcrumbList>
+            <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog/emkosti">Ёмкости</Link></BreadcrumbLink></BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem><BreadcrumbPage>{article}</BreadcrumbPage></BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
+
+        <div className="grid gap-8 md:grid-cols-2">
+          <div>
+            <div className="aspect-square overflow-hidden rounded-lg border bg-card mb-3">
+              <img src={emkost.image} alt={emkost.title} className="h-full w-full object-contain p-4" />
+            </div>
+          </div>
+
+          <div>
+            <h1 className="text-xl sm:text-2xl font-bold text-foreground mb-1">{emkost.title}</h1>
+            <p className="font-mono text-sm text-muted-foreground mb-2">{article}</p>
+            <p className="text-sm text-muted-foreground mb-6">{emkost.subtitle}</p>
+
+            <div className="grid grid-cols-2 gap-px rounded-lg border overflow-hidden mb-6">
+              <div className="bg-card p-3">
+                <span className="block text-xs text-muted-foreground">Объём</span>
+                <span className="text-sm font-semibold text-foreground">{emkost.volume.toLocaleString()} л</span>
+              </div>
+              {emkost.diameter > 0 && (
+                <div className="bg-card p-3">
+                  <span className="block text-xs text-muted-foreground">Диаметр (D)</span>
+                  <span className="text-sm font-semibold text-foreground">{emkost.diameter.toLocaleString()} мм</span>
+                </div>
+              )}
+              <div className="bg-card p-3 border-t">
+                <span className="block text-xs text-muted-foreground">{emkost.heightLabel}</span>
+                <span className="text-sm font-semibold text-foreground">{emkost.heightOrLength.toLocaleString()} мм</span>
+              </div>
+              {"rectDims" in emkost && emkost.rectDims && (
+                <>
+                  <div className="bg-card p-3 border-t">
+                    <span className="block text-xs text-muted-foreground">Длина (L)</span>
+                    <span className="text-sm font-semibold text-foreground">{emkost.rectDims.length.toLocaleString()} мм</span>
+                  </div>
+                  <div className="bg-card p-3 border-t">
+                    <span className="block text-xs text-muted-foreground">Ширина (W)</span>
+                    <span className="text-sm font-semibold text-foreground">{emkost.rectDims.width.toLocaleString()} мм</span>
+                  </div>
+                </>
+              )}
+              <div className="bg-card p-3 border-t">
+                <span className="block text-xs text-muted-foreground">Материал</span>
+                <span className="text-sm font-semibold text-foreground">{emkost.materialName}</span>
+              </div>
+            </div>
+
+            {emkost.description && (
+              <p className="text-sm text-muted-foreground mb-6">{emkost.description}</p>
+            )}
+
+            <div className="flex items-center gap-3">
+              <div className="flex items-center gap-1 border rounded-md">
+                <Button variant="ghost" size="icon" className="h-9 w-9" onClick={() => setQty((q) => Math.max(1, q - 1))}>
+                  <Minus className="h-4 w-4" />
+                </Button>
+                <span className="w-10 text-center text-sm font-medium">{qty}</span>
+                <Button variant="ghost" size="icon" className="h-9 w-9" onClick={() => setQty((q) => q + 1)}>
+                  <Plus className="h-4 w-4" />
+                </Button>
+              </div>
+              <Button className="gap-2 flex-1" onClick={handleAddEmkost}>
+                <ShoppingCart className="h-4 w-4" />
+                В корзину
+              </Button>
+            </div>
+          </div>
+        </div>
+      </main>
+    );
+  }
 
   const parsed = parseArticle(article);
   if (!parsed) {
