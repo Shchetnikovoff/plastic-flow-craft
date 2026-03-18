@@ -26,6 +26,7 @@ import PageFooter from "@/components/PageFooter";
 
 const heroImages = [
   { src: "/images/lamelnyj-hero-real.jpg", alt: "Ламельный тонкослойный отстойник" },
+  { src: "/images/vodoochistka-hero-real-2.jpeg", alt: "Ламельный отстойник — системы водоочистки" },
   { src: "/images/lamelnyj-photo-1.jpg", alt: "Ламельный отстойник фото" },
 ];
 

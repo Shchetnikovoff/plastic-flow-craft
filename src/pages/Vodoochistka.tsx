@@ -198,12 +198,9 @@ const VodoochistkaInner = () => {
             Получить расчёт стоимости
           </Button>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
+          <div className="mt-6">
             <div className="rounded-lg border border-border overflow-hidden bg-card">
               <img src="/images/vodoochistka-hero-real.jpeg" alt="Водоочистное оборудование из полимеров" className="w-full object-contain" />
-            </div>
-            <div className="rounded-lg border border-border overflow-hidden bg-card">
-              <img src="/images/vodoochistka-hero-real-2.jpeg" alt="Системы водоочистки" className="w-full object-contain" />
             </div>
           </div>
         </section>
