@@ -314,7 +314,7 @@ const ProductDetailContent = () => {
 
         <div className="grid gap-8 md:grid-cols-2">
           <div>
-            <div className="aspect-square overflow-hidden rounded-lg border bg-card mb-3">
+            <div className={`${emkost.image.includes("perelivnaya") ? "aspect-[4/3]" : "aspect-square"} overflow-hidden rounded-lg border bg-card mb-3`}>
               {"rectDims" in emkost && emkost.rectDims && !emkost.image.includes("perelivnaya") ? (
                 <DimensionOverlay
                   imageSrc={emkost.image}
@@ -336,7 +336,7 @@ const ProductDetailContent = () => {
                   }
                 />
               ) : (
-                <img src={emkost.image} alt={emkost.title} className="h-full w-full object-contain p-4" />
+                <img src={emkost.image} alt={emkost.title} className="h-full w-full object-cover" />
               )}
             </div>
           </div>
