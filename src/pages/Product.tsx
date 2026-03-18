@@ -319,7 +319,7 @@ const ProductDetailContent = () => {
                   height={emkost.rectDims.height}
                   objectBounds={
                     emkost.image.includes("perelivnaya")
-                      ? { left: 100, right: 320, top: 100, bottom: 345 }
+                      ? { left: 115, right: 310, top: 115, bottom: 340 }
                       : emkost.image.includes("pryam")
                         ? { left: 75, right: 325, top: 45, bottom: 330 }
                         : undefined
