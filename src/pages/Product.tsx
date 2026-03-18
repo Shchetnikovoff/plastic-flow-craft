@@ -467,6 +467,158 @@ const ProductDetailContent = () => {
     );
   }
 
+  // Try FFU
+  const ffuModel = article.startsWith("ФФУ-") ? ffuModels.find((m) => m.name === article) : null;
+  if (ffuModel) {
+    const handleAddFfu = () => {
+      addItem({ article, diameter: 0, wallThickness: 0 }, qty);
+      toast.success(`${article} (${qty} шт.) добавлен в корзину`);
+    };
+
+    const handleFfuSpecPdf = async () => {
+      const errors = validateContactForm(contactData);
+      setContactErrors(errors);
+      if (Object.keys(errors).length > 0) return;
+
+      await generateSpecPdf(
+        {
+          article,
+          diameter: 0,
+          wallThickness: 0,
+          socketThickness: 0,
+          availableLength: null,
+          connectionName: "",
+          materialName: "Полипропилен / ПВХ / Стеклопластик",
+          workingTemp: "до +60 °C",
+          chemicalResistance: "Нефтепродукты, жиры, ПАВ, взвешенные вещества",
+        },
+        contactData
+      );
+      toast.success("PDF-спецификация скачана");
+      setPdfDialogOpen(false);
+    };
+
+    const handleFfuKpPdf = async () => {
+      await generateLetterheadPdf();
+      toast.success("Коммерческое предложение скачано");
+    };
+
+    const handleFfuContactChange = (field: keyof ContactFormData, value: string) => {
+      setContactData((prev) => ({ ...prev, [field]: value }));
+      if (contactErrors[field]) {
+        setContactErrors((prev) => ({ ...prev, [field]: undefined }));
+      }
+    };
+
+    return (
+      <main className="mx-auto max-w-[960px] px-4 sm:px-6 py-6 sm:py-8">
+        <Breadcrumb className="mb-6">
+          <BreadcrumbList>
+            <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog">Каталог</Link></BreadcrumbLink></BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog/vodoochistka">Водоочистка</Link></BreadcrumbLink></BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog/vodoochistka/ffu">ФФУ</Link></BreadcrumbLink></BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem><BreadcrumbPage>{article}</BreadcrumbPage></BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
+
+        <div className="grid gap-8 md:grid-cols-2">
+          {/* Image */}
+          <div>
+            <div className="aspect-[4/3] overflow-hidden rounded-lg border bg-card">
+              <img src="/images/ffu-real-3d.png" alt={`${article} — Флотационно-фильтровальная установка`} className="h-full w-full object-contain p-4" />
+            </div>
+          </div>
+
+          {/* Info */}
+          <div>
+            <h1 className="text-xl sm:text-2xl font-bold text-foreground mb-1">
+              Флотационно-фильтровальная установка {article}
+            </h1>
+            <p className="font-mono text-sm text-muted-foreground mb-2">{article}</p>
+            <p className="text-sm text-muted-foreground mb-6">
+              ФФУ для глубокой очистки сточных вод от нефтепродуктов, жиров и взвешенных веществ. Производительность — {ffuModel.capacity} м³/ч.
+            </p>
+
+            {/* Specs grid */}
+            <div className="grid grid-cols-2 gap-px rounded-lg border overflow-hidden mb-6">
+              <div className="bg-card p-3">
+                <span className="block text-xs text-muted-foreground">Производительность</span>
+                <span className="text-sm font-semibold text-foreground">{ffuModel.capacity} м³/ч</span>
+              </div>
+              <div className="bg-card p-3">
+                <span className="block text-xs text-muted-foreground">Мощность</span>
+                <span className="text-sm font-semibold text-foreground">{ffuModel.power} кВт</span>
+              </div>
+              <div className="bg-card p-3 border-t">
+                <span className="block text-xs text-muted-foreground">Габариты (Д×Ш×В)</span>
+                <span className="text-sm font-semibold text-foreground">{ffuModel.dimensions} мм</span>
+              </div>
+              <div className="bg-card p-3 border-t">
+                <span className="block text-xs text-muted-foreground">Масса (сух.)</span>
+                <span className="text-sm font-semibold text-foreground">{ffuModel.massDry} т</span>
+              </div>
+              <div className="bg-card p-3 border-t">
+                <span className="block text-xs text-muted-foreground">Материал корпуса</span>
+                <span className="text-sm font-semibold text-foreground">ПП / ПВХ / СП</span>
+              </div>
+              <div className="bg-card p-3 border-t">
+                <span className="block text-xs text-muted-foreground">Рабочая температура</span>
+                <span className="text-sm font-semibold text-foreground">до +60 °C</span>
+              </div>
+            </div>
+
+            {/* Add to cart */}
+            <div className="flex items-center gap-3">
+              <div className="flex items-center gap-1 border rounded-md">
+                <Button variant="ghost" size="icon" className="h-9 w-9" onClick={() => setQty((q) => Math.max(1, q - 1))}>
+                  <Minus className="h-4 w-4" />
+                </Button>
+                <span className="w-10 text-center text-sm font-medium">{qty}</span>
+                <Button variant="ghost" size="icon" className="h-9 w-9" onClick={() => setQty((q) => q + 1)}>
+                  <Plus className="h-4 w-4" />
+                </Button>
+              </div>
+              <Button className="gap-2 flex-1" onClick={handleAddFfu}>
+                <ShoppingCart className="h-4 w-4" />
+                В корзину
+              </Button>
+            </div>
+
+            <Button variant="outline" className="gap-2 w-full mt-3" onClick={() => setPdfDialogOpen(true)}>
+              <FileDown className="h-4 w-4" />
+              Скачать спецификацию (PDF)
+            </Button>
+
+            <Button variant="outline" className="gap-2 w-full mt-2" onClick={handleFfuKpPdf}>
+              <FileDown className="h-4 w-4" />
+              Скачать коммерческое предложение (PDF)
+            </Button>
+          </div>
+        </div>
+
+        {/* PDF Download Dialog */}
+        <Dialog open={pdfDialogOpen} onOpenChange={setPdfDialogOpen}>
+          <DialogContent className="max-w-md">
+            <DialogHeader>
+              <DialogTitle>Скачать спецификацию</DialogTitle>
+              <DialogDescription>
+                Заполните контактные данные для скачивания PDF-спецификации
+              </DialogDescription>
+            </DialogHeader>
+            <ContactFormFields data={contactData} errors={contactErrors} onChange={handleFfuContactChange} />
+            <Button className="w-full gap-2 mt-2" onClick={handleFfuSpecPdf}>
+              <FileDown className="h-4 w-4" />
+              Скачать PDF
+            </Button>
+          </DialogContent>
+        </Dialog>
+      </main>
+    );
+  }
+
   const parsed = parseArticle(article);
   if (!parsed) {
     return (
