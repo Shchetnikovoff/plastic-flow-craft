@@ -133,6 +133,31 @@ const EmkostiPerelivnyeInner = () => {
           </div>
         </section>
 
+        {/* Цвет полипропилена */}
+        <section className="mb-10">
+          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">Цвет полипропилена</h2>
+          <div className="grid gap-2 sm:grid-cols-2">
+            {ppColors.map((c) => (
+              <div
+                key={c.ral}
+                onClick={() => setSelectedColor(c)}
+                className={`rounded-lg border bg-card p-3 cursor-pointer transition-all ${
+                  selectedColor.ral === c.ral
+                    ? "border-primary ring-1 ring-primary shadow-sm"
+                    : "hover:border-muted-foreground"
+                }`}
+              >
+                <div className="flex items-center gap-2">
+                  <span className="w-5 h-5 rounded-full border border-border shrink-0" style={{ backgroundColor: c.hex }} />
+                  <span className="text-sm font-semibold text-foreground">{c.name}</span>
+                  <span className="text-xs text-muted-foreground">{c.ral}</span>
+                </div>
+                <p className="text-xs text-muted-foreground mt-1">{c.application}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
         {/* Intro */}
         <section className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">
