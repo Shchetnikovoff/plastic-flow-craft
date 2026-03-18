@@ -254,7 +254,7 @@ const ProductDetailContent = () => {
   const [contactData, setContactData] = useState<ContactFormData>({ name: "", email: "", phone: "", inn: "" });
   const [contactErrors, setContactErrors] = useState<ContactFormErrors>({});
 
-  if (!article) return <div className="p-8 text-center text-muted-foreground">Артикул не указан</div>;
+  const navigate = useNavigate();
 
   // Try emkost first
   const emkost = parseEmkostArticle(article);
