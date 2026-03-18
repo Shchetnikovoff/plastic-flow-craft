@@ -346,6 +346,37 @@ const ProductDetailContent = () => {
             <p className="font-mono text-sm text-muted-foreground mb-2">{article}</p>
             <p className="text-sm text-muted-foreground mb-6">{emkost.subtitle}</p>
 
+            {/* Color picker for perelivnye */}
+            {"perelivColor" in emkost && emkost.perelivColor && (
+              <div className="mb-6">
+                <h3 className="text-sm font-semibold text-foreground mb-2">Цвет полипропилена</h3>
+                <div className="grid gap-2 sm:grid-cols-2">
+                  {ppColors.map((c) => (
+                    <div
+                      key={c.code}
+                      onClick={() => {
+                        if (c.code !== emkost.perelivColor!.code) {
+                          navigate(`/product/ПЕ-PP-${c.code}-${emkost.perelivPoolVolume}`, { replace: true });
+                        }
+                      }}
+                      className={`rounded-lg border bg-card p-3 cursor-pointer transition-all ${
+                        emkost.perelivColor!.code === c.code
+                          ? "border-primary ring-1 ring-primary shadow-sm"
+                          : "hover:border-muted-foreground"
+                      }`}
+                    >
+                      <div className="flex items-center gap-2">
+                        <span className="w-5 h-5 rounded-full border border-border shrink-0" style={{ backgroundColor: c.hex }} />
+                        <span className="text-sm font-semibold text-foreground">{c.name}</span>
+                        <span className="text-xs text-muted-foreground">{c.ral}</span>
+                      </div>
+                      <p className="text-xs text-muted-foreground mt-1">{c.application}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
             <div className="grid grid-cols-2 gap-px rounded-lg border overflow-hidden mb-6">
               <div className="bg-card p-3">
                 <span className="block text-xs text-muted-foreground">Объём</span>
@@ -377,6 +408,15 @@ const ProductDetailContent = () => {
                 <span className="block text-xs text-muted-foreground">Материал</span>
                 <span className="text-sm font-semibold text-foreground">{emkost.materialName}</span>
               </div>
+              {"perelivColor" in emkost && emkost.perelivColor && (
+                <div className="bg-card p-3 border-t">
+                  <span className="block text-xs text-muted-foreground">Цвет</span>
+                  <span className="text-sm font-semibold text-foreground flex items-center gap-1.5">
+                    <span className="w-3 h-3 rounded-full border border-border shrink-0" style={{ backgroundColor: emkost.perelivColor.hex }} />
+                    {emkost.perelivColor.name} ({emkost.perelivColor.ral})
+                  </span>
+                </div>
+              )}
             </div>
 
             {emkost.description && (
