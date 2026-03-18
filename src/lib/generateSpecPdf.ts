@@ -14,6 +14,8 @@ interface ProductSpec {
   chemicalResistance?: string;
   colorName?: string;
   colorRal?: string;
+  productTitle?: string;
+  extraRows?: [string, string][];
 }
 
 export async function generateSpecPdf(product: ProductSpec, contact: ContactFormData) {
