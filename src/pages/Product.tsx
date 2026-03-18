@@ -110,10 +110,11 @@ function parseEmkostArticle(article: string) {
       image: "/images/emkosti-hero-2.png",
     };
   }
-  // Search in perelivnye (overflow tanks for pools)
+  // Search in perelivnye (overflow tanks for pools) — format: ПЕ-PP-{COLOR}-{VOLUME}
   if (article.startsWith("ПЕ-")) {
     const item = perelivnyeProducts.find((p) => p.article === article);
     if (item) {
+      const color = ppColors.find((c) => c.code === item.colorCode);
       return {
         productType: "emkost" as const,
         emkostType: "rectangular",
@@ -127,6 +128,8 @@ function parseEmkostArticle(article: string) {
         description: `Переливная ёмкость для бассейна ${item.label}, полипропилен PP-H, размеры ${item.length}×${item.width}×${item.height} мм`,
         image: "/images/emkost-perelivnaya-bassein.jpg",
         rectDims: { length: item.length, width: item.width, height: item.height },
+        perelivColor: color || null,
+        perelivPoolVolume: item.poolVolume,
       };
     }
   }
