@@ -1,20 +1,28 @@
+interface ObjectBounds {
+  left: number;
+  right: number;
+  top: number;
+  bottom: number;
+}
+
 interface DimensionOverlayProps {
   imageSrc: string;
   imageAlt: string;
   length?: number;
   width?: number;
   height?: number;
+  objectBounds?: ObjectBounds;
 }
 
 /**
  * Renders a product image with GOST-style SVG dimension lines overlay.
  * Extension lines, filled arrowheads, values centered on dimension lines.
  */
-const DimensionOverlay = ({ imageSrc, imageAlt, length, width, height }: DimensionOverlayProps) => {
+const DimensionOverlay = ({ imageSrc, imageAlt, length, width, height, objectBounds }: DimensionOverlayProps) => {
   const fmt = (v: number) => v.toLocaleString();
 
   // Object bounding box within the 400x400 viewBox
-  const obj = { left: 80, right: 320, top: 60, bottom: 310 };
+  const obj = objectBounds ?? { left: 80, right: 320, top: 60, bottom: 310 };
   // Dimension line offsets
   const hOff = 30; // height dim line offset left
   const lOff = 28; // length dim line offset below
