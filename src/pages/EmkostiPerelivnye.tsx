@@ -201,9 +201,10 @@ const EmkostiPerelivnyeInner = () => {
             Размер ёмкости подбирается в зависимости от объёма бассейна. Ниже представлены стандартные модели — возможно изготовление по индивидуальным размерам.
           </p>
           <div className="rounded-lg border border-border overflow-auto">
-            <Table>
+           <Table>
               <TableHeader>
                 <TableRow>
+                  <TableHead className="text-xs">Артикул</TableHead>
                   <TableHead className="text-xs">Объём бассейна</TableHead>
                   <TableHead className="text-xs text-right">Длина, мм</TableHead>
                   <TableHead className="text-xs text-right">Ширина, мм</TableHead>
@@ -212,11 +213,14 @@ const EmkostiPerelivnyeInner = () => {
               </TableHeader>
               <TableBody>
                 {perelivnyeProducts.map((item) => (
-                  <TableRow key={item.poolVolume}>
-                    <TableCell className="text-xs font-medium">{item.label}</TableCell>
-                    <TableCell className="text-xs text-right">{item.length.toLocaleString()}</TableCell>
-                    <TableCell className="text-xs text-right">{item.width.toLocaleString()}</TableCell>
-                    <TableCell className="text-xs text-right">{item.height.toLocaleString()}</TableCell>
+                  <TableRow key={item.article} className="cursor-pointer" asChild>
+                    <Link to={`/product/${item.article}`}>
+                      <TableCell className="text-xs font-medium font-mono text-primary">{item.article}</TableCell>
+                      <TableCell className="text-xs font-medium">{item.label}</TableCell>
+                      <TableCell className="text-xs text-right">{item.length.toLocaleString()}</TableCell>
+                      <TableCell className="text-xs text-right">{item.width.toLocaleString()}</TableCell>
+                      <TableCell className="text-xs text-right">{item.height.toLocaleString()}</TableCell>
+                    </Link>
                   </TableRow>
                 ))}
               </TableBody>
