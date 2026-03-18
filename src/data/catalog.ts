@@ -46,6 +46,7 @@ export const catalog: CatalogCategory[] = [
     id: "vodoochistka",
     name: "Водоочистка",
     slug: "vodoochistka",
+    image: "/images/vodoochistka-collage-hero.png",
     description: "Полимерное водоочистное оборудование — эффективность, долговечность и устойчивость к агрессивным средам!",
     subcategories: [
       { id: "v1", name: "ФФУ флотационно-фильтровальная установка", slug: "ffu", externalPath: "/catalog/vodoochistka/ffu", image: "/images/ffu-real-3d.png" },
