@@ -317,11 +317,27 @@ const ProductDetailContent = () => {
                   length={emkost.rectDims.length}
                   width={emkost.rectDims.width}
                   height={emkost.rectDims.height}
-                  objectBounds={
+                  isoCorners={
                     emkost.image.includes("perelivnaya")
-                      ? { left: 115, right: 310, top: 115, bottom: 340 }
+                      ? {
+                          // Blue overflow tank in emkost-perelivnaya-bassein.jpg
+                          frontTopLeft:  { x: 95,  y: 145 },
+                          frontTopRight: { x: 280, y: 115 },
+                          frontBotLeft:  { x: 95,  y: 340 },
+                          frontBotRight: { x: 280, y: 345 },
+                          backTopRight:  { x: 340, y: 90  },
+                          backBotRight:  { x: 340, y: 310 },
+                        }
                       : emkost.image.includes("pryam")
-                        ? { left: 75, right: 325, top: 45, bottom: 330 }
+                        ? {
+                            // Rectangular tank in emkost-pryam-pp-1.png
+                            frontTopLeft:  { x: 60,  y: 65  },
+                            frontTopRight: { x: 290, y: 45  },
+                            frontBotLeft:  { x: 60,  y: 310 },
+                            frontBotRight: { x: 290, y: 330 },
+                            backTopRight:  { x: 345, y: 30  },
+                            backBotRight:  { x: 345, y: 290 },
+                          }
                         : undefined
                   }
                 />
