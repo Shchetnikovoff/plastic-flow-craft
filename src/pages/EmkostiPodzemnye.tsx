@@ -168,7 +168,7 @@ const EmkostiPodzemnyeInner = () => {
           {/* Hero images */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
             <div className="rounded-lg border border-border overflow-hidden bg-card">
-              <img src="/images/emkosti-podzemnye-svt-1.jpg" alt="Многокамерная подземная ёмкость СВТ" className="w-full h-48 object-cover" />
+              <img src="/images/emkosti-podzemnye-svt-1.jpg" alt="Многокамерная подземная ёмкость СВТ" className="w-full object-contain" />
             </div>
             <div className="rounded-lg border border-border overflow-hidden bg-card">
               <img src="/images/emkosti-podzemnye-svt-2.jpg" alt="Подземные резервуары в разрезе" className="w-full h-48 object-cover" />
