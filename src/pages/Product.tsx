@@ -18,6 +18,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 import { toast } from "sonner";
 import ContactFormFields, { type ContactFormData, type ContactFormErrors, validateContactForm } from "@/components/ContactFormFields";
 import { generateSpecPdf } from "@/lib/generateSpecPdf";
+import DimensionOverlay from "@/components/DimensionOverlay";
 
 /** Try to find an emkost (tank) product by article */
 function parseEmkostArticle(article: string) {
