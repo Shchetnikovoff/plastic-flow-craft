@@ -18,6 +18,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 import { toast } from "sonner";
 import ContactFormFields, { type ContactFormData, type ContactFormErrors, validateContactForm } from "@/components/ContactFormFields";
 import { generateSpecPdf } from "@/lib/generateSpecPdf";
+import DimensionOverlay from "@/components/DimensionOverlay";
 
 /** Try to find an emkost (tank) product by article */
 function parseEmkostArticle(article: string) {
@@ -309,7 +310,17 @@ const ProductDetailContent = () => {
         <div className="grid gap-8 md:grid-cols-2">
           <div>
             <div className="aspect-square overflow-hidden rounded-lg border bg-card mb-3">
-              <img src={emkost.image} alt={emkost.title} className="h-full w-full object-contain p-4" />
+              {"rectDims" in emkost && emkost.rectDims ? (
+                <DimensionOverlay
+                  imageSrc={emkost.image}
+                  imageAlt={emkost.title}
+                  length={emkost.rectDims.length}
+                  width={emkost.rectDims.width}
+                  height={emkost.rectDims.height}
+                />
+              ) : (
+                <img src={emkost.image} alt={emkost.title} className="h-full w-full object-contain p-4" />
+              )}
             </div>
           </div>
 
