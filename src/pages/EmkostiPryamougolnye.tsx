@@ -185,7 +185,7 @@ const EmkostiPryamougolnyeInner = () => {
           {/* Hero images */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
             <div className="rounded-lg border border-border overflow-hidden bg-card">
-              <img src="/images/emkost-pryam-real-4.png" alt="Рендер ёмкости из полипропилена в обрешётке" className="w-full h-48 object-cover" />
+              <img src="/images/emkost-pryam-real-4.png" alt="Рендер ёмкости из полипропилена в обрешётке" className="w-full object-contain" />
             </div>
             <div className="rounded-lg border border-border overflow-hidden bg-card">
               <img src="/images/emkost-pryam-real-2.jpg" alt="Ёмкость из полиэтилена в обрешётке — фото" className="w-full h-48 object-cover" />
