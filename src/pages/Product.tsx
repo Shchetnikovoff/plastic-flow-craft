@@ -126,7 +126,7 @@ function parseEmkostArticle(article: string) {
         heightOrLength: item.height,
         heightLabel: "H, мм",
         description: `Переливная ёмкость для бассейна ${item.label}, полипропилен PP-H, размеры ${item.length}×${item.width}×${item.height} мм`,
-        image: colorCode === "7032" ? "/images/emkost-perelivnaya-bassein-grey.jpg" : "/images/emkost-perelivnaya-bassein.jpg",
+        image: item.colorCode === "7032" ? "/images/emkost-perelivnaya-bassein-grey.jpg" : "/images/emkost-perelivnaya-bassein.jpg",
         rectDims: { length: item.length, width: item.width, height: item.height },
         perelivColor: color || null,
         perelivPoolVolume: item.poolVolume,
