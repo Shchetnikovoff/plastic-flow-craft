@@ -144,7 +144,7 @@ const CatalogPageInner = () => {
           <div className="rounded-xl border border-border bg-card p-8">
             {result.subcategory.image && (
               <div className="aspect-[16/9] bg-muted rounded-lg overflow-hidden mb-4">
-                <img src={result.subcategory.image} alt={result.subcategory.name} className="w-full h-full object-cover" />
+                <img src={result.subcategory.image} alt={result.subcategory.name} className="w-full h-full object-contain" />
               </div>
             )}
             <h2 className="text-xl font-bold text-foreground mb-2">{result.subcategory.name}</h2>
