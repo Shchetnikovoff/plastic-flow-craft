@@ -72,10 +72,6 @@ const advantages = [
   { icon: Wrench, title: "Монтаж и сервис", text: "Установка на объекте, подключение к системе водоподготовки, обучение персонала." },
 ];
 
-const ppColors = [
-  { name: "Серый", ral: "RAL 7032", hex: "#b5b0a1", application: "внутри помещения" },
-  { name: "Голубой", ral: "RAL 5012", hex: "#0089bf", application: "улица, УФ-защита" },
-];
 
 const EmkostiPerelivnyeInner = () => {
   const [cartOpen, setCartOpen] = useState(false);
