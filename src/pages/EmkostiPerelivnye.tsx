@@ -242,7 +242,7 @@ const EmkostiPerelivnyeInner = () => {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {perelivnyeProducts.map((item) => (
+                {filteredProducts.map((item) => (
                   <TableRow key={item.article} className="cursor-pointer hover:bg-muted/70" onClick={() => navigate(`/product/${item.article}`)}>
                       <TableCell className="text-xs font-medium font-mono text-primary">{item.article}</TableCell>
                       <TableCell className="text-xs font-medium">{item.label}</TableCell>
