@@ -14,6 +14,8 @@ interface ProductSpec {
   chemicalResistance?: string;
   colorName?: string;
   colorRal?: string;
+  productTitle?: string;
+  extraRows?: [string, string][];
 }
 
 export async function generateSpecPdf(product: ProductSpec, contact: ContactFormData) {
@@ -56,17 +58,19 @@ export async function generateSpecPdf(product: ProductSpec, contact: ContactForm
   const labelX = 25;
   const valueX = 95;
 
-  const rows: [string, string][] = [
-    ["Наименование", "Отвод вентиляционный 90°"],
-    ["Артикул", product.article],
-    ["Диаметр (DN)", `${product.diameter} мм`],
-    ["Соединение", product.connectionName],
-    ["Толщина стенки (S)", `${product.wallThickness} мм`],
-    ["Толщина раструба (Sp)", `${product.socketThickness} мм`],
-    ["Длина (L)", product.availableLength ? `${product.availableLength} мм` : "—"],
-    ["Угол", "90°"],
-    ["Материал", product.materialName],
-  ];
+  const rows: [string, string][] = product.extraRows
+    ? [["Наименование", product.productTitle || product.article], ["Артикул", product.article], ...product.extraRows]
+    : [
+        ["Наименование", product.productTitle || "Отвод вентиляционный 90°"],
+        ["Артикул", product.article],
+        ["Диаметр (DN)", `${product.diameter} мм`],
+        ["Соединение", product.connectionName],
+        ["Толщина стенки (S)", `${product.wallThickness} мм`],
+        ["Толщина раструба (Sp)", `${product.socketThickness} мм`],
+        ["Длина (L)", product.availableLength ? `${product.availableLength} мм` : "—"],
+        ["Угол", "90°"],
+        ["Материал", product.materialName],
+      ];
 
   if (product.workingTemp) {
     rows.push(["Рабочая температура", product.workingTemp]);
