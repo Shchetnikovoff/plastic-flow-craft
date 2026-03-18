@@ -111,8 +111,8 @@ const GalvanikaPageInner = () => {
           <p className="text-sm text-muted-foreground mb-5">Проектирование, производство и монтаж гальванических линий и ванн — полный цикл от эскиза до ввода в эксплуатацию!</p>
           <Button onClick={scrollToForm} className="gap-2">Получить расчёт стоимости</Button>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
-            <div className="rounded-lg border border-border overflow-hidden bg-card"><img src="/images/galvanika-hero-1.png" alt="Гальваническое оборудование" className="w-full h-56 object-cover" /></div>
-            <div className="rounded-lg border border-border overflow-hidden bg-card"><img src="/images/galvanika-hero-2.png" alt="Гальванические ванны" className="w-full h-56 object-cover" /></div>
+            <div className="rounded-lg border border-border overflow-hidden bg-card"><img src="/images/galvanika-hero-1.png" alt="Гальваническое оборудование" className="w-full object-contain" /></div>
+            <div className="rounded-lg border border-border overflow-hidden bg-card"><img src="/images/galvanika-hero-2.png" alt="Гальванические ванны" className="w-full object-contain" /></div>
           </div>
         </section>
 
