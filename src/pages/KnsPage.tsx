@@ -71,8 +71,8 @@ const Inner = () => {
           <p className="text-sm text-muted-foreground mb-5">КНС из полипропилена и стеклопластика — надёжное водоотведение для любых объектов!</p>
           <Button onClick={scrollToForm}>Получить расчёт стоимости</Button>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
-            <div className="rounded-lg border border-border overflow-hidden bg-card"><img src="/images/kns-hero-1.png" alt="КНС канализационная насосная станция" className="w-full h-56 object-cover" /></div>
-            <div className="rounded-lg border border-border overflow-hidden bg-card"><img src="/images/kns-hero-2.png" alt="КНС в корпусе SVT" className="w-full h-56 object-cover" /></div>
+<div className="rounded-lg border border-border overflow-hidden bg-card"><img src="/images/kns-hero-1.png" alt="КНС канализационная насосная станция" className="w-full object-contain" /></div>
+            <div className="rounded-lg border border-border overflow-hidden bg-card"><img src="/images/kns-hero-2.png" alt="КНС в корпусе SVT" className="w-full object-contain" /></div>
           </div>
         </section>
 
