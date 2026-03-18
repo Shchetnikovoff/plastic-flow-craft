@@ -36,7 +36,7 @@ export const catalog: CatalogCategory[] = [
       { id: "e6", name: "Ёмкости для сейсмически активных районов", slug: "sejsmicheskie", image: "/images/emkosti-podzemnye-svt-2.jpg", description: "Ёмкости из полипропилена и полиэтилена с усиленной конструкцией для эксплуатации в сейсмически активных зонах. Повышенная устойчивость к динамическим нагрузкам." },
       { id: "e7", name: "Ёмкость для щелочи", slug: "dlya-shchelochi", externalPath: "/catalog/emkosti/kisloty-shchelochi", image: "/images/emkosti-shchelochi-real.jpg" },
       { id: "e8", name: "Ёмкость для кислоты", slug: "dlya-kisloty", externalPath: "/catalog/emkosti/kisloty-shchelochi", image: "/images/emkosti-kisloty-thumb.png" },
-      { id: "e9", name: "Переливные ёмкости для бассейнов", slug: "perelivnye-bassejny", image: "/images/emkosti-hero-real.png", description: "Переливные ёмкости из полипропилена для систем водоподготовки бассейнов. Сбор и хранение переливной воды, интеграция с системами фильтрации и обеззараживания." },
+      { id: "e9", name: "Переливные ёмкости для бассейнов", slug: "perelivnye-bassejny", image: "/images/emkost-perelivnaya-bassein.jpg", description: "Переливные ёмкости из полипропилена для систем водоподготовки бассейнов. Сбор и хранение переливной воды, интеграция с системами фильтрации и обеззараживания." },
     ],
   },
   {
