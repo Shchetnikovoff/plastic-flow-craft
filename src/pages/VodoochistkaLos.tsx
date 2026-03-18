@@ -143,7 +143,7 @@ const VodoochistkaLosInner = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-6">
             <div className="rounded-lg border border-border overflow-hidden bg-card">
-              <img src="/images/los-hero-1.jpg" alt="Локальное очистное сооружение ЛОС" className="w-full h-48 object-cover" />
+              <img src="/images/los-hero-1.jpg" alt="Локальное очистное сооружение ЛОС" className="w-full object-contain" />
               <p className="text-xs text-muted-foreground p-2 text-center">ЛОС</p>
             </div>
             <div className="rounded-lg border border-border overflow-hidden bg-card">
