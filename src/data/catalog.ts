@@ -28,6 +28,7 @@ export const catalog: CatalogCategory[] = [
     id: "emkosti",
     name: "Ёмкости",
     slug: "emkosti",
+    image: "/images/emkosti-collage-hero.png",
     description: "Промышленные ёмкости из листового полипропилена и полиэтилена — надёжность, проверенная временем!",
     subcategories: [
       { id: "e1", name: "Ёмкости цилиндрические вертикальные", slug: "cilindricheskie-vertikalnye", image: "/images/emkosti-vert-pp-group.png", description: "Вертикальные цилиндрические ёмкости из листового полипропилена и полиэтилена для хранения воды, химических реагентов и технических жидкостей. Объём от 100 до 50 000 литров." },
