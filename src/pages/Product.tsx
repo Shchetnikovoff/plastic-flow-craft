@@ -321,12 +321,12 @@ const ProductDetailContent = () => {
                     emkost.image.includes("perelivnaya")
                       ? {
                           // Blue overflow tank in emkost-perelivnaya-bassein.jpg
-                          frontTopLeft:  { x: 95,  y: 145 },
-                          frontTopRight: { x: 280, y: 115 },
-                          frontBotLeft:  { x: 95,  y: 340 },
-                          frontBotRight: { x: 280, y: 345 },
-                          backTopRight:  { x: 340, y: 90  },
-                          backBotRight:  { x: 340, y: 310 },
+                          frontTopLeft:  { x: 128, y: 108 },
+                          frontTopRight: { x: 288, y: 104 },
+                          frontBotLeft:  { x: 128, y: 332 },
+                          frontBotRight: { x: 288, y: 340 },
+                          backTopRight:  { x: 348, y: 78  },
+                          backBotRight:  { x: 348, y: 300 },
                         }
                       : emkost.image.includes("pryam")
                         ? {
