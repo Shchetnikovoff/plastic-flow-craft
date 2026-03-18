@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 import CartSheet from "@/components/CartSheet";
 import { CartProvider } from "@/contexts/CartContext";
@@ -74,6 +74,7 @@ const advantages = [
 
 const EmkostiPerelivnyeInner = () => {
   const [cartOpen, setCartOpen] = useState(false);
+  const navigate = useNavigate();
   const [form, setForm] = useState({ name: "", phone: "", email: "", description: "" });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -201,9 +202,10 @@ const EmkostiPerelivnyeInner = () => {
             Размер ёмкости подбирается в зависимости от объёма бассейна. Ниже представлены стандартные модели — возможно изготовление по индивидуальным размерам.
           </p>
           <div className="rounded-lg border border-border overflow-auto">
-            <Table>
+           <Table>
               <TableHeader>
                 <TableRow>
+                  <TableHead className="text-xs">Артикул</TableHead>
                   <TableHead className="text-xs">Объём бассейна</TableHead>
                   <TableHead className="text-xs text-right">Длина, мм</TableHead>
                   <TableHead className="text-xs text-right">Ширина, мм</TableHead>
@@ -212,11 +214,12 @@ const EmkostiPerelivnyeInner = () => {
               </TableHeader>
               <TableBody>
                 {perelivnyeProducts.map((item) => (
-                  <TableRow key={item.poolVolume}>
-                    <TableCell className="text-xs font-medium">{item.label}</TableCell>
-                    <TableCell className="text-xs text-right">{item.length.toLocaleString()}</TableCell>
-                    <TableCell className="text-xs text-right">{item.width.toLocaleString()}</TableCell>
-                    <TableCell className="text-xs text-right">{item.height.toLocaleString()}</TableCell>
+                  <TableRow key={item.article} className="cursor-pointer hover:bg-muted/70" onClick={() => navigate(`/product/${item.article}`)}>
+                      <TableCell className="text-xs font-medium font-mono text-primary">{item.article}</TableCell>
+                      <TableCell className="text-xs font-medium">{item.label}</TableCell>
+                      <TableCell className="text-xs text-right">{item.length.toLocaleString()}</TableCell>
+                      <TableCell className="text-xs text-right">{item.width.toLocaleString()}</TableCell>
+                      <TableCell className="text-xs text-right">{item.height.toLocaleString()}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>

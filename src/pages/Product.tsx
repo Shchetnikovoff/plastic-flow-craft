@@ -10,6 +10,7 @@ import { razdvizhnoyImages, razdvizhnoyFlanecImages, getRazdvizhnoySizes } from 
 import { vozdukhovodImages, getVozdukhovodSizes, vozdukhovodAvailableLengths } from "@/data/vozdukhovodProducts";
 import { emkostGroups } from "@/data/emkostiProducts";
 import { pozharnyeRect, pozharnyePodzem, pozharnyeHoriz } from "@/data/pozharnyeProducts";
+import { perelivnyeProducts } from "@/data/perelivnyeProducts";
 import { Button } from "@/components/ui/button";
 import { ShoppingCart, Plus, Minus, ChevronLeft, ChevronRight, FileDown } from "lucide-react";
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
@@ -107,6 +108,26 @@ function parseEmkostArticle(article: string) {
       description: `Горизонтальная цилиндрическая ёмкость. Диаметр ${horiz.diameter} мм, длина ${horiz.length} мм.`,
       image: "/images/emkosti-hero-2.png",
     };
+  }
+  // Search in perelivnye (overflow tanks for pools)
+  if (article.startsWith("ПЕ-")) {
+    const item = perelivnyeProducts.find((p) => p.article === article);
+    if (item) {
+      return {
+        productType: "emkost" as const,
+        emkostType: "rectangular",
+        title: `Переливная ёмкость для бассейна ${item.label}`,
+        subtitle: "Переливная ёмкость для бассейна из полипропилена",
+        materialName: "Полипропилен (PP-H)",
+        volume: item.length * item.width * item.height / 1e6,
+        diameter: 0,
+        heightOrLength: item.height,
+        heightLabel: "H, мм",
+        description: `Переливная ёмкость для бассейна ${item.label}, полипропилен PP-H, размеры ${item.length}×${item.width}×${item.height} мм`,
+        image: "/images/emkost-perelivnaya-bassein.jpg",
+        rectDims: { length: item.length, width: item.width, height: item.height },
+      };
+    }
   }
   return null;
 }
