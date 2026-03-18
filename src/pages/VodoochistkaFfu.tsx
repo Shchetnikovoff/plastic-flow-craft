@@ -280,8 +280,12 @@ const VodoochistkaFfuInner = () => {
               </TableHeader>
               <TableBody>
                 {models.map((m) => (
-                  <TableRow key={m.name}>
-                    <TableCell className="text-xs font-medium">{m.name}</TableCell>
+                  <TableRow
+                    key={m.name}
+                    className="cursor-pointer transition-colors hover:bg-primary/5"
+                    onClick={() => navigate(`/product/${encodeURIComponent(m.name)}`)}
+                  >
+                    <TableCell className="text-xs font-medium text-primary underline">{m.name}</TableCell>
                     <TableCell className="text-xs text-right">{m.capacity}</TableCell>
                     <TableCell className="text-xs text-right">{m.dimensions}</TableCell>
                     <TableCell className="text-xs text-right">{m.massDry}</TableCell>
