@@ -127,7 +127,7 @@ const EmkostiPerelivnyeInner = () => {
 
           {/* Hero image */}
           <div className="mt-6 rounded-lg border border-border overflow-hidden bg-card">
-            <img src="/images/emkost-perelivnaya-bassein.jpg" alt="Переливная ёмкость для бассейна из полипропилена" className="w-full h-auto object-cover" />
+            <img src={selectedColorCode === "7032" ? "/images/emkost-perelivnaya-bassein-grey.jpg" : "/images/emkost-perelivnaya-bassein.jpg"} alt="Переливная ёмкость для бассейна из полипропилена" className="w-full h-auto object-cover" />
           </div>
         </section>
 
