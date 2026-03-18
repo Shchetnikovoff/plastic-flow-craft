@@ -154,7 +154,7 @@ const VodoochistkaObezvozhivatelInner = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-6">
             {heroImages.map((img, i) => (
               <div key={i} className="rounded-lg border border-border overflow-hidden bg-card">
-                <img src={img.src} alt={img.alt} className="w-full object-cover h-48 sm:h-64" />
+                <img src={img.src} alt={img.alt} className="w-full object-contain" />
               </div>
             ))}
           </div>

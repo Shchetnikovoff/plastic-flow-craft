@@ -171,8 +171,8 @@ const VodoochistkaDozirovanieInner = () => {
             Получить расчёт стоимости
           </Button>
           <div className="grid grid-cols-2 gap-3 mt-6">
-            <img src="/images/dozirovanie-hero-real.jpg" alt="Станция дозирования — общий вид" className="rounded-lg border border-border object-cover w-full aspect-[4/3]" />
-            <img src="/images/dozirovanie-hero-real.jpg" alt="Станция дозирования реагентов" className="rounded-lg border border-border object-cover w-full aspect-[4/3]" />
+            <img src="/images/dozirovanie-hero-real.jpg" alt="Станция дозирования — общий вид" className="rounded-lg border border-border object-contain w-full aspect-[4/3]" />
+            <img src="/images/dozirovanie-hero-real.jpg" alt="Станция дозирования реагентов" className="rounded-lg border border-border object-contain w-full aspect-[4/3]" />
           </div>
         </section>
 
