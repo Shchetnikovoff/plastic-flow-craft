@@ -331,7 +331,7 @@ const EmkostiPageInner = () => {
                           <>
                             <div className="aspect-[4/3] bg-muted flex items-center justify-center">
                               {sub.image ? (
-                                <img src={sub.image} alt={sub.name} className="w-full h-full object-cover" />
+                                <img src={sub.image} alt={sub.name} className="w-full h-full object-contain" />
                               ) : (
                                 <ImageOff className="h-10 w-10 text-muted-foreground/40" />
                               )}
