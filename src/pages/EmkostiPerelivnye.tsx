@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 import CartSheet from "@/components/CartSheet";
 import { CartProvider } from "@/contexts/CartContext";
-import { perelivnyeProducts } from "@/data/perelivnyeProducts";
+import { perelivnyeProducts, ppColors } from "@/data/perelivnyeProducts";
 import { Check, Droplets, Wrench, ShieldCheck, Clock, Truck, FlaskConical, Settings } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
