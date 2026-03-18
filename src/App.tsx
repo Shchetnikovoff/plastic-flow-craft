@@ -39,6 +39,7 @@ import ShkafyUpravleniyaPage from "./pages/ShkafyUpravleniyaPage";
 import UslugiPage from "./pages/UslugiPage";
 import AboutPage from "./pages/AboutPage";
 import NotFound from "./pages/NotFound";
+import LayoutDemo from "./pages/LayoutDemo";
 
 const queryClient = new QueryClient();
 
@@ -87,6 +88,7 @@ const App = () => (
           <Route path="/catalog/shkafy-upravleniya" element={<ShkafyUpravleniyaPage />} />
           <Route path="/catalog/uslugi" element={<UslugiPage />} />
           <Route path="/about" element={<AboutPage />} />
+          <Route path="/layout-demo" element={<LayoutDemo />} />
           <Route path="/catalog" element={<CatalogPage />} />
           <Route path="/catalog/:categorySlug" element={<CatalogPage />} />
           <Route path="/catalog/:categorySlug/:subSlug" element={<CatalogPage />} />
