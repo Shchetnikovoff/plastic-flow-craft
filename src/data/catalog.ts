@@ -99,18 +99,10 @@ export const catalog: CatalogCategory[] = [
     id: "ventilyatsiya",
     name: "Вентиляция",
     slug: "ventilyatsiya",
-    description: "Элементы промышленной вентиляции из полипропилена — круглого и прямоугольного сечения.",
+    description: "Элементы промышленной вентиляции из полипропилена — круглого и квадратного сечения.",
     subcategories: [
-      // — Круглого сечения —
-      { id: "ve1", name: "Отвод вентиляционный", slug: "otvod", externalPath: "/", image: "/images/product-1.png", group: "Круглого сечения" },
-      { id: "ve2", name: "Тройник вентиляционный", slug: "troynik", externalPath: "/troynik", image: "/images/troynik-1.png", group: "Круглого сечения" },
-      { id: "ve3", name: "Раздвижной элемент", slug: "razdvizhnoy", externalPath: "/razdvizhnoy", image: "/images/razdvizhnoy-1.png", group: "Круглого сечения" },
-      { id: "ve4", name: "Воздуховод круглый", slug: "vozdukhovod", externalPath: "/vozdukhovod", image: "/images/vozdukhovod-1.png", group: "Круглого сечения" },
-      // — Прямоугольного сечения —
-      { id: "ve5", name: "Воздуховод прямоугольный", slug: "vozdukhovod-pryamougolnyy", group: "Прямоугольного сечения", image: "/images/vent-vozdukhovod-pryam.png" },
-      { id: "ve6", name: "Отвод прямоугольный", slug: "otvod-pryamougolnyy", group: "Прямоугольного сечения", image: "/images/vent-otvod-pryam.png" },
-      { id: "ve7", name: "Тройник прямоугольный", slug: "troynik-pryamougolnyy", group: "Прямоугольного сечения", image: "/images/vent-troynik-pryam.png" },
-      { id: "ve8", name: "Переход круглый-прямоугольный", slug: "perekhod-kruglyy-pryamougolnyy", group: "Прямоугольного сечения", image: "/images/vent-perekhod.png" },
+      { id: "ve1", name: "Воздуховоды и фасонные элементы химическистойкие круглого сечения", slug: "krugloe-sechenie", externalPath: "/", image: "/images/ventilyatsiya-fasonnye.jpg", group: "Круглого сечения", description: "Отводы, тройники, раздвижные элементы и воздуховоды круглого сечения из полипропилена для промышленной вентиляции." },
+      { id: "ve2", name: "Воздуховоды и фасонные элементы химическистойкие квадратного сечения", slug: "pryamougolnoe-sechenie", group: "Квадратного сечения", image: "/images/vent-vozdukhovod-pryam.png", description: "Воздуховоды, отводы, тройники и переходные элементы квадратного сечения из полипропилена для промышленной вентиляции. Стойкость к агрессивным газам, изготовление по индивидуальным размерам." },
     ],
   },
   {
