@@ -187,7 +187,7 @@ const GazoochistkaSkrubberyInner = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-6">
             <div className="rounded-lg border border-border overflow-hidden bg-card">
-              <img src="/images/skrubber-vert-real-1.jpg" alt="Скруббер вертикальный" className="w-full h-56 object-cover" />
+              <img src="/images/skrubber-vert-real-1.jpg" alt="Скруббер вертикальный" className="w-full object-contain" />
               <p className="text-xs text-muted-foreground p-2 text-center">Скруббер вертикальный (серия СН)</p>
             </div>
             <div className="rounded-lg border border-border overflow-hidden bg-card">
