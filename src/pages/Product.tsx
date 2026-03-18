@@ -26,7 +26,20 @@ function parseEmkostArticle(article: string) {
       const item = cat.items.find((i) => i.article === article);
       if (item) {
         const isHorizontal = group.id.startsWith("horizontal");
-        const materialName = group.id.includes("pnd") ? "Полиэтилен (ПНД/HDPE)" : "Полипропилен (ПП)";
+        const isPnd = group.id.includes("pnd");
+        const materialName = isPnd ? "Полиэтилен (ПНД/HDPE)" : "Полипропилен (ПП)";
+        // Pick image based on tank type
+        let image = "/images/emkosti-real-proizvodstvo.jpg";
+        if (isHorizontal) {
+          if (cat.id.includes("lv")) image = "/images/emkost-horiz-pp-high.png";
+          else image = "/images/emkost-horiz-pp-low.png";
+          if (isPnd) image = "/images/emkost-horiz-pnd-photo.jpg";
+        } else {
+          if (cat.id.includes("sloped")) image = "/images/emkost-vert-pp-sloped.png";
+          else if (cat.id.includes("conical")) image = "/images/emkost-vert-pp-conical.png";
+          else image = "/images/emkost-vert-pp-flat.jpg";
+          if (isPnd) image = "/images/emkost-vert-pnd-photo.png";
+        }
         return {
           productType: "emkost" as const,
           emkostType: isHorizontal ? "horizontal" : "vertical",
@@ -38,7 +51,7 @@ function parseEmkostArticle(article: string) {
           heightOrLength: item.height,
           heightLabel: cat.heightLabel,
           description: cat.description,
-          image: isHorizontal ? "/images/emkosti-hero-2.png" : "/images/emkosti-real-proizvodstvo.jpg",
+          image,
         };
       }
     }
