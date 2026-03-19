@@ -295,8 +295,12 @@ const VodoochistkaLamelnyjInner = () => {
               </TableHeader>
               <TableBody>
                 {models.map((m, i) => (
-                  <TableRow key={m.name} className={i % 2 === 1 ? "bg-muted/50" : ""}>
-                    <TableCell className="text-xs font-medium">{m.name}</TableCell>
+                  <TableRow
+                    key={m.name}
+                    className={`cursor-pointer transition-colors hover:bg-primary/5 ${i % 2 === 1 ? "bg-muted/50" : ""}`}
+                    onClick={() => navigate(`/product/${encodeURIComponent(m.name)}`)}
+                  >
+                    <TableCell className="text-xs font-medium text-primary underline">{m.name}</TableCell>
                     <TableCell className="text-xs text-right">{m.capacity}</TableCell>
                     <TableCell className="text-xs text-right">{m.dimensions}</TableCell>
                     <TableCell className="text-xs text-right">{m.mass}</TableCell>
