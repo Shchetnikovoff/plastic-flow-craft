@@ -548,25 +548,29 @@ const ProductDetailContent = () => {
           {/* Info */}
           <div>
             <h1 className="text-xl sm:text-2xl font-bold text-foreground mb-1">
-              Флотационно-фильтровальная установка {article}
+              Флотационно-фильтровальная установка {ffuModel.name}
             </h1>
-            <p className="font-mono text-sm text-muted-foreground mb-4">{article}</p>
+            <p className="font-mono text-sm text-muted-foreground mb-4">{ffuModel.article}</p>
 
             <ArticleBreakdown
-              exampleArticle={article}
+              exampleArticle={ffuModel.article}
               segments={(() => {
-                const suffix = article.replace("ФФУ-", "");
-                const modMatch = suffix.match(/^([\d.]+)([А-Яа-яA-Za-z]*)$/);
-                const cap = modMatch ? modMatch[1] : suffix;
+                const parts = ffuModel.article.split(".");
+                // СЗПК.ФФУ.01К.ПП
+                const modelPart = parts[2] || "";
+                const modMatch = modelPart.match(/^(\d+)([А-Яа-яA-Za-z]*)$/);
+                const num = modMatch ? modMatch[1] : modelPart;
                 const mod = modMatch ? modMatch[2] : "";
                 const modMap: Record<string, string> = { "К": "Компактная", "М": "Модульная" };
                 const segs = [
-                  { value: "ФФУ", label: "Тип", desc: "Флотационно-фильтровальная установка" },
-                  { value: cap, label: "Произв.", desc: `${cap} м³/ч` },
+                  { value: parts[0], label: "Компания", desc: "ООО СЗПК «Пласт-Металл Про»" },
+                  { value: parts[1], label: "Тип", desc: "Флотационно-фильтровальная установка" },
+                  { value: num, label: "Произв.", desc: `${ffuModel.capacity} м³/ч` },
                 ];
                 if (mod) {
                   segs.push({ value: mod, label: "Модиф.", desc: modMap[mod] || mod });
                 }
+                segs.push({ value: parts[3], label: "Материал", desc: "Полипропилен" });
                 return segs;
               })()}
             />
