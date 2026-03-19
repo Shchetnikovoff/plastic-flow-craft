@@ -30,7 +30,7 @@ export function getRazdvizhnoySizes(materialName: string, colorCode: string, con
   if (!mat) return [];
   const specs = materialSpecs[materialName];
   const hasMultipleColors = specs && specs.colors.length > 1;
-  const prefix = connectionType === "flanec" ? "РЭ-Ф" : "РЭ";
+  const prefix = connectionType === "flanec" ? "РЭФ" : "РЭ";
 
   return baseSizes.map((item) => ({
     diameter: item.diameter,
@@ -39,7 +39,7 @@ export function getRazdvizhnoySizes(materialName: string, colorCode: string, con
     lMax: 1800,
     socket: item.socketThickness,
     article: hasMultipleColors
-      ? `${prefix}-${mat.code}-${colorCode}-${item.diameter}`
-      : `${prefix}-${mat.code}-${item.diameter}`,
+      ? `СЗПК.${prefix}.${mat.code}.${colorCode}.${item.diameter}`
+      : `СЗПК.${prefix}.${mat.code}.${item.diameter}`,
   }));
 }

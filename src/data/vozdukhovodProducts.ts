@@ -56,7 +56,7 @@ export function getVozdukhovodSizes(materialName: string, colorCode: string): Vo
     availableLengths: vozdukhovodAvailableLengths,
     socketThickness: item.socketThickness,
     article: hasMultipleColors
-      ? `ВК-${mat.code}-${colorCode}-${item.diameter}`
-      : `ВК-${mat.code}-${item.diameter}`,
+      ? `СЗПК.ВК.${mat.code}.${colorCode}.${item.diameter}`
+      : `СЗПК.ВК.${mat.code}.${item.diameter}`,
   }));
 }
