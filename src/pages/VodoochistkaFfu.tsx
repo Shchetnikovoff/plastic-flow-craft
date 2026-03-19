@@ -283,9 +283,9 @@ const VodoochistkaFfuInner = () => {
                   <TableRow
                     key={m.name}
                     className="cursor-pointer transition-colors hover:bg-primary/5"
-                    onClick={() => navigate(`/product/${encodeURIComponent(m.name)}`)}
+                    onClick={() => navigate(`/product/${encodeURIComponent(m.article)}`)}
                   >
-                    <TableCell className="text-xs font-medium text-primary underline">{m.name}</TableCell>
+                    <TableCell className="text-xs font-medium text-primary underline">{m.article}</TableCell>
                     <TableCell className="text-xs text-right">{m.capacity}</TableCell>
                     <TableCell className="text-xs text-right">{m.dimensions}</TableCell>
                     <TableCell className="text-xs text-right">{m.massDry}</TableCell>
