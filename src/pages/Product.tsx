@@ -12,7 +12,8 @@ import { emkostGroups } from "@/data/emkostiProducts";
 import { pozharnyeRect, pozharnyePodzem, pozharnyeHoriz } from "@/data/pozharnyeProducts";
 import { perelivnyeProducts, ppColors } from "@/data/perelivnyeProducts";
 import { ffuModels } from "@/data/ffuProducts";
-import { lamelnyjModels } from "@/data/lamelnyjProducts";
+import { lamelnyjModels, parseLamelnyjArticle } from "@/data/lamelnyjProducts";
+import ArticleBreakdown from "@/components/configurator/ArticleBreakdown";
 import { Button } from "@/components/ui/button";
 import { ShoppingCart, Plus, Minus, ChevronLeft, ChevronRight, FileDown } from "lucide-react";
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
@@ -627,9 +628,10 @@ const ProductDetailContent = () => {
     );
   }
 
-  // Try Lamella Settler (ОГ-)
-  const lamModel = article.startsWith("ОГ-") ? lamelnyjModels.find((m) => m.name === article) : null;
-  if (lamModel) {
+  // Try Lamella Settler (ЛО-)
+  const lamParsed = article.startsWith("ЛО-") ? parseLamelnyjArticle(article) : null;
+  const lamModel = lamParsed ? lamelnyjModels.find((m) => m.name === article) : null;
+  if (lamParsed && lamModel) {
     const handleAddLam = () => {
       addItem({ article, diameter: 0, wallThickness: 0 }, qty);
       toast.success(`${article} (${qty} шт.) добавлен в корзину`);
@@ -703,7 +705,17 @@ const ProductDetailContent = () => {
             <h1 className="text-xl sm:text-2xl font-bold text-foreground mb-1">
               Тонкослойный (ламельный) отстойник {article}
             </h1>
-            <p className="font-mono text-sm text-muted-foreground mb-2">{article}</p>
+            <p className="font-mono text-sm text-muted-foreground mb-4">{article}</p>
+
+            <ArticleBreakdown
+              exampleArticle={article}
+              segments={[
+                { value: lamParsed.type, label: "Тип", desc: lamParsed.typeDesc },
+                { value: lamParsed.materialCode, label: "Материал", desc: lamParsed.materialName },
+                { value: lamParsed.capacity, label: "Произв.", desc: `${lamParsed.capacity} м³/ч` },
+              ]}
+            />
+
             <p className="text-sm text-muted-foreground mb-6">
               Ламельный отстойник для механической очистки бытовых, промышленных и ливневых сточных вод. Производительность — {lamModel.capacity} м³/ч.
             </p>
