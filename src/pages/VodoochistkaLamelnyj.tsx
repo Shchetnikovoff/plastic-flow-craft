@@ -175,10 +175,10 @@ const VodoochistkaLamelnyjInner = () => {
             Получить расчёт стоимости
           </Button>
 
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-6">
+          <div className="grid grid-cols-3 gap-3 mt-6">
             {heroImages.map((img, i) => (
-              <div key={i} className={`rounded-lg border border-border overflow-hidden bg-card ${i === 0 ? "col-span-2 sm:col-span-2 row-span-2" : ""}`}>
-                <img src={img.src} alt={img.alt} className={`w-full object-contain ${i === 0 ? "h-full min-h-[200px]" : ""}`} />
+              <div key={i} className="rounded-lg border border-border overflow-hidden bg-card">
+                <img src={img.src} alt={img.alt} className="w-full h-full object-contain p-2" />
               </div>
             ))}
           </div>
