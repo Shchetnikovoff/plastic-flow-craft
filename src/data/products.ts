@@ -60,7 +60,7 @@ export const productSizesByMaterial: Record<string, ProductSize[]> = Object.from
     mat.name,
     baseSizes.map((item) => ({
       ...item,
-      article: `ОТВ-90-${mat.code}-${item.diameter}`,
+      article: `СЗПК.ОТВ.90.${mat.code}.${item.diameter}`,
     })),
   ])
 );
