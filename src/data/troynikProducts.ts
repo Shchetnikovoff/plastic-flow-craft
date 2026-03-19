@@ -268,8 +268,8 @@ export function getTroynikSizes(materialName: string, colorCode: string, connect
   return sizes.map((item) => ({
     ...item,
     article: hasMultipleColors
-      ? `${prefix}-${mat.code}-${colorCode}-${item.d}x${item.d1}`
-      : `${prefix}-${mat.code}-${item.d}x${item.d1}`,
+      ? `СЗПК.${prefix}.${mat.code}.${colorCode}.${item.d}x${item.d1}`
+      : `СЗПК.${prefix}.${mat.code}.${item.d}x${item.d1}`,
   }));
 }
 

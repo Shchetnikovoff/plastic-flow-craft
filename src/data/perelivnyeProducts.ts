@@ -45,7 +45,7 @@ const baseSizes: BaseSize[] = [
 
 export const perelivnyeProducts: PerelivnayaProduct[] = baseSizes.flatMap((s) =>
   ppColors.map((c) => ({
-    article: `ПЕ-PP-${c.code}-${s.poolVolume}`,
+    article: `СЗПК.ПЕ.ПП.${c.code}.${s.poolVolume}`,
     poolVolume: s.poolVolume,
     length: s.length,
     width: s.width,

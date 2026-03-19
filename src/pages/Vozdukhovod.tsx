@@ -45,6 +45,7 @@ const VozdukhovodContent = () => {
   const firstSize = currentSizes[0];
 
   const articleSegments: ArticleSegment[] = [
+    { value: "СЗПК", label: "Компания", desc: "ООО СЗПК «Пласт-Металл Про»" },
     { value: "ВК", label: "Тип изделия", desc: "Воздуховод круглый" },
     { value: mat?.code || "—", label: "Материал", desc: mat?.name.replace(/\s*\(.*\)/, "") || "—" },
     ...(hasMultipleColors && selectedColor

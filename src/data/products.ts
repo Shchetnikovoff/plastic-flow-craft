@@ -60,7 +60,7 @@ export const productSizesByMaterial: Record<string, ProductSize[]> = Object.from
     mat.name,
     baseSizes.map((item) => ({
       ...item,
-      article: `ОТВ-90-${mat.code}-${item.diameter}`,
+      article: `СЗПК.ОТВ.90.${mat.code}.${item.diameter}`,
     })),
   ])
 );
@@ -72,12 +72,12 @@ export function getSizesForColor(materialName: string, colorCode: string, connec
   const specs = materialSpecs[materialName];
   const hasMultipleColors = specs && specs.colors.length > 1;
   const conn = connectionTypes.find((c) => c.id === connectionType);
-  const prefix = conn?.articlePrefix || "ОТВ";
+  const prefix = conn?.id === "flanec" ? "ОТВФ" : "ОТВР";
   return baseSizes.map((item) => ({
     ...item,
     article: hasMultipleColors
-      ? `${prefix}-${angle}-${mat.code}-${colorCode}-${item.diameter}`
-      : `${prefix}-${angle}-${mat.code}-${item.diameter}`,
+      ? `СЗПК.${prefix}.${angle}.${mat.code}.${colorCode}.${item.diameter}`
+      : `СЗПК.${prefix}.${angle}.${mat.code}.${item.diameter}`,
   }));
 }
 

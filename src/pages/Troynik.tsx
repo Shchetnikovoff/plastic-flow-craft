@@ -46,6 +46,7 @@ const TroynikContent = () => {
   const prefix = selectedConnection === "flanec" ? "ТРФ" : "ТР";
 
   const articleSegments: ArticleSegment[] = [
+    { value: "СЗПК", label: "Компания", desc: "ООО СЗПК «Пласт-Металл Про»" },
     { value: prefix, label: "Тип изделия", desc: selectedConnection === "flanec" ? "Тройник вентиляционный, фланец" : "Тройник вентиляционный, раструб" },
     { value: mat?.code || "—", label: "Материал", desc: mat?.name.replace(/\s*\(.*\)/, "") || "—" },
     ...(hasMultipleColors && selectedColor

@@ -43,7 +43,8 @@ const RazdvizhnoyContent = () => {
   const firstSize = currentSizes[0];
 
   const articleSegments: ArticleSegment[] = [
-    { value: connectionType === "flanec" ? "РЭ-Ф" : "РЭ", label: "Тип изделия", desc: connectionType === "flanec" ? "Раздвижной элемент (фланец)" : "Раздвижной элемент" },
+    { value: "СЗПК", label: "Компания", desc: "ООО СЗПК «Пласт-Металл Про»" },
+    { value: connectionType === "flanec" ? "РЭФ" : "РЭ", label: "Тип изделия", desc: connectionType === "flanec" ? "Раздвижной элемент (фланец)" : "Раздвижной элемент" },
     { value: mat?.code || "—", label: "Материал", desc: mat?.name.replace(/\s*\(.*\)/, "") || "—" },
     ...(hasMultipleColors && selectedColor
       ? [{ value: selectedColor.colorCode, label: "Цвет (RAL)", desc: selectedColor.name, hex: selectedColor.hex }]

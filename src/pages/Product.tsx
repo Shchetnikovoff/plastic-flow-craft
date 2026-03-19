@@ -114,8 +114,8 @@ function parseEmkostArticle(article: string) {
       image: "/images/emkosti-hero-2.png",
     };
   }
-  // Search in perelivnye (overflow tanks for pools) — format: ПЕ-PP-{COLOR}-{VOLUME}
-  if (article.startsWith("ПЕ-")) {
+  // Search in perelivnye (overflow tanks for pools) — format: СЗПК.ПЕ.ПП.{COLOR}.{VOLUME}
+  if (article.startsWith("СЗПК.ПЕ.")) {
     const item = perelivnyeProducts.find((p) => p.article === article);
     if (item) {
       const color = ppColors.find((c) => c.code === item.colorCode);
@@ -140,25 +140,29 @@ function parseEmkostArticle(article: string) {
   return null;
 }
 
-/** Parse article to extract product params */
+/** Parse article to extract product params — new format: СЗПК.{TYPE}.{PARAMS} */
 function parseArticle(article: string) {
-  // Troynik format: ТР-MATERIAL[-COLOR]-DxD1
-  if (article.startsWith("ТР-")) {
-    const parts = article.split("-");
-    const materialCode = parts[1];
+  if (!article.startsWith("СЗПК.")) return null;
+  const parts = article.split(".");
+  if (parts.length < 4) return null;
+  const type = parts[1]; // ОТВР, ОТВФ, ТР, ТРФ, ВК, РЭ, РЭФ, ОТВ
+
+  // Troynik: СЗПК.ТР.PPC.7032.100x100 or СЗПК.ТРФ.PPC.7032.100x100
+  if (type === "ТР" || type === "ТРФ") {
+    const materialCode = parts[2];
     const material = materials.find((m) => m.code === materialCode);
     if (!material) return null;
     const specs = materialSpecs[material.name];
-    const lastPart = parts[parts.length - 1]; // "DxD1"
+    const lastPart = parts[parts.length - 1]; // "100x100"
     const [dStr, d1Str] = lastPart.split("x");
     const d = parseInt(dStr);
     const d1 = parseInt(d1Str);
-    const colorCode = parts.length === 4 ? parts[2] : null;
+    const colorCode = parts.length === 5 ? parts[3] : null;
     const color = colorCode ? specs?.colors.find((c) => c.colorCode === colorCode) : specs?.colors[0];
     const sizeData = baseTroynikSizes.find((s) => s.d === d && s.d1 === d1);
     return {
       productType: "troynik" as const,
-      connectionType: "rastrub" as ConnectionType,
+      connectionType: (type === "ТРФ" ? "flanec" : "rastrub") as ConnectionType,
       angle: 90 as const,
       material,
       color,
@@ -170,17 +174,15 @@ function parseArticle(article: string) {
     };
   }
 
-  // Vozdukhovod format: ВК-MATERIAL[-COLOR]-DIAMETER
-  if (article.startsWith("ВК-")) {
-    const stripped = article.replace("ВК-", "");
-    const parts = stripped.split("-");
-    const materialCode = parts[0];
+  // Vozdukhovod: СЗПК.ВК.PPC.7032.200 or СЗПК.ВК.PPC.200
+  if (type === "ВК") {
+    const materialCode = parts[2];
     const material = materials.find((m) => m.code === materialCode);
     if (!material) return null;
     const specs = materialSpecs[material.name];
     const diameter = parseInt(parts[parts.length - 1]);
-    const hasColor = parts.length === 3;
-    const colorCode = hasColor ? parts[1] : specs?.colors[0]?.colorCode || "";
+    const hasColor = parts.length === 5;
+    const colorCode = hasColor ? parts[3] : specs?.colors[0]?.colorCode || "";
     const color = hasColor ? specs?.colors.find((c) => c.colorCode === colorCode) : specs?.colors[0];
     const sizes = getVozdukhovodSizes(material.name, colorCode);
     const sizeEntry = sizes.find((s) => s.diameter === diameter);
@@ -200,18 +202,16 @@ function parseArticle(article: string) {
     };
   }
 
-  // Razdvizhnoy format: РЭ-MATERIAL[-COLOR]-DIAMETER or РЭ-Ф-MATERIAL[-COLOR]-DIAMETER (flanec)
-  if (article.startsWith("РЭ-")) {
-    const isFlanec = article.startsWith("РЭ-Ф-");
-    const stripped = isFlanec ? article.replace("РЭ-Ф-", "") : article.replace("РЭ-", "");
-    const parts = stripped.split("-");
-    const materialCode = parts[0];
+  // Razdvizhnoy: СЗПК.РЭ.PPC.7032.200 or СЗПК.РЭФ.PPC.7032.200
+  if (type === "РЭ" || type === "РЭФ") {
+    const isFlanec = type === "РЭФ";
+    const materialCode = parts[2];
     const material = materials.find((m) => m.code === materialCode);
     if (!material) return null;
     const specs = materialSpecs[material.name];
     const diameter = parseInt(parts[parts.length - 1]);
-    const hasColor = parts.length === 3;
-    const colorCode = hasColor ? parts[1] : specs?.colors[0]?.colorCode || "";
+    const hasColor = parts.length === 5;
+    const colorCode = hasColor ? parts[3] : specs?.colors[0]?.colorCode || "";
     const color = hasColor ? specs?.colors.find((c) => c.colorCode === colorCode) : specs?.colors[0];
     const sizes = getRazdvizhnoySizes(material.name, colorCode);
     const sizeEntry = sizes.find((s) => s.diameter === diameter);
@@ -231,21 +231,22 @@ function parseArticle(article: string) {
     };
   }
 
-  // Elbow format: PREFIX-ANGLE-MATERIAL[-COLOR]-DIAMETER
-  const parts = article.split("-");
-  if (parts.length < 4) return null;
-  const prefix = parts[0];
-  const connectionType: ConnectionType = prefix === "ОТВФ" ? "flanec" : "rastrub";
-  const angle = parseInt(parts[1]) as 90 | 60;
-  const materialCode = parts[2];
-  const diameter = parseInt(parts[parts.length - 1]);
-  const colorCode = parts.length === 5 ? parts[3] : null;
-  const material = materials.find((m) => m.code === materialCode);
-  if (!material) return null;
-  const specs = materialSpecs[material.name];
-  const color = colorCode ? specs?.colors.find((c) => c.colorCode === colorCode) : specs?.colors[0];
-  const sizeData = baseSizes.find((s) => s.diameter === diameter);
-  return { productType: "otvod" as const, connectionType, angle, material, color, diameter, sizeData, troynikSize: null, razdvizhnoySize: null, vozdukhovodSize: null, specs };
+  // Elbow: СЗПК.ОТВР.90.PPC.7032.200 or СЗПК.ОТВФ.90.PPC.200
+  if (type === "ОТВР" || type === "ОТВФ" || type === "ОТВ") {
+    const connectionType: ConnectionType = type === "ОТВФ" ? "flanec" : "rastrub";
+    const angle = parseInt(parts[2]) as 90 | 60;
+    const materialCode = parts[3];
+    const diameter = parseInt(parts[parts.length - 1]);
+    const colorCode = parts.length === 6 ? parts[4] : null;
+    const material = materials.find((m) => m.code === materialCode);
+    if (!material) return null;
+    const specs = materialSpecs[material.name];
+    const color = colorCode ? specs?.colors.find((c) => c.colorCode === colorCode) : specs?.colors[0];
+    const sizeData = baseSizes.find((s) => s.diameter === diameter);
+    return { productType: "otvod" as const, connectionType, angle, material, color, diameter, sizeData, troynikSize: null, razdvizhnoySize: null, vozdukhovodSize: null, specs };
+  }
+
+  return null;
 }
 
 const ProductDetailContent = () => {
@@ -298,7 +299,7 @@ const ProductDetailContent = () => {
       }
     };
 
-    const isPerelivnaya = article.startsWith("ПЕ-");
+    const isPerelivnaya = article.startsWith("СЗПК.ПЕ.");
 
     return (
       <main className="mx-auto max-w-[960px] px-4 sm:px-6 py-6 sm:py-8">
@@ -360,7 +361,7 @@ const ProductDetailContent = () => {
                       key={c.code}
                       onClick={() => {
                         if (c.code !== emkost.perelivColor!.code) {
-                          navigate(`/product/ПЕ-PP-${c.code}-${emkost.perelivPoolVolume}`, { replace: true });
+                          navigate(`/product/СЗПК.ПЕ.ПП.${c.code}.${emkost.perelivPoolVolume}`, { replace: true });
                         }
                       }}
                       className={`rounded-lg border bg-card p-3 cursor-pointer transition-all ${
@@ -683,9 +684,9 @@ const ProductDetailContent = () => {
     );
   }
 
-  // Try Lamella Settler (ЛО-)
-  const lamParsed = article.startsWith("ЛО-") ? parseLamelnyjArticle(article) : null;
-  const lamModel = lamParsed ? lamelnyjModels.find((m) => m.name === article) : null;
+  // Try Lamella Settler (СЗПК.ЛО.)
+  const lamParsed = parseLamelnyjArticle(article);
+  const lamModel = lamParsed ? lamelnyjModels.find((m) => m.article === article) : null;
   if (lamParsed && lamModel) {
     const handleAddLam = () => {
       addItem({ article, diameter: 0, wallThickness: 0 }, qty);
@@ -743,7 +744,7 @@ const ProductDetailContent = () => {
             <BreadcrumbSeparator />
             <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog/vodoochistka/lamelnyj-otstojnik">Ламельный отстойник</Link></BreadcrumbLink></BreadcrumbItem>
             <BreadcrumbSeparator />
-            <BreadcrumbItem><BreadcrumbPage>{article}</BreadcrumbPage></BreadcrumbItem>
+            <BreadcrumbItem><BreadcrumbPage>{lamModel.name} ({lamModel.article})</BreadcrumbPage></BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
 
@@ -758,16 +759,17 @@ const ProductDetailContent = () => {
           {/* Info */}
           <div>
             <h1 className="text-xl sm:text-2xl font-bold text-foreground mb-1">
-              Тонкослойный (ламельный) отстойник {article}
+              Тонкослойный (ламельный) отстойник {lamModel.name}
             </h1>
-            <p className="font-mono text-sm text-muted-foreground mb-4">{article}</p>
+            <p className="font-mono text-sm text-muted-foreground mb-4">{lamModel.article}</p>
 
             <ArticleBreakdown
-              exampleArticle={article}
+              exampleArticle={lamModel.article}
               segments={[
+                { value: "СЗПК", label: "Компания", desc: "ООО СЗПК «Пласт-Металл Про»" },
                 { value: lamParsed.type, label: "Тип", desc: lamParsed.typeDesc },
+                { value: lamParsed.capacityCode, label: "Произв.", desc: `${lamParsed.capacity} м³/ч` },
                 { value: lamParsed.materialCode, label: "Материал", desc: lamParsed.materialName },
-                { value: lamParsed.capacity, label: "Произв.", desc: `${lamParsed.capacity} м³/ч` },
               ]}
             />
 

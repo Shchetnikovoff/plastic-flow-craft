@@ -27,7 +27,7 @@ const sizes: [number, number, number][] = [
 
 function makeTable(prefix: string): EmkostSize[] {
   return sizes.map(([volume, diameter, height]) => ({
-    article: `${prefix}-${volume}`,
+    article: `СЗПК.${prefix}.${volume}`,
     volume,
     diameter,
     height,
