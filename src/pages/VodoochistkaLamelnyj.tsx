@@ -287,6 +287,7 @@ const VodoochistkaLamelnyjInner = () => {
             <Table>
               <TableHeader>
                 <TableRow>
+                  <TableHead className="text-xs">Артикул</TableHead>
                   <TableHead className="text-xs">Модель</TableHead>
                   <TableHead className="text-xs text-right">Произв., м³/ч</TableHead>
                   <TableHead className="text-xs text-right">Габариты (Д×Ш×В), мм</TableHead>
@@ -296,11 +297,12 @@ const VodoochistkaLamelnyjInner = () => {
               <TableBody>
                 {models.map((m, i) => (
                   <TableRow
-                    key={m.name}
+                    key={m.article}
                     className={`cursor-pointer transition-colors hover:bg-primary/5 ${i % 2 === 1 ? "bg-muted/50" : ""}`}
-                    onClick={() => navigate(`/product/${encodeURIComponent(m.name)}`)}
+                    onClick={() => navigate(`/product/${encodeURIComponent(m.article)}`)}
                   >
-                    <TableCell className="text-xs font-medium text-primary underline">{m.name}</TableCell>
+                    <TableCell className="text-xs font-medium text-primary underline">{m.article}</TableCell>
+                    <TableCell className="text-xs">{m.name}</TableCell>
                     <TableCell className="text-xs text-right">{m.capacity}</TableCell>
                     <TableCell className="text-xs text-right">{m.dimensions}</TableCell>
                     <TableCell className="text-xs text-right">{m.mass}</TableCell>
