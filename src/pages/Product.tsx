@@ -784,6 +784,7 @@ const ProductDetailContent = () => {
       </main>
     );
   }
+  const parsed = parseArticle(article);
   if (!parsed) {
     return (
       <main className="mx-auto max-w-[960px] px-4 sm:px-6 py-6 sm:py-8">
