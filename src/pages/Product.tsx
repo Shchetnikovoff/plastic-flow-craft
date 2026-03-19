@@ -541,7 +541,7 @@ const ProductDetailContent = () => {
           {/* Image */}
           <div>
             <div className="aspect-[4/3] overflow-hidden rounded-lg border bg-card">
-              <img src="/images/ffu-real-3d.png" alt={`${article} — Флотационно-фильтровальная установка`} className="h-full w-full object-contain p-4" />
+              <img src="/images/ffu-real-3d.png" alt={`${ffuModel.article} — Флотационно-фильтровальная установка`} className="h-full w-full object-contain p-4" />
             </div>
           </div>
 
