@@ -705,7 +705,17 @@ const ProductDetailContent = () => {
             <h1 className="text-xl sm:text-2xl font-bold text-foreground mb-1">
               Тонкослойный (ламельный) отстойник {article}
             </h1>
-            <p className="font-mono text-sm text-muted-foreground mb-2">{article}</p>
+            <p className="font-mono text-sm text-muted-foreground mb-4">{article}</p>
+
+            <ArticleBreakdown
+              exampleArticle={article}
+              segments={[
+                { value: lamParsed.type, label: "Тип", desc: lamParsed.typeDesc },
+                { value: lamParsed.materialCode, label: "Материал", desc: lamParsed.materialName },
+                { value: lamParsed.capacity, label: "Произв.", desc: `${lamParsed.capacity} м³/ч` },
+              ]}
+            />
+
             <p className="text-sm text-muted-foreground mb-6">
               Ламельный отстойник для механической очистки бытовых, промышленных и ливневых сточных вод. Производительность — {lamModel.capacity} м³/ч.
             </p>
