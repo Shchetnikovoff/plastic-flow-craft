@@ -165,7 +165,8 @@ const ProductContent = ({ angle, selectedConnection, setSelectedConnection }: Pr
           <Button variant="outline" className="gap-2"
             onClick={async () => {
               const pdfSegments = [
-                { value: conn?.articlePrefix || "ОТВР", label: "Тип изделия", desc: selectedConnection === "flanec" ? "Фланец" : "Раструб" },
+                { value: "СЗПК", label: "Компания", desc: "ООО СЗПК «Пласт-Металл Про»" },
+                { value: selectedConnection === "flanec" ? "ОТВФ" : "ОТВР", label: "Тип", desc: selectedConnection === "flanec" ? "Фланец" : "Раструб" },
                 { value: String(angle), label: "Угол", desc: `${angle} градусов` },
                 { value: mat?.code || "—", label: "Материал", desc: mat?.name.replace(/\s*\(.*\)/, "") || "—" },
                 ...(hasMultipleColors && selectedColor
