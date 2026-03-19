@@ -470,7 +470,7 @@ const ProductDetailContent = () => {
   }
 
   // Try FFU
-  const ffuModel = article.startsWith("ФФУ-") ? ffuModels.find((m) => m.name === article) : null;
+  const ffuModel = ffuModels.find((m) => m.article === article || m.name === article) || null;
   if (ffuModel) {
     const handleAddFfu = () => {
       addItem({ article, diameter: 0, wallThickness: 0 }, qty);
