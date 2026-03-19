@@ -361,7 +361,7 @@ const ProductDetailContent = () => {
                       key={c.code}
                       onClick={() => {
                         if (c.code !== emkost.perelivColor!.code) {
-                          navigate(`/product/ПЕ-PP-${c.code}-${emkost.perelivPoolVolume}`, { replace: true });
+                          navigate(`/product/СЗПК.ПЕ.ПП.${c.code}.${emkost.perelivPoolVolume}`, { replace: true });
                         }
                       }}
                       className={`rounded-lg border bg-card p-3 cursor-pointer transition-all ${
