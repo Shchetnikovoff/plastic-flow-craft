@@ -628,9 +628,10 @@ const ProductDetailContent = () => {
     );
   }
 
-  // Try Lamella Settler (ОГ-)
-  const lamModel = article.startsWith("ОГ-") ? lamelnyjModels.find((m) => m.name === article) : null;
-  if (lamModel) {
+  // Try Lamella Settler (ЛО-)
+  const lamParsed = article.startsWith("ЛО-") ? parseLamelnyjArticle(article) : null;
+  const lamModel = lamParsed ? lamelnyjModels.find((m) => m.name === article) : null;
+  if (lamParsed && lamModel) {
     const handleAddLam = () => {
       addItem({ article, diameter: 0, wallThickness: 0 }, qty);
       toast.success(`${article} (${qty} шт.) добавлен в корзину`);
