@@ -12,6 +12,7 @@ import { emkostGroups } from "@/data/emkostiProducts";
 import { pozharnyeRect, pozharnyePodzem, pozharnyeHoriz } from "@/data/pozharnyeProducts";
 import { perelivnyeProducts, ppColors } from "@/data/perelivnyeProducts";
 import { ffuModels } from "@/data/ffuProducts";
+import { lamelnyjModels } from "@/data/lamelnyjProducts";
 import { Button } from "@/components/ui/button";
 import { ShoppingCart, Plus, Minus, ChevronLeft, ChevronRight, FileDown } from "lucide-react";
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
