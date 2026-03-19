@@ -470,11 +470,11 @@ const ProductDetailContent = () => {
   }
 
   // Try FFU
-  const ffuModel = article.startsWith("ФФУ-") ? ffuModels.find((m) => m.name === article) : null;
+  const ffuModel = ffuModels.find((m) => m.article === article || m.name === article) || null;
   if (ffuModel) {
     const handleAddFfu = () => {
-      addItem({ article, diameter: 0, wallThickness: 0 }, qty);
-      toast.success(`${article} (${qty} шт.) добавлен в корзину`);
+      addItem({ article: ffuModel.article, diameter: 0, wallThickness: 0 }, qty);
+      toast.success(`${ffuModel.article} (${qty} шт.) добавлен в корзину`);
     };
 
     const handleFfuSpecPdf = async () => {
@@ -484,14 +484,14 @@ const ProductDetailContent = () => {
 
       await generateSpecPdf(
         {
-          article,
+          article: ffuModel.article,
           diameter: 0,
           wallThickness: 0,
           socketThickness: 0,
           availableLength: null,
           connectionName: "",
           materialName: "Полипропилен / ПВХ / Стеклопластик",
-          productTitle: `Флотационно-фильтровальная установка ${article}`,
+          productTitle: `Флотационно-фильтровальная установка ${ffuModel.name}`,
           extraRows: [
             ["Производительность", `${ffuModel.capacity} м³/ч`],
             ["Мощность", `${ffuModel.power} кВт`],
@@ -533,7 +533,7 @@ const ProductDetailContent = () => {
             <BreadcrumbSeparator />
             <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog/vodoochistka/ffu">ФФУ</Link></BreadcrumbLink></BreadcrumbItem>
             <BreadcrumbSeparator />
-            <BreadcrumbItem><BreadcrumbPage>{article}</BreadcrumbPage></BreadcrumbItem>
+            <BreadcrumbItem><BreadcrumbPage>{ffuModel.name} ({ffuModel.article})</BreadcrumbPage></BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
 
@@ -541,32 +541,36 @@ const ProductDetailContent = () => {
           {/* Image */}
           <div>
             <div className="aspect-[4/3] overflow-hidden rounded-lg border bg-card">
-              <img src="/images/ffu-real-3d.png" alt={`${article} — Флотационно-фильтровальная установка`} className="h-full w-full object-contain p-4" />
+              <img src="/images/ffu-real-3d.png" alt={`${ffuModel.article} — Флотационно-фильтровальная установка`} className="h-full w-full object-contain p-4" />
             </div>
           </div>
 
           {/* Info */}
           <div>
             <h1 className="text-xl sm:text-2xl font-bold text-foreground mb-1">
-              Флотационно-фильтровальная установка {article}
+              Флотационно-фильтровальная установка {ffuModel.name}
             </h1>
-            <p className="font-mono text-sm text-muted-foreground mb-4">{article}</p>
+            <p className="font-mono text-sm text-muted-foreground mb-4">{ffuModel.article}</p>
 
             <ArticleBreakdown
-              exampleArticle={article}
+              exampleArticle={ffuModel.article}
               segments={(() => {
-                const suffix = article.replace("ФФУ-", "");
-                const modMatch = suffix.match(/^([\d.]+)([А-Яа-яA-Za-z]*)$/);
-                const cap = modMatch ? modMatch[1] : suffix;
+                const parts = ffuModel.article.split(".");
+                // СЗПК.ФФУ.01К.ПП
+                const modelPart = parts[2] || "";
+                const modMatch = modelPart.match(/^(\d+)([А-Яа-яA-Za-z]*)$/);
+                const num = modMatch ? modMatch[1] : modelPart;
                 const mod = modMatch ? modMatch[2] : "";
                 const modMap: Record<string, string> = { "К": "Компактная", "М": "Модульная" };
                 const segs = [
-                  { value: "ФФУ", label: "Тип", desc: "Флотационно-фильтровальная установка" },
-                  { value: cap, label: "Произв.", desc: `${cap} м³/ч` },
+                  { value: parts[0], label: "Компания", desc: "ООО СЗПК «Пласт-Металл Про»" },
+                  { value: parts[1], label: "Тип", desc: "Флотационно-фильтровальная установка" },
+                  { value: num, label: "Произв.", desc: `${ffuModel.capacity} м³/ч` },
                 ];
                 if (mod) {
                   segs.push({ value: mod, label: "Модиф.", desc: modMap[mod] || mod });
                 }
+                segs.push({ value: parts[3], label: "Материал", desc: "Полипропилен" });
                 return segs;
               })()}
             />
