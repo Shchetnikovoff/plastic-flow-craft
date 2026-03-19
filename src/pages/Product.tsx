@@ -716,7 +716,7 @@ const ProductDetailContent = () => {
           {/* Image */}
           <div>
             <div className="aspect-[4/3] overflow-hidden rounded-lg border bg-card">
-              <img src="/images/lamelnyj-thumb-new.png" alt={`${article} — Тонкослойный ламельный отстойник`} className="h-full w-full object-contain p-4" />
+              <img src={lamModel && parseFloat(lamModel.capacity) >= 20 ? "/images/lamelnyj-hero-real.jpg" : "/images/lamelnyj-thumb-new.png"} alt={`${article} — Тонкослойный ламельный отстойник`} className="h-full w-full object-contain p-4" />
             </div>
           </div>
 
