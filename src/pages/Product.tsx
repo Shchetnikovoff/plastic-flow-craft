@@ -496,9 +496,13 @@ const ProductDetailContent = () => {
             ["Производительность", `${ffuModel.capacity} м³/ч`],
             ["Мощность", `${ffuModel.power} кВт`],
             ["Габариты (Д×Ш×В)", `${ffuModel.dimensions} мм`],
-            ["Масса (сух.)", `${ffuModel.massDry} т`],
+            ["Масса сухая", `${ffuModel.massDry} т`],
+            ["Масса с водой", `${ffuModel.massWet} т`],
             ["Материал корпуса", "Полипропилен / ПВХ / Стеклопластик"],
             ["Рабочая температура", "до +60 °C"],
+            ["Взвеш. вещества (вход)", "50–200 мг/л"],
+            ["Взвеш. вещества (локальная)", "15–40 мг/л"],
+            ["Взвеш. вещества (глубокая)", "3 мг/л"],
           ],
         },
         contactData
@@ -572,7 +576,7 @@ const ProductDetailContent = () => {
             </p>
 
             {/* Specs grid */}
-            <div className="grid grid-cols-2 gap-px rounded-lg border overflow-hidden mb-6">
+            <div className="grid grid-cols-2 gap-px rounded-lg border overflow-hidden mb-4">
               <div className="bg-card p-3">
                 <span className="block text-xs text-muted-foreground">Производительность</span>
                 <span className="text-sm font-semibold text-foreground">{ffuModel.capacity} м³/ч</span>
@@ -586,8 +590,12 @@ const ProductDetailContent = () => {
                 <span className="text-sm font-semibold text-foreground">{ffuModel.dimensions} мм</span>
               </div>
               <div className="bg-card p-3 border-t">
-                <span className="block text-xs text-muted-foreground">Масса (сух.)</span>
+                <span className="block text-xs text-muted-foreground">Масса сухая</span>
                 <span className="text-sm font-semibold text-foreground">{ffuModel.massDry} т</span>
+              </div>
+              <div className="bg-card p-3 border-t">
+                <span className="block text-xs text-muted-foreground">Масса с водой</span>
+                <span className="text-sm font-semibold text-foreground">{ffuModel.massWet} т</span>
               </div>
               <div className="bg-card p-3 border-t">
                 <span className="block text-xs text-muted-foreground">Материал корпуса</span>
@@ -596,6 +604,29 @@ const ProductDetailContent = () => {
               <div className="bg-card p-3 border-t">
                 <span className="block text-xs text-muted-foreground">Рабочая температура</span>
                 <span className="text-sm font-semibold text-foreground">до +60 °C</span>
+              </div>
+              <div className="bg-card p-3 border-t">
+                <span className="block text-xs text-muted-foreground">Эффективность очистки</span>
+                <span className="text-sm font-semibold text-foreground">до 98%</span>
+              </div>
+            </div>
+
+            {/* Suspended solids block */}
+            <div className="rounded-lg border bg-card p-4 mb-6">
+              <h3 className="text-sm font-semibold text-foreground mb-3">Взвешенные вещества</h3>
+              <div className="grid grid-cols-3 gap-3 text-center">
+                <div>
+                  <span className="block text-xs text-muted-foreground mb-1">На входе</span>
+                  <span className="text-sm font-semibold text-foreground">50–200 мг/л</span>
+                </div>
+                <div>
+                  <span className="block text-xs text-muted-foreground mb-1">Локальная очистка</span>
+                  <span className="text-sm font-semibold text-foreground">15–40 мг/л</span>
+                </div>
+                <div>
+                  <span className="block text-xs text-muted-foreground mb-1">Глубокая очистка</span>
+                  <span className="text-sm font-semibold text-foreground">3 мг/л</span>
+                </div>
               </div>
             </div>
 
