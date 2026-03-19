@@ -759,16 +759,17 @@ const ProductDetailContent = () => {
           {/* Info */}
           <div>
             <h1 className="text-xl sm:text-2xl font-bold text-foreground mb-1">
-              Тонкослойный (ламельный) отстойник {article}
+              Тонкослойный (ламельный) отстойник {lamModel.name}
             </h1>
-            <p className="font-mono text-sm text-muted-foreground mb-4">{article}</p>
+            <p className="font-mono text-sm text-muted-foreground mb-4">{lamModel.article}</p>
 
             <ArticleBreakdown
-              exampleArticle={article}
+              exampleArticle={lamModel.article}
               segments={[
+                { value: "СЗПК", label: "Компания", desc: "ООО СЗПК «Пласт-Металл Про»" },
                 { value: lamParsed.type, label: "Тип", desc: lamParsed.typeDesc },
+                { value: lamParsed.capacityCode, label: "Произв.", desc: `${lamParsed.capacity} м³/ч` },
                 { value: lamParsed.materialCode, label: "Материал", desc: lamParsed.materialName },
-                { value: lamParsed.capacity, label: "Произв.", desc: `${lamParsed.capacity} м³/ч` },
               ]}
             />
 
