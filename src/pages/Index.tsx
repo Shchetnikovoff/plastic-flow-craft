@@ -52,7 +52,8 @@ const ProductContent = ({ angle, selectedConnection, setSelectedConnection }: Pr
   const firstSize = currentSizes[0];
 
   const articleSegments: ArticleSegment[] = [
-    { value: conn?.articlePrefix || "ОТВР", label: "Тип изделия", desc: selectedConnection === "flanec" ? "Отвод вентиляционный, тип соединения — фланец" : "Отвод вентиляционный, тип соединения — раструб" },
+    { value: "СЗПК", label: "Компания", desc: "ООО СЗПК «Пласт-Металл Про»" },
+    { value: selectedConnection === "flanec" ? "ОТВФ" : "ОТВР", label: "Тип изделия", desc: selectedConnection === "flanec" ? "Отвод вентиляционный, фланец" : "Отвод вентиляционный, раструб" },
     { value: String(angle), label: "Угол поворота", desc: `${angle} градусов` },
     { value: mat?.code || "—", label: "Материал", desc: mat?.name.replace(/\s*\(.*\)/, "") || "—" },
     ...(hasMultipleColors && selectedColor
