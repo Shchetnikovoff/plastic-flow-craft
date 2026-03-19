@@ -546,7 +546,27 @@ const ProductDetailContent = () => {
             <h1 className="text-xl sm:text-2xl font-bold text-foreground mb-1">
               Флотационно-фильтровальная установка {article}
             </h1>
-            <p className="font-mono text-sm text-muted-foreground mb-2">{article}</p>
+            <p className="font-mono text-sm text-muted-foreground mb-4">{article}</p>
+
+            <ArticleBreakdown
+              exampleArticle={article}
+              segments={(() => {
+                const suffix = article.replace("ФФУ-", "");
+                const modMatch = suffix.match(/^([\d.]+)([А-Яа-яA-Za-z]*)$/);
+                const cap = modMatch ? modMatch[1] : suffix;
+                const mod = modMatch ? modMatch[2] : "";
+                const modMap: Record<string, string> = { "К": "Компактная", "М": "Модульная" };
+                const segs = [
+                  { value: "ФФУ", label: "Тип", desc: "Флотационно-фильтровальная установка" },
+                  { value: cap, label: "Произв.", desc: `${cap} м³/ч` },
+                ];
+                if (mod) {
+                  segs.push({ value: mod, label: "Модиф.", desc: modMap[mod] || mod });
+                }
+                return segs;
+              })()}
+            />
+
             <p className="text-sm text-muted-foreground mb-6">
               ФФУ для глубокой очистки сточных вод от нефтепродуктов, жиров и взвешенных веществ. Производительность — {ffuModel.capacity} м³/ч.
             </p>
