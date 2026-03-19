@@ -484,14 +484,14 @@ const ProductDetailContent = () => {
 
       await generateSpecPdf(
         {
-          article,
+          article: ffuModel.article,
           diameter: 0,
           wallThickness: 0,
           socketThickness: 0,
           availableLength: null,
           connectionName: "",
           materialName: "Полипропилен / ПВХ / Стеклопластик",
-          productTitle: `Флотационно-фильтровальная установка ${article}`,
+          productTitle: `Флотационно-фильтровальная установка ${ffuModel.name}`,
           extraRows: [
             ["Производительность", `${ffuModel.capacity} м³/ч`],
             ["Мощность", `${ffuModel.power} кВт`],
