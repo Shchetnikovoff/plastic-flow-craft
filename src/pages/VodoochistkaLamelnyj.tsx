@@ -27,7 +27,7 @@ import PageFooter from "@/components/PageFooter";
 
 const heroImages = [
   { src: "/images/lamelnyj-hero-real.jpg", alt: "Ламельный тонкослойный отстойник" },
-  { src: "/images/lamelnyj-otstoynik-real.jpg", alt: "Ламельный тонкослойный отстойник — фото" },
+  { src: "/images/lamelnyj-otstoynik-render.png", alt: "Ламельный тонкослойный отстойник — рендер RAL 7032" },
   { src: "/images/lamelnyj-otstoynik-ral7032.png", alt: "Ламельный отстойник RAL 7032 / RAL 7024" },
 ];
 
