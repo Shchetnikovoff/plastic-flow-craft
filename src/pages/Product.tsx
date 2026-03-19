@@ -114,8 +114,8 @@ function parseEmkostArticle(article: string) {
       image: "/images/emkosti-hero-2.png",
     };
   }
-  // Search in perelivnye (overflow tanks for pools) — format: ПЕ-PP-{COLOR}-{VOLUME}
-  if (article.startsWith("ПЕ-")) {
+  // Search in perelivnye (overflow tanks for pools) — format: СЗПК.ПЕ.ПП.{COLOR}.{VOLUME}
+  if (article.startsWith("СЗПК.ПЕ.")) {
     const item = perelivnyeProducts.find((p) => p.article === article);
     if (item) {
       const color = ppColors.find((c) => c.code === item.colorCode);
