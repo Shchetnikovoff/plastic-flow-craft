@@ -570,7 +570,6 @@ const ProductDetailContent = () => {
             <p className="text-sm text-muted-foreground mb-6">
               ФФУ для глубокой очистки сточных вод от нефтепродуктов, жиров и взвешенных веществ. Производительность — {ffuModel.capacity} м³/ч.
             </p>
-            </p>
 
             {/* Specs grid */}
             <div className="grid grid-cols-2 gap-px rounded-lg border overflow-hidden mb-6">
