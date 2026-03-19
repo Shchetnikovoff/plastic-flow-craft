@@ -177,7 +177,7 @@ const VodoochistkaLamelnyjInner = () => {
 
           <div className="grid grid-cols-3 gap-3 mt-6">
             {heroImages.map((img, i) => (
-              <div key={i} className="rounded-lg border border-border overflow-hidden bg-card">
+              <div key={i} className="rounded-lg border border-border overflow-hidden bg-card aspect-[4/3] flex items-center justify-center">
                 <img src={img.src} alt={img.alt} className="w-full h-full object-contain p-2" />
               </div>
             ))}
