@@ -473,8 +473,8 @@ const ProductDetailContent = () => {
   const ffuModel = ffuModels.find((m) => m.article === article || m.name === article) || null;
   if (ffuModel) {
     const handleAddFfu = () => {
-      addItem({ article, diameter: 0, wallThickness: 0 }, qty);
-      toast.success(`${article} (${qty} шт.) добавлен в корзину`);
+      addItem({ article: ffuModel.article, diameter: 0, wallThickness: 0 }, qty);
+      toast.success(`${ffuModel.article} (${qty} шт.) добавлен в корзину`);
     };
 
     const handleFfuSpecPdf = async () => {
