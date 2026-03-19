@@ -127,6 +127,7 @@ const partnershipAdvantages = [
 /* ── component ── */
 
 const VodoochistkaLamelnyjInner = () => {
+  const navigate = useNavigate();
   const [cartOpen, setCartOpen] = useState(false);
   const [form, setForm] = useState({ name: "", phone: "", email: "", description: "" });
 
