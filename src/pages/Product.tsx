@@ -684,9 +684,9 @@ const ProductDetailContent = () => {
     );
   }
 
-  // Try Lamella Settler (ЛО-)
-  const lamParsed = article.startsWith("ЛО-") ? parseLamelnyjArticle(article) : null;
-  const lamModel = lamParsed ? lamelnyjModels.find((m) => m.name === article) : null;
+  // Try Lamella Settler (СЗПК.ЛО.)
+  const lamParsed = parseLamelnyjArticle(article);
+  const lamModel = lamParsed ? lamelnyjModels.find((m) => m.article === article) : null;
   if (lamParsed && lamModel) {
     const handleAddLam = () => {
       addItem({ article, diameter: 0, wallThickness: 0 }, qty);
