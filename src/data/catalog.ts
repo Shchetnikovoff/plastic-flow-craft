@@ -50,7 +50,7 @@ export const catalog: CatalogCategory[] = [
     description: "Полимерное водоочистное оборудование — эффективность, долговечность и устойчивость к агрессивным средам!",
     subcategories: [
       { id: "v1", name: "ФФУ флотационно-фильтровальная установка", slug: "ffu", externalPath: "/catalog/vodoochistka/ffu", image: "/images/ffu-real-3d.png" },
-      { id: "v2", name: "Ламельный тонкослойный отстойник-сепаратор", slug: "lamelnyj-otstojnik", externalPath: "/catalog/vodoochistka/lamelnyj-otstojnik", image: "/images/lamelnyj-thumb.png" },
+      { id: "v2", name: "Ламельный тонкослойный отстойник-сепаратор", slug: "lamelnyj-otstojnik", externalPath: "/catalog/vodoochistka/lamelnyj-otstojnik", image: "/images/lamelnyj-thumb-new.jpg" },
       { id: "v3", name: "Мешочный обезвоживатель осадка", slug: "meshochnyj-obezvozhivatel", externalPath: "/catalog/vodoochistka/meshochnyj-obezvozhivatel", image: "/images/obezvozhivatel-real-3d.png" },
       { id: "v4", name: "Станция приготовления коагулянта", slug: "stantsiya-dozirovaniya", externalPath: "/catalog/vodoochistka/stantsiya-dozirovaniya", image: "/images/vodoochistka-koagulyant-real.png" },
       { id: "v5", name: "Станция приготовления флокулянта", slug: "stantsiya-flokulyanta", image: "/images/vodoochistka-flokulyant-real.jpg", description: "Автоматизированные станции приготовления и дозирования флокулянта. Корпус из химически стойкого полипропилена, встроенные мешалки и насосы-дозаторы." },
