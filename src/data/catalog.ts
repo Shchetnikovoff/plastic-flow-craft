@@ -51,7 +51,7 @@ export const catalog: CatalogCategory[] = [
     subcategories: [
       { id: "v1", name: "ФФУ флотационно-фильтровальная установка", slug: "ffu", externalPath: "/catalog/vodoochistka/ffu", image: "/images/ffu-real-3d.png" },
       { id: "v2", name: "Ламельный тонкослойный отстойник-сепаратор", slug: "lamelnyj-otstojnik", externalPath: "/catalog/vodoochistka/lamelnyj-otstojnik", image: "/images/lamelnyj-thumb-new.png" },
-      { id: "v3", name: "Мешочный обезвоживатель осадка", slug: "meshochnyj-obezvozhivatel", externalPath: "/catalog/vodoochistka/meshochnyj-obezvozhivatel", image: "/images/obezvozhivatel-real-3d.png" },
+      { id: "v3", name: "Мешочный обезвоживатель осадка", slug: "meshochnyj-obezvozhivatel", externalPath: "/catalog/vodoochistka/meshochnyj-obezvozhivatel", image: "/images/obezvozhivatel-real-3d-new.jpg" },
       { id: "v4", name: "Станция приготовления коагулянта", slug: "stantsiya-dozirovaniya", externalPath: "/catalog/vodoochistka/stantsiya-dozirovaniya", image: "/images/vodoochistka-koagulyant-real.png" },
       { id: "v5", name: "Станция приготовления флокулянта", slug: "stantsiya-flokulyanta", image: "/images/vodoochistka-flokulyant-real.jpg", description: "Автоматизированные станции приготовления и дозирования флокулянта. Корпус из химически стойкого полипропилена, встроенные мешалки и насосы-дозаторы." },
       { id: "v6", name: "Жироуловители промышленные", slug: "zhirouloviteli", externalPath: "/catalog/vodoochistka/zhirouloviteli", image: "/images/vodoochistka-zhiroulovitel-real.jpg" },
