@@ -162,7 +162,7 @@ const VodoochistkaDozirovanieInner = () => {
         <section className="mb-10">
           <p className="text-xs text-muted-foreground uppercase tracking-wider mb-2">ООО СЗПК «Пласт-Металл ПРО»</p>
           <h1 className="text-2xl sm:text-3xl font-bold text-foreground leading-tight mb-3">
-            Станция дозирования реагентов
+            Станции приготовления реагентов
           </h1>
           <p className="text-sm text-muted-foreground mb-5">
             Автоматическое приготовление и точное дозирование коагулянта и флокулянта для систем водоочистки любой производительности.
