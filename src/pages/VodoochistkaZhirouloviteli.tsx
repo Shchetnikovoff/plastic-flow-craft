@@ -311,7 +311,7 @@ const VodoochistkaZhirouloviteliInner = () => {
         </section>
 
         {/* Section 7: Горизонтальные жироуловители */}
-        <section className="mb-10">
+        <section className="mb-10" id="gorizontalnye">
           <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Горизонтальные жироуловители</h2>
           <div className="rounded-lg border border-border overflow-auto text-sm">
             <Table>
