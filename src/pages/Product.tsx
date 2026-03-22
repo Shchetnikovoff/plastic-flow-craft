@@ -1356,7 +1356,7 @@ const ProductDetailContent = () => {
         <ImageGalleryWithLightbox
           images={
             zhuModel.article.includes(".ЖУП.")
-              ? ["/images/zhu-p-hero-ral7032.jpg", "/images/zhu-p-schema1.png", "/images/zhu-p-schema2.png", "/images/zhu-p-schema3.png", "/images/zhu-p-photo2.jpg"]
+              ? ["/images/zhu-p-schema1.png", "/images/zhu-p-schema2.png", "/images/zhu-p-schema3.png"]
               : zhuModel.article.includes(".ЖУГ.")
               ? ["/images/zhu-g-hero-ral7032.jpg", "/images/zhu-g-schema1.png", "/images/zhu-g-schema2.png", "/images/zhu-g-schema3.png", "/images/zhu-g-schema4.png", "/images/zhu-g-schema5.jpg"]
               : ["/images/zhu-pv-hero-ral7032.jpg", "/images/zhu-pv-schema1.png", "/images/zhu-pv-schema2.png", "/images/zhu-pv-schema3.png", "/images/zhu-pv-schema4.png", "/images/zhu-pv-schema5.png"]
