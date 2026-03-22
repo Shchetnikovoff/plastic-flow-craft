@@ -1341,6 +1341,8 @@ const ProductDetailContent = () => {
             <BreadcrumbSeparator />
             <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog/vodoochistka/zhirouloviteli">Жироуловители</Link></BreadcrumbLink></BreadcrumbItem>
             <BreadcrumbSeparator />
+            <BreadcrumbItem><BreadcrumbLink asChild><Link to={zhuModel.backLink}>{zhuModel.backLabel}</Link></BreadcrumbLink></BreadcrumbItem>
+            <BreadcrumbSeparator />
             <BreadcrumbItem><BreadcrumbPage>{zhuModel.name} ({zhuModel.article})</BreadcrumbPage></BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
