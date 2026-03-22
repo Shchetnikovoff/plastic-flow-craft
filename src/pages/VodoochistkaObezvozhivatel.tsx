@@ -143,7 +143,7 @@ const VodoochistkaObezvozhivatelInner = () => {
         <section className="mb-10">
           <p className="text-xs text-muted-foreground uppercase tracking-wider mb-2">ООО СЗПК «Пласт-Металл ПРО»</p>
           <h1 className="text-2xl sm:text-3xl font-bold text-foreground leading-tight mb-3">
-            Мешочный обезвоживатель осадка ОНИКС
+            Мешочный обезвоживатель осадка
           </h1>
           <p className="text-sm text-muted-foreground mb-5">
             Эффективное обезвоживание шлама без электроэнергии — компактно, просто, надёжно!
