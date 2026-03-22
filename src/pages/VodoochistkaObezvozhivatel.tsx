@@ -252,8 +252,12 @@ const VodoochistkaObezvozhivatelInner = () => {
               </TableHeader>
               <TableBody>
                 {models.map((m) => (
-                  <TableRow key={m.name} className="even:bg-muted/30">
-                    <TableCell className="text-xs font-mono text-muted-foreground">{m.article}</TableCell>
+                  <TableRow
+                    key={m.name}
+                    className="even:bg-muted/30 cursor-pointer hover:bg-accent/50 transition-colors"
+                    onClick={() => navigate(`/product/${encodeURIComponent(m.article)}`)}
+                  >
+                    <TableCell className="text-xs font-mono text-primary underline">{m.article}</TableCell>
                     <TableCell className="text-xs font-medium">{m.name}</TableCell>
                     <TableCell className="text-xs text-right">{m.capacity}</TableCell>
                     <TableCell className="text-xs text-right">{m.bags}</TableCell>
