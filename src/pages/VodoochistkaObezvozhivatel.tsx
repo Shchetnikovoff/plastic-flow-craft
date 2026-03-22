@@ -60,13 +60,13 @@ const processSteps = [
 ];
 
 const models = [
-  { name: "ОНИКС-1", capacity: "1,5", bags: "1", dimensions: "700×500×1420" },
-  { name: "ОНИКС-2", capacity: "3", bags: "2", dimensions: "1100×500×1480" },
-  { name: "ОНИКС-3", capacity: "4,5", bags: "3", dimensions: "1650×500×1480" },
-  { name: "ОНИКС-4", capacity: "6", bags: "4", dimensions: "2200×500×1480" },
-  { name: "ОНИКС-5", capacity: "7,5", bags: "5", dimensions: "2750×500×1480" },
-  { name: "ОНИКС-6", capacity: "9", bags: "6", dimensions: "3300×500×1480" },
-  { name: "ОНИКС-12", capacity: "12", bags: "12", dimensions: "6600×500×1480" },
+  { name: "ОНИКС-1", article: "СЗПК.МО.01.ПП", capacity: "1,5", bags: "1", dimensions: "700×500×1420" },
+  { name: "ОНИКС-2", article: "СЗПК.МО.02.ПП", capacity: "3", bags: "2", dimensions: "1100×500×1480" },
+  { name: "ОНИКС-3", article: "СЗПК.МО.03.ПП", capacity: "4,5", bags: "3", dimensions: "1650×500×1480" },
+  { name: "ОНИКС-4", article: "СЗПК.МО.04.ПП", capacity: "6", bags: "4", dimensions: "2200×500×1480" },
+  { name: "ОНИКС-5", article: "СЗПК.МО.05.ПП", capacity: "7,5", bags: "5", dimensions: "2750×500×1480" },
+  { name: "ОНИКС-6", article: "СЗПК.МО.06.ПП", capacity: "9", bags: "6", dimensions: "3300×500×1480" },
+  { name: "ОНИКС-12", article: "СЗПК.МО.12.ПП", capacity: "12", bags: "12", dimensions: "6600×500×1480" },
 ];
 
 const faqItems = [
@@ -242,6 +242,7 @@ const VodoochistkaObezvozhivatelInner = () => {
             <Table>
               <TableHeader>
                 <TableRow>
+                  <TableHead className="text-xs">Артикул</TableHead>
                   <TableHead className="text-xs">Модель</TableHead>
                   <TableHead className="text-xs text-right">Произв., м³/сут</TableHead>
                   <TableHead className="text-xs text-right">Мешков</TableHead>
@@ -251,6 +252,7 @@ const VodoochistkaObezvozhivatelInner = () => {
               <TableBody>
                 {models.map((m) => (
                   <TableRow key={m.name} className="even:bg-muted/30">
+                    <TableCell className="text-xs font-mono text-muted-foreground">{m.article}</TableCell>
                     <TableCell className="text-xs font-medium">{m.name}</TableCell>
                     <TableCell className="text-xs text-right">{m.capacity}</TableCell>
                     <TableCell className="text-xs text-right">{m.bags}</TableCell>
