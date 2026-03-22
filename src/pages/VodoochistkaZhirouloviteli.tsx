@@ -221,7 +221,7 @@ const VodoochistkaZhirouloviteliInner = () => {
         </section>
 
         {/* Section: Назначение */}
-        <section className="mb-10">
+        <section id="naznachenie" className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Назначение и области применения</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             {purposeItems.map((area, i) => (
