@@ -71,8 +71,8 @@ const Inner = () => {
           <p className="text-sm text-muted-foreground mb-5">Устанавливаются на ровную площадку внутри помещения или под навесом. Удобный доступ ко всем узлам, откидная крышка для обслуживания.</p>
           <Button onClick={() => document.getElementById("cta-form")?.scrollIntoView({ behavior: "smooth" })} className="gap-2">Получить расчёт стоимости</Button>
           <div className="grid grid-cols-2 gap-3 mt-6">
-            <img src="/images/zhu-vertical-ral.jpg" alt="Наземный вертикальный жироуловитель" className="rounded-lg border border-border object-contain w-full aspect-[4/3]" />
-            <img src="/images/zhu-underground-ral.jpg" alt="Вертикальный жироуловитель" className="rounded-lg border border-border object-contain w-full aspect-[4/3]" />
+            <img src="/images/zhu-nv-hero-ral7032.jpg" alt="Наземный вертикальный жироуловитель" className="rounded-lg border border-border object-contain w-full aspect-[4/3]" />
+            <img src="/images/zhu-pv-hero-ral7032.jpg" alt="Подземный вертикальный жироуловитель" className="rounded-lg border border-border object-contain w-full aspect-[4/3]" />
           </div>
         </section>
 
