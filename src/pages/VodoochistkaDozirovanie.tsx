@@ -173,7 +173,7 @@ const VodoochistkaDozirovanieInner = () => {
           </Button>
           <div className="grid grid-cols-2 gap-3 mt-6">
             <img src="/images/spr-hero-ral7032.jpg" alt="Станция приготовления реагентов — общий вид" className="rounded-lg border border-border object-contain w-full aspect-[4/3]" />
-            <img src="/images/spr-hero-ral7032.jpg" alt="Станция приготовления реагентов" className="rounded-lg border border-border object-contain w-full aspect-[4/3]" />
+            <img src="/images/spr-schema-front.gif" alt="Схема станции приготовления реагентов" className="rounded-lg border border-border object-contain w-full aspect-[4/3]" />
           </div>
         </section>
 
