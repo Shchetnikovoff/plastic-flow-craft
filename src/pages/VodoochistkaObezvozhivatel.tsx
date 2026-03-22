@@ -106,6 +106,7 @@ const partnershipAdvantages = [
 const VodoochistkaObezvozhivatelInner = () => {
   const [cartOpen, setCartOpen] = useState(false);
   const [form, setForm] = useState({ name: "", phone: "", email: "", description: "" });
+  const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
