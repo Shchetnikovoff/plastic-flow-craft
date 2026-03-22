@@ -258,8 +258,12 @@ const VodoochistkaDozirovanieInner = () => {
               </TableHeader>
               <TableBody>
                 {models.map((m) => (
-                  <TableRow key={m.name}>
-                    <TableCell className="text-xs font-mono font-medium">{m.article}</TableCell>
+                  <TableRow
+                    key={m.name}
+                    className="cursor-pointer hover:bg-primary/5 transition-colors"
+                    onClick={() => navigate(`/product/${encodeURIComponent(m.article)}`)}
+                  >
+                    <TableCell className="text-xs font-mono font-medium text-primary underline">{m.article}</TableCell>
                     <TableCell className="text-xs font-medium">{m.name}</TableCell>
                     <TableCell className="text-xs text-right">{m.capacity}</TableCell>
                     <TableCell className="text-xs text-right">{m.dimensions}</TableCell>
