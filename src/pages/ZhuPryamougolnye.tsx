@@ -72,8 +72,7 @@ const Inner = () => {
           <h1 className="text-2xl sm:text-3xl font-bold text-foreground leading-tight mb-3">Прямоугольные наземные жироуловители</h1>
           <p className="text-sm text-muted-foreground mb-5">Корпус прямоугольного сечения из листового ПП с рёбрами жёсткости. Оптимальны для встраивания в ограниченные пространства технических помещений.</p>
           <Button onClick={() => document.getElementById("cta-form")?.scrollIntoView({ behavior: "smooth" })} className="gap-2">Получить расчёт стоимости</Button>
-          <div className="grid grid-cols-2 gap-3 mt-6">
-            <img src="/images/zhu-p-hero-ral7032.jpg" alt="Прямоугольный жироуловитель" className="rounded-lg border border-border object-contain w-full aspect-[4/3]" />
+          <div className="mt-6">
             <img src="/images/zhu-p-schema1.png" alt="Устройство прямоугольного жироуловителя — фронтальная схема" className="rounded-lg border border-border object-contain w-full aspect-[4/3] bg-white" />
           </div>
         </section>
