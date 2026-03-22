@@ -155,8 +155,29 @@ const VodoochistkaZhirouloviteliInner = () => {
           </div>
         </section>
 
+        {/* Anchor nav */}
+        <nav className="mb-8 flex flex-wrap gap-2">
+          {[
+            { id: "vidy", label: "Виды" },
+            { id: "opisanie", label: "Описание" },
+            { id: "naznachenie", label: "Назначение" },
+            { id: "princip", label: "Принцип работы" },
+            { id: "opcii", label: "Опции" },
+            { id: "preimushchestva", label: "Преимущества" },
+            { id: "cta-form", label: "Заявка" },
+          ].map((s) => (
+            <button
+              key={s.id}
+              onClick={() => document.getElementById(s.id)?.scrollIntoView({ behavior: "smooth" })}
+              className="rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium text-foreground hover:bg-accent hover:text-accent-foreground transition-colors"
+            >
+              {s.label}
+            </button>
+          ))}
+        </nav>
+
         {/* Section: Виды */}
-        <section className="mb-10">
+        <section id="vidy" className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Виды жироуловителей</h2>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             {typeCards.map((card, i) => (
