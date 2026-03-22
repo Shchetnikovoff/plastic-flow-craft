@@ -935,7 +935,7 @@ const ProductDetailContent = () => {
         </Breadcrumb>
 
         <ImageGalleryWithLightbox
-          images={["/images/spr-hero-ral7032.jpg"]}
+          images={["/images/spr-hero-ral7032.jpg", "/images/spr-schema-front.gif", "/images/spr-schema-top.png"]}
           selectedImage={selectedImage}
           onSelectedImageChange={setSelectedImage}
         />
