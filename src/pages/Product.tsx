@@ -1348,7 +1348,11 @@ const ProductDetailContent = () => {
         </Breadcrumb>
 
         <ImageGalleryWithLightbox
-          images={["/images/zhu-pv-hero-ral7032.jpg", "/images/zhu-pv-schema1.png", "/images/zhu-pv-schema2.png", "/images/zhu-pv-schema3.png", "/images/zhu-pv-schema4.png", "/images/zhu-pv-schema5.png"]}
+          images={
+            zhuModel.article.includes(".ЖУГ.")
+              ? ["/images/zhu-g-hero-ral7032.jpg", "/images/zhu-g-schema1.png", "/images/zhu-g-schema2.png", "/images/zhu-g-schema3.png", "/images/zhu-g-schema4.png", "/images/zhu-g-schema5.jpg"]
+              : ["/images/zhu-pv-hero-ral7032.jpg", "/images/zhu-pv-schema1.png", "/images/zhu-pv-schema2.png", "/images/zhu-pv-schema3.png", "/images/zhu-pv-schema4.png", "/images/zhu-pv-schema5.png"]
+          }
           selectedImage={selectedImage}
           onSelectedImageChange={setSelectedImage}
         />

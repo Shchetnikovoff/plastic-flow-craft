@@ -14,19 +14,19 @@ import { toast } from "sonner";
 import PageFooter from "@/components/PageFooter";
 
 const models = [
-  { article: "СЗПК.ЖУГ.1.ПП", name: "ЖУГ-1", throughput: "1", dimensions: "Ø800×L1200" },
-  { article: "СЗПК.ЖУГ.2.ПП", name: "ЖУГ-2", throughput: "2", dimensions: "Ø1000×L1500" },
-  { article: "СЗПК.ЖУГ.3.ПП", name: "ЖУГ-3", throughput: "3", dimensions: "Ø1000×L2000" },
-  { article: "СЗПК.ЖУГ.4.ПП", name: "ЖУГ-4", throughput: "4", dimensions: "Ø1200×L2000" },
-  { article: "СЗПК.ЖУГ.5.ПП", name: "ЖУГ-5", throughput: "5", dimensions: "Ø1200×L2400" },
-  { article: "СЗПК.ЖУГ.6.ПП", name: "ЖУГ-6", throughput: "6", dimensions: "Ø1280×L2600" },
-  { article: "СЗПК.ЖУГ.7.ПП", name: "ЖУГ-7", throughput: "7", dimensions: "Ø1280×L2900" },
-  { article: "СЗПК.ЖУГ.8.ПП", name: "ЖУГ-8", throughput: "8", dimensions: "Ø1280×L3300" },
-  { article: "СЗПК.ЖУГ.9.ПП", name: "ЖУГ-9", throughput: "9", dimensions: "Ø1280×L3750" },
-  { article: "СЗПК.ЖУГ.10.ПП", name: "ЖУГ-10", throughput: "10", dimensions: "Ø1400×L3500" },
-  { article: "СЗПК.ЖУГ.15.ПП", name: "ЖУГ-15", throughput: "15", dimensions: "Ø1600×L3900" },
-  { article: "СЗПК.ЖУГ.20.ПП", name: "ЖУГ-20", throughput: "20", dimensions: "Ø1600×L5100" },
-  { article: "СЗПК.ЖУГ.25.ПП", name: "ЖУГ-25", throughput: "25", dimensions: "Ø1600×L6300" },
+  { article: "СЗПК.ЖУГ.1.ПП", name: "ЖУГ-1", throughput: "1", peakDischarge: "500", dimensions: "Ø800×L1200" },
+  { article: "СЗПК.ЖУГ.2.ПП", name: "ЖУГ-2", throughput: "2", peakDischarge: "1000", dimensions: "Ø1000×L1500" },
+  { article: "СЗПК.ЖУГ.3.ПП", name: "ЖУГ-3", throughput: "3", peakDischarge: "1500", dimensions: "Ø1000×L2000" },
+  { article: "СЗПК.ЖУГ.4.ПП", name: "ЖУГ-4", throughput: "4", peakDischarge: "2000", dimensions: "Ø1200×L2000" },
+  { article: "СЗПК.ЖУГ.5.ПП", name: "ЖУГ-5", throughput: "5", peakDischarge: "2500", dimensions: "Ø1200×L2400" },
+  { article: "СЗПК.ЖУГ.6.ПП", name: "ЖУГ-6", throughput: "6", peakDischarge: "3000", dimensions: "Ø1280×L2600" },
+  { article: "СЗПК.ЖУГ.7.ПП", name: "ЖУГ-7", throughput: "7", peakDischarge: "3500", dimensions: "Ø1280×L2900" },
+  { article: "СЗПК.ЖУГ.8.ПП", name: "ЖУГ-8", throughput: "8", peakDischarge: "4000", dimensions: "Ø1280×L3300" },
+  { article: "СЗПК.ЖУГ.9.ПП", name: "ЖУГ-9", throughput: "9", peakDischarge: "4500", dimensions: "Ø1280×L3750" },
+  { article: "СЗПК.ЖУГ.10.ПП", name: "ЖУГ-10", throughput: "10", peakDischarge: "5000", dimensions: "Ø1400×L3500" },
+  { article: "СЗПК.ЖУГ.15.ПП", name: "ЖУГ-15", throughput: "15", peakDischarge: "7500", dimensions: "Ø1600×L3900" },
+  { article: "СЗПК.ЖУГ.20.ПП", name: "ЖУГ-20", throughput: "20", peakDischarge: "10000", dimensions: "Ø1600×L5100" },
+  { article: "СЗПК.ЖУГ.25.ПП", name: "ЖУГ-25", throughput: "25", peakDischarge: "12500", dimensions: "Ø1600×L6300" },
 ];
 
 const optionsList = [
@@ -70,19 +70,21 @@ const Inner = () => {
         <section className="mb-10">
           <p className="text-xs text-muted-foreground uppercase tracking-wider mb-2">ООО СЗПК «Пласт-Металл ПРО»</p>
           <h1 className="text-2xl sm:text-3xl font-bold text-foreground leading-tight mb-3">Горизонтальные жироуловители</h1>
-          <p className="text-sm text-muted-foreground mb-5">Увеличенная зона отстаивания для больших объёмов стоков. Наземное и подземное исполнение. Производительность до 25 л/с.</p>
+          <p className="text-sm text-muted-foreground mb-5">Увеличенная зона отстаивания для больших объёмов стоков. Подземное исполнение. Производительность до 25 л/с.</p>
           <Button onClick={() => document.getElementById("cta-form")?.scrollIntoView({ behavior: "smooth" })} className="gap-2">Получить расчёт стоимости</Button>
-          <div className="grid grid-cols-2 gap-3 mt-6">
-            <img src="/images/zhu-horizontal-ral.jpg" alt="Горизонтальный жироуловитель" className="rounded-lg border border-border object-contain w-full aspect-[4/3]" />
-            <img src="/images/zhu-underground-ral.jpg" alt="Подземный жироуловитель" className="rounded-lg border border-border object-contain w-full aspect-[4/3]" />
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mt-6">
+            <img src="/images/zhu-g-hero-ral7032.jpg" alt="Горизонтальный жироуловитель" className="rounded-lg border border-border object-contain w-full aspect-[4/3]" />
+            <img src="/images/zhu-g-schema1.png" alt="Схема горизонтального жироуловителя с размерами" className="rounded-lg border border-border object-contain w-full aspect-[4/3]" />
+            <img src="/images/zhu-g-schema3.png" alt="Горизонтальный жироуловитель — вид сбоку" className="rounded-lg border border-border object-contain w-full aspect-[4/3]" />
           </div>
         </section>
 
         <section className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">Описание</h2>
           <div className="text-sm text-muted-foreground leading-relaxed space-y-3">
-            <p>Горизонтальные жироуловители обеспечивают увеличенную зону отстаивания за счёт длины корпуса, что повышает эффективность гравитационной сепарации при больших объёмах стоков.</p>
-            <p>Выпускаются в наземном и подземном исполнении. Подземные модели монтируются на бетонное основание с обсыпкой пескоцементной смесью. Производительность от 1 до 25 л/с.</p>
+            <p>Подземный горизонтальный жироуловитель представляет собой цилиндрическую пластиковую ёмкость, внутри которой оборудованы две камеры. Сверху жироуловитель закрывается крышкой. Сточная вода через входной патрубок поступает в 1-й отсек, выполняющий роль отстойника ила, где происходит отделение крупного мусора и тяжёлых загрязнений, оседающих на дне.</p>
+            <p>Далее вода поступает во 2-й отсек, выполняющий функцию жироуловителя, в котором происходит окончательное отделение жиров. Очищенная вода через распределительный карман поступает в отводящий патрубок и отводится в канализационную сеть.</p>
+            <p>Изготовление в стандартном варианте с диаметром патрубков 110, 160 или 200 мм, а также по проекту заказчика. В комплекте — колодец высотой 500 мм и диаметром 700 мм. Монтаж на бетонное основание H-200 мм с обсыпкой пескоцементной смесью 1:10, слоем не менее 200 мм.</p>
           </div>
         </section>
 
@@ -95,6 +97,7 @@ const Inner = () => {
                   <TableHead className="text-xs">Артикул</TableHead>
                   <TableHead className="text-xs">Модель</TableHead>
                   <TableHead className="text-xs text-right">Произв., л/с</TableHead>
+                  <TableHead className="text-xs text-right">Пик. сброс, л</TableHead>
                   <TableHead className="text-xs text-right">Габариты, мм</TableHead>
                 </TableRow>
               </TableHeader>
@@ -104,6 +107,7 @@ const Inner = () => {
                     <TableCell className="text-xs font-mono font-medium text-primary underline">{m.article}</TableCell>
                     <TableCell className="text-xs font-medium">{m.name}</TableCell>
                     <TableCell className="text-xs text-right">{m.throughput}</TableCell>
+                    <TableCell className="text-xs text-right">{m.peakDischarge}</TableCell>
                     <TableCell className="text-xs text-right">{m.dimensions}</TableCell>
                   </TableRow>
                 ))}
