@@ -28,7 +28,7 @@ import PageFooter from "@/components/PageFooter";
 /* ── static data ── */
 
 const heroImages = [
-  { src: "/images/obezvozhivatel-hero-real.jpg", alt: "Мешочный обезвоживатель осадка" },
+  { src: "/images/obezvozhivatel-hero-ral7032.jpg", alt: "Мешочный обезвоживатель осадка" },
   { src: "/images/obezvozhivatel-schema-1.webp", alt: "Схема мешочного обезвоживателя" },
 ];
 
