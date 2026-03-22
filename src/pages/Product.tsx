@@ -932,7 +932,7 @@ const ProductDetailContent = () => {
         </Breadcrumb>
 
         <ImageGalleryWithLightbox
-          images={["/images/obezvozhivatel-3d-ral7032.jpg", "/images/obezvozhivatel-schema-ral7032.jpg"]}
+          images={["/images/obezvozhivatel-3d-ral7032.jpg", "/images/obezvozhivatel-schema-1.webp"]}
           selectedImage={selectedImage}
           onSelectedImageChange={setSelectedImage}
         />
