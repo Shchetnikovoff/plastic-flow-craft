@@ -206,12 +206,16 @@ const VodoochistkaZhirouloviteliInner = () => {
           <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Виды жироуловителей</h2>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             {typeCards.map((card, i) => (
-              <Card key={i} className="border-border overflow-hidden">
+              <Card
+                key={i}
+                className="border-border overflow-hidden cursor-pointer hover:border-primary hover:shadow-md transition-all"
+                onClick={() => document.getElementById(card.anchor)?.scrollIntoView({ behavior: "smooth", block: "start" })}
+              >
                 <div className="aspect-square bg-card p-2">
                   <img src={card.image} alt={card.title} className="w-full h-full object-contain" />
                 </div>
                 <CardContent className="p-3 pt-0">
-                  <h3 className="text-xs font-semibold text-foreground mb-1">{card.title}</h3>
+                  <h3 className="text-xs font-semibold text-primary mb-1">{card.title}</h3>
                   <p className="text-[11px] text-muted-foreground leading-snug">{card.desc}</p>
                 </CardContent>
               </Card>
