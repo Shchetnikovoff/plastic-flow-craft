@@ -70,19 +70,21 @@ const Inner = () => {
         <section className="mb-10">
           <p className="text-xs text-muted-foreground uppercase tracking-wider mb-2">ООО СЗПК «Пласт-Металл ПРО»</p>
           <h1 className="text-2xl sm:text-3xl font-bold text-foreground leading-tight mb-3">Горизонтальные жироуловители</h1>
-          <p className="text-sm text-muted-foreground mb-5">Увеличенная зона отстаивания для больших объёмов стоков. Наземное и подземное исполнение. Производительность до 25 л/с.</p>
+          <p className="text-sm text-muted-foreground mb-5">Увеличенная зона отстаивания для больших объёмов стоков. Подземное исполнение. Производительность до 25 л/с.</p>
           <Button onClick={() => document.getElementById("cta-form")?.scrollIntoView({ behavior: "smooth" })} className="gap-2">Получить расчёт стоимости</Button>
-          <div className="grid grid-cols-2 gap-3 mt-6">
-            <img src="/images/zhu-horizontal-ral.jpg" alt="Горизонтальный жироуловитель" className="rounded-lg border border-border object-contain w-full aspect-[4/3]" />
-            <img src="/images/zhu-underground-ral.jpg" alt="Подземный жироуловитель" className="rounded-lg border border-border object-contain w-full aspect-[4/3]" />
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mt-6">
+            <img src="/images/zhu-g-hero-ral7032.jpg" alt="Горизонтальный жироуловитель" className="rounded-lg border border-border object-contain w-full aspect-[4/3]" />
+            <img src="/images/zhu-g-schema1.png" alt="Схема горизонтального жироуловителя с размерами" className="rounded-lg border border-border object-contain w-full aspect-[4/3]" />
+            <img src="/images/zhu-g-schema3.png" alt="Горизонтальный жироуловитель — вид сбоку" className="rounded-lg border border-border object-contain w-full aspect-[4/3]" />
           </div>
         </section>
 
         <section className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">Описание</h2>
           <div className="text-sm text-muted-foreground leading-relaxed space-y-3">
-            <p>Горизонтальные жироуловители обеспечивают увеличенную зону отстаивания за счёт длины корпуса, что повышает эффективность гравитационной сепарации при больших объёмах стоков.</p>
-            <p>Выпускаются в наземном и подземном исполнении. Подземные модели монтируются на бетонное основание с обсыпкой пескоцементной смесью. Производительность от 1 до 25 л/с.</p>
+            <p>Подземный горизонтальный жироуловитель представляет собой цилиндрическую пластиковую ёмкость, внутри которой оборудованы две камеры. Сверху жироуловитель закрывается крышкой. Сточная вода через входной патрубок поступает в 1-й отсек, выполняющий роль отстойника ила, где происходит отделение крупного мусора и тяжёлых загрязнений, оседающих на дне.</p>
+            <p>Далее вода поступает во 2-й отсек, выполняющий функцию жироуловителя, в котором происходит окончательное отделение жиров. Очищенная вода через распределительный карман поступает в отводящий патрубок и отводится в канализационную сеть.</p>
+            <p>Изготовление в стандартном варианте с диаметром патрубков 110, 160 или 200 мм, а также по проекту заказчика. В комплекте — колодец высотой 500 мм и диаметром 700 мм. Монтаж на бетонное основание H-200 мм с обсыпкой пескоцементной смесью 1:10, слоем не менее 200 мм.</p>
           </div>
         </section>
 
