@@ -156,10 +156,9 @@ const VodoochistkaZhirouloviteliInner = () => {
             Получить расчёт стоимости
           </Button>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-6">
-            <div className="rounded-lg border border-border overflow-hidden bg-card">
-              <img src="/images/zhiroulovitel-hero-1.png" alt="Промышленный жироуловитель" className="w-full object-contain" />
-            </div>
+          <div className="grid grid-cols-2 gap-3 mt-6">
+            <img src="/images/zhu-vertical.jpg" alt="Наземный вертикальный жироуловитель" className="rounded-lg border border-border object-contain w-full aspect-[4/3]" />
+            <img src="/images/zhu-rectangular.jpg" alt="Прямоугольный жироуловитель" className="rounded-lg border border-border object-contain w-full aspect-[4/3]" />
           </div>
         </section>
 
