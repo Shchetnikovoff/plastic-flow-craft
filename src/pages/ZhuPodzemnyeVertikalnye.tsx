@@ -79,9 +79,10 @@ const Inner = () => {
           <h1 className="text-2xl sm:text-3xl font-bold text-foreground leading-tight mb-3">Подземные вертикальные жироуловители</h1>
           <p className="text-sm text-muted-foreground mb-5">Цилиндрический корпус для заглублённого монтажа. Минимальная занимаемая площадь, обслуживание через горловину технического колодца.</p>
           <Button onClick={() => document.getElementById("cta-form")?.scrollIntoView({ behavior: "smooth" })} className="gap-2">Получить расчёт стоимости</Button>
-          <div className="grid grid-cols-2 gap-3 mt-6">
-            <img src="/images/zhu-underground-ral.jpg" alt="Подземный вертикальный жироуловитель" className="rounded-lg border border-border object-contain w-full aspect-[4/3]" />
-            <img src="/images/zhu-vertical-ral.jpg" alt="Вертикальный жироуловитель" className="rounded-lg border border-border object-contain w-full aspect-[4/3]" />
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mt-6">
+            <img src="/images/zhu-pv-hero-ral7032.jpg" alt="Подземный вертикальный жироуловитель" className="rounded-lg border border-border object-contain w-full aspect-[4/3]" />
+            <img src="/images/zhu-pv-schema1.png" alt="Схема жироуловителя — вид спереди" className="rounded-lg border border-border object-contain w-full aspect-[4/3]" />
+            <img src="/images/zhu-pv-schema2.png" alt="Схема жироуловителя — разрез" className="rounded-lg border border-border object-contain w-full aspect-[4/3]" />
           </div>
         </section>
 

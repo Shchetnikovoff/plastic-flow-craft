@@ -46,7 +46,7 @@ const typeCards = [
   {
     title: "Подземные вертикальные",
     desc: "Цилиндрический корпус для заглублённого монтажа. Минимальная занимаемая площадь.",
-    image: "/images/zhu-underground-ral.jpg",
+    image: "/images/zhu-pv-hero-ral7032.jpg",
     path: "/catalog/vodoochistka/zhirouloviteli/podzemnye-vertikalnye",
   },
   {
