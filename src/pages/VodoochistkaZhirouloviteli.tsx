@@ -52,7 +52,7 @@ const typeCards = [
   {
     title: "Наземные вертикальные",
     desc: "Устанавливаются на ровную площадку внутри помещения. Удобный доступ ко всем узлам.",
-    image: "/images/zhu-vertical-ral.jpg",
+    image: "/images/zhu-nv-hero-ral7032.jpg",
     path: "/catalog/vodoochistka/zhirouloviteli/nazemnye-vertikalnye",
   },
   {
