@@ -255,7 +255,7 @@ const VodoochistkaZhirouloviteliInner = () => {
         </section>
 
         {/* Section 5: Доп. опции */}
-        <section className="mb-10">
+        <section id="opcii" className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Дополнительные опции</h2>
           <ul className="space-y-1.5">
             {optionsList.map((item, i) => (
