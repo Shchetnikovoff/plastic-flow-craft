@@ -237,7 +237,7 @@ const VodoochistkaZhirouloviteliInner = () => {
 
 
         {/* Section 4: Принцип работы */}
-        <section className="mb-10">
+        <section id="princip" className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Принцип работы</h2>
           <div className="space-y-3">
             {processSteps.map((s) => (
