@@ -1,15 +1,19 @@
 
 
-## Plan: Replace sludge dewatering section image with uploaded render
+## Plan: Add schema image to sludge dewatering product cards
 
-### What changes
-1. Copy the uploaded image to `public/images/obezvozhivatel-real-3d-new.png`
-2. Update `src/data/catalog.ts` line 54 — change image path from `/images/obezvozhivatel-real-3d.png` to the new file
-3. Update `src/pages/Vodoochistka.tsx` if it references the old image for this section
-4. The uploaded image already has a light grey tone consistent with RAL 7032 — no color processing needed
+**What:** Add the existing schema image (`obezvozhivatel-schema-1.webp`) as a second image in ОНИКС product cards, with thumbnail navigation like other product pages.
 
-### Files to modify
-- **`public/images/`** — copy uploaded image
-- **`src/data/catalog.ts`** — update image path for "Мешочный обезвоживатель осадка" (line 54)
-- **`src/pages/Vodoochistka.tsx`** — update image reference if present in modifications section
+### Changes
+
+**File: `src/pages/Product.tsx`** (lines ~933-938)
+
+Replace the single static image with `ImageGalleryWithLightbox` component (already used across the project):
+
+- Import `ImageGalleryWithLightbox` from `@/components/configurator`
+- Add `useState` for `selectedImage` index
+- Define image array: `["/images/obezvozhivatel-real-3d-new.jpg", "/images/obezvozhivatel-schema-1.webp"]`
+- Replace the single `<div><img></div>` block with `<ImageGalleryWithLightbox images={moImages} selectedImage={selectedImage} onSelectedImageChange={setSelectedImage} />`
+
+This matches the pattern used on FFU, Lamella, and ventilation product pages.
 
