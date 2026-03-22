@@ -73,6 +73,10 @@ const App = () => (
           <Route path="/catalog/vodoochistka/lamelnyj-otstojnik" element={<VodoochistkaLamelnyj />} />
           <Route path="/catalog/vodoochistka/meshochnyj-obezvozhivatel" element={<VodoochistkaObezvozhivatel />} />
           <Route path="/catalog/vodoochistka/stantsiya-dozirovaniya" element={<VodoochistkaDozirovanie />} />
+          <Route path="/catalog/vodoochistka/zhirouloviteli/podzemnye-vertikalnye" element={<ZhuPodzemnyeVertikalnye />} />
+          <Route path="/catalog/vodoochistka/zhirouloviteli/nazemnye-vertikalnye" element={<ZhuNazemnyeVertikalnye />} />
+          <Route path="/catalog/vodoochistka/zhirouloviteli/gorizontalnye" element={<ZhuGorizontalnye />} />
+          <Route path="/catalog/vodoochistka/zhirouloviteli/pryamougolnye" element={<ZhuPryamougolnye />} />
           <Route path="/catalog/vodoochistka/zhirouloviteli" element={<VodoochistkaZhirouloviteli />} />
           <Route path="/catalog/vodoochistka/los" element={<VodoochistkaLos />} />
           <Route path="/catalog/vodoochistka/shkafy-dozirovaniya" element={<VodoochistkaShkafyDozirovaniya />} />
