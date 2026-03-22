@@ -14,15 +14,19 @@ import { toast } from "sonner";
 import PageFooter from "@/components/PageFooter";
 
 const models = [
-  { article: "СЗПК.ЖУП.1.ПП", name: "ЖУП-1", throughput: "1", peakDischarge: "500", dimensions: "600×400×800" },
-  { article: "СЗПК.ЖУП.2.ПП", name: "ЖУП-2", throughput: "2", peakDischarge: "1000", dimensions: "800×500×900" },
-  { article: "СЗПК.ЖУП.3.ПП", name: "ЖУП-3", throughput: "3", peakDischarge: "1500", dimensions: "1000×600×1000" },
-  { article: "СЗПК.ЖУП.4.ПП", name: "ЖУП-4", throughput: "4", peakDischarge: "2000", dimensions: "1200×700×1000" },
-  { article: "СЗПК.ЖУП.5.ПП", name: "ЖУП-5", throughput: "5", peakDischarge: "2500", dimensions: "1400×800×1100" },
-  { article: "СЗПК.ЖУП.6.ПП", name: "ЖУП-6", throughput: "6", peakDischarge: "3000", dimensions: "1500×900×1100" },
-  { article: "СЗПК.ЖУП.8.ПП", name: "ЖУП-8", throughput: "8", peakDischarge: "4000", dimensions: "1800×1000×1200" },
-  { article: "СЗПК.ЖУП.10.ПП", name: "ЖУП-10", throughput: "10", peakDischarge: "5000", dimensions: "2000×1100×1200" },
-  { article: "СЗПК.ЖУП.15.ПП", name: "ЖУП-15", throughput: "15", peakDischarge: "7500", dimensions: "2400×1200×1300" },
+  { article: "СЗПК.ЖУП.1.ПП", name: "ЖУП-1", throughput: "1", peakDischarge: "500", dimensions: "1050×750×1120" },
+  { article: "СЗПК.ЖУП.2.ПП", name: "ЖУП-2", throughput: "2", peakDischarge: "1000", dimensions: "1400×850×1320" },
+  { article: "СЗПК.ЖУП.3.ПП", name: "ЖУП-3", throughput: "3", peakDischarge: "1500", dimensions: "1500×1000×1320" },
+  { article: "СЗПК.ЖУП.4.ПП", name: "ЖУП-4", throughput: "4", peakDischarge: "2000", dimensions: "1650×1000×1500" },
+  { article: "СЗПК.ЖУП.5.ПП", name: "ЖУП-5", throughput: "5", peakDischarge: "2500", dimensions: "1650×1200×1520" },
+  { article: "СЗПК.ЖУП.6.ПП", name: "ЖУП-6", throughput: "6", peakDischarge: "3000", dimensions: "1750×1250×1670" },
+  { article: "СЗПК.ЖУП.7.ПП", name: "ЖУП-7", throughput: "7", peakDischarge: "3500", dimensions: "2000×1300×1670" },
+  { article: "СЗПК.ЖУП.8.ПП", name: "ЖУП-8", throughput: "8", peakDischarge: "4000", dimensions: "2000×1500×1670" },
+  { article: "СЗПК.ЖУП.9.ПП", name: "ЖУП-9", throughput: "9", peakDischarge: "4500", dimensions: "2300×1500×1670" },
+  { article: "СЗПК.ЖУП.10.ПП", name: "ЖУП-10", throughput: "10", peakDischarge: "5000", dimensions: "2550×1500×1670" },
+  { article: "СЗПК.ЖУП.15.ПП", name: "ЖУП-15", throughput: "15", peakDischarge: "7500", dimensions: "2800×1500×2020" },
+  { article: "СЗПК.ЖУП.20.ПП", name: "ЖУП-20", throughput: "20", peakDischarge: "10000", dimensions: "3500×1600×2020" },
+  { article: "СЗПК.ЖУП.25.ПП", name: "ЖУП-25", throughput: "25", peakDischarge: "12500", dimensions: "4000×1650×2120" },
 ];
 
 const optionsList = [
@@ -69,16 +73,17 @@ const Inner = () => {
           <p className="text-sm text-muted-foreground mb-5">Корпус прямоугольного сечения из листового ПП с рёбрами жёсткости. Оптимальны для встраивания в ограниченные пространства технических помещений.</p>
           <Button onClick={() => document.getElementById("cta-form")?.scrollIntoView({ behavior: "smooth" })} className="gap-2">Получить расчёт стоимости</Button>
           <div className="grid grid-cols-2 gap-3 mt-6">
-            <img src="/images/zhu-rectangular-ral.jpg" alt="Прямоугольный жироуловитель" className="rounded-lg border border-border object-contain w-full aspect-[4/3]" />
-            <img src="/images/zhu-vertical-ral.jpg" alt="Вертикальный жироуловитель" className="rounded-lg border border-border object-contain w-full aspect-[4/3]" />
+            <img src="/images/zhu-p-hero-ral7032.jpg" alt="Прямоугольный жироуловитель" className="rounded-lg border border-border object-contain w-full aspect-[4/3]" />
+            <img src="/images/zhu-p-schema3.png" alt="Устройство прямоугольного жироуловителя" className="rounded-lg border border-border object-contain w-full aspect-[4/3]" />
           </div>
         </section>
 
         <section className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">Описание</h2>
           <div className="text-sm text-muted-foreground leading-relaxed space-y-3">
-            <p>Прямоугольные жироуловители из листового полипропилена с рёбрами жёсткости — оптимальное решение для ограниченных пространств технических помещений. Компактная форма позволяет устанавливать оборудование вплотную к стенам.</p>
-            <p>Изготавливаются по индивидуальным размерам с учётом производительности и особенностей объекта. Производительность от 1 до 15 л/с. Откидная крышка обеспечивает удобное обслуживание.</p>
+            <p>Прямоугольные жироуловители из листового полипропилена толщиной 5–10 мм с рёбрами жёсткости — оптимальное решение для ограниченных пространств технических помещений. Компактная прямоугольная форма позволяет устанавливать оборудование вплотную к стенам.</p>
+            <p>Корпус оснащён герметичной откидной крышкой с уплотнителем EPDM, внутренними седиментационными пластинами для повышения эффективности сепарации и патрубками для подключения к канализации. Производительность от 1 до 25 л/с, пиковый сброс от 500 до 12 500 литров.</p>
+            <p>Предназначены для улавливания неэмульгированных жиров и масел из сточных вод кухонь, ресторанов, столовых, мясоперерабатывающих предприятий в соответствии со СНиП 2.04.01-85. Срок службы — не менее 25 лет.</p>
           </div>
         </section>
 
