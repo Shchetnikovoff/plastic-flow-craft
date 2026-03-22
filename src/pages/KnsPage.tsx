@@ -76,32 +76,52 @@ const Inner = () => {
           </div>
         </section>
 
-        <section className="mb-10">
+
+        <nav className="mb-8 flex flex-wrap gap-2">
+          {[
+            { id: "opisanie", label: "Описание" },
+            { id: "primenenie", label: "Применение" },
+            { id: "vidy", label: "Виды" },
+            { id: "preimushchestva", label: "Преимущества" },
+            { id: "katalog", label: "Каталог" },
+            { id: "cta-form", label: "Заявка" },
+          ].map((s) => (
+            <button
+              key={s.id}
+              onClick={() => document.getElementById(s.id)?.scrollIntoView({ behavior: "smooth" })}
+              className="rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium text-foreground hover:bg-accent hover:text-accent-foreground transition-colors"
+            >
+              {s.label}
+            </button>
+          ))}
+        </nav>
+
+        <section id="opisanie" className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">КНС: от проектирования до монтажа</h2>
           <p className="text-sm text-muted-foreground leading-relaxed mb-4">Мы проектируем и производим канализационные насосные станции в корпусах из полипропилена и стеклопластика (SVT) для хозяйственно-бытовых, промышленных и ливневых стоков.</p>
           <h3 className="text-sm font-semibold text-foreground mb-2">Почему выбирают нас:</h3>
           <ul className="space-y-2">{whyUs.map((item, i) => (<li key={i} className="flex items-start gap-2 text-sm text-muted-foreground"><Check className="h-4 w-4 text-primary shrink-0 mt-0.5" /><span>{item}</span></li>))}</ul>
         </section>
 
-        <section className="mb-10">
+        <section id="primenenie" className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Области применения</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">{applications.map((a, i) => (<div key={i} className="flex items-start gap-2 rounded-lg border border-border bg-card p-3"><a.icon className="h-4 w-4 text-primary shrink-0 mt-0.5" /><span className="text-sm text-foreground">{a.text}</span></div>))}</div>
         </section>
 
-        <section className="mb-10">
+        <section id="vidy" className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Виды КНС</h2>
           <Accordion type="multiple" defaultValue={[modifications[0].title]} className="space-y-2">
             {modifications.map((mod) => (<AccordionItem key={mod.title} value={mod.title} className="rounded-lg border border-border bg-card px-4"><AccordionTrigger className="text-sm font-semibold text-foreground hover:no-underline">{mod.title}</AccordionTrigger><AccordionContent><ul className="space-y-1.5 pb-2">{mod.items.map((item, i) => (<li key={i} className="flex items-start gap-2 text-sm text-muted-foreground"><span className="text-primary mt-1">•</span><span>{item}</span></li>))}</ul></AccordionContent></AccordionItem>))}
           </Accordion>
         </section>
 
-        <section className="mb-10">
+        <section id="preimushchestva" className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Преимущества сотрудничества</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">{advantages.map((adv) => (<Card key={adv.title}><CardContent className="p-4 flex items-start gap-3"><adv.icon className="h-5 w-5 text-primary shrink-0 mt-0.5" /><div><p className="text-sm font-semibold text-foreground mb-1">{adv.title}</p><p className="text-xs text-muted-foreground">{adv.text}</p></div></CardContent></Card>))}</div>
         </section>
 
         {category && (
-          <section className="mb-10">
+          <section id="katalog" className="mb-10">
             <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Каталог КНС</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">{category.subcategories.map((sub, i) => {
               const cc = (<><div className="aspect-[4/3] bg-muted flex items-center justify-center">{sub.image ? <img src={sub.image} alt={sub.name} className="w-full h-full object-contain" /> : <ImageOff className="h-10 w-10 text-muted-foreground/40" />}</div><div className="px-3 py-2.5"><p className="text-xs text-muted-foreground font-semibold">{catIndex}.{i + 1}</p><p className="text-sm font-medium text-foreground group-hover:text-primary transition-colors mt-0.5">{sub.name}</p></div></>);

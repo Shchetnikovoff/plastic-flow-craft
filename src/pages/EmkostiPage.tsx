@@ -125,6 +125,27 @@ const EmkostiPageInner = () => {
         </section>
 
         {/* Intro */}
+
+        <nav className="mb-8 flex flex-wrap gap-2">
+          {[
+            { id: "opisanie", label: "Описание" },
+            { id: "naznachenie", label: "Назначение" },
+            { id: "materialy", label: "Материалы" },
+            { id: "modifikacii", label: "Модификации" },
+            { id: "preimushchestva", label: "Преимущества" },
+            { id: "katalog", label: "Каталог" },
+            { id: "cta-form", label: "Заявка" },
+          ].map((s) => (
+            <button
+              key={s.id}
+              onClick={() => document.getElementById(s.id)?.scrollIntoView({ behavior: "smooth" })}
+              className="rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium text-foreground hover:bg-accent hover:text-accent-foreground transition-colors"
+            >
+              {s.label}
+            </button>
+          ))}
+        </nav>
+
         <section className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">
             Промышленные ёмкости на заказ: от эскиза до монтажа
@@ -144,7 +165,7 @@ const EmkostiPageInner = () => {
         </section>
 
         {/* Section 1: Назначение */}
-        <section className="mb-10">
+        <section id="naznachenie" className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Назначение ёмкостей</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             {applications.map((app, i) => (
@@ -157,7 +178,7 @@ const EmkostiPageInner = () => {
         </section>
 
         {/* Section 2: Материалы */}
-        <section className="mb-10">
+        <section id="opisanie" className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Описание материалов</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             {/* PP */}
@@ -205,7 +226,7 @@ const EmkostiPageInner = () => {
         </section>
 
         {/* Section 3: Виды и модификации */}
-        <section className="mb-10">
+        <section id="modifikacii" className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Виды и модификации ёмкостей</h2>
           <Accordion type="multiple" defaultValue={["По форме"]} className="space-y-2">
             {modifications.map((mod) => (
@@ -247,7 +268,7 @@ const EmkostiPageInner = () => {
         </section>
 
         {/* Section 4: Преимущества */}
-        <section className="mb-10">
+        <section id="preimushchestva" className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Преимущества сотрудничества</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
             {advantages.map((adv) => (
@@ -262,7 +283,7 @@ const EmkostiPageInner = () => {
 
         {/* Subcategories grid */}
         {category && (
-          <section className="mb-10">
+          <section id="katalog" className="mb-10">
             <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Каталог ёмкостей</h2>
             <div className="flex flex-col md:flex-row gap-6">
               <nav className="md:w-[220px] shrink-0">

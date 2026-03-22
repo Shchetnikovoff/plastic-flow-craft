@@ -158,6 +158,24 @@ const VodoochistkaLosInner = () => {
         </section>
 
         {/* Intro */}
+
+        <nav className="mb-8 flex flex-wrap gap-2">
+          {[
+            { id: "opisanie", label: "Описание" },
+            { id: "modeli", label: "Модели" },
+            { id: "preimushchestva", label: "Преимущества" },
+            { id: "cta-form", label: "Заявка" },
+          ].map((s) => (
+            <button
+              key={s.id}
+              onClick={() => document.getElementById(s.id)?.scrollIntoView({ behavior: "smooth" })}
+              className="rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium text-foreground hover:bg-accent hover:text-accent-foreground transition-colors"
+            >
+              {s.label}
+            </button>
+          ))}
+        </nav>
+
         <section className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">
             Комплексные решения очистки сточных вод
@@ -177,7 +195,7 @@ const VodoochistkaLosInner = () => {
         </section>
 
         {/* Product tabs */}
-        <section className="mb-10">
+        <section id="modeli" className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Типоразмерный ряд</h2>
 
           <Tabs defaultValue="los" className="w-full">
@@ -305,7 +323,7 @@ const VodoochistkaLosInner = () => {
         </section>
 
         {/* Преимущества */}
-        <section className="mb-10">
+        <section id="preimushchestva" className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Преимущества сотрудничества</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {partnershipAdvantages.map((a, i) => (

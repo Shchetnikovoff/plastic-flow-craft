@@ -206,6 +206,27 @@ const VodoochistkaInner = () => {
         </section>
 
         {/* Intro */}
+
+        <nav className="mb-8 flex flex-wrap gap-2">
+          {[
+            { id: "opisanie", label: "Описание" },
+            { id: "produkciya", label: "Продукция" },
+            { id: "materialy", label: "Материалы" },
+            { id: "primenenie", label: "Применение" },
+            { id: "preimushchestva", label: "Преимущества" },
+            { id: "katalog", label: "Каталог" },
+            { id: "cta-form", label: "Заявка" },
+          ].map((s) => (
+            <button
+              key={s.id}
+              onClick={() => document.getElementById(s.id)?.scrollIntoView({ behavior: "smooth" })}
+              className="rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium text-foreground hover:bg-accent hover:text-accent-foreground transition-colors"
+            >
+              {s.label}
+            </button>
+          ))}
+        </nav>
+
         <section className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">
             Системы водоочистки из полимерных материалов: от проектирования до ввода в эксплуатацию
@@ -225,7 +246,7 @@ const VodoochistkaInner = () => {
         </section>
 
         {/* Section 1: Перечень продукции */}
-        <section className="mb-10">
+        <section id="produkciya" className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Перечень продукции</h2>
           <Accordion type="multiple" defaultValue={[products[0].title]} className="space-y-2">
             {products.map((prod) => (
@@ -249,7 +270,7 @@ const VodoochistkaInner = () => {
         </section>
 
         {/* Section 2: Преимущества полимерных материалов */}
-        <section className="mb-10">
+        <section id="preimushchestva" className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Преимущества полимерных материалов</h2>
 
           <h3 className="text-sm font-semibold text-foreground mb-3">Основные материалы:</h3>
@@ -283,7 +304,7 @@ const VodoochistkaInner = () => {
         </section>
 
         {/* Section 3: Сферы применения */}
-        <section className="mb-10">
+        <section id="primenenie" className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Типовые сферы применения</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             {applicationAreas.map((area, i) => (
@@ -296,7 +317,7 @@ const VodoochistkaInner = () => {
         </section>
 
         {/* Section 4: Преимущества сотрудничества */}
-        <section className="mb-10">
+        <section id="preimushchestva" className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Преимущества сотрудничества</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
             {partnershipAdvantages.map((adv) => (
@@ -315,7 +336,7 @@ const VodoochistkaInner = () => {
 
         {/* Subcategories grid */}
         {category && (
-          <section className="mb-10">
+          <section id="katalog" className="mb-10">
             <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Каталог водоочистного оборудования</h2>
             <div className="flex flex-col md:flex-row gap-6">
               <nav className="md:w-[220px] shrink-0">

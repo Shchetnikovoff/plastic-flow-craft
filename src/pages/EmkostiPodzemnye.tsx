@@ -180,6 +180,27 @@ const EmkostiPodzemnyeInner = () => {
         </section>
 
         {/* Intro */}
+
+        <nav className="mb-8 flex flex-wrap gap-2">
+          {[
+            { id: "opisanie", label: "Описание" },
+            { id: "naznachenie", label: "Назначение" },
+            { id: "materialy", label: "Материалы" },
+            { id: "modifikacii", label: "Модификации" },
+            { id: "modeli", label: "Модели" },
+            { id: "preimushchestva", label: "Преимущества" },
+            { id: "cta-form", label: "Заявка" },
+          ].map((s) => (
+            <button
+              key={s.id}
+              onClick={() => document.getElementById(s.id)?.scrollIntoView({ behavior: "smooth" })}
+              className="rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium text-foreground hover:bg-accent hover:text-accent-foreground transition-colors"
+            >
+              {s.label}
+            </button>
+          ))}
+        </nav>
+
         <section className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">
             Подземные резервуары на заказ: от проектирования до ввода в эксплуатацию
@@ -199,7 +220,7 @@ const EmkostiPodzemnyeInner = () => {
         </section>
 
         {/* Section 1: Назначение */}
-        <section className="mb-10">
+        <section id="naznachenie" className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Назначение подземных ёмкостей</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             {applications.map((app, i) => (
@@ -212,7 +233,7 @@ const EmkostiPodzemnyeInner = () => {
         </section>
 
         {/* Section 2: Технология и материалы */}
-        <section className="mb-10">
+        <section id="materialy" className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Технология и материалы</h2>
           <p className="text-sm text-muted-foreground leading-relaxed mb-4">
             Спиральновитые трубы (СВП) — это гофрированные полимерные или металлополимерные конструкции, формируемые методом спиральной навивки с последующей сваркой швов.
@@ -252,7 +273,7 @@ const EmkostiPodzemnyeInner = () => {
         </section>
 
         {/* Section 3: Виды и модификации */}
-        <section className="mb-10">
+        <section id="modifikacii" className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Виды и модификации</h2>
           <Accordion type="multiple" defaultValue={["По назначению"]} className="space-y-2">
             {modifications.map((mod) => (
@@ -276,7 +297,7 @@ const EmkostiPodzemnyeInner = () => {
         </section>
 
         {/* Типоразмерный ряд */}
-        <section className="mb-10">
+        <section id="modeli" className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Типоразмерный ряд</h2>
           <div className="rounded-lg border border-border overflow-auto">
             <Table>
@@ -301,7 +322,7 @@ const EmkostiPodzemnyeInner = () => {
         </section>
 
         {/* Section 4: Преимущества сотрудничества */}
-        <section className="mb-10">
+        <section id="preimushchestva" className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Преимущества сотрудничества</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
             {advantages.map((adv) => (

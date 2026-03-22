@@ -132,7 +132,29 @@ const EmkostiPerelivnyeInner = () => {
         </section>
 
         {/* Цвет полипропилена */}
-        <section className="mb-10">
+
+        <nav className="mb-8 flex flex-wrap gap-2">
+          {[
+            { id: "cvet", label: "Цвет" },
+            { id: "opisanie", label: "Описание" },
+            { id: "funkcii", label: "Функции" },
+            { id: "primenenie", label: "Применение" },
+            { id: "harakteristiki", label: "Характеристики" },
+            { id: "modeli", label: "Модели" },
+            { id: "preimushchestva", label: "Преимущества" },
+            { id: "cta-form", label: "Заявка" },
+          ].map((s) => (
+            <button
+              key={s.id}
+              onClick={() => document.getElementById(s.id)?.scrollIntoView({ behavior: "smooth" })}
+              className="rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium text-foreground hover:bg-accent hover:text-accent-foreground transition-colors"
+            >
+              {s.label}
+            </button>
+          ))}
+        </nav>
+
+        <section id="cvet" className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">Цвет полипропилена</h2>
           <div className="grid gap-2 sm:grid-cols-2">
             {ppColors.map((c) => (
@@ -176,7 +198,7 @@ const EmkostiPerelivnyeInner = () => {
         </section>
 
         {/* Функции */}
-        <section className="mb-10">
+        <section id="funkcii" className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Функции переливной ёмкости</h2>
           <div className="space-y-2">
             {features.map((item, i) => (
@@ -189,7 +211,7 @@ const EmkostiPerelivnyeInner = () => {
         </section>
 
         {/* Назначение */}
-        <section className="mb-10">
+        <section id="primenenie" className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Область применения</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             {applications.map((app, i) => (
@@ -202,7 +224,7 @@ const EmkostiPerelivnyeInner = () => {
         </section>
 
         {/* Характеристики */}
-        <section className="mb-10">
+        <section id="harakteristiki" className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Технические характеристики</h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 mb-6">
             {specs.map((spec, i) => (
@@ -225,7 +247,7 @@ const EmkostiPerelivnyeInner = () => {
         </section>
 
         {/* Типоразмерный ряд */}
-        <section className="mb-10">
+        <section id="modeli" className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Типоразмерный ряд</h2>
           <p className="text-sm text-muted-foreground mb-4">
             Размер ёмкости подбирается в зависимости от объёма бассейна. Ниже представлены стандартные модели — возможно изготовление по индивидуальным размерам.
@@ -257,7 +279,7 @@ const EmkostiPerelivnyeInner = () => {
         </section>
 
         {/* Преимущества */}
-        <section className="mb-10">
+        <section id="preimushchestva" className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Преимущества сотрудничества</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
             {advantages.map((adv) => (
