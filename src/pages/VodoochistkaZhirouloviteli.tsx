@@ -58,7 +58,7 @@ const typeCards = [
   {
     title: "Горизонтальные",
     desc: "Увеличенная зона отстаивания для больших объёмов стоков. Производительность до 25 л/с.",
-    image: "/images/zhu-horizontal-ral.jpg",
+    image: "/images/zhu-g-hero-ral7032.jpg",
     path: "/catalog/vodoochistka/zhirouloviteli/gorizontalnye",
   },
   {
