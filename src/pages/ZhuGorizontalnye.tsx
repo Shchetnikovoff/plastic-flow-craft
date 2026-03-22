@@ -107,6 +107,7 @@ const Inner = () => {
                     <TableCell className="text-xs font-mono font-medium text-primary underline">{m.article}</TableCell>
                     <TableCell className="text-xs font-medium">{m.name}</TableCell>
                     <TableCell className="text-xs text-right">{m.throughput}</TableCell>
+                    <TableCell className="text-xs text-right">{m.peakDischarge}</TableCell>
                     <TableCell className="text-xs text-right">{m.dimensions}</TableCell>
                   </TableRow>
                 ))}
