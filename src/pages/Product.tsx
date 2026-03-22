@@ -1295,9 +1295,9 @@ const ProductDetailContent = () => {
           extraRows: [
             ["Производительность", `${zhuModel.throughput} л/с`],
             ["Пиковый сброс", `${zhuModel.peakDischarge} л`],
-            ["Ø корпуса", `${zhuModel.diameter} мм`],
-            ["Высота корпуса", `${zhuModel.height} мм`],
-            ["Ø колодца", `${zhuModel.wellDiameter} мм`],
+            [zhuModel.article.includes(".ЖУП.") ? "Длина×Ширина корпуса" : "Ø корпуса", `${zhuModel.diameter} мм`],
+            [zhuModel.article.includes(".ЖУП.") ? "Высота ёмкости" : "Высота корпуса", `${zhuModel.height} мм`],
+            [zhuModel.article.includes(".ЖУП.") ? "Высота колодца" : "Ø колодца", `${zhuModel.wellDiameter} мм`],
             ["Высота входа", `${zhuModel.inletHeight} мм`],
             ["Высота выхода", `${zhuModel.outletHeight} мм`],
             ["Ø патрубков", `${zhuModel.pipeDiameter} мм`],
