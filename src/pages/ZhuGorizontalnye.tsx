@@ -97,6 +97,7 @@ const Inner = () => {
                   <TableHead className="text-xs">Артикул</TableHead>
                   <TableHead className="text-xs">Модель</TableHead>
                   <TableHead className="text-xs text-right">Произв., л/с</TableHead>
+                  <TableHead className="text-xs text-right">Пик. сброс, л</TableHead>
                   <TableHead className="text-xs text-right">Габариты, мм</TableHead>
                 </TableRow>
               </TableHeader>
