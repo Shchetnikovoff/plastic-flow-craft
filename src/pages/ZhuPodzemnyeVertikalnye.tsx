@@ -86,7 +86,26 @@ const Inner = () => {
           </div>
         </section>
 
-        <section className="mb-10">
+
+        <nav className="mb-8 flex flex-wrap gap-2">
+          {[
+            { id: "opisanie", label: "Описание" },
+            { id: "modeli", label: "Модели" },
+            { id: "princip", label: "Принцип работы" },
+            { id: "opcii", label: "Опции" },
+            { id: "cta-form", label: "Заявка" },
+          ].map((s) => (
+            <button
+              key={s.id}
+              onClick={() => document.getElementById(s.id)?.scrollIntoView({ behavior: "smooth" })}
+              className="rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium text-foreground hover:bg-accent hover:text-accent-foreground transition-colors"
+            >
+              {s.label}
+            </button>
+          ))}
+        </nav>
+
+        <section id="opisanie" className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">Описание</h2>
           <div className="text-sm text-muted-foreground leading-relaxed space-y-3">
             <p>Подземные вертикальные жироуловители размещаются в грунте — на поверхность выходит только крышка технического колодца. Монтаж производится на бетонное основание (H-200 мм), с обсыпкой пескоцементной смесью 1:10, слоем не менее 200 мм.</p>
@@ -94,7 +113,7 @@ const Inner = () => {
           </div>
         </section>
 
-        <section className="mb-10">
+        <section id="modeli" className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Модельный ряд</h2>
           <div className="rounded-lg border border-border overflow-auto mb-4">
             <Table>
@@ -125,7 +144,7 @@ const Inner = () => {
           <p className="text-xs text-muted-foreground">Возможно изготовление по индивидуальным размерам.</p>
         </section>
 
-        <section className="mb-10">
+        <section id="princip" className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Принцип работы</h2>
           <div className="space-y-3">
             {processSteps.map((s) => (
@@ -140,7 +159,7 @@ const Inner = () => {
           </div>
         </section>
 
-        <section className="mb-10">
+        <section id="opcii" className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Дополнительное оборудование</h2>
           <ul className="space-y-1.5">
             {optionsList.map((item, i) => (

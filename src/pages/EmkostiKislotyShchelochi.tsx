@@ -204,6 +204,26 @@ const EmkostiKislotyShchelochiInner = () => {
         </section>
 
         {/* Intro */}
+
+        <nav className="mb-8 flex flex-wrap gap-2">
+          {[
+            { id: "opisanie", label: "Описание" },
+            { id: "naznachenie", label: "Назначение" },
+            { id: "materialy", label: "Материалы" },
+            { id: "modifikacii", label: "Модификации" },
+            { id: "preimushchestva", label: "Преимущества" },
+            { id: "cta-form", label: "Заявка" },
+          ].map((s) => (
+            <button
+              key={s.id}
+              onClick={() => document.getElementById(s.id)?.scrollIntoView({ behavior: "smooth" })}
+              className="rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium text-foreground hover:bg-accent hover:text-accent-foreground transition-colors"
+            >
+              {s.label}
+            </button>
+          ))}
+        </nav>
+
         <section className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">
             Ёмкости для кислот и щелочей: от проектирования до монтажа
@@ -223,7 +243,7 @@ const EmkostiKislotyShchelochiInner = () => {
         </section>
 
         {/* Section 1: Назначение */}
-        <section className="mb-10">
+        <section id="naznachenie" className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Назначение ёмкостей</h2>
           <p className="text-sm text-muted-foreground mb-3">Наши ёмкости предназначены для:</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -237,7 +257,7 @@ const EmkostiKislotyShchelochiInner = () => {
         </section>
 
         {/* Section 2: Материалы */}
-        <section className="mb-10">
+        <section id="opisanie" className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Описание материалов</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-6">
@@ -284,7 +304,7 @@ const EmkostiKislotyShchelochiInner = () => {
         </section>
 
         {/* Section 3: Виды и модификации */}
-        <section className="mb-10">
+        <section id="modifikacii" className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Виды и модификации ёмкостей</h2>
           <Accordion type="multiple" defaultValue={[modifications[0].title]} className="space-y-2">
             {modifications.map((mod) => (
@@ -308,7 +328,7 @@ const EmkostiKislotyShchelochiInner = () => {
         </section>
 
         {/* Section 4: Преимущества сотрудничества */}
-        <section className="mb-10">
+        <section id="preimushchestva" className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Преимущества сотрудничества</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
             {partnershipAdvantages.map((adv) => (

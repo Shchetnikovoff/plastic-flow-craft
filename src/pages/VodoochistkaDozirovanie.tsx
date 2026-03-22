@@ -178,6 +178,26 @@ const VodoochistkaDozirovanieInner = () => {
         </section>
 
         {/* Intro */}
+
+        <nav className="mb-8 flex flex-wrap gap-2">
+          {[
+            { id: "opisanie", label: "Описание" },
+            { id: "naznachenie", label: "Назначение" },
+            { id: "princip", label: "Принцип работы" },
+            { id: "modeli", label: "Модели" },
+            { id: "preimushchestva", label: "Преимущества" },
+            { id: "cta-form", label: "Заявка" },
+          ].map((s) => (
+            <button
+              key={s.id}
+              onClick={() => document.getElementById(s.id)?.scrollIntoView({ behavior: "smooth" })}
+              className="rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium text-foreground hover:bg-accent hover:text-accent-foreground transition-colors"
+            >
+              {s.label}
+            </button>
+          ))}
+        </nav>
+
         <section className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">
             Станции дозирования: производство под ключ
@@ -197,7 +217,7 @@ const VodoochistkaDozirovanieInner = () => {
         </section>
 
         {/* Section 1: Назначение */}
-        <section className="mb-10">
+        <section id="naznachenie" className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Назначение и области применения</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             {purposeItems.map((area, i) => (
@@ -210,7 +230,7 @@ const VodoochistkaDozirovanieInner = () => {
         </section>
 
         {/* Section 2: Принцип работы */}
-        <section className="mb-10">
+        <section id="princip" className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Принцип работы</h2>
 
           <p className="text-sm text-muted-foreground leading-relaxed mb-4">
@@ -243,7 +263,7 @@ const VodoochistkaDozirovanieInner = () => {
         </section>
 
         {/* Section 3: Модельный ряд */}
-        <section className="mb-10">
+        <section id="modeli" className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Модельный ряд</h2>
 
           <div className="rounded-lg border border-border overflow-auto">
@@ -298,7 +318,7 @@ const VodoochistkaDozirovanieInner = () => {
         </section>
 
         {/* Section 5: Преимущества сотрудничества */}
-        <section className="mb-10">
+        <section id="preimushchestva" className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Преимущества сотрудничества</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {partnershipAdvantages.map((a, i) => (

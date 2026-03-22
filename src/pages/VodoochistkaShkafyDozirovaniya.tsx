@@ -167,6 +167,27 @@ const VodoochistkaShkafyDozirovaniyaInner = () => {
         </section>
 
         {/* Intro */}
+
+        <nav className="mb-8 flex flex-wrap gap-2">
+          {[
+            { id: "opisanie", label: "Описание" },
+            { id: "komponenty", label: "Компоненты" },
+            { id: "funkcii", label: "Функции" },
+            { id: "vidy", label: "Виды" },
+            { id: "primenenie", label: "Применение" },
+            { id: "preimushchestva", label: "Преимущества" },
+            { id: "cta-form", label: "Заявка" },
+          ].map((s) => (
+            <button
+              key={s.id}
+              onClick={() => document.getElementById(s.id)?.scrollIntoView({ behavior: "smooth" })}
+              className="rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium text-foreground hover:bg-accent hover:text-accent-foreground transition-colors"
+            >
+              {s.label}
+            </button>
+          ))}
+        </nav>
+
         <section className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">
             Дозировочные шкафы: производство под ключ
@@ -186,7 +207,7 @@ const VodoochistkaShkafyDozirovaniyaInner = () => {
         </section>
 
         {/* Section 1: Основные компоненты */}
-        <section className="mb-10">
+        <section id="komponenty" className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Основные компоненты</h2>
           <div className="rounded-lg border border-border overflow-hidden">
             {components.map((c, i) => (
@@ -243,7 +264,7 @@ const VodoochistkaShkafyDozirovaniyaInner = () => {
         </section>
 
         {/* Section 5: Области применения */}
-        <section className="mb-10">
+        <section id="primenenie" className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Области применения</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             {applications.map((a, i) => (
@@ -256,7 +277,7 @@ const VodoochistkaShkafyDozirovaniyaInner = () => {
         </section>
 
         {/* Section 6: Преимущества сотрудничества */}
-        <section className="mb-10">
+        <section id="preimushchestva" className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Преимущества сотрудничества</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {partnershipAdvantages.map((a, i) => (

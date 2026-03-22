@@ -137,7 +137,26 @@ const GazoochistkaFvgInner = () => {
         </section>
 
         {/* Why us */}
-        <section className="mb-10">
+
+        <nav className="mb-8 flex flex-wrap gap-2">
+          {[
+            { id: "opisanie", label: "Описание" },
+            { id: "princip", label: "Принцип работы" },
+            { id: "modeli", label: "Модели" },
+            { id: "preimushchestva", label: "Преимущества" },
+            { id: "cta-form", label: "Заявка" },
+          ].map((s) => (
+            <button
+              key={s.id}
+              onClick={() => document.getElementById(s.id)?.scrollIntoView({ behavior: "smooth" })}
+              className="rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium text-foreground hover:bg-accent hover:text-accent-foreground transition-colors"
+            >
+              {s.label}
+            </button>
+          ))}
+        </nav>
+
+        <section id="opisanie" className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">Почему выбирают наши фильтры</h2>
           <ul className="space-y-2">
             {whyUs.map((item, i) => (
@@ -150,7 +169,7 @@ const GazoochistkaFvgInner = () => {
         </section>
 
         {/* Filter sizes info */}
-        <section className="mb-10">
+        <section id="opisanie" className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">Размерный ряд фильтров</h2>
           <div className="space-y-2 text-sm text-muted-foreground leading-relaxed">
             <p>
@@ -163,7 +182,7 @@ const GazoochistkaFvgInner = () => {
         </section>
 
         {/* Principle */}
-        <section className="mb-10">
+        <section id="princip" className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">Принцип работы</h2>
           <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
             <p>
@@ -179,7 +198,7 @@ const GazoochistkaFvgInner = () => {
         </section>
 
         {/* Designation */}
-        <section className="mb-10">
+        <section id="opisanie" className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">Условное обозначение</h2>
           <p className="text-sm text-muted-foreground mb-3">Пример: <span className="font-semibold text-foreground">ФВГ-0,37-1-ПП</span></p>
           <div className="rounded-lg border border-border overflow-auto">
@@ -203,7 +222,7 @@ const GazoochistkaFvgInner = () => {
         </section>
 
         {/* Specs table */}
-        <section className="mb-10">
+        <section id="harakteristiki" className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Технические характеристики</h2>
           <div className="rounded-lg border border-border overflow-auto">
             <Table>
@@ -306,7 +325,7 @@ const GazoochistkaFvgInner = () => {
         </section>
 
         {/* Partnership */}
-        <section className="mb-10">
+        <section id="preimushchestva" className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Преимущества сотрудничества</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
             {partnershipAdvantages.map((a, i) => (
