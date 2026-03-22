@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 import CartSheet from "@/components/CartSheet";
 import { CartProvider } from "@/contexts/CartContext";
@@ -126,6 +126,7 @@ const partnershipAdvantages = [
 const VodoochistkaDozirovanieInner = () => {
   const [cartOpen, setCartOpen] = useState(false);
   const [form, setForm] = useState({ name: "", phone: "", email: "", description: "" });
+  const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -257,8 +258,12 @@ const VodoochistkaDozirovanieInner = () => {
               </TableHeader>
               <TableBody>
                 {models.map((m) => (
-                  <TableRow key={m.name}>
-                    <TableCell className="text-xs font-mono font-medium">{m.article}</TableCell>
+                  <TableRow
+                    key={m.name}
+                    className="cursor-pointer hover:bg-primary/5 transition-colors"
+                    onClick={() => navigate(`/product/${encodeURIComponent(m.article)}`)}
+                  >
+                    <TableCell className="text-xs font-mono font-medium text-primary underline">{m.article}</TableCell>
                     <TableCell className="text-xs font-medium">{m.name}</TableCell>
                     <TableCell className="text-xs text-right">{m.capacity}</TableCell>
                     <TableCell className="text-xs text-right">{m.dimensions}</TableCell>

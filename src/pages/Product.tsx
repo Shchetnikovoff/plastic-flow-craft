@@ -855,6 +855,194 @@ const ProductDetailContent = () => {
     );
   }
 
+  // Try SPR (Станция приготовления реагентов — СЗПК.СПР.)
+  const sprModels = [
+    { name: "СПР-500", article: "СЗПК.СПР.500.ПП", capacity: "500", dimensions: "1700×1200×1540" },
+    { name: "СПР-1000", article: "СЗПК.СПР.1000.ПП", capacity: "1 000", dimensions: "2000×1350×1540" },
+    { name: "СПР-2000", article: "СЗПК.СПР.2000.ПП", capacity: "2 000", dimensions: "2300×1450×1940" },
+    { name: "СПР-3000", article: "СЗПК.СПР.3000.ПП", capacity: "3 000", dimensions: "2700×1600×1940" },
+    { name: "СПР-4000", article: "СЗПК.СПР.4000.ПП", capacity: "4 000", dimensions: "3200×1750×1940" },
+    { name: "СПР-5000", article: "СЗПК.СПР.5000.ПП", capacity: "5 000", dimensions: "3300×1850×1940" },
+    { name: "СПР-6000", article: "СЗПК.СПР.6000.ПП", capacity: "6 000", dimensions: "3500×1850×2140" },
+    { name: "СПР-10000", article: "СЗПК.СПР.10000.ПП", capacity: "10 000", dimensions: "3900×1850×2140" },
+  ];
+  const sprModel = sprModels.find((m) => m.article === article) || null;
+  if (sprModel) {
+    const handleAddSpr = () => {
+      addItem({ article: sprModel.article, diameter: 0, wallThickness: 0 }, qty);
+      toast.success(`${sprModel.article} (${qty} шт.) добавлен в корзину`);
+    };
+
+    const handleSprSpecPdf = async () => {
+      const errors = validateContactForm(contactData);
+      setContactErrors(errors);
+      if (Object.keys(errors).length > 0) return;
+
+      await generateSpecPdf(
+        {
+          article: sprModel.article,
+          diameter: 0,
+          wallThickness: 0,
+          socketThickness: 0,
+          availableLength: null,
+          connectionName: "",
+          materialName: "Полипропилен (ПП)",
+          productTitle: `Станция приготовления реагентов ${sprModel.name}`,
+          extraRows: [
+            ["Производительность", `${sprModel.capacity} л/ч`],
+            ["Габариты (A×B×C)", `${sprModel.dimensions} мм`],
+            ["Материал корпуса", "Полипропилен (ПП)"],
+            ["Давление", "2–6 бар"],
+            ["Время выдержки", "60 мин"],
+            ["Концентрация раствора", "0,1–0,5%"],
+            ["Степень защиты", "IP54"],
+            ["Температура эксплуатации", "+5…+40 °C"],
+          ],
+        },
+        contactData
+      );
+      toast.success("PDF-спецификация скачана");
+      setPdfDialogOpen(false);
+    };
+
+    const handleSprKpPdf = async () => {
+      await generateLetterheadPdf();
+      toast.success("Коммерческое предложение скачано");
+    };
+
+    const handleSprContactChange = (field: keyof ContactFormData, value: string) => {
+      setContactData((prev) => ({ ...prev, [field]: value }));
+      if (contactErrors[field]) {
+        setContactErrors((prev) => ({ ...prev, [field]: undefined }));
+      }
+    };
+
+    const sprParts = sprModel.article.split(".");
+    const sprCap = sprParts[2] || "";
+
+    return (
+      <main className="mx-auto max-w-[960px] px-4 sm:px-6 py-6 sm:py-8">
+        <Breadcrumb className="mb-6">
+          <BreadcrumbList>
+            <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog">Каталог</Link></BreadcrumbLink></BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog/vodoochistka">Водоочистка</Link></BreadcrumbLink></BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog/vodoochistka/stantsiya-dozirovaniya">Станции приготовления реагентов</Link></BreadcrumbLink></BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem><BreadcrumbPage>{sprModel.name} ({sprModel.article})</BreadcrumbPage></BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
+
+        <ImageGalleryWithLightbox
+          images={["/images/vodoochistka-koagulyant-real.png", "/images/dozirovanie-hero-real.jpg"]}
+          selectedImage={selectedImage}
+          onSelectedImageChange={setSelectedImage}
+        />
+
+        <div className="grid gap-8 md:grid-cols-2">
+          <div>
+            <h1 className="text-xl sm:text-2xl font-bold text-foreground mb-1">
+              Станция приготовления реагентов {sprModel.name}
+            </h1>
+            <p className="font-mono text-sm text-muted-foreground mb-4">{sprModel.article}</p>
+
+            <ArticleBreakdown
+              exampleArticle={sprModel.article}
+              segments={[
+                { value: "СЗПК", label: "Компания", desc: "ООО СЗПК «Пласт-Металл Про»" },
+                { value: "СПР", label: "Тип", desc: "Станция приготовления реагентов" },
+                { value: sprCap, label: "Произв.", desc: `${sprModel.capacity} л/ч` },
+                { value: sprParts[3], label: "Материал", desc: "Полипропилен" },
+              ]}
+            />
+
+            <p className="text-sm text-muted-foreground mb-6">
+              Автоматическая станция приготовления и дозирования коагулянтов и флокулянтов. Трёхкамерная система непрерывного действия, производительность — {sprModel.capacity} л/ч.
+            </p>
+
+            <div className="grid grid-cols-2 gap-px rounded-lg border overflow-hidden mb-6">
+              <div className="bg-card p-3">
+                <span className="block text-xs text-muted-foreground">Производительность</span>
+                <span className="text-sm font-semibold text-foreground">{sprModel.capacity} л/ч</span>
+              </div>
+              <div className="bg-card p-3">
+                <span className="block text-xs text-muted-foreground">Габариты (A×B×C)</span>
+                <span className="text-sm font-semibold text-foreground">{sprModel.dimensions} мм</span>
+              </div>
+              <div className="bg-card p-3 border-t">
+                <span className="block text-xs text-muted-foreground">Давление</span>
+                <span className="text-sm font-semibold text-foreground">2–6 бар</span>
+              </div>
+              <div className="bg-card p-3 border-t">
+                <span className="block text-xs text-muted-foreground">Время выдержки</span>
+                <span className="text-sm font-semibold text-foreground">60 мин</span>
+              </div>
+              <div className="bg-card p-3 border-t">
+                <span className="block text-xs text-muted-foreground">Концентрация</span>
+                <span className="text-sm font-semibold text-foreground">0,1–0,5%</span>
+              </div>
+              <div className="bg-card p-3 border-t">
+                <span className="block text-xs text-muted-foreground">Степень защиты</span>
+                <span className="text-sm font-semibold text-foreground">IP54</span>
+              </div>
+              <div className="bg-card p-3 border-t">
+                <span className="block text-xs text-muted-foreground">Температура</span>
+                <span className="text-sm font-semibold text-foreground">+5…+40 °C</span>
+              </div>
+              <div className="bg-card p-3 border-t">
+                <span className="block text-xs text-muted-foreground">Материал корпуса</span>
+                <span className="text-sm font-semibold text-foreground">Полипропилен (ПП)</span>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-3">
+              <div className="flex items-center gap-1 border rounded-md">
+                <Button variant="ghost" size="icon" className="h-9 w-9" onClick={() => setQty((q) => Math.max(1, q - 1))}>
+                  <Minus className="h-4 w-4" />
+                </Button>
+                <span className="w-10 text-center text-sm font-medium">{qty}</span>
+                <Button variant="ghost" size="icon" className="h-9 w-9" onClick={() => setQty((q) => q + 1)}>
+                  <Plus className="h-4 w-4" />
+                </Button>
+              </div>
+              <Button className="gap-2 flex-1" onClick={handleAddSpr}>
+                <ShoppingCart className="h-4 w-4" />
+                В корзину
+              </Button>
+            </div>
+
+            <Button variant="outline" className="gap-2 w-full mt-3" onClick={() => setPdfDialogOpen(true)}>
+              <FileDown className="h-4 w-4" />
+              Скачать спецификацию (PDF)
+            </Button>
+
+            <Button variant="outline" className="gap-2 w-full mt-2" onClick={handleSprKpPdf}>
+              <FileDown className="h-4 w-4" />
+              Скачать коммерческое предложение (PDF)
+            </Button>
+          </div>
+        </div>
+
+        <Dialog open={pdfDialogOpen} onOpenChange={setPdfDialogOpen}>
+          <DialogContent className="max-w-md">
+            <DialogHeader>
+              <DialogTitle>Скачать спецификацию</DialogTitle>
+              <DialogDescription>
+                Заполните контактные данные для скачивания PDF-спецификации
+              </DialogDescription>
+            </DialogHeader>
+            <ContactFormFields data={contactData} errors={contactErrors} onChange={handleSprContactChange} />
+            <Button className="w-full gap-2 mt-2" onClick={handleSprSpecPdf}>
+              <FileDown className="h-4 w-4" />
+              Скачать PDF
+            </Button>
+          </DialogContent>
+        </Dialog>
+      </main>
+    );
+  }
+
   // Try Meshochnyj Obezvozhivatel (СЗПК.МО.)
   const moModels = [
     { name: "МО-1", article: "СЗПК.МО.01.ПП", capacity: "1,5", bags: "1", dimensions: "700×500×1420" },
