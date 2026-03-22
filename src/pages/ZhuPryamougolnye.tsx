@@ -14,15 +14,19 @@ import { toast } from "sonner";
 import PageFooter from "@/components/PageFooter";
 
 const models = [
-  { article: "СЗПК.ЖУП.1.ПП", name: "ЖУП-1", throughput: "1", peakDischarge: "500", dimensions: "600×400×800" },
-  { article: "СЗПК.ЖУП.2.ПП", name: "ЖУП-2", throughput: "2", peakDischarge: "1000", dimensions: "800×500×900" },
-  { article: "СЗПК.ЖУП.3.ПП", name: "ЖУП-3", throughput: "3", peakDischarge: "1500", dimensions: "1000×600×1000" },
-  { article: "СЗПК.ЖУП.4.ПП", name: "ЖУП-4", throughput: "4", peakDischarge: "2000", dimensions: "1200×700×1000" },
-  { article: "СЗПК.ЖУП.5.ПП", name: "ЖУП-5", throughput: "5", peakDischarge: "2500", dimensions: "1400×800×1100" },
-  { article: "СЗПК.ЖУП.6.ПП", name: "ЖУП-6", throughput: "6", peakDischarge: "3000", dimensions: "1500×900×1100" },
-  { article: "СЗПК.ЖУП.8.ПП", name: "ЖУП-8", throughput: "8", peakDischarge: "4000", dimensions: "1800×1000×1200" },
-  { article: "СЗПК.ЖУП.10.ПП", name: "ЖУП-10", throughput: "10", peakDischarge: "5000", dimensions: "2000×1100×1200" },
-  { article: "СЗПК.ЖУП.15.ПП", name: "ЖУП-15", throughput: "15", peakDischarge: "7500", dimensions: "2400×1200×1300" },
+  { article: "СЗПК.ЖУП.1.ПП", name: "ЖУП-1", throughput: "1", peakDischarge: "500", dimensions: "1050×750×1120" },
+  { article: "СЗПК.ЖУП.2.ПП", name: "ЖУП-2", throughput: "2", peakDischarge: "1000", dimensions: "1400×850×1320" },
+  { article: "СЗПК.ЖУП.3.ПП", name: "ЖУП-3", throughput: "3", peakDischarge: "1500", dimensions: "1500×1000×1320" },
+  { article: "СЗПК.ЖУП.4.ПП", name: "ЖУП-4", throughput: "4", peakDischarge: "2000", dimensions: "1650×1000×1500" },
+  { article: "СЗПК.ЖУП.5.ПП", name: "ЖУП-5", throughput: "5", peakDischarge: "2500", dimensions: "1650×1200×1520" },
+  { article: "СЗПК.ЖУП.6.ПП", name: "ЖУП-6", throughput: "6", peakDischarge: "3000", dimensions: "1750×1250×1670" },
+  { article: "СЗПК.ЖУП.7.ПП", name: "ЖУП-7", throughput: "7", peakDischarge: "3500", dimensions: "2000×1300×1670" },
+  { article: "СЗПК.ЖУП.8.ПП", name: "ЖУП-8", throughput: "8", peakDischarge: "4000", dimensions: "2000×1500×1670" },
+  { article: "СЗПК.ЖУП.9.ПП", name: "ЖУП-9", throughput: "9", peakDischarge: "4500", dimensions: "2300×1500×1670" },
+  { article: "СЗПК.ЖУП.10.ПП", name: "ЖУП-10", throughput: "10", peakDischarge: "5000", dimensions: "2550×1500×1670" },
+  { article: "СЗПК.ЖУП.15.ПП", name: "ЖУП-15", throughput: "15", peakDischarge: "7500", dimensions: "2800×1500×2020" },
+  { article: "СЗПК.ЖУП.20.ПП", name: "ЖУП-20", throughput: "20", peakDischarge: "10000", dimensions: "3500×1600×2020" },
+  { article: "СЗПК.ЖУП.25.ПП", name: "ЖУП-25", throughput: "25", peakDischarge: "12500", dimensions: "4000×1650×2120" },
 ];
 
 const optionsList = [
