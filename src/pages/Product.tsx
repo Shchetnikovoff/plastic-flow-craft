@@ -1449,26 +1449,6 @@ const ProductDetailContent = () => {
               </div>
             </div>
 
-            {/* Эксплуатация */}
-            <h3 className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-2">Эксплуатация</h3>
-            <div className="grid grid-cols-2 gap-px rounded-lg border overflow-hidden mb-4">
-              <div className="bg-card p-3">
-                <span className="block text-xs text-muted-foreground">Надставка колодца</span>
-                <span className="text-sm font-semibold text-foreground">Есть</span>
-              </div>
-              <div className="bg-card p-3">
-                <span className="block text-xs text-muted-foreground">Изменение Ø патрубков</span>
-                <span className="text-sm font-semibold text-foreground">Есть</span>
-              </div>
-              <div className="bg-card p-3 border-t">
-                <span className="block text-xs text-muted-foreground">Изготовление по ТЗ</span>
-                <span className="text-sm font-semibold text-foreground">Есть</span>
-              </div>
-              <div className="bg-card p-3 border-t">
-                <span className="block text-xs text-muted-foreground">Гарантия</span>
-                <span className="text-sm font-semibold text-foreground">5 лет</span>
-              </div>
-            </div>
           </div>
         </div>
 
