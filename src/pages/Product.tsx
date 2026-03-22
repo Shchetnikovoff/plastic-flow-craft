@@ -1222,17 +1222,17 @@ const ProductDetailContent = () => {
 
   // Try Жироуловитель (СЗПК.ЖУ.)
   const zhuModels = [
-    { name: "ЖУ-1", article: "СЗПК.ЖУ.1.ПП", throughput: "1", peakDischarge: "500", diameter: "800", height: "1300" },
-    { name: "ЖУ-2", article: "СЗПК.ЖУ.2.ПП", throughput: "2", peakDischarge: "1000", diameter: "1000", height: "1600" },
-    { name: "ЖУ-3", article: "СЗПК.ЖУ.3.ПП", throughput: "3", peakDischarge: "1500", diameter: "1200", height: "1500" },
-    { name: "ЖУ-4", article: "СЗПК.ЖУ.4.ПП", throughput: "4", peakDischarge: "2000", diameter: "1350", height: "1550" },
-    { name: "ЖУ-5", article: "СЗПК.ЖУ.5.ПП", throughput: "5", peakDischarge: "2500", diameter: "1350", height: "2000" },
-    { name: "ЖУ-6", article: "СЗПК.ЖУ.6.ПП", throughput: "6", peakDischarge: "3000", diameter: "1450", height: "2000" },
-    { name: "ЖУ-7", article: "СЗПК.ЖУ.7.ПП", throughput: "7", peakDischarge: "3500", diameter: "1550", height: "2000" },
-    { name: "ЖУ-8", article: "СЗПК.ЖУ.8.ПП", throughput: "8", peakDischarge: "4000", diameter: "1650", height: "2000" },
-    { name: "ЖУ-9", article: "СЗПК.ЖУ.9.ПП", throughput: "9", peakDischarge: "4500", diameter: "1750", height: "2000" },
-    { name: "ЖУ-10", article: "СЗПК.ЖУ.10.ПП", throughput: "10", peakDischarge: "5000", diameter: "1850", height: "2000" },
-    { name: "ЖУ-15", article: "СЗПК.ЖУ.15.ПП", throughput: "15", peakDischarge: "7500", diameter: "2200", height: "2000" },
+    { name: "ЖУ-1", article: "СЗПК.ЖУ.1.ПП", throughput: "1", peakDischarge: "500", diameter: "800", height: "1300", wellDiameter: "700", inletHeight: "1140", outletHeight: "1090", pipeDiameter: "110", installType: "Подземный вертикальный" },
+    { name: "ЖУ-2", article: "СЗПК.ЖУ.2.ПП", throughput: "2", peakDischarge: "1000", diameter: "1000", height: "1600", wellDiameter: "700", inletHeight: "1430", outletHeight: "1380", pipeDiameter: "110", installType: "Подземный вертикальный" },
+    { name: "ЖУ-3", article: "СЗПК.ЖУ.3.ПП", throughput: "3", peakDischarge: "1500", diameter: "1200", height: "1500", wellDiameter: "700", inletHeight: "1330", outletHeight: "1280", pipeDiameter: "110", installType: "Подземный вертикальный" },
+    { name: "ЖУ-4", article: "СЗПК.ЖУ.4.ПП", throughput: "4", peakDischarge: "2000", diameter: "1350", height: "1550", wellDiameter: "700", inletHeight: "1380", outletHeight: "1330", pipeDiameter: "160", installType: "Подземный вертикальный" },
+    { name: "ЖУ-5", article: "СЗПК.ЖУ.5.ПП", throughput: "5", peakDischarge: "2500", diameter: "1350", height: "2000", wellDiameter: "700", inletHeight: "1830", outletHeight: "1780", pipeDiameter: "160", installType: "Подземный вертикальный" },
+    { name: "ЖУ-6", article: "СЗПК.ЖУ.6.ПП", throughput: "6", peakDischarge: "3000", diameter: "1450", height: "2000", wellDiameter: "700", inletHeight: "1830", outletHeight: "1780", pipeDiameter: "160", installType: "Подземный вертикальный" },
+    { name: "ЖУ-7", article: "СЗПК.ЖУ.7.ПП", throughput: "7", peakDischarge: "3500", diameter: "1550", height: "2000", wellDiameter: "700", inletHeight: "1830", outletHeight: "1780", pipeDiameter: "160", installType: "Подземный вертикальный" },
+    { name: "ЖУ-8", article: "СЗПК.ЖУ.8.ПП", throughput: "8", peakDischarge: "4000", diameter: "1650", height: "2000", wellDiameter: "700", inletHeight: "1830", outletHeight: "1780", pipeDiameter: "200", installType: "Подземный вертикальный" },
+    { name: "ЖУ-9", article: "СЗПК.ЖУ.9.ПП", throughput: "9", peakDischarge: "4500", diameter: "1750", height: "2000", wellDiameter: "700", inletHeight: "1830", outletHeight: "1780", pipeDiameter: "200", installType: "Подземный вертикальный" },
+    { name: "ЖУ-10", article: "СЗПК.ЖУ.10.ПП", throughput: "10", peakDischarge: "5000", diameter: "1850", height: "2000", wellDiameter: "700", inletHeight: "1830", outletHeight: "1780", pipeDiameter: "200", installType: "Подземный вертикальный" },
+    { name: "ЖУ-15", article: "СЗПК.ЖУ.15.ПП", throughput: "15", peakDischarge: "7500", diameter: "2200", height: "2000", wellDiameter: "700", inletHeight: "1830", outletHeight: "1780", pipeDiameter: "200", installType: "Подземный вертикальный" },
   ];
   const zhuModel = zhuModels.find((m) => m.article === article) || null;
   if (zhuModel) {
@@ -1260,7 +1260,12 @@ const ProductDetailContent = () => {
             ["Производительность", `${zhuModel.throughput} л/с`],
             ["Пиковый сброс", `${zhuModel.peakDischarge} л`],
             ["Ø корпуса", `${zhuModel.diameter} мм`],
-            ["Высота", `${zhuModel.height} мм`],
+            ["Высота корпуса", `${zhuModel.height} мм`],
+            ["Ø колодца", `${zhuModel.wellDiameter} мм`],
+            ["Высота входа", `${zhuModel.inletHeight} мм`],
+            ["Высота выхода", `${zhuModel.outletHeight} мм`],
+            ["Ø патрубков", `${zhuModel.pipeDiameter} мм`],
+            ["Способ установки", zhuModel.installType],
             ["Материал корпуса", "Полипропилен (ПП)"],
             ["Принцип работы", "Гравитационная сепарация"],
           ],
@@ -1286,6 +1291,16 @@ const ProductDetailContent = () => {
     const zhuParts = zhuModel.article.split(".");
     const zhuThroughput = zhuParts[2] || "";
 
+    const zhuAdditionalEquipment = [
+      "Надставка технического колодца (10–50 см)",
+      "Лестница для обслуживания",
+      "Крышка жироуловителя промышленного (чугун / ПП)",
+      "Дозатор биопрепаратов",
+      "Сигнализатор уровня жира",
+      "Автоматический сборщик жира с таймером",
+      "Коалесцентный модуль для повышения эффективности",
+    ];
+
     return (
       <main className="mx-auto max-w-[960px] px-4 sm:px-6 py-6 sm:py-8">
         <Breadcrumb className="mb-6">
@@ -1301,7 +1316,7 @@ const ProductDetailContent = () => {
         </Breadcrumb>
 
         <ImageGalleryWithLightbox
-          images={["/images/zhu-vertical-ral.jpg", "/images/zhu-underground-ral.jpg", "/images/zhu-rectangular-ral.jpg", "/images/zhu-horizontal-ral.jpg"]}
+          images={["/images/zhu-underground-ral.jpg", "/images/zhu-vertical-ral.jpg", "/images/zhu-rectangular-ral.jpg", "/images/zhu-horizontal-ral.jpg"]}
           selectedImage={selectedImage}
           onSelectedImageChange={setSelectedImage}
         />
@@ -1309,7 +1324,7 @@ const ProductDetailContent = () => {
         <div className="grid gap-8 md:grid-cols-2">
           <div>
             <h1 className="text-xl sm:text-2xl font-bold text-foreground mb-1">
-              Промышленный жироуловитель {zhuModel.name}
+              Жироуловитель {zhuModel.name} ({zhuModel.installType.toLowerCase()})
             </h1>
             <p className="font-mono text-sm text-muted-foreground mb-4">{zhuModel.article}</p>
 
@@ -1324,10 +1339,27 @@ const ProductDetailContent = () => {
             />
 
             <p className="text-sm text-muted-foreground mb-6">
-              Промышленный жироуловитель для удаления жиров, масел и нефтепродуктов из сточных вод методом гравитационной сепарации. Производительность — {zhuModel.throughput} л/с.
+              Промышленный вертикальный жироуловитель производительностью {zhuModel.throughput} л/с с пиковым сбросом {zhuModel.peakDischarge} литров. Изготовлен из пищевого полипропилена, срок службы — не менее 25 лет. Предназначен для улавливания и удаления неэмульгированных жиров и масел из сточных вод кухонь, ресторанов, мясоперерабатывающих и других предприятий в соответствии со СНиП 2.04.01-85.
             </p>
+          </div>
 
-            <div className="grid grid-cols-2 gap-px rounded-lg border overflow-hidden mb-6">
+          <div>
+            {/* Основные характеристики */}
+            <h3 className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-2">Основные характеристики</h3>
+            <div className="grid grid-cols-2 gap-px rounded-lg border overflow-hidden mb-4">
+              <div className="bg-card p-3">
+                <span className="block text-xs text-muted-foreground">Производитель</span>
+                <span className="text-sm font-semibold text-foreground">Пласт-Металл Про</span>
+              </div>
+              <div className="bg-card p-3">
+                <span className="block text-xs text-muted-foreground">Способ установки</span>
+                <span className="text-sm font-semibold text-foreground">{zhuModel.installType}</span>
+              </div>
+            </div>
+
+            {/* Технические характеристики */}
+            <h3 className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-2">Технические характеристики</h3>
+            <div className="grid grid-cols-2 gap-px rounded-lg border overflow-hidden mb-4">
               <div className="bg-card p-3">
                 <span className="block text-xs text-muted-foreground">Производительность</span>
                 <span className="text-sm font-semibold text-foreground">{zhuModel.throughput} л/с</span>
@@ -1341,46 +1373,113 @@ const ProductDetailContent = () => {
                 <span className="text-sm font-semibold text-foreground">{zhuModel.diameter} мм</span>
               </div>
               <div className="bg-card p-3 border-t">
-                <span className="block text-xs text-muted-foreground">Высота</span>
+                <span className="block text-xs text-muted-foreground">Высота корпуса</span>
                 <span className="text-sm font-semibold text-foreground">{zhuModel.height} мм</span>
               </div>
               <div className="bg-card p-3 border-t">
-                <span className="block text-xs text-muted-foreground">Материал корпуса</span>
-                <span className="text-sm font-semibold text-foreground">Полипропилен (ПП)</span>
+                <span className="block text-xs text-muted-foreground">Ø колодца</span>
+                <span className="text-sm font-semibold text-foreground">{zhuModel.wellDiameter} мм</span>
               </div>
               <div className="bg-card p-3 border-t">
-                <span className="block text-xs text-muted-foreground">Принцип работы</span>
-                <span className="text-sm font-semibold text-foreground">Гравитационный</span>
+                <span className="block text-xs text-muted-foreground">Высота колодца</span>
+                <span className="text-sm font-semibold text-foreground">Индивидуально</span>
+              </div>
+              <div className="bg-card p-3 border-t">
+                <span className="block text-xs text-muted-foreground">Высота входа</span>
+                <span className="text-sm font-semibold text-foreground">{zhuModel.inletHeight} мм</span>
+              </div>
+              <div className="bg-card p-3 border-t">
+                <span className="block text-xs text-muted-foreground">Высота выхода</span>
+                <span className="text-sm font-semibold text-foreground">{zhuModel.outletHeight} мм</span>
+              </div>
+              <div className="bg-card p-3 border-t">
+                <span className="block text-xs text-muted-foreground">Ø патрубков</span>
+                <span className="text-sm font-semibold text-foreground">{zhuModel.pipeDiameter} мм</span>
+              </div>
+              <div className="bg-card p-3 border-t">
+                <span className="block text-xs text-muted-foreground">Материал</span>
+                <span className="text-sm font-semibold text-foreground">Полипропилен (ПП)</span>
               </div>
             </div>
 
-            <div className="flex items-center gap-3">
-              <div className="flex items-center gap-1 border rounded-md">
-                <Button variant="ghost" size="icon" className="h-9 w-9" onClick={() => setQty((q) => Math.max(1, q - 1))}>
-                  <Minus className="h-4 w-4" />
-                </Button>
-                <span className="w-10 text-center text-sm font-medium">{qty}</span>
-                <Button variant="ghost" size="icon" className="h-9 w-9" onClick={() => setQty((q) => q + 1)}>
-                  <Plus className="h-4 w-4" />
-                </Button>
+            {/* Эксплуатация */}
+            <h3 className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-2">Эксплуатация</h3>
+            <div className="grid grid-cols-2 gap-px rounded-lg border overflow-hidden mb-4">
+              <div className="bg-card p-3">
+                <span className="block text-xs text-muted-foreground">Надставка колодца</span>
+                <span className="text-sm font-semibold text-foreground">Есть</span>
               </div>
-              <Button className="gap-2 flex-1" onClick={handleAddZhu}>
-                <ShoppingCart className="h-4 w-4" />
-                В корзину
-              </Button>
+              <div className="bg-card p-3">
+                <span className="block text-xs text-muted-foreground">Изменение Ø патрубков</span>
+                <span className="text-sm font-semibold text-foreground">Есть</span>
+              </div>
+              <div className="bg-card p-3 border-t">
+                <span className="block text-xs text-muted-foreground">Изготовление по ТЗ</span>
+                <span className="text-sm font-semibold text-foreground">Есть</span>
+              </div>
+              <div className="bg-card p-3 border-t">
+                <span className="block text-xs text-muted-foreground">Гарантия</span>
+                <span className="text-sm font-semibold text-foreground">5 лет</span>
+              </div>
             </div>
-
-            <Button variant="outline" className="gap-2 w-full mt-3" onClick={() => setPdfDialogOpen(true)}>
-              <FileDown className="h-4 w-4" />
-              Скачать спецификацию (PDF)
-            </Button>
-
-            <Button variant="outline" className="gap-2 w-full mt-2" onClick={handleZhuKpPdf}>
-              <FileDown className="h-4 w-4" />
-              Скачать коммерческое предложение (PDF)
-            </Button>
           </div>
         </div>
+
+        {/* Описание */}
+        <section className="mt-8 mb-6 rounded-lg border bg-card p-5">
+          <h2 className="text-sm font-bold text-foreground uppercase tracking-wider mb-3">Описание</h2>
+          <div className="text-sm text-muted-foreground leading-relaxed space-y-3">
+            <p>
+              Промышленный вертикальный жироуловитель — незаменимое устройство на любом производственном объекте, специализирующемся на изготовлении продуктов питания: промышленных цехах и предприятиях общественного питания.
+            </p>
+            <p>
+              Жироуловитель {zhuModel.name} производительностью {zhuModel.throughput} л/с имеет пиковый сброс {zhuModel.peakDischarge} литров, изготовлен из пищевого полипропилена, срок службы которого не менее 25 лет. Предназначен для улавливания и удаления неэмульгированных жиров и масел из сточных вод в соответствии со СНиП 2.04.01-85. Защищает бытовую канализацию от жирового загрязнения, повышает эффективность последующих очистных сооружений.
+            </p>
+            <p>
+              Сточная вода через входной патрубок поступает в 1-й отсек, выполняющий роль отстойника ила, где происходит отделение крупного мусора и тяжёлых загрязнений, оседающих на дне. Далее вода поступает во 2-й отсек, выполняющий функцию жироуловителя, в котором происходит окончательное отделение жиров. Очищенная вода через распределительный карман поступает в отводящий патрубок и отводится в канализационную сеть.
+            </p>
+          </div>
+        </section>
+
+        {/* Дополнительное оборудование */}
+        <section className="mb-6 rounded-lg border bg-card p-5">
+          <h2 className="text-sm font-bold text-foreground uppercase tracking-wider mb-3">Дополнительное оборудование</h2>
+          <ul className="space-y-1.5">
+            {zhuAdditionalEquipment.map((item, i) => (
+              <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
+                <span className="h-1.5 w-1.5 rounded-full bg-primary shrink-0 mt-1.5" />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        {/* Действия */}
+        <div className="flex items-center gap-3 mb-3">
+          <div className="flex items-center gap-1 border rounded-md">
+            <Button variant="ghost" size="icon" className="h-9 w-9" onClick={() => setQty((q) => Math.max(1, q - 1))}>
+              <Minus className="h-4 w-4" />
+            </Button>
+            <span className="w-10 text-center text-sm font-medium">{qty}</span>
+            <Button variant="ghost" size="icon" className="h-9 w-9" onClick={() => setQty((q) => q + 1)}>
+              <Plus className="h-4 w-4" />
+            </Button>
+          </div>
+          <Button className="gap-2 flex-1" onClick={handleAddZhu}>
+            <ShoppingCart className="h-4 w-4" />
+            В корзину
+          </Button>
+        </div>
+
+        <Button variant="outline" className="gap-2 w-full mb-2" onClick={() => setPdfDialogOpen(true)}>
+          <FileDown className="h-4 w-4" />
+          Скачать спецификацию (PDF)
+        </Button>
+
+        <Button variant="outline" className="gap-2 w-full" onClick={handleZhuKpPdf}>
+          <FileDown className="h-4 w-4" />
+          Скачать коммерческое предложение (PDF)
+        </Button>
 
         <Dialog open={pdfDialogOpen} onOpenChange={setPdfDialogOpen}>
           <DialogContent className="max-w-md">
