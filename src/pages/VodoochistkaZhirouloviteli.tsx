@@ -199,7 +199,7 @@ const VodoochistkaZhirouloviteliInner = () => {
         </section>
 
         {/* Intro */}
-        <section className="mb-10">
+        <section id="opisanie" className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">
             Жироуловители для промышленных и коммерческих объектов
           </h2>
