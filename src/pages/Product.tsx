@@ -938,8 +938,6 @@ const ProductDetailContent = () => {
 
         <div className="grid gap-8 md:grid-cols-2">
           <div>
-
-          <div>
             <h1 className="text-xl sm:text-2xl font-bold text-foreground mb-1">
               Мешочный обезвоживатель осадка {moModel.name}
             </h1>
