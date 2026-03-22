@@ -45,43 +45,32 @@ const purposeItems = [
 const typeCards = [
   {
     title: "Подземные вертикальные",
-    desc: "Цилиндрический корпус для заглублённого монтажа. Минимальная занимаемая площадь, обслуживание через горловину.",
+    desc: "Цилиндрический корпус для заглублённого монтажа. Минимальная занимаемая площадь.",
     image: "/images/zhu-underground-ral.jpg",
-    anchor: "podzemnye-vertikalnye",
+    path: "/catalog/vodoochistka/zhirouloviteli/podzemnye-vertikalnye",
   },
   {
     title: "Наземные вертикальные",
-    desc: "Устанавливаются на ровную площадку внутри помещения или под навесом. Удобный доступ ко всем узлам.",
+    desc: "Устанавливаются на ровную площадку внутри помещения. Удобный доступ ко всем узлам.",
     image: "/images/zhu-vertical-ral.jpg",
-    anchor: "nazemnye-vertikalnye",
+    path: "/catalog/vodoochistka/zhirouloviteli/nazemnye-vertikalnye",
   },
   {
     title: "Горизонтальные",
-    desc: "Увеличенная зона отстаивания для больших объёмов стоков. Наземное и подземное исполнение.",
+    desc: "Увеличенная зона отстаивания для больших объёмов стоков. Производительность до 25 л/с.",
     image: "/images/zhu-horizontal-ral.jpg",
-    anchor: "gorizontalnye",
+    path: "/catalog/vodoochistka/zhirouloviteli/gorizontalnye",
   },
   {
     title: "Прямоугольные наземные",
     desc: "Корпус прямоугольного сечения из листового ПП. Оптимальны для ограниченных пространств.",
     image: "/images/zhu-rectangular-ral.jpg",
-    anchor: "pryamougolnye",
+    path: "/catalog/vodoochistka/zhirouloviteli/pryamougolnye",
   },
 ];
 
-const models = [
-  { article: "СЗПК.ЖУ.1.ПП", name: "ЖУ-1", throughput: "1", peakDischarge: "500", diameter: "800", height: "1300" },
-  { article: "СЗПК.ЖУ.2.ПП", name: "ЖУ-2", throughput: "2", peakDischarge: "1000", diameter: "1000", height: "1600" },
-  { article: "СЗПК.ЖУ.3.ПП", name: "ЖУ-3", throughput: "3", peakDischarge: "1500", diameter: "1200", height: "1500" },
-  { article: "СЗПК.ЖУ.4.ПП", name: "ЖУ-4", throughput: "4", peakDischarge: "2000", diameter: "1350", height: "1550" },
-  { article: "СЗПК.ЖУ.5.ПП", name: "ЖУ-5", throughput: "5", peakDischarge: "2500", diameter: "1350", height: "2000" },
-  { article: "СЗПК.ЖУ.6.ПП", name: "ЖУ-6", throughput: "6", peakDischarge: "3000", diameter: "1450", height: "2000" },
-  { article: "СЗПК.ЖУ.7.ПП", name: "ЖУ-7", throughput: "7", peakDischarge: "3500", diameter: "1550", height: "2000" },
-  { article: "СЗПК.ЖУ.8.ПП", name: "ЖУ-8", throughput: "8", peakDischarge: "4000", diameter: "1650", height: "2000" },
-  { article: "СЗПК.ЖУ.9.ПП", name: "ЖУ-9", throughput: "9", peakDischarge: "4500", diameter: "1750", height: "2000" },
-  { article: "СЗПК.ЖУ.10.ПП", name: "ЖУ-10", throughput: "10", peakDischarge: "5000", diameter: "1850", height: "2000" },
-  { article: "СЗПК.ЖУ.15.ПП", name: "ЖУ-15", throughput: "15", peakDischarge: "7500", diameter: "2200", height: "2000" },
-];
+
+
 
 const processSteps = [
   { step: "1", title: "Приём стоков", desc: "Жиросодержащие сточные воды поступают через входной патрубок в приёмную камеру." },
@@ -209,7 +198,7 @@ const VodoochistkaZhirouloviteliInner = () => {
               <Card
                 key={i}
                 className="border-border overflow-hidden cursor-pointer hover:border-primary hover:shadow-md transition-all"
-                onClick={() => document.getElementById(card.anchor)?.scrollIntoView({ behavior: "smooth", block: "start" })}
+                onClick={() => navigate(card.path)}
               >
                 <div className="aspect-square bg-card p-2">
                   <img src={card.image} alt={card.title} className="w-full h-full object-contain" />
@@ -223,43 +212,8 @@ const VodoochistkaZhirouloviteliInner = () => {
           </div>
         </section>
 
-        {/* Section 3: Модельный ряд — подземные вертикальные */}
-        <section className="mb-10" id="podzemnye-vertikalnye">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Подземные вертикальные жироуловители</h2>
-          <div className="rounded-lg border border-border overflow-auto mb-4">
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead className="text-xs">Артикул</TableHead>
-                  <TableHead className="text-xs">Модель</TableHead>
-                  <TableHead className="text-xs text-right">л/с</TableHead>
-                  <TableHead className="text-xs text-right">Пиковый сброс, л</TableHead>
-                  <TableHead className="text-xs text-right">Ø корпуса, мм</TableHead>
-                  <TableHead className="text-xs text-right">Высота, мм</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {models.map((m) => (
-                  <TableRow
-                    key={m.article}
-                    className="cursor-pointer hover:bg-primary/5 transition-colors"
-                    onClick={() => navigate(`/product/${encodeURIComponent(m.article)}`)}
-                  >
-                    <TableCell className="text-xs font-mono font-medium text-primary underline">{m.article}</TableCell>
-                    <TableCell className="text-xs font-medium">{m.name}</TableCell>
-                    <TableCell className="text-xs text-right">{m.throughput}</TableCell>
-                    <TableCell className="text-xs text-right">{m.peakDischarge}</TableCell>
-                    <TableCell className="text-xs text-right">{m.diameter}</TableCell>
-                    <TableCell className="text-xs text-right">{m.height}</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </div>
-          <p className="text-xs text-muted-foreground">
-            Возможно изготовление жироуловителей по индивидуальным размерам и производительности.
-          </p>
-        </section>
+
+
 
         {/* Section 4: Принцип работы */}
         <section className="mb-10">
@@ -310,79 +264,8 @@ const VodoochistkaZhirouloviteliInner = () => {
           </div>
         </section>
 
-        {/* Section 7: Горизонтальные жироуловители */}
-        <section className="mb-10" id="gorizontalnye">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Горизонтальные жироуловители</h2>
-          <div className="rounded-lg border border-border overflow-auto text-sm">
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead className="text-xs">Артикул</TableHead>
-                  <TableHead className="text-xs text-right">Произв., л/с</TableHead>
-                  <TableHead className="text-xs text-right">Габариты, мм</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {[
-                  { article: "ПЭ-3,5-500", throughput: "1", dimensions: "Ø800×L1200" },
-                  { article: "ПЭ-7-1000", throughput: "2", dimensions: "Ø1000×L1500" },
-                  { article: "ПЭ-11-1500", throughput: "3", dimensions: "Ø1000×L2000" },
-                  { article: "ПЭ-15-2000", throughput: "4", dimensions: "Ø1200×L2000" },
-                  { article: "ПЭ-18-2500", throughput: "5", dimensions: "Ø1200×L2400" },
-                  { article: "ПЭ-22-3000", throughput: "6", dimensions: "Ø1280×L2600" },
-                  { article: "ПЭ-25-3500", throughput: "7", dimensions: "Ø1280×L2900" },
-                  { article: "ПЭ-29-4000", throughput: "8", dimensions: "Ø1280×L3300" },
-                  { article: "ПЭ-32-4500", throughput: "9", dimensions: "Ø1280×L3750" },
-                  { article: "ПЭ-36-5000", throughput: "10", dimensions: "Ø1400×L3500" },
-                  { article: "ПЭ-54-7500", throughput: "15", dimensions: "Ø1600×L3900" },
-                  { article: "ПЭ-72-10000", throughput: "20", dimensions: "Ø1600×L5100" },
-                  { article: "ПЭ-90-12500", throughput: "25", dimensions: "Ø1600×L6300" },
-                ].map((m) => (
-                  <TableRow key={m.article} className="even:bg-muted/30">
-                    <TableCell className="text-xs font-medium">{m.article}</TableCell>
-                    <TableCell className="text-xs text-right">{m.throughput}</TableCell>
-                    <TableCell className="text-xs text-right">{m.dimensions}</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </div>
-          <p className="text-xs text-muted-foreground mt-2">
-            Возможно изготовление горизонтальных жироуловителей по индивидуальным размерам.
-          </p>
-        </section>
 
-        {/* Section 8: Наземные вертикальные */}
-        <section className="mb-10" id="nazemnye-vertikalnye">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Наземные вертикальные жироуловители</h2>
-          <div className="rounded-lg border border-border bg-card p-4 text-sm text-muted-foreground leading-relaxed space-y-2">
-            <p>
-              Наземные вертикальные жироуловители устанавливаются в технических и подвальных помещениях на ровную площадку. Удобный доступ ко всем узлам, откидная крышка для обслуживания. Подключаются к производственной канализационной сети.
-            </p>
-            <p>
-              Модельный ряд совпадает с подземными вертикальными (ЖУ-1 — ЖУ-15), но без технического колодца. Изготовление по индивидуальным размерам и конфигурации.
-            </p>
-            <Button variant="outline" size="sm" className="mt-2" onClick={scrollToForm}>
-              Запросить расчёт
-            </Button>
-          </div>
-        </section>
 
-        {/* Section 9: Прямоугольные */}
-        <section className="mb-10" id="pryamougolnye">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Прямоугольные наземные жироуловители</h2>
-          <div className="rounded-lg border border-border bg-card p-4 text-sm text-muted-foreground leading-relaxed space-y-2">
-            <p>
-              Прямоугольные жироуловители из листового полипропилена с рёбрами жёсткости — оптимальное решение для ограниченных пространств технических помещений. Компактная форма позволяет устанавливать оборудование вплотную к стенам.
-            </p>
-            <p>
-              Изготавливаются по индивидуальным размерам с учётом производительности и особенностей объекта. Производительность от 1 до 15 л/с.
-            </p>
-            <Button variant="outline" size="sm" className="mt-2" onClick={scrollToForm}>
-              Запросить расчёт
-            </Button>
-          </div>
-        </section>
 
         <section id="cta-form" className="mb-10 rounded-lg border border-border bg-card p-6">
           <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Оставить заявку</h2>
