@@ -52,7 +52,7 @@ export const catalog: CatalogCategory[] = [
       { id: "v1", name: "ФФУ флотационно-фильтровальная установка", slug: "ffu", externalPath: "/catalog/vodoochistka/ffu", image: "/images/ffu-real-3d.png" },
       { id: "v2", name: "Ламельный тонкослойный отстойник-сепаратор", slug: "lamelnyj-otstojnik", externalPath: "/catalog/vodoochistka/lamelnyj-otstojnik", image: "/images/lamelnyj-thumb-new.png" },
       { id: "v3", name: "Мешочный обезвоживатель осадка", slug: "meshochnyj-obezvozhivatel", externalPath: "/catalog/vodoochistka/meshochnyj-obezvozhivatel", image: "/images/obezvozhivatel-3d-ral7032.jpg" },
-      { id: "v4", name: "Станции приготовления реагентов", slug: "stantsiya-dozirovaniya", externalPath: "/catalog/vodoochistka/stantsiya-dozirovaniya", image: "/images/vodoochistka-koagulyant-real.png" },
+      { id: "v4", name: "Станции приготовления реагентов", slug: "stantsiya-dozirovaniya", externalPath: "/catalog/vodoochistka/stantsiya-dozirovaniya", image: "/images/spr-hero-ral7032.jpg" },
       { id: "v6", name: "Жироуловители промышленные", slug: "zhirouloviteli", externalPath: "/catalog/vodoochistka/zhirouloviteli", image: "/images/vodoochistka-zhiroulovitel-real.jpg" },
       { id: "v7", name: "КОС — комплексные очистные сооружения", slug: "los", externalPath: "/catalog/vodoochistka/los", image: "/images/vodoochistka-kos-kompakt.jpg" },
       { id: "v8", name: "Шкафы и стойки дозирования", slug: "shkafy-dozirovaniya", externalPath: "/catalog/vodoochistka/shkafy-dozirovaniya", image: "/images/vodoochistka-dozirovanie-grundfos.jpg" },
