@@ -105,6 +105,7 @@ const partnershipAdvantages = [
 
 const VodoochistkaZhirouloviteliInner = () => {
   const [cartOpen, setCartOpen] = useState(false);
+  const navigate = useNavigate();
   const [form, setForm] = useState({ name: "", phone: "", email: "", description: "" });
 
   const handleSubmit = (e: React.FormEvent) => {
