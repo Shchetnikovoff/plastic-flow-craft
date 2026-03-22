@@ -52,19 +52,19 @@ const typeCards = [
   {
     title: "Наземные вертикальные",
     desc: "Устанавливаются на ровную площадку внутри помещения. Удобный доступ ко всем узлам.",
-    image: "/images/zhu-nv-hero-ral7032.jpg",
+    image: "/images/zhu-vertical-ral.jpg",
     path: "/catalog/vodoochistka/zhirouloviteli/nazemnye-vertikalnye",
   },
   {
     title: "Горизонтальные",
     desc: "Увеличенная зона отстаивания для больших объёмов стоков. Производительность до 25 л/с.",
-    image: "/images/zhu-g-hero-ral7032.jpg",
+    image: "/images/zhu-horizontal-ral.jpg",
     path: "/catalog/vodoochistka/zhirouloviteli/gorizontalnye",
   },
   {
     title: "Прямоугольные наземные",
     desc: "Корпус прямоугольного сечения из листового ПП. Оптимальны для ограниченных пространств.",
-    image: "/images/zhu-p-hero-ral7032.jpg",
+    image: "/images/zhu-rectangular-ral.jpg",
     path: "/catalog/vodoochistka/zhirouloviteli/pryamougolnye",
   },
 ];
@@ -150,8 +150,8 @@ const VodoochistkaZhirouloviteliInner = () => {
           </Button>
 
           <div className="grid grid-cols-2 gap-3 mt-6">
-            <img src="/images/zhu-pv-hero-ral7032.jpg" alt="Подземный вертикальный жироуловитель" className="rounded-lg border border-border object-contain w-full aspect-[4/3]" />
-            <img src="/images/zhu-g-hero-ral7032.jpg" alt="Горизонтальный жироуловитель" className="rounded-lg border border-border object-contain w-full aspect-[4/3]" />
+            <img src="/images/zhu-vertical-ral.jpg" alt="Наземный вертикальный жироуловитель" className="rounded-lg border border-border object-contain w-full aspect-[4/3]" />
+            <img src="/images/zhu-rectangular-ral.jpg" alt="Прямоугольный жироуловитель" className="rounded-lg border border-border object-contain w-full aspect-[4/3]" />
           </div>
         </section>
 

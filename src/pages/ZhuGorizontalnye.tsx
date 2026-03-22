@@ -73,8 +73,8 @@ const Inner = () => {
           <p className="text-sm text-muted-foreground mb-5">Увеличенная зона отстаивания для больших объёмов стоков. Наземное и подземное исполнение. Производительность до 25 л/с.</p>
           <Button onClick={() => document.getElementById("cta-form")?.scrollIntoView({ behavior: "smooth" })} className="gap-2">Получить расчёт стоимости</Button>
           <div className="grid grid-cols-2 gap-3 mt-6">
-            <img src="/images/zhu-g-hero-ral7032.jpg" alt="Горизонтальный жироуловитель" className="rounded-lg border border-border object-contain w-full aspect-[4/3]" />
-            <img src="/images/zhu-pv-hero-ral7032.jpg" alt="Подземный жироуловитель" className="rounded-lg border border-border object-contain w-full aspect-[4/3]" />
+            <img src="/images/zhu-horizontal-ral.jpg" alt="Горизонтальный жироуловитель" className="rounded-lg border border-border object-contain w-full aspect-[4/3]" />
+            <img src="/images/zhu-underground-ral.jpg" alt="Подземный жироуловитель" className="rounded-lg border border-border object-contain w-full aspect-[4/3]" />
           </div>
         </section>
 

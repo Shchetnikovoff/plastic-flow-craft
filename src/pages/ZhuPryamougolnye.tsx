@@ -69,8 +69,8 @@ const Inner = () => {
           <p className="text-sm text-muted-foreground mb-5">Корпус прямоугольного сечения из листового ПП с рёбрами жёсткости. Оптимальны для встраивания в ограниченные пространства технических помещений.</p>
           <Button onClick={() => document.getElementById("cta-form")?.scrollIntoView({ behavior: "smooth" })} className="gap-2">Получить расчёт стоимости</Button>
           <div className="grid grid-cols-2 gap-3 mt-6">
-            <img src="/images/zhu-p-hero-ral7032.jpg" alt="Прямоугольный жироуловитель" className="rounded-lg border border-border object-contain w-full aspect-[4/3]" />
-            <img src="/images/zhu-nv-hero-ral7032.jpg" alt="Вертикальный жироуловитель" className="rounded-lg border border-border object-contain w-full aspect-[4/3]" />
+            <img src="/images/zhu-rectangular-ral.jpg" alt="Прямоугольный жироуловитель" className="rounded-lg border border-border object-contain w-full aspect-[4/3]" />
+            <img src="/images/zhu-vertical-ral.jpg" alt="Вертикальный жироуловитель" className="rounded-lg border border-border object-contain w-full aspect-[4/3]" />
           </div>
         </section>
 

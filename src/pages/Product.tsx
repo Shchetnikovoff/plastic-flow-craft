@@ -1348,12 +1348,7 @@ const ProductDetailContent = () => {
         </Breadcrumb>
 
         <ImageGalleryWithLightbox
-          images={
-            zhuModel.name.startsWith("ЖУН") ? ["/images/zhu-nv-hero-ral7032.jpg", "/images/zhu-pv-schema1.png", "/images/zhu-pv-schema2.png"] :
-            zhuModel.name.startsWith("ЖУГ") ? ["/images/zhu-g-hero-ral7032.jpg", "/images/zhu-pv-schema1.png", "/images/zhu-pv-schema2.png"] :
-            zhuModel.name.startsWith("ЖУП") ? ["/images/zhu-p-hero-ral7032.jpg"] :
-            ["/images/zhu-pv-hero-ral7032.jpg", "/images/zhu-pv-schema1.png", "/images/zhu-pv-schema2.png", "/images/zhu-pv-schema3.png", "/images/zhu-pv-schema4.png", "/images/zhu-pv-schema5.png"]
-          }
+          images={["/images/zhu-pv-hero-ral7032.jpg", "/images/zhu-pv-schema1.png", "/images/zhu-pv-schema2.png", "/images/zhu-pv-schema3.png", "/images/zhu-pv-schema4.png", "/images/zhu-pv-schema5.png"]}
           selectedImage={selectedImage}
           onSelectedImageChange={setSelectedImage}
         />
