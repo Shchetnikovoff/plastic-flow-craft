@@ -1220,6 +1220,187 @@ const ProductDetailContent = () => {
     );
   }
 
+  // Try Жироуловитель (СЗПК.ЖУ.)
+  const zhuModels = [
+    { name: "ЖУ-1", article: "СЗПК.ЖУ.1.ПП", throughput: "1", peakDischarge: "500", diameter: "800", height: "1300" },
+    { name: "ЖУ-2", article: "СЗПК.ЖУ.2.ПП", throughput: "2", peakDischarge: "1000", diameter: "1000", height: "1600" },
+    { name: "ЖУ-3", article: "СЗПК.ЖУ.3.ПП", throughput: "3", peakDischarge: "1500", diameter: "1200", height: "1500" },
+    { name: "ЖУ-4", article: "СЗПК.ЖУ.4.ПП", throughput: "4", peakDischarge: "2000", diameter: "1350", height: "1550" },
+    { name: "ЖУ-5", article: "СЗПК.ЖУ.5.ПП", throughput: "5", peakDischarge: "2500", diameter: "1350", height: "2000" },
+    { name: "ЖУ-6", article: "СЗПК.ЖУ.6.ПП", throughput: "6", peakDischarge: "3000", diameter: "1450", height: "2000" },
+    { name: "ЖУ-7", article: "СЗПК.ЖУ.7.ПП", throughput: "7", peakDischarge: "3500", diameter: "1550", height: "2000" },
+    { name: "ЖУ-8", article: "СЗПК.ЖУ.8.ПП", throughput: "8", peakDischarge: "4000", diameter: "1650", height: "2000" },
+    { name: "ЖУ-9", article: "СЗПК.ЖУ.9.ПП", throughput: "9", peakDischarge: "4500", diameter: "1750", height: "2000" },
+    { name: "ЖУ-10", article: "СЗПК.ЖУ.10.ПП", throughput: "10", peakDischarge: "5000", diameter: "1850", height: "2000" },
+    { name: "ЖУ-15", article: "СЗПК.ЖУ.15.ПП", throughput: "15", peakDischarge: "7500", diameter: "2200", height: "2000" },
+  ];
+  const zhuModel = zhuModels.find((m) => m.article === article) || null;
+  if (zhuModel) {
+    const handleAddZhu = () => {
+      addItem({ article: zhuModel.article, diameter: 0, wallThickness: 0 }, qty);
+      toast.success(`${zhuModel.article} (${qty} шт.) добавлен в корзину`);
+    };
+
+    const handleZhuSpecPdf = async () => {
+      const errors = validateContactForm(contactData);
+      setContactErrors(errors);
+      if (Object.keys(errors).length > 0) return;
+
+      await generateSpecPdf(
+        {
+          article: zhuModel.article,
+          diameter: 0,
+          wallThickness: 0,
+          socketThickness: 0,
+          availableLength: null,
+          connectionName: "",
+          materialName: "Полипропилен (ПП)",
+          productTitle: `Промышленный жироуловитель ${zhuModel.name}`,
+          extraRows: [
+            ["Производительность", `${zhuModel.throughput} л/с`],
+            ["Пиковый сброс", `${zhuModel.peakDischarge} л`],
+            ["Ø корпуса", `${zhuModel.diameter} мм`],
+            ["Высота", `${zhuModel.height} мм`],
+            ["Материал корпуса", "Полипропилен (ПП)"],
+            ["Принцип работы", "Гравитационная сепарация"],
+          ],
+        },
+        contactData
+      );
+      toast.success("PDF-спецификация скачана");
+      setPdfDialogOpen(false);
+    };
+
+    const handleZhuKpPdf = async () => {
+      await generateLetterheadPdf();
+      toast.success("Коммерческое предложение скачано");
+    };
+
+    const handleZhuContactChange = (field: keyof ContactFormData, value: string) => {
+      setContactData((prev) => ({ ...prev, [field]: value }));
+      if (contactErrors[field]) {
+        setContactErrors((prev) => ({ ...prev, [field]: undefined }));
+      }
+    };
+
+    const zhuParts = zhuModel.article.split(".");
+    const zhuThroughput = zhuParts[2] || "";
+
+    return (
+      <main className="mx-auto max-w-[960px] px-4 sm:px-6 py-6 sm:py-8">
+        <Breadcrumb className="mb-6">
+          <BreadcrumbList>
+            <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog">Каталог</Link></BreadcrumbLink></BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog/vodoochistka">Водоочистка</Link></BreadcrumbLink></BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog/vodoochistka/zhirouloviteli">Жироуловители</Link></BreadcrumbLink></BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem><BreadcrumbPage>{zhuModel.name} ({zhuModel.article})</BreadcrumbPage></BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
+
+        <ImageGalleryWithLightbox
+          images={["/images/zhiroulovitel-hero-1.png"]}
+          selectedImage={selectedImage}
+          onSelectedImageChange={setSelectedImage}
+        />
+
+        <div className="grid gap-8 md:grid-cols-2">
+          <div>
+            <h1 className="text-xl sm:text-2xl font-bold text-foreground mb-1">
+              Промышленный жироуловитель {zhuModel.name}
+            </h1>
+            <p className="font-mono text-sm text-muted-foreground mb-4">{zhuModel.article}</p>
+
+            <ArticleBreakdown
+              exampleArticle={zhuModel.article}
+              segments={[
+                { value: "СЗПК", label: "Компания", desc: "ООО СЗПК «Пласт-Металл Про»" },
+                { value: "ЖУ", label: "Тип", desc: "Жироуловитель" },
+                { value: zhuThroughput, label: "Произв.", desc: `${zhuModel.throughput} л/с` },
+                { value: zhuParts[3], label: "Материал", desc: "Полипропилен" },
+              ]}
+            />
+
+            <p className="text-sm text-muted-foreground mb-6">
+              Промышленный жироуловитель для удаления жиров, масел и нефтепродуктов из сточных вод методом гравитационной сепарации. Производительность — {zhuModel.throughput} л/с.
+            </p>
+
+            <div className="grid grid-cols-2 gap-px rounded-lg border overflow-hidden mb-6">
+              <div className="bg-card p-3">
+                <span className="block text-xs text-muted-foreground">Производительность</span>
+                <span className="text-sm font-semibold text-foreground">{zhuModel.throughput} л/с</span>
+              </div>
+              <div className="bg-card p-3">
+                <span className="block text-xs text-muted-foreground">Пиковый сброс</span>
+                <span className="text-sm font-semibold text-foreground">{zhuModel.peakDischarge} л</span>
+              </div>
+              <div className="bg-card p-3 border-t">
+                <span className="block text-xs text-muted-foreground">Ø корпуса</span>
+                <span className="text-sm font-semibold text-foreground">{zhuModel.diameter} мм</span>
+              </div>
+              <div className="bg-card p-3 border-t">
+                <span className="block text-xs text-muted-foreground">Высота</span>
+                <span className="text-sm font-semibold text-foreground">{zhuModel.height} мм</span>
+              </div>
+              <div className="bg-card p-3 border-t">
+                <span className="block text-xs text-muted-foreground">Материал корпуса</span>
+                <span className="text-sm font-semibold text-foreground">Полипропилен (ПП)</span>
+              </div>
+              <div className="bg-card p-3 border-t">
+                <span className="block text-xs text-muted-foreground">Принцип работы</span>
+                <span className="text-sm font-semibold text-foreground">Гравитационный</span>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-3">
+              <div className="flex items-center gap-1 border rounded-md">
+                <Button variant="ghost" size="icon" className="h-9 w-9" onClick={() => setQty((q) => Math.max(1, q - 1))}>
+                  <Minus className="h-4 w-4" />
+                </Button>
+                <span className="w-10 text-center text-sm font-medium">{qty}</span>
+                <Button variant="ghost" size="icon" className="h-9 w-9" onClick={() => setQty((q) => q + 1)}>
+                  <Plus className="h-4 w-4" />
+                </Button>
+              </div>
+              <Button className="gap-2 flex-1" onClick={handleAddZhu}>
+                <ShoppingCart className="h-4 w-4" />
+                В корзину
+              </Button>
+            </div>
+
+            <Button variant="outline" className="gap-2 w-full mt-3" onClick={() => setPdfDialogOpen(true)}>
+              <FileDown className="h-4 w-4" />
+              Скачать спецификацию (PDF)
+            </Button>
+
+            <Button variant="outline" className="gap-2 w-full mt-2" onClick={handleZhuKpPdf}>
+              <FileDown className="h-4 w-4" />
+              Скачать коммерческое предложение (PDF)
+            </Button>
+          </div>
+        </div>
+
+        <Dialog open={pdfDialogOpen} onOpenChange={setPdfDialogOpen}>
+          <DialogContent className="max-w-md">
+            <DialogHeader>
+              <DialogTitle>Скачать спецификацию</DialogTitle>
+              <DialogDescription>
+                Заполните контактные данные для скачивания PDF-спецификации
+              </DialogDescription>
+            </DialogHeader>
+            <ContactFormFields data={contactData} errors={contactErrors} onChange={handleZhuContactChange} />
+            <Button className="w-full gap-2 mt-2" onClick={handleZhuSpecPdf}>
+              <FileDown className="h-4 w-4" />
+              Скачать PDF
+            </Button>
+          </DialogContent>
+        </Dialog>
+      </main>
+    );
+  }
+
   const parsed = parseArticle(article);
   if (!parsed) {
     return (
