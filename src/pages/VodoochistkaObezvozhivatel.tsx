@@ -242,6 +242,7 @@ const VodoochistkaObezvozhivatelInner = () => {
             <Table>
               <TableHeader>
                 <TableRow>
+                  <TableHead className="text-xs">Артикул</TableHead>
                   <TableHead className="text-xs">Модель</TableHead>
                   <TableHead className="text-xs text-right">Произв., м³/сут</TableHead>
                   <TableHead className="text-xs text-right">Мешков</TableHead>
@@ -251,6 +252,7 @@ const VodoochistkaObezvozhivatelInner = () => {
               <TableBody>
                 {models.map((m) => (
                   <TableRow key={m.name} className="even:bg-muted/30">
+                    <TableCell className="text-xs font-mono text-muted-foreground">{m.article}</TableCell>
                     <TableCell className="text-xs font-medium">{m.name}</TableCell>
                     <TableCell className="text-xs text-right">{m.capacity}</TableCell>
                     <TableCell className="text-xs text-right">{m.bags}</TableCell>
