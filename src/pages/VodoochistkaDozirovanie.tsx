@@ -249,6 +249,7 @@ const VodoochistkaDozirovanieInner = () => {
             <Table>
               <TableHeader>
                 <TableRow>
+                  <TableHead className="text-xs">Артикул</TableHead>
                   <TableHead className="text-xs">Модель</TableHead>
                   <TableHead className="text-xs text-right">Подача воды, л/ч</TableHead>
                   <TableHead className="text-xs text-right">Габариты (A×B×C), мм</TableHead>
@@ -257,6 +258,7 @@ const VodoochistkaDozirovanieInner = () => {
               <TableBody>
                 {models.map((m) => (
                   <TableRow key={m.name}>
+                    <TableCell className="text-xs font-mono font-medium">{m.article}</TableCell>
                     <TableCell className="text-xs font-medium">{m.name}</TableCell>
                     <TableCell className="text-xs text-right">{m.capacity}</TableCell>
                     <TableCell className="text-xs text-right">{m.dimensions}</TableCell>
