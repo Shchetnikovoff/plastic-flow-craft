@@ -1301,7 +1301,7 @@ const ProductDetailContent = () => {
         </Breadcrumb>
 
         <ImageGalleryWithLightbox
-          images={["/images/zhu-vertical.jpg", "/images/zhu-underground-vertical.jpg", "/images/zhu-rectangular.jpg"]}
+          images={["/images/zhu-vertical-ral.jpg", "/images/zhu-underground-ral.jpg", "/images/zhu-rectangular-ral.jpg", "/images/zhu-horizontal-ral.jpg"]}
           selectedImage={selectedImage}
           onSelectedImageChange={setSelectedImage}
         />
