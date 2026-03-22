@@ -1,19 +1,14 @@
 
 
-## Plan: Add schema image to sludge dewatering product cards
+## Plan: Update dewatering schematic to RAL 7032 color scheme
 
-**What:** Add the existing schema image (`obezvozhivatel-schema-1.webp`) as a second image in ОНИКС product cards, with thumbnail navigation like other product pages.
+**What:** Generate a new version of the schematic image (`obezvozhivatel-schema-1.webp`) with the equipment body in Grey RAL 7032 and frame/pipes in Graphite RAL 7024, replacing the current schematic in both locations.
 
 ### Changes
 
-**File: `src/pages/Product.tsx`** (lines ~933-938)
+**1. Generate new image** — Create `public/images/obezvozhivatel-schema-ral7032.jpg` using flux.schnell: technical schematic/cutaway diagram of a bag-type sludge dewatering unit, grey RAL 7032 body, graphite RAL 7024 frame and pipes, clean white background, industrial style.
 
-Replace the single static image with `ImageGalleryWithLightbox` component (already used across the project):
+**2. `src/pages/Product.tsx`** (line 935) — Replace `"/images/obezvozhivatel-schema-1.webp"` with `"/images/obezvozhivatel-schema-ral7032.jpg"`
 
-- Import `ImageGalleryWithLightbox` from `@/components/configurator`
-- Add `useState` for `selectedImage` index
-- Define image array: `["/images/obezvozhivatel-real-3d-new.jpg", "/images/obezvozhivatel-schema-1.webp"]`
-- Replace the single `<div><img></div>` block with `<ImageGalleryWithLightbox images={moImages} selectedImage={selectedImage} onSelectedImageChange={setSelectedImage} />`
-
-This matches the pattern used on FFU, Lamella, and ventilation product pages.
+**3. `src/pages/VodoochistkaObezvozhivatel.tsx`** (line 32) — Replace `"/images/obezvozhivatel-schema-1.webp"` with `"/images/obezvozhivatel-schema-ral7032.jpg"`
 
