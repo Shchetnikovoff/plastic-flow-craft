@@ -45,27 +45,27 @@ const purposeItems = [
 const typeCards = [
   {
     title: "Подземные вертикальные",
-    desc: "Цилиндрический корпус для заглублённого монтажа. Минимальная занимаемая площадь, обслуживание через горловину.",
+    desc: "Цилиндрический корпус для заглублённого монтажа. Минимальная занимаемая площадь.",
     image: "/images/zhu-underground-ral.jpg",
-    anchor: "podzemnye-vertikalnye",
+    path: "/catalog/vodoochistka/zhirouloviteli/podzemnye-vertikalnye",
   },
   {
     title: "Наземные вертикальные",
-    desc: "Устанавливаются на ровную площадку внутри помещения или под навесом. Удобный доступ ко всем узлам.",
+    desc: "Устанавливаются на ровную площадку внутри помещения. Удобный доступ ко всем узлам.",
     image: "/images/zhu-vertical-ral.jpg",
-    anchor: "nazemnye-vertikalnye",
+    path: "/catalog/vodoochistka/zhirouloviteli/nazemnye-vertikalnye",
   },
   {
     title: "Горизонтальные",
-    desc: "Увеличенная зона отстаивания для больших объёмов стоков. Наземное и подземное исполнение.",
+    desc: "Увеличенная зона отстаивания для больших объёмов стоков. Производительность до 25 л/с.",
     image: "/images/zhu-horizontal-ral.jpg",
-    anchor: "gorizontalnye",
+    path: "/catalog/vodoochistka/zhirouloviteli/gorizontalnye",
   },
   {
     title: "Прямоугольные наземные",
     desc: "Корпус прямоугольного сечения из листового ПП. Оптимальны для ограниченных пространств.",
     image: "/images/zhu-rectangular-ral.jpg",
-    anchor: "pryamougolnye",
+    path: "/catalog/vodoochistka/zhirouloviteli/pryamougolnye",
   },
 ];
 
