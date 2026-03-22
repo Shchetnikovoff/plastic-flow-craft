@@ -64,7 +64,7 @@ const typeCards = [
   {
     title: "Прямоугольные наземные",
     desc: "Корпус прямоугольного сечения из листового ПП. Оптимальны для ограниченных пространств.",
-    image: "/images/zhu-rectangular-ral.jpg",
+    image: "/images/zhu-p-hero-ral7032.jpg",
     path: "/catalog/vodoochistka/zhirouloviteli/pryamougolnye",
   },
 ];
