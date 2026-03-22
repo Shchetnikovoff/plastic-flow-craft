@@ -197,12 +197,15 @@ const VodoochistkaZhirouloviteliInner = () => {
         {/* Section 2: Виды */}
         <section className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Виды жироуловителей</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             {typeCards.map((card, i) => (
-              <Card key={i} className="border-border">
-                <CardContent className="p-4">
-                  <h3 className="text-sm font-semibold text-foreground mb-1">{card.title}</h3>
-                  <p className="text-xs text-muted-foreground">{card.desc}</p>
+              <Card key={i} className="border-border overflow-hidden">
+                <div className="aspect-square bg-card p-2">
+                  <img src={card.image} alt={card.title} className="w-full h-full object-contain" />
+                </div>
+                <CardContent className="p-3 pt-0">
+                  <h3 className="text-xs font-semibold text-foreground mb-1">{card.title}</h3>
+                  <p className="text-[11px] text-muted-foreground leading-snug">{card.desc}</p>
                 </CardContent>
               </Card>
             ))}
