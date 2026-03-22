@@ -930,12 +930,14 @@ const ProductDetailContent = () => {
           </BreadcrumbList>
         </Breadcrumb>
 
+        <ImageGalleryWithLightbox
+          images={["/images/obezvozhivatel-real-3d-new.jpg", "/images/obezvozhivatel-schema-1.webp"]}
+          selectedImage={selectedImage}
+          onSelectedImageChange={setSelectedImage}
+        />
+
         <div className="grid gap-8 md:grid-cols-2">
           <div>
-            <div className="aspect-[4/3] overflow-hidden rounded-lg border bg-card">
-              <img src="/images/obezvozhivatel-real-3d-new.jpg" alt={`${moModel.article} — Мешочный обезвоживатель осадка`} className="h-full w-full object-contain p-4" />
-            </div>
-          </div>
 
           <div>
             <h1 className="text-xl sm:text-2xl font-bold text-foreground mb-1">
