@@ -853,6 +853,184 @@ const ProductDetailContent = () => {
       </main>
     );
   }
+
+  // Try Meshochnyj Obezvozhivatel (СЗПК.МО.)
+  const moModels = [
+    { name: "ОНИКС-1", article: "СЗПК.МО.01.ПП", capacity: "1,5", bags: "1", dimensions: "700×500×1420" },
+    { name: "ОНИКС-2", article: "СЗПК.МО.02.ПП", capacity: "3", bags: "2", dimensions: "1100×500×1480" },
+    { name: "ОНИКС-3", article: "СЗПК.МО.03.ПП", capacity: "4,5", bags: "3", dimensions: "1650×500×1480" },
+    { name: "ОНИКС-4", article: "СЗПК.МО.04.ПП", capacity: "6", bags: "4", dimensions: "2200×500×1480" },
+    { name: "ОНИКС-5", article: "СЗПК.МО.05.ПП", capacity: "7,5", bags: "5", dimensions: "2750×500×1480" },
+    { name: "ОНИКС-6", article: "СЗПК.МО.06.ПП", capacity: "9", bags: "6", dimensions: "3300×500×1480" },
+    { name: "ОНИКС-12", article: "СЗПК.МО.12.ПП", capacity: "12", bags: "12", dimensions: "6600×500×1480" },
+  ];
+  const moModel = moModels.find((m) => m.article === article) || null;
+  if (moModel) {
+    const handleAddMo = () => {
+      addItem({ article: moModel.article, diameter: 0, wallThickness: 0 }, qty);
+      toast.success(`${moModel.article} (${qty} шт.) добавлен в корзину`);
+    };
+
+    const handleMoSpecPdf = async () => {
+      const errors = validateContactForm(contactData);
+      setContactErrors(errors);
+      if (Object.keys(errors).length > 0) return;
+
+      await generateSpecPdf(
+        {
+          article: moModel.article,
+          diameter: 0,
+          wallThickness: 0,
+          socketThickness: 0,
+          availableLength: null,
+          connectionName: "",
+          materialName: "Полипропилен (ПП)",
+          productTitle: `Мешочный обезвоживатель осадка ${moModel.name}`,
+          extraRows: [
+            ["Производительность", `${moModel.capacity} м³/сут`],
+            ["Количество мешков", moModel.bags],
+            ["Габариты (Д×Ш×В)", `${moModel.dimensions} мм`],
+            ["Материал корпуса", "Полипропилен (ПП)"],
+            ["Принцип работы", "Гравитационная фильтрация"],
+            ["Энергопотребление", "Не требуется"],
+          ],
+        },
+        contactData
+      );
+      toast.success("PDF-спецификация скачана");
+      setPdfDialogOpen(false);
+    };
+
+    const handleMoKpPdf = async () => {
+      await generateLetterheadPdf();
+      toast.success("Коммерческое предложение скачано");
+    };
+
+    const handleMoContactChange = (field: keyof ContactFormData, value: string) => {
+      setContactData((prev) => ({ ...prev, [field]: value }));
+      if (contactErrors[field]) {
+        setContactErrors((prev) => ({ ...prev, [field]: undefined }));
+      }
+    };
+
+    const moParts = moModel.article.split(".");
+    const moNum = moParts[2] || "";
+
+    return (
+      <main className="mx-auto max-w-[960px] px-4 sm:px-6 py-6 sm:py-8">
+        <Breadcrumb className="mb-6">
+          <BreadcrumbList>
+            <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog">Каталог</Link></BreadcrumbLink></BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog/vodoochistka">Водоочистка</Link></BreadcrumbLink></BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog/vodoochistka/meshochnyj-obezvozhivatel">Обезвоживатель</Link></BreadcrumbLink></BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem><BreadcrumbPage>{moModel.name} ({moModel.article})</BreadcrumbPage></BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
+
+        <div className="grid gap-8 md:grid-cols-2">
+          <div>
+            <div className="aspect-[4/3] overflow-hidden rounded-lg border bg-card">
+              <img src="/images/obezvozhivatel-real-3d-new.jpg" alt={`${moModel.article} — Мешочный обезвоживатель осадка`} className="h-full w-full object-contain p-4" />
+            </div>
+          </div>
+
+          <div>
+            <h1 className="text-xl sm:text-2xl font-bold text-foreground mb-1">
+              Мешочный обезвоживатель осадка {moModel.name}
+            </h1>
+            <p className="font-mono text-sm text-muted-foreground mb-4">{moModel.article}</p>
+
+            <ArticleBreakdown
+              exampleArticle={moModel.article}
+              segments={[
+                { value: "СЗПК", label: "Компания", desc: "ООО СЗПК «Пласт-Металл Про»" },
+                { value: "МО", label: "Тип", desc: "Мешочный обезвоживатель" },
+                { value: moNum, label: "Мешков", desc: `${moModel.bags} шт.` },
+                { value: moParts[3], label: "Материал", desc: "Полипропилен" },
+              ]}
+            />
+
+            <p className="text-sm text-muted-foreground mb-6">
+              Обезвоживатель осадка для снижения влажности шламов методом гравитационной фильтрации через полимерные мешки. Производительность — {moModel.capacity} м³/сут.
+            </p>
+
+            <div className="grid grid-cols-2 gap-px rounded-lg border overflow-hidden mb-6">
+              <div className="bg-card p-3">
+                <span className="block text-xs text-muted-foreground">Производительность</span>
+                <span className="text-sm font-semibold text-foreground">{moModel.capacity} м³/сут</span>
+              </div>
+              <div className="bg-card p-3">
+                <span className="block text-xs text-muted-foreground">Количество мешков</span>
+                <span className="text-sm font-semibold text-foreground">{moModel.bags}</span>
+              </div>
+              <div className="bg-card p-3 border-t">
+                <span className="block text-xs text-muted-foreground">Габариты (Д×Ш×В)</span>
+                <span className="text-sm font-semibold text-foreground">{moModel.dimensions} мм</span>
+              </div>
+              <div className="bg-card p-3 border-t">
+                <span className="block text-xs text-muted-foreground">Материал корпуса</span>
+                <span className="text-sm font-semibold text-foreground">Полипропилен (ПП)</span>
+              </div>
+              <div className="bg-card p-3 border-t">
+                <span className="block text-xs text-muted-foreground">Принцип работы</span>
+                <span className="text-sm font-semibold text-foreground">Гравитационный</span>
+              </div>
+              <div className="bg-card p-3 border-t">
+                <span className="block text-xs text-muted-foreground">Энергопотребление</span>
+                <span className="text-sm font-semibold text-foreground">Не требуется</span>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-3">
+              <div className="flex items-center gap-1 border rounded-md">
+                <Button variant="ghost" size="icon" className="h-9 w-9" onClick={() => setQty((q) => Math.max(1, q - 1))}>
+                  <Minus className="h-4 w-4" />
+                </Button>
+                <span className="w-10 text-center text-sm font-medium">{qty}</span>
+                <Button variant="ghost" size="icon" className="h-9 w-9" onClick={() => setQty((q) => q + 1)}>
+                  <Plus className="h-4 w-4" />
+                </Button>
+              </div>
+              <Button className="gap-2 flex-1" onClick={handleAddMo}>
+                <ShoppingCart className="h-4 w-4" />
+                В корзину
+              </Button>
+            </div>
+
+            <Button variant="outline" className="gap-2 w-full mt-3" onClick={() => setPdfDialogOpen(true)}>
+              <FileDown className="h-4 w-4" />
+              Скачать спецификацию (PDF)
+            </Button>
+
+            <Button variant="outline" className="gap-2 w-full mt-2" onClick={handleMoKpPdf}>
+              <FileDown className="h-4 w-4" />
+              Скачать коммерческое предложение (PDF)
+            </Button>
+          </div>
+        </div>
+
+        <Dialog open={pdfDialogOpen} onOpenChange={setPdfDialogOpen}>
+          <DialogContent className="max-w-md">
+            <DialogHeader>
+              <DialogTitle>Скачать спецификацию</DialogTitle>
+              <DialogDescription>
+                Заполните контактные данные для скачивания PDF-спецификации
+              </DialogDescription>
+            </DialogHeader>
+            <ContactFormFields data={contactData} errors={contactErrors} onChange={handleMoContactChange} />
+            <Button className="w-full gap-2 mt-2" onClick={handleMoSpecPdf}>
+              <FileDown className="h-4 w-4" />
+              Скачать PDF
+            </Button>
+          </DialogContent>
+        </Dialog>
+      </main>
+    );
+  }
+
   const parsed = parseArticle(article);
   if (!parsed) {
     return (
