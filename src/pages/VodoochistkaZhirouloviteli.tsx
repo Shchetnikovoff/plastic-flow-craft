@@ -223,43 +223,8 @@ const VodoochistkaZhirouloviteliInner = () => {
           </div>
         </section>
 
-        {/* Section 3: Модельный ряд — подземные вертикальные */}
-        <section className="mb-10" id="podzemnye-vertikalnye">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Подземные вертикальные жироуловители</h2>
-          <div className="rounded-lg border border-border overflow-auto mb-4">
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead className="text-xs">Артикул</TableHead>
-                  <TableHead className="text-xs">Модель</TableHead>
-                  <TableHead className="text-xs text-right">л/с</TableHead>
-                  <TableHead className="text-xs text-right">Пиковый сброс, л</TableHead>
-                  <TableHead className="text-xs text-right">Ø корпуса, мм</TableHead>
-                  <TableHead className="text-xs text-right">Высота, мм</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {models.map((m) => (
-                  <TableRow
-                    key={m.article}
-                    className="cursor-pointer hover:bg-primary/5 transition-colors"
-                    onClick={() => navigate(`/product/${encodeURIComponent(m.article)}`)}
-                  >
-                    <TableCell className="text-xs font-mono font-medium text-primary underline">{m.article}</TableCell>
-                    <TableCell className="text-xs font-medium">{m.name}</TableCell>
-                    <TableCell className="text-xs text-right">{m.throughput}</TableCell>
-                    <TableCell className="text-xs text-right">{m.peakDischarge}</TableCell>
-                    <TableCell className="text-xs text-right">{m.diameter}</TableCell>
-                    <TableCell className="text-xs text-right">{m.height}</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </div>
-          <p className="text-xs text-muted-foreground">
-            Возможно изготовление жироуловителей по индивидуальным размерам и производительности.
-          </p>
-        </section>
+
+
 
         {/* Section 4: Принцип работы */}
         <section className="mb-10">
