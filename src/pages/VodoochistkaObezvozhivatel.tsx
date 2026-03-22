@@ -28,7 +28,7 @@ import PageFooter from "@/components/PageFooter";
 /* ── static data ── */
 
 const heroImages = [
-  { src: "/images/obezvozhivatel-hero-real.jpg", alt: "Мешочный обезвоживатель осадка" },
+  { src: "/images/obezvozhivatel-hero-ral7032.jpg", alt: "Мешочный обезвоживатель осадка" },
   { src: "/images/obezvozhivatel-schema-1.webp", alt: "Схема мешочного обезвоживателя" },
 ];
 
@@ -60,13 +60,13 @@ const processSteps = [
 ];
 
 const models = [
-  { name: "ОНИКС-1", article: "СЗПК.МО.01.ПП", capacity: "1,5", bags: "1", dimensions: "700×500×1420" },
-  { name: "ОНИКС-2", article: "СЗПК.МО.02.ПП", capacity: "3", bags: "2", dimensions: "1100×500×1480" },
-  { name: "ОНИКС-3", article: "СЗПК.МО.03.ПП", capacity: "4,5", bags: "3", dimensions: "1650×500×1480" },
-  { name: "ОНИКС-4", article: "СЗПК.МО.04.ПП", capacity: "6", bags: "4", dimensions: "2200×500×1480" },
-  { name: "ОНИКС-5", article: "СЗПК.МО.05.ПП", capacity: "7,5", bags: "5", dimensions: "2750×500×1480" },
-  { name: "ОНИКС-6", article: "СЗПК.МО.06.ПП", capacity: "9", bags: "6", dimensions: "3300×500×1480" },
-  { name: "ОНИКС-12", article: "СЗПК.МО.12.ПП", capacity: "12", bags: "12", dimensions: "6600×500×1480" },
+  { name: "МО-1", article: "СЗПК.МО.01.ПП", capacity: "1,5", bags: "1", dimensions: "700×500×1420" },
+  { name: "МО-2", article: "СЗПК.МО.02.ПП", capacity: "3", bags: "2", dimensions: "1100×500×1480" },
+  { name: "МО-3", article: "СЗПК.МО.03.ПП", capacity: "4,5", bags: "3", dimensions: "1650×500×1480" },
+  { name: "МО-4", article: "СЗПК.МО.04.ПП", capacity: "6", bags: "4", dimensions: "2200×500×1480" },
+  { name: "МО-5", article: "СЗПК.МО.05.ПП", capacity: "7,5", bags: "5", dimensions: "2750×500×1480" },
+  { name: "МО-6", article: "СЗПК.МО.06.ПП", capacity: "9", bags: "6", dimensions: "3300×500×1480" },
+  { name: "МО-12", article: "СЗПК.МО.12.ПП", capacity: "12", bags: "12", dimensions: "6600×500×1480" },
 ];
 
 const faqItems = [
@@ -143,7 +143,7 @@ const VodoochistkaObezvozhivatelInner = () => {
         <section className="mb-10">
           <p className="text-xs text-muted-foreground uppercase tracking-wider mb-2">ООО СЗПК «Пласт-Металл ПРО»</p>
           <h1 className="text-2xl sm:text-3xl font-bold text-foreground leading-tight mb-3">
-            Мешочный обезвоживатель осадка ОНИКС
+            Мешочный обезвоживатель осадка
           </h1>
           <p className="text-sm text-muted-foreground mb-5">
             Эффективное обезвоживание шлама без электроэнергии — компактно, просто, надёжно!
