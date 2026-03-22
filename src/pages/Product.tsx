@@ -1256,19 +1256,19 @@ const ProductDetailContent = () => {
     { name: "ЖУГ-20", article: "СЗПК.ЖУГ.20.ПП", throughput: "20", peakDischarge: "10000", diameter: "1600", height: "5100", wellDiameter: "-", inletHeight: "-", outletHeight: "-", pipeDiameter: "200", installType: "Горизонтальный", backLink: "/catalog/vodoochistka/zhirouloviteli/gorizontalnye", backLabel: "Горизонтальные" },
     { name: "ЖУГ-25", article: "СЗПК.ЖУГ.25.ПП", throughput: "25", peakDischarge: "12500", diameter: "1600", height: "6300", wellDiameter: "-", inletHeight: "-", outletHeight: "-", pipeDiameter: "200", installType: "Горизонтальный", backLink: "/catalog/vodoochistka/zhirouloviteli/gorizontalnye", backLabel: "Горизонтальные" },
     // Прямоугольные (ЖУП)
-    { name: "ЖУП-1", article: "СЗПК.ЖУП.1.ПП", throughput: "1", peakDischarge: "500", diameter: "1050×750", height: "1120", wellDiameter: "-", inletHeight: "-", outletHeight: "-", pipeDiameter: "110", installType: "Прямоугольный наземный", backLink: "/catalog/vodoochistka/zhirouloviteli/pryamougolnye", backLabel: "Прямоугольные" },
-    { name: "ЖУП-2", article: "СЗПК.ЖУП.2.ПП", throughput: "2", peakDischarge: "1000", diameter: "1400×850", height: "1320", wellDiameter: "-", inletHeight: "-", outletHeight: "-", pipeDiameter: "110", installType: "Прямоугольный наземный", backLink: "/catalog/vodoochistka/zhirouloviteli/pryamougolnye", backLabel: "Прямоугольные" },
-    { name: "ЖУП-3", article: "СЗПК.ЖУП.3.ПП", throughput: "3", peakDischarge: "1500", diameter: "1500×1000", height: "1320", wellDiameter: "-", inletHeight: "-", outletHeight: "-", pipeDiameter: "110", installType: "Прямоугольный наземный", backLink: "/catalog/vodoochistka/zhirouloviteli/pryamougolnye", backLabel: "Прямоугольные" },
-    { name: "ЖУП-4", article: "СЗПК.ЖУП.4.ПП", throughput: "4", peakDischarge: "2000", diameter: "1650×1000", height: "1500", wellDiameter: "-", inletHeight: "-", outletHeight: "-", pipeDiameter: "110", installType: "Прямоугольный наземный", backLink: "/catalog/vodoochistka/zhirouloviteli/pryamougolnye", backLabel: "Прямоугольные" },
-    { name: "ЖУП-5", article: "СЗПК.ЖУП.5.ПП", throughput: "5", peakDischarge: "2500", diameter: "1650×1200", height: "1520", wellDiameter: "-", inletHeight: "-", outletHeight: "-", pipeDiameter: "160", installType: "Прямоугольный наземный", backLink: "/catalog/vodoochistka/zhirouloviteli/pryamougolnye", backLabel: "Прямоугольные" },
-    { name: "ЖУП-6", article: "СЗПК.ЖУП.6.ПП", throughput: "6", peakDischarge: "3000", diameter: "1750×1250", height: "1670", wellDiameter: "-", inletHeight: "-", outletHeight: "-", pipeDiameter: "160", installType: "Прямоугольный наземный", backLink: "/catalog/vodoochistka/zhirouloviteli/pryamougolnye", backLabel: "Прямоугольные" },
-    { name: "ЖУП-7", article: "СЗПК.ЖУП.7.ПП", throughput: "7", peakDischarge: "3500", diameter: "2000×1300", height: "1670", wellDiameter: "-", inletHeight: "-", outletHeight: "-", pipeDiameter: "160", installType: "Прямоугольный наземный", backLink: "/catalog/vodoochistka/zhirouloviteli/pryamougolnye", backLabel: "Прямоугольные" },
-    { name: "ЖУП-8", article: "СЗПК.ЖУП.8.ПП", throughput: "8", peakDischarge: "4000", diameter: "2000×1500", height: "1670", wellDiameter: "-", inletHeight: "-", outletHeight: "-", pipeDiameter: "200", installType: "Прямоугольный наземный", backLink: "/catalog/vodoochistka/zhirouloviteli/pryamougolnye", backLabel: "Прямоугольные" },
-    { name: "ЖУП-9", article: "СЗПК.ЖУП.9.ПП", throughput: "9", peakDischarge: "4500", diameter: "2300×1500", height: "1670", wellDiameter: "-", inletHeight: "-", outletHeight: "-", pipeDiameter: "200", installType: "Прямоугольный наземный", backLink: "/catalog/vodoochistka/zhirouloviteli/pryamougolnye", backLabel: "Прямоугольные" },
-    { name: "ЖУП-10", article: "СЗПК.ЖУП.10.ПП", throughput: "10", peakDischarge: "5000", diameter: "2550×1500", height: "1670", wellDiameter: "-", inletHeight: "-", outletHeight: "-", pipeDiameter: "200", installType: "Прямоугольный наземный", backLink: "/catalog/vodoochistka/zhirouloviteli/pryamougolnye", backLabel: "Прямоугольные" },
-    { name: "ЖУП-15", article: "СЗПК.ЖУП.15.ПП", throughput: "15", peakDischarge: "7500", diameter: "2800×1500", height: "2020", wellDiameter: "-", inletHeight: "-", outletHeight: "-", pipeDiameter: "200", installType: "Прямоугольный наземный", backLink: "/catalog/vodoochistka/zhirouloviteli/pryamougolnye", backLabel: "Прямоугольные" },
-    { name: "ЖУП-20", article: "СЗПК.ЖУП.20.ПП", throughput: "20", peakDischarge: "10000", diameter: "3500×1600", height: "2020", wellDiameter: "-", inletHeight: "-", outletHeight: "-", pipeDiameter: "200", installType: "Прямоугольный наземный", backLink: "/catalog/vodoochistka/zhirouloviteli/pryamougolnye", backLabel: "Прямоугольные" },
-    { name: "ЖУП-25", article: "СЗПК.ЖУП.25.ПП", throughput: "25", peakDischarge: "12500", diameter: "4000×1650", height: "2120", wellDiameter: "-", inletHeight: "-", outletHeight: "-", pipeDiameter: "200", installType: "Прямоугольный наземный", backLink: "/catalog/vodoochistka/zhirouloviteli/pryamougolnye", backLabel: "Прямоугольные" },
+    { name: "ЖУП-1", article: "СЗПК.ЖУП.1.ПП", throughput: "1", peakDischarge: "500", diameter: "1050×750", height: "1120", wellDiameter: "120", inletHeight: "840", outletHeight: "790", pipeDiameter: "110", installType: "Прямоугольный наземный", backLink: "/catalog/vodoochistka/zhirouloviteli/pryamougolnye", backLabel: "Прямоугольные" },
+    { name: "ЖУП-2", article: "СЗПК.ЖУП.2.ПП", throughput: "2", peakDischarge: "1000", diameter: "1400×850", height: "1320", wellDiameter: "120", inletHeight: "940", outletHeight: "890", pipeDiameter: "110", installType: "Прямоугольный наземный", backLink: "/catalog/vodoochistka/zhirouloviteli/pryamougolnye", backLabel: "Прямоугольные" },
+    { name: "ЖУП-3", article: "СЗПК.ЖУП.3.ПП", throughput: "3", peakDischarge: "1500", diameter: "1500×1000", height: "1320", wellDiameter: "120", inletHeight: "1040", outletHeight: "990", pipeDiameter: "110", installType: "Прямоугольный наземный", backLink: "/catalog/vodoochistka/zhirouloviteli/pryamougolnye", backLabel: "Прямоугольные" },
+    { name: "ЖУП-4", article: "СЗПК.ЖУП.4.ПП", throughput: "4", peakDischarge: "2000", diameter: "1650×1000", height: "1500", wellDiameter: "120", inletHeight: "1120", outletHeight: "1070", pipeDiameter: "110", installType: "Прямоугольный наземный", backLink: "/catalog/vodoochistka/zhirouloviteli/pryamougolnye", backLabel: "Прямоугольные" },
+    { name: "ЖУП-5", article: "СЗПК.ЖУП.5.ПП", throughput: "5", peakDischarge: "2500", diameter: "1650×1200", height: "1520", wellDiameter: "120", inletHeight: "1140", outletHeight: "1090", pipeDiameter: "160", installType: "Прямоугольный наземный", backLink: "/catalog/vodoochistka/zhirouloviteli/pryamougolnye", backLabel: "Прямоугольные" },
+    { name: "ЖУП-6", article: "СЗПК.ЖУП.6.ПП", throughput: "6", peakDischarge: "3000", diameter: "1750×1250", height: "1670", wellDiameter: "120", inletHeight: "1290", outletHeight: "1240", pipeDiameter: "160", installType: "Прямоугольный наземный", backLink: "/catalog/vodoochistka/zhirouloviteli/pryamougolnye", backLabel: "Прямоугольные" },
+    { name: "ЖУП-7", article: "СЗПК.ЖУП.7.ПП", throughput: "7", peakDischarge: "3500", diameter: "2000×1300", height: "1670", wellDiameter: "120", inletHeight: "1290", outletHeight: "1240", pipeDiameter: "160", installType: "Прямоугольный наземный", backLink: "/catalog/vodoochistka/zhirouloviteli/pryamougolnye", backLabel: "Прямоугольные" },
+    { name: "ЖУП-8", article: "СЗПК.ЖУП.8.ПП", throughput: "8", peakDischarge: "4000", diameter: "2000×1500", height: "1670", wellDiameter: "120", inletHeight: "1290", outletHeight: "1240", pipeDiameter: "200", installType: "Прямоугольный наземный", backLink: "/catalog/vodoochistka/zhirouloviteli/pryamougolnye", backLabel: "Прямоугольные" },
+    { name: "ЖУП-9", article: "СЗПК.ЖУП.9.ПП", throughput: "9", peakDischarge: "4500", diameter: "2300×1500", height: "1670", wellDiameter: "120", inletHeight: "1290", outletHeight: "1240", pipeDiameter: "200", installType: "Прямоугольный наземный", backLink: "/catalog/vodoochistka/zhirouloviteli/pryamougolnye", backLabel: "Прямоугольные" },
+    { name: "ЖУП-10", article: "СЗПК.ЖУП.10.ПП", throughput: "10", peakDischarge: "5000", diameter: "2550×1500", height: "1670", wellDiameter: "120", inletHeight: "1290", outletHeight: "1240", pipeDiameter: "200", installType: "Прямоугольный наземный", backLink: "/catalog/vodoochistka/zhirouloviteli/pryamougolnye", backLabel: "Прямоугольные" },
+    { name: "ЖУП-15", article: "СЗПК.ЖУП.15.ПП", throughput: "15", peakDischarge: "7500", diameter: "2800×1500", height: "2020", wellDiameter: "150", inletHeight: "1640", outletHeight: "1590", pipeDiameter: "200", installType: "Прямоугольный наземный", backLink: "/catalog/vodoochistka/zhirouloviteli/pryamougolnye", backLabel: "Прямоугольные" },
+    { name: "ЖУП-20", article: "СЗПК.ЖУП.20.ПП", throughput: "20", peakDischarge: "10000", diameter: "3500×1600", height: "2020", wellDiameter: "150", inletHeight: "1640", outletHeight: "1590", pipeDiameter: "200", installType: "Прямоугольный наземный", backLink: "/catalog/vodoochistka/zhirouloviteli/pryamougolnye", backLabel: "Прямоугольные" },
+    { name: "ЖУП-25", article: "СЗПК.ЖУП.25.ПП", throughput: "25", peakDischarge: "12500", diameter: "4000×1650", height: "2120", wellDiameter: "150", inletHeight: "1740", outletHeight: "1690", pipeDiameter: "200", installType: "Прямоугольный наземный", backLink: "/catalog/vodoochistka/zhirouloviteli/pryamougolnye", backLabel: "Прямоугольные" },
   ];
   const zhuModel = zhuModels.find((m) => m.article === article) || null;
   if (zhuModel) {
@@ -1295,9 +1295,9 @@ const ProductDetailContent = () => {
           extraRows: [
             ["Производительность", `${zhuModel.throughput} л/с`],
             ["Пиковый сброс", `${zhuModel.peakDischarge} л`],
-            ["Ø корпуса", `${zhuModel.diameter} мм`],
-            ["Высота корпуса", `${zhuModel.height} мм`],
-            ["Ø колодца", `${zhuModel.wellDiameter} мм`],
+            [zhuModel.article.includes(".ЖУП.") ? "Длина×Ширина корпуса" : "Ø корпуса", `${zhuModel.diameter} мм`],
+            [zhuModel.article.includes(".ЖУП.") ? "Высота ёмкости" : "Высота корпуса", `${zhuModel.height} мм`],
+            [zhuModel.article.includes(".ЖУП.") ? "Высота колодца" : "Ø колодца", `${zhuModel.wellDiameter} мм`],
             ["Высота входа", `${zhuModel.inletHeight} мм`],
             ["Высота выхода", `${zhuModel.outletHeight} мм`],
             ["Ø патрубков", `${zhuModel.pipeDiameter} мм`],
@@ -1356,7 +1356,7 @@ const ProductDetailContent = () => {
         <ImageGalleryWithLightbox
           images={
             zhuModel.article.includes(".ЖУП.")
-              ? ["/images/zhu-p-schema1.png", "/images/zhu-p-schema2.png", "/images/zhu-p-schema3.png"]
+              ? ["/images/zhu-p-schema1.png", "/images/zhu-p-schema2.png", "/images/zhu-p-schema3.png", "/images/zhu-p-schema4.png"]
               : zhuModel.article.includes(".ЖУГ.")
               ? ["/images/zhu-g-hero-ral7032.jpg", "/images/zhu-g-schema1.png", "/images/zhu-g-schema2.png", "/images/zhu-g-schema3.png", "/images/zhu-g-schema4.png", "/images/zhu-g-schema5.jpg"]
               : ["/images/zhu-pv-hero-ral7032.jpg", "/images/zhu-pv-schema1.png", "/images/zhu-pv-schema2.png", "/images/zhu-pv-schema3.png", "/images/zhu-pv-schema4.png", "/images/zhu-pv-schema5.png"]
@@ -1383,7 +1383,10 @@ const ProductDetailContent = () => {
             />
 
             <p className="text-sm text-muted-foreground mb-6">
-              Промышленный вертикальный жироуловитель производительностью {zhuModel.throughput} л/с с пиковым сбросом {zhuModel.peakDischarge} литров. Изготовлен из пищевого полипропилена, срок службы — не менее 25 лет. Предназначен для улавливания и удаления неэмульгированных жиров и масел из сточных вод кухонь, ресторанов, мясоперерабатывающих и других предприятий в соответствии со СНиП 2.04.01-85.
+              {zhuModel.article.includes(".ЖУП.")
+                ? `Промышленный прямоугольный жироуловитель производительностью ${zhuModel.throughput} л/с с пиковым сбросом ${zhuModel.peakDischarge} литров. Корпус из листового полипропилена с рёбрами жёсткости, герметичная крышка с уплотнителем EPDM, внутренние седиментационные пластины. Срок службы — не менее 25 лет.`
+                : `Промышленный вертикальный жироуловитель производительностью ${zhuModel.throughput} л/с с пиковым сбросом ${zhuModel.peakDischarge} литров. Изготовлен из пищевого полипропилена, срок службы — не менее 25 лет. Предназначен для улавливания и удаления неэмульгированных жиров и масел из сточных вод кухонь, ресторанов, мясоперерабатывающих и других предприятий в соответствии со СНиП 2.04.01-85.`
+              }
             </p>
           </div>
 
@@ -1413,20 +1416,20 @@ const ProductDetailContent = () => {
                 <span className="text-sm font-semibold text-foreground">{zhuModel.peakDischarge} л</span>
               </div>
               <div className="bg-card p-3 border-t">
-                <span className="block text-xs text-muted-foreground">Ø корпуса</span>
+                <span className="block text-xs text-muted-foreground">{zhuModel.article.includes(".ЖУП.") ? "Длина×Ширина корпуса" : "Ø корпуса"}</span>
                 <span className="text-sm font-semibold text-foreground">{zhuModel.diameter} мм</span>
               </div>
               <div className="bg-card p-3 border-t">
-                <span className="block text-xs text-muted-foreground">Высота корпуса</span>
+                <span className="block text-xs text-muted-foreground">{zhuModel.article.includes(".ЖУП.") ? "Высота ёмкости" : "Высота корпуса"}</span>
                 <span className="text-sm font-semibold text-foreground">{zhuModel.height} мм</span>
               </div>
               <div className="bg-card p-3 border-t">
-                <span className="block text-xs text-muted-foreground">Ø колодца</span>
+                <span className="block text-xs text-muted-foreground">{zhuModel.article.includes(".ЖУП.") ? "Высота колодца" : "Ø колодца"}</span>
                 <span className="text-sm font-semibold text-foreground">{zhuModel.wellDiameter} мм</span>
               </div>
               <div className="bg-card p-3 border-t">
-                <span className="block text-xs text-muted-foreground">Высота колодца</span>
-                <span className="text-sm font-semibold text-foreground">Индивидуально</span>
+                <span className="block text-xs text-muted-foreground">{zhuModel.article.includes(".ЖУП.") ? "Высота общая" : "Высота колодца"}</span>
+                <span className="text-sm font-semibold text-foreground">{zhuModel.article.includes(".ЖУП.") ? `${parseInt(zhuModel.height) + parseInt(zhuModel.wellDiameter)} мм` : "Индивидуально"}</span>
               </div>
               <div className="bg-card p-3 border-t">
                 <span className="block text-xs text-muted-foreground">Высота входа</span>
@@ -1473,15 +1476,31 @@ const ProductDetailContent = () => {
         <section className="mt-8 mb-6 rounded-lg border bg-card p-5">
           <h2 className="text-sm font-bold text-foreground uppercase tracking-wider mb-3">Описание</h2>
           <div className="text-sm text-muted-foreground leading-relaxed space-y-3">
-            <p>
-              Промышленный вертикальный жироуловитель — незаменимое устройство на любом производственном объекте, специализирующемся на изготовлении продуктов питания: промышленных цехах и предприятиях общественного питания.
-            </p>
-            <p>
-              Жироуловитель {zhuModel.name} производительностью {zhuModel.throughput} л/с имеет пиковый сброс {zhuModel.peakDischarge} литров, изготовлен из пищевого полипропилена, срок службы которого не менее 25 лет. Предназначен для улавливания и удаления неэмульгированных жиров и масел из сточных вод в соответствии со СНиП 2.04.01-85. Защищает бытовую канализацию от жирового загрязнения, повышает эффективность последующих очистных сооружений.
-            </p>
-            <p>
-              Сточная вода через входной патрубок поступает в 1-й отсек, выполняющий роль отстойника ила, где происходит отделение крупного мусора и тяжёлых загрязнений, оседающих на дне. Далее вода поступает во 2-й отсек, выполняющий функцию жироуловителя, в котором происходит окончательное отделение жиров. Очищенная вода через распределительный карман поступает в отводящий патрубок и отводится в канализационную сеть.
-            </p>
+            {zhuModel.article.includes(".ЖУП.") ? (
+              <>
+                <p>
+                  Прямоугольный жироуловитель {zhuModel.name} — промышленное оборудование для крупных ресторанов и предприятий пищевой отрасли. Корпус прямоугольного сечения из листового полипропилена толщиной 5–10 мм с рёбрами жёсткости оптимален для установки в ограниченных пространствах технических помещений.
+                </p>
+                <p>
+                  Производительность {zhuModel.throughput} л/с, пиковый сброс {zhuModel.peakDischarge} литров. Габариты корпуса: {zhuModel.diameter} мм, высота ёмкости {zhuModel.height} мм, высота колодца {zhuModel.wellDiameter} мм (общая высота {parseInt(zhuModel.height) + parseInt(zhuModel.wellDiameter)} мм). Оснащён герметичной откидной крышкой с уплотнителем EPDM, внутренними седиментационными пластинами для повышения эффективности сепарации и патрубками Ø{zhuModel.pipeDiameter} мм.
+                </p>
+                <p>
+                  Сточная вода через входной патрубок (высота входа {zhuModel.inletHeight} мм) поступает в 1-й отсек — отстойник ила, где происходит отделение крупного мусора и тяжёлых загрязнений. Далее вода поступает во 2-й отсек — жироуловитель, где происходит окончательное отделение жиров. Очищенная вода через отводящий патрубок (высота выхода {zhuModel.outletHeight} мм) отводится в канализационную сеть.
+                </p>
+              </>
+            ) : (
+              <>
+                <p>
+                  Промышленный вертикальный жироуловитель — незаменимое устройство на любом производственном объекте, специализирующемся на изготовлении продуктов питания: промышленных цехах и предприятиях общественного питания.
+                </p>
+                <p>
+                  Жироуловитель {zhuModel.name} производительностью {zhuModel.throughput} л/с имеет пиковый сброс {zhuModel.peakDischarge} литров, изготовлен из пищевого полипропилена, срок службы которого не менее 25 лет. Предназначен для улавливания и удаления неэмульгированных жиров и масел из сточных вод в соответствии со СНиП 2.04.01-85. Защищает бытовую канализацию от жирового загрязнения, повышает эффективность последующих очистных сооружений.
+                </p>
+                <p>
+                  Сточная вода через входной патрубок поступает в 1-й отсек, выполняющий роль отстойника ила, где происходит отделение крупного мусора и тяжёлых загрязнений, оседающих на дне. Далее вода поступает во 2-й отсек, выполняющий функцию жироуловителя, в котором происходит окончательное отделение жиров. Очищенная вода через распределительный карман поступает в отводящий патрубок и отводится в канализационную сеть.
+                </p>
+              </>
+            )}
           </div>
         </section>
 
