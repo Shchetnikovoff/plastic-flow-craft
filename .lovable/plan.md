@@ -1,21 +1,22 @@
 
 
-## Plan: Update reagent station images with uploaded photo in RAL 7032
+## Plan: Add schema drawings to SPR product card gallery
 
-**What:** Replace all reagent preparation station images with the uploaded photo, recolored to the standard Grey RAL 7032 body / Graphite RAL 7024 frame scheme.
+**What:** Copy both uploaded schema images to `public/images/` and add them to the SPR product card gallery array.
 
 ### Changes
 
-**1. Copy uploaded image** to `public/images/spr-hero-ral7032.jpg`
+**1. Copy uploaded images to project:**
+- `user-uploads://EasyPureDraw1_1.gif` → `public/images/spr-schema-front.gif`
+- `user-uploads://izobrazhenie_2023-11-24_144458187.png` → `public/images/spr-schema-top.png`
 
-**2. Recolor using AI image editing** — Edit the uploaded photo to apply Grey RAL 7032 (#CBCEC0) body and Graphite RAL 7024 (#3A3D3F) frame/pipes, matching the unified industrial color standard.
+**2. `src/pages/Product.tsx`** (line 938) — Expand gallery array:
+```tsx
+images={["/images/spr-hero-ral7032.jpg", "/images/spr-schema-front.gif", "/images/spr-schema-top.png"]}
+```
 
-**3. `src/data/catalog.ts`** (line 55) — Update catalog thumbnail:
-- Change `image: "/images/vodoochistka-koagulyant-real.png"` → `image: "/images/spr-hero-ral7032.jpg"`
-
-**4. `src/pages/VodoochistkaDozirovanie.tsx`** (lines 175-176) — Update hero images:
-- Replace both `dozirovanie-hero-real.jpg` references with `spr-hero-ral7032.jpg`
-
-**5. `src/pages/Product.tsx`** (line 938) — Update product card gallery:
-- Replace `vodoochistka-koagulyant-real.png` and `dozirovanie-hero-real.jpg` with the new image
+**3. `src/pages/VodoochistkaDozirovanie.tsx`** (line 176) — Replace duplicate hero image with schema:
+```tsx
+<img src="/images/spr-schema-front.gif" alt="Схема станции приготовления реагентов" ... />
+```
 
