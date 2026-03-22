@@ -155,6 +155,28 @@ const VodoochistkaZhirouloviteliInner = () => {
           </div>
         </section>
 
+        {/* Section: Виды */}
+        <section className="mb-10">
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Виды жироуловителей</h2>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            {typeCards.map((card, i) => (
+              <Card
+                key={i}
+                className="border-border overflow-hidden cursor-pointer hover:border-primary hover:shadow-md transition-all"
+                onClick={() => navigate(card.path)}
+              >
+                <div className="aspect-square bg-card p-2">
+                  <img src={card.image} alt={card.title} className="w-full h-full object-contain" />
+                </div>
+                <CardContent className="p-3 pt-0">
+                  <h3 className="text-xs font-semibold text-primary mb-1">{card.title}</h3>
+                  <p className="text-[11px] text-muted-foreground leading-snug">{card.desc}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </section>
+
         {/* Intro */}
         <section className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">
@@ -177,7 +199,7 @@ const VodoochistkaZhirouloviteliInner = () => {
           </ul>
         </section>
 
-        {/* Section 1: Назначение */}
+        {/* Section: Назначение */}
         <section className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Назначение и области применения</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -186,28 +208,6 @@ const VodoochistkaZhirouloviteliInner = () => {
                 <area.icon className="h-4 w-4 text-primary shrink-0 mt-0.5" />
                 <span className="text-sm text-foreground">{area.text}</span>
               </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Section 2: Виды */}
-        <section className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Виды жироуловителей</h2>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-            {typeCards.map((card, i) => (
-              <Card
-                key={i}
-                className="border-border overflow-hidden cursor-pointer hover:border-primary hover:shadow-md transition-all"
-                onClick={() => navigate(card.path)}
-              >
-                <div className="aspect-square bg-card p-2">
-                  <img src={card.image} alt={card.title} className="w-full h-full object-contain" />
-                </div>
-                <CardContent className="p-3 pt-0">
-                  <h3 className="text-xs font-semibold text-primary mb-1">{card.title}</h3>
-                  <p className="text-[11px] text-muted-foreground leading-snug">{card.desc}</p>
-                </CardContent>
-              </Card>
             ))}
           </div>
         </section>
