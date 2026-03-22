@@ -45,23 +45,27 @@ const purposeItems = [
 const typeCards = [
   {
     title: "Подземные вертикальные",
-    desc: "Цилиндрический корпус для заглублённого монтажа. Минимальная занимаемая площадь, обслуживание через горловину. Монтируется в грунт на бетонное основание с обсыпкой пескоцементной смесью.",
+    desc: "Цилиндрический корпус для заглублённого монтажа. Минимальная занимаемая площадь, обслуживание через горловину.",
     image: "/images/zhu-underground-ral.jpg",
+    anchor: "podzemnye-vertikalnye",
   },
   {
     title: "Наземные вертикальные",
-    desc: "Устанавливаются на ровную площадку внутри помещения или под навесом. Удобный доступ ко всем узлам. Откидная крышка для обслуживания и удаления жирового слоя.",
+    desc: "Устанавливаются на ровную площадку внутри помещения или под навесом. Удобный доступ ко всем узлам.",
     image: "/images/zhu-vertical-ral.jpg",
+    anchor: "nazemnye-vertikalnye",
   },
   {
     title: "Горизонтальные",
-    desc: "Увеличенная зона отстаивания для больших объёмов стоков. Наземное и подземное исполнение. Длина корпуса обеспечивает максимальную эффективность сепарации.",
+    desc: "Увеличенная зона отстаивания для больших объёмов стоков. Наземное и подземное исполнение.",
     image: "/images/zhu-horizontal-ral.jpg",
+    anchor: "gorizontalnye",
   },
   {
     title: "Прямоугольные наземные",
-    desc: "Корпус прямоугольного сечения из листового ПП с рёбрами жёсткости. Оптимальны для встраивания в ограниченные пространства технических помещений.",
+    desc: "Корпус прямоугольного сечения из листового ПП. Оптимальны для ограниченных пространств.",
     image: "/images/zhu-rectangular-ral.jpg",
+    anchor: "pryamougolnye",
   },
 ];
 
@@ -202,12 +206,16 @@ const VodoochistkaZhirouloviteliInner = () => {
           <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Виды жироуловителей</h2>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             {typeCards.map((card, i) => (
-              <Card key={i} className="border-border overflow-hidden">
+              <Card
+                key={i}
+                className="border-border overflow-hidden cursor-pointer hover:border-primary hover:shadow-md transition-all"
+                onClick={() => document.getElementById(card.anchor)?.scrollIntoView({ behavior: "smooth", block: "start" })}
+              >
                 <div className="aspect-square bg-card p-2">
                   <img src={card.image} alt={card.title} className="w-full h-full object-contain" />
                 </div>
                 <CardContent className="p-3 pt-0">
-                  <h3 className="text-xs font-semibold text-foreground mb-1">{card.title}</h3>
+                  <h3 className="text-xs font-semibold text-primary mb-1">{card.title}</h3>
                   <p className="text-[11px] text-muted-foreground leading-snug">{card.desc}</p>
                 </CardContent>
               </Card>
@@ -215,9 +223,9 @@ const VodoochistkaZhirouloviteliInner = () => {
           </div>
         </section>
 
-        {/* Section 3: Модельный ряд */}
-        <section className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Модельный ряд</h2>
+        {/* Section 3: Модельный ряд — подземные вертикальные */}
+        <section className="mb-10" id="podzemnye-vertikalnye">
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Подземные вертикальные жироуловители</h2>
           <div className="rounded-lg border border-border overflow-auto mb-4">
             <Table>
               <TableHeader>
@@ -303,7 +311,7 @@ const VodoochistkaZhirouloviteliInner = () => {
         </section>
 
         {/* Section 7: Горизонтальные жироуловители */}
-        <section className="mb-10">
+        <section className="mb-10" id="gorizontalnye">
           <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Горизонтальные жироуловители</h2>
           <div className="rounded-lg border border-border overflow-auto text-sm">
             <Table>
@@ -344,7 +352,38 @@ const VodoochistkaZhirouloviteliInner = () => {
           </p>
         </section>
 
-        {/* CTA Form */}
+        {/* Section 8: Наземные вертикальные */}
+        <section className="mb-10" id="nazemnye-vertikalnye">
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Наземные вертикальные жироуловители</h2>
+          <div className="rounded-lg border border-border bg-card p-4 text-sm text-muted-foreground leading-relaxed space-y-2">
+            <p>
+              Наземные вертикальные жироуловители устанавливаются в технических и подвальных помещениях на ровную площадку. Удобный доступ ко всем узлам, откидная крышка для обслуживания. Подключаются к производственной канализационной сети.
+            </p>
+            <p>
+              Модельный ряд совпадает с подземными вертикальными (ЖУ-1 — ЖУ-15), но без технического колодца. Изготовление по индивидуальным размерам и конфигурации.
+            </p>
+            <Button variant="outline" size="sm" className="mt-2" onClick={scrollToForm}>
+              Запросить расчёт
+            </Button>
+          </div>
+        </section>
+
+        {/* Section 9: Прямоугольные */}
+        <section className="mb-10" id="pryamougolnye">
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Прямоугольные наземные жироуловители</h2>
+          <div className="rounded-lg border border-border bg-card p-4 text-sm text-muted-foreground leading-relaxed space-y-2">
+            <p>
+              Прямоугольные жироуловители из листового полипропилена с рёбрами жёсткости — оптимальное решение для ограниченных пространств технических помещений. Компактная форма позволяет устанавливать оборудование вплотную к стенам.
+            </p>
+            <p>
+              Изготавливаются по индивидуальным размерам с учётом производительности и особенностей объекта. Производительность от 1 до 15 л/с.
+            </p>
+            <Button variant="outline" size="sm" className="mt-2" onClick={scrollToForm}>
+              Запросить расчёт
+            </Button>
+          </div>
+        </section>
+
         <section id="cta-form" className="mb-10 rounded-lg border border-border bg-card p-6">
           <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Оставить заявку</h2>
           <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
