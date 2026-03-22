@@ -62,17 +62,17 @@ const typeCards = [
 ];
 
 const models = [
-  { article: "ЖУ-3,5-500", throughput: "1", peakDischarge: "500", diameter: "800", height: "1300" },
-  { article: "ЖУ-7-1000", throughput: "2", peakDischarge: "1000", diameter: "1000", height: "1600" },
-  { article: "ЖУ-11-1500", throughput: "3", peakDischarge: "1500", diameter: "1200", height: "1500" },
-  { article: "ЖУ-15-2000", throughput: "4", peakDischarge: "2000", diameter: "1350", height: "1550" },
-  { article: "ЖУ-18-2500", throughput: "5", peakDischarge: "2500", diameter: "1350", height: "2000" },
-  { article: "ЖУ-22-3000", throughput: "6", peakDischarge: "3000", diameter: "1450", height: "2000" },
-  { article: "ЖУ-25-3500", throughput: "7", peakDischarge: "3500", diameter: "1550", height: "2000" },
-  { article: "ЖУ-29-4000", throughput: "8", peakDischarge: "4000", diameter: "1650", height: "2000" },
-  { article: "ЖУ-32-4500", throughput: "9", peakDischarge: "4500", diameter: "1750", height: "2000" },
-  { article: "ЖУ-36-5000", throughput: "10", peakDischarge: "5000", diameter: "1850", height: "2000" },
-  { article: "ЖУ-54-7500", throughput: "15", peakDischarge: "7500", diameter: "2200", height: "2000" },
+  { article: "СЗПК.ЖУ.1.ПП", name: "ЖУ-1", throughput: "1", peakDischarge: "500", diameter: "800", height: "1300" },
+  { article: "СЗПК.ЖУ.2.ПП", name: "ЖУ-2", throughput: "2", peakDischarge: "1000", diameter: "1000", height: "1600" },
+  { article: "СЗПК.ЖУ.3.ПП", name: "ЖУ-3", throughput: "3", peakDischarge: "1500", diameter: "1200", height: "1500" },
+  { article: "СЗПК.ЖУ.4.ПП", name: "ЖУ-4", throughput: "4", peakDischarge: "2000", diameter: "1350", height: "1550" },
+  { article: "СЗПК.ЖУ.5.ПП", name: "ЖУ-5", throughput: "5", peakDischarge: "2500", diameter: "1350", height: "2000" },
+  { article: "СЗПК.ЖУ.6.ПП", name: "ЖУ-6", throughput: "6", peakDischarge: "3000", diameter: "1450", height: "2000" },
+  { article: "СЗПК.ЖУ.7.ПП", name: "ЖУ-7", throughput: "7", peakDischarge: "3500", diameter: "1550", height: "2000" },
+  { article: "СЗПК.ЖУ.8.ПП", name: "ЖУ-8", throughput: "8", peakDischarge: "4000", diameter: "1650", height: "2000" },
+  { article: "СЗПК.ЖУ.9.ПП", name: "ЖУ-9", throughput: "9", peakDischarge: "4500", diameter: "1750", height: "2000" },
+  { article: "СЗПК.ЖУ.10.ПП", name: "ЖУ-10", throughput: "10", peakDischarge: "5000", diameter: "1850", height: "2000" },
+  { article: "СЗПК.ЖУ.15.ПП", name: "ЖУ-15", throughput: "15", peakDischarge: "7500", diameter: "2200", height: "2000" },
 ];
 
 const processSteps = [
