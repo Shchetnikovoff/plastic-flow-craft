@@ -1413,20 +1413,20 @@ const ProductDetailContent = () => {
                 <span className="text-sm font-semibold text-foreground">{zhuModel.peakDischarge} л</span>
               </div>
               <div className="bg-card p-3 border-t">
-                <span className="block text-xs text-muted-foreground">Ø корпуса</span>
+                <span className="block text-xs text-muted-foreground">{zhuModel.article.includes(".ЖУП.") ? "Длина×Ширина корпуса" : "Ø корпуса"}</span>
                 <span className="text-sm font-semibold text-foreground">{zhuModel.diameter} мм</span>
               </div>
               <div className="bg-card p-3 border-t">
-                <span className="block text-xs text-muted-foreground">Высота корпуса</span>
+                <span className="block text-xs text-muted-foreground">{zhuModel.article.includes(".ЖУП.") ? "Высота ёмкости" : "Высота корпуса"}</span>
                 <span className="text-sm font-semibold text-foreground">{zhuModel.height} мм</span>
               </div>
               <div className="bg-card p-3 border-t">
-                <span className="block text-xs text-muted-foreground">Ø колодца</span>
+                <span className="block text-xs text-muted-foreground">{zhuModel.article.includes(".ЖУП.") ? "Высота колодца" : "Ø колодца"}</span>
                 <span className="text-sm font-semibold text-foreground">{zhuModel.wellDiameter} мм</span>
               </div>
               <div className="bg-card p-3 border-t">
-                <span className="block text-xs text-muted-foreground">Высота колодца</span>
-                <span className="text-sm font-semibold text-foreground">Индивидуально</span>
+                <span className="block text-xs text-muted-foreground">{zhuModel.article.includes(".ЖУП.") ? "Высота общая" : "Высота колодца"}</span>
+                <span className="text-sm font-semibold text-foreground">{zhuModel.article.includes(".ЖУП.") ? `${parseInt(zhuModel.height) + parseInt(zhuModel.wellDiameter)} мм` : "Индивидуально"}</span>
               </div>
               <div className="bg-card p-3 border-t">
                 <span className="block text-xs text-muted-foreground">Высота входа</span>
