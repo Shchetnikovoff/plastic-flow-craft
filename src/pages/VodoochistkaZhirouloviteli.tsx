@@ -209,7 +209,7 @@ const VodoochistkaZhirouloviteliInner = () => {
               <Card
                 key={i}
                 className="border-border overflow-hidden cursor-pointer hover:border-primary hover:shadow-md transition-all"
-                onClick={() => document.getElementById(card.anchor)?.scrollIntoView({ behavior: "smooth", block: "start" })}
+                onClick={() => navigate(card.path)}
               >
                 <div className="aspect-square bg-card p-2">
                   <img src={card.image} alt={card.title} className="w-full h-full object-contain" />
