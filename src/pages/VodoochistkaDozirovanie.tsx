@@ -70,14 +70,14 @@ const constructionElements = [
 ];
 
 const models = [
-  { name: "EASYPURE 500", capacity: "500", dimensions: "1700×1200×1540" },
-  { name: "EASYPURE 1000", capacity: "1 000", dimensions: "2000×1350×1540" },
-  { name: "EASYPURE 2000", capacity: "2 000", dimensions: "2300×1450×1940" },
-  { name: "EASYPURE 3000", capacity: "3 000", dimensions: "2700×1600×1940" },
-  { name: "EASYPURE 4000", capacity: "4 000", dimensions: "3200×1750×1940" },
-  { name: "EASYPURE 5000", capacity: "5 000", dimensions: "3300×1850×1940" },
-  { name: "EASYPURE 6000", capacity: "6 000", dimensions: "3500×1850×2140" },
-  { name: "EASYPURE 10000", capacity: "10 000", dimensions: "3900×1850×2140" },
+  { name: "СПР-500", article: "СЗПК.СПР.500.ПП", capacity: "500", dimensions: "1700×1200×1540" },
+  { name: "СПР-1000", article: "СЗПК.СПР.1000.ПП", capacity: "1 000", dimensions: "2000×1350×1540" },
+  { name: "СПР-2000", article: "СЗПК.СПР.2000.ПП", capacity: "2 000", dimensions: "2300×1450×1940" },
+  { name: "СПР-3000", article: "СЗПК.СПР.3000.ПП", capacity: "3 000", dimensions: "2700×1600×1940" },
+  { name: "СПР-4000", article: "СЗПК.СПР.4000.ПП", capacity: "4 000", dimensions: "3200×1750×1940" },
+  { name: "СПР-5000", article: "СЗПК.СПР.5000.ПП", capacity: "5 000", dimensions: "3300×1850×1940" },
+  { name: "СПР-6000", article: "СЗПК.СПР.6000.ПП", capacity: "6 000", dimensions: "3500×1850×2140" },
+  { name: "СПР-10000", article: "СЗПК.СПР.10000.ПП", capacity: "10 000", dimensions: "3900×1850×2140" },
 ];
 
 const commonSpecs = [
@@ -154,7 +154,7 @@ const VodoochistkaDozirovanieInner = () => {
             <BreadcrumbSeparator />
             <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog/vodoochistka">Водоочистка</Link></BreadcrumbLink></BreadcrumbItem>
             <BreadcrumbSeparator />
-            <BreadcrumbItem><BreadcrumbPage>Станция дозирования</BreadcrumbPage></BreadcrumbItem>
+            <BreadcrumbItem><BreadcrumbPage>Станции приготовления реагентов</BreadcrumbPage></BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
 
@@ -162,7 +162,7 @@ const VodoochistkaDozirovanieInner = () => {
         <section className="mb-10">
           <p className="text-xs text-muted-foreground uppercase tracking-wider mb-2">ООО СЗПК «Пласт-Металл ПРО»</p>
           <h1 className="text-2xl sm:text-3xl font-bold text-foreground leading-tight mb-3">
-            Станция дозирования реагентов
+            Станции приготовления реагентов
           </h1>
           <p className="text-sm text-muted-foreground mb-5">
             Автоматическое приготовление и точное дозирование коагулянта и флокулянта для систем водоочистки любой производительности.
@@ -249,6 +249,7 @@ const VodoochistkaDozirovanieInner = () => {
             <Table>
               <TableHeader>
                 <TableRow>
+                  <TableHead className="text-xs">Артикул</TableHead>
                   <TableHead className="text-xs">Модель</TableHead>
                   <TableHead className="text-xs text-right">Подача воды, л/ч</TableHead>
                   <TableHead className="text-xs text-right">Габариты (A×B×C), мм</TableHead>
@@ -257,6 +258,7 @@ const VodoochistkaDozirovanieInner = () => {
               <TableBody>
                 {models.map((m) => (
                   <TableRow key={m.name}>
+                    <TableCell className="text-xs font-mono font-medium">{m.article}</TableCell>
                     <TableCell className="text-xs font-medium">{m.name}</TableCell>
                     <TableCell className="text-xs text-right">{m.capacity}</TableCell>
                     <TableCell className="text-xs text-right">{m.dimensions}</TableCell>
