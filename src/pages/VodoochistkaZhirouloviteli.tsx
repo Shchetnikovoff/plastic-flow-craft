@@ -352,7 +352,38 @@ const VodoochistkaZhirouloviteliInner = () => {
           </p>
         </section>
 
-        {/* CTA Form */}
+        {/* Section 8: Наземные вертикальные */}
+        <section className="mb-10" id="nazemnye-vertikalnye">
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Наземные вертикальные жироуловители</h2>
+          <div className="rounded-lg border border-border bg-card p-4 text-sm text-muted-foreground leading-relaxed space-y-2">
+            <p>
+              Наземные вертикальные жироуловители устанавливаются в технических и подвальных помещениях на ровную площадку. Удобный доступ ко всем узлам, откидная крышка для обслуживания. Подключаются к производственной канализационной сети.
+            </p>
+            <p>
+              Модельный ряд совпадает с подземными вертикальными (ЖУ-1 — ЖУ-15), но без технического колодца. Изготовление по индивидуальным размерам и конфигурации.
+            </p>
+            <Button variant="outline" size="sm" className="mt-2" onClick={scrollToForm}>
+              Запросить расчёт
+            </Button>
+          </div>
+        </section>
+
+        {/* Section 9: Прямоугольные */}
+        <section className="mb-10" id="pryamougolnye">
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Прямоугольные наземные жироуловители</h2>
+          <div className="rounded-lg border border-border bg-card p-4 text-sm text-muted-foreground leading-relaxed space-y-2">
+            <p>
+              Прямоугольные жироуловители из листового полипропилена с рёбрами жёсткости — оптимальное решение для ограниченных пространств технических помещений. Компактная форма позволяет устанавливать оборудование вплотную к стенам.
+            </p>
+            <p>
+              Изготавливаются по индивидуальным размерам с учётом производительности и особенностей объекта. Производительность от 1 до 15 л/с.
+            </p>
+            <Button variant="outline" size="sm" className="mt-2" onClick={scrollToForm}>
+              Запросить расчёт
+            </Button>
+          </div>
+        </section>
+
         <section id="cta-form" className="mb-10 rounded-lg border border-border bg-card p-6">
           <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Оставить заявку</h2>
           <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
