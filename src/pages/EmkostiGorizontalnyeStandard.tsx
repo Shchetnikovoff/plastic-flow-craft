@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/breadcrumb";
 import { toast } from "sonner";
 import PageFooter from "@/components/PageFooter";
+import { HorizontalTankCalculator } from "@/components/configurator";
 
 const models = [
   { art: "СЗПК.ЕГППЛСТ.1000", vol: 1000, d: 940, l: 1500 },
