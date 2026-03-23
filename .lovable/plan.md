@@ -1,16 +1,49 @@
 
 
-## Plan: Add TankCalculator to the EmkostiVertikalnye page
+## Plan: Create Horizontal Cylindrical Tanks subsection
 
-**What:** Add the existing `TankCalculator` component to the vertical tanks overview page (`EmkostiVertikalnye.tsx`), placed right after the subtypes image grid and before the CTA form. Also add a "Калькулятор" anchor to the nav.
+### What
+Create a landing page for "Ёмкости цилиндрические горизонтальные" and its first sub-page "Стандартная на низких ложементах" with the product table from the uploaded image. Copy uploaded product photos and schema to the project.
 
-### Changes to `src/pages/EmkostiVertikalnye.tsx`
+### Files to create/modify
 
-1. Import `TankCalculator` from `@/components/configurator`
-2. Add a `models` array with the standard volume range (same as `EmkostiEvpp.tsx`: 1000–50000 л)
-3. Insert `<TankCalculator models={models} defaultType="flat" />` after the subtypes grid section (line 128) and before the CTA form
-4. Add `{ id: "calculator", label: "Калькулятор" }` to the anchor nav array
+#### 1. Copy uploaded images to `public/images/`
+- `EGTS-standartnaya-1.jpg` → `public/images/egts-standartnaya-1.jpg`
+- `EGTS-standartnaya-3.jpg` → `public/images/egts-standartnaya-3.jpg`
+- `EGTS-standart-1.jpg` → `public/images/egts-standart-schema.jpg`
 
-### Files modified
-- `src/pages/EmkostiVertikalnye.tsx`
+#### 2. Create `src/pages/EmkostiGorizontalnye.tsx`
+Landing page for horizontal tanks (pattern: `EmkostiVertikalnye.tsx`):
+- Breadcrumbs: Каталог → Ёмкости → Цилиндрические горизонтальные
+- Hero section with title, description, uploaded photos
+- Subtypes grid with card linking to `/catalog/emkosti/gorizontalnye/standartnaya`
+- CTA form + PageFooter
+
+#### 3. Create `src/pages/EmkostiGorizontalnyeStandard.tsx`
+Sub-page for standard horizontal tanks (pattern: `EmkostiEvpp.tsx`):
+- Breadcrumbs: Каталог → Ёмкости → Горизонтальные → Стандартная
+- Hero with title + 2 photos (product + schema)
+- Anchor nav (Описание, Модельный ряд, Заявка)
+- Description section about standard horizontal tanks on low saddles
+- Model table with 17 rows from uploaded data:
+
+```text
+ЕГППЛСТ-1000   1000   940   1500
+ЕГППЛСТ-2000   2000   1330  1500
+...
+ЕГППЛСТ-50000  50000  3050  7000
+```
+
+Note: Column headers use "L, мм" instead of "H, мм" (length, not height)
+- Clickable rows → `/product/{article}`
+- CTA form + PageFooter
+
+#### 4. Update `src/App.tsx`
+- Import both new pages
+- Add routes:
+  - `/catalog/emkosti/gorizontalnye` → `EmkostiGorizontalnye`
+  - `/catalog/emkosti/gorizontalnye/standartnaya` → `EmkostiGorizontalnyeStandard`
+
+#### 5. Update `src/data/catalog.ts`
+- Add `externalPath: "/catalog/emkosti/gorizontalnye"` to the `e2` subcategory entry
 
