@@ -20,6 +20,7 @@ import EmkostiVertikalnye from "./pages/EmkostiVertikalnye";
 import EmkostiEvpp from "./pages/EmkostiEvpp";
 import EmkostiEvppSloped from "./pages/EmkostiEvppSloped";
 import EmkostiEvppConical from "./pages/EmkostiEvppConical";
+import EmkostiEvppConusDno from "./pages/EmkostiEvppConusDno";
 import Vodoochistka from "./pages/Vodoochistka";
 import VodoochistkaFfu from "./pages/VodoochistkaFfu";
 import VodoochistkaLamelnyj from "./pages/VodoochistkaLamelnyj";
