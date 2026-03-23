@@ -85,11 +85,12 @@ function parseExtendedEmkostArticle(article: string) {
             : specs.colors[0];
         }
 
-        const image = pickTankImage(cat.id, selectedColor?.colorCode);
+        const image = cat.id === "egpplst" ? "/images/egts-standartnaya-2.jpg" : pickTankImage(cat.id, selectedColor?.colorCode);
         const schemaImage = cat.id === "evpp-flat" ? "/images/evpp-flat-schema.png"
           : cat.id === "evpp-sloped" ? "/images/evpp-sloped-schema.png"
           : cat.id === "evpp-conical" ? "/images/evpp-conical-schema.png"
           : cat.id === "evpp-conusdno" ? "/images/evpp-conusdno-schema.png"
+          : cat.id === "egpplst" ? "/images/egts-standart-schema.jpg"
           : undefined;
 
         const matInfo = materials.find((m) => m.code === matCode);
@@ -136,6 +137,7 @@ function parseEmkostArticle(article: string) {
           if (cat.id.includes("lv")) image = "/images/emkost-horiz-pp-high.png";
           else image = "/images/emkost-horiz-pp-low.png";
           if (isPnd) image = "/images/emkost-horiz-pnd-photo.jpg";
+          if (cat.id === "egpplst") image = "/images/egts-standartnaya-2.jpg";
         } else {
           image = pickTankImage(cat.id);
           if (isPnd) image = "/images/emkost-vert-pnd-photo.png";
@@ -144,6 +146,7 @@ function parseEmkostArticle(article: string) {
           : cat.id === "evpp-sloped" ? "/images/evpp-sloped-schema.png"
           : cat.id === "evpp-conical" ? "/images/evpp-conical-schema.png"
           : cat.id === "evpp-conusdno" ? "/images/evpp-conusdno-schema.png"
+          : cat.id === "egpplst" ? "/images/egts-standart-schema.jpg"
           : undefined;
         return {
           productType: "emkost" as const,
