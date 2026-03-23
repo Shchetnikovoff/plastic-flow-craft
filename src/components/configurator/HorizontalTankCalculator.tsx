@@ -156,11 +156,16 @@ const HorizontalTankCalculator = ({ defaultType = "low" }: HorizontalTankCalcula
                           : "border-border hover:border-muted-foreground bg-card"
                       }`}
                     >
-                      <img
-                        src={cfg.image}
-                        alt={cfg.label}
-                        className="w-full aspect-[4/3] object-contain rounded"
-                      />
+                      <div className="relative w-full aspect-[4/3] rounded overflow-hidden">
+                        <img
+                          src={cfg.image}
+                          alt={cfg.label}
+                          className="w-full h-full object-contain"
+                        />
+                        {overlayStyle && (
+                          <div className="absolute inset-0 pointer-events-none" style={overlayStyle} />
+                        )}
+                      </div>
                       <span className="text-xs font-medium text-foreground text-center leading-tight">
                         {cfg.label}
                       </span>
