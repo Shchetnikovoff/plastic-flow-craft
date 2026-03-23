@@ -167,6 +167,13 @@ const EmkostiGorizontalnyeVysokieInner = () => {
           <p className="text-xs text-muted-foreground mt-2">Кликните на строку для перехода в карточку товара</p>
         </section>
 
+        <HorizontalTankCalculator
+          models={models}
+          articlePrefix="ЕГППЛВ"
+          prefixLabel="Высокие ложементы — Горизонтальные"
+          heroImage="/images/egts-vysokie-lozhementy-1.jpg"
+        />
+
         {/* CTA Form */}
         <section id="cta-form" className="mb-10 scroll-mt-8">
           <div className="rounded-xl border border-border bg-card p-6 sm:p-8">
