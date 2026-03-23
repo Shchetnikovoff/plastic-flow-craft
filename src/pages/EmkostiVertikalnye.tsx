@@ -29,6 +29,13 @@ const subtypes = [
     path: "/catalog/emkosti/vertikalnye/naklonnoe-dno",
     description: "Ёмкость с наклонным дном для полного слива жидкости. Люк Ø800 мм.",
   },
+  {
+    id: "konicheskaya-krysha",
+    name: "С конической крышей",
+    image: "/images/evpp-conical-hero.png",
+    path: "/catalog/emkosti/vertikalnye/konicheskaya-krysha",
+    description: "Коническая крыша обеспечивает сток конденсата и защиту от осадков.",
+  },
 ];
 
 const EmkostiVertikalnyeInner = () => {
