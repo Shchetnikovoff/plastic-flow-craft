@@ -16,18 +16,37 @@ interface HorizontalTankModel {
   l: number;
 }
 
+const horizontalTypeImages: Record<HorizontalTankType, Record<string, string>> = {
+  low: {
+    default: "/images/egts-standartnaya-1.jpg",
+    "5012": "/images/egts-low-hero-blue.png",
+    "9003": "/images/egts-low-hero-white.png",
+    black: "/images/egts-low-hero-black.png",
+  },
+  high: {
+    default: "/images/egts-vysokie-lozhementy-1.jpg",
+    "5012": "/images/egts-high-hero-blue.png",
+    "9003": "/images/egts-high-hero-white.png",
+    black: "/images/egts-high-hero-black.png",
+  },
+};
+
+function getHorizontalTankImage(type: HorizontalTankType, colorCode: string): string {
+  const images = horizontalTypeImages[type];
+  const key = colorCode === "" ? "black" : colorCode;
+  return images[key] || images["default"];
+}
+
 const horizontalTypeConfig: Record<HorizontalTankType, {
   label: string;
   prefix: string;
   prefixLabel: string;
-  image: string;
   models: HorizontalTankModel[];
 }> = {
   low: {
     label: "Низкие ложементы",
     prefix: "ЕГППЛСТ",
     prefixLabel: "Низкие ложементы — Горизонтальные",
-    image: "/images/egts-standartnaya-1.jpg",
     models: [
       { art: "СЗПК.ЕГППЛСТ.1000", vol: 1000, d: 940, l: 1500 },
       { art: "СЗПК.ЕГППЛСТ.2000", vol: 2000, d: 1330, l: 1500 },
@@ -52,7 +71,6 @@ const horizontalTypeConfig: Record<HorizontalTankType, {
     label: "Высокие ложементы",
     prefix: "ЕГППЛВ",
     prefixLabel: "Высокие ложементы — Горизонтальные",
-    image: "/images/egts-vysokie-lozhementy-1.jpg",
     models: [
       { art: "СЗПК.ЕГППЛВ.1000", vol: 1000, d: 940, l: 1500 },
       { art: "СЗПК.ЕГППЛВ.2000", vol: 2000, d: 1330, l: 1500 },
@@ -95,20 +113,6 @@ const HorizontalTankCalculator = ({ defaultType = "low" }: HorizontalTankCalcula
   );
 
   const specs = materialSpecs[selectedMaterial];
-
-  const getColorOverlay = useCallback((hex: string | undefined, colorCode: string | undefined): React.CSSProperties | null => {
-    if (!hex) return null;
-    // RAL 7032 (default grey) — no overlay
-    if (colorCode === "7032") return null;
-    // RAL 9003 (white)
-    if (colorCode === "9003") return { backgroundColor: hex, mixBlendMode: "soft-light" as const, opacity: 0.5 };
-    // PE100 black (no colorCode)
-    if (!colorCode) return { backgroundColor: hex, mixBlendMode: "multiply" as const, opacity: 0.6 };
-    // RAL 5012 (blue) and others
-    return { backgroundColor: hex, mixBlendMode: "multiply" as const, opacity: 0.35 };
-  }, []);
-
-  const overlayStyle = useMemo(() => getColorOverlay(selectedColor.hex, selectedColor.colorCode), [getColorOverlay, selectedColor]);
 
   const matchedModel = useMemo(() => {
     let closest = models[0];
@@ -156,16 +160,11 @@ const HorizontalTankCalculator = ({ defaultType = "low" }: HorizontalTankCalcula
                           : "border-border hover:border-muted-foreground bg-card"
                       }`}
                     >
-                      <div className="relative w-full aspect-[4/3] rounded overflow-hidden">
-                        <img
-                          src={cfg.image}
-                          alt={cfg.label}
-                          className="w-full h-full object-contain"
-                        />
-                        {overlayStyle && (
-                          <div className="absolute inset-0 pointer-events-none" style={overlayStyle} />
-                        )}
-                      </div>
+                      <img
+                        src={getHorizontalTankImage(t, selectedColor.colorCode)}
+                        alt={cfg.label}
+                        className="w-full aspect-[4/3] object-contain rounded"
+                      />
                       <span className="text-xs font-medium text-foreground text-center leading-tight">
                         {cfg.label}
                       </span>
@@ -249,15 +248,12 @@ const HorizontalTankCalculator = ({ defaultType = "low" }: HorizontalTankCalcula
 
           {/* Photo preview */}
           <div className="flex flex-col items-center justify-center">
-            <div className="w-full max-w-[220px] relative overflow-hidden rounded-lg">
+            <div className="w-full max-w-[220px]">
               <img
-                src={config.image}
+                src={getHorizontalTankImage(selectedType, selectedColor.colorCode)}
                 alt={config.label}
-                className="w-full aspect-[4/3] object-contain"
+                className="w-full aspect-[4/3] object-contain rounded-lg"
               />
-              {overlayStyle && (
-                <div className="absolute inset-0 pointer-events-none rounded-lg" style={overlayStyle} />
-              )}
             </div>
           </div>
         </div>
