@@ -17,6 +17,8 @@ import EmkostiKislotyShchelochi from "./pages/EmkostiKislotyShchelochi";
 import EmkostiPerelivnye from "./pages/EmkostiPerelivnye";
 import EmkostiCatalog from "./pages/EmkostiCatalog";
 import EmkostiVertikalnye from "./pages/EmkostiVertikalnye";
+import EmkostiGorizontalnye from "./pages/EmkostiGorizontalnye";
+import EmkostiGorizontalnyeStandard from "./pages/EmkostiGorizontalnyeStandard";
 import EmkostiEvpp from "./pages/EmkostiEvpp";
 import EmkostiEvppSloped from "./pages/EmkostiEvppSloped";
 import EmkostiEvppConical from "./pages/EmkostiEvppConical";
