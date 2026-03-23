@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/breadcrumb";
 import { toast } from "sonner";
 import PageFooter from "@/components/PageFooter";
+import { HorizontalTankCalculator } from "@/components/configurator";
 
 const subtypes = [
   {
@@ -86,6 +87,7 @@ const EmkostiGorizontalnyeInner = () => {
         {/* Anchor nav */}
         <nav className="mb-8 flex flex-wrap gap-2">
           {[
+            { id: "calculator", label: "Калькулятор" },
             { id: "katalog", label: "Каталог" },
             { id: "cta-form", label: "Заявка" },
           ].map((s) => (
@@ -98,6 +100,8 @@ const EmkostiGorizontalnyeInner = () => {
             </button>
           ))}
         </nav>
+
+        <HorizontalTankCalculator />
 
         {/* Subtypes grid */}
         <section id="katalog" className="mb-10">

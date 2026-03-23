@@ -91,9 +91,9 @@ const EmkostiGorizontalnyeVysokieInner = () => {
         {/* Anchor nav */}
         <nav className="mb-8 flex flex-wrap gap-2">
           {[
+            { id: "calculator", label: "Калькулятор" },
             { id: "opisanie", label: "Описание" },
             { id: "modeli", label: "Модельный ряд" },
-            { id: "calculator", label: "Калькулятор" },
             { id: "cta-form", label: "Заявка" },
           ].map((s) => (
             <button
@@ -105,6 +105,9 @@ const EmkostiGorizontalnyeVysokieInner = () => {
             </button>
           ))}
         </nav>
+
+        <HorizontalTankCalculator defaultType="high" />
+
 
         {/* Description */}
         <section id="opisanie" className="mb-10">
@@ -167,12 +170,7 @@ const EmkostiGorizontalnyeVysokieInner = () => {
           <p className="text-xs text-muted-foreground mt-2">Кликните на строку для перехода в карточку товара</p>
         </section>
 
-        <HorizontalTankCalculator
-          models={models}
-          articlePrefix="ЕГППЛВ"
-          prefixLabel="Высокие ложементы — Горизонтальные"
-          heroImage="/images/egts-vysokie-lozhementy-1.jpg"
-        />
+
 
         {/* CTA Form */}
         <section id="cta-form" className="mb-10 scroll-mt-8">
