@@ -3,7 +3,7 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import { CartProvider, useCart } from "@/contexts/CartContext";
 import Header from "@/components/Header";
 import CartSheet from "@/components/CartSheet";
-import { materials, materialSpecs, connectionTypes, baseSizes, type ConnectionType } from "@/data/products";
+import { materials, materialSpecs, connectionTypes, baseSizes, type ConnectionType, type MaterialColor } from "@/data/products";
 import { getProductImages } from "@/data/products";
 import { baseTroynikSizes, troynikImages } from "@/data/troynikProducts";
 import { razdvizhnoyImages, razdvizhnoyFlanecImages, getRazdvizhnoySizes } from "@/data/razdvizhnoyProducts";

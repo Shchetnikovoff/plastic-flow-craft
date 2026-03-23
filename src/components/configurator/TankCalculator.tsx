@@ -231,20 +231,30 @@ const TankCalculator = ({ models, defaultType }: TankCalculatorProps) => {
         <div className="mt-6 rounded-lg border border-primary/20 bg-primary/5 p-4">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div className="space-y-1">
-              <p className="text-sm font-semibold text-foreground">
-                Рекомендованная модель: <span className="text-primary">{matchedModel.art}</span>
-              </p>
-              <p className="text-xs text-muted-foreground">
-                {matchedModel.vol.toLocaleString("ru-RU")} л · Ø{matchedModel.d.toLocaleString("ru-RU")} мм · H {matchedModel.h.toLocaleString("ru-RU")} мм
-                · {materials.find((m) => m.name === selectedMaterial)?.code} · {selectedColor.name} ({selectedColor.ral})
-              </p>
+              {(() => {
+                const matCode = materials.find((m) => m.name === selectedMaterial)?.code || "PPC";
+                const colorPart = selectedColor.colorCode ? `.${selectedColor.colorCode}` : "";
+                const prefix = tankTypeArticlePrefix[selectedType];
+                const fullArticle = `СЗПК.${prefix}.${matCode}${colorPart}.${matchedModel.vol}`;
+                return (
+                  <>
+                    <p className="text-sm font-semibold text-foreground">
+                      Рекомендованная модель: <span className="text-primary">{fullArticle}</span>
+                    </p>
+                    <p className="text-xs text-muted-foreground">
+                      {matchedModel.vol.toLocaleString("ru-RU")} л · Ø{matchedModel.d.toLocaleString("ru-RU")} мм · H {matchedModel.h.toLocaleString("ru-RU")} мм
+                      · {matCode} · {selectedColor.name} ({selectedColor.ral})
+                    </p>
+                    <Button asChild size="sm" className="gap-1.5 mt-2">
+                      <Link to={`/product/${encodeURIComponent(fullArticle)}`}>
+                        Перейти к товару
+                        <ArrowRight className="h-4 w-4" />
+                      </Link>
+                    </Button>
+                  </>
+                );
+              })()}
             </div>
-            <Button asChild size="sm" className="gap-1.5">
-              <Link to={`/product/${encodeURIComponent(matchedModel.art)}`}>
-                Перейти к товару
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </Button>
           </div>
         </div>
       </div>
