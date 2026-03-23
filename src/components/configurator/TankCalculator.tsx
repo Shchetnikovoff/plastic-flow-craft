@@ -1,5 +1,6 @@
 import { useState, useMemo, useCallback } from "react";
 import { Link } from "react-router-dom";
+import ArticleBreakdown, { type ArticleSegment } from "@/components/configurator/ArticleBreakdown";
 import { Badge } from "@/components/ui/badge";
 import { Slider } from "@/components/ui/slider";
 import { Button } from "@/components/ui/button";
