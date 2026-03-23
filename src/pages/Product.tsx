@@ -50,6 +50,7 @@ function parseEmkostArticle(article: string) {
         const schemaImage = cat.id === "evpp-flat" ? "/images/evpp-flat-schema.png"
           : cat.id === "evpp-sloped" ? "/images/evpp-sloped-schema.png"
           : cat.id === "evpp-conical" ? "/images/evpp-conical-schema.png"
+          : cat.id === "evpp-conusdno" ? "/images/evpp-conusdno-schema.png"
           : undefined;
         return {
           productType: "emkost" as const,
