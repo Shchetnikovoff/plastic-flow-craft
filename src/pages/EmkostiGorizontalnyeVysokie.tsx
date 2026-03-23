@@ -93,6 +93,7 @@ const EmkostiGorizontalnyeVysokieInner = () => {
           {[
             { id: "opisanie", label: "Описание" },
             { id: "modeli", label: "Модельный ряд" },
+            { id: "calculator", label: "Калькулятор" },
             { id: "cta-form", label: "Заявка" },
           ].map((s) => (
             <button
