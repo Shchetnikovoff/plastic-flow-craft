@@ -36,6 +36,13 @@ const subtypes = [
     path: "/catalog/emkosti/vertikalnye/konicheskaya-krysha",
     description: "Коническая крыша обеспечивает сток конденсата и защиту от осадков.",
   },
+  {
+    id: "konusnoe-dno",
+    name: "С конусным дном",
+    image: "/images/evpp-conusdno-hero.png",
+    path: "/catalog/emkosti/vertikalnye/konusnoe-dno",
+    description: "Конусное дно для сбора осадка и полного слива жидкости. Опорная рама.",
+  },
 ];
 
 const EmkostiVertikalnyeInner = () => {

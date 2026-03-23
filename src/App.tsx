@@ -20,6 +20,7 @@ import EmkostiVertikalnye from "./pages/EmkostiVertikalnye";
 import EmkostiEvpp from "./pages/EmkostiEvpp";
 import EmkostiEvppSloped from "./pages/EmkostiEvppSloped";
 import EmkostiEvppConical from "./pages/EmkostiEvppConical";
+import EmkostiEvppConusDno from "./pages/EmkostiEvppConusDno";
 import Vodoochistka from "./pages/Vodoochistka";
 import VodoochistkaFfu from "./pages/VodoochistkaFfu";
 import VodoochistkaLamelnyj from "./pages/VodoochistkaLamelnyj";
@@ -70,6 +71,7 @@ const App = () => (
           <Route path="/catalog/emkosti/vertikalnye/ploskaya" element={<EmkostiEvpp />} />
           <Route path="/catalog/emkosti/vertikalnye/naklonnoe-dno" element={<EmkostiEvppSloped />} />
           <Route path="/catalog/emkosti/vertikalnye/konicheskaya-krysha" element={<EmkostiEvppConical />} />
+          <Route path="/catalog/emkosti/vertikalnye/konusnoe-dno" element={<EmkostiEvppConusDno />} />
           <Route path="/catalog/emkosti/vertikalnye" element={<EmkostiVertikalnye />} />
           <Route path="/catalog/emkosti/podzemnye" element={<EmkostiPodzemnye />} />
           <Route path="/catalog/emkosti/pryamougolnye" element={<EmkostiPryamougolnye />} />
