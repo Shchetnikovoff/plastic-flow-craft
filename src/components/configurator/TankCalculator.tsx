@@ -208,7 +208,7 @@ const TankCalculator = ({ models, defaultType }: TankCalculatorProps) => {
           {/* Photo preview */}
           <div className="flex flex-col items-center justify-center">
             <div className="w-full max-w-[220px]">
-              <TintedImage
+              <ColoredTankImage
                 src={tankTypeImages[selectedType]}
                 hex={selectedColor.hex}
                 alt={tankTypeLabels[selectedType]}
