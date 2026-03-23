@@ -127,9 +127,8 @@ const TankCalculator = ({ models, defaultType }: TankCalculatorProps) => {
                         : "border-border hover:border-muted-foreground bg-card"
                     }`}
                   >
-                    <ColoredTankImage
-                      src={tankTypeImages[t]}
-                      hex={selectedColor.hex}
+                    <img
+                      src={getTankImage(t, selectedColor.colorCode)}
                       alt={tankTypeLabels[t]}
                       className="w-full aspect-square object-contain rounded"
                     />
