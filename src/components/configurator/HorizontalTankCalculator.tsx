@@ -96,6 +96,20 @@ const HorizontalTankCalculator = ({ defaultType = "low" }: HorizontalTankCalcula
 
   const specs = materialSpecs[selectedMaterial];
 
+  const getColorOverlay = useCallback((hex: string | undefined, colorCode: string | undefined): React.CSSProperties | null => {
+    if (!hex) return null;
+    // RAL 7032 (default grey) — no overlay
+    if (colorCode === "7032") return null;
+    // RAL 9003 (white)
+    if (colorCode === "9003") return { backgroundColor: hex, mixBlendMode: "soft-light" as const, opacity: 0.5 };
+    // PE100 black (no colorCode)
+    if (!colorCode) return { backgroundColor: hex, mixBlendMode: "multiply" as const, opacity: 0.6 };
+    // RAL 5012 (blue) and others
+    return { backgroundColor: hex, mixBlendMode: "multiply" as const, opacity: 0.35 };
+  }, []);
+
+  const overlayStyle = useMemo(() => getColorOverlay(selectedColor.hex, selectedColor.colorCode), [getColorOverlay, selectedColor]);
+
   const matchedModel = useMemo(() => {
     let closest = models[0];
     let minDiff = Math.abs(models[0].vol - selectedVolume);
@@ -142,11 +156,16 @@ const HorizontalTankCalculator = ({ defaultType = "low" }: HorizontalTankCalcula
                           : "border-border hover:border-muted-foreground bg-card"
                       }`}
                     >
-                      <img
-                        src={cfg.image}
-                        alt={cfg.label}
-                        className="w-full aspect-[4/3] object-contain rounded"
-                      />
+                      <div className="relative w-full aspect-[4/3] rounded overflow-hidden">
+                        <img
+                          src={cfg.image}
+                          alt={cfg.label}
+                          className="w-full h-full object-contain"
+                        />
+                        {overlayStyle && (
+                          <div className="absolute inset-0 pointer-events-none" style={overlayStyle} />
+                        )}
+                      </div>
                       <span className="text-xs font-medium text-foreground text-center leading-tight">
                         {cfg.label}
                       </span>
@@ -230,12 +249,15 @@ const HorizontalTankCalculator = ({ defaultType = "low" }: HorizontalTankCalcula
 
           {/* Photo preview */}
           <div className="flex flex-col items-center justify-center">
-            <div className="w-full max-w-[220px]">
+            <div className="w-full max-w-[220px] relative overflow-hidden rounded-lg">
               <img
                 src={config.image}
                 alt={config.label}
-                className="w-full aspect-[4/3] object-contain rounded-lg"
+                className="w-full aspect-[4/3] object-contain"
               />
+              {overlayStyle && (
+                <div className="absolute inset-0 pointer-events-none rounded-lg" style={overlayStyle} />
+              )}
             </div>
           </div>
         </div>
