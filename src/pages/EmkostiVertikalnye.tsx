@@ -13,6 +13,21 @@ import {
 } from "@/components/ui/breadcrumb";
 import { toast } from "sonner";
 import PageFooter from "@/components/PageFooter";
+import { TankCalculator } from "@/components/configurator";
+
+const defaultModels = [
+  { art: "1000", vol: 1000, d: 1050, h: 1250 },
+  { art: "2000", vol: 2000, d: 1250, h: 1700 },
+  { art: "3000", vol: 3000, d: 1400, h: 2050 },
+  { art: "5000", vol: 5000, d: 1600, h: 2600 },
+  { art: "10000", vol: 10000, d: 2000, h: 3300 },
+  { art: "15000", vol: 15000, d: 2400, h: 3450 },
+  { art: "20000", vol: 20000, d: 2600, h: 3850 },
+  { art: "25000", vol: 25000, d: 2800, h: 4200 },
+  { art: "30000", vol: 30000, d: 3000, h: 4400 },
+  { art: "40000", vol: 40000, d: 3200, h: 5100 },
+  { art: "50000", vol: 50000, d: 3500, h: 5400 },
+];
 
 const subtypes = [
   {
