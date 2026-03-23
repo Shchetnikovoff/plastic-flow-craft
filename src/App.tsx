@@ -19,6 +19,7 @@ import EmkostiCatalog from "./pages/EmkostiCatalog";
 import EmkostiVertikalnye from "./pages/EmkostiVertikalnye";
 import EmkostiGorizontalnye from "./pages/EmkostiGorizontalnye";
 import EmkostiGorizontalnyeStandard from "./pages/EmkostiGorizontalnyeStandard";
+import EmkostiGorizontalnyeVysokie from "./pages/EmkostiGorizontalnyeVysokie";
 import EmkostiEvpp from "./pages/EmkostiEvpp";
 import EmkostiEvppSloped from "./pages/EmkostiEvppSloped";
 import EmkostiEvppConical from "./pages/EmkostiEvppConical";
