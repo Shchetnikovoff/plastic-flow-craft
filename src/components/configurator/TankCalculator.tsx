@@ -27,39 +27,29 @@ const tankTypeLabels: Record<TankType, string> = {
   conusdno: "Конусное дно",
 };
 
-const tankTypeImages: Record<TankType, string> = {
-  flat: "/images/evpp-flat-hero.png",
-  sloped: "/images/evpp-sloped-hero.png",
-  conical: "/images/evpp-conical-hero.png",
-  conusdno: "/images/evpp-conusdno-hero.png",
+const tankTypeImages: Record<TankType, Record<string, string>> = {
+  flat: {
+    default: "/images/evpp-flat-hero.png",
+    "5012": "/images/evpp-flat-hero-blue.png",
+  },
+  sloped: {
+    default: "/images/evpp-sloped-hero.png",
+    "5012": "/images/evpp-sloped-hero-blue.png",
+  },
+  conical: {
+    default: "/images/evpp-conical-hero.png",
+    "5012": "/images/evpp-conical-hero-blue.png",
+  },
+  conusdno: {
+    default: "/images/evpp-conusdno-hero.png",
+    "5012": "/images/evpp-conusdno-hero-blue.png",
+  },
 };
 
-/** CSS blend-mode based color overlay — preserves photo quality */
-const ColoredTankImage = ({ src, hex, alt, className }: {
-  src: string;
-  hex: string;
-  alt: string;
-  className?: string;
-}) => {
-  const r = parseInt(hex.slice(1, 3), 16) / 255;
-  const g = parseInt(hex.slice(3, 5), 16) / 255;
-  const b = parseInt(hex.slice(5, 7), 16) / 255;
-  const lightness = r * 0.299 + g * 0.587 + b * 0.114;
-
-  const opacity = lightness > 0.85 ? 0.15 : lightness < 0.15 ? 0.6 : 0.7;
-  const blendMode: React.CSSProperties["mixBlendMode"] =
-    lightness < 0.15 ? "multiply" : "color";
-
-  return (
-    <div className="relative overflow-hidden">
-      <img src={src} alt={alt} className={className} />
-      <div
-        className="absolute inset-0 pointer-events-none transition-all duration-300"
-        style={{ backgroundColor: hex, mixBlendMode: blendMode, opacity }}
-      />
-    </div>
-  );
-};
+function getTankImage(type: TankType, colorCode: string): string {
+  const images = tankTypeImages[type];
+  return images[colorCode] || images["default"];
+}
 
 const TankCalculator = ({ models, defaultType }: TankCalculatorProps) => {
   const volumes = useMemo(() => models.map((m) => m.vol), [models]);
