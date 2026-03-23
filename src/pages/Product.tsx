@@ -457,6 +457,32 @@ const ProductDetailContent = () => {
           <div>
             <h1 className="text-xl sm:text-2xl font-bold text-foreground mb-1">{emkost.title}</h1>
             <p className="font-mono text-sm text-muted-foreground mb-2">{article}</p>
+
+            {/* Article breakdown */}
+            {(() => {
+              const parts = article.split(".");
+              const segments: ArticleSegment[] = [
+                { value: "СЗПК", label: "Компания", desc: "Сибирский завод полимерных конструкций" },
+                { value: parts[1] || "", label: "Тип", desc: emkost.subtitle.split(" — ")[0] || "Ёмкость" },
+              ];
+              if ("materialCode" in emkost && emkost.materialCode) {
+                segments.push({ value: emkost.materialCode as string, label: "Материал", desc: emkost.materialName.split("(")[0].trim() });
+              }
+              if ("colorLabel" in emkost && emkost.colorLabel && parts.length >= 5) {
+                const colorHex = (() => {
+                  const mc = "materialCode" in emkost ? emkost.materialCode as string : "";
+                  const mat = materials.find((m) => m.code === mc);
+                  if (!mat) return undefined;
+                  const sp = materialSpecs[mat.name];
+                  const cc = parts[3];
+                  return sp?.colors.find((c) => c.colorCode === cc)?.hex;
+                })();
+                segments.push({ value: parts[3], label: "Цвет", desc: emkost.colorLabel as string, hex: colorHex });
+              }
+              segments.push({ value: String(emkost.volume), label: "Объём, л", desc: `${emkost.volume.toLocaleString()} литров` });
+              return <ArticleBreakdown exampleArticle={article} segments={segments} />;
+            })()}
+
             <p className="text-sm text-muted-foreground mb-6">{emkost.subtitle}</p>
 
             {/* Color picker for perelivnye */}
