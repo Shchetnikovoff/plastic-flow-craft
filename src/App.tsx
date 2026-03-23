@@ -16,6 +16,7 @@ import EmkostiPozharnye from "./pages/EmkostiPozharnye";
 import EmkostiKislotyShchelochi from "./pages/EmkostiKislotyShchelochi";
 import EmkostiPerelivnye from "./pages/EmkostiPerelivnye";
 import EmkostiCatalog from "./pages/EmkostiCatalog";
+import EmkostiVertikalnyePloskaya from "./pages/EmkostiVertikalnyePloskaya";
 import Vodoochistka from "./pages/Vodoochistka";
 import VodoochistkaFfu from "./pages/VodoochistkaFfu";
 import VodoochistkaLamelnyj from "./pages/VodoochistkaLamelnyj";
