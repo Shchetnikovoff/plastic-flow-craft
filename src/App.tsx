@@ -18,6 +18,7 @@ import EmkostiPerelivnye from "./pages/EmkostiPerelivnye";
 import EmkostiCatalog from "./pages/EmkostiCatalog";
 import EmkostiVertikalnye from "./pages/EmkostiVertikalnye";
 import EmkostiEvpp from "./pages/EmkostiEvpp";
+import EmkostiEvppSloped from "./pages/EmkostiEvppSloped";
 import Vodoochistka from "./pages/Vodoochistka";
 import VodoochistkaFfu from "./pages/VodoochistkaFfu";
 import VodoochistkaLamelnyj from "./pages/VodoochistkaLamelnyj";
