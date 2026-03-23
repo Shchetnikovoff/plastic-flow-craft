@@ -249,12 +249,15 @@ const HorizontalTankCalculator = ({ defaultType = "low" }: HorizontalTankCalcula
 
           {/* Photo preview */}
           <div className="flex flex-col items-center justify-center">
-            <div className="w-full max-w-[220px]">
+            <div className="w-full max-w-[220px] relative overflow-hidden rounded-lg">
               <img
                 src={config.image}
                 alt={config.label}
-                className="w-full aspect-[4/3] object-contain rounded-lg"
+                className="w-full aspect-[4/3] object-contain"
               />
+              {overlayStyle && (
+                <div className="absolute inset-0 pointer-events-none rounded-lg" style={overlayStyle} />
+              )}
             </div>
           </div>
         </div>
