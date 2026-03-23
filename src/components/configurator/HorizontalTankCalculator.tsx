@@ -16,13 +16,82 @@ interface HorizontalTankModel {
   l: number;
 }
 
+const horizontalTypeImages: Record<HorizontalTankType, Record<string, string>> = {
+  low: {
+    default: "/images/egts-standartnaya-1.jpg",
+    "5012": "/images/egts-low-hero-blue.png",
+    "9003": "/images/egts-low-hero-white.png",
+    black: "/images/egts-low-hero-black.png",
+  },
+  high: {
+    default: "/images/egts-vysokie-lozhementy-1.jpg",
+    "5012": "/images/egts-high-hero-blue.png",
+    "9003": "/images/egts-high-hero-white.png",
+    black: "/images/egts-high-hero-black.png",
+  },
+};
+
+function getHorizontalTankImage(type: HorizontalTankType, colorCode: string): string {
+  const images = horizontalTypeImages[type];
+  const key = colorCode === "" ? "black" : colorCode;
+  return images[key] || images["default"];
+}
+
 const horizontalTypeConfig: Record<HorizontalTankType, {
   label: string;
   prefix: string;
   prefixLabel: string;
-  image: string;
   models: HorizontalTankModel[];
 }> = {
+  low: {
+    label: "Низкие ложементы",
+    prefix: "ЕГППЛСТ",
+    prefixLabel: "Низкие ложементы — Горизонтальные",
+    models: [
+      { art: "СЗПК.ЕГППЛСТ.1000", vol: 1000, d: 940, l: 1500 },
+      { art: "СЗПК.ЕГППЛСТ.2000", vol: 2000, d: 1330, l: 1500 },
+      { art: "СЗПК.ЕГППЛСТ.3000", vol: 3000, d: 1600, l: 1500 },
+      { art: "СЗПК.ЕГППЛСТ.4000", vol: 4000, d: 1600, l: 2000 },
+      { art: "СЗПК.ЕГППЛСТ.5000", vol: 5000, d: 1700, l: 2300 },
+      { art: "СЗПК.ЕГППЛСТ.6000", vol: 6000, d: 1850, l: 2300 },
+      { art: "СЗПК.ЕГППЛСТ.8000", vol: 8000, d: 2260, l: 2000 },
+      { art: "СЗПК.ЕГППЛСТ.10000", vol: 10000, d: 2350, l: 2350 },
+      { art: "СЗПК.ЕГППЛСТ.12000", vol: 12000, d: 2350, l: 2800 },
+      { art: "СЗПК.ЕГППЛСТ.15000", vol: 15000, d: 2350, l: 3500 },
+      { art: "СЗПК.ЕГППЛСТ.20000", vol: 20000, d: 2380, l: 4500 },
+      { art: "СЗПК.ЕГППЛСТ.25000", vol: 25000, d: 2370, l: 5700 },
+      { art: "СЗПК.ЕГППЛСТ.30000", vol: 30000, d: 2400, l: 6650 },
+      { art: "СЗПК.ЕГППЛСТ.35000", vol: 35000, d: 3050, l: 4800 },
+      { art: "СЗПК.ЕГППЛСТ.40000", vol: 40000, d: 3050, l: 5600 },
+      { art: "СЗПК.ЕГППЛСТ.45000", vol: 45000, d: 3050, l: 6200 },
+      { art: "СЗПК.ЕГППЛСТ.50000", vol: 50000, d: 3050, l: 7000 },
+    ],
+  },
+  high: {
+    label: "Высокие ложементы",
+    prefix: "ЕГППЛВ",
+    prefixLabel: "Высокие ложементы — Горизонтальные",
+    models: [
+      { art: "СЗПК.ЕГППЛВ.1000", vol: 1000, d: 940, l: 1500 },
+      { art: "СЗПК.ЕГППЛВ.2000", vol: 2000, d: 1330, l: 1500 },
+      { art: "СЗПК.ЕГППЛВ.3000", vol: 3000, d: 1600, l: 1500 },
+      { art: "СЗПК.ЕГППЛВ.4000", vol: 4000, d: 1600, l: 2000 },
+      { art: "СЗПК.ЕГППЛВ.5000", vol: 5000, d: 1700, l: 2300 },
+      { art: "СЗПК.ЕГППЛВ.6000", vol: 6000, d: 1850, l: 2300 },
+      { art: "СЗПК.ЕГППЛВ.8000", vol: 8000, d: 2260, l: 2000 },
+      { art: "СЗПК.ЕГППЛВ.10000", vol: 10000, d: 2350, l: 2350 },
+      { art: "СЗПК.ЕГППЛВ.12000", vol: 12000, d: 2350, l: 2800 },
+      { art: "СЗПК.ЕГППЛВ.15000", vol: 15000, d: 2350, l: 3500 },
+      { art: "СЗПК.ЕГППЛВ.20000", vol: 20000, d: 2380, l: 4500 },
+      { art: "СЗПК.ЕГППЛВ.25000", vol: 25000, d: 2370, l: 5700 },
+      { art: "СЗПК.ЕГППЛВ.30000", vol: 30000, d: 2400, l: 6650 },
+      { art: "СЗПК.ЕГППЛВ.35000", vol: 35000, d: 3050, l: 4800 },
+      { art: "СЗПК.ЕГППЛВ.40000", vol: 40000, d: 3050, l: 5600 },
+      { art: "СЗПК.ЕГППЛВ.45000", vol: 45000, d: 3050, l: 6200 },
+      { art: "СЗПК.ЕГППЛВ.50000", vol: 50000, d: 3050, l: 7000 },
+    ],
+  },
+};
   low: {
     label: "Низкие ложементы",
     prefix: "ЕГППЛСТ",
