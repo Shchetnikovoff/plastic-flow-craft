@@ -3,8 +3,9 @@ import { Link, useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 import CartSheet from "@/components/CartSheet";
 import { CartProvider } from "@/contexts/CartContext";
-import { Check } from "lucide-react";
+import { Check, FileDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { generateLetterheadPdf } from "@/lib/generateLetterheadPdf";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
@@ -163,6 +164,10 @@ const EmkostiEvppConusDnoInner = () => {
             </div>
           </div>
           <p className="text-xs text-muted-foreground mt-2">Кликните на строку для перехода в карточку товара</p>
+          <Button variant="outline" className="gap-2 mt-4" onClick={async () => { await generateLetterheadPdf(); toast.success("Коммерческое предложение скачано"); }}>
+            <FileDown className="h-4 w-4" />
+            Скачать коммерческое предложение (PDF)
+          </Button>
         </section>
 
         {/* CTA Form */}
