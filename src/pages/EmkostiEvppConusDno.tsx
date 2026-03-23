@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/breadcrumb";
 import { toast } from "sonner";
 import PageFooter from "@/components/PageFooter";
+import { TankCalculator } from "@/components/configurator";
 
 const models = [
   { art: "СЗПК.ЕВПП-КД.1000", vol: 1000, d: 940, h: 1500 },
