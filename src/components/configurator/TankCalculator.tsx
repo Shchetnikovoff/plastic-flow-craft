@@ -99,20 +99,26 @@ const TankCalculator = ({ models, defaultType }: TankCalculatorProps) => {
             {/* Tank type */}
             <div>
               <span className="text-sm font-semibold text-foreground mb-2 block">Тип ёмкости</span>
-              <div className="flex flex-wrap gap-2">
+              <div className="grid grid-cols-4 gap-2">
                 {(Object.keys(tankTypeLabels) as TankType[]).map((t) => (
-                  <Badge
+                  <div
                     key={t}
-                    variant="outline"
-                    className={`rounded-full px-3 py-1.5 text-xs font-medium cursor-pointer transition-colors ${
-                      selectedType === t
-                        ? "border-primary text-primary bg-primary/5"
-                        : "hover:border-primary/50 hover:text-primary/80"
-                    }`}
                     onClick={() => setSelectedType(t)}
+                    className={`flex flex-col items-center gap-1.5 rounded-lg border p-2 cursor-pointer transition-all ${
+                      selectedType === t
+                        ? "border-primary ring-1 ring-primary shadow-sm bg-primary/5"
+                        : "border-border hover:border-muted-foreground bg-card"
+                    }`}
                   >
-                    {tankTypeLabels[t]}
-                  </Badge>
+                    <img
+                      src={tankTypeImages[t]}
+                      alt={tankTypeLabels[t]}
+                      className="w-full aspect-square object-contain rounded"
+                    />
+                    <span className="text-[10px] font-medium text-foreground text-center leading-tight">
+                      {tankTypeLabels[t]}
+                    </span>
+                  </div>
                 ))}
               </div>
             </div>
