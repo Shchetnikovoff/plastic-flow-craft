@@ -14,20 +14,30 @@ const ImageGalleryWithLightbox = ({ images, selectedImage, onSelectedImageChange
 
   return (
     <>
-      {/* Thumbnail row */}
-      <div className="grid grid-cols-3 sm:grid-cols-5 gap-2 sm:gap-3 mb-8">
-        {images.map((src, i) => (
-          <button
-            key={i}
-            onClick={() => { onSelectedImageChange(i); setLightboxOpen(true); }}
-            className={`aspect-square overflow-hidden rounded border-2 bg-card transition-all cursor-zoom-in ${
-              i === selectedImage ? "border-primary shadow-md" : "border-border hover:border-muted-foreground"
-            }`}
-          >
-            <img src={src} alt={`Фото ${i + 1}`} className="h-full w-full object-contain p-2 transition-all duration-300" />
-          </button>
-        ))}
+      {/* Large main image */}
+      <div
+        className="w-full aspect-square overflow-hidden rounded-lg border border-border bg-card mb-4 cursor-zoom-in"
+        onClick={() => setLightboxOpen(true)}
+      >
+        <img src={images[selectedImage]} alt={`Фото ${selectedImage + 1}`} className="h-full w-full object-contain p-4 transition-all duration-300" />
       </div>
+
+      {/* Thumbnail row */}
+      {images.length > 1 && (
+        <div className="grid grid-cols-3 sm:grid-cols-5 gap-2 sm:gap-3 mb-8">
+          {images.map((src, i) => (
+            <button
+              key={i}
+              onClick={() => onSelectedImageChange(i)}
+              className={`aspect-square overflow-hidden rounded border-2 bg-card transition-all ${
+                i === selectedImage ? "border-primary shadow-md" : "border-border hover:border-muted-foreground"
+              }`}
+            >
+              <img src={src} alt={`Фото ${i + 1}`} className="h-full w-full object-contain p-2 transition-all duration-300" />
+            </button>
+          ))}
+        </div>
+      )}
 
       {/* Lightbox */}
       <Dialog open={lightboxOpen} onOpenChange={setLightboxOpen}>

@@ -74,6 +74,13 @@ export const emkostGroups: EmkostGroup[] = [
         items: makeTable("ЕВПП-КК"),
         heightLabel: "H, мм",
       },
+      {
+        id: "evpp-conusdno",
+        title: "Конусное дно",
+        description: "Вертикальная цилиндрическая ёмкость с конусным дном для полного слива жидкости и осаждения взвесей.",
+        items: makeTable("ЕВПП-КД"),
+        heightLabel: "H, мм",
+      },
     ],
   },
   {
