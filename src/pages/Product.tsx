@@ -13,7 +13,7 @@ import { pozharnyeRect, pozharnyePodzem, pozharnyeHoriz } from "@/data/pozharnye
 import { perelivnyeProducts, ppColors } from "@/data/perelivnyeProducts";
 import { ffuModels } from "@/data/ffuProducts";
 import { lamelnyjModels, parseLamelnyjArticle } from "@/data/lamelnyjProducts";
-import ArticleBreakdown from "@/components/configurator/ArticleBreakdown";
+import ArticleBreakdown, { type ArticleSegment } from "@/components/configurator/ArticleBreakdown";
 import ImageGalleryWithLightbox from "@/components/configurator/ImageGalleryWithLightbox";
 import { Button } from "@/components/ui/button";
 import { ShoppingCart, Plus, Minus, ChevronLeft, ChevronRight, FileDown } from "lucide-react";
@@ -457,6 +457,32 @@ const ProductDetailContent = () => {
           <div>
             <h1 className="text-xl sm:text-2xl font-bold text-foreground mb-1">{emkost.title}</h1>
             <p className="font-mono text-sm text-muted-foreground mb-2">{article}</p>
+
+            {/* Article breakdown */}
+            {(() => {
+              const parts = article.split(".");
+              const segments: ArticleSegment[] = [
+                { value: "СЗПК", label: "Компания", desc: "Сибирский завод полимерных конструкций" },
+                { value: parts[1] || "", label: "Тип", desc: emkost.subtitle.split(" — ")[0] || "Ёмкость" },
+              ];
+              if ("materialCode" in emkost && emkost.materialCode) {
+                segments.push({ value: emkost.materialCode as string, label: "Материал", desc: emkost.materialName.split("(")[0].trim() });
+              }
+              if ("colorLabel" in emkost && emkost.colorLabel && parts.length >= 5) {
+                const colorHex = (() => {
+                  const mc = "materialCode" in emkost ? emkost.materialCode as string : "";
+                  const mat = materials.find((m) => m.code === mc);
+                  if (!mat) return undefined;
+                  const sp = materialSpecs[mat.name];
+                  const cc = parts[3];
+                  return sp?.colors.find((c) => c.colorCode === cc)?.hex;
+                })();
+                segments.push({ value: parts[3], label: "Цвет", desc: emkost.colorLabel as string, hex: colorHex });
+              }
+              segments.push({ value: String(emkost.volume), label: "Объём, л", desc: `${emkost.volume.toLocaleString()} литров` });
+              return <ArticleBreakdown exampleArticle={article} segments={segments} />;
+            })()}
+
             <p className="text-sm text-muted-foreground mb-6">{emkost.subtitle}</p>
 
             {/* Color picker for perelivnye */}
@@ -1768,7 +1794,38 @@ const ProductDetailContent = () => {
           <h1 className="text-xl sm:text-2xl font-bold text-foreground mb-1">
             {isVozdukhovod ? "Воздуховод вентиляционный круглый" : isRazdvizhnoy ? "Раздвижной элемент вентиляционный" : isTroynik ? "Тройник вентиляционный" : `Отвод вентиляционный ${angle}°`}
           </h1>
-          <p className="font-mono text-sm text-muted-foreground mb-6">{article}</p>
+          <p className="font-mono text-sm text-muted-foreground mb-2">{article}</p>
+
+          {/* Article breakdown for vent products */}
+          {(() => {
+            const parts = article.split(".");
+            const typeCode = parts[1] || "";
+            const typeLabels: Record<string, string> = {
+              "ОТВР": "Отвод раструбный", "ОТВФ": "Отвод фланцевый", "ОТВ": "Отвод",
+              "ТР": "Тройник раструбный", "ТРФ": "Тройник фланцевый",
+              "РЭ": "Раздвижной элемент", "РЭФ": "Раздвижной фланцевый",
+              "ВК": "Воздуховод круглый",
+            };
+            const segments: ArticleSegment[] = [
+              { value: "СЗПК", label: "Компания", desc: "Сибирский завод полимерных конструкций" },
+              { value: typeCode, label: "Тип", desc: typeLabels[typeCode] || typeCode },
+            ];
+            if (!isTroynik && !isVozdukhovod && !isRazdvizhnoy && parts[2]) {
+              segments.push({ value: parts[2], label: "Угол", desc: `${parts[2]}°` });
+            }
+            if (material) {
+              segments.push({ value: material.code, label: "Материал", desc: material.name.split("(")[0].trim() });
+            }
+            if (color?.colorCode) {
+              segments.push({ value: color.colorCode, label: "Цвет", desc: `${color.name} (${color.ral})`, hex: color.hex });
+            }
+            if (isTroynik && troynikSize) {
+              segments.push({ value: `${diameter}×${troynikSize.d1}`, label: "Диаметры", desc: `D ${diameter} мм × D1 ${troynikSize.d1} мм` });
+            } else {
+              segments.push({ value: String(diameter), label: "Диаметр", desc: `${diameter} мм` });
+            }
+            return <ArticleBreakdown exampleArticle={article} segments={segments} />;
+          })()}
 
           <div className="grid grid-cols-2 gap-px rounded-lg border overflow-hidden mb-6">
             <div className="bg-card p-3">
