@@ -92,6 +92,7 @@ const EmkostiEvppConusDnoInner = () => {
         {/* Anchor nav */}
         <nav className="mb-8 flex flex-wrap gap-2">
           {[
+            { id: "calculator", label: "Калькулятор" },
             { id: "opisanie", label: "Описание" },
             { id: "modeli", label: "Модельный ряд" },
             { id: "cta-form", label: "Заявка" },
