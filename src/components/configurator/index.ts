@@ -9,3 +9,4 @@ export type { CharCell } from "./CharacteristicsGrid";
 export { QuantityCell, AddToCartButton } from "./QuantityCell";
 export { default as TankCalculator } from "./TankCalculator";
 export type { TankType } from "./TankCalculator";
+export { default as HorizontalTankCalculator } from "./HorizontalTankCalculator";
