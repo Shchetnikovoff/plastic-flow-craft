@@ -1,6 +1,7 @@
 import { jsPDF } from "jspdf";
 import type { ProductSize, MaterialColor } from "@/data/products";
 import { loadImageAsBase64 } from "./imageUtils";
+import { registerCyrillicFont } from "./pdfFonts";
 
 interface FullPagePdfOptions {
   sizes: ProductSize[];
@@ -22,6 +23,7 @@ export async function generateFullPagePdf(options: FullPagePdfOptions) {
   } = options;
 
   const doc = new jsPDF({ orientation: "landscape" });
+  await registerCyrillicFont(doc);
   const pw = doc.internal.pageSize.getWidth();
   const ph = doc.internal.pageSize.getHeight();
   const margin = 20;
@@ -38,6 +40,7 @@ export async function generateFullPagePdf(options: FullPagePdfOptions) {
     }
     doc.setFontSize(8);
     doc.setTextColor(128);
+    doc.setFont("PTSans", "normal");
     doc.text("ООО СЗПК «Пласт-Металл Про»", pw - margin, 10, { align: "right" });
     doc.text("+7 963 322-55-40 | osobenkov@list.ru", pw - margin, 14, { align: "right" });
   };
@@ -45,6 +48,7 @@ export async function generateFullPagePdf(options: FullPagePdfOptions) {
   const drawFooter = () => {
     doc.setFontSize(8);
     doc.setTextColor(128);
+    doc.setFont("PTSans", "normal");
     doc.text(
       "ООО СЗПК «Пласт-Металл Про» | +7 963 322-55-40 | osobenkov@list.ru",
       pw / 2, ph - 8, { align: "center" }
@@ -67,11 +71,13 @@ export async function generateFullPagePdf(options: FullPagePdfOptions) {
   let y = 26;
   doc.setFontSize(20);
   doc.setTextColor(30, 58, 95);
+  doc.setFont("PTSans", "bold");
   doc.text("Каталог продукции", pw / 2, y, { align: "center" });
   y += 10;
 
   doc.setFontSize(14);
   doc.setTextColor(60);
+  doc.setFont("PTSans", "normal");
   doc.text("Отвод вентиляционный круглого сечения 90°", pw / 2, y, { align: "center" });
   y += 8;
 
@@ -84,10 +90,12 @@ export async function generateFullPagePdf(options: FullPagePdfOptions) {
   // === Description ===
   doc.setFontSize(12);
   doc.setTextColor(30, 58, 95);
+  doc.setFont("PTSans", "bold");
   doc.text("Описание", margin, y);
   y += 7;
   doc.setFontSize(9);
   doc.setTextColor(60);
+  doc.setFont("PTSans", "normal");
   const descText = "Отвод вентиляционный круглого сечения служит для плавного поворота системы под углом 90°. Обеспечивает надёжное соединение элементов вентиляционной системы благодаря раструбному типу соединения.";
   const descLines = doc.splitTextToSize(descText, pw - margin * 2);
   doc.text(descLines, margin, y);
@@ -97,6 +105,7 @@ export async function generateFullPagePdf(options: FullPagePdfOptions) {
   y = checkPage(y, 30);
   doc.setFontSize(12);
   doc.setTextColor(30, 58, 95);
+  doc.setFont("PTSans", "bold");
   doc.text("Характеристики", margin, y);
   y += 7;
 
@@ -115,11 +124,11 @@ export async function generateFullPagePdf(options: FullPagePdfOptions) {
     doc.setFillColor(248, 249, 252);
     doc.rect(sx, y, colW, 14, "FD");
     doc.setTextColor(120);
+    doc.setFont("PTSans", "normal");
     doc.text(specItems[i].label, sx + 4, y + 5);
     doc.setTextColor(30);
-    doc.setFont("helvetica", "bold");
+    doc.setFont("PTSans", "bold");
     doc.text(specItems[i].value, sx + 4, y + 11);
-    doc.setFont("helvetica", "normal");
   }
   y += 20;
 
@@ -128,6 +137,7 @@ export async function generateFullPagePdf(options: FullPagePdfOptions) {
     y = checkPage(y, 30);
     doc.setFontSize(12);
     doc.setTextColor(30, 58, 95);
+    doc.setFont("PTSans", "bold");
     doc.text("Характеристики пластика", margin, y);
     y += 7;
 
@@ -139,24 +149,24 @@ export async function generateFullPagePdf(options: FullPagePdfOptions) {
       doc.setFillColor(248, 249, 252);
       doc.rect(margin, y, halfW, 14, "FD");
       doc.setTextColor(120);
+      doc.setFont("PTSans", "normal");
       doc.text("Рабочая температура", margin + 4, y + 5);
       doc.setTextColor(30);
-      doc.setFont("helvetica", "bold");
+      doc.setFont("PTSans", "bold");
       doc.text(workingTemp, margin + 4, y + 11);
-      doc.setFont("helvetica", "normal");
     }
 
     if (chemicalResistance) {
       doc.setDrawColor(200);
       doc.setFillColor(248, 249, 252);
-      doc.rect(margin + halfW, y, halfW, 14, "FD");
+      doc.rect(margin + (pw - margin * 2) / 2, y, halfW, 14, "FD");
       doc.setTextColor(120);
+      doc.setFont("PTSans", "normal");
       doc.text("Химическая стойкость", margin + halfW + 4, y + 5);
       doc.setTextColor(30);
-      doc.setFont("helvetica", "bold");
+      doc.setFont("PTSans", "bold");
       const crLines = doc.splitTextToSize(chemicalResistance, halfW - 8);
       doc.text(crLines[0], margin + halfW + 4, y + 11);
-      doc.setFont("helvetica", "normal");
     }
     y += 20;
   }
@@ -166,10 +176,12 @@ export async function generateFullPagePdf(options: FullPagePdfOptions) {
     y = checkPage(y, 20);
     doc.setFontSize(10);
     doc.setTextColor(30, 58, 95);
+    doc.setFont("PTSans", "bold");
     doc.text("Доступные цвета:", margin, y);
     y += 6;
     doc.setFontSize(9);
     doc.setTextColor(60);
+    doc.setFont("PTSans", "normal");
     for (const c of colors) {
       y = checkPage(y, 6);
       doc.text(`• ${c.name} (${c.ral}) — ${c.application}`, margin + 4, y);
@@ -183,6 +195,7 @@ export async function generateFullPagePdf(options: FullPagePdfOptions) {
     y = checkPage(y, 25);
     doc.setFontSize(12);
     doc.setTextColor(30, 58, 95);
+    doc.setFont("PTSans", "bold");
     doc.text("Расшифровка артикула", margin, y);
     y += 7;
 
@@ -195,9 +208,9 @@ export async function generateFullPagePdf(options: FullPagePdfOptions) {
       doc.setFillColor(248, 249, 252);
       doc.rect(sx, y, segW, 18, "FD");
       doc.setTextColor(30);
-      doc.setFont("helvetica", "bold");
+      doc.setFont("PTSans", "bold");
       doc.text(seg.value, sx + segW / 2, y + 6, { align: "center" });
-      doc.setFont("helvetica", "normal");
+      doc.setFont("PTSans", "normal");
       doc.setTextColor(30, 58, 95);
       doc.setFontSize(7);
       doc.text(seg.label, sx + segW / 2, y + 11, { align: "center" });
@@ -212,6 +225,7 @@ export async function generateFullPagePdf(options: FullPagePdfOptions) {
   y = checkPage(y, 20);
   doc.setFontSize(12);
   doc.setTextColor(30, 58, 95);
+  doc.setFont("PTSans", "bold");
   doc.text("Технические характеристики", margin, y);
   y += 8;
 
@@ -230,7 +244,7 @@ export async function generateFullPagePdf(options: FullPagePdfOptions) {
   doc.rect(margin, y, tableW, rowH, "F");
   doc.setFontSize(9);
   doc.setTextColor(255);
-  doc.setFont("helvetica", "bold");
+  doc.setFont("PTSans", "bold");
   let x = margin;
   for (const col of cols) {
     const tx = col.align === "center" ? x + col.width / 2 : x + 3;
@@ -239,7 +253,7 @@ export async function generateFullPagePdf(options: FullPagePdfOptions) {
   }
   y += rowH;
   doc.setTextColor(0);
-  doc.setFont("helvetica", "normal");
+  doc.setFont("PTSans", "normal");
 
   // Rows
   for (let i = 0; i < sizes.length; i++) {

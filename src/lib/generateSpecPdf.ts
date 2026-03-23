@@ -1,6 +1,7 @@
 import { jsPDF } from "jspdf";
 import type { ContactFormData } from "@/components/ContactFormFields";
 import { loadImageAsBase64 } from "./imageUtils";
+import { registerCyrillicFont } from "./pdfFonts";
 
 interface ProductSpec {
   article: string;
@@ -20,6 +21,7 @@ interface ProductSpec {
 
 export async function generateSpecPdf(product: ProductSpec, contact: ContactFormData) {
   const doc = new jsPDF();
+  await registerCyrillicFont(doc);
   const pageWidth = doc.internal.pageSize.getWidth();
 
   // Load logo
@@ -83,9 +85,9 @@ export async function generateSpecPdf(product: ProductSpec, contact: ContactForm
   }
 
   for (const [label, value] of rows) {
-    doc.setFont("helvetica", "bold");
+    doc.setFont("PTSans", "bold");
     doc.text(`${label}:`, labelX, y);
-    doc.setFont("helvetica", "normal");
+    doc.setFont("PTSans", "normal");
     doc.text(value, valueX, y);
     y += 8;
   }
@@ -96,7 +98,7 @@ export async function generateSpecPdf(product: ProductSpec, contact: ContactForm
   doc.line(20, y, pageWidth - 20, y);
   y += 12;
   doc.setFontSize(12);
-  doc.setFont("helvetica", "bold");
+  doc.setFont("PTSans", "bold");
   doc.text("Контактные данные заказчика", labelX, y);
   y += 10;
   doc.setFontSize(11);
@@ -109,9 +111,9 @@ export async function generateSpecPdf(product: ProductSpec, contact: ContactForm
   ];
 
   for (const [label, value] of contactRows) {
-    doc.setFont("helvetica", "bold");
+    doc.setFont("PTSans", "bold");
     doc.text(`${label}:`, labelX, y);
-    doc.setFont("helvetica", "normal");
+    doc.setFont("PTSans", "normal");
     doc.text(value, valueX, y);
     y += 8;
   }
