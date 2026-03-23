@@ -21,6 +21,13 @@ const subtypes = [
     path: "/catalog/emkosti/gorizontalnye/standartnaya",
     description: "Горизонтальная цилиндрическая ёмкость стандартной формы на низких ложементах. Объём от 1 000 до 50 000 литров.",
   },
+  {
+    id: "vysokie-lozhementy",
+    name: "Стандартная на высоких ложементах",
+    image: "/images/egts-vysokie-lozhementy-1.jpg",
+    path: "/catalog/emkosti/gorizontalnye/vysokie-lozhementy",
+    description: "Горизонтальная цилиндрическая ёмкость с плоской крышей и плоским дном на высоких ложементах. Объём от 1 000 до 50 000 литров.",
+  },
 ];
 
 const EmkostiGorizontalnyeInner = () => {
