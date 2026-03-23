@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect, useRef, useCallback } from "react";
+import { useState, useMemo, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { Badge } from "@/components/ui/badge";
 import { Slider } from "@/components/ui/slider";
@@ -34,78 +34,31 @@ const tankTypeImages: Record<TankType, string> = {
   conusdno: "/images/evpp-conusdno-hero.png",
 };
 
-/** Tint non-white pixels of an image to a target color, keeping white background */
-function useTintedImage(src: string, hex: string): string {
-  const [result, setResult] = useState(src);
-  const cacheRef = useRef<Record<string, string>>({});
-
-  useEffect(() => {
-    const key = `${src}|${hex}`;
-    if (cacheRef.current[key]) {
-      setResult(cacheRef.current[key]);
-      return;
-    }
-
-    const img = new Image();
-    img.crossOrigin = "anonymous";
-    img.onload = () => {
-      // Use a smaller canvas for thumbnails (max 300px wide)
-      const scale = Math.min(1, 300 / img.width);
-      const w = Math.round(img.width * scale);
-      const h = Math.round(img.height * scale);
-
-      const canvas = document.createElement("canvas");
-      canvas.width = w;
-      canvas.height = h;
-      const ctx = canvas.getContext("2d")!;
-      ctx.drawImage(img, 0, 0, w, h);
-
-      const imageData = ctx.getImageData(0, 0, w, h);
-      const data = imageData.data;
-
-      // Parse target color
-      const tr = parseInt(hex.slice(1, 3), 16);
-      const tg = parseInt(hex.slice(3, 5), 16);
-      const tb = parseInt(hex.slice(5, 7), 16);
-
-      for (let i = 0; i < data.length; i += 4) {
-        const r = data[i], g = data[i + 1], b = data[i + 2];
-        const lum = (r * 0.299 + g * 0.587 + b * 0.114);
-
-        // White/near-white pixels — keep as-is
-        if (lum > 235) continue;
-
-        // Very dark pixels (structural elements) — keep as-is
-        if (lum < 60) continue;
-
-        // Mid-tone pixels (tank body) — tint to target color
-        // Use luminance as a factor to preserve shading
-        const factor = lum / 200; // normalize to ~1 for mid-greys
-        data[i] = Math.min(255, Math.round(tr * factor));
-        data[i + 1] = Math.min(255, Math.round(tg * factor));
-        data[i + 2] = Math.min(255, Math.round(tb * factor));
-      }
-
-      ctx.putImageData(imageData, 0, 0);
-      const dataUrl = canvas.toDataURL("image/png");
-      cacheRef.current[key] = dataUrl;
-      setResult(dataUrl);
-    };
-    img.src = src;
-  }, [src, hex]);
-
-  return result;
-}
-
-/** Image component with color tinting */
-const TintedImage = ({ src, hex, alt, className }: {
+/** CSS blend-mode based color overlay — preserves photo quality */
+const ColoredTankImage = ({ src, hex, alt, className }: {
   src: string;
   hex: string;
   alt: string;
   className?: string;
 }) => {
-  const tinted = useTintedImage(src, hex);
-  return <img src={tinted} alt={alt} className={className} />;
+  const r = parseInt(hex.slice(1, 3), 16) / 255;
+  const g = parseInt(hex.slice(3, 5), 16) / 255;
+  const b = parseInt(hex.slice(5, 7), 16) / 255;
+  const lightness = r * 0.299 + g * 0.587 + b * 0.114;
+
+  const opacity = lightness > 0.85 ? 0.15 : lightness < 0.15 ? 0.6 : 0.7;
+  const blendMode: React.CSSProperties["mixBlendMode"] =
+    lightness < 0.15 ? "multiply" : "color";
+
+  return (
+    <div className="relative overflow-hidden">
+      <img src={src} alt={alt} className={className} />
+      <div
+        className="absolute inset-0 pointer-events-none transition-all duration-300"
+        style={{ backgroundColor: hex, mixBlendMode: blendMode, opacity }}
+      />
+    </div>
+  );
 };
 
 const TankCalculator = ({ models, defaultType }: TankCalculatorProps) => {
@@ -184,7 +137,7 @@ const TankCalculator = ({ models, defaultType }: TankCalculatorProps) => {
                         : "border-border hover:border-muted-foreground bg-card"
                     }`}
                   >
-                    <TintedImage
+                    <ColoredTankImage
                       src={tankTypeImages[t]}
                       hex={selectedColor.hex}
                       alt={tankTypeLabels[t]}
@@ -255,7 +208,7 @@ const TankCalculator = ({ models, defaultType }: TankCalculatorProps) => {
           {/* Photo preview */}
           <div className="flex flex-col items-center justify-center">
             <div className="w-full max-w-[220px]">
-              <TintedImage
+              <ColoredTankImage
                 src={tankTypeImages[selectedType]}
                 hex={selectedColor.hex}
                 alt={tankTypeLabels[selectedType]}
