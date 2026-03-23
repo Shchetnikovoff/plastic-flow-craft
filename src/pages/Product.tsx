@@ -581,6 +581,10 @@ const ProductDetailContent = () => {
               <FileDown className="h-4 w-4" />
               Скачать спецификацию (PDF)
             </Button>
+            <Button variant="outline" className="gap-2 w-full mt-2" onClick={async () => { await generateLetterheadPdf(); toast.success("Коммерческое предложение скачано"); }}>
+              <FileDown className="h-4 w-4" />
+              Скачать коммерческое предложение (PDF)
+            </Button>
           </div>
         </div>
 
