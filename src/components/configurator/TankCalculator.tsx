@@ -197,9 +197,8 @@ const TankCalculator = ({ models, defaultType }: TankCalculatorProps) => {
           {/* Photo preview */}
           <div className="flex flex-col items-center justify-center">
             <div className="w-full max-w-[220px]">
-              <ColoredTankImage
-                src={tankTypeImages[selectedType]}
-                hex={selectedColor.hex}
+              <img
+                src={getTankImage(selectedType, selectedColor.colorCode)}
                 alt={tankTypeLabels[selectedType]}
                 className="w-full aspect-[3/4] object-contain rounded-lg"
               />
