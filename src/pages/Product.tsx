@@ -322,31 +322,39 @@ const ProductDetailContent = () => {
 
         <div className="grid gap-8 md:grid-cols-2">
           <div>
-            <div className={`${emkost.image.includes("perelivnaya") ? "aspect-[4/3]" : "aspect-square"} overflow-hidden rounded-lg border bg-card mb-3`}>
-              {"rectDims" in emkost && emkost.rectDims && !emkost.image.includes("perelivnaya") ? (
-                <DimensionOverlay
-                  imageSrc={emkost.image}
-                  imageAlt={emkost.title}
-                  length={emkost.rectDims.length}
-                  width={emkost.rectDims.width}
-                  height={emkost.rectDims.height}
-                  isoCorners={
-                    emkost.image.includes("pryam")
-                      ? {
-                          frontTopLeft:  { x: 60,  y: 65  },
-                          frontTopRight: { x: 290, y: 45  },
-                          frontBotLeft:  { x: 60,  y: 310 },
-                          frontBotRight: { x: 290, y: 330 },
-                          backTopRight:  { x: 345, y: 30  },
-                          backBotRight:  { x: 345, y: 290 },
-                        }
-                      : undefined
-                  }
-                />
-              ) : (
-                <img src={emkost.image} alt={emkost.title} className="h-full w-full object-contain" />
-              )}
-            </div>
+            {"schemaImage" in emkost && emkost.schemaImage ? (
+              <ImageGalleryWithLightbox
+                images={[emkost.image, emkost.schemaImage]}
+                selectedImage={0}
+                onSelectedImageChange={() => {}}
+              />
+            ) : (
+              <div className={`${emkost.image.includes("perelivnaya") ? "aspect-[4/3]" : "aspect-square"} overflow-hidden rounded-lg border bg-card mb-3`}>
+                {"rectDims" in emkost && emkost.rectDims && !emkost.image.includes("perelivnaya") ? (
+                  <DimensionOverlay
+                    imageSrc={emkost.image}
+                    imageAlt={emkost.title}
+                    length={emkost.rectDims.length}
+                    width={emkost.rectDims.width}
+                    height={emkost.rectDims.height}
+                    isoCorners={
+                      emkost.image.includes("pryam")
+                        ? {
+                            frontTopLeft:  { x: 60,  y: 65  },
+                            frontTopRight: { x: 290, y: 45  },
+                            frontBotLeft:  { x: 60,  y: 310 },
+                            frontBotRight: { x: 290, y: 330 },
+                            backTopRight:  { x: 345, y: 30  },
+                            backBotRight:  { x: 345, y: 290 },
+                          }
+                        : undefined
+                    }
+                  />
+                ) : (
+                  <img src={emkost.image} alt={emkost.title} className="h-full w-full object-contain" />
+                )}
+              </div>
+            )}
           </div>
 
           <div>
