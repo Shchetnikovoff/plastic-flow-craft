@@ -108,6 +108,7 @@ const EmkostiVertikalnyeInner = () => {
         <nav className="mb-8 flex flex-wrap gap-2">
           {[
             { id: "katalog", label: "Каталог" },
+            { id: "calculator", label: "Калькулятор" },
             { id: "cta-form", label: "Заявка" },
           ].map((s) => (
             <button
