@@ -1,31 +1,72 @@
 
 
-## Plan: Fix Cyrillic text in PDF generation
+## Plan: Add anchor navigation to all category and product pages
 
-**Problem:** jsPDF's built-in `helvetica` font has no Cyrillic glyphs, causing hieroglyphs in all PDF downloads. The DOCX generation uses the `docx` library which references system fonts by name — it should work correctly (Arial supports Cyrillic). If DOCX also shows issues, it's likely a viewer problem, not a generation problem.
+**What:** Add the same anchor navigation panel (pill-shaped buttons for smooth-scrolling to sections) that exists on `VodoochistkaZhirouloviteli.tsx` to all other category landing pages and detailed product subpages across the site. Also add `id` attributes to sections that lack them.
 
-**Solution:** Embed a Cyrillic-compatible font (PT Sans from Google Fonts — free, professional, supports full Cyrillic range) into all three PDF generation files.
+### Pages to update (28 total)
 
-### Changes
+**Category landing pages (7)** — sections: Описание, Назначение, Материалы/Модификации, Преимущества, Каталог, Заявка
+1. `EmkostiPage.tsx`
+2. `Vodoochistka.tsx`
+3. `GazoochistkaPage.tsx`
+4. `KnsPage.tsx`
+5. `ReaktoryPage.tsx`
+6. `GidrometallurgiyaPage.tsx`
+7. `VentilyatsiyaPage.tsx`
 
-**1. Create `src/lib/pdfFonts.ts`**
-- Fetch PT Sans Regular and Bold `.ttf` files from Google Fonts CDN at runtime
-- Convert to base64 and register with jsPDF via `doc.addFileToVFS()` + `doc.addFont()`
-- Export a helper: `async function registerCyrillicFont(doc: jsPDF)` that registers both weights
+**Product subpages with detailed sections (17)** — sections vary per page (Описание, Назначение, Принцип работы, Модельный ряд, Характеристики, Опции, Преимущества, Заявка)
+8. `EmkostiPozharnye.tsx`
+9. `EmkostiPodzemnye.tsx`
+10. `EmkostiPerelivnye.tsx`
+11. `EmkostiPryamougolnye.tsx`
+12. `EmkostiKislotyShchelochi.tsx`
+13. `VodoochistkaFfu.tsx`
+14. `VodoochistkaLamelnyj.tsx`
+15. `VodoochistkaLos.tsx`
+16. `VodoochistkaDozirovanie.tsx`
+17. `VodoochistkaObezvozhivatel.tsx`
+18. `VodoochistkaShkafyDozirovaniya.tsx`
+19. `GazoochistkaSkrubbery.tsx`
+20. `GazoochistkaFvg.tsx`
+21. `GazoochistkaKapleuloviteli.tsx`
+22. `ZhuGorizontalnye.tsx`
+23. `ZhuNazemnyeVertikalnye.tsx`
+24. `ZhuPodzemnyeVertikalnye.tsx`
+25. `ZhuPryamougolnye.tsx`
 
-**2. Update `src/lib/generateLetterheadPdf.ts`**
-- Import and call `registerCyrillicFont(doc)` after creating the jsPDF instance
-- Replace all `doc.setFont("helvetica", ...)` with `doc.setFont("PTSans", ...)`
+**Excluded** (already has nav or too simple): `VodoochistkaZhirouloviteli.tsx` (done), `GalvanikaPage.tsx`, `Index.tsx`, `AboutPage.tsx`, `CatalogPage.tsx`, `Product.tsx`, `NotFound.tsx`
 
-**3. Update `src/lib/generateSpecPdf.ts`**
-- Same font registration and replacement
+### Changes per page
 
-**4. Update `src/lib/generateFullPagePdf.ts`**
-- Same font registration and replacement
+For each page:
+
+1. **Add `id` attributes** to each `<section>` block (e.g. `id="opisanie"`, `id="naznachenie"`, `id="modeli"`, `id="preimushchestva"`, `id="cta-form"`)
+
+2. **Insert `<nav>` block** after the Hero section with pill buttons matching the page's actual sections. Example for a category page:
+```tsx
+<nav className="mb-8 flex flex-wrap gap-2">
+  {[
+    { id: "opisanie", label: "Описание" },
+    { id: "naznachenie", label: "Назначение" },
+    { id: "materialy", label: "Материалы" },
+    { id: "preimushchestva", label: "Преимущества" },
+    { id: "katalog", label: "Каталог" },
+    { id: "cta-form", label: "Заявка" },
+  ].map((s) => (
+    <button
+      key={s.id}
+      onClick={() => document.getElementById(s.id)?.scrollIntoView({ behavior: "smooth" })}
+      className="rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium text-foreground hover:bg-accent hover:text-accent-foreground transition-colors"
+    >
+      {s.label}
+    </button>
+  ))}
+</nav>
+```
+
+Each page gets labels tailored to its actual content sections. Product subpages with model tables get "Модели" anchor, pages with "Принцип работы" get that anchor, etc.
 
 ### Files modified
-- `src/lib/pdfFonts.ts` — new shared font loader
-- `src/lib/generateLetterheadPdf.ts` — use PT Sans
-- `src/lib/generateSpecPdf.ts` — use PT Sans
-- `src/lib/generateFullPagePdf.ts` — use PT Sans
+- 25 page files in `src/pages/`
 
