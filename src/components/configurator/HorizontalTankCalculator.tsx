@@ -96,6 +96,20 @@ const HorizontalTankCalculator = ({ defaultType = "low" }: HorizontalTankCalcula
 
   const specs = materialSpecs[selectedMaterial];
 
+  const getColorOverlay = useCallback((hex: string | undefined, colorCode: string | undefined): React.CSSProperties | null => {
+    if (!hex) return null;
+    // RAL 7032 (default grey) — no overlay
+    if (colorCode === "7032") return null;
+    // RAL 9003 (white)
+    if (colorCode === "9003") return { backgroundColor: hex, mixBlendMode: "soft-light" as const, opacity: 0.5 };
+    // PE100 black (no colorCode)
+    if (!colorCode) return { backgroundColor: hex, mixBlendMode: "multiply" as const, opacity: 0.6 };
+    // RAL 5012 (blue) and others
+    return { backgroundColor: hex, mixBlendMode: "multiply" as const, opacity: 0.35 };
+  }, []);
+
+  const overlayStyle = useMemo(() => getColorOverlay(selectedColor.hex, selectedColor.colorCode), [getColorOverlay, selectedColor]);
+
   const matchedModel = useMemo(() => {
     let closest = models[0];
     let minDiff = Math.abs(models[0].vol - selectedVolume);
