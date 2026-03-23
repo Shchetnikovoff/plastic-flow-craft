@@ -1,42 +1,28 @@
 
 
-## Plan: Add "Наклонное дно" subsection to 6.1 Vertical Cylindrical Tanks
+## Plan: Fix EVPP product card issues
 
-**What:** Create a new subpage for "Вертикальная цилиндрическая ёмкость с наклонным дном" (ЕВПП-НД) following the same pattern as the existing EVPP flat-roof page, using the two uploaded images.
+**Problems found:**
+1. Articles `СЗПК.ЕВПП-КД.*` (conusdno) are not registered in `emkostiProducts.ts` — clicking any row shows "Товар не найден"
+2. Product card images for all EVPP types are too small — `ImageGalleryWithLightbox` renders only a row of small thumbnails without a large main image preview
+3. Hero images on all 4 subsection pages are clean (no watermarks found)
 
 ### Changes
 
-**1. Copy uploaded images to project**
-- `user-uploads://Emkost-vertikalnaya-tsilindricheskaya-naklonnoe-dno.jpg` → `public/images/evpp-sloped-hero.png` (product photo, remove "СВ ПОЛИМЕР" watermark)
-- `user-uploads://Emkost-vertikalnaya-tsilindricheskaya-naklonnoe-dno-1.jpg` → `public/images/evpp-sloped-schema.png` (technical schema)
+**1. `src/data/emkostiProducts.ts`** — Add `evpp-conusdno` category
+- Add new category entry with `id: "evpp-conusdno"`, `items: makeTable("ЕВПП-КД")` to the `vertical-pp` group
 
-**2. Create `src/pages/EmkostiEvppSloped.tsx`**
-- Clone structure from `EmkostiEvpp.tsx`
-- Title: "Вертикальная цилиндрическая ёмкость с наклонным дном"
-- Description: "Вертикальная цилиндрическая ёмкость с наклонным дном. Полностью закрытая с люком Ø800 мм со съёмной крышкой на болтовом соединении."
-- Model table: 17 rows with articles `СЗПК.ЕВПП-НД.1000` through `СЗПК.ЕВПП-НД.50000` (same sizes as ЕВПП from `emkostiProducts.ts`)
-- Gallery: hero photo + schema via `ImageGalleryWithLightbox`
-- Breadcrumb: Каталог → Ёмкости → Цилиндрические вертикальные → Наклонное дно
+**2. `src/components/configurator/ImageGalleryWithLightbox.tsx`** — Add large main image
+- Add a large main image display above the thumbnail row showing `images[selectedImage]` at full width in an `aspect-square` container with `object-contain`
+- Clicking the main image opens the lightbox
+- Thumbnails below select the main image (existing click-to-lightbox behavior preserved)
 
-**3. Update `src/pages/EmkostiVertikalnye.tsx`**
-- Add second entry to `subtypes` array:
-  ```
-  { id: "naklonnoe-dno", name: "С наклонным дном", image: "/images/evpp-sloped-hero.png",
-    path: "/catalog/emkosti/vertikalnye/naklonnoe-dno", description: "Ёмкость с наклонным дном для полного слива жидкости. Люк Ø800 мм." }
-  ```
-
-**4. Update `src/App.tsx`**
-- Import `EmkostiEvppSloped`
-- Add route: `<Route path="/catalog/emkosti/vertikalnye/naklonnoe-dno" element={<EmkostiEvppSloped />} />`
-
-**5. Update `src/pages/Product.tsx`**
-- Add `evpp-sloped` category handling in `parseEmkostArticle` to return hero + schema images for ЕВПП-НД product cards
+**3. `src/pages/Product.tsx`** — Add `evpp-conusdno` to schema image mapping
+- Add `cat.id === "evpp-conusdno"` case to the `schemaImage` ternary (line 53) — this line already exists, confirming it's already handled
+- Add `cat.id.includes("conusdno")` to the image selection logic (line 45-48) so it picks the correct hero image `/images/evpp-conusdno-hero.png`
 
 ### Files modified
-- `public/images/evpp-sloped-hero.png` — new (cleaned product photo)
-- `public/images/evpp-sloped-schema.png` — new (technical schema)
-- `src/pages/EmkostiEvppSloped.tsx` — new page
-- `src/pages/EmkostiVertikalnye.tsx` — add subtype card
-- `src/App.tsx` — add route
-- `src/pages/Product.tsx` — add ЕВПП-НД product card support
+- `src/data/emkostiProducts.ts` — add conusdno category
+- `src/components/configurator/ImageGalleryWithLightbox.tsx` — add large main image
+- `src/pages/Product.tsx` — add conusdno image mapping
 
