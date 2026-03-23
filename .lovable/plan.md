@@ -1,28 +1,35 @@
 
 
-## Plan: Fix EVPP product card issues
+## Plan: Add tank selection calculator with material/color switching to EVPP pages
 
-**Problems found:**
-1. Articles `СЗПК.ЕВПП-КД.*` (conusdno) are not registered in `emkostiProducts.ts` — clicking any row shows "Товар не найден"
-2. Product card images for all EVPP types are too small — `ImageGalleryWithLightbox` renders only a row of small thumbnails without a large main image preview
-3. Hero images on all 4 subsection pages are clean (no watermarks found)
+**What:** Create a reusable `TankCalculator` component that lets users select parameters (volume, type, material, color) and see a matching tank recommendation. When the user changes color, the tank image tint changes to match the selected RAL color. Add this calculator to all 4 EVPP subsection pages.
 
-### Changes
+### New component: `src/components/configurator/TankCalculator.tsx`
 
-**1. `src/data/emkostiProducts.ts`** — Add `evpp-conusdno` category
-- Add new category entry with `id: "evpp-conusdno"`, `items: makeTable("ЕВПП-КД")` to the `vertical-pp` group
+Interactive calculator with:
+- **Volume selector** — slider or dropdown for desired volume (1000–50000 л)
+- **Tank type selector** — badges for 4 types (Плоская крыша, Наклонное дно, Коническая крыша, Конусное дно)
+- **Material selector** — reuse `materials` and `materialSpecs` from `src/data/products.ts` (PPC, PE100, PPH, PPs) displayed as badge pills
+- **Color selector** — show available colors for selected material (from `materialSpecs`), each as a clickable swatch card (same UI as `MaterialSection.tsx`)
+- **Tank preview** — SVG illustration of the tank that changes fill color to the selected `hex` value. Simple cylinder shape with flat/sloped/conical/cone-bottom variants
+- **Result card** — shows matched article, dimensions (Ø×H), selected material code, selected color RAL, with a "Перейти к товару" link to `/product/:article`
 
-**2. `src/components/configurator/ImageGalleryWithLightbox.tsx`** — Add large main image
-- Add a large main image display above the thumbnail row showing `images[selectedImage]` at full width in an `aspect-square` container with `object-contain`
-- Clicking the main image opens the lightbox
-- Thumbnails below select the main image (existing click-to-lightbox behavior preserved)
+The SVG tank illustration will be a simple inline SVG (cylinder body + top + bottom shapes) where the fill color is bound to `selectedColor.hex`. This gives instant visual feedback when switching colors.
 
-**3. `src/pages/Product.tsx`** — Add `evpp-conusdno` to schema image mapping
-- Add `cat.id === "evpp-conusdno"` case to the `schemaImage` ternary (line 53) — this line already exists, confirming it's already handled
-- Add `cat.id.includes("conusdno")` to the image selection logic (line 45-48) so it picks the correct hero image `/images/evpp-conusdno-hero.png`
+### Changes to existing pages
 
-### Files modified
-- `src/data/emkostiProducts.ts` — add conusdno category
-- `src/components/configurator/ImageGalleryWithLightbox.tsx` — add large main image
-- `src/pages/Product.tsx` — add conusdno image mapping
+**Files modified (4):**
+- `src/pages/EmkostiEvpp.tsx` — add `<TankCalculator defaultType="flat" />` between anchor nav and description sections, add "Калькулятор" to anchor nav
+- `src/pages/EmkostiEvppSloped.tsx` — add `<TankCalculator defaultType="sloped" />`
+- `src/pages/EmkostiEvppConical.tsx` — add `<TankCalculator defaultType="conical" />`
+- `src/pages/EmkostiEvppConusDno.tsx` — add `<TankCalculator defaultType="conusdno" />`
+
+### Data flow
+
+The calculator uses the existing `models` arrays already defined in each page. To avoid duplication, the calculator will accept `models` as a prop along with `defaultType`. Volume selection filters to the nearest matching model. Material and color are cosmetic selections that update the SVG color and the displayed article suffix.
+
+### Files
+- `src/components/configurator/TankCalculator.tsx` — new component
+- `src/components/configurator/index.ts` — export it
+- 4 EVPP page files — integrate the calculator
 
