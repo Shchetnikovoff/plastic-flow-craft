@@ -1,49 +1,61 @@
 
 
-## Plan: Create Horizontal Cylindrical Tanks subsection
+## Plan: Add "На высоких ложементах" subtype to horizontal tanks
 
 ### What
-Create a landing page for "Ёмкости цилиндрические горизонтальные" and its first sub-page "Стандартная на низких ложементах" with the product table from the uploaded image. Copy uploaded product photos and schema to the project.
+Add a second subtype card to the horizontal tanks landing page and create a new sub-page with the product table (17 models, ЕГППЛВ series). Save uploaded images (2 product photos + 1 schema) to `public/images/`.
 
 ### Files to create/modify
 
 #### 1. Copy uploaded images to `public/images/`
-- `EGTS-standartnaya-1.jpg` → `public/images/egts-standartnaya-1.jpg`
-- `EGTS-standartnaya-3.jpg` → `public/images/egts-standartnaya-3.jpg`
-- `EGTS-standart-1.jpg` → `public/images/egts-standart-schema.jpg`
+- `EGTS-vysokie-lozhementy-
 
-#### 2. Create `src/pages/EmkostiGorizontalnye.tsx`
-Landing page for horizontal tanks (pattern: `EmkostiVertikalnye.tsx`):
-- Breadcrumbs: Каталог → Ёмкости → Цилиндрические горизонтальные
-- Hero section with title, description, uploaded photos
-- Subtypes grid with card linking to `/catalog/emkosti/gorizontalnye/standartnaya`
-- CTA form + PageFooter
+<lov-plan>
 
-#### 3. Create `src/pages/EmkostiGorizontalnyeStandard.tsx`
-Sub-page for standard horizontal tanks (pattern: `EmkostiEvpp.tsx`):
-- Breadcrumbs: Каталог → Ёмкости → Горизонтальные → Стандартная
-- Hero with title + 2 photos (product + schema)
-- Anchor nav (Описание, Модельный ряд, Заявка)
-- Description section about standard horizontal tanks on low saddles
-- Model table with 17 rows from uploaded data:
+## Plan: Add "На высоких ложементах" subtype to horizontal tanks
 
-```text
-ЕГППЛСТ-1000   1000   940   1500
-ЕГППЛСТ-2000   2000   1330  1500
-...
-ЕГППЛСТ-50000  50000  3050  7000
+### What
+Add a second subtype card to the horizontal tanks landing page and create a new sub-page with the product table (17 models, ЕГППЛВ series). Save uploaded images (2 product photos + 1 schema) to `public/images/`.
+
+### Files to create/modify
+
+#### 1. Copy uploaded images to `public/images/`
+- `EGTS-vysokie-lozhementy-1.jpg` → `public/images/egts-vysokie-lozhementy-1.jpg`
+- `EGTS-vysokie-lozhementy-2.jpg` → `public/images/egts-vysokie-lozhementy-2.jpg`
+- `EGTS-na-vysokih-lozhementah-1.jpg` → `public/images/egts-vysokie-schema.jpg`
+- Remove branding text from product photos before saving.
+
+#### 2. Update `src/pages/EmkostiGorizontalnye.tsx`
+Add second entry to `subtypes` array:
+```
+{
+  id: "vysokie-lozhementy",
+  name: "Стандартная на высоких ложементах",
+  image: "/images/egts-vysokie-lozhementy-1.jpg",
+  path: "/catalog/emkosti/gorizontalnye/vysokie-lozhementy",
+  description: "Горизонтальная цилиндрическая ёмкость с плоской крышей и плоским дном на высоких ложементах. Объём от 1 000 до 50 000 литров.",
+}
 ```
 
-Note: Column headers use "L, мм" instead of "H, мм" (length, not height)
+#### 3. Create `src/pages/EmkostiGorizontalnyeVysokie.tsx`
+Clone structure from `EmkostiGorizontalnyeStandard.tsx`:
+- Breadcrumbs: Каталог → Ёмкости → Горизонтальные → На высоких ложементах
+- Hero with 2 photos (product + schema)
+- Anchor nav, description section, model table with 17 rows:
+
+| Артикул | Объём | Ø | L |
+|---------|-------|---|---|
+| СЗПК.ЕГППЛВ.1000 | 1000 | 940 | 1500 |
+| ... | ... | ... | ... |
+| СЗПК.ЕГППЛВ.50000 | 50000 | 3050 | 7000 |
+
 - Clickable rows → `/product/{article}`
 - CTA form + PageFooter
 
 #### 4. Update `src/App.tsx`
-- Import both new pages
-- Add routes:
-  - `/catalog/emkosti/gorizontalnye` → `EmkostiGorizontalnye`
-  - `/catalog/emkosti/gorizontalnye/standartnaya` → `EmkostiGorizontalnyeStandard`
+- Import `EmkostiGorizontalnyeVysokie`
+- Add route: `/catalog/emkosti/gorizontalnye/vysokie-lozhementy`
 
-#### 5. Update `src/data/catalog.ts`
-- Add `externalPath: "/catalog/emkosti/gorizontalnye"` to the `e2` subcategory entry
+#### 5. Update `src/pages/Product.tsx`
+- Add `egpplv` category handling for images and schema (use `egts-vysokie-lozhementy-2.jpg` as product image, `egts-vysokie-schema.jpg` as schema)
 
