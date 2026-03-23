@@ -85,12 +85,15 @@ function parseExtendedEmkostArticle(article: string) {
             : specs.colors[0];
         }
 
-        const image = cat.id === "egpplst" ? "/images/egts-standartnaya-2.jpg" : pickTankImage(cat.id, selectedColor?.colorCode);
+        const image = cat.id === "egpplst" ? "/images/egts-standartnaya-2.jpg"
+          : cat.id === "egpplv" ? "/images/egts-vysokie-lozhementy-2.jpg"
+          : pickTankImage(cat.id, selectedColor?.colorCode);
         const schemaImage = cat.id === "evpp-flat" ? "/images/evpp-flat-schema.png"
           : cat.id === "evpp-sloped" ? "/images/evpp-sloped-schema.png"
           : cat.id === "evpp-conical" ? "/images/evpp-conical-schema.png"
           : cat.id === "evpp-conusdno" ? "/images/evpp-conusdno-schema.png"
           : cat.id === "egpplst" ? "/images/egts-standart-schema.jpg"
+          : cat.id === "egpplv" ? "/images/egts-vysokie-schema.jpg"
           : undefined;
 
         const matInfo = materials.find((m) => m.code === matCode);
