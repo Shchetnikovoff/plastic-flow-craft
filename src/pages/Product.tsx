@@ -1794,7 +1794,38 @@ const ProductDetailContent = () => {
           <h1 className="text-xl sm:text-2xl font-bold text-foreground mb-1">
             {isVozdukhovod ? "Воздуховод вентиляционный круглый" : isRazdvizhnoy ? "Раздвижной элемент вентиляционный" : isTroynik ? "Тройник вентиляционный" : `Отвод вентиляционный ${angle}°`}
           </h1>
-          <p className="font-mono text-sm text-muted-foreground mb-6">{article}</p>
+          <p className="font-mono text-sm text-muted-foreground mb-2">{article}</p>
+
+          {/* Article breakdown for vent products */}
+          {(() => {
+            const parts = article.split(".");
+            const typeCode = parts[1] || "";
+            const typeLabels: Record<string, string> = {
+              "ОТВР": "Отвод раструбный", "ОТВФ": "Отвод фланцевый", "ОТВ": "Отвод",
+              "ТР": "Тройник раструбный", "ТРФ": "Тройник фланцевый",
+              "РЭ": "Раздвижной элемент", "РЭФ": "Раздвижной фланцевый",
+              "ВК": "Воздуховод круглый",
+            };
+            const segments: ArticleSegment[] = [
+              { value: "СЗПК", label: "Компания", desc: "Сибирский завод полимерных конструкций" },
+              { value: typeCode, label: "Тип", desc: typeLabels[typeCode] || typeCode },
+            ];
+            if (!isTroynik && !isVozdukhovod && !isRazdvizhnoy && parts[2]) {
+              segments.push({ value: parts[2], label: "Угол", desc: `${parts[2]}°` });
+            }
+            if (material) {
+              segments.push({ value: material.code, label: "Материал", desc: material.name.split("(")[0].trim() });
+            }
+            if (color?.colorCode) {
+              segments.push({ value: color.colorCode, label: "Цвет", desc: `${color.name} (${color.ral})`, hex: color.hex });
+            }
+            if (isTroynik && troynikSize) {
+              segments.push({ value: `${diameter}×${troynikSize.d1}`, label: "Диаметры", desc: `D ${diameter} мм × D1 ${troynikSize.d1} мм` });
+            } else {
+              segments.push({ value: String(diameter), label: "Диаметр", desc: `${diameter} мм` });
+            }
+            return <ArticleBreakdown exampleArticle={article} segments={segments} />;
+          })()}
 
           <div className="grid grid-cols-2 gap-px rounded-lg border overflow-hidden mb-6">
             <div className="bg-card p-3">
