@@ -32,7 +32,7 @@ export const catalog: CatalogCategory[] = [
     description: "Промышленные ёмкости из листового полипропилена и полиэтилена — надёжность, проверенная временем!",
     subcategories: [
       { id: "e1", name: "Ёмкости цилиндрические вертикальные", slug: "cilindricheskie-vertikalnye", externalPath: "/catalog/emkosti/vertikalnye", image: "/images/emkosti-vert-pp-group.png", description: "Вертикальные цилиндрические ёмкости из листового полипропилена и полиэтилена для хранения воды, химических реагентов и технических жидкостей. Объём от 100 до 50 000 литров." },
-      { id: "e2", name: "Ёмкости цилиндрические горизонтальные", slug: "cilindricheskie-gorizontalnye", image: "/images/emkost-horiz-group.png", description: "Горизонтальные цилиндрические ёмкости из полипропилена и полиэтилена. Применяются для хранения и транспортировки жидкостей. Оснащение люками, штуцерами, уровнемерами." },
+      { id: "e2", name: "Ёмкости цилиндрические горизонтальные", slug: "cilindricheskie-gorizontalnye", externalPath: "/catalog/emkosti/gorizontalnye", image: "/images/emkost-horiz-group.png", description: "Горизонтальные цилиндрические ёмкости из полипропилена и полиэтилена. Применяются для хранения и транспортировки жидкостей. Оснащение люками, штуцерами, уровнемерами." },
       { id: "e3", name: "Ёмкости подземные", slug: "podzemnye", externalPath: "/catalog/emkosti/podzemnye", image: "/images/emkosti-podzemnye-1.jpg" },
       { id: "e4", name: "Ёмкости прямоугольные", slug: "pryamougolnye", externalPath: "/catalog/emkosti/pryamougolnye", image: "/images/emkost-pryam-pp-1.png" },
       { id: "e5", name: "Ёмкости пожарные", slug: "pozharnye", externalPath: "/catalog/emkosti/pozharnye", image: "/images/emkost-pryam-pp-2.png" },
