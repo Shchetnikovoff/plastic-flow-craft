@@ -42,8 +42,9 @@ function parseEmkostArticle(article: string) {
           else image = "/images/emkost-horiz-pp-low.png";
           if (isPnd) image = "/images/emkost-horiz-pnd-photo.jpg";
         } else {
-          if (cat.id.includes("sloped")) image = "/images/emkost-vert-pp-sloped.png";
-          else if (cat.id.includes("conical")) image = "/images/emkost-vert-pp-conical.png";
+          if (cat.id === "evpp-sloped") image = "/images/evpp-sloped-hero.png";
+          else if (cat.id === "evpp-conical") image = "/images/evpp-conical-hero.png";
+          else if (cat.id === "evpp-conusdno") image = "/images/evpp-conusdno-hero.png";
           else image = "/images/evpp-flat-hero.png";
           if (isPnd) image = "/images/emkost-vert-pnd-photo.png";
         }
