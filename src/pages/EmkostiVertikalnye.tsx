@@ -143,6 +143,8 @@ const EmkostiVertikalnyeInner = () => {
           </div>
         </section>
 
+        <TankCalculator models={defaultModels} defaultType="flat" />
+
         {/* CTA Form */}
         <section id="cta-form" className="mb-10 scroll-mt-8">
           <div className="rounded-xl border border-border bg-card p-6 sm:p-8">
