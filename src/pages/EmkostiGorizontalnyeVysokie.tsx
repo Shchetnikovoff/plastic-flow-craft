@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/breadcrumb";
 import { toast } from "sonner";
 import PageFooter from "@/components/PageFooter";
+import { HorizontalTankCalculator } from "@/components/configurator";
 
 const models = [
   { art: "СЗПК.ЕГППЛВ.1000", vol: 1000, d: 940, l: 1500 },
@@ -92,6 +93,7 @@ const EmkostiGorizontalnyeVysokieInner = () => {
           {[
             { id: "opisanie", label: "Описание" },
             { id: "modeli", label: "Модельный ряд" },
+            { id: "calculator", label: "Калькулятор" },
             { id: "cta-form", label: "Заявка" },
           ].map((s) => (
             <button
@@ -164,6 +166,13 @@ const EmkostiGorizontalnyeVysokieInner = () => {
           </div>
           <p className="text-xs text-muted-foreground mt-2">Кликните на строку для перехода в карточку товара</p>
         </section>
+
+        <HorizontalTankCalculator
+          models={models}
+          articlePrefix="ЕГППЛВ"
+          prefixLabel="Высокие ложементы — Горизонтальные"
+          heroImage="/images/egts-vysokie-lozhementy-1.jpg"
+        />
 
         {/* CTA Form */}
         <section id="cta-form" className="mb-10 scroll-mt-8">
