@@ -1,61 +1,38 @@
 
 
-## Plan: Add "На высоких ложементах" subtype to horizontal tanks
+## Plan: Add Color-Responsive Renders to Horizontal Tank Calculator
 
-### What
-Add a second subtype card to the horizontal tanks landing page and create a new sub-page with the product table (17 models, ЕГППЛВ series). Save uploaded images (2 product photos + 1 schema) to `public/images/`.
+### Problem
+The horizontal tank calculator shows a static photo regardless of the selected color, unlike the vertical tank calculator which switches between color-specific render images (grey, blue, white, black).
 
-### Files to create/modify
+### Approach
+Since separate color-variant renders don't exist for horizontal tanks (only JPG photos), we'll apply a **CSS color overlay technique** on the preview image to simulate the selected RAL color. This will tint the tank body in the preview to match the user's color selection, providing immediate visual feedback similar to the vertical tanks section.
 
-#### 1. Copy uploaded images to `public/images/`
-- `EGTS-vysokie-lozhementy-
+### Changes
 
-<lov-plan>
+**1. `src/components/configurator/HorizontalTankCalculator.tsx`**
+- Add a `getColorOverlayStyle` helper that returns CSS styles (semi-transparent overlay or mix-blend-mode) based on `selectedColor.hex`
+- For RAL 7032 (default grey) — show the original image with no overlay
+- For RAL 5012 (blue), RAL 9003 (white), Black — apply a tinted overlay matching the color
+- Wrap the preview `<img>` in a container with a `::after` pseudo-element or an overlay `<div>` styled with the selected color and `mix-blend-mode: multiply` (for darker colors) or `screen` (for lighter)
+- Apply the same overlay logic to the type-selector thumbnails so they also reflect the chosen color
 
-## Plan: Add "На высоких ложементах" subtype to horizontal tanks
+### Technical Detail
 
-### What
-Add a second subtype card to the horizontal tanks landing page and create a new sub-page with the product table (17 models, ЕГППЛВ series). Save uploaded images (2 product photos + 1 schema) to `public/images/`.
-
-### Files to create/modify
-
-#### 1. Copy uploaded images to `public/images/`
-- `EGTS-vysokie-lozhementy-1.jpg` → `public/images/egts-vysokie-lozhementy-1.jpg`
-- `EGTS-vysokie-lozhementy-2.jpg` → `public/images/egts-vysokie-lozhementy-2.jpg`
-- `EGTS-na-vysokih-lozhementah-1.jpg` → `public/images/egts-vysokie-schema.jpg`
-- Remove branding text from product photos before saving.
-
-#### 2. Update `src/pages/EmkostiGorizontalnye.tsx`
-Add second entry to `subtypes` array:
+The overlay approach:
 ```
-{
-  id: "vysokie-lozhementy",
-  name: "Стандартная на высоких ложементах",
-  image: "/images/egts-vysokie-lozhementy-1.jpg",
-  path: "/catalog/emkosti/gorizontalnye/vysokie-lozhementy",
-  description: "Горизонтальная цилиндрическая ёмкость с плоской крышей и плоским дном на высоких ложементах. Объём от 1 000 до 50 000 литров.",
-}
+<div className="relative">
+  <img src={config.image} ... />
+  <div
+    className="absolute inset-0 rounded-lg pointer-events-none"
+    style={{
+      backgroundColor: selectedColor.hex,
+      mixBlendMode: 'multiply',
+      opacity: 0.35,
+    }}
+  />
+</div>
 ```
 
-#### 3. Create `src/pages/EmkostiGorizontalnyeVysokie.tsx`
-Clone structure from `EmkostiGorizontalnyeStandard.tsx`:
-- Breadcrumbs: Каталог → Ёмкости → Горизонтальные → На высоких ложементах
-- Hero with 2 photos (product + schema)
-- Anchor nav, description section, model table with 17 rows:
-
-| Артикул | Объём | Ø | L |
-|---------|-------|---|---|
-| СЗПК.ЕГППЛВ.1000 | 1000 | 940 | 1500 |
-| ... | ... | ... | ... |
-| СЗПК.ЕГППЛВ.50000 | 50000 | 3050 | 7000 |
-
-- Clickable rows → `/product/{article}`
-- CTA form + PageFooter
-
-#### 4. Update `src/App.tsx`
-- Import `EmkostiGorizontalnyeVysokie`
-- Add route: `/catalog/emkosti/gorizontalnye/vysokie-lozhementy`
-
-#### 5. Update `src/pages/Product.tsx`
-- Add `egpplv` category handling for images and schema (use `egts-vysokie-lozhementy-2.jpg` as product image, `egts-vysokie-schema.jpg` as schema)
+For PE100 (black, no colorCode) — stronger opacity. For RAL 7032 (grey, default) — no overlay. For RAL 9003 (white) — use `screen` blend mode or very low opacity. This gives a convincing tint effect without needing separate image files.
 
