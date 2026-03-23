@@ -177,10 +177,14 @@ const TankCalculator = ({ models, defaultType }: TankCalculatorProps) => {
             )}
           </div>
 
-          {/* SVG preview */}
+          {/* Photo preview */}
           <div className="flex flex-col items-center justify-center">
-            <div className="w-full max-w-[200px]">
-              <TankSvg type={selectedType} color={selectedColor.hex} />
+            <div className="w-full max-w-[220px]">
+              <img
+                src={tankTypeImages[selectedType]}
+                alt={tankTypeLabels[selectedType]}
+                className="w-full aspect-[3/4] object-contain rounded-lg"
+              />
             </div>
           </div>
         </div>
