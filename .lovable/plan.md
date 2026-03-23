@@ -1,44 +1,16 @@
 
 
-## Plan: Add color-specific renders for remaining tank colors
+## Plan: Add TankCalculator to the EmkostiVertikalnye page
 
-**Current state:** Only blue (5012) and default (grey 7032) images exist. Missing: natural white (9003) and black (PE100).
+**What:** Add the existing `TankCalculator` component to the vertical tanks overview page (`EmkostiVertikalnye.tsx`), placed right after the subtypes image grid and before the CTA form. Also add a "Калькулятор" anchor to the nav.
 
-**Colors from `materialSpecs`:**
-- **7032 (Серый)** — already the default images, no change needed
-- **5012 (Голубой)** — already has blue renders, done
-- **9003 (Натуральный)** — needs white/cream renders for all 4 tank types
-- **"" (Чёрный, PE100)** — needs dark/black renders for all 4 tank types
+### Changes to `src/pages/EmkostiVertikalnye.tsx`
 
-### Changes
-
-**1. Generate 8 new image assets**
-Using the existing hero photos as base, create tinted versions:
-- `public/images/evpp-flat-hero-white.png` — natural white tint
-- `public/images/evpp-sloped-hero-white.png`
-- `public/images/evpp-conical-hero-white.png`
-- `public/images/evpp-conusdno-hero-white.png`
-- `public/images/evpp-flat-hero-black.png` — dark/black tint
-- `public/images/evpp-sloped-hero-black.png`
-- `public/images/evpp-conical-hero-black.png`
-- `public/images/evpp-conusdno-hero-black.png`
-
-**2. Update `tankTypeImages` mapping in `TankCalculator.tsx`**
-Add entries for `"9003"` and `"black"` (for PE100's empty colorCode, use a fallback key):
-```tsx
-flat: {
-  default: "/images/evpp-flat-hero.png",
-  "5012": "/images/evpp-flat-hero-blue.png",
-  "9003": "/images/evpp-flat-hero-white.png",
-  "black": "/images/evpp-flat-hero-black.png",
-},
-// ... same for sloped, conical, conusdno
-```
-
-**3. Update `getTankImage` to handle PE100's empty colorCode**
-Map empty `colorCode` (`""`) to `"black"` key before lookup.
+1. Import `TankCalculator` from `@/components/configurator`
+2. Add a `models` array with the standard volume range (same as `EmkostiEvpp.tsx`: 1000–50000 л)
+3. Insert `<TankCalculator models={models} defaultType="flat" />` after the subtypes grid section (line 128) and before the CTA form
+4. Add `{ id: "calculator", label: "Калькулятор" }` to the anchor nav array
 
 ### Files modified
-- 8 new image files in `public/images/`
-- `src/components/configurator/TankCalculator.tsx` — update image mapping and lookup
+- `src/pages/EmkostiVertikalnye.tsx`
 
