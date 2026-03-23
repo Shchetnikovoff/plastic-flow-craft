@@ -16,7 +16,6 @@ import EmkostiPozharnye from "./pages/EmkostiPozharnye";
 import EmkostiKislotyShchelochi from "./pages/EmkostiKislotyShchelochi";
 import EmkostiPerelivnye from "./pages/EmkostiPerelivnye";
 import EmkostiCatalog from "./pages/EmkostiCatalog";
-import EmkostiVertikalnyePloskaya from "./pages/EmkostiVertikalnyePloskaya";
 import Vodoochistka from "./pages/Vodoochistka";
 import VodoochistkaFfu from "./pages/VodoochistkaFfu";
 import VodoochistkaLamelnyj from "./pages/VodoochistkaLamelnyj";
@@ -64,7 +63,6 @@ const App = () => (
           <Route path="/vozdukhovod" element={<Vozdukhovod />} />
           <Route path="/product/:article" element={<Product />} />
           <Route path="/catalog/emkosti/konfigurator" element={<EmkostiCatalog />} />
-          <Route path="/catalog/emkosti/vertikalnye-ploskaya" element={<EmkostiVertikalnyePloskaya />} />
           <Route path="/catalog/emkosti/podzemnye" element={<EmkostiPodzemnye />} />
           <Route path="/catalog/emkosti/pryamougolnye" element={<EmkostiPryamougolnye />} />
           <Route path="/catalog/emkosti/pozharnye" element={<EmkostiPozharnye />} />
