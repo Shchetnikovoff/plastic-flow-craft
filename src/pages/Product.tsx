@@ -322,16 +322,13 @@ const ProductDetailContent = () => {
 
         <div className="grid gap-8 md:grid-cols-2">
           <div>
-            {"schemaImage" in emkost && emkost.schemaImage ? (() => {
-              const [selImg, setSelImg] = useState(0);
-              return (
-                <ImageGalleryWithLightbox
-                  images={[emkost.image, emkost.schemaImage]}
-                  selectedImage={selImg}
-                  onSelectedImageChange={setSelImg}
-                />
-              );
-            })() : (
+            {"schemaImage" in emkost && emkost.schemaImage ? (
+              <ImageGalleryWithLightbox
+                images={[emkost.image, emkost.schemaImage]}
+                selectedImage={selectedImage}
+                onSelectedImageChange={setSelectedImage}
+              />
+            ) : (
               <div className={`${emkost.image.includes("perelivnaya") ? "aspect-[4/3]" : "aspect-square"} overflow-hidden rounded-lg border bg-card mb-3`}>
                 {"rectDims" in emkost && emkost.rectDims && !emkost.image.includes("perelivnaya") ? (
                   <DimensionOverlay
