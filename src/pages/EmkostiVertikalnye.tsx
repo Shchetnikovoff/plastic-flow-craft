@@ -22,6 +22,13 @@ const subtypes = [
     path: "/catalog/emkosti/vertikalnye/ploskaya",
     description: "Стандартная форма. Полностью закрытая ёмкость с приваренной крышей и люком Ø800 мм.",
   },
+  {
+    id: "naklonnoe-dno",
+    name: "С наклонным дном",
+    image: "/images/evpp-sloped-hero.png",
+    path: "/catalog/emkosti/vertikalnye/naklonnoe-dno",
+    description: "Ёмкость с наклонным дном для полного слива жидкости. Люк Ø800 мм.",
+  },
 ];
 
 const EmkostiVertikalnyeInner = () => {

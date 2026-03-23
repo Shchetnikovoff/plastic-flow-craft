@@ -67,6 +67,7 @@ const App = () => (
           <Route path="/product/:article" element={<Product />} />
           <Route path="/catalog/emkosti/konfigurator" element={<EmkostiCatalog />} />
           <Route path="/catalog/emkosti/vertikalnye/ploskaya" element={<EmkostiEvpp />} />
+          <Route path="/catalog/emkosti/vertikalnye/naklonnoe-dno" element={<EmkostiEvppSloped />} />
           <Route path="/catalog/emkosti/vertikalnye" element={<EmkostiVertikalnye />} />
           <Route path="/catalog/emkosti/podzemnye" element={<EmkostiPodzemnye />} />
           <Route path="/catalog/emkosti/pryamougolnye" element={<EmkostiPryamougolnye />} />
