@@ -110,11 +110,17 @@ const TankCalculator = ({ models, defaultType }: TankCalculatorProps) => {
                         : "border-border hover:border-muted-foreground bg-card"
                     }`}
                   >
-                    <img
-                      src={tankTypeImages[t]}
-                      alt={tankTypeLabels[t]}
-                      className="w-full aspect-square object-contain rounded"
-                    />
+                    <div className="relative w-full aspect-square rounded overflow-hidden">
+                      <img
+                        src={tankTypeImages[t]}
+                        alt={tankTypeLabels[t]}
+                        className="w-full h-full object-contain"
+                      />
+                      <div
+                        className="absolute inset-0 mix-blend-multiply pointer-events-none transition-colors duration-300"
+                        style={{ backgroundColor: selectedColor.hex }}
+                      />
+                    </div>
                     <span className="text-[10px] font-medium text-foreground text-center leading-tight">
                       {tankTypeLabels[t]}
                     </span>
