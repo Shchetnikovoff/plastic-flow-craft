@@ -60,6 +60,7 @@ function parseEmkostArticle(article: string) {
           heightLabel: cat.heightLabel,
           description: cat.description,
           image,
+          schemaImage,
         };
       }
     }
