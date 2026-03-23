@@ -44,9 +44,10 @@ function parseEmkostArticle(article: string) {
         } else {
           if (cat.id.includes("sloped")) image = "/images/emkost-vert-pp-sloped.png";
           else if (cat.id.includes("conical")) image = "/images/emkost-vert-pp-conical.png";
-          else image = "/images/emkost-vert-pp-flat.jpg";
+          else image = "/images/evpp-flat-hero.png";
           if (isPnd) image = "/images/emkost-vert-pnd-photo.png";
         }
+        const schemaImage = cat.id === "evpp-flat" ? "/images/evpp-flat-schema.png" : undefined;
         return {
           productType: "emkost" as const,
           emkostType: isHorizontal ? "horizontal" : "vertical",
