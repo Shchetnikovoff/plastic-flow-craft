@@ -7,3 +7,5 @@ export { default as ProductPageShell } from "./ProductPageShell";
 export { default as CharacteristicsGrid } from "./CharacteristicsGrid";
 export type { CharCell } from "./CharacteristicsGrid";
 export { QuantityCell, AddToCartButton } from "./QuantityCell";
+export { default as TankCalculator } from "./TankCalculator";
+export type { TankType } from "./TankCalculator";

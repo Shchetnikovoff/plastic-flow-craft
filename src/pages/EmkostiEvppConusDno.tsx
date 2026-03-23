@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/breadcrumb";
 import { toast } from "sonner";
 import PageFooter from "@/components/PageFooter";
+import { TankCalculator } from "@/components/configurator";
 
 const models = [
   { art: "СЗПК.ЕВПП-КД.1000", vol: 1000, d: 940, h: 1500 },
@@ -91,6 +92,7 @@ const EmkostiEvppConusDnoInner = () => {
         {/* Anchor nav */}
         <nav className="mb-8 flex flex-wrap gap-2">
           {[
+            { id: "calculator", label: "Калькулятор" },
             { id: "opisanie", label: "Описание" },
             { id: "modeli", label: "Модельный ряд" },
             { id: "cta-form", label: "Заявка" },
@@ -104,6 +106,8 @@ const EmkostiEvppConusDnoInner = () => {
             </button>
           ))}
         </nav>
+
+        <TankCalculator models={models} defaultType="conusdno" />
 
         {/* Description */}
         <section id="opisanie" className="mb-10">
