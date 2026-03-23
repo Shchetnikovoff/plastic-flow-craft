@@ -229,16 +229,31 @@ const TankCalculator = ({ models, defaultType }: TankCalculatorProps) => {
         </div>
 
         {/* Result */}
-        <div className="mt-6 rounded-lg border border-primary/20 bg-primary/5 p-4">
-          <div className="flex flex-wrap items-center justify-between gap-3">
-            <div className="space-y-1">
-              {(() => {
-                const matCode = materials.find((m) => m.name === selectedMaterial)?.code || "PPC";
-                const colorPart = selectedColor.colorCode ? `.${selectedColor.colorCode}` : "";
-                const prefix = tankTypeArticlePrefix[selectedType];
-                const fullArticle = `СЗПК.${prefix}.${matCode}${colorPart}.${matchedModel.vol}`;
-                return (
-                  <>
+        {(() => {
+          const matCode = materials.find((m) => m.name === selectedMaterial)?.code || "PPC";
+          const colorPart = selectedColor.colorCode ? `.${selectedColor.colorCode}` : "";
+          const prefix = tankTypeArticlePrefix[selectedType];
+          const fullArticle = `СЗПК.${prefix}.${matCode}${colorPart}.${matchedModel.vol}`;
+
+          const segments: ArticleSegment[] = [
+            { value: "СЗПК", label: "Компания", desc: "Сибирский завод полимерных конструкций" },
+            { value: prefix, label: "Тип", desc: tankTypeLabels[selectedType] },
+            { value: matCode, label: "Материал", desc: materials.find((m) => m.code === matCode)?.name.split("(")[0].trim() || matCode },
+            ...(selectedColor.colorCode ? [{
+              value: selectedColor.colorCode,
+              label: "Цвет",
+              desc: `${selectedColor.name} (${selectedColor.ral})`,
+              hex: selectedColor.hex,
+            }] : []),
+            { value: String(matchedModel.vol), label: "Объём, л", desc: `${matchedModel.vol.toLocaleString("ru-RU")} литров` },
+          ];
+
+          return (
+            <div className="mt-6 space-y-3">
+              <ArticleBreakdown exampleArticle={fullArticle} segments={segments} />
+              <div className="rounded-lg border border-primary/20 bg-primary/5 p-4">
+                <div className="flex flex-wrap items-center justify-between gap-3">
+                  <div className="space-y-1">
                     <p className="text-sm font-semibold text-foreground">
                       Рекомендованная модель: <span className="text-primary">{fullArticle}</span>
                     </p>
@@ -246,18 +261,18 @@ const TankCalculator = ({ models, defaultType }: TankCalculatorProps) => {
                       {matchedModel.vol.toLocaleString("ru-RU")} л · Ø{matchedModel.d.toLocaleString("ru-RU")} мм · H {matchedModel.h.toLocaleString("ru-RU")} мм
                       · {matCode} · {selectedColor.name} ({selectedColor.ral})
                     </p>
-                    <Button asChild size="sm" className="gap-1.5 mt-2">
-                      <Link to={`/product/${encodeURIComponent(fullArticle)}`}>
-                        Перейти к товару
-                        <ArrowRight className="h-4 w-4" />
-                      </Link>
-                    </Button>
-                  </>
-                );
-              })()}
+                  </div>
+                  <Button asChild size="sm" className="gap-1.5">
+                    <Link to={`/product/${encodeURIComponent(fullArticle)}`}>
+                      Перейти к товару
+                      <ArrowRight className="h-4 w-4" />
+                    </Link>
+                  </Button>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
+          );
+        })()}
       </div>
     </section>
   );
