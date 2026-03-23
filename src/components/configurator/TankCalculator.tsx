@@ -20,6 +20,18 @@ interface TankCalculatorProps {
   defaultType: TankType;
 }
 
+const tankTypeArticlePrefix: Record<TankType, string> = {
+  flat: "ЕВПП",
+  sloped: "ЕВПП-НД",
+  conical: "ЕВПП-КК",
+  conusdno: "ЕВПП-КД",
+};
+
+interface TankCalculatorProps {
+  models: TankModel[];
+  defaultType: TankType;
+}
+
 const tankTypeLabels: Record<TankType, string> = {
   flat: "Плоская крыша",
   sloped: "Наклонное дно",
