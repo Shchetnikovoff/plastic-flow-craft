@@ -31,24 +31,33 @@ const tankTypeImages: Record<TankType, Record<string, string>> = {
   flat: {
     default: "/images/evpp-flat-hero.png",
     "5012": "/images/evpp-flat-hero-blue.png",
+    "9003": "/images/evpp-flat-hero-white.png",
+    black: "/images/evpp-flat-hero-black.png",
   },
   sloped: {
     default: "/images/evpp-sloped-hero.png",
     "5012": "/images/evpp-sloped-hero-blue.png",
+    "9003": "/images/evpp-sloped-hero-white.png",
+    black: "/images/evpp-sloped-hero-black.png",
   },
   conical: {
     default: "/images/evpp-conical-hero.png",
     "5012": "/images/evpp-conical-hero-blue.png",
+    "9003": "/images/evpp-conical-hero-white.png",
+    black: "/images/evpp-conical-hero-black.png",
   },
   conusdno: {
     default: "/images/evpp-conusdno-hero.png",
     "5012": "/images/evpp-conusdno-hero-blue.png",
+    "9003": "/images/evpp-conusdno-hero-white.png",
+    black: "/images/evpp-conusdno-hero-black.png",
   },
 };
 
 function getTankImage(type: TankType, colorCode: string): string {
   const images = tankTypeImages[type];
-  return images[colorCode] || images["default"];
+  const key = colorCode === "" ? "black" : colorCode;
+  return images[key] || images["default"];
 }
 
 const TankCalculator = ({ models, defaultType }: TankCalculatorProps) => {
