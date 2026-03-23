@@ -18,6 +18,7 @@ import EmkostiPerelivnye from "./pages/EmkostiPerelivnye";
 import EmkostiCatalog from "./pages/EmkostiCatalog";
 import EmkostiVertikalnye from "./pages/EmkostiVertikalnye";
 import EmkostiEvpp from "./pages/EmkostiEvpp";
+import EmkostiEvppSloped from "./pages/EmkostiEvppSloped";
 import Vodoochistka from "./pages/Vodoochistka";
 import VodoochistkaFfu from "./pages/VodoochistkaFfu";
 import VodoochistkaLamelnyj from "./pages/VodoochistkaLamelnyj";
@@ -66,6 +67,7 @@ const App = () => (
           <Route path="/product/:article" element={<Product />} />
           <Route path="/catalog/emkosti/konfigurator" element={<EmkostiCatalog />} />
           <Route path="/catalog/emkosti/vertikalnye/ploskaya" element={<EmkostiEvpp />} />
+          <Route path="/catalog/emkosti/vertikalnye/naklonnoe-dno" element={<EmkostiEvppSloped />} />
           <Route path="/catalog/emkosti/vertikalnye" element={<EmkostiVertikalnye />} />
           <Route path="/catalog/emkosti/podzemnye" element={<EmkostiPodzemnye />} />
           <Route path="/catalog/emkosti/pryamougolnye" element={<EmkostiPryamougolnye />} />
