@@ -1,6 +1,7 @@
 import { jsPDF } from "jspdf";
 import type { ProductSize, MaterialColor } from "@/data/products";
 import { loadImageAsBase64 } from "./imageUtils";
+import { registerFonts } from "./pdfFonts";
 
 interface FullPagePdfOptions {
   sizes: ProductSize[];
@@ -22,6 +23,7 @@ export async function generateFullPagePdf(options: FullPagePdfOptions) {
   } = options;
 
   const doc = new jsPDF({ orientation: "landscape" });
+  registerFonts(doc);
   const pw = doc.internal.pageSize.getWidth();
   const ph = doc.internal.pageSize.getHeight();
   const margin = 20;
@@ -117,9 +119,9 @@ export async function generateFullPagePdf(options: FullPagePdfOptions) {
     doc.setTextColor(120);
     doc.text(specItems[i].label, sx + 4, y + 5);
     doc.setTextColor(30);
-    doc.setFont("helvetica", "bold");
+    doc.setFont("Roboto", "bold");
     doc.text(specItems[i].value, sx + 4, y + 11);
-    doc.setFont("helvetica", "normal");
+    doc.setFont("Roboto", "normal");
   }
   y += 20;
 
@@ -141,9 +143,9 @@ export async function generateFullPagePdf(options: FullPagePdfOptions) {
       doc.setTextColor(120);
       doc.text("Рабочая температура", margin + 4, y + 5);
       doc.setTextColor(30);
-      doc.setFont("helvetica", "bold");
+      doc.setFont("Roboto", "bold");
       doc.text(workingTemp, margin + 4, y + 11);
-      doc.setFont("helvetica", "normal");
+      doc.setFont("Roboto", "normal");
     }
 
     if (chemicalResistance) {
@@ -153,10 +155,10 @@ export async function generateFullPagePdf(options: FullPagePdfOptions) {
       doc.setTextColor(120);
       doc.text("Химическая стойкость", margin + halfW + 4, y + 5);
       doc.setTextColor(30);
-      doc.setFont("helvetica", "bold");
+      doc.setFont("Roboto", "bold");
       const crLines = doc.splitTextToSize(chemicalResistance, halfW - 8);
       doc.text(crLines[0], margin + halfW + 4, y + 11);
-      doc.setFont("helvetica", "normal");
+      doc.setFont("Roboto", "normal");
     }
     y += 20;
   }
@@ -195,9 +197,9 @@ export async function generateFullPagePdf(options: FullPagePdfOptions) {
       doc.setFillColor(248, 249, 252);
       doc.rect(sx, y, segW, 18, "FD");
       doc.setTextColor(30);
-      doc.setFont("helvetica", "bold");
+      doc.setFont("Roboto", "bold");
       doc.text(seg.value, sx + segW / 2, y + 6, { align: "center" });
-      doc.setFont("helvetica", "normal");
+      doc.setFont("Roboto", "normal");
       doc.setTextColor(30, 58, 95);
       doc.setFontSize(7);
       doc.text(seg.label, sx + segW / 2, y + 11, { align: "center" });
@@ -230,7 +232,7 @@ export async function generateFullPagePdf(options: FullPagePdfOptions) {
   doc.rect(margin, y, tableW, rowH, "F");
   doc.setFontSize(9);
   doc.setTextColor(255);
-  doc.setFont("helvetica", "bold");
+  doc.setFont("Roboto", "bold");
   let x = margin;
   for (const col of cols) {
     const tx = col.align === "center" ? x + col.width / 2 : x + 3;
@@ -239,7 +241,7 @@ export async function generateFullPagePdf(options: FullPagePdfOptions) {
   }
   y += rowH;
   doc.setTextColor(0);
-  doc.setFont("helvetica", "normal");
+  doc.setFont("Roboto", "normal");
 
   // Rows
   for (let i = 0; i < sizes.length; i++) {

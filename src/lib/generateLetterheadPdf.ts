@@ -1,8 +1,10 @@
 import { jsPDF } from "jspdf";
 import { loadImageAsBase64 } from "./imageUtils";
+import { registerFonts } from "./pdfFonts";
 
 export async function generateLetterheadPdf() {
   const doc = new jsPDF({ orientation: "portrait", unit: "mm", format: "a4" });
+  registerFonts(doc);
   const pw = doc.internal.pageSize.getWidth();
   const ph = doc.internal.pageSize.getHeight();
   const margin = 20;
@@ -22,13 +24,13 @@ export async function generateLetterheadPdf() {
   // Company name
   doc.setFontSize(11);
   doc.setTextColor(30, 58, 95);
-  doc.setFont("helvetica", "bold");
+  doc.setFont("Roboto", "bold");
   doc.text("ООО СЗПК «Пласт-Металл Про»", margin + 32, y + 1);
 
   // Contact info right-aligned
   doc.setFontSize(8);
   doc.setTextColor(102);
-  doc.setFont("helvetica", "normal");
+  doc.setFont("Roboto", "normal");
   doc.text("+7 963 322-55-40  |  osobenkov@list.ru", pw - margin, y + 1, { align: "right" });
 
   y += 10;
@@ -42,37 +44,37 @@ export async function generateLetterheadPdf() {
   // === TITLE ===
   doc.setFontSize(18);
   doc.setTextColor(30, 58, 95);
-  doc.setFont("helvetica", "bold");
+  doc.setFont("Roboto", "bold");
   doc.text("КОММЕРЧЕСКОЕ ПРЕДЛОЖЕНИЕ", pw / 2, y, { align: "center" });
   y += 14;
 
   // === Date line ===
   doc.setFontSize(11);
   doc.setTextColor(51);
-  doc.setFont("helvetica", "normal");
+  doc.setFont("Roboto", "normal");
   doc.text("Дата: «____» ______________ 20____ г.", margin, y);
   doc.text("№ ___________", pw - margin, y, { align: "right" });
   y += 10;
 
   // === Recipient ===
-  doc.setFont("helvetica", "bold");
+  doc.setFont("Roboto", "bold");
   doc.text("Кому: ", margin, y);
-  doc.setFont("helvetica", "normal");
+  doc.setFont("Roboto", "normal");
   doc.setTextColor(153);
   doc.text("_______________________________________________", margin + 15, y);
   y += 8;
 
   doc.setTextColor(51);
-  doc.setFont("helvetica", "bold");
+  doc.setFont("Roboto", "bold");
   doc.text("Организация: ", margin, y);
-  doc.setFont("helvetica", "normal");
+  doc.setFont("Roboto", "normal");
   doc.setTextColor(153);
   doc.text("________________________________________", margin + 30, y);
   y += 12;
 
   // === Greeting ===
   doc.setTextColor(51);
-  doc.setFont("helvetica", "normal");
+  doc.setFont("Roboto", "normal");
   doc.text("Уважаемый(ая) ___________________________!", margin, y);
   y += 10;
 
@@ -111,7 +113,7 @@ export async function generateLetterheadPdf() {
 
   doc.setFontSize(7);
   doc.setTextColor(153);
-  doc.setFont("helvetica", "normal");
+  doc.setFont("Roboto", "normal");
   doc.text(
     "ООО СЗПК «Пласт-Металл Про»  |  ИНН: 7806634460  |  Ленинградская обл., д. Разметелево, ул. Строителей 27",
     pw / 2,
