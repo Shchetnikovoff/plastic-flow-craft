@@ -3,7 +3,7 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import { CartProvider, useCart } from "@/contexts/CartContext";
 import Header from "@/components/Header";
 import CartSheet from "@/components/CartSheet";
-import { materials, materialSpecs, connectionTypes, baseSizes, type ConnectionType } from "@/data/products";
+import { materials, materialSpecs, connectionTypes, baseSizes, type ConnectionType, type MaterialColor } from "@/data/products";
 import { getProductImages } from "@/data/products";
 import { baseTroynikSizes, troynikImages } from "@/data/troynikProducts";
 import { razdvizhnoyImages, razdvizhnoyFlanecImages, getRazdvizhnoySizes } from "@/data/razdvizhnoyProducts";
@@ -25,9 +25,105 @@ import { generateSpecPdf } from "@/lib/generateSpecPdf";
 import { generateLetterheadPdf } from "@/lib/generateLetterheadPdf";
 import DimensionOverlay from "@/components/DimensionOverlay";
 
+/** Image lookup map for tank type + color */
+const tankImageMap: Record<string, Record<string, string>> = {
+  "evpp-flat": { default: "/images/evpp-flat-hero.png", "5012": "/images/evpp-flat-hero-blue.png", "9003": "/images/evpp-flat-hero-white.png", black: "/images/evpp-flat-hero-black.png" },
+  "evpp-sloped": { default: "/images/evpp-sloped-hero.png", "5012": "/images/evpp-sloped-hero-blue.png", "9003": "/images/evpp-sloped-hero-white.png", black: "/images/evpp-sloped-hero-black.png" },
+  "evpp-conical": { default: "/images/evpp-conical-hero.png", "5012": "/images/evpp-conical-hero-blue.png", "9003": "/images/evpp-conical-hero-white.png", black: "/images/evpp-conical-hero-black.png" },
+  "evpp-conusdno": { default: "/images/evpp-conusdno-hero.png", "5012": "/images/evpp-conusdno-hero-blue.png", "9003": "/images/evpp-conusdno-hero-white.png", black: "/images/evpp-conusdno-hero-black.png" },
+};
+
+function pickTankImage(catId: string, colorCode?: string): string {
+  const map = tankImageMap[catId];
+  if (!map) return "/images/emkosti-real-proizvodstvo.jpg";
+  if (!colorCode) return map.default;
+  const key = colorCode === "" ? "black" : colorCode;
+  return map[key] || map.default;
+}
+
+/** Map material codes to full material names */
+const materialCodeToName: Record<string, string> = {};
+materials.forEach((m) => { materialCodeToName[m.code] = m.name; });
+
+/** Try to parse extended article format: СЗПК.ЕВПП.PPC.7032.1000 */
+function parseExtendedEmkostArticle(article: string) {
+  const parts = article.split(".");
+  if (parts.length < 4 || parts[0] !== "СЗПК") return null;
+
+  // Type prefix can be multi-part: ЕВПП-НД, ЕВПП-КК, ЕВПП-КД
+  const typePrefix = parts[1];
+  
+  // Try to detect material code in parts[2]
+  const matCode = parts[2];
+  const matName = materialCodeToName[matCode];
+  if (!matName) return null;
+
+  let colorCode: string | undefined;
+  let volumeStr: string;
+  if (parts.length >= 5) {
+    colorCode = parts[3];
+    volumeStr = parts[4];
+  } else {
+    volumeStr = parts[3];
+  }
+
+  const volume = parseInt(volumeStr, 10);
+  if (isNaN(volume)) return null;
+
+  const baseArticle = `СЗПК.${typePrefix}.${volume}`;
+
+  for (const group of emkostGroups) {
+    for (const cat of group.categories) {
+      const item = cat.items.find((i) => i.article === baseArticle);
+      if (item) {
+        const isHorizontal = group.id.startsWith("horizontal");
+        const specs = materialSpecs[matName];
+        let selectedColor: MaterialColor | undefined;
+        if (specs) {
+          selectedColor = colorCode
+            ? specs.colors.find((c) => c.colorCode === colorCode)
+            : specs.colors[0];
+        }
+
+        const image = pickTankImage(cat.id, selectedColor?.colorCode);
+        const schemaImage = cat.id === "evpp-flat" ? "/images/evpp-flat-schema.png"
+          : cat.id === "evpp-sloped" ? "/images/evpp-sloped-schema.png"
+          : cat.id === "evpp-conical" ? "/images/evpp-conical-schema.png"
+          : cat.id === "evpp-conusdno" ? "/images/evpp-conusdno-schema.png"
+          : undefined;
+
+        const matInfo = materials.find((m) => m.code === matCode);
+        const colorLabel = selectedColor ? `${selectedColor.name} (${selectedColor.ral})` : "";
+
+        return {
+          productType: "emkost" as const,
+          emkostType: isHorizontal ? "horizontal" : "vertical",
+          title: `${isHorizontal ? "Горизонтальная" : "Вертикальная"} ёмкость ${item.volume.toLocaleString()} л`,
+          subtitle: `${cat.title} — ${group.title}`,
+          materialName: matInfo?.name || matName,
+          materialCode: matCode,
+          colorLabel,
+          volume: item.volume,
+          diameter: item.diameter,
+          heightOrLength: item.height,
+          heightLabel: cat.heightLabel,
+          description: cat.description,
+          image,
+          schemaImage,
+        };
+      }
+    }
+  }
+  return null;
+}
+
 /** Try to find an emkost (tank) product by article */
 function parseEmkostArticle(article: string) {
-  // Search in emkostGroups (vertical/horizontal tanks)
+  // First try extended format with material/color
+  const extended = parseExtendedEmkostArticle(article);
+  if (extended) return extended;
+
+  // Fallback: base article match
   for (const group of emkostGroups) {
     for (const cat of group.categories) {
       const item = cat.items.find((i) => i.article === article);
@@ -35,17 +131,13 @@ function parseEmkostArticle(article: string) {
         const isHorizontal = group.id.startsWith("horizontal");
         const isPnd = group.id.includes("pnd");
         const materialName = isPnd ? "Полиэтилен (ПНД/HDPE)" : "Полипропилен (ПП)";
-        // Pick image based on tank type
         let image = "/images/emkosti-real-proizvodstvo.jpg";
         if (isHorizontal) {
           if (cat.id.includes("lv")) image = "/images/emkost-horiz-pp-high.png";
           else image = "/images/emkost-horiz-pp-low.png";
           if (isPnd) image = "/images/emkost-horiz-pnd-photo.jpg";
         } else {
-          if (cat.id === "evpp-sloped") image = "/images/evpp-sloped-hero.png";
-          else if (cat.id === "evpp-conical") image = "/images/evpp-conical-hero.png";
-          else if (cat.id === "evpp-conusdno") image = "/images/evpp-conusdno-hero.png";
-          else image = "/images/evpp-flat-hero.png";
+          image = pickTankImage(cat.id);
           if (isPnd) image = "/images/emkost-vert-pnd-photo.png";
         }
         const schemaImage = cat.id === "evpp-flat" ? "/images/evpp-flat-schema.png"
