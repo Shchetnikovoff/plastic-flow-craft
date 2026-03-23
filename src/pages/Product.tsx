@@ -13,7 +13,7 @@ import { pozharnyeRect, pozharnyePodzem, pozharnyeHoriz } from "@/data/pozharnye
 import { perelivnyeProducts, ppColors } from "@/data/perelivnyeProducts";
 import { ffuModels } from "@/data/ffuProducts";
 import { lamelnyjModels, parseLamelnyjArticle } from "@/data/lamelnyjProducts";
-import ArticleBreakdown from "@/components/configurator/ArticleBreakdown";
+import ArticleBreakdown, { type ArticleSegment } from "@/components/configurator/ArticleBreakdown";
 import ImageGalleryWithLightbox from "@/components/configurator/ImageGalleryWithLightbox";
 import { Button } from "@/components/ui/button";
 import { ShoppingCart, Plus, Minus, ChevronLeft, ChevronRight, FileDown } from "lucide-react";
