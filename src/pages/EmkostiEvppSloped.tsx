@@ -107,6 +107,8 @@ const EmkostiEvppSlopedInner = () => {
           ))}
         </nav>
 
+        <TankCalculator models={models} defaultType="sloped" />
+
         {/* Description */}
         <section id="opisanie" className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">Описание</h2>
