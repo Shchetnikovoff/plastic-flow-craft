@@ -168,10 +168,6 @@ const EmkostiEvppConicalInner = () => {
             </div>
           </div>
           <p className="text-xs text-muted-foreground mt-2">Кликните на строку для перехода в карточку товара</p>
-          <Button variant="outline" className="gap-2 mt-4" onClick={async () => { await generateLetterheadPdf(); toast.success("Коммерческое предложение скачано"); }}>
-            <FileDown className="h-4 w-4" />
-            Скачать коммерческое предложение (PDF)
-          </Button>
         </section>
 
         {/* CTA Form */}
