@@ -124,16 +124,15 @@ const EmkostiPageInner = () => {
           </div>
         </section>
 
-        {/* Intro */}
-
+        {/* Anchor nav */}
         <nav className="mb-8 flex flex-wrap gap-2">
           {[
+            { id: "katalog", label: "Каталог" },
             { id: "opisanie", label: "Описание" },
             { id: "naznachenie", label: "Назначение" },
             { id: "materialy", label: "Материалы" },
             { id: "modifikacii", label: "Модификации" },
             { id: "preimushchestva", label: "Преимущества" },
-            { id: "katalog", label: "Каталог" },
             { id: "cta-form", label: "Заявка" },
           ].map((s) => (
             <button
@@ -146,142 +145,7 @@ const EmkostiPageInner = () => {
           ))}
         </nav>
 
-        <section className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">
-            Промышленные ёмкости на заказ: от эскиза до монтажа
-          </h2>
-          <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-            Мы производим промышленные ёмкости из листового полипропилена (PP) и полиэтилена (ПНД/HDPE) любой сложности и объёма — под задачи химической, пищевой, фармацевтической промышленности, сельского хозяйства, ЖКХ и строительства.
-          </p>
-          <h3 className="text-sm font-semibold text-foreground mb-2">Почему выбирают нас:</h3>
-          <ul className="space-y-2">
-            {whyUs.map((item, i) => (
-              <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
-                <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" />
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
-        </section>
-
-        {/* Section 1: Назначение */}
-        <section id="naznachenie" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Назначение ёмкостей</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-            {applications.map((app, i) => (
-              <div key={i} className="flex items-start gap-2 rounded-lg border border-border bg-card p-3">
-                <Droplets className="h-4 w-4 text-primary shrink-0 mt-0.5" />
-                <span className="text-sm text-foreground">{app}</span>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Section 2: Материалы */}
-        <section id="opisanie" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Описание материалов</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-            {/* PP */}
-            <Card>
-              <CardHeader className="pb-3">
-                <CardTitle className="text-lg">Полипропилен (PP)</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-2 text-sm text-muted-foreground">
-                <div className="grid grid-cols-2 gap-px rounded-lg border overflow-hidden">
-                  <div className="bg-muted/30 p-2.5"><span className="block text-xs text-muted-foreground">Температура</span><span className="text-sm font-semibold text-foreground">−20…+100 °C</span></div>
-                  <div className="bg-muted/30 p-2.5"><span className="block text-xs text-muted-foreground">Плотность</span><span className="text-sm font-semibold text-foreground">0,90–0,92 г/см³</span></div>
-                  <div className="bg-muted/30 p-2.5 border-t"><span className="block text-xs text-muted-foreground">Плавление</span><span className="text-sm font-semibold text-foreground">160–170 °C</span></div>
-                  <div className="bg-muted/30 p-2.5 border-t"><span className="block text-xs text-muted-foreground">Хим. стойкость</span><span className="text-sm font-semibold text-foreground">Высокая</span></div>
-                </div>
-                <p>Идеален для агрессивных сред и повышенных температур.</p>
-              </CardContent>
-            </Card>
-            {/* HDPE */}
-            <Card>
-              <CardHeader className="pb-3">
-                <CardTitle className="text-lg">Полиэтилен (ПНД/HDPE)</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-2 text-sm text-muted-foreground">
-                <div className="grid grid-cols-2 gap-px rounded-lg border overflow-hidden">
-                  <div className="bg-muted/30 p-2.5"><span className="block text-xs text-muted-foreground">Температура</span><span className="text-sm font-semibold text-foreground">−50…+60 °C</span></div>
-                  <div className="bg-muted/30 p-2.5"><span className="block text-xs text-muted-foreground">Плотность</span><span className="text-sm font-semibold text-foreground">0,93–0,97 г/см³</span></div>
-                  <div className="bg-muted/30 p-2.5 border-t"><span className="block text-xs text-muted-foreground">Плавление</span><span className="text-sm font-semibold text-foreground">120–135 °C</span></div>
-                  <div className="bg-muted/30 p-2.5 border-t"><span className="block text-xs text-muted-foreground">УФ‑стойкость</span><span className="text-sm font-semibold text-foreground">Высокая</span></div>
-                </div>
-                <p>Оптимален для воды, пищевых продуктов и эксплуатации на открытом воздухе.</p>
-              </CardContent>
-            </Card>
-          </div>
-          <div className="rounded-lg border border-border bg-card p-4">
-            <h3 className="text-sm font-semibold text-foreground mb-2">Оба материала:</h3>
-            <ul className="space-y-1.5">
-              {["Не подвержены коррозии", "Экологически безопасны и пригодны для вторичной переработки", "Имеют малый вес, упрощающий транспортировку и монтаж"].map((item, i) => (
-                <li key={i} className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <Check className="h-3.5 w-3.5 text-primary shrink-0" />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </section>
-
-        {/* Section 3: Виды и модификации */}
-        <section id="modifikacii" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Виды и модификации ёмкостей</h2>
-          <Accordion type="multiple" defaultValue={["По форме"]} className="space-y-2">
-            {modifications.map((mod) => (
-              <AccordionItem key={mod.title} value={mod.title} className="rounded-lg border border-border bg-card px-4">
-                <AccordionTrigger className="text-sm font-semibold text-foreground hover:no-underline">
-                  {mod.title}
-                </AccordionTrigger>
-                <AccordionContent>
-                  <ul className="space-y-1.5 pb-2">
-                    {mod.items.map((item, i) => (
-                      <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
-                        <span className="text-primary mt-1">•</span>
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
-        </section>
-
-        {/* CTA to configurator */}
-        <section className="mb-10">
-          <Link
-            to="/catalog/emkosti/konfigurator"
-            className="block rounded-xl border-2 border-primary/30 bg-primary/5 p-6 sm:p-8 text-center hover:border-primary/60 hover:bg-primary/10 transition-all group"
-          >
-            <h2 className="text-lg sm:text-xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
-              Конфигуратор ёмкостей
-            </h2>
-            <p className="text-sm text-muted-foreground mb-4">
-              Подберите тип, материал и размер ёмкости. Добавьте в корзину и оформите заявку.
-            </p>
-            <span className="inline-flex items-center gap-2 text-sm font-semibold text-primary">
-              Перейти к конфигуратору →
-            </span>
-          </Link>
-        </section>
-
-        {/* Section 4: Преимущества */}
-        <section id="preimushchestva" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Преимущества сотрудничества</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            {advantages.map((adv) => (
-              <div key={adv.title} className="rounded-lg border border-border bg-card p-4">
-                <adv.icon className="h-6 w-6 text-primary mb-2" />
-                <h3 className="text-sm font-semibold text-foreground mb-1">{adv.title}</h3>
-                <p className="text-xs text-muted-foreground leading-relaxed">{adv.text}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Subcategories grid */}
+        {/* Каталог ёмкостей — moved up */}
         {category && (
           <section id="katalog" className="mb-10">
             <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Каталог ёмкостей</h2>
@@ -393,6 +257,140 @@ const EmkostiPageInner = () => {
             </div>
           </section>
         )}
+
+        {/* Описание */}
+        <section id="opisanie" className="mb-10">
+          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">
+            Промышленные ёмкости на заказ: от эскиза до монтажа
+          </h2>
+          <p className="text-sm text-muted-foreground leading-relaxed mb-4">
+            Мы производим промышленные ёмкости из листового полипропилена (PP) и полиэтилена (ПНД/HDPE) любой сложности и объёма — под задачи химической, пищевой, фармацевтической промышленности, сельского хозяйства, ЖКХ и строительства.
+          </p>
+          <h3 className="text-sm font-semibold text-foreground mb-2">Почему выбирают нас:</h3>
+          <ul className="space-y-2">
+            {whyUs.map((item, i) => (
+              <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
+                <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        {/* Назначение */}
+        <section id="naznachenie" className="mb-10">
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Назначение ёмкостей</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            {applications.map((app, i) => (
+              <div key={i} className="flex items-start gap-2 rounded-lg border border-border bg-card p-3">
+                <Droplets className="h-4 w-4 text-primary shrink-0 mt-0.5" />
+                <span className="text-sm text-foreground">{app}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Материалы */}
+        <section id="materialy" className="mb-10">
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Описание материалов</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <Card>
+              <CardHeader className="pb-3">
+                <CardTitle className="text-lg">Полипропилен (PP)</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-2 text-sm text-muted-foreground">
+                <div className="grid grid-cols-2 gap-px rounded-lg border overflow-hidden">
+                  <div className="bg-muted/30 p-2.5"><span className="block text-xs text-muted-foreground">Температура</span><span className="text-sm font-semibold text-foreground">−20…+100 °C</span></div>
+                  <div className="bg-muted/30 p-2.5"><span className="block text-xs text-muted-foreground">Плотность</span><span className="text-sm font-semibold text-foreground">0,90–0,92 г/см³</span></div>
+                  <div className="bg-muted/30 p-2.5 border-t"><span className="block text-xs text-muted-foreground">Плавление</span><span className="text-sm font-semibold text-foreground">160–170 °C</span></div>
+                  <div className="bg-muted/30 p-2.5 border-t"><span className="block text-xs text-muted-foreground">Хим. стойкость</span><span className="text-sm font-semibold text-foreground">Высокая</span></div>
+                </div>
+                <p>Идеален для агрессивных сред и повышенных температур.</p>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader className="pb-3">
+                <CardTitle className="text-lg">Полиэтилен (ПНД/HDPE)</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-2 text-sm text-muted-foreground">
+                <div className="grid grid-cols-2 gap-px rounded-lg border overflow-hidden">
+                  <div className="bg-muted/30 p-2.5"><span className="block text-xs text-muted-foreground">Температура</span><span className="text-sm font-semibold text-foreground">−50…+60 °C</span></div>
+                  <div className="bg-muted/30 p-2.5"><span className="block text-xs text-muted-foreground">Плотность</span><span className="text-sm font-semibold text-foreground">0,93–0,97 г/см³</span></div>
+                  <div className="bg-muted/30 p-2.5 border-t"><span className="block text-xs text-muted-foreground">Плавление</span><span className="text-sm font-semibold text-foreground">120–135 °C</span></div>
+                  <div className="bg-muted/30 p-2.5 border-t"><span className="block text-xs text-muted-foreground">УФ‑стойкость</span><span className="text-sm font-semibold text-foreground">Высокая</span></div>
+                </div>
+                <p>Оптимален для воды, пищевых продуктов и эксплуатации на открытом воздухе.</p>
+              </CardContent>
+            </Card>
+          </div>
+          <div className="rounded-lg border border-border bg-card p-4">
+            <h3 className="text-sm font-semibold text-foreground mb-2">Оба материала:</h3>
+            <ul className="space-y-1.5">
+              {["Не подвержены коррозии", "Экологически безопасны и пригодны для вторичной переработки", "Имеют малый вес, упрощающий транспортировку и монтаж"].map((item, i) => (
+                <li key={i} className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <Check className="h-3.5 w-3.5 text-primary shrink-0" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+
+        {/* Виды и модификации */}
+        <section id="modifikacii" className="mb-10">
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Виды и модификации ёмкостей</h2>
+          <Accordion type="multiple" defaultValue={["По форме"]} className="space-y-2">
+            {modifications.map((mod) => (
+              <AccordionItem key={mod.title} value={mod.title} className="rounded-lg border border-border bg-card px-4">
+                <AccordionTrigger className="text-sm font-semibold text-foreground hover:no-underline">
+                  {mod.title}
+                </AccordionTrigger>
+                <AccordionContent>
+                  <ul className="space-y-1.5 pb-2">
+                    {mod.items.map((item, i) => (
+                      <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
+                        <span className="text-primary mt-1">•</span>
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </section>
+
+        {/* CTA to configurator */}
+        <section className="mb-10">
+          <Link
+            to="/catalog/emkosti/konfigurator"
+            className="block rounded-xl border-2 border-primary/30 bg-primary/5 p-6 sm:p-8 text-center hover:border-primary/60 hover:bg-primary/10 transition-all group"
+          >
+            <h2 className="text-lg sm:text-xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
+              Конфигуратор ёмкостей
+            </h2>
+            <p className="text-sm text-muted-foreground mb-4">
+              Подберите тип, материал и размер ёмкости. Добавьте в корзину и оформите заявку.
+            </p>
+            <span className="inline-flex items-center gap-2 text-sm font-semibold text-primary">
+              Перейти к конфигуратору →
+            </span>
+          </Link>
+        </section>
+
+        {/* Преимущества */}
+        <section id="preimushchestva" className="mb-10">
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Преимущества сотрудничества</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            {advantages.map((adv) => (
+              <div key={adv.title} className="rounded-lg border border-border bg-card p-4">
+                <adv.icon className="h-6 w-6 text-primary mb-2" />
+                <h3 className="text-sm font-semibold text-foreground mb-1">{adv.title}</h3>
+                <p className="text-xs text-muted-foreground leading-relaxed">{adv.text}</p>
+              </div>
+            ))}
+          </div>
+        </section>
 
         {/* CTA Form */}
         <section id="cta-form" className="mb-10 scroll-mt-8">
