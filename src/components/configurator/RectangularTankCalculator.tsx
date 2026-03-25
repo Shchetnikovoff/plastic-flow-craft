@@ -1,14 +1,16 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { Slider } from "@/components/ui/slider";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { pryamougolnyeProducts } from "@/data/pryamougolnyeProducts";
-import { materials, materialSpecs } from "@/data/products";
-import ArticleBreakdown, { ArticleSegment } from "./ArticleBreakdown";
+import { materials, materialSpecs, type MaterialColor } from "@/data/products";
+import ArticleBreakdown, { type ArticleSegment } from "./ArticleBreakdown";
 
 const volumes = pryamougolnyeProducts.map((p) => p.volume);
+const minVol = volumes[0];
+const maxVol = volumes[volumes.length - 1];
 
 function getColorOverlay(hex: string, colorCode: string) {
   if (!colorCode && hex === "#1C1C1C") return { backgroundColor: hex, mixBlendMode: "multiply" as const, opacity: 0.55 };
@@ -18,48 +20,149 @@ function getColorOverlay(hex: string, colorCode: string) {
 }
 
 const RectangularTankCalculator = () => {
-  const [volIdx, setVolIdx] = useState(0);
-  const [matIdx, setMatIdx] = useState(0);
-  const [colorIdx, setColorIdx] = useState(0);
+  const [selectedVolume, setSelectedVolume] = useState(minVol);
+  const [selectedMaterial, setSelectedMaterial] = useState(materials[0].name);
+  const [selectedColor, setSelectedColor] = useState<MaterialColor>(
+    materialSpecs[materials[0].name].colors[0]
+  );
 
-  const mat = materials[matIdx];
-  const specs = materialSpecs[mat.name];
-  const colors = specs.colors;
-  const color = colors[Math.min(colorIdx, colors.length - 1)];
+  const specs = materialSpecs[selectedMaterial];
 
-  const volume = volumes[volIdx];
-  const product = pryamougolnyeProducts.find((p) => p.volume === volume)!;
+  const matchedProduct = useMemo(() => {
+    let closest = pryamougolnyeProducts[0];
+    let minDiff = Math.abs(closest.volume - selectedVolume);
+    for (const p of pryamougolnyeProducts) {
+      const diff = Math.abs(p.volume - selectedVolume);
+      if (diff < minDiff) {
+        minDiff = diff;
+        closest = p;
+      }
+    }
+    return closest;
+  }, [selectedVolume]);
 
-  const hasMultipleColors = colors.length > 1;
-  const articleStr = hasMultipleColors
-    ? `СЗПК.ЕПО.${mat.code}.${color.colorCode}.${volume}`
-    : `СЗПК.ЕПО.${mat.code}.${volume}`;
+  const handleMaterialChange = useCallback((matName: string) => {
+    setSelectedMaterial(matName);
+    const newSpecs = materialSpecs[matName];
+    if (newSpecs && newSpecs.colors.length > 0) {
+      setSelectedColor(newSpecs.colors[0]);
+    }
+  }, []);
+
+  const overlay = getColorOverlay(selectedColor.hex, selectedColor.colorCode);
+
+  const matCode = materials.find((m) => m.name === selectedMaterial)?.code || "PPC";
+  const hasMultipleColors = specs.colors.length > 1;
+  const colorPart = hasMultipleColors && selectedColor.colorCode ? `.${selectedColor.colorCode}` : "";
+  const articleStr = `СЗПК.ЕПО.${matCode}${colorPart}.${matchedProduct.volume}`;
 
   const segments: ArticleSegment[] = useMemo(() => {
     const segs: ArticleSegment[] = [
-      { value: "СЗПК", label: "Бренд", desc: "СибЗавод ПолимерКомпозит" },
+      { value: "СЗПК", label: "Компания", desc: "Сибирский завод полимерных конструкций" },
       { value: "ЕПО", label: "Тип", desc: "Прямоугольная в обрешётке" },
-      { value: mat.code, label: "Материал", desc: mat.name.split("(")[0].trim() },
+      { value: matCode, label: "Материал", desc: materials.find((m) => m.code === matCode)?.name.split("(")[0].trim() || matCode },
     ];
-    if (hasMultipleColors) {
-      segs.push({ value: color.colorCode, label: "Цвет", desc: `${color.name} ${color.ral}`, hex: color.hex });
+    if (hasMultipleColors && selectedColor.colorCode) {
+      segs.push({
+        value: selectedColor.colorCode,
+        label: "Цвет",
+        desc: `${selectedColor.name} (${selectedColor.ral})`,
+        hex: selectedColor.hex,
+      });
     }
-    segs.push({ value: String(volume), label: "Объём", desc: `${volume.toLocaleString("ru-RU")} литров` });
+    segs.push({ value: String(matchedProduct.volume), label: "Объём, л", desc: `${matchedProduct.volume.toLocaleString("ru-RU")} литров` });
     return segs;
-  }, [mat, color, volume, hasMultipleColors]);
-
-  const overlay = getColorOverlay(color.hex, color.colorCode);
+  }, [matCode, selectedColor, matchedProduct, hasMultipleColors]);
 
   return (
     <section id="calculator" className="mb-10 scroll-mt-8">
-      <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Калькулятор подбора</h2>
+      <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">
+        Калькулятор подбора ёмкости
+      </h2>
+      <div className="rounded-xl border border-border bg-card p-5 sm:p-6">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_220px] gap-6">
+          {/* Controls */}
+          <div className="space-y-6">
+            {/* Volume slider */}
+            <div>
+              <label className="text-sm font-semibold text-foreground mb-3 block">
+                Объём: <span className="text-primary">{matchedProduct.volume.toLocaleString("ru-RU")} л</span>
+              </label>
+              <Slider
+                min={minVol}
+                max={maxVol}
+                step={1000}
+                value={[selectedVolume]}
+                onValueChange={([v]) => setSelectedVolume(v)}
+              />
+              <div className="flex justify-between text-xs text-muted-foreground mt-1">
+                <span>{minVol.toLocaleString("ru-RU")} л</span>
+                <span>{maxVol.toLocaleString("ru-RU")} л</span>
+              </div>
+            </div>
 
-      <div className="rounded-xl border border-border bg-card overflow-hidden">
-        <div className="grid grid-cols-1 md:grid-cols-2">
-          {/* Image */}
-          <div className="relative bg-muted flex items-center justify-center p-6">
-            <div className="relative w-full max-w-[320px]">
-              <img src="/images/emkost-pryam-pp-1.png" alt="Прямоугольная ёмкость" className="w-full h-auto rounded-lg" />
+            {/* Material */}
+            <div>
+              <span className="text-sm font-semibold text-foreground mb-2 block">Материал</span>
+              <div className="flex flex-wrap gap-2">
+                {materials.map((mat) => (
+                  <Badge
+                    key={mat.name}
+                    variant="outline"
+                    className={`rounded-full px-3 py-1.5 text-xs font-medium cursor-pointer transition-colors ${
+                      selectedMaterial === mat.name
+                        ? "border-primary text-primary bg-primary/5"
+                        : "hover:border-primary/50 hover:text-primary/80"
+                    }`}
+                    onClick={() => handleMaterialChange(mat.name)}
+                  >
+                    {mat.code}
+                  </Badge>
+                ))}
+              </div>
+              {specs && (
+                <div className="mt-2 flex gap-3 text-xs text-muted-foreground">
+                  <span>🌡 {specs.workingTemp}</span>
+                </div>
+              )}
+            </div>
+
+            {/* Colors */}
+            {specs && (
+              <div>
+                <span className="text-sm font-semibold text-foreground mb-2 block">Цвет</span>
+                <div className="flex flex-wrap gap-2">
+                  {specs.colors.map((c) => (
+                    <div
+                      key={c.ral + c.colorCode}
+                      onClick={() => setSelectedColor(c)}
+                      className={`flex items-center gap-2 rounded-lg border px-3 py-2 cursor-pointer transition-all ${
+                        selectedColor.colorCode === c.colorCode
+                          ? "border-primary ring-1 ring-primary shadow-sm bg-primary/5"
+                          : "border-border hover:border-muted-foreground bg-card"
+                      }`}
+                    >
+                      <span
+                        className="w-5 h-5 rounded-full border border-border shrink-0"
+                        style={{ backgroundColor: c.hex }}
+                      />
+                      <span className="text-xs font-medium text-foreground">{c.name}</span>
+                      <span className="text-xs text-muted-foreground">{c.ral}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Photo preview */}
+          <div className="flex flex-col items-center justify-center">
+            <div className="w-full max-w-[220px] relative">
+              <img
+                src="/images/emkost-pryam-pp-1.png"
+                alt="Прямоугольная ёмкость"
+                className="w-full aspect-[3/4] object-contain rounded-lg"
+              />
               {overlay && (
                 <div
                   className="absolute inset-0 rounded-lg pointer-events-none"
@@ -72,89 +175,30 @@ const RectangularTankCalculator = () => {
               )}
             </div>
           </div>
-
-          {/* Controls */}
-          <div className="p-4 sm:p-6 space-y-5">
-            {/* Volume */}
-            <div>
-              <p className="text-xs font-semibold text-muted-foreground uppercase mb-2">Объём</p>
-              <div className="flex items-center gap-3">
-                <Slider
-                  min={0}
-                  max={volumes.length - 1}
-                  step={1}
-                  value={[volIdx]}
-                  onValueChange={([v]) => setVolIdx(v)}
-                  className="flex-1"
-                />
-                <span className="text-sm font-bold text-foreground min-w-[70px] text-right">
-                  {volume.toLocaleString("ru-RU")} л
-                </span>
-              </div>
-            </div>
-
-            {/* Material */}
-            <div>
-              <p className="text-xs font-semibold text-muted-foreground uppercase mb-2">Материал</p>
-              <div className="flex flex-wrap gap-1.5">
-                {materials.map((m, i) => (
-                  <Badge
-                    key={m.code}
-                    variant="outline"
-                    className={`cursor-pointer text-[11px] px-2.5 py-1 rounded-full transition-colors ${
-                      i === matIdx ? "border-primary text-primary bg-primary/5" : "hover:border-primary/50"
-                    }`}
-                    onClick={() => { setMatIdx(i); setColorIdx(0); }}
-                  >
-                    {m.code}
-                  </Badge>
-                ))}
-              </div>
-              <p className="text-[10px] text-muted-foreground mt-1">{specs.workingTemp}</p>
-            </div>
-
-            {/* Color */}
-            <div>
-              <p className="text-xs font-semibold text-muted-foreground uppercase mb-2">Цвет</p>
-              <div className="flex flex-wrap gap-2">
-                {colors.map((c, i) => (
-                  <button
-                    key={c.colorCode || c.name}
-                    onClick={() => setColorIdx(i)}
-                    className={`w-8 h-8 rounded-full border-2 transition-all ${
-                      i === (colorIdx >= colors.length ? 0 : colorIdx)
-                        ? "border-primary ring-2 ring-primary/30 scale-110"
-                        : "border-border hover:scale-105"
-                    }`}
-                    style={{ backgroundColor: c.hex }}
-                    title={`${c.name} ${c.ral}`}
-                  />
-                ))}
-              </div>
-              <p className="text-[10px] text-muted-foreground mt-1">
-                {color.name} {color.ral} — {color.application}
-              </p>
-            </div>
-
-            {/* Result */}
-            <div className="rounded-lg border border-border bg-muted/30 p-3 space-y-1.5">
-              <p className="text-xs text-muted-foreground">Габариты (Д×Ш×В):</p>
-              <p className="text-sm font-bold text-foreground">{product.dimensions} мм</p>
-              <p className="text-xs text-muted-foreground">Артикул:</p>
-              <p className="text-sm font-mono font-bold text-foreground">{articleStr}</p>
-            </div>
-
-            <Link to={`/product/${encodeURIComponent(articleStr)}`}>
-              <Button className="w-full gap-2 mt-1">
-                Перейти к товару <ArrowRight className="w-4 h-4" />
-              </Button>
-            </Link>
-          </div>
         </div>
 
-        {/* Article breakdown */}
-        <div className="px-4 sm:px-6 pb-4">
+        {/* Result */}
+        <div className="mt-6 space-y-3">
           <ArticleBreakdown exampleArticle={articleStr} segments={segments} />
+          <div className="rounded-lg border border-primary/20 bg-primary/5 p-4">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <div className="space-y-1">
+                <p className="text-sm font-semibold text-foreground">
+                  Рекомендованная модель: <span className="text-primary">{articleStr}</span>
+                </p>
+                <p className="text-xs text-muted-foreground">
+                  {matchedProduct.volume.toLocaleString("ru-RU")} л · {matchedProduct.dimensions} мм
+                  · {matCode} · {selectedColor.name} ({selectedColor.ral})
+                </p>
+              </div>
+              <Button asChild size="sm" className="gap-1.5">
+                <Link to={`/product/${encodeURIComponent(articleStr)}`}>
+                  Перейти к товару
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
     </section>
