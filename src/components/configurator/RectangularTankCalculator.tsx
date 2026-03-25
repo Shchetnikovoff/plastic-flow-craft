@@ -12,11 +12,15 @@ const volumes = pryamougolnyeProducts.map((p) => p.volume);
 const minVol = volumes[0];
 const maxVol = volumes[volumes.length - 1];
 
-function getColorOverlay(hex: string, colorCode: string) {
-  if (!colorCode && hex === "#1C1C1C") return { backgroundColor: hex, mixBlendMode: "multiply" as const, opacity: 0.55 };
-  if (colorCode === "9003") return { backgroundColor: hex, mixBlendMode: "screen" as const, opacity: 0.15 };
-  if (colorCode === "7032") return null;
-  return { backgroundColor: hex, mixBlendMode: "multiply" as const, opacity: 0.35 };
+const colorImages: Record<string, string> = {
+  "7032": "/images/emkost-pryam-pp-1.png",
+  "5012": "/images/emkost-pryam-hero-blue.png",
+  "9003": "/images/emkost-pryam-hero-white.png",
+  "": "/images/emkost-pryam-hero-black.png",
+};
+
+function getRectImage(colorCode: string): string {
+  return colorImages[colorCode] || colorImages["7032"];
 }
 
 const RectangularTankCalculator = () => {
@@ -48,8 +52,6 @@ const RectangularTankCalculator = () => {
       setSelectedColor(newSpecs.colors[0]);
     }
   }, []);
-
-  const overlay = getColorOverlay(selectedColor.hex, selectedColor.colorCode);
 
   const matCode = materials.find((m) => m.name === selectedMaterial)?.code || "PPC";
   const hasMultipleColors = specs.colors.length > 1;
@@ -157,22 +159,12 @@ const RectangularTankCalculator = () => {
 
           {/* Photo preview */}
           <div className="flex flex-col items-center justify-center">
-            <div className="w-full max-w-[220px] relative">
+            <div className="w-full max-w-[220px]">
               <img
-                src="/images/emkost-pryam-pp-1.png"
+                src={getRectImage(selectedColor.colorCode)}
                 alt="Прямоугольная ёмкость"
                 className="w-full aspect-[3/4] object-contain rounded-lg"
               />
-              {overlay && (
-                <div
-                  className="absolute inset-0 rounded-lg pointer-events-none"
-                  style={{
-                    backgroundColor: overlay.backgroundColor,
-                    mixBlendMode: overlay.mixBlendMode,
-                    opacity: overlay.opacity,
-                  }}
-                />
-              )}
             </div>
           </div>
         </div>
