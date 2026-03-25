@@ -360,19 +360,18 @@ function parseEmkostArticle(article: string) {
       const epovVolume = parseInt(epovVolumeStr!, 10);
       const epovItem = !isNaN(epovVolume) ? pryamougolnyeVertikalnyeProducts.find((p) => p.volume === epovVolume) : null;
       if (epovItem) {
-        const epovColorFilters: Record<string, string> = {
-          "7032": "none",
-          "5012": "hue-rotate(190deg) saturate(1.8) brightness(0.95)",
-          "9003": "brightness(1.25) saturate(0.15) contrast(1.1)",
-          "": "brightness(0.35) saturate(0) contrast(1.2)",
+        const epovVertImages: Record<string, string> = {
+          "7032": "/images/emkost-pryam-vert-gray.png",
+          "5012": "/images/emkost-pryam-vert-blue.png",
+          "9003": "/images/emkost-pryam-vert-white.png",
+          "": "/images/emkost-pryam-vert-black.png",
         };
         const epovSpecs = epovMatInfo ? materialSpecs[epovMatInfo.name] : null;
         const epovColor = epovSpecs
           ? (epovColorCode ? epovSpecs.colors.find((c) => c.colorCode === epovColorCode) : epovSpecs.colors[0])
           : undefined;
         const epovImageKey = epovColor?.colorCode ?? "";
-        const epovImage = "/images/emkost-pryam-goriz-render-grey.png";
-        const epovImageFilter = epovColorFilters[epovImageKey] ?? "none";
+        const epovImage = epovVertImages[epovImageKey] || epovVertImages["7032"];
         const epovColorLabel = epovColor ? `${epovColor.name} (${epovColor.ral})` : "";
 
         return {
