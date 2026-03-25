@@ -335,7 +335,7 @@ function parseEmkostArticle(article: string) {
         heightOrLength: itemBase.height,
         heightLabel: "H, мм",
         description: `Прямоугольная горизонтальная ёмкость в обрешётке. Размеры ${itemBase.length}×${itemBase.width}×${itemBase.height} мм, объём ${itemBase.volume.toLocaleString()} л.`,
-        image: "/images/emkost-pryam-pp-1.png",
+        image: "/images/emkost-pryam-goriz-render-grey.png",
         rectDims: { length: itemBase.length, width: itemBase.width, height: itemBase.height },
         breadcrumbBack: { label: "Горизонтальные прямоугольные", path: "/catalog/emkosti/pryamougolnye/gorizontalnye" },
       };
