@@ -220,6 +220,8 @@ const EmkostiPryamougolnyeInner = () => {
           ))}
         </nav>
 
+        <RectangularTankCalculator />
+
         {/* Типоразмерный ряд — with tabs for PP and PND */}
         <section id="modeli" className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Типоразмерный ряд</h2>

@@ -10,3 +10,4 @@ export { QuantityCell, AddToCartButton } from "./QuantityCell";
 export { default as TankCalculator } from "./TankCalculator";
 export type { TankType } from "./TankCalculator";
 export { default as HorizontalTankCalculator } from "./HorizontalTankCalculator";
+export { default as RectangularTankCalculator } from "./RectangularTankCalculator";
