@@ -194,9 +194,12 @@ const EmkostiPryamougolnyeGorizontalnyeInner = () => {
           <p className="text-sm text-muted-foreground mb-5">
             Горизонтальная компоновка для компактного размещения при ограниченной высоте. Объём от 1 000 до 50 000 литров.
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
             <div className="rounded-lg border border-border overflow-hidden bg-card">
               <img src="/images/emkost-pryam-real-4.png" alt="Прямоугольная горизонтальная ёмкость" className="w-full object-contain" />
+            </div>
+            <div className="rounded-lg border border-border overflow-hidden bg-card">
+              <img src="/images/emkost-pryam-goriz-hero.png" alt="Горизонтальная ёмкость в обрешётке — рендер" className="w-full object-contain" />
             </div>
             <div className="rounded-lg border border-border overflow-hidden bg-card">
               <img src="/images/emkost-pryam-real-2.jpg" alt="Горизонтальная ёмкость в обрешётке" className="w-full object-contain" />
