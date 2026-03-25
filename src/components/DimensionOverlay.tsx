@@ -96,6 +96,7 @@ const DimensionOverlay = ({
   height,
   objectBounds,
   isoCorners: isoCornersProp,
+  imageStyle,
 }: DimensionOverlayProps) => {
   // Resolve corners
   const iso: IsoCorners = isoCornersProp
