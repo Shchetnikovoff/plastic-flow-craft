@@ -198,9 +198,24 @@ const VodoochistkaInner = () => {
             Получить расчёт стоимости
           </Button>
 
-          <div className="mt-6">
-            <div className="rounded-lg border border-border overflow-hidden bg-card">
-              <img src="/images/vodoochistka-hero-real.jpeg" alt="Водоочистное оборудование из полимеров" className="w-full object-contain" />
+          <div className="grid grid-cols-1 lg:grid-cols-[3fr_2fr] gap-4 mt-6">
+            <div className="rounded-xl border border-border overflow-hidden bg-card flex items-center justify-center min-h-[400px]">
+              <img src="/images/vodoochistka-hero-real.jpeg" alt="Водоочистное оборудование из полимеров" className="w-full h-auto object-contain" />
+            </div>
+            <div className="grid grid-cols-3 gap-2">
+              {[
+                { src: "/images/ffu-real-3d.png", alt: "ФФУ" },
+                { src: "/images/lamelnyj-thumb-new.png", alt: "Ламельный отстойник" },
+                { src: "/images/obezvozhivatel-3d-ral7032.jpg", alt: "Обезвоживатель" },
+                { src: "/images/spr-hero-ral7032.jpg", alt: "Станция дозирования" },
+                { src: "/images/zhu-vertical-ral.jpg", alt: "Жироуловители" },
+                { src: "/images/vodoochistka-kos-kompakt.jpg", alt: "КОС" },
+                { src: "/images/vodoochistka-dozirovanie-grundfos.jpg", alt: "Шкафы дозирования" },
+              ].map((img) => (
+                <div key={img.alt} className="rounded-lg border border-border overflow-hidden bg-card flex items-center justify-center aspect-square">
+                  <img src={img.src} alt={img.alt} className="w-full h-full object-contain p-1" />
+                </div>
+              ))}
             </div>
           </div>
         </section>
