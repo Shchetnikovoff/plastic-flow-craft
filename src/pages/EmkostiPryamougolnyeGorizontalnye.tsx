@@ -166,12 +166,7 @@ const RectProductTable = ({ selectedMaterial, selectedColor, onMaterialChange, o
         </div>
 
         <div className="flex items-center justify-center">
-          <img
-            src={GORIZ_RENDER_SRC}
-            alt="Превью ёмкости"
-            className="max-w-[200px] w-full object-contain transition-[filter] duration-300"
-            style={{ filter: currentFilter }}
-          />
+          <TankRenderPreview colorCode={selectedColor.colorCode} className="max-w-[200px] w-full" />
         </div>
       </div>
 
