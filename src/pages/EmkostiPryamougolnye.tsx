@@ -115,7 +115,7 @@ const subtypes = [
     image: "/images/emkost-pryam-vert-card.png",
     path: "/catalog/emkosti/pryamougolnye/vertikalnye",
     description: "Вертикальная компоновка — высота больше ширины. Объём от 500 до 25 000 л.",
-    imgFilter: "saturate(0) brightness(0.55) contrast(1.1)",
+    imgFilter: undefined as string | undefined,
   },
 ];
 
