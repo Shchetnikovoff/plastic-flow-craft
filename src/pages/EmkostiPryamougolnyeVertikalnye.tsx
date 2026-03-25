@@ -33,38 +33,26 @@ function getRectImage(colorCode: string): string {
 
 const VERT_RENDER_SRC = "/images/emkost-pryam-goriz-render-grey.png";
 
-const colorOverlays: Record<string, string | null> = {
-  "7032": null,
-  "5012": "rgba(0,120,200,0.35)",
-  "9003": null,
-  "": null,
-};
-
-const colorBrightnessFilter: Record<string, string> = {
+const colorFilters: Record<string, string> = {
   "7032": "none",
-  "5012": "none",
-  "9003": "brightness(1.3) contrast(0.9)",
+  "5012": "hue-rotate(185deg) saturate(2.5) brightness(0.92)",
+  "9003": "brightness(1.2) saturate(0.2) contrast(1.05)",
   "": "brightness(0.3) saturate(0) contrast(1.3)",
 };
 
+function getColorFilter(colorCode: string): string {
+  return colorFilters[colorCode] ?? "none";
+}
+
 const VertTankRenderPreview = ({ colorCode, className = "" }: { colorCode: string; className?: string }) => {
-  const overlay = colorOverlays[colorCode] ?? null;
-  const filter = colorBrightnessFilter[colorCode] ?? "none";
+  const filter = getColorFilter(colorCode);
   return (
-    <div className={`relative inline-block ${className}`}>
-      <img
-        src={VERT_RENDER_SRC}
-        alt="Превью ёмкости"
-        className="w-full object-contain transition-[filter] duration-300"
-        style={{ filter }}
-      />
-      {overlay && (
-        <div
-          className="absolute inset-0 transition-colors duration-300 pointer-events-none"
-          style={{ backgroundColor: overlay, mixBlendMode: "multiply" }}
-        />
-      )}
-    </div>
+    <img
+      src={VERT_RENDER_SRC}
+      alt="Превью ёмкости"
+      className={`object-contain transition-[filter] duration-300 ${className}`}
+      style={{ filter }}
+    />
   );
 };
 
