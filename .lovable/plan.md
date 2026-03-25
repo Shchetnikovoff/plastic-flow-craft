@@ -1,21 +1,13 @@
 
 
-## Plan: Add Collage to Vodoochistka Hero Section
+## Plan: Move Catalog Section Up
 
-Replace the single hero image with a collage identical in style to the EmkostiPage: main image on the left (~60%), 3-column thumbnail grid on the right (~40%).
+Move the "Каталог водоочистного оборудования" section (lines 352-end of that section) to right after the hero collage and navigation pills, before the descriptive text sections.
 
 ### Changes
 
-**`src/pages/Vodoochistka.tsx`** (lines 201-205):
-- Replace the single full-width image container with a 2-column grid using `lg:grid-cols-[3fr_2fr]`
-- Left column: the existing `vodoochistka-hero-real.jpeg` in a large container with `min-h-[400px]`
-- Right column: grid of 7 subcategory thumbnails in a `grid-cols-3` layout (fills 2 rows of 3 + 1 remaining), using images from catalog data:
-  - ФФУ (`ffu-real-3d.png`)
-  - Ламельный отстойник (`lamelnyj-thumb-new.png`)
-  - Обезвоживатель (`obezvozhivatel-3d-ral7032.jpg`)
-  - Станция дозирования (`spr-hero-ral7032.jpg`)
-  - Жироуловители (`zhu-vertical-ral.jpg`)
-  - КОС (`vodoochistka-kos-kompakt.jpg`)
-  - Шкафы дозирования (`vodoochistka-dozirovanie-grundfos.jpg`)
-- Each thumbnail in a square card with `aspect-square`, `object-contain`, rounded border — same styling as EmkostiPage
+**`src/pages/Vodoochistka.tsx`**:
+- Cut the catalog section (lines 352-onwards with the subcategories grid) from its current position
+- Paste it immediately after the nav pills (after line 243), before the "Системы водоочистки" text section (line 245)
+- This follows the established design pattern (per memory: catalog-layout-priority) of placing product selection blocks right after the hero section
 
