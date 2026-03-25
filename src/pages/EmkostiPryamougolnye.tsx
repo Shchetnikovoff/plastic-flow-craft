@@ -104,7 +104,7 @@ const subtypes = [
   {
     id: "gorizontalnye",
     name: "Горизонтальные",
-    image: "/images/emkost-pryam-real-4.png",
+    image: "/images/emkost-pryam-goriz-card.png",
     path: "/catalog/emkosti/pryamougolnye/gorizontalnye",
     description: "Горизонтальная компоновка — длина больше высоты. Объём от 1 000 до 50 000 л.",
   },
