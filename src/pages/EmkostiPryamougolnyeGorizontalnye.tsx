@@ -20,24 +20,30 @@ import { toast } from "sonner";
 import PageFooter from "@/components/PageFooter";
 import ArticleBreakdown, { type ArticleSegment } from "@/components/configurator/ArticleBreakdown";
 
-const RectProductTable = () => {
+const colorImages: Record<string, string> = {
+  "7032": "/images/emkost-pryam-pp-1.png",
+  "5012": "/images/emkost-pryam-hero-blue.png",
+  "9003": "/images/emkost-pryam-hero-white.png",
+  "": "/images/emkost-pryam-hero-black.png",
+};
+
+function getRectImage(colorCode: string): string {
+  return colorImages[colorCode] || colorImages["7032"];
+}
+
+interface RectProductTableProps {
+  selectedMaterial: string;
+  selectedColor: MaterialColor;
+  onMaterialChange: (matName: string) => void;
+  onColorChange: (color: MaterialColor) => void;
+}
+
+const RectProductTable = ({ selectedMaterial, selectedColor, onMaterialChange, onColorChange }: RectProductTableProps) => {
   const navigate = useNavigate();
-  const [selectedMaterial, setSelectedMaterial] = useState(materials[0].name);
-  const [selectedColor, setSelectedColor] = useState<MaterialColor>(
-    materialSpecs[materials[0].name].colors[0]
-  );
 
   const specs = materialSpecs[selectedMaterial];
   const matCode = materials.find((m) => m.name === selectedMaterial)?.code || "PPC";
   const hasMultipleColors = specs.colors.length > 1;
-
-  const handleMaterialChange = useCallback((matName: string) => {
-    setSelectedMaterial(matName);
-    const newSpecs = materialSpecs[matName];
-    if (newSpecs && newSpecs.colors.length > 0) {
-      setSelectedColor(newSpecs.colors[0]);
-    }
-  }, []);
 
   const buildArticle = useCallback((volume: number) => {
     const colorPart = hasMultipleColors && selectedColor.colorCode ? `.${selectedColor.colorCode}` : "";
@@ -80,7 +86,7 @@ const RectProductTable = () => {
                   ? "border-primary text-primary bg-primary/5"
                   : "hover:border-primary/50 hover:text-primary/80"
               }`}
-              onClick={() => handleMaterialChange(mat.name)}
+              onClick={() => onMaterialChange(mat.name)}
             >
               {mat.code}
             </Badge>
@@ -100,7 +106,7 @@ const RectProductTable = () => {
             {specs.colors.map((c) => (
               <div
                 key={c.ral + c.colorCode}
-                onClick={() => setSelectedColor(c)}
+                onClick={() => onColorChange(c)}
                 className={`flex items-center gap-2 rounded-lg border px-3 py-2 cursor-pointer transition-all ${
                   selectedColor.colorCode === c.colorCode
                     ? "border-primary ring-1 ring-primary shadow-sm bg-primary/5"
@@ -158,6 +164,20 @@ const RectProductTable = () => {
 const EmkostiPryamougolnyeGorizontalnyeInner = () => {
   const [cartOpen, setCartOpen] = useState(false);
   const [form, setForm] = useState({ name: "", phone: "", email: "", description: "" });
+  const [selectedMaterial, setSelectedMaterial] = useState(materials[0].name);
+  const [selectedColor, setSelectedColor] = useState<MaterialColor>(
+    materialSpecs[materials[0].name].colors[0]
+  );
+
+  const handleMaterialChange = useCallback((matName: string) => {
+    setSelectedMaterial(matName);
+    const newSpecs = materialSpecs[matName];
+    if (newSpecs && newSpecs.colors.length > 0) {
+      setSelectedColor(newSpecs.colors[0]);
+    }
+  }, []);
+
+  const heroRenderSrc = getRectImage(selectedColor.colorCode);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -198,8 +218,8 @@ const EmkostiPryamougolnyeGorizontalnyeInner = () => {
             <div className="rounded-lg border border-border overflow-hidden bg-card">
               <img src="/images/emkost-pryam-real-4.png" alt="Прямоугольная горизонтальная ёмкость" className="w-full object-contain" />
             </div>
-            <div className="rounded-lg border border-border overflow-hidden bg-card">
-              <img src="/images/emkost-pryam-goriz-hero.png" alt="Горизонтальная ёмкость в обрешётке — рендер" className="w-full object-contain" />
+            <div className="rounded-lg border border-border overflow-hidden bg-card transition-all">
+              <img src={heroRenderSrc} alt="Горизонтальная ёмкость в обрешётке — рендер" className="w-full object-contain" />
             </div>
             <div className="rounded-lg border border-border overflow-hidden bg-card">
               <img src="/images/emkost-pryam-real-2.jpg" alt="Горизонтальная ёмкость в обрешётке" className="w-full object-contain" />
@@ -222,7 +242,12 @@ const EmkostiPryamougolnyeGorizontalnyeInner = () => {
           ))}
         </nav>
 
-        <RectProductTable />
+        <RectProductTable
+          selectedMaterial={selectedMaterial}
+          selectedColor={selectedColor}
+          onMaterialChange={handleMaterialChange}
+          onColorChange={setSelectedColor}
+        />
 
         <section id="cta-form" className="mb-10 scroll-mt-8">
           <div className="rounded-xl border border-border bg-card p-6 sm:p-8">
