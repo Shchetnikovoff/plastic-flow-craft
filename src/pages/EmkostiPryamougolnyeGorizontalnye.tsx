@@ -22,48 +22,28 @@ import ArticleBreakdown, { type ArticleSegment } from "@/components/configurator
 
 const GORIZ_RENDER_SRC = "/images/emkost-pryam-goriz-render-grey.png";
 
-// Overlay colors for mix-blend-mode: multiply (preserves dark frame, tints light body)
-const colorOverlays: Record<string, string | null> = {
-  "7032": null,                    // grey — no overlay needed
-  "5012": "rgba(0,120,200,0.35)",  // blue tint
-  "9003": null,                    // white — brighten via filter
-  "": null,                        // black — darken via filter
-};
-
-const colorBrightnessFilter: Record<string, string> = {
+// CSS filters tuned to preserve dark graphite frame while tinting lighter body
+const colorFilters: Record<string, string> = {
   "7032": "none",
-  "5012": "none",
-  "9003": "brightness(1.3) contrast(0.9)",
+  "5012": "hue-rotate(185deg) saturate(2.5) brightness(0.92)",
+  "9003": "brightness(1.2) saturate(0.2) contrast(1.05)",
   "": "brightness(0.3) saturate(0) contrast(1.3)",
 };
 
-function getOverlay(colorCode: string): string | null {
-  return colorOverlays[colorCode] ?? null;
+function getColorFilter(colorCode: string): string {
+  return colorFilters[colorCode] ?? "none";
 }
 
-function getBrightnessFilter(colorCode: string): string {
-  return colorBrightnessFilter[colorCode] ?? "none";
-}
-
-/** Reusable render preview with color overlay that preserves graphite frame */
+/** Reusable render preview with CSS filter for color switching */
 const TankRenderPreview = ({ colorCode, className = "" }: { colorCode: string; className?: string }) => {
-  const overlay = getOverlay(colorCode);
-  const filter = getBrightnessFilter(colorCode);
+  const filter = getColorFilter(colorCode);
   return (
-    <div className={`relative inline-block ${className}`}>
-      <img
-        src={GORIZ_RENDER_SRC}
-        alt="Превью ёмкости"
-        className="w-full object-contain transition-[filter] duration-300"
-        style={{ filter }}
-      />
-      {overlay && (
-        <div
-          className="absolute inset-0 transition-colors duration-300 pointer-events-none"
-          style={{ backgroundColor: overlay, mixBlendMode: "multiply" }}
-        />
-      )}
-    </div>
+    <img
+      src={GORIZ_RENDER_SRC}
+      alt="Превью ёмкости"
+      className={`object-contain transition-[filter] duration-300 ${className}`}
+      style={{ filter }}
+    />
   );
 };
 
