@@ -20,15 +20,17 @@ import { toast } from "sonner";
 import PageFooter from "@/components/PageFooter";
 import ArticleBreakdown, { type ArticleSegment } from "@/components/configurator/ArticleBreakdown";
 
-const colorImages: Record<string, string> = {
-  "7032": "/images/emkost-pryam-pp-1.png",
-  "5012": "/images/emkost-pryam-hero-blue.png",
-  "9003": "/images/emkost-pryam-hero-white.png",
-  "": "/images/emkost-pryam-hero-black.png",
+const GORIZ_RENDER_SRC = "/images/emkost-pryam-goriz-render-grey.png";
+
+const colorFilters: Record<string, string> = {
+  "7032": "none",
+  "5012": "hue-rotate(190deg) saturate(3) brightness(0.9)",
+  "9003": "brightness(1.5) saturate(0.1)",
+  "": "brightness(0.25) saturate(0)",
 };
 
-function getRectImage(colorCode: string): string {
-  return colorImages[colorCode] || colorImages["7032"];
+function getColorFilter(colorCode: string): string {
+  return colorFilters[colorCode] ?? colorFilters["7032"];
 }
 
 interface RectProductTableProps {
