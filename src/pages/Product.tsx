@@ -223,6 +223,26 @@ function parseEmkostArticle(article: string) {
       image: "/images/emkosti-hero-2.png",
     };
   }
+  // Search in podzemnyeProducts (underground SVT tanks) — format: СЗПК.ЕСВП.{volume}
+  if (article.startsWith("СЗПК.ЕСВП.")) {
+    const item = podzemnyeProducts.find((p) => p.article === article);
+    if (item) {
+      return {
+        productType: "emkost" as const,
+        emkostType: "underground",
+        title: `Ёмкость подземная из СВТ ${item.volume} м³`,
+        subtitle: "Подземная ёмкость из спиральновитых труб",
+        materialName: "Полиэтилен высокой плотности (ПНД/HDPE)",
+        volume: item.volume * 1000,
+        diameter: item.diameter,
+        heightOrLength: item.length,
+        heightLabel: "L, мм",
+        description: `Подземная ёмкость из спиральновитых труб. Объём ${item.volume} м³, диаметр ${item.diameter} мм, длина ${item.length} мм.`,
+        image: "/images/emkosti-podzemnye-svt-1.jpg",
+        breadcrumbBack: { label: "Подземные ёмкости", path: "/catalog/emkosti/podzemnye" },
+      };
+    }
+  }
   // Search in perelivnye (overflow tanks for pools) — format: СЗПК.ПЕ.ПП.{COLOR}.{VOLUME}
   if (article.startsWith("СЗПК.ПЕ.")) {
     const item = perelivnyeProducts.find((p) => p.article === article);

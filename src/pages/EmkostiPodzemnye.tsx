@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 import CartSheet from "@/components/CartSheet";
 import { CartProvider } from "@/contexts/CartContext";
@@ -120,6 +120,7 @@ const advantages = [
 const EmkostiPodzemnyeInner = () => {
   const [cartOpen, setCartOpen] = useState(false);
   const [form, setForm] = useState({ name: "", phone: "", email: "", description: "" });
+  const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -179,15 +180,14 @@ const EmkostiPodzemnyeInner = () => {
           </div>
         </section>
 
-        {/* Intro */}
-
+        {/* Navigation */}
         <nav className="mb-8 flex flex-wrap gap-2">
           {[
+            { id: "modeli", label: "Модели" },
             { id: "opisanie", label: "Описание" },
             { id: "naznachenie", label: "Назначение" },
             { id: "materialy", label: "Материалы" },
             { id: "modifikacii", label: "Модификации" },
-            { id: "modeli", label: "Модели" },
             { id: "preimushchestva", label: "Преимущества" },
             { id: "cta-form", label: "Заявка" },
           ].map((s) => (
@@ -201,7 +201,40 @@ const EmkostiPodzemnyeInner = () => {
           ))}
         </nav>
 
-        <section className="mb-10">
+        {/* Типоразмерный ряд */}
+        <section id="modeli" className="mb-10">
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Типоразмерный ряд</h2>
+          <div className="rounded-lg border border-border overflow-auto">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead className="text-xs">Артикул</TableHead>
+                  <TableHead className="text-xs">Объём, м³</TableHead>
+                  <TableHead className="text-xs text-right">Ø корпуса, мм</TableHead>
+                  <TableHead className="text-xs text-right">Длина (L), мм</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {podzemnyeProducts.map((item) => (
+                  <TableRow
+                    key={item.article}
+                    className="cursor-pointer hover:bg-accent/50 transition-colors"
+                    onClick={() => navigate(`/product/${item.article}`)}
+                  >
+                    <TableCell className="text-xs font-medium text-primary underline underline-offset-2">{item.article}</TableCell>
+                    <TableCell className="text-xs font-medium">{item.volume}</TableCell>
+                    <TableCell className="text-xs text-right">{item.diameter.toLocaleString()}</TableCell>
+                    <TableCell className="text-xs text-right">{item.length.toLocaleString()}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
+          <p className="text-xs text-muted-foreground mt-2">Нажмите на строку, чтобы открыть карточку товара с возможностью скачивания КП и спецификации</p>
+        </section>
+
+        {/* Intro / Description */}
+        <section id="opisanie" className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">
             Подземные резервуары на заказ: от проектирования до ввода в эксплуатацию
           </h2>
@@ -294,31 +327,6 @@ const EmkostiPodzemnyeInner = () => {
               </AccordionItem>
             ))}
           </Accordion>
-        </section>
-
-        {/* Типоразмерный ряд */}
-        <section id="modeli" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Типоразмерный ряд</h2>
-          <div className="rounded-lg border border-border overflow-auto">
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead className="text-xs">Объём, м³</TableHead>
-                  <TableHead className="text-xs text-right">Ø корпуса, мм</TableHead>
-                  <TableHead className="text-xs text-right">Длина (L), мм</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {podzemnyeProducts.map((item) => (
-                  <TableRow key={item.volume}>
-                    <TableCell className="text-xs font-medium">{item.volume}</TableCell>
-                    <TableCell className="text-xs text-right">{item.diameter.toLocaleString()}</TableCell>
-                    <TableCell className="text-xs text-right">{item.length.toLocaleString()}</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </div>
         </section>
 
         {/* Section 4: Преимущества сотрудничества */}
