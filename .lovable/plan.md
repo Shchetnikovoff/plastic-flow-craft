@@ -1,29 +1,22 @@
 
 
-## Plan: Dynamic Tables with Material/Color Articles for Rectangular Tanks
+## Plan: Remove Duplicate Calculator and Clean Up Dead Code
 
-### What changes
+### Problem
+1. `RectangularTankCalculator` (line 368) duplicates the material/color selection that `RectProductTable` (line 371) already provides
+2. Old `ProductTable` component (lines 538-569) is dead code — never rendered
+3. Nav anchor "Калькулятор" points to the removed section
 
-**1. `src/pages/EmkostiPryamougolnye.tsx`** — Replace static PP/PND tabs with material & color selector above the table
-- Remove `Tabs` with PP/PND tabs and their image grids
-- Add material selector badges (PPC, PE100, PPH, PPs) and color picker cards (same style as calculator)
-- `ProductTable` receives `materialCode` and `colorCode` props
-- Table articles become dynamic: `СЗПК.ЕПО.{matCode}.{colorCode}.{volume}` (or without color for PE100)
-- Each row navigates to `/product/СЗПК.ЕПО.PPC.7032.1000` etc.
-- Add `ArticleBreakdown` above the table showing the article format explanation
+### Changes — Single file: `src/pages/EmkostiPryamougolnye.tsx`
 
-**2. `src/pages/Product.tsx`** — Extend `parseExtendedEmkostArticle` to handle rectangular tanks
-- When `typePrefix === "ЕПО"`, search `pryamougolnyeProducts` by volume (strip material/color from article to find base product)
-- Return proper product data with `materialCode`, `colorLabel`, `rectDims`, image, and breadcrumb
-- Pick image based on color code using existing `colorImages` mapping (grey, blue, white, black)
+1. **Remove `<RectangularTankCalculator />`** call (line 368) and the import (line 26)
+2. **Remove nav anchor** `{ id: "calculator", label: "Калькулятор" }` from the nav bar (line 349)
+3. **Remove dead `ProductTable` component** (lines 538-570) — it's the old table that's no longer used
+4. **Remove unused `sizeTable`** constant (lines 109-126) — also dead code from old layout
+5. **Remove unused image arrays** `ppImages` and `pndImages` (lines 128-138) — leftover from old tabs
 
-**3. `src/data/pryamougolnyeProducts.ts`** — No changes needed (base articles remain as-is for backward compat)
-
-### How the table works
-
-User selects material (e.g. PPH) and color (e.g. RAL 5012 Blue) → table shows 16 rows with articles like `СЗПК.ЕПО.PPH.5012.1000` through `СЗПК.ЕПО.PPH.5012.50000` → click navigates to product card → Product.tsx resolves the extended article, shows ArticleBreakdown with material/color segments.
-
-### Scope
-- 2 files modified
-- No new components needed
+### Result
+- Single interactive table with material & color selectors remains as the primary product selection UI
+- All product card links continue to work via existing ЕПО article parsing in Product.tsx
+- No duplicate UI elements
 
