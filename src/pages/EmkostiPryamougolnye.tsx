@@ -183,8 +183,7 @@ const EmkostiPryamougolnyeInner = () => {
 
         <nav className="mb-8 flex flex-wrap gap-2">
           {[
-            
-            { id: "modeli", label: "Модели" },
+            { id: "katalog", label: "Каталог" },
             { id: "opisanie", label: "Описание" },
             { id: "naznachenie", label: "Назначение" },
             { id: "materialy", label: "Материалы" },
@@ -202,10 +201,27 @@ const EmkostiPryamougolnyeInner = () => {
           ))}
         </nav>
 
-        
-
-        {/* Типоразмерный ряд — with material & color selector */}
-        <RectProductTable />
+        {/* Subtypes grid */}
+        <section id="katalog" className="mb-10">
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Типы прямоугольных ёмкостей</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {subtypes.map((sub) => (
+              <Link
+                key={sub.id}
+                to={sub.path}
+                className="group rounded-lg border border-border bg-card overflow-hidden hover:border-primary/50 hover:shadow-md transition-all block"
+              >
+                <div className="aspect-[4/3] bg-muted flex items-center justify-center">
+                  <img src={sub.image} alt={sub.name} className="w-full h-full object-contain" />
+                </div>
+                <div className="px-4 py-3">
+                  <h3 className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">{sub.name}</h3>
+                  <p className="text-xs text-muted-foreground mt-1">{sub.description}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
 
         <section className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">
