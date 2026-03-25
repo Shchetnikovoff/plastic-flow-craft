@@ -111,7 +111,7 @@ const subtypes = [
   {
     id: "vertikalnye",
     name: "Вертикальные",
-    image: "/images/emkost-pryam-real-3.png",
+    image: "/images/emkost-pryam-vert-card.png",
     path: "/catalog/emkosti/pryamougolnye/vertikalnye",
     description: "Вертикальная компоновка — высота больше ширины. Объём от 500 до 25 000 л.",
   },
