@@ -350,32 +350,7 @@ const EmkostiPryamougolnyeInner = () => {
           </div>
         </section>
 
-        {/* Таблица типоразмеров */}
-        <section className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Таблица типоразмеров прямоугольных ёмкостей</h2>
-          <div className="rounded-lg border border-border overflow-auto">
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead className="text-sm">Объём, л</TableHead>
-                  <TableHead className="text-sm text-right">Длина, мм</TableHead>
-                  <TableHead className="text-sm text-right">Ширина, мм</TableHead>
-                  <TableHead className="text-sm text-right">Высота, мм</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {sizeTable.map((row) => (
-                  <TableRow key={row.volume} className="even:bg-muted/30">
-                    <TableCell className="text-sm font-medium">{row.volume.toLocaleString()}</TableCell>
-                    <TableCell className="text-sm text-right">{row.length.toLocaleString()}</TableCell>
-                    <TableCell className="text-sm text-right">{row.width.toLocaleString()}</TableCell>
-                    <TableCell className="text-sm text-right">{row.height.toLocaleString()}</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </div>
-        </section>
+        {/* Duplicate table removed — now in "modeli" section above */}
 
         {/* CTA Form */}
         <section id="cta-form" className="mb-10 scroll-mt-8">
