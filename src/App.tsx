@@ -46,6 +46,7 @@ import VentilyatsiyaPage from "./pages/VentilyatsiyaPage";
 import ReaktoryPage from "./pages/ReaktoryPage";
 import GidrometallurgiyaPage from "./pages/GidrometallurgiyaPage";
 import KnsPage from "./pages/KnsPage";
+import KnsSvtPage from "./pages/KnsSvtPage";
 import GalvanikaPage from "./pages/GalvanikaPage";
 import VodopodgotovkaPage from "./pages/VodopodgotovkaPage";
 import LabMebelPage from "./pages/LabMebelPage";
