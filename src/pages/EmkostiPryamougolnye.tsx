@@ -107,6 +107,7 @@ const subtypes = [
     image: "/images/emkost-pryam-goriz-card.png",
     path: "/catalog/emkosti/pryamougolnye/gorizontalnye",
     description: "Горизонтальная компоновка — длина больше высоты. Объём от 1 000 до 50 000 л.",
+    imgFilter: undefined as string | undefined,
   },
   {
     id: "vertikalnye",
@@ -114,6 +115,7 @@ const subtypes = [
     image: "/images/emkost-pryam-vert-card.png",
     path: "/catalog/emkosti/pryamougolnye/vertikalnye",
     description: "Вертикальная компоновка — высота больше ширины. Объём от 500 до 25 000 л.",
+    imgFilter: "saturate(0) brightness(0.55) contrast(1.1)",
   },
 ];
 
@@ -212,7 +214,7 @@ const EmkostiPryamougolnyeInner = () => {
                 className="group rounded-lg border border-border bg-card overflow-hidden hover:border-primary/50 hover:shadow-md transition-all block"
               >
                 <div className="aspect-[4/3] bg-muted flex items-center justify-center">
-                  <img src={sub.image} alt={sub.name} className="w-full h-full object-contain" />
+                  <img src={sub.image} alt={sub.name} className="w-full h-full object-contain" style={sub.imgFilter ? { filter: sub.imgFilter } : undefined} />
                 </div>
                 <div className="px-4 py-3">
                   <h3 className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">{sub.name}</h3>
