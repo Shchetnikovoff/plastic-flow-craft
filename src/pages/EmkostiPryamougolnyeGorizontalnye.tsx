@@ -265,12 +265,7 @@ const EmkostiPryamougolnyeGorizontalnyeInner = () => {
               <img src="/images/emkost-pryam-real-4.png" alt="Прямоугольная горизонтальная ёмкость" className="w-full object-contain" />
             </div>
             <div className="rounded-lg border border-border overflow-hidden bg-card transition-all">
-              <img
-                src={GORIZ_RENDER_SRC}
-                alt="Горизонтальная ёмкость в обрешётке — рендер"
-                className="w-full object-contain transition-[filter] duration-300"
-                style={{ filter: heroFilter }}
-              />
+              <TankRenderPreview colorCode={selectedColor.colorCode} className="w-full" />
             </div>
             <div className="rounded-lg border border-border overflow-hidden bg-card">
               <img src="/images/emkost-pryam-real-2.jpg" alt="Горизонтальная ёмкость в обрешётке" className="w-full object-contain" />
