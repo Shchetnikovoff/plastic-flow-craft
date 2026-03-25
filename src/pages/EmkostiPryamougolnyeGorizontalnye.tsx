@@ -22,16 +22,50 @@ import ArticleBreakdown, { type ArticleSegment } from "@/components/configurator
 
 const GORIZ_RENDER_SRC = "/images/emkost-pryam-goriz-render-grey.png";
 
-const colorFilters: Record<string, string> = {
-  "7032": "none",
-  "5012": "hue-rotate(190deg) saturate(1.8) brightness(0.95)",
-  "9003": "brightness(1.25) saturate(0.15) contrast(1.1)",
-  "": "brightness(0.35) saturate(0) contrast(1.2)",
+// Overlay colors for mix-blend-mode: multiply (preserves dark frame, tints light body)
+const colorOverlays: Record<string, string | null> = {
+  "7032": null,                    // grey — no overlay needed
+  "5012": "rgba(0,120,200,0.35)",  // blue tint
+  "9003": null,                    // white — brighten via filter
+  "": null,                        // black — darken via filter
 };
 
-function getColorFilter(colorCode: string): string {
-  return colorFilters[colorCode] ?? colorFilters["7032"];
+const colorBrightnessFilter: Record<string, string> = {
+  "7032": "none",
+  "5012": "none",
+  "9003": "brightness(1.3) contrast(0.9)",
+  "": "brightness(0.3) saturate(0) contrast(1.3)",
+};
+
+function getOverlay(colorCode: string): string | null {
+  return colorOverlays[colorCode] ?? null;
 }
+
+function getBrightnessFilter(colorCode: string): string {
+  return colorBrightnessFilter[colorCode] ?? "none";
+}
+
+/** Reusable render preview with color overlay that preserves graphite frame */
+const TankRenderPreview = ({ colorCode, className = "" }: { colorCode: string; className?: string }) => {
+  const overlay = getOverlay(colorCode);
+  const filter = getBrightnessFilter(colorCode);
+  return (
+    <div className={`relative inline-block ${className}`}>
+      <img
+        src={GORIZ_RENDER_SRC}
+        alt="Превью ёмкости"
+        className="w-full object-contain transition-[filter] duration-300"
+        style={{ filter }}
+      />
+      {overlay && (
+        <div
+          className="absolute inset-0 transition-colors duration-300 pointer-events-none"
+          style={{ backgroundColor: overlay, mixBlendMode: "multiply" }}
+        />
+      )}
+    </div>
+  );
+};
 
 interface RectProductTableProps {
   selectedMaterial: string;
