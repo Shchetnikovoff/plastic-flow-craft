@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useState, useCallback, useMemo } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 import CartSheet from "@/components/CartSheet";
 import { CartProvider } from "@/contexts/CartContext";
 import { pryamougolnyeProducts } from "@/data/pryamougolnyeProducts";
+import { materials, materialSpecs, type MaterialColor } from "@/data/products";
 import { Check, Box, Wrench, ShieldCheck, Clock, Truck, Beaker, Settings } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -19,10 +21,10 @@ import {
 import {
   Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
 } from "@/components/ui/table";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
 import PageFooter from "@/components/PageFooter";
 import { RectangularTankCalculator } from "@/components/configurator";
+import ArticleBreakdown, { type ArticleSegment } from "@/components/configurator/ArticleBreakdown";
 
 const whyUs = [
   "Собственное производство с применением экструзионной сварки",
@@ -135,6 +137,149 @@ const pndImages = [
   { src: "/images/emkost-pryam-pp-2.png", alt: "Ёмкость прямоугольная в обрешётке" },
 ];
 
+/** Interactive product table with material & color selector */
+const RectProductTable = () => {
+  const navigate = useNavigate();
+  const [selectedMaterial, setSelectedMaterial] = useState(materials[0].name);
+  const [selectedColor, setSelectedColor] = useState<MaterialColor>(
+    materialSpecs[materials[0].name].colors[0]
+  );
+
+  const specs = materialSpecs[selectedMaterial];
+  const matCode = materials.find((m) => m.name === selectedMaterial)?.code || "PPC";
+  const hasMultipleColors = specs.colors.length > 1;
+
+  const handleMaterialChange = useCallback((matName: string) => {
+    setSelectedMaterial(matName);
+    const newSpecs = materialSpecs[matName];
+    if (newSpecs && newSpecs.colors.length > 0) {
+      setSelectedColor(newSpecs.colors[0]);
+    }
+  }, []);
+
+  const buildArticle = useCallback((volume: number) => {
+    const colorPart = hasMultipleColors && selectedColor.colorCode ? `.${selectedColor.colorCode}` : "";
+    return `СЗПК.ЕПО.${matCode}${colorPart}.${volume}`;
+  }, [matCode, selectedColor, hasMultipleColors]);
+
+  const exampleArticle = buildArticle(pryamougolnyeProducts[0].volume);
+
+  const segments: ArticleSegment[] = useMemo(() => {
+    const segs: ArticleSegment[] = [
+      { value: "СЗПК", label: "Компания", desc: "Сибирский завод полимерных конструкций" },
+      { value: "ЕПО", label: "Тип", desc: "Прямоугольная в обрешётке" },
+      { value: matCode, label: "Материал", desc: materials.find((m) => m.code === matCode)?.name.split("(")[0].trim() || matCode },
+    ];
+    if (hasMultipleColors && selectedColor.colorCode) {
+      segs.push({
+        value: selectedColor.colorCode,
+        label: "Цвет",
+        desc: `${selectedColor.name} (${selectedColor.ral})`,
+        hex: selectedColor.hex,
+      });
+    }
+    segs.push({ value: String(pryamougolnyeProducts[0].volume), label: "Объём, л", desc: "Объём в литрах" });
+    return segs;
+  }, [matCode, selectedColor, hasMultipleColors]);
+
+  return (
+    <section id="modeli" className="mb-10">
+      <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Типоразмерный ряд</h2>
+
+      {/* Material selector */}
+      <div className="mb-4">
+        <span className="text-sm font-semibold text-foreground mb-2 block">Материал</span>
+        <div className="flex flex-wrap gap-2">
+          {materials.map((mat) => (
+            <Badge
+              key={mat.name}
+              variant="outline"
+              className={`rounded-full px-3 py-1.5 text-xs font-medium cursor-pointer transition-colors ${
+                selectedMaterial === mat.name
+                  ? "border-primary text-primary bg-primary/5"
+                  : "hover:border-primary/50 hover:text-primary/80"
+              }`}
+              onClick={() => handleMaterialChange(mat.name)}
+            >
+              {mat.code}
+            </Badge>
+          ))}
+        </div>
+        {specs && (
+          <div className="mt-2 flex gap-3 text-xs text-muted-foreground">
+            <span>🌡 {specs.workingTemp}</span>
+          </div>
+        )}
+      </div>
+
+      {/* Color selector */}
+      {specs && (
+        <div className="mb-4">
+          <span className="text-sm font-semibold text-foreground mb-2 block">Цвет</span>
+          <div className="flex flex-wrap gap-2">
+            {specs.colors.map((c) => (
+              <div
+                key={c.ral + c.colorCode}
+                onClick={() => setSelectedColor(c)}
+                className={`flex items-center gap-2 rounded-lg border px-3 py-2 cursor-pointer transition-all ${
+                  selectedColor.colorCode === c.colorCode
+                    ? "border-primary ring-1 ring-primary shadow-sm bg-primary/5"
+                    : "border-border hover:border-muted-foreground bg-card"
+                }`}
+              >
+                <span
+                  className="w-5 h-5 rounded-full border border-border shrink-0"
+                  style={{ backgroundColor: c.hex }}
+                />
+                <span className="text-xs font-medium text-foreground">{c.name}</span>
+                <span className="text-xs text-muted-foreground">{c.ral}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Article breakdown */}
+      <ArticleBreakdown exampleArticle={exampleArticle} segments={segments} />
+
+      {/* Table */}
+      <div className="rounded-lg border bg-card">
+        <Table>
+          <TableHeader>
+            <TableRow className="bg-primary/5">
+              <TableHead className="font-semibold">Артикул</TableHead>
+              <TableHead className="font-semibold">Объём, л</TableHead>
+              <TableHead className="font-semibold">Длина, мм</TableHead>
+              <TableHead className="font-semibold">Ширина, мм</TableHead>
+              <TableHead className="font-semibold">Высота, мм</TableHead>
+              <TableHead className="font-semibold">Цена</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {pryamougolnyeProducts.map((p) => {
+              const art = buildArticle(p.volume);
+              return (
+                <TableRow
+                  key={p.volume}
+                  className="cursor-pointer transition-colors hover:bg-primary/5"
+                  onClick={() => navigate(`/product/${encodeURIComponent(art)}`)}
+                >
+                  <TableCell className="font-mono text-xs font-medium">{art}</TableCell>
+                  <TableCell>{p.volume.toLocaleString("ru-RU")}</TableCell>
+                  <TableCell>{p.length}</TableCell>
+                  <TableCell>{p.width}</TableCell>
+                  <TableCell>{p.height}</TableCell>
+                  <TableCell className="text-muted-foreground text-xs italic">По запросу</TableCell>
+                </TableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
+      </div>
+    </section>
+  );
+};
+
 const EmkostiPryamougolnyeInner = () => {
   const [cartOpen, setCartOpen] = useState(false);
   const [form, setForm] = useState({ name: "", phone: "", email: "", description: "" });
@@ -222,39 +367,8 @@ const EmkostiPryamougolnyeInner = () => {
 
         <RectangularTankCalculator />
 
-        {/* Типоразмерный ряд — with tabs for PP and PND */}
-        <section id="modeli" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Типоразмерный ряд</h2>
-
-          <Tabs defaultValue="pp" className="w-full">
-            <TabsList className="mb-4">
-              <TabsTrigger value="pp">Полипропилен (ПП)</TabsTrigger>
-              <TabsTrigger value="pnd">Полиэтилен (ПНД)</TabsTrigger>
-            </TabsList>
-
-            <TabsContent value="pp">
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
-                {ppImages.map((img, i) => (
-                  <div key={i} className="rounded-lg border border-border overflow-hidden bg-card">
-                    <img src={img.src} alt={img.alt} className="w-full object-contain" />
-                  </div>
-                ))}
-              </div>
-              <ProductTable />
-            </TabsContent>
-
-            <TabsContent value="pnd">
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
-                {pndImages.map((img, i) => (
-                  <div key={i} className="rounded-lg border border-border overflow-hidden bg-card">
-                    <img src={img.src} alt={img.alt} className="w-full object-contain" />
-                  </div>
-                ))}
-              </div>
-              <ProductTable />
-            </TabsContent>
-          </Tabs>
-        </section>
+        {/* Типоразмерный ряд — with material & color selector */}
+        <RectProductTable />
 
         <section className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">

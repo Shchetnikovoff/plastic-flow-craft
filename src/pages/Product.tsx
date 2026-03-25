@@ -267,23 +267,80 @@ function parseEmkostArticle(article: string) {
       };
     }
   }
-  // Search in pryamougolnyeProducts (rectangular tanks in frame) — format: СЗПК.ЕПО.{volume}
+  // Search in pryamougolnyeProducts (rectangular tanks in frame) — format: СЗПК.ЕПО.{matCode}.{colorCode}.{volume} or СЗПК.ЕПО.{matCode}.{volume}
   if (article.startsWith("СЗПК.ЕПО.")) {
-    const item = pryamougolnyeProducts.find((p) => p.article === article);
-    if (item) {
+    const epoParts = article.split(".");
+    // parts: [СЗПК, ЕПО, matCode, colorCode?, volume]
+    if (epoParts.length >= 4) {
+      const epoMatCode = epoParts[2];
+      const epoMatInfo = materials.find((m) => m.code === epoMatCode);
+      let epoColorCode: string | undefined;
+      let epoVolumeStr: string;
+      if (epoParts.length >= 5) {
+        // Could be СЗПК.ЕПО.PPC.7032.1000 or СЗПК.ЕПО.PE100.1000
+        const potentialVol = parseInt(epoParts[3], 10);
+        if (!isNaN(potentialVol) && potentialVol >= 100) {
+          // parts[3] is volume (no color segment)
+          epoVolumeStr = epoParts[3];
+        } else {
+          epoColorCode = epoParts[3];
+          epoVolumeStr = epoParts[4];
+        }
+      } else {
+        epoVolumeStr = epoParts[3];
+      }
+      const epoVolume = parseInt(epoVolumeStr!, 10);
+      const epoItem = !isNaN(epoVolume) ? pryamougolnyeProducts.find((p) => p.volume === epoVolume) : null;
+      if (epoItem) {
+        const epoColorImages: Record<string, string> = {
+          "7032": "/images/emkost-pryam-pp-1.png",
+          "5012": "/images/emkost-pryam-hero-blue.png",
+          "9003": "/images/emkost-pryam-hero-white.png",
+          "": "/images/emkost-pryam-hero-black.png",
+        };
+        const epoSpecs = epoMatInfo ? materialSpecs[epoMatInfo.name] : null;
+        const epoColor = epoSpecs
+          ? (epoColorCode ? epoSpecs.colors.find((c) => c.colorCode === epoColorCode) : epoSpecs.colors[0])
+          : undefined;
+        const epoImageKey = epoColor?.colorCode ?? "";
+        const epoImage = epoColorImages[epoImageKey] || epoColorImages["7032"];
+        const epoColorLabel = epoColor ? `${epoColor.name} (${epoColor.ral})` : "";
+
+        return {
+          productType: "emkost" as const,
+          emkostType: "rectangular",
+          title: `Ёмкость прямоугольная в обрешётке ${epoItem.volume.toLocaleString()} л`,
+          subtitle: "Прямоугольная ёмкость в металлической обрешётке",
+          materialName: epoMatInfo?.name || "Полипропилен (ПП)",
+          materialCode: epoMatCode,
+          colorLabel: epoColorLabel,
+          volume: epoItem.volume,
+          diameter: 0,
+          heightOrLength: epoItem.height,
+          heightLabel: "H, мм",
+          description: `Прямоугольная ёмкость в обрешётке. Размеры ${epoItem.length}×${epoItem.width}×${epoItem.height} мм, объём ${epoItem.volume.toLocaleString()} л. Материал: ${epoMatInfo?.name || epoMatCode}. ${epoColorLabel ? `Цвет: ${epoColorLabel}.` : ""}`,
+          image: epoImage,
+          rectDims: { length: epoItem.length, width: epoItem.width, height: epoItem.height },
+          breadcrumbBack: { label: "Прямоугольные ёмкости", path: "/catalog/emkosti/pryamougolnye" },
+        };
+      }
+    }
+    // Fallback: try exact match on base article
+    const itemBase = pryamougolnyeProducts.find((p) => p.article === article);
+    if (itemBase) {
       return {
         productType: "emkost" as const,
         emkostType: "rectangular",
-        title: `Ёмкость прямоугольная в обрешётке ${item.volume.toLocaleString()} л`,
+        title: `Ёмкость прямоугольная в обрешётке ${itemBase.volume.toLocaleString()} л`,
         subtitle: "Прямоугольная ёмкость из полипропилена / полиэтилена в металлической обрешётке",
         materialName: "Полипропилен (ПП) / Полиэтилен (ПНД)",
-        volume: item.volume,
+        volume: itemBase.volume,
         diameter: 0,
-        heightOrLength: item.height,
+        heightOrLength: itemBase.height,
         heightLabel: "H, мм",
-        description: `Прямоугольная ёмкость в обрешётке. Размеры ${item.length}×${item.width}×${item.height} мм, объём ${item.volume.toLocaleString()} л.`,
+        description: `Прямоугольная ёмкость в обрешётке. Размеры ${itemBase.length}×${itemBase.width}×${itemBase.height} мм, объём ${itemBase.volume.toLocaleString()} л.`,
         image: "/images/emkost-pryam-pp-1.png",
-        rectDims: { length: item.length, width: item.width, height: item.height },
+        rectDims: { length: itemBase.length, width: itemBase.width, height: itemBase.height },
         breadcrumbBack: { label: "Прямоугольные ёмкости", path: "/catalog/emkosti/pryamougolnye" },
       };
     }
