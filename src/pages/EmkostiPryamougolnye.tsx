@@ -318,16 +318,6 @@ const EmkostiPryamougolnyeInner = () => {
             <li className="flex items-start gap-2"><Check className="h-3.5 w-3.5 text-primary shrink-0 mt-0.5" /><span>Возможность установки внутренних перегородок и отсеков</span></li>
           </ul>
 
-          {/* Schema images */}
-          <h3 className="text-sm font-semibold text-foreground mb-3">Чертежи и схемы:</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
-            <div className="rounded-lg border border-border overflow-hidden bg-card">
-              <img src="/images/emkost-pryam-schema-real.jpg" alt="Схема прямоугольной ёмкости" className="w-full object-contain bg-white p-2" />
-            </div>
-            <div className="rounded-lg border border-border overflow-hidden bg-card">
-              <img src="/images/emkost-pryam-eskiz.png" alt="Эскиз прямоугольной ёмкости с размерами" className="w-full object-contain bg-white p-2" />
-            </div>
-          </div>
 
           <h3 className="text-sm font-semibold text-foreground mb-2">Преимущества конструкции:</h3>
           <ul className="space-y-1.5">
