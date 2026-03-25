@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 import CartSheet from "@/components/CartSheet";
 import { CartProvider } from "@/contexts/CartContext";
@@ -200,11 +200,11 @@ const EmkostiPryamougolnyeInner = () => {
 
         <nav className="mb-8 flex flex-wrap gap-2">
           {[
+            { id: "modeli", label: "Модели" },
             { id: "opisanie", label: "Описание" },
             { id: "naznachenie", label: "Назначение" },
             { id: "materialy", label: "Материалы" },
             { id: "modifikacii", label: "Модификации" },
-            { id: "modeli", label: "Модели" },
             { id: "preimushchestva", label: "Преимущества" },
             { id: "cta-form", label: "Заявка" },
           ].map((s) => (
@@ -217,6 +217,40 @@ const EmkostiPryamougolnyeInner = () => {
             </button>
           ))}
         </nav>
+
+        {/* Типоразмерный ряд — with tabs for PP and PND */}
+        <section id="modeli" className="mb-10">
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Типоразмерный ряд</h2>
+
+          <Tabs defaultValue="pp" className="w-full">
+            <TabsList className="mb-4">
+              <TabsTrigger value="pp">Полипропилен (ПП)</TabsTrigger>
+              <TabsTrigger value="pnd">Полиэтилен (ПНД)</TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="pp">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
+                {ppImages.map((img, i) => (
+                  <div key={i} className="rounded-lg border border-border overflow-hidden bg-card">
+                    <img src={img.src} alt={img.alt} className="w-full object-contain" />
+                  </div>
+                ))}
+              </div>
+              <ProductTable />
+            </TabsContent>
+
+            <TabsContent value="pnd">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
+                {pndImages.map((img, i) => (
+                  <div key={i} className="rounded-lg border border-border overflow-hidden bg-card">
+                    <img src={img.src} alt={img.alt} className="w-full object-contain" />
+                  </div>
+                ))}
+              </div>
+              <ProductTable />
+            </TabsContent>
+          </Tabs>
+        </section>
 
         <section className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">
@@ -330,39 +364,7 @@ const EmkostiPryamougolnyeInner = () => {
           </Accordion>
         </section>
 
-        {/* Типоразмерный ряд — with tabs for PP and PND */}
-        <section id="modeli" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Типоразмерный ряд</h2>
-
-          <Tabs defaultValue="pp" className="w-full">
-            <TabsList className="mb-4">
-              <TabsTrigger value="pp">Полипропилен (ПП)</TabsTrigger>
-              <TabsTrigger value="pnd">Полиэтилен (ПНД)</TabsTrigger>
-            </TabsList>
-
-            <TabsContent value="pp">
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
-                {ppImages.map((img, i) => (
-                  <div key={i} className="rounded-lg border border-border overflow-hidden bg-card">
-                    <img src={img.src} alt={img.alt} className="w-full object-contain" />
-                  </div>
-                ))}
-              </div>
-              <ProductTable />
-            </TabsContent>
-
-            <TabsContent value="pnd">
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
-                {pndImages.map((img, i) => (
-                  <div key={i} className="rounded-lg border border-border overflow-hidden bg-card">
-                    <img src={img.src} alt={img.alt} className="w-full object-contain" />
-                  </div>
-                ))}
-              </div>
-              <ProductTable />
-            </TabsContent>
-          </Tabs>
-        </section>
+        {/* Moved: Типоразмерный ряд is now above Описание */}
 
         {/* Преимущества сотрудничества */}
         <section id="preimushchestva" className="mb-10">
@@ -382,32 +384,7 @@ const EmkostiPryamougolnyeInner = () => {
           </div>
         </section>
 
-        {/* Таблица типоразмеров */}
-        <section className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Таблица типоразмеров прямоугольных ёмкостей</h2>
-          <div className="rounded-lg border border-border overflow-auto">
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead className="text-sm">Объём, л</TableHead>
-                  <TableHead className="text-sm text-right">Длина, мм</TableHead>
-                  <TableHead className="text-sm text-right">Ширина, мм</TableHead>
-                  <TableHead className="text-sm text-right">Высота, мм</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {sizeTable.map((row) => (
-                  <TableRow key={row.volume} className="even:bg-muted/30">
-                    <TableCell className="text-sm font-medium">{row.volume.toLocaleString()}</TableCell>
-                    <TableCell className="text-sm text-right">{row.length.toLocaleString()}</TableCell>
-                    <TableCell className="text-sm text-right">{row.width.toLocaleString()}</TableCell>
-                    <TableCell className="text-sm text-right">{row.height.toLocaleString()}</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </div>
-        </section>
+        {/* Duplicate table removed — now in "modeli" section above */}
 
         {/* CTA Form */}
         <section id="cta-form" className="mb-10 scroll-mt-8">
@@ -450,30 +427,39 @@ const EmkostiPryamougolnyeInner = () => {
   );
 };
 
-const ProductTable = () => (
-  <div className="rounded-lg border border-border overflow-auto">
-    <Table>
-      <TableHeader>
-        <TableRow>
-          <TableHead className="text-xs">Объём, л</TableHead>
-          <TableHead className="text-xs text-right">Длина (Д), мм</TableHead>
-          <TableHead className="text-xs text-right">Ширина (Ш), мм</TableHead>
-          <TableHead className="text-xs text-right">Высота (В), мм</TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {pryamougolnyeProducts.map((item) => (
-          <TableRow key={item.volume}>
-            <TableCell className="text-xs font-medium">{item.volume.toLocaleString()}</TableCell>
-            <TableCell className="text-xs text-right">{item.length.toLocaleString()}</TableCell>
-            <TableCell className="text-xs text-right">{item.width.toLocaleString()}</TableCell>
-            <TableCell className="text-xs text-right">{item.height.toLocaleString()}</TableCell>
+const ProductTable = () => {
+  const navigate = useNavigate();
+  return (
+    <div className="rounded-lg border border-border overflow-auto">
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead className="text-xs">Артикул</TableHead>
+            <TableHead className="text-xs">Объём, л</TableHead>
+            <TableHead className="text-xs text-right">Длина (Д), мм</TableHead>
+            <TableHead className="text-xs text-right">Ширина (Ш), мм</TableHead>
+            <TableHead className="text-xs text-right">Высота (В), мм</TableHead>
           </TableRow>
-        ))}
-      </TableBody>
-    </Table>
-  </div>
-);
+        </TableHeader>
+        <TableBody>
+          {pryamougolnyeProducts.map((item) => (
+            <TableRow
+              key={item.article}
+              className="cursor-pointer hover:bg-accent/50 transition-colors"
+              onClick={() => navigate(`/product/${item.article}`)}
+            >
+              <TableCell className="text-xs font-medium text-primary underline">{item.article}</TableCell>
+              <TableCell className="text-xs font-medium">{item.volume.toLocaleString()}</TableCell>
+              <TableCell className="text-xs text-right">{item.length.toLocaleString()}</TableCell>
+              <TableCell className="text-xs text-right">{item.width.toLocaleString()}</TableCell>
+              <TableCell className="text-xs text-right">{item.height.toLocaleString()}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </div>
+  );
+};
 
 const EmkostiPryamougolnye = () => (
   <CartProvider>

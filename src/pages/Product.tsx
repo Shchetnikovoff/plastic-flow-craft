@@ -12,6 +12,7 @@ import { emkostGroups } from "@/data/emkostiProducts";
 import { pozharnyeRect, pozharnyePodzem, pozharnyeHoriz } from "@/data/pozharnyeProducts";
 import { perelivnyeProducts, ppColors } from "@/data/perelivnyeProducts";
 import { podzemnyeProducts } from "@/data/podzemnyeProducts";
+import { pryamougolnyeProducts } from "@/data/pryamougolnyeProducts";
 import { ffuModels } from "@/data/ffuProducts";
 import { lamelnyjModels, parseLamelnyjArticle } from "@/data/lamelnyjProducts";
 import ArticleBreakdown, { type ArticleSegment } from "@/components/configurator/ArticleBreakdown";
@@ -263,6 +264,27 @@ function parseEmkostArticle(article: string) {
         rectDims: { length: item.length, width: item.width, height: item.height },
         perelivColor: color || null,
         perelivPoolVolume: item.poolVolume,
+      };
+    }
+  }
+  // Search in pryamougolnyeProducts (rectangular tanks in frame) — format: СЗПК.ЕПО.{volume}
+  if (article.startsWith("СЗПК.ЕПО.")) {
+    const item = pryamougolnyeProducts.find((p) => p.article === article);
+    if (item) {
+      return {
+        productType: "emkost" as const,
+        emkostType: "rectangular",
+        title: `Ёмкость прямоугольная в обрешётке ${item.volume.toLocaleString()} л`,
+        subtitle: "Прямоугольная ёмкость из полипропилена / полиэтилена в металлической обрешётке",
+        materialName: "Полипропилен (ПП) / Полиэтилен (ПНД)",
+        volume: item.volume,
+        diameter: 0,
+        heightOrLength: item.height,
+        heightLabel: "H, мм",
+        description: `Прямоугольная ёмкость в обрешётке. Размеры ${item.length}×${item.width}×${item.height} мм, объём ${item.volume.toLocaleString()} л.`,
+        image: "/images/emkost-pryam-pp-1.png",
+        rectDims: { length: item.length, width: item.width, height: item.height },
+        breadcrumbBack: { label: "Прямоугольные ёмкости", path: "/catalog/emkosti/pryamougolnye" },
       };
     }
   }
