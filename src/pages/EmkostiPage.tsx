@@ -113,13 +113,27 @@ const EmkostiPageInner = () => {
             Получить расчёт стоимости
           </Button>
 
-          {/* Hero images */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
-            <div className="rounded-lg border border-border overflow-hidden bg-card">
-              <img src="/images/emkosti-hero-1.png" alt="Промышленные ёмкости из полипропилена" className="w-full h-auto object-contain" />
-            </div>
-            <div className="rounded-lg border border-border overflow-hidden bg-card">
+          {/* Hero collage */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-6">
+            <div className="rounded-xl border border-border overflow-hidden bg-card flex items-center justify-center p-2">
               <img src="/images/emkosti-hero-2.png" alt="Ёмкость в разрезе" className="w-full h-auto object-contain" />
+            </div>
+            <div className="grid grid-cols-3 gap-2">
+              {[
+                { src: "/images/emkosti-vert-pp-group.png", alt: "Вертикальные ёмкости" },
+                { src: "/images/emkost-horiz-group.png", alt: "Горизонтальные ёмкости" },
+                { src: "/images/emkosti-podzemnye-1.jpg", alt: "Подземные ёмкости" },
+                { src: "/images/emkost-pryam-pp-1.png", alt: "Прямоугольные ёмкости" },
+                { src: "/images/emkost-pryam-pp-2.png", alt: "Пожарные ёмкости" },
+                { src: "/images/emkosti-sejsmicheskie.png", alt: "Сейсмические ёмкости" },
+                { src: "/images/emkosti-shchelochi-thumb.png", alt: "Ёмкости для щелочи" },
+                { src: "/images/emkosti-kisloty-thumb.png", alt: "Ёмкости для кислоты" },
+                { src: "/images/emkost-perelivnaya-bassein.jpg", alt: "Переливные ёмкости" },
+              ].map((img) => (
+                <div key={img.src} className="rounded-lg border border-border overflow-hidden bg-card aspect-square flex items-center justify-center p-1">
+                  <img src={img.src} alt={img.alt} className="w-full h-full object-contain" />
+                </div>
+              ))}
             </div>
           </div>
         </section>
