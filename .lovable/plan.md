@@ -1,17 +1,25 @@
 
 
-## Plan: Use Vertical Render in Product Cards
+## Plan: Replace Hero Images with Collage
 
-Currently, when clicking a vertical tank row in the table, the product card page (`Product.tsx`, line 374) shows a horizontal render (`emkost-pryam-goriz-render-grey.png`) with CSS hue-rotate filters for color variants. This needs to be replaced with the actual vertical color-specific images.
+### What Changes
+Remove the first hero image (`emkosti-hero-1.png`) from the EmkostiPage hero section and replace the two-image grid with a single collage that combines the second hero image (`emkosti-hero-2.png`) with the main images from all 9 емкости subsections.
 
-### Changes
+### File Changes
 
-**`src/pages/Product.tsx`** (lines 362-375):
-- Replace the single `epovImage` with a color-based lookup using the same images from the vertical tanks page:
-  - `7032` → `/images/emkost-pryam-vert-gray.png`
-  - `5012` → `/images/emkost-pryam-vert-blue.png`
-  - `9003` → `/images/emkost-pryam-vert-white.png`
-  - `""` (PE100) → `/images/emkost-pryam-vert-black.png`
-- Remove `epovColorFilters` and `epovImageFilter` — no CSS filters needed since we have dedicated images per color
-- Set `imageFilter` to `undefined` in the returned object
+**`src/pages/EmkostiPage.tsx`** (lines 116-124):
+- Remove the 2-column grid with two separate images
+- Replace with a single-column collage layout: a CSS grid showing the second hero image prominently (larger, spanning full width or half) alongside thumbnails of all 9 subsection main images arranged in a compact mosaic/grid
+- Images sourced from catalog data (lines 34-42 of catalog.ts):
+  1. `/images/emkosti-vert-pp-group.png`
+  2. `/images/emkost-horiz-group.png`
+  3. `/images/emkosti-podzemnye-1.jpg`
+  4. `/images/emkost-pryam-pp-1.png`
+  5. `/images/emkost-pryam-pp-2.png`
+  6. `/images/emkosti-sejsmicheskie.png`
+  7. `/images/emkosti-shchelochi-thumb.png`
+  8. `/images/emkosti-kisloty-thumb.png`
+  9. `/images/emkost-perelivnaya-bassein.jpg`
+- Layout: Hero image (`emkosti-hero-2.png`) takes ~50% width on left, right side shows a 3x3 grid of the 9 subsection thumbnails
+- All images use `object-contain` with rounded borders per design standard
 
