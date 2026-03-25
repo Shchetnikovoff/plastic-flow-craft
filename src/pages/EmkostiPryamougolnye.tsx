@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useState, useCallback, useMemo } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 import CartSheet from "@/components/CartSheet";
 import { CartProvider } from "@/contexts/CartContext";
 import { pryamougolnyeProducts } from "@/data/pryamougolnyeProducts";
+import { materials, materialSpecs, type MaterialColor } from "@/data/products";
 import { Check, Box, Wrench, ShieldCheck, Clock, Truck, Beaker, Settings } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -19,10 +21,10 @@ import {
 import {
   Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
 } from "@/components/ui/table";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
 import PageFooter from "@/components/PageFooter";
 import { RectangularTankCalculator } from "@/components/configurator";
+import ArticleBreakdown, { type ArticleSegment } from "@/components/configurator/ArticleBreakdown";
 
 const whyUs = [
   "Собственное производство с применением экструзионной сварки",
