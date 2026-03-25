@@ -392,6 +392,8 @@ function parseEmkostArticle(article: string) {
       }
     }
   }
+  return null;
+}
 
 /** Parse article to extract product params — new format: СЗПК.{TYPE}.{PARAMS} */
 function parseArticle(article: string) {
