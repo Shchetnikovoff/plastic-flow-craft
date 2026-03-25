@@ -106,24 +106,6 @@ const advantages = [
   { icon: Beaker, title: "Гибкость", text: "Возможность доработки конструкции в процессе эксплуатации." },
 ];
 
-const sizeTable = [
-  { volume: 1000, length: 1000, width: 1000, height: 1000 },
-  { volume: 2000, length: 2000, width: 1000, height: 1000 },
-  { volume: 3000, length: 2100, width: 1200, height: 1200 },
-  { volume: 4000, length: 1800, width: 1500, height: 1500 },
-  { volume: 5000, length: 2300, width: 1500, height: 1500 },
-  { volume: 6000, length: 2700, width: 1500, height: 1500 },
-  { volume: 8000, length: 3600, width: 1500, height: 1500 },
-  { volume: 10000, length: 4500, width: 1500, height: 1500 },
-  { volume: 15000, length: 4700, width: 1800, height: 1800 },
-  { volume: 20000, length: 5000, width: 2000, height: 2000 },
-  { volume: 25000, length: 6300, width: 2000, height: 2000 },
-  { volume: 30000, length: 6000, width: 2250, height: 2250 },
-  { volume: 35000, length: 7300, width: 2400, height: 2000 },
-  { volume: 40000, length: 8400, width: 2400, height: 2000 },
-  { volume: 45000, length: 9400, width: 2400, height: 2000 },
-  { volume: 50000, length: 10500, width: 2400, height: 2000 },
-];
 
 const ppImages = [
   { src: "/images/emkost-pryam-pp-1.png", alt: "Ёмкость прямоугольная из полипропилена в обрешётке" },
