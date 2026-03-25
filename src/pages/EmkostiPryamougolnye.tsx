@@ -22,6 +22,7 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
 import PageFooter from "@/components/PageFooter";
+import { RectangularTankCalculator } from "@/components/configurator";
 
 const whyUs = [
   "Собственное производство с применением экструзионной сварки",
@@ -200,6 +201,7 @@ const EmkostiPryamougolnyeInner = () => {
 
         <nav className="mb-8 flex flex-wrap gap-2">
           {[
+            { id: "calculator", label: "Калькулятор" },
             { id: "modeli", label: "Модели" },
             { id: "opisanie", label: "Описание" },
             { id: "naznachenie", label: "Назначение" },
@@ -217,6 +219,8 @@ const EmkostiPryamougolnyeInner = () => {
             </button>
           ))}
         </nav>
+
+        <RectangularTankCalculator />
 
         {/* Типоразмерный ряд — with tabs for PP and PND */}
         <section id="modeli" className="mb-10">
