@@ -201,6 +201,7 @@ const EmkostiPryamougolnyeInner = () => {
 
         <nav className="mb-8 flex flex-wrap gap-2">
           {[
+            { id: "calculator", label: "Калькулятор" },
             { id: "modeli", label: "Модели" },
             { id: "opisanie", label: "Описание" },
             { id: "naznachenie", label: "Назначение" },
