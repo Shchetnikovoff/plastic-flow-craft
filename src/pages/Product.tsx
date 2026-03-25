@@ -591,6 +591,7 @@ const ProductDetailContent = () => {
                     length={emkost.rectDims.length}
                     width={emkost.rectDims.width}
                     height={emkost.rectDims.height}
+                    imageStyle={"imageFilter" in emkost && emkost.imageFilter ? { filter: emkost.imageFilter } : undefined}
                     isoCorners={
                       emkost.image.includes("pryam")
                         ? {
@@ -605,7 +606,12 @@ const ProductDetailContent = () => {
                     }
                   />
                 ) : (
-                  <img src={emkost.image} alt={emkost.title} className="h-full w-full object-contain" />
+                  <img
+                    src={emkost.image}
+                    alt={emkost.title}
+                    className="h-full w-full object-contain"
+                    style={"imageFilter" in emkost && emkost.imageFilter ? { filter: emkost.imageFilter } : undefined}
+                  />
                 )}
               </div>
             )}
