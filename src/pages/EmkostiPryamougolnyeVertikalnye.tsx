@@ -251,7 +251,7 @@ const EmkostiPryamougolnyeVertikalnyeInner = () => {
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
             <div className="rounded-lg border border-border overflow-hidden bg-card">
-              <img src="/images/emkost-pryam-real-3.png" alt="Прямоугольная вертикальная ёмкость" className="w-full object-contain" />
+              <img src="/images/emkost-pryam-vert-hero.png" alt="Прямоугольная вертикальная ёмкость" className="w-full object-contain" />
             </div>
             <div className="rounded-lg border border-border overflow-hidden bg-card transition-all">
               <img src={heroRenderSrc} alt="Вертикальная ёмкость в обрешётке" className="w-full object-contain" />
