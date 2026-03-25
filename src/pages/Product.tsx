@@ -11,6 +11,7 @@ import { vozdukhovodImages, getVozdukhovodSizes, vozdukhovodAvailableLengths } f
 import { emkostGroups } from "@/data/emkostiProducts";
 import { pozharnyeRect, pozharnyePodzem, pozharnyeHoriz } from "@/data/pozharnyeProducts";
 import { perelivnyeProducts, ppColors } from "@/data/perelivnyeProducts";
+import { podzemnyeProducts } from "@/data/podzemnyeProducts";
 import { ffuModels } from "@/data/ffuProducts";
 import { lamelnyjModels, parseLamelnyjArticle } from "@/data/lamelnyjProducts";
 import ArticleBreakdown, { type ArticleSegment } from "@/components/configurator/ArticleBreakdown";
@@ -221,6 +222,26 @@ function parseEmkostArticle(article: string) {
       description: `Горизонтальная цилиндрическая ёмкость. Диаметр ${horiz.diameter} мм, длина ${horiz.length} мм.`,
       image: "/images/emkosti-hero-2.png",
     };
+  }
+  // Search in podzemnyeProducts (underground SVT tanks) — format: СЗПК.ЕСВП.{volume}
+  if (article.startsWith("СЗПК.ЕСВП.")) {
+    const item = podzemnyeProducts.find((p) => p.article === article);
+    if (item) {
+      return {
+        productType: "emkost" as const,
+        emkostType: "underground",
+        title: `Ёмкость подземная из СВТ ${item.volume} м³`,
+        subtitle: "Подземная ёмкость из спиральновитых труб",
+        materialName: "Полиэтилен высокой плотности (ПНД/HDPE)",
+        volume: item.volume * 1000,
+        diameter: item.diameter,
+        heightOrLength: item.length,
+        heightLabel: "L, мм",
+        description: `Подземная ёмкость из спиральновитых труб. Объём ${item.volume} м³, диаметр ${item.diameter} мм, длина ${item.length} мм.`,
+        image: "/images/emkosti-podzemnye-svt-1.jpg",
+        breadcrumbBack: { label: "Подземные ёмкости", path: "/catalog/emkosti/podzemnye" },
+      };
+    }
   }
   // Search in perelivnye (overflow tanks for pools) — format: СЗПК.ПЕ.ПП.{COLOR}.{VOLUME}
   if (article.startsWith("СЗПК.ПЕ.")) {
