@@ -106,7 +106,7 @@ const RectProductTable = ({ selectedMaterial, selectedColor, onMaterialChange, o
     return segs;
   }, [matCode, selectedColor, hasMultipleColors]);
 
-  const currentFilter = getColorFilter(selectedColor.colorCode);
+  
 
   return (
     <section id="modeli" className="mb-10">
