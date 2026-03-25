@@ -388,7 +388,7 @@ function parseEmkostArticle(article: string) {
           heightLabel: "H, мм",
           description: `Прямоугольная вертикальная ёмкость в обрешётке. Размеры ${epovItem.width}×${epovItem.depth}×${epovItem.height} мм, объём ${epovItem.volume.toLocaleString()} л. Материал: ${epovMatInfo?.name || epovMatCode}. ${epovColorLabel ? `Цвет: ${epovColorLabel}.` : ""}`,
           image: epovImage,
-          imageFilter: epovImageFilter,
+          imageFilter: undefined,
           rectDims: { length: epovItem.width, width: epovItem.depth, height: epovItem.height },
           breadcrumbBack: { label: "Вертикальные прямоугольные", path: "/catalog/emkosti/pryamougolnye/vertikalnye" },
         };
