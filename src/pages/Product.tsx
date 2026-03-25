@@ -276,18 +276,15 @@ function parseEmkostArticle(article: string) {
       const epoMatInfo = materials.find((m) => m.code === epoMatCode);
       let epoColorCode: string | undefined;
       let epoVolumeStr: string;
-      if (epoParts.length >= 5) {
-        // Could be СЗПК.ЕПО.PPC.7032.1000 or СЗПК.ЕПО.PE100.1000
-        const potentialVol = parseInt(epoParts[3], 10);
-        if (!isNaN(potentialVol) && potentialVol >= 100) {
-          // parts[3] is volume (no color segment)
-          epoVolumeStr = epoParts[3];
-        } else {
-          epoColorCode = epoParts[3];
-          epoVolumeStr = epoParts[4];
-        }
-      } else {
+      if (epoParts.length === 5) {
+        // СЗПК.ЕПО.PPC.7032.1000 — 5 parts means color is present
+        epoColorCode = epoParts[3];
+        epoVolumeStr = epoParts[4];
+      } else if (epoParts.length === 4) {
+        // СЗПК.ЕПО.PE100.1000 — 4 parts means no color
         epoVolumeStr = epoParts[3];
+      } else {
+        epoVolumeStr = epoParts[epoParts.length - 1];
       }
       const epoVolume = parseInt(epoVolumeStr!, 10);
       const epoItem = !isNaN(epoVolume) ? pryamougolnyeProducts.find((p) => p.volume === epoVolume) : null;
