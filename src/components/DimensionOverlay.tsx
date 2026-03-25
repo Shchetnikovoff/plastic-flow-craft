@@ -184,6 +184,7 @@ const DimensionOverlay = ({
         src={imageSrc}
         alt={imageAlt}
         className="h-full w-full object-contain p-4"
+        style={imageStyle}
       />
       <svg
         viewBox="0 0 400 400"
