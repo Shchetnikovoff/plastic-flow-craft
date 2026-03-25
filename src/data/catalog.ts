@@ -63,7 +63,7 @@ export const catalog: CatalogCategory[] = [
     name: "КНС",
     slug: "kns",
     subcategories: [
-      { id: "k1", name: "КНС в корпусе SVT", slug: "v-korpuse-svt", image: "/images/kns-3d-razrez.png", description: "Канализационные насосные станции в корпусе SVT из стеклопластика. Высокая прочность, устойчивость к грунтовым водам. Комплектация насосами и автоматикой под проект." },
+      { id: "k1", name: "КНС в корпусе SVT", slug: "v-korpuse-svt", image: "/images/kns-svt-cutaway.jpg", externalPath: "/catalog/kns/v-korpuse-svt", description: "Канализационные насосные станции в корпусе SVT из стеклопластика. Высокая прочность, устойчивость к грунтовым водам. Комплектация насосами и автоматикой под проект." },
       { id: "k2", name: "КНС в корпусе из полипропилена", slug: "v-korpuse-polipropilen", image: "/images/kns-pp.png", description: "Канализационные насосные станции в полипропиленовом корпусе. Лёгкий монтаж, химическая стойкость, долговечность. Объём и конфигурация по техзаданию заказчика." },
     ],
   },
