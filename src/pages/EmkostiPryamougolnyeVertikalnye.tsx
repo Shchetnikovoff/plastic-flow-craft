@@ -34,10 +34,10 @@ function getRectImage(colorCode: string): string {
 const VERT_RENDER_SRC = "/images/emkost-pryam-vert-card.png";
 
 const colorFilters: Record<string, string> = {
-  "7032": "none",
-  "5012": "hue-rotate(185deg) saturate(2.5) brightness(0.92)",
-  "9003": "brightness(1.2) saturate(0.2) contrast(1.05)",
-  "": "brightness(0.3) saturate(0) contrast(1.3)",
+  "7032": "saturate(0) brightness(0.55) contrast(1.1)",
+  "5012": "saturate(0.6) brightness(0.55) contrast(1.1) hue-rotate(10deg)",
+  "9003": "saturate(0) brightness(0.75) contrast(1.05)",
+  "": "saturate(0) brightness(0.3) contrast(1.3)",
 };
 
 function getColorFilter(colorCode: string): string {
