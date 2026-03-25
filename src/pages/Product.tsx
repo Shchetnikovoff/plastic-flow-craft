@@ -12,6 +12,7 @@ import { emkostGroups } from "@/data/emkostiProducts";
 import { pozharnyeRect, pozharnyePodzem, pozharnyeHoriz } from "@/data/pozharnyeProducts";
 import { perelivnyeProducts, ppColors } from "@/data/perelivnyeProducts";
 import { podzemnyeProducts } from "@/data/podzemnyeProducts";
+import { pryamougolnyeProducts } from "@/data/pryamougolnyeProducts";
 import { ffuModels } from "@/data/ffuProducts";
 import { lamelnyjModels, parseLamelnyjArticle } from "@/data/lamelnyjProducts";
 import ArticleBreakdown, { type ArticleSegment } from "@/components/configurator/ArticleBreakdown";
