@@ -287,18 +287,19 @@ function parseEmkostArticle(article: string) {
       const epoVolume = parseInt(epoVolumeStr!, 10);
       const epoItem = !isNaN(epoVolume) ? pryamougolnyeProducts.find((p) => p.volume === epoVolume) : null;
       if (epoItem) {
-        const epoColorImages: Record<string, string> = {
-          "7032": "/images/emkost-pryam-pp-1.png",
-          "5012": "/images/emkost-pryam-hero-blue.png",
-          "9003": "/images/emkost-pryam-hero-white.png",
-          "": "/images/emkost-pryam-hero-black.png",
+        const epoColorFilters: Record<string, string> = {
+          "7032": "none",
+          "5012": "hue-rotate(190deg) saturate(3) brightness(0.9)",
+          "9003": "brightness(1.5) saturate(0.1)",
+          "": "brightness(0.25) saturate(0)",
         };
         const epoSpecs = epoMatInfo ? materialSpecs[epoMatInfo.name] : null;
         const epoColor = epoSpecs
           ? (epoColorCode ? epoSpecs.colors.find((c) => c.colorCode === epoColorCode) : epoSpecs.colors[0])
           : undefined;
         const epoImageKey = epoColor?.colorCode ?? "";
-        const epoImage = epoColorImages[epoImageKey] || epoColorImages["7032"];
+        const epoImage = "/images/emkost-pryam-goriz-render-grey.png";
+        const epoImageFilter = epoColorFilters[epoImageKey] ?? "none";
         const epoColorLabel = epoColor ? `${epoColor.name} (${epoColor.ral})` : "";
 
         return {
