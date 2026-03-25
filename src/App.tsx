@@ -12,6 +12,8 @@ import CatalogPage from "./pages/CatalogPage";
 import EmkostiPage from "./pages/EmkostiPage";
 import EmkostiPodzemnye from "./pages/EmkostiPodzemnye";
 import EmkostiPryamougolnye from "./pages/EmkostiPryamougolnye";
+import EmkostiPryamougolnyeGorizontalnye from "./pages/EmkostiPryamougolnyeGorizontalnye";
+import EmkostiPryamougolnyeVertikalnye from "./pages/EmkostiPryamougolnyeVertikalnye";
 import EmkostiPozharnye from "./pages/EmkostiPozharnye";
 import EmkostiKislotyShchelochi from "./pages/EmkostiKislotyShchelochi";
 import EmkostiPerelivnye from "./pages/EmkostiPerelivnye";
