@@ -31,7 +31,7 @@ function getRectImage(colorCode: string): string {
   return colorImages[colorCode] || colorImages["7032"];
 }
 
-const VERT_RENDER_SRC = "/images/emkost-pryam-goriz-render-grey.png";
+const VERT_RENDER_SRC = "/images/emkost-pryam-vert-card.png";
 
 const colorFilters: Record<string, string> = {
   "7032": "none",
