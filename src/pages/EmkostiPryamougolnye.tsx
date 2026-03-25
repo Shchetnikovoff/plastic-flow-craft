@@ -23,7 +23,7 @@ import {
 } from "@/components/ui/table";
 import { toast } from "sonner";
 import PageFooter from "@/components/PageFooter";
-import { RectangularTankCalculator } from "@/components/configurator";
+
 import ArticleBreakdown, { type ArticleSegment } from "@/components/configurator/ArticleBreakdown";
 
 const whyUs = [
