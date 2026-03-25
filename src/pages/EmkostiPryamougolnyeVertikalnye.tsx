@@ -167,12 +167,7 @@ const VertRectProductTable = ({ selectedMaterial, selectedColor, onMaterialChang
         </div>
 
         <div className="flex items-center justify-center">
-          <img
-            src={VERT_RENDER_SRC}
-            alt="Превью ёмкости"
-            className="max-w-[200px] w-full object-contain transition-[filter] duration-300"
-            style={{ filter: currentFilter }}
-          />
+          <VertTankRenderPreview colorCode={selectedColor.colorCode} className="max-w-[200px] w-full" />
         </div>
       </div>
 
