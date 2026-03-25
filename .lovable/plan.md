@@ -1,33 +1,29 @@
 
 
-## Plan: Align Rectangular Tank Calculator with Vertical Tank Calculator Style
+## Plan: Dynamic Tables with Material/Color Articles for Rectangular Tanks
 
-### Problem
-The `RectangularTankCalculator` uses a different layout and color selection approach than the `TankCalculator` used in vertical tanks. Need to match the vertical tanks' style.
+### What changes
 
-### Key Differences (Current → Target)
+**1. `src/pages/EmkostiPryamougolnye.tsx`** — Replace static PP/PND tabs with material & color selector above the table
+- Remove `Tabs` with PP/PND tabs and their image grids
+- Add material selector badges (PPC, PE100, PPH, PPs) and color picker cards (same style as calculator)
+- `ProductTable` receives `materialCode` and `colorCode` props
+- Table articles become dynamic: `СЗПК.ЕПО.{matCode}.{colorCode}.{volume}` (or without color for PE100)
+- Each row navigates to `/product/СЗПК.ЕПО.PPC.7032.1000` etc.
+- Add `ArticleBreakdown` above the table showing the article format explanation
 
-| Aspect | Rectangular (current) | Vertical (target) |
-|---|---|---|
-| Layout | 2-column (image left, controls right) | Controls left, small image right (`lg:grid-cols-[1fr_220px]`) |
-| Volume slider | Index-based, label outside | Value-based with min/max labels below |
-| Material selector | Badge with `text-[11px]` | Badge with `text-xs`, `px-3 py-1.5` |
-| Color selector | Round color circles only | Cards with swatch + name + RAL text |
-| Color rendering | CSS overlay on image | CSS overlay (keep — no separate renders exist for rectangular) |
-| Result section | Inline box inside controls | Full-width bottom section with `ArticleBreakdown` + highlighted result card |
-| Image | Large left panel with bg-muted | Small 220px column, `aspect-[3/4]` |
+**2. `src/pages/Product.tsx`** — Extend `parseExtendedEmkostArticle` to handle rectangular tanks
+- When `typePrefix === "ЕПО"`, search `pryamougolnyeProducts` by volume (strip material/color from article to find base product)
+- Return proper product data with `materialCode`, `colorLabel`, `rectDims`, image, and breadcrumb
+- Pick image based on color code using existing `colorImages` mapping (grey, blue, white, black)
 
-### Changes — Single file: `src/components/configurator/RectangularTankCalculator.tsx`
+**3. `src/data/pryamougolnyeProducts.ts`** — No changes needed (base articles remain as-is for backward compat)
 
-Rewrite to match `TankCalculator` structure:
+### How the table works
 
-1. **Layout**: Change to `grid-cols-1 lg:grid-cols-[1fr_220px]` — controls on left, image preview (220px) on right
-2. **Volume slider**: Use actual volume values (`min={1000}`, `max={50000}`, `step={1000}`) with min/max labels below, show selected value in label
-3. **Material selector**: Use same Badge sizing (`px-3 py-1.5 text-xs`) with temperature info below
-4. **Color selector**: Replace round circles with card-style selectors showing color swatch + name + RAL (matching vertical tanks' `flex items-center gap-2 rounded-lg border px-3 py-2` pattern)
-5. **Image preview**: Move to right column, 220px max width, `aspect-[3/4]`, keep overlay approach for color tinting
-6. **Result section**: Move below the grid as full-width `ArticleBreakdown` + highlighted result card with "Перейти к товару" button (matching vertical tanks' bottom result pattern)
-7. **Snap volume to nearest product**: Use closest-match logic like `TankCalculator.matchedModel`
+User selects material (e.g. PPH) and color (e.g. RAL 5012 Blue) → table shows 16 rows with articles like `СЗПК.ЕПО.PPH.5012.1000` through `СЗПК.ЕПО.PPH.5012.50000` → click navigates to product card → Product.tsx resolves the extended article, shows ArticleBreakdown with material/color segments.
 
-No other files need changes — the component is already imported and used in `EmkostiPryamougolnye.tsx`.
+### Scope
+- 2 files modified
+- No new components needed
 
