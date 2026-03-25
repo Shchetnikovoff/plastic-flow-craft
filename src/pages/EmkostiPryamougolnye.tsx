@@ -214,7 +214,7 @@ const EmkostiPryamougolnyeInner = () => {
                 className="group rounded-lg border border-border bg-card overflow-hidden hover:border-primary/50 hover:shadow-md transition-all block"
               >
                 <div className="aspect-[4/3] bg-muted flex items-center justify-center">
-                  <img src={sub.image} alt={sub.name} className="w-full h-full object-contain" />
+                  <img src={sub.image} alt={sub.name} className="w-full h-full object-contain" style={sub.imgFilter ? { filter: sub.imgFilter } : undefined} />
                 </div>
                 <div className="px-4 py-3">
                   <h3 className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">{sub.name}</h3>
