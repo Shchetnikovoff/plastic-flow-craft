@@ -31,6 +31,19 @@ function getRectImage(colorCode: string): string {
   return colorImages[colorCode] || colorImages["7032"];
 }
 
+const VERT_RENDER_SRC = "/images/emkost-pryam-goriz-render-grey.png";
+
+const colorFilters: Record<string, string> = {
+  "7032": "none",
+  "5012": "hue-rotate(190deg) saturate(1.8) brightness(0.95)",
+  "9003": "brightness(1.25) saturate(0.15) contrast(1.1)",
+  "": "brightness(0.35) saturate(0) contrast(1.2)",
+};
+
+function getColorFilter(colorCode: string): string {
+  return colorFilters[colorCode] ?? "none";
+}
+
 interface VertRectProductTableProps {
   selectedMaterial: string;
   selectedColor: MaterialColor;
