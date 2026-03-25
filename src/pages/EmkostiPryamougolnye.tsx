@@ -224,39 +224,8 @@ const EmkostiPryamougolnyeInner = () => {
 
         <RectangularTankCalculator />
 
-        {/* Типоразмерный ряд — with tabs for PP and PND */}
-        <section id="modeli" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Типоразмерный ряд</h2>
-
-          <Tabs defaultValue="pp" className="w-full">
-            <TabsList className="mb-4">
-              <TabsTrigger value="pp">Полипропилен (ПП)</TabsTrigger>
-              <TabsTrigger value="pnd">Полиэтилен (ПНД)</TabsTrigger>
-            </TabsList>
-
-            <TabsContent value="pp">
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
-                {ppImages.map((img, i) => (
-                  <div key={i} className="rounded-lg border border-border overflow-hidden bg-card">
-                    <img src={img.src} alt={img.alt} className="w-full object-contain" />
-                  </div>
-                ))}
-              </div>
-              <ProductTable />
-            </TabsContent>
-
-            <TabsContent value="pnd">
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
-                {pndImages.map((img, i) => (
-                  <div key={i} className="rounded-lg border border-border overflow-hidden bg-card">
-                    <img src={img.src} alt={img.alt} className="w-full object-contain" />
-                  </div>
-                ))}
-              </div>
-              <ProductTable />
-            </TabsContent>
-          </Tabs>
-        </section>
+        {/* Типоразмерный ряд — with material & color selector */}
+        <RectProductTable />
 
         <section className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">
