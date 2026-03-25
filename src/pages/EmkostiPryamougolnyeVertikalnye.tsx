@@ -31,27 +31,13 @@ function getRectImage(colorCode: string): string {
   return colorImages[colorCode] || colorImages["7032"];
 }
 
-const VERT_RENDER_SRC = "/images/emkost-pryam-vert-card.png";
-
-const colorFilters: Record<string, string> = {
-  "7032": "saturate(0) brightness(0.55) contrast(1.1)",
-  "5012": "saturate(0.6) brightness(0.55) contrast(1.1) hue-rotate(10deg)",
-  "9003": "saturate(0) brightness(0.75) contrast(1.05)",
-  "": "saturate(0) brightness(0.3) contrast(1.3)",
-};
-
-function getColorFilter(colorCode: string): string {
-  return colorFilters[colorCode] ?? "none";
-}
-
 const VertTankRenderPreview = ({ colorCode, className = "" }: { colorCode: string; className?: string }) => {
-  const filter = getColorFilter(colorCode);
+  const src = colorImages[colorCode] || colorImages["7032"];
   return (
     <img
-      src={VERT_RENDER_SRC}
+      src={src}
       alt="Превью ёмкости"
-      className={`object-contain transition-[filter] duration-300 ${className}`}
-      style={{ filter }}
+      className={`object-contain transition-opacity duration-300 ${className}`}
     />
   );
 };
