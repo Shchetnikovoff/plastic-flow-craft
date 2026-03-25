@@ -316,6 +316,7 @@ function parseEmkostArticle(article: string) {
           heightLabel: "H, мм",
           description: `Прямоугольная горизонтальная ёмкость в обрешётке. Размеры ${epoItem.length}×${epoItem.width}×${epoItem.height} мм, объём ${epoItem.volume.toLocaleString()} л. Материал: ${epoMatInfo?.name || epoMatCode}. ${epoColorLabel ? `Цвет: ${epoColorLabel}.` : ""}`,
           image: epoImage,
+          imageFilter: epoImageFilter,
           rectDims: { length: epoItem.length, width: epoItem.width, height: epoItem.height },
           breadcrumbBack: { label: "Горизонтальные прямоугольные", path: "/catalog/emkosti/pryamougolnye/gorizontalnye" },
         };
