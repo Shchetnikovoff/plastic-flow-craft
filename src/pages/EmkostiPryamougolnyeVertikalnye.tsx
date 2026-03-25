@@ -107,7 +107,7 @@ const VertRectProductTable = ({ selectedMaterial, selectedColor, onMaterialChang
     return segs;
   }, [matCode, selectedColor, hasMultipleColors]);
 
-  const currentFilter = getColorFilter(selectedColor.colorCode);
+  
 
   return (
     <section id="modeli" className="mb-10">
