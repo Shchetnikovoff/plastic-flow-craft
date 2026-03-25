@@ -267,6 +267,27 @@ function parseEmkostArticle(article: string) {
       };
     }
   }
+  // Search in pryamougolnyeProducts (rectangular tanks in frame) — format: СЗПК.ЕПО.{volume}
+  if (article.startsWith("СЗПК.ЕПО.")) {
+    const item = pryamougolnyeProducts.find((p) => p.article === article);
+    if (item) {
+      return {
+        productType: "emkost" as const,
+        emkostType: "rectangular",
+        title: `Ёмкость прямоугольная в обрешётке ${item.volume.toLocaleString()} л`,
+        subtitle: "Прямоугольная ёмкость из полипропилена / полиэтилена в металлической обрешётке",
+        materialName: "Полипропилен (ПП) / Полиэтилен (ПНД)",
+        volume: item.volume,
+        diameter: 0,
+        heightOrLength: item.height,
+        heightLabel: "H, мм",
+        description: `Прямоугольная ёмкость в обрешётке. Размеры ${item.length}×${item.width}×${item.height} мм, объём ${item.volume.toLocaleString()} л.`,
+        image: "/images/emkost-pryam-pp-1.png",
+        rectDims: { length: item.length, width: item.width, height: item.height },
+        breadcrumbBack: { label: "Прямоугольные ёмкости", path: "/catalog/emkosti/pryamougolnye" },
+      };
+    }
+  }
   return null;
 }
 

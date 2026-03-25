@@ -427,30 +427,39 @@ const EmkostiPryamougolnyeInner = () => {
   );
 };
 
-const ProductTable = () => (
-  <div className="rounded-lg border border-border overflow-auto">
-    <Table>
-      <TableHeader>
-        <TableRow>
-          <TableHead className="text-xs">Объём, л</TableHead>
-          <TableHead className="text-xs text-right">Длина (Д), мм</TableHead>
-          <TableHead className="text-xs text-right">Ширина (Ш), мм</TableHead>
-          <TableHead className="text-xs text-right">Высота (В), мм</TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {pryamougolnyeProducts.map((item) => (
-          <TableRow key={item.volume}>
-            <TableCell className="text-xs font-medium">{item.volume.toLocaleString()}</TableCell>
-            <TableCell className="text-xs text-right">{item.length.toLocaleString()}</TableCell>
-            <TableCell className="text-xs text-right">{item.width.toLocaleString()}</TableCell>
-            <TableCell className="text-xs text-right">{item.height.toLocaleString()}</TableCell>
+const ProductTable = () => {
+  const navigate = useNavigate();
+  return (
+    <div className="rounded-lg border border-border overflow-auto">
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead className="text-xs">Артикул</TableHead>
+            <TableHead className="text-xs">Объём, л</TableHead>
+            <TableHead className="text-xs text-right">Длина (Д), мм</TableHead>
+            <TableHead className="text-xs text-right">Ширина (Ш), мм</TableHead>
+            <TableHead className="text-xs text-right">Высота (В), мм</TableHead>
           </TableRow>
-        ))}
-      </TableBody>
-    </Table>
-  </div>
-);
+        </TableHeader>
+        <TableBody>
+          {pryamougolnyeProducts.map((item) => (
+            <TableRow
+              key={item.article}
+              className="cursor-pointer hover:bg-accent/50 transition-colors"
+              onClick={() => navigate(`/product/${item.article}`)}
+            >
+              <TableCell className="text-xs font-medium text-primary underline">{item.article}</TableCell>
+              <TableCell className="text-xs font-medium">{item.volume.toLocaleString()}</TableCell>
+              <TableCell className="text-xs text-right">{item.length.toLocaleString()}</TableCell>
+              <TableCell className="text-xs text-right">{item.width.toLocaleString()}</TableCell>
+              <TableCell className="text-xs text-right">{item.height.toLocaleString()}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </div>
+  );
+};
 
 const EmkostiPryamougolnye = () => (
   <CartProvider>
