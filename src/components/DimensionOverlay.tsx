@@ -35,6 +35,8 @@ interface DimensionOverlayProps {
   objectBounds?: ObjectBounds;
   /** Isometric corners for 3D-perspective dimension lines */
   isoCorners?: IsoCorners;
+  /** Optional CSS style applied to the image element (e.g. filter for color tinting) */
+  imageStyle?: React.CSSProperties;
 }
 
 /** Convert flat bounds to iso corners (no perspective) */
