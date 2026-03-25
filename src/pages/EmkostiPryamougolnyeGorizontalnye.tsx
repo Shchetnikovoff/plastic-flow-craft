@@ -24,9 +24,9 @@ const GORIZ_RENDER_SRC = "/images/emkost-pryam-goriz-render-grey.png";
 
 const colorFilters: Record<string, string> = {
   "7032": "none",
-  "5012": "hue-rotate(190deg) saturate(3) brightness(0.9)",
-  "9003": "brightness(1.5) saturate(0.1)",
-  "": "brightness(0.25) saturate(0)",
+  "5012": "hue-rotate(190deg) saturate(1.8) brightness(0.95)",
+  "9003": "brightness(1.25) saturate(0.15) contrast(1.1)",
+  "": "brightness(0.35) saturate(0) contrast(1.2)",
 };
 
 function getColorFilter(colorCode: string): string {
@@ -72,59 +72,74 @@ const RectProductTable = ({ selectedMaterial, selectedColor, onMaterialChange, o
     return segs;
   }, [matCode, selectedColor, hasMultipleColors]);
 
+  const currentFilter = getColorFilter(selectedColor.colorCode);
+
   return (
     <section id="modeli" className="mb-10">
       <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Типоразмерный ряд</h2>
 
-      <div className="mb-4">
-        <span className="text-sm font-semibold text-foreground mb-2 block">Материал</span>
-        <div className="flex flex-wrap gap-2">
-          {materials.map((mat) => (
-            <Badge
-              key={mat.name}
-              variant="outline"
-              className={`rounded-full px-3 py-1.5 text-xs font-medium cursor-pointer transition-colors ${
-                selectedMaterial === mat.name
-                  ? "border-primary text-primary bg-primary/5"
-                  : "hover:border-primary/50 hover:text-primary/80"
-              }`}
-              onClick={() => onMaterialChange(mat.name)}
-            >
-              {mat.code}
-            </Badge>
-          ))}
-        </div>
-        {specs && (
-          <div className="mt-2 flex gap-3 text-xs text-muted-foreground">
-            <span>🌡 {specs.workingTemp}</span>
-          </div>
-        )}
-      </div>
-
-      {specs && (
-        <div className="mb-4">
-          <span className="text-sm font-semibold text-foreground mb-2 block">Цвет</span>
-          <div className="flex flex-wrap gap-2">
-            {specs.colors.map((c) => (
-              <div
-                key={c.ral + c.colorCode}
-                onClick={() => onColorChange(c)}
-                className={`flex items-center gap-2 rounded-lg border px-3 py-2 cursor-pointer transition-all ${
-                  selectedColor.colorCode === c.colorCode
-                    ? "border-primary ring-1 ring-primary shadow-sm bg-primary/5"
-                    : "border-border hover:border-muted-foreground bg-card"
-                }`}
-              >
-                <span className="w-5 h-5 rounded-full border border-border shrink-0" style={{ backgroundColor: c.hex }} />
-                <span className="text-xs font-medium text-foreground">{c.name}</span>
-                <span className="text-xs text-muted-foreground">{c.ral}</span>
+      <div className="grid grid-cols-1 sm:grid-cols-[1fr_220px] gap-4 mb-4">
+        <div>
+          <div className="mb-4">
+            <span className="text-sm font-semibold text-foreground mb-2 block">Материал</span>
+            <div className="flex flex-wrap gap-2">
+              {materials.map((mat) => (
+                <Badge
+                  key={mat.name}
+                  variant="outline"
+                  className={`rounded-full px-3 py-1.5 text-xs font-medium cursor-pointer transition-colors ${
+                    selectedMaterial === mat.name
+                      ? "border-primary text-primary bg-primary/5"
+                      : "hover:border-primary/50 hover:text-primary/80"
+                  }`}
+                  onClick={() => onMaterialChange(mat.name)}
+                >
+                  {mat.code}
+                </Badge>
+              ))}
+            </div>
+            {specs && (
+              <div className="mt-2 flex gap-3 text-xs text-muted-foreground">
+                <span>🌡 {specs.workingTemp}</span>
               </div>
-            ))}
+            )}
           </div>
-        </div>
-      )}
 
-      <ArticleBreakdown exampleArticle={exampleArticle} segments={segments} />
+          {specs && (
+            <div className="mb-4">
+              <span className="text-sm font-semibold text-foreground mb-2 block">Цвет</span>
+              <div className="flex flex-wrap gap-2">
+                {specs.colors.map((c) => (
+                  <div
+                    key={c.ral + c.colorCode}
+                    onClick={() => onColorChange(c)}
+                    className={`flex items-center gap-2 rounded-lg border px-3 py-2 cursor-pointer transition-all ${
+                      selectedColor.colorCode === c.colorCode
+                        ? "border-primary ring-1 ring-primary shadow-sm bg-primary/5"
+                        : "border-border hover:border-muted-foreground bg-card"
+                    }`}
+                  >
+                    <span className="w-5 h-5 rounded-full border border-border shrink-0" style={{ backgroundColor: c.hex }} />
+                    <span className="text-xs font-medium text-foreground">{c.name}</span>
+                    <span className="text-xs text-muted-foreground">{c.ral}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <ArticleBreakdown exampleArticle={exampleArticle} segments={segments} />
+        </div>
+
+        <div className="flex items-center justify-center">
+          <img
+            src={GORIZ_RENDER_SRC}
+            alt="Превью ёмкости"
+            className="max-w-[200px] w-full object-contain transition-[filter] duration-300"
+            style={{ filter: currentFilter }}
+          />
+        </div>
+      </div>
 
       <div className="rounded-lg border bg-card">
         <Table>
