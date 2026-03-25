@@ -12,6 +12,8 @@ import CatalogPage from "./pages/CatalogPage";
 import EmkostiPage from "./pages/EmkostiPage";
 import EmkostiPodzemnye from "./pages/EmkostiPodzemnye";
 import EmkostiPryamougolnye from "./pages/EmkostiPryamougolnye";
+import EmkostiPryamougolnyeGorizontalnye from "./pages/EmkostiPryamougolnyeGorizontalnye";
+import EmkostiPryamougolnyeVertikalnye from "./pages/EmkostiPryamougolnyeVertikalnye";
 import EmkostiPozharnye from "./pages/EmkostiPozharnye";
 import EmkostiKislotyShchelochi from "./pages/EmkostiKislotyShchelochi";
 import EmkostiPerelivnye from "./pages/EmkostiPerelivnye";
@@ -80,6 +82,8 @@ const App = () => (
           <Route path="/catalog/emkosti/gorizontalnye/standartnaya" element={<EmkostiGorizontalnyeStandard />} />
           <Route path="/catalog/emkosti/gorizontalnye/vysokie-lozhementy" element={<EmkostiGorizontalnyeVysokie />} />
           <Route path="/catalog/emkosti/podzemnye" element={<EmkostiPodzemnye />} />
+          <Route path="/catalog/emkosti/pryamougolnye/gorizontalnye" element={<EmkostiPryamougolnyeGorizontalnye />} />
+          <Route path="/catalog/emkosti/pryamougolnye/vertikalnye" element={<EmkostiPryamougolnyeVertikalnye />} />
           <Route path="/catalog/emkosti/pryamougolnye" element={<EmkostiPryamougolnye />} />
           <Route path="/catalog/emkosti/pozharnye" element={<EmkostiPozharnye />} />
           <Route path="/catalog/emkosti/kisloty-shchelochi" element={<EmkostiKislotyShchelochi />} />
