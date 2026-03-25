@@ -107,17 +107,6 @@ const advantages = [
 ];
 
 
-const ppImages = [
-  { src: "/images/emkost-pryam-pp-1.png", alt: "Ёмкость прямоугольная из полипропилена в обрешётке" },
-  { src: "/images/emkost-pryam-pp-3.png", alt: "Ёмкость прямоугольная ПП в металлообрешётке" },
-  { src: "/images/emkost-pryam-pp-4.png", alt: "Рендер ёмкости прямоугольной из полипропилена" },
-];
-
-const pndImages = [
-  { src: "/images/emkost-pryam-pnd-1.jpg", alt: "Ёмкость прямоугольная из полиэтилена в обрешётке" },
-  { src: "/images/emkost-pryam-pnd-2.png", alt: "Рендер ёмкости прямоугольной из полиэтилена" },
-  { src: "/images/emkost-pryam-pp-2.png", alt: "Ёмкость прямоугольная в обрешётке" },
-];
 
 /** Interactive product table with material & color selector */
 const RectProductTable = () => {
