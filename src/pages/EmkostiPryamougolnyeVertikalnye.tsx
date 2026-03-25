@@ -21,10 +21,10 @@ import PageFooter from "@/components/PageFooter";
 import ArticleBreakdown, { type ArticleSegment } from "@/components/configurator/ArticleBreakdown";
 
 const colorImages: Record<string, string> = {
-  "7032": "/images/emkost-pryam-pp-1.png",
-  "5012": "/images/emkost-pryam-hero-blue.png",
-  "9003": "/images/emkost-pryam-hero-white.png",
-  "": "/images/emkost-pryam-hero-black.png",
+  "7032": "/images/emkost-pryam-vert-gray.png",
+  "5012": "/images/emkost-pryam-vert-blue.png",
+  "9003": "/images/emkost-pryam-vert-white.png",
+  "": "/images/emkost-pryam-vert-black.png",
 };
 
 function getRectImage(colorCode: string): string {
