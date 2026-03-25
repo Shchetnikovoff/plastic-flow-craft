@@ -336,7 +336,7 @@ const EmkostiPryamougolnyeInner = () => {
           ))}
         </nav>
 
-        <RectangularTankCalculator />
+        
 
         {/* Типоразмерный ряд — with material & color selector */}
         <RectProductTable />
