@@ -289,9 +289,9 @@ function parseEmkostArticle(article: string) {
       if (epoItem) {
         const epoColorFilters: Record<string, string> = {
           "7032": "none",
-          "5012": "hue-rotate(190deg) saturate(3) brightness(0.9)",
-          "9003": "brightness(1.5) saturate(0.1)",
-          "": "brightness(0.25) saturate(0)",
+          "5012": "hue-rotate(190deg) saturate(1.8) brightness(0.95)",
+          "9003": "brightness(1.25) saturate(0.15) contrast(1.1)",
+          "": "brightness(0.35) saturate(0) contrast(1.2)",
         };
         const epoSpecs = epoMatInfo ? materialSpecs[epoMatInfo.name] : null;
         const epoColor = epoSpecs
@@ -360,18 +360,19 @@ function parseEmkostArticle(article: string) {
       const epovVolume = parseInt(epovVolumeStr!, 10);
       const epovItem = !isNaN(epovVolume) ? pryamougolnyeVertikalnyeProducts.find((p) => p.volume === epovVolume) : null;
       if (epovItem) {
-        const epovColorImages: Record<string, string> = {
-          "7032": "/images/emkost-pryam-pp-1.png",
-          "5012": "/images/emkost-pryam-hero-blue.png",
-          "9003": "/images/emkost-pryam-hero-white.png",
-          "": "/images/emkost-pryam-hero-black.png",
+        const epovColorFilters: Record<string, string> = {
+          "7032": "none",
+          "5012": "hue-rotate(190deg) saturate(1.8) brightness(0.95)",
+          "9003": "brightness(1.25) saturate(0.15) contrast(1.1)",
+          "": "brightness(0.35) saturate(0) contrast(1.2)",
         };
         const epovSpecs = epovMatInfo ? materialSpecs[epovMatInfo.name] : null;
         const epovColor = epovSpecs
           ? (epovColorCode ? epovSpecs.colors.find((c) => c.colorCode === epovColorCode) : epovSpecs.colors[0])
           : undefined;
         const epovImageKey = epovColor?.colorCode ?? "";
-        const epovImage = epovColorImages[epovImageKey] || epovColorImages["7032"];
+        const epovImage = "/images/emkost-pryam-goriz-render-grey.png";
+        const epovImageFilter = epovColorFilters[epovImageKey] ?? "none";
         const epovColorLabel = epovColor ? `${epovColor.name} (${epovColor.ral})` : "";
 
         return {
@@ -388,6 +389,7 @@ function parseEmkostArticle(article: string) {
           heightLabel: "H, мм",
           description: `Прямоугольная вертикальная ёмкость в обрешётке. Размеры ${epovItem.width}×${epovItem.depth}×${epovItem.height} мм, объём ${epovItem.volume.toLocaleString()} л. Материал: ${epovMatInfo?.name || epovMatCode}. ${epovColorLabel ? `Цвет: ${epovColorLabel}.` : ""}`,
           image: epovImage,
+          imageFilter: epovImageFilter,
           rectDims: { length: epovItem.width, width: epovItem.depth, height: epovItem.height },
           breadcrumbBack: { label: "Вертикальные прямоугольные", path: "/catalog/emkosti/pryamougolnye/vertikalnye" },
         };
