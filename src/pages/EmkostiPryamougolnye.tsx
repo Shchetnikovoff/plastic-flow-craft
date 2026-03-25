@@ -23,7 +23,7 @@ import {
 } from "@/components/ui/table";
 import { toast } from "sonner";
 import PageFooter from "@/components/PageFooter";
-import { RectangularTankCalculator } from "@/components/configurator";
+
 import ArticleBreakdown, { type ArticleSegment } from "@/components/configurator/ArticleBreakdown";
 
 const whyUs = [
@@ -106,36 +106,7 @@ const advantages = [
   { icon: Beaker, title: "Гибкость", text: "Возможность доработки конструкции в процессе эксплуатации." },
 ];
 
-const sizeTable = [
-  { volume: 1000, length: 1000, width: 1000, height: 1000 },
-  { volume: 2000, length: 2000, width: 1000, height: 1000 },
-  { volume: 3000, length: 2100, width: 1200, height: 1200 },
-  { volume: 4000, length: 1800, width: 1500, height: 1500 },
-  { volume: 5000, length: 2300, width: 1500, height: 1500 },
-  { volume: 6000, length: 2700, width: 1500, height: 1500 },
-  { volume: 8000, length: 3600, width: 1500, height: 1500 },
-  { volume: 10000, length: 4500, width: 1500, height: 1500 },
-  { volume: 15000, length: 4700, width: 1800, height: 1800 },
-  { volume: 20000, length: 5000, width: 2000, height: 2000 },
-  { volume: 25000, length: 6300, width: 2000, height: 2000 },
-  { volume: 30000, length: 6000, width: 2250, height: 2250 },
-  { volume: 35000, length: 7300, width: 2400, height: 2000 },
-  { volume: 40000, length: 8400, width: 2400, height: 2000 },
-  { volume: 45000, length: 9400, width: 2400, height: 2000 },
-  { volume: 50000, length: 10500, width: 2400, height: 2000 },
-];
 
-const ppImages = [
-  { src: "/images/emkost-pryam-pp-1.png", alt: "Ёмкость прямоугольная из полипропилена в обрешётке" },
-  { src: "/images/emkost-pryam-pp-3.png", alt: "Ёмкость прямоугольная ПП в металлообрешётке" },
-  { src: "/images/emkost-pryam-pp-4.png", alt: "Рендер ёмкости прямоугольной из полипропилена" },
-];
-
-const pndImages = [
-  { src: "/images/emkost-pryam-pnd-1.jpg", alt: "Ёмкость прямоугольная из полиэтилена в обрешётке" },
-  { src: "/images/emkost-pryam-pnd-2.png", alt: "Рендер ёмкости прямоугольной из полиэтилена" },
-  { src: "/images/emkost-pryam-pp-2.png", alt: "Ёмкость прямоугольная в обрешётке" },
-];
 
 /** Interactive product table with material & color selector */
 const RectProductTable = () => {
@@ -346,7 +317,7 @@ const EmkostiPryamougolnyeInner = () => {
 
         <nav className="mb-8 flex flex-wrap gap-2">
           {[
-            { id: "calculator", label: "Калькулятор" },
+            
             { id: "modeli", label: "Модели" },
             { id: "opisanie", label: "Описание" },
             { id: "naznachenie", label: "Назначение" },
@@ -365,7 +336,7 @@ const EmkostiPryamougolnyeInner = () => {
           ))}
         </nav>
 
-        <RectangularTankCalculator />
+        
 
         {/* Типоразмерный ряд — with material & color selector */}
         <RectProductTable />
@@ -535,39 +506,6 @@ const EmkostiPryamougolnyeInner = () => {
   );
 };
 
-const ProductTable = () => {
-  const navigate = useNavigate();
-  return (
-    <div className="rounded-lg border border-border overflow-auto">
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead className="text-xs">Артикул</TableHead>
-            <TableHead className="text-xs">Объём, л</TableHead>
-            <TableHead className="text-xs text-right">Длина (Д), мм</TableHead>
-            <TableHead className="text-xs text-right">Ширина (Ш), мм</TableHead>
-            <TableHead className="text-xs text-right">Высота (В), мм</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {pryamougolnyeProducts.map((item) => (
-            <TableRow
-              key={item.article}
-              className="cursor-pointer hover:bg-accent/50 transition-colors"
-              onClick={() => navigate(`/product/${item.article}`)}
-            >
-              <TableCell className="text-xs font-medium text-primary underline">{item.article}</TableCell>
-              <TableCell className="text-xs font-medium">{item.volume.toLocaleString()}</TableCell>
-              <TableCell className="text-xs text-right">{item.length.toLocaleString()}</TableCell>
-              <TableCell className="text-xs text-right">{item.width.toLocaleString()}</TableCell>
-              <TableCell className="text-xs text-right">{item.height.toLocaleString()}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </div>
-  );
-};
 
 const EmkostiPryamougolnye = () => (
   <CartProvider>
