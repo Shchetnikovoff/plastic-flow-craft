@@ -1,13 +1,21 @@
 
 
-## Plan: Enlarge Main Hero Image
+## Plan: Add Collage to Vodoochistka Hero Section
 
-Make the left hero image (`emkosti-hero-2.png`) take up more space relative to the thumbnails grid.
+Replace the single hero image with a collage identical in style to the EmkostiPage: main image on the left (~60%), 3-column thumbnail grid on the right (~40%).
 
 ### Changes
 
-**`src/pages/EmkostiPage.tsx`** (line 117):
-- Change grid from `lg:grid-cols-2` to `lg:grid-cols-[3fr_2fr]` so the main image gets ~60% width and thumbnails ~40%
-- Remove `p-2` padding from the main image container to maximize display area
-- Add `min-h-[400px]` to the main image container for a taller display
+**`src/pages/Vodoochistka.tsx`** (lines 201-205):
+- Replace the single full-width image container with a 2-column grid using `lg:grid-cols-[3fr_2fr]`
+- Left column: the existing `vodoochistka-hero-real.jpeg` in a large container with `min-h-[400px]`
+- Right column: grid of 7 subcategory thumbnails in a `grid-cols-3` layout (fills 2 rows of 3 + 1 remaining), using images from catalog data:
+  - ФФУ (`ffu-real-3d.png`)
+  - Ламельный отстойник (`lamelnyj-thumb-new.png`)
+  - Обезвоживатель (`obezvozhivatel-3d-ral7032.jpg`)
+  - Станция дозирования (`spr-hero-ral7032.jpg`)
+  - Жироуловители (`zhu-vertical-ral.jpg`)
+  - КОС (`vodoochistka-kos-kompakt.jpg`)
+  - Шкафы дозирования (`vodoochistka-dozirovanie-grundfos.jpg`)
+- Each thumbnail in a square card with `aspect-square`, `object-contain`, rounded border — same styling as EmkostiPage
 
