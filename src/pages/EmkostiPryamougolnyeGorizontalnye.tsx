@@ -179,7 +179,7 @@ const EmkostiPryamougolnyeGorizontalnyeInner = () => {
     }
   }, []);
 
-  const heroRenderSrc = getRectImage(selectedColor.colorCode);
+  const heroFilter = getColorFilter(selectedColor.colorCode);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
