@@ -114,8 +114,8 @@ const EmkostiPageInner = () => {
           </Button>
 
           {/* Hero collage */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-6">
-            <div className="rounded-xl border border-border overflow-hidden bg-card flex items-center justify-center p-2">
+          <div className="grid grid-cols-1 lg:grid-cols-[3fr_2fr] gap-4 mt-6">
+            <div className="rounded-xl border border-border overflow-hidden bg-card flex items-center justify-center min-h-[400px]">
               <img src="/images/emkosti-hero-2.png" alt="Ёмкость в разрезе" className="w-full h-auto object-contain" />
             </div>
             <div className="grid grid-cols-3 gap-2">
