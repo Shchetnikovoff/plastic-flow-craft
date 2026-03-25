@@ -287,18 +287,19 @@ function parseEmkostArticle(article: string) {
       const epoVolume = parseInt(epoVolumeStr!, 10);
       const epoItem = !isNaN(epoVolume) ? pryamougolnyeProducts.find((p) => p.volume === epoVolume) : null;
       if (epoItem) {
-        const epoColorImages: Record<string, string> = {
-          "7032": "/images/emkost-pryam-pp-1.png",
-          "5012": "/images/emkost-pryam-hero-blue.png",
-          "9003": "/images/emkost-pryam-hero-white.png",
-          "": "/images/emkost-pryam-hero-black.png",
+        const epoColorFilters: Record<string, string> = {
+          "7032": "none",
+          "5012": "hue-rotate(190deg) saturate(3) brightness(0.9)",
+          "9003": "brightness(1.5) saturate(0.1)",
+          "": "brightness(0.25) saturate(0)",
         };
         const epoSpecs = epoMatInfo ? materialSpecs[epoMatInfo.name] : null;
         const epoColor = epoSpecs
           ? (epoColorCode ? epoSpecs.colors.find((c) => c.colorCode === epoColorCode) : epoSpecs.colors[0])
           : undefined;
         const epoImageKey = epoColor?.colorCode ?? "";
-        const epoImage = epoColorImages[epoImageKey] || epoColorImages["7032"];
+        const epoImage = "/images/emkost-pryam-goriz-render-grey.png";
+        const epoImageFilter = epoColorFilters[epoImageKey] ?? "none";
         const epoColorLabel = epoColor ? `${epoColor.name} (${epoColor.ral})` : "";
 
         return {
@@ -315,6 +316,7 @@ function parseEmkostArticle(article: string) {
           heightLabel: "H, мм",
           description: `Прямоугольная горизонтальная ёмкость в обрешётке. Размеры ${epoItem.length}×${epoItem.width}×${epoItem.height} мм, объём ${epoItem.volume.toLocaleString()} л. Материал: ${epoMatInfo?.name || epoMatCode}. ${epoColorLabel ? `Цвет: ${epoColorLabel}.` : ""}`,
           image: epoImage,
+          imageFilter: epoImageFilter,
           rectDims: { length: epoItem.length, width: epoItem.width, height: epoItem.height },
           breadcrumbBack: { label: "Горизонтальные прямоугольные", path: "/catalog/emkosti/pryamougolnye/gorizontalnye" },
         };
@@ -333,7 +335,7 @@ function parseEmkostArticle(article: string) {
         heightOrLength: itemBase.height,
         heightLabel: "H, мм",
         description: `Прямоугольная горизонтальная ёмкость в обрешётке. Размеры ${itemBase.length}×${itemBase.width}×${itemBase.height} мм, объём ${itemBase.volume.toLocaleString()} л.`,
-        image: "/images/emkost-pryam-pp-1.png",
+        image: "/images/emkost-pryam-goriz-render-grey.png",
         rectDims: { length: itemBase.length, width: itemBase.width, height: itemBase.height },
         breadcrumbBack: { label: "Горизонтальные прямоугольные", path: "/catalog/emkosti/pryamougolnye/gorizontalnye" },
       };
@@ -589,6 +591,7 @@ const ProductDetailContent = () => {
                     length={emkost.rectDims.length}
                     width={emkost.rectDims.width}
                     height={emkost.rectDims.height}
+                    imageStyle={"imageFilter" in emkost && emkost.imageFilter ? { filter: emkost.imageFilter } : undefined}
                     isoCorners={
                       emkost.image.includes("pryam")
                         ? {
@@ -603,7 +606,12 @@ const ProductDetailContent = () => {
                     }
                   />
                 ) : (
-                  <img src={emkost.image} alt={emkost.title} className="h-full w-full object-contain" />
+                  <img
+                    src={emkost.image}
+                    alt={emkost.title}
+                    className="h-full w-full object-contain"
+                    style={"imageFilter" in emkost && emkost.imageFilter ? { filter: emkost.imageFilter } : undefined}
+                  />
                 )}
               </div>
             )}

@@ -20,15 +20,17 @@ import { toast } from "sonner";
 import PageFooter from "@/components/PageFooter";
 import ArticleBreakdown, { type ArticleSegment } from "@/components/configurator/ArticleBreakdown";
 
-const colorImages: Record<string, string> = {
-  "7032": "/images/emkost-pryam-pp-1.png",
-  "5012": "/images/emkost-pryam-hero-blue.png",
-  "9003": "/images/emkost-pryam-hero-white.png",
-  "": "/images/emkost-pryam-hero-black.png",
+const GORIZ_RENDER_SRC = "/images/emkost-pryam-goriz-render-grey.png";
+
+const colorFilters: Record<string, string> = {
+  "7032": "none",
+  "5012": "hue-rotate(190deg) saturate(3) brightness(0.9)",
+  "9003": "brightness(1.5) saturate(0.1)",
+  "": "brightness(0.25) saturate(0)",
 };
 
-function getRectImage(colorCode: string): string {
-  return colorImages[colorCode] || colorImages["7032"];
+function getColorFilter(colorCode: string): string {
+  return colorFilters[colorCode] ?? colorFilters["7032"];
 }
 
 interface RectProductTableProps {
@@ -177,7 +179,7 @@ const EmkostiPryamougolnyeGorizontalnyeInner = () => {
     }
   }, []);
 
-  const heroRenderSrc = getRectImage(selectedColor.colorCode);
+  const heroFilter = getColorFilter(selectedColor.colorCode);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -219,7 +221,12 @@ const EmkostiPryamougolnyeGorizontalnyeInner = () => {
               <img src="/images/emkost-pryam-real-4.png" alt="Прямоугольная горизонтальная ёмкость" className="w-full object-contain" />
             </div>
             <div className="rounded-lg border border-border overflow-hidden bg-card transition-all">
-              <img src={heroRenderSrc} alt="Горизонтальная ёмкость в обрешётке — рендер" className="w-full object-contain" />
+              <img
+                src={GORIZ_RENDER_SRC}
+                alt="Горизонтальная ёмкость в обрешётке — рендер"
+                className="w-full object-contain transition-[filter] duration-300"
+                style={{ filter: heroFilter }}
+              />
             </div>
             <div className="rounded-lg border border-border overflow-hidden bg-card">
               <img src="/images/emkost-pryam-real-2.jpg" alt="Горизонтальная ёмкость в обрешётке" className="w-full object-contain" />

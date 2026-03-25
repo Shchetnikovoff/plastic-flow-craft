@@ -35,6 +35,8 @@ interface DimensionOverlayProps {
   objectBounds?: ObjectBounds;
   /** Isometric corners for 3D-perspective dimension lines */
   isoCorners?: IsoCorners;
+  /** Optional CSS style applied to the image element (e.g. filter for color tinting) */
+  imageStyle?: React.CSSProperties;
 }
 
 /** Convert flat bounds to iso corners (no perspective) */
@@ -94,6 +96,7 @@ const DimensionOverlay = ({
   height,
   objectBounds,
   isoCorners: isoCornersProp,
+  imageStyle,
 }: DimensionOverlayProps) => {
   // Resolve corners
   const iso: IsoCorners = isoCornersProp
@@ -181,6 +184,7 @@ const DimensionOverlay = ({
         src={imageSrc}
         alt={imageAlt}
         className="h-full w-full object-contain p-4"
+        style={imageStyle}
       />
       <svg
         viewBox="0 0 400 400"
