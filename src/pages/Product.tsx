@@ -13,6 +13,7 @@ import { pozharnyeRect, pozharnyePodzem, pozharnyeHoriz } from "@/data/pozharnye
 import { perelivnyeProducts, ppColors } from "@/data/perelivnyeProducts";
 import { podzemnyeProducts } from "@/data/podzemnyeProducts";
 import { pryamougolnyeProducts } from "@/data/pryamougolnyeProducts";
+import { pryamougolnyeVertikalnyeProducts } from "@/data/pryamougolnyeVertikalnyeProducts";
 import { ffuModels } from "@/data/ffuProducts";
 import { lamelnyjModels, parseLamelnyjArticle } from "@/data/lamelnyjProducts";
 import ArticleBreakdown, { type ArticleSegment } from "@/components/configurator/ArticleBreakdown";
