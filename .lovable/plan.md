@@ -1,11 +1,13 @@
 
-## Plan: Replace Horizontal Tank Card Image
 
-### Change
-Save the uploaded image to `public/images/emkost-pryam-goriz-card.png` and update the `subtypes` array in `EmkostiPryamougolnye.tsx` to reference it.
+## Plan: Remove First Hero Image on Vertical Tanks Page
 
-### File Changes
+The page `EmkostiPryamougolnyeVertikalnye.tsx` has two hero images in a 2-column grid (lines 238-245). The first image (`emkost-pryam-vert-hero.png`, line 240) shows a horizontal tank and needs to be removed, leaving only the second (correct vertical) render.
 
-1. **Copy image**: `user-uploads://emkost-pryam-real-3_1-3.png` → `public/images/emkost-pryam-goriz-card.png`
+### Changes
 
-2. **`src/pages/EmkostiPryamougolnye.tsx`** — line 107: change image path from `"/images/emkost-pryam-real-4.png"` to `"/images/emkost-pryam-goriz-card.png"`
+**`src/pages/EmkostiPryamougolnyeVertikalnye.tsx`** (lines 238-245):
+- Remove the first `<div>` with the horizontal tank image
+- Change the grid from `grid-cols-2` to a single centered image container
+- Keep only the second image (the color-reactive vertical render)
+
