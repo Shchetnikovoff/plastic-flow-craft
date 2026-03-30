@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/accordion";
 import { toast } from "sonner";
 import PageFooter from "@/components/PageFooter";
+import ChemicalSelector from "@/components/ChemicalSelector";
 
 /* ── static data ── */
 
@@ -210,6 +211,7 @@ const EmkostiKislotyShchelochiInner = () => {
             { id: "opisanie", label: "Описание" },
             { id: "naznachenie", label: "Назначение" },
             { id: "materialy", label: "Материалы" },
+            { id: "podbor", label: "Подбор материала" },
             { id: "modifikacii", label: "Модификации" },
             { id: "preimushchestva", label: "Преимущества" },
             { id: "cta-form", label: "Заявка" },
@@ -301,6 +303,18 @@ const EmkostiKislotyShchelochiInner = () => {
               </tbody>
             </table>
           </div>
+        </section>
+
+        {/* Section: Интерактивный подбор материала */}
+        <section id="podbor" className="mb-10 scroll-mt-20">
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">
+            Интерактивный подбор материала
+          </h2>
+          <Card>
+            <CardContent className="p-4 sm:p-6">
+              <ChemicalSelector />
+            </CardContent>
+          </Card>
         </section>
 
         {/* Section 3: Виды и модификации */}

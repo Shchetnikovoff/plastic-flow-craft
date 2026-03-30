@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import Header from "@/components/Header";
 import CartSheet from "@/components/CartSheet";
 import { CartProvider } from "@/contexts/CartContext";
@@ -115,6 +115,8 @@ const options = [
 /* ── component ── */
 
 const GazoochistkaSkrubberyInner = () => {
+  const [searchParams] = useSearchParams();
+  const defaultTab = searchParams.get("tab") === "horizontal" ? "horizontal" : "vertical";
   const [cartOpen, setCartOpen] = useState(false);
   const [form, setForm] = useState({ name: "", phone: "", email: "", description: "" });
 
@@ -239,7 +241,7 @@ const GazoochistkaSkrubberyInner = () => {
         <section id="modeli" className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Типоразмерный ряд</h2>
 
-          <Tabs defaultValue="vertical" className="w-full">
+          <Tabs defaultValue={defaultTab} className="w-full">
             <TabsList className="w-full grid grid-cols-2 mb-4">
               <TabsTrigger value="vertical" className="text-xs sm:text-sm">Вертикальные (серия СН)</TabsTrigger>
               <TabsTrigger value="horizontal" className="text-xs sm:text-sm">Горизонтальные (серия СТ)</TabsTrigger>
@@ -273,22 +275,6 @@ const GazoochistkaSkrubberyInner = () => {
               {renderTable(ctModels)}
             </TabsContent>
           </Tabs>
-        </section>
-
-        {/* Vertical scrubber table */}
-        <section className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">
-            Типоразмерный ряд вертикальных скрубберов
-          </h2>
-          {renderTable(chModels)}
-        </section>
-
-        {/* Horizontal scrubber table */}
-        <section className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">
-            Типоразмерный ряд горизонтальных скрубберов
-          </h2>
-          {renderTable(ctModels)}
         </section>
 
         {/* Applications */}
