@@ -1,7 +1,5 @@
-import { useState } from "react";
 import CorporatePageShell from "@/components/corporate/CorporatePageShell";
-import { ProductGrid, AdvantagesGrid, FeatureChecklist, FAQSection } from "@/components/corporate/sections";
-import { findCategory } from "@/data/catalog";
+import { AdvantagesGrid, FeatureChecklist, FAQSection } from "@/components/corporate/sections";
 import { Wrench, ShieldCheck, Clock, Truck, FlaskConical, Droplets, Factory, Settings, Shield } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
@@ -54,49 +52,43 @@ const faq = [
 ];
 
 const KnsPage = () => {
-  const [selectedSubId, setSelectedSubId] = useState<string | null>(null);
-  const category = findCategory("kns");
-
   return (
     <CorporatePageShell
       catalogTabs="kns"
       breadcrumbs={[
-        { label: "Каталог", to: "/catalog" },
+        { label: "Каталог", href: "/catalog" },
         { label: "КНС" },
       ]}
       title="Канализационные насосные станции (КНС)"
       subtitle="КНС из полипропилена и стеклопластика — надёжное водоотведение для любых объектов!"
       heroImage="/images/kns-svt-cutaway.jpg"
-      heroImageAlt="КНС канализационная насосная станция"
       stats={stats}
-      ctaTitle="Готовы заказать КНС?"
-      ctaSubtitle="Оставьте заявку — расчёт в течение 24 часов."
     >
       <FeatureChecklist title="Почему выбирают нас" items={whyUs} />
 
       <section className="mb-10">
-        <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Области применения</h2>
+        <h2 className="text-base font-bold text-slate-900 mb-4 tracking-wide uppercase">Области применения</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
           {applications.map((a, i) => (
-            <div key={i} className="flex items-start gap-2 rounded-lg border border-border bg-card p-3">
-              <a.icon className="h-4 w-4 text-primary shrink-0 mt-0.5" />
-              <span className="text-sm text-foreground">{a.text}</span>
+            <div key={i} className="flex items-start gap-2 rounded-lg border border-slate-200 bg-white p-3">
+              <a.icon className="h-4 w-4 text-amber-600 shrink-0 mt-0.5" />
+              <span className="text-sm text-slate-900">{a.text}</span>
             </div>
           ))}
         </div>
       </section>
 
       <section className="mb-10">
-        <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Виды КНС</h2>
+        <h2 className="text-base font-bold text-slate-900 mb-4 tracking-wide uppercase">Виды КНС</h2>
         <Accordion type="multiple" defaultValue={[modifications[0].title]} className="space-y-2">
           {modifications.map((mod) => (
-            <AccordionItem key={mod.title} value={mod.title} className="rounded-lg border border-border bg-card px-4">
-              <AccordionTrigger className="text-sm font-semibold text-foreground hover:no-underline">{mod.title}</AccordionTrigger>
+            <AccordionItem key={mod.title} value={mod.title} className="rounded-lg border border-slate-200 bg-white px-4">
+              <AccordionTrigger className="text-sm font-semibold text-slate-900 hover:no-underline">{mod.title}</AccordionTrigger>
               <AccordionContent>
                 <ul className="space-y-1.5 pb-2">
                   {mod.items.map((item, i) => (
-                    <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
-                      <span className="text-primary mt-1">•</span><span>{item}</span>
+                    <li key={i} className="flex items-start gap-2 text-sm text-slate-500">
+                      <span className="text-amber-600 mt-1">•</span><span>{item}</span>
                     </li>
                   ))}
                 </ul>
@@ -108,16 +100,7 @@ const KnsPage = () => {
 
       <AdvantagesGrid items={advantages} />
 
-      {category && (
-        <ProductGrid
-          title="Каталог КНС"
-          catIndex={9}
-          subcategories={category.subcategories}
-          onSelect={setSelectedSubId}
-        />
-      )}
-
-      <FAQSection items={faq} />
+<FAQSection items={faq} />
     </CorporatePageShell>
   );
 };

@@ -70,21 +70,21 @@ const ProductContent = ({ angle, selectedConnection, setSelectedConnection }: Pr
       {/* Description + Characteristics */}
       <div className="grid gap-6 sm:gap-8 md:grid-cols-2 mb-8">
         <div>
-          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">Описание</h2>
-          <p className="text-sm text-muted-foreground leading-relaxed">
+          <h2 className="text-base font-bold text-slate-900 mb-3 tracking-wide uppercase">Описание</h2>
+          <p className="text-sm text-slate-500 leading-relaxed">
             Отвод вентиляционный круглого сечения служит для плавного поворота системы под углом {angle}°.
             Обеспечивает надёжное соединение элементов вентиляционной системы благодаря раструбному типу соединения.
           </p>
         </div>
         <div>
-          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">Характеристики</h2>
+          <h2 className="text-base font-bold text-slate-900 mb-3 tracking-wide uppercase">Характеристики</h2>
           <div className="grid grid-cols-2 gap-px rounded-lg border overflow-hidden">
-            <div className="bg-card p-3">
-              <span className="block text-xs text-muted-foreground">Диаметр</span>
-              <span className="text-sm font-semibold text-foreground">200–1200 мм</span>
+            <div className="bg-white p-3">
+              <span className="block text-xs text-slate-500">Диаметр</span>
+              <span className="text-sm font-semibold text-slate-900">200–1200 мм</span>
             </div>
-            <div className="bg-card p-3">
-              <span className="block text-xs text-muted-foreground mb-1">Соединение</span>
+            <div className="bg-white p-3">
+              <span className="block text-xs text-slate-500 mb-1">Соединение</span>
               <div className="flex gap-1.5">
                 {connectionTypes.map((ct) => (
                   <button
@@ -92,8 +92,8 @@ const ProductContent = ({ angle, selectedConnection, setSelectedConnection }: Pr
                     onClick={() => { setSelectedConnection(ct.id); setQuantities({}); setSelectedImage(0); }}
                     className={`text-xs font-semibold px-2 py-0.5 rounded-full border transition-colors ${
                       selectedConnection === ct.id
-                        ? "border-primary text-primary bg-primary/10"
-                        : "border-border text-muted-foreground hover:border-primary/50 hover:text-foreground"
+                        ? "border-amber-600 text-amber-600 bg-amber-50"
+                        : "border-slate-200 text-slate-500 hover:border-amber-600/50 hover:text-slate-900"
                     }`}
                   >
                     {ct.name}
@@ -101,13 +101,13 @@ const ProductContent = ({ angle, selectedConnection, setSelectedConnection }: Pr
                 ))}
               </div>
             </div>
-            <div className="bg-card p-3 border-t">
-              <span className="block text-xs text-muted-foreground">Стенка</span>
-              <span className="text-sm font-semibold text-foreground">3–10 мм</span>
+            <div className="bg-white p-3 border-t">
+              <span className="block text-xs text-slate-500">Стенка</span>
+              <span className="text-sm font-semibold text-slate-900">3–10 мм</span>
             </div>
-            <div className="bg-card p-3 border-t">
-              <span className="block text-xs text-muted-foreground">Угол</span>
-              <span className="text-sm font-semibold text-foreground">{angle}°</span>
+            <div className="bg-white p-3 border-t">
+              <span className="block text-xs text-slate-500">Угол</span>
+              <span className="text-sm font-semibold text-slate-900">{angle}°</span>
             </div>
           </div>
         </div>
@@ -122,7 +122,7 @@ const ProductContent = ({ angle, selectedConnection, setSelectedConnection }: Pr
 
       {/* Table */}
       <div>
-        <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase text-center">
+        <h2 className="text-base font-bold text-slate-900 mb-4 tracking-wide uppercase text-center">
           Технические характеристики — {selectedMaterial}{selectedColor && specs?.colors.length > 1 ? ` — ${selectedColor.name}` : ""} — {conn?.name}
         </h2>
 
@@ -131,24 +131,24 @@ const ProductContent = ({ angle, selectedConnection, setSelectedConnection }: Pr
         <div className="rounded-lg border overflow-x-auto">
           <Table className="min-w-[640px]">
             <TableHeader>
-              <TableRow className="bg-primary text-primary-foreground hover:bg-primary">
-                <TableHead className="text-primary-foreground font-semibold text-xs">Артикул</TableHead>
-                <TableHead className="text-primary-foreground font-semibold text-xs text-center">DN</TableHead>
-                <TableHead className="text-primary-foreground font-semibold text-xs text-center">S, мм</TableHead>
-                <TableHead className="text-primary-foreground font-semibold text-xs text-center">L, мм</TableHead>
-                <TableHead className="text-primary-foreground font-semibold text-xs text-center">Sp, мм</TableHead>
-                <TableHead className="text-primary-foreground font-semibold text-xs text-center whitespace-nowrap">Кол-во</TableHead>
-                <TableHead className="text-primary-foreground font-semibold text-xs text-center">Действие</TableHead>
+              <TableRow className="bg-amber-600 text-white hover:bg-amber-600">
+                <TableHead className="text-white font-semibold text-xs">Артикул</TableHead>
+                <TableHead className="text-white font-semibold text-xs text-center">DN</TableHead>
+                <TableHead className="text-white font-semibold text-xs text-center">S, мм</TableHead>
+                <TableHead className="text-white font-semibold text-xs text-center">L, мм</TableHead>
+                <TableHead className="text-white font-semibold text-xs text-center">Sp, мм</TableHead>
+                <TableHead className="text-white font-semibold text-xs text-center whitespace-nowrap">Кол-во</TableHead>
+                <TableHead className="text-white font-semibold text-xs text-center">Действие</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {currentSizes.map((size, i) => (
-                <TableRow key={size.article} className={`cursor-pointer transition-colors hover:bg-primary/5 ${i % 2 === 0 ? "bg-card" : "bg-muted/30"}`}
+                <TableRow key={size.article} className={`cursor-pointer transition-colors hover:bg-amber-50 ${i % 2 === 0 ? "bg-white" : "bg-slate-50"}`}
                   onClick={() => navigate(`/product/${encodeURIComponent(size.article)}`)}>
-                  <TableCell className="font-mono text-xs text-primary underline underline-offset-2 whitespace-nowrap">{size.article}</TableCell>
+                  <TableCell className="font-mono text-xs text-amber-600 underline underline-offset-2 whitespace-nowrap">{size.article}</TableCell>
                   <TableCell className="text-center text-sm font-medium">{size.diameter}</TableCell>
                   <TableCell className="text-center text-sm">{size.wallThickness}</TableCell>
-                  <TableCell className="text-center text-sm text-primary">{size.availableLength ?? "—"}</TableCell>
+                  <TableCell className="text-center text-sm text-amber-600">{size.availableLength ?? "—"}</TableCell>
                   <TableCell className="text-center text-sm font-medium">{size.socketThickness}</TableCell>
                   <TableCell onClick={(e) => e.stopPropagation()}>
                     <QuantityCell quantity={quantities[size.article] || 1} onDecrement={() => setQty(size.article, -1)} onIncrement={() => setQty(size.article, 1)} />

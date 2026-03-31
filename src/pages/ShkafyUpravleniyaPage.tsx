@@ -1,6 +1,5 @@
 import CorporatePageShell from "@/components/corporate/CorporatePageShell";
-import { ProductGrid, AdvantagesGrid, FeatureChecklist, FAQSection } from "@/components/corporate/sections";
-import { findCategory } from "@/data/catalog";
+import { AdvantagesGrid, FeatureChecklist, FAQSection } from "@/components/corporate/sections";
 import { Wrench, ShieldCheck, Clock, Truck, Zap, Settings, Shield } from "lucide-react";
 
 const stats = [
@@ -37,27 +36,21 @@ const faq = [
 ];
 
 const ShkafyUpravleniyaPage = () => {
-  const category = findCategory("shkafy-upravleniya");
-
   return (
     <CorporatePageShell
       catalogTabs="shkafy-upravleniya"
       title="Шкафы управления"
       subtitle="Автоматизация гальванических линий, очистных сооружений и насосных станций — надёжное управление технологическими процессами!"
       heroImage="/images/emkosti-collage-hero.png"
-      breadcrumbLabel="Шкафы управления"
+      breadcrumbs={[
+        { label: "Каталог", href: "/catalog" },
+        { label: "Шкафы управления" },
+      ]}
       stats={stats}
     >
       <FeatureChecklist items={whyUs} />
       <AdvantagesGrid items={advantages} />
-      {category && (
-        <ProductGrid
-          title="Каталог шкафов управления"
-          subcategories={category.subcategories}
-          catIndex={11}
-        />
-      )}
-      <FAQSection items={faq} />
+<FAQSection items={faq} />
     </CorporatePageShell>
   );
 };

@@ -39,22 +39,19 @@ const KnsSvtPage = () => (
   <CorporatePageShell
       catalogTabs="kns"
     breadcrumbs={[
-      { label: "Каталог", to: "/catalog" },
-      { label: "КНС", to: "/catalog/kns" },
+      { label: "Каталог", href: "/catalog" },
+      { label: "КНС", href: "/catalog/kns" },
       { label: "КНС в корпусе SVT" },
     ]}
     title="Канализационные насосные станции в корпусе SVT"
     subtitle="КНС из стеклопластика — максимальная прочность и долговечность для подземного размещения."
     heroImage="/images/kns-svt-cutaway.jpg"
-    heroImageAlt="КНС в корпусе SVT — разрез"
     stats={stats}
-    ctaTitle="Заказать КНС в корпусе SVT"
-    ctaSubtitle="Оставьте заявку — расчёт в течение 24 часов."
   >
     {/* Product Table */}
     <section className="mb-10">
-      <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Типоразмерный ряд</h2>
-      <div className="rounded-lg border border-border overflow-x-auto">
+      <h2 className="text-base font-bold text-slate-900 mb-4 tracking-wide uppercase">Типоразмерный ряд</h2>
+      <div className="rounded-lg border border-slate-200 overflow-x-auto">
         <Table>
           <TableHeader>
             <TableRow>
@@ -72,7 +69,7 @@ const KnsSvtPage = () => (
           </TableHeader>
           <TableBody>
             {knsSvtProducts.map((p) => (
-              <TableRow key={p.article} className="hover:bg-muted/50">
+              <TableRow key={p.article} className="hover:bg-slate-100/50">
                 <TableCell className="text-sm font-medium">{p.model}</TableCell>
                 <TableCell className="text-sm text-center">{p.diameter}</TableCell>
                 <TableCell className="text-sm text-center">{p.height}</TableCell>
@@ -94,15 +91,15 @@ const KnsSvtPage = () => (
 
     {/* Specs cards */}
     <section className="mb-10">
-      <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Технические характеристики</h2>
+      <h2 className="text-base font-bold text-slate-900 mb-4 tracking-wide uppercase">Технические характеристики</h2>
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
         {specs.map((s) => (
           <Card key={s.title}>
             <CardContent className="p-4 flex items-start gap-3">
-              <s.icon className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+              <s.icon className="h-5 w-5 text-amber-600 shrink-0 mt-0.5" />
               <div>
-                <p className="text-sm font-semibold text-foreground mb-1">{s.title}</p>
-                <p className="text-xs text-muted-foreground">{s.text}</p>
+                <p className="text-sm font-semibold text-slate-900 mb-1">{s.title}</p>
+                <p className="text-xs text-slate-500">{s.text}</p>
               </div>
             </CardContent>
           </Card>

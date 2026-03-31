@@ -1,6 +1,5 @@
 import CorporatePageShell from "@/components/corporate/CorporatePageShell";
-import { ProductGrid, AdvantagesGrid, FeatureChecklist, FAQSection } from "@/components/corporate/sections";
-import { findCategory } from "@/data/catalog";
+import { AdvantagesGrid, FeatureChecklist, FAQSection } from "@/components/corporate/sections";
 import { Wrench, ShieldCheck, Clock, Truck, FlaskConical, Settings, Shield } from "lucide-react";
 
 const stats = [
@@ -37,27 +36,21 @@ const faq = [
 ];
 
 const GidrometallurgiyaPage = () => {
-  const category = findCategory("gidrometallurgiya");
-
   return (
     <CorporatePageShell
       catalogTabs="gidrometallurgiya"
       title="Оборудование для гидрометаллургии"
       subtitle="Реакторы, нутч-фильтры, установки выщелачивания и сорбции — полимерное оборудование для извлечения металлов!"
       heroImage="/images/emkosti-collage-hero.png"
-      breadcrumbLabel="Гидрометаллургия"
+      breadcrumbs={[
+        { label: "Каталог", href: "/catalog" },
+        { label: "Гидрометаллургия" },
+      ]}
       stats={stats}
     >
       <FeatureChecklist items={whyUs} />
       <AdvantagesGrid items={advantages} />
-      {category && (
-        <ProductGrid
-          title="Каталог оборудования"
-          subcategories={category.subcategories}
-          catIndex={8}
-        />
-      )}
-      <FAQSection items={faq} />
+<FAQSection items={faq} />
     </CorporatePageShell>
   );
 };

@@ -136,7 +136,7 @@ const GazoochistkaSkrubbery = () => {
   };
 
   const renderTable = (models: typeof chModels) => (
-    <div className="rounded-lg border border-border overflow-auto text-sm">
+    <div className="rounded-lg border border-slate-200 overflow-auto text-sm">
       <Table>
         <TableHeader>
           <TableRow>
@@ -147,7 +147,7 @@ const GazoochistkaSkrubbery = () => {
         </TableHeader>
         <TableBody>
           {models.map((m, i) => (
-            <TableRow key={i} className={i % 2 === 1 ? "bg-muted/30" : ""}>
+            <TableRow key={i} className={i % 2 === 1 ? "bg-slate-50" : ""}>
               <TableCell className="text-xs font-medium">{m.model}</TableCell>
               <TableCell className="text-xs text-right">{m.flow}</TableCell>
               <TableCell className="text-xs text-right">{m.dimensions}</TableCell>
@@ -164,7 +164,6 @@ const GazoochistkaSkrubbery = () => {
       title="Промышленные скрубберы"
       subtitle="Газоочистное оборудование для удаления токсичных газов, кислотных паров и аэрозолей из промышленных выбросов. Вертикальные и горизонтальные модели производительностью от 100 до 60 000 м³/ч."
       heroImage="/images/gazoochistka-hero-1.png"
-      heroImageAlt="Скруббер вертикальный"
       breadcrumbs={[
         { label: "Каталог", href: "/catalog" },
         { label: "Газоочистка", href: "/catalog/gazoochistka" },
@@ -187,7 +186,7 @@ const GazoochistkaSkrubbery = () => {
 
       {/* Product tabs */}
       <section id="modeli" className="mb-10">
-        <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Типоразмерный ряд</h2>
+        <h2 className="text-base font-bold text-slate-900 mb-4 tracking-wide uppercase">Типоразмерный ряд</h2>
         <Tabs defaultValue="vertical" className="w-full">
           <TabsList className="w-full grid grid-cols-2 mb-4">
             <TabsTrigger value="vertical" className="text-xs sm:text-sm">Вертикальные (серия СН)</TabsTrigger>
@@ -195,10 +194,10 @@ const GazoochistkaSkrubbery = () => {
           </TabsList>
           <TabsContent value="vertical">
             <div className="flex flex-col sm:flex-row gap-4 mb-4">
-              <img src="/images/skrubber-vert-real-2.jpg" alt="Скруббер вертикальный" className="w-full sm:w-48 object-contain rounded-lg border border-border" />
+              <img src="/images/skrubber-vert-real-2.jpg" alt="Скруббер вертикальный" className="w-full sm:w-48 object-contain rounded-lg border border-slate-200" />
               <div>
-                <h3 className="text-sm font-semibold text-foreground mb-1">Скруббер вертикальный со стационарной насадкой (серия СН)</h3>
-                <p className="text-xs text-muted-foreground">
+                <h3 className="text-sm font-semibold text-slate-900 mb-1">Скруббер вертикальный со стационарной насадкой (серия СН)</h3>
+                <p className="text-xs text-slate-500">
                   Насадочный абсорбер с неподвижным слоем для очистки от химически активных газов, аэрозолей и туманов. Производительность от 100 до 40 000 м³/ч. Применяется в гальванике, металлургии, химической и нефтехимической промышленности.
                 </p>
               </div>
@@ -207,10 +206,10 @@ const GazoochistkaSkrubbery = () => {
           </TabsContent>
           <TabsContent value="horizontal">
             <div className="flex flex-col sm:flex-row gap-4 mb-4">
-              <img src="/images/skrubber-goriz-real-3.png" alt="Скруббер горизонтальный" className="w-full sm:w-48 object-contain rounded-lg border border-border" />
+              <img src="/images/skrubber-goriz-real-3.png" alt="Скруббер горизонтальный" className="w-full sm:w-48 object-contain rounded-lg border border-slate-200" />
               <div>
-                <h3 className="text-sm font-semibold text-foreground mb-1">Скруббер горизонтальный (серия СТ)</h3>
-                <p className="text-xs text-muted-foreground">
+                <h3 className="text-sm font-semibold text-slate-900 mb-1">Скруббер горизонтальный (серия СТ)</h3>
+                <p className="text-xs text-slate-500">
                   Компактный горизонтальный абсорбер для объектов с ограниченной высотой помещения (до 3 м). Производительность от 500 до 60 000 м³/ч. Оптимален для встраивания в существующие системы вентиляции.
                 </p>
               </div>
@@ -244,25 +243,25 @@ const GazoochistkaSkrubbery = () => {
 
       {/* Kit */}
       <section className="mb-10">
-        <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Комплектация</h2>
+        <h2 className="text-base font-bold text-slate-900 mb-4 tracking-wide uppercase">Комплектация</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           <div>
-            <h3 className="text-sm font-semibold text-foreground mb-2">Базовая комплектация</h3>
+            <h3 className="text-sm font-semibold text-slate-900 mb-2">Базовая комплектация</h3>
             <ul className="space-y-2">
               {baseKit.map((item, i) => (
-                <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
-                  <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" />
+                <li key={i} className="flex items-start gap-2 text-sm text-slate-500">
+                  <Check className="h-4 w-4 text-amber-600 shrink-0 mt-0.5" />
                   <span>{item}</span>
                 </li>
               ))}
             </ul>
           </div>
           <div>
-            <h3 className="text-sm font-semibold text-foreground mb-2">Дополнительные опции</h3>
+            <h3 className="text-sm font-semibold text-slate-900 mb-2">Дополнительные опции</h3>
             <ul className="space-y-2">
               {options.map((item, i) => (
-                <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
-                  <Check className="h-4 w-4 text-muted-foreground/50 shrink-0 mt-0.5" />
+                <li key={i} className="flex items-start gap-2 text-sm text-slate-500">
+                  <Check className="h-4 w-4 text-slate-400 shrink-0 mt-0.5" />
                   <span>{item}</span>
                 </li>
               ))}
@@ -281,10 +280,10 @@ const GazoochistkaSkrubbery = () => {
 
       {/* CTA form */}
       <section id="cta-form" className="mb-10 scroll-mt-24">
-        <Card className="border-border">
+        <Card className="border-slate-200">
           <CardContent className="p-6">
-            <h2 className="text-base font-bold text-foreground mb-1 tracking-wide uppercase">Запросить расчёт</h2>
-            <p className="text-xs text-muted-foreground mb-4">Заполните форму — мы подберём скруббер под ваши параметры и подготовим коммерческое предложение.</p>
+            <h2 className="text-base font-bold text-slate-900 mb-1 tracking-wide uppercase">Запросить расчёт</h2>
+            <p className="text-xs text-slate-500 mb-4">Заполните форму — мы подберём скруббер под ваши параметры и подготовим коммерческое предложение.</p>
             <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-1.5">
                 <Label htmlFor="name" className="text-xs">Имя *</Label>

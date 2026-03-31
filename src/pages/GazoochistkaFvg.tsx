@@ -112,7 +112,6 @@ const GazoochistkaFvg = () => {
       title="Фильтры волокнистые гальванические (ФВГ / ФВК)"
       subtitle="Высокоэффективная очистка воздушных вентиляционных выбросов в гальванических, травильных и химических производствах, из вытяжных шкафов и лабораторных помещений. Производительность от 2 500 до 80 000 м³/ч."
       heroImage="/images/gazoochistka-hero-1.png"
-      heroImageAlt="Фильтр ФВГ — общий вид"
       breadcrumbs={[
         { label: "Каталог", href: "/catalog" },
         { label: "Газоочистка", href: "/catalog/gazoochistka" },
@@ -129,10 +128,10 @@ const GazoochistkaFvg = () => {
       {/* Filter sizes info */}
       <DarkInfoBlock title="Размерный ряд фильтров">
         <p>
-          Выпускаются 5 типоразмеров фильтров с площадью поверхности фильтрования: <span className="font-semibold text-foreground">0,37</span>, <span className="font-semibold text-foreground">0,74</span>, <span className="font-semibold text-foreground">1,6</span>, <span className="font-semibold text-foreground">3,2</span> и <span className="font-semibold text-foreground">6,4</span> м².
+          Выпускаются 5 типоразмеров фильтров с площадью поверхности фильтрования: <span className="font-semibold text-slate-900">0,37</span>, <span className="font-semibold text-slate-900">0,74</span>, <span className="font-semibold text-slate-900">1,6</span>, <span className="font-semibold text-slate-900">3,2</span> и <span className="font-semibold text-slate-900">6,4</span> м².
         </p>
         <p>
-          Производительность — от <span className="font-semibold text-foreground">2 500</span> до <span className="font-semibold text-foreground">80 000</span> м³/ч, что позволяет подобрать оптимальное решение для любого масштаба производства.
+          Производительность — от <span className="font-semibold text-slate-900">2 500</span> до <span className="font-semibold text-slate-900">80 000</span> м³/ч, что позволяет подобрать оптимальное решение для любого масштаба производства.
         </p>
       </DarkInfoBlock>
 
@@ -151,9 +150,9 @@ const GazoochistkaFvg = () => {
 
       {/* Designation */}
       <section className="mb-10">
-        <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">Условное обозначение</h2>
-        <p className="text-sm text-muted-foreground mb-3">Пример: <span className="font-semibold text-foreground">ФВГ-0,37-1-ПП</span></p>
-        <div className="rounded-lg border border-border overflow-auto">
+        <h2 className="text-base font-bold text-slate-900 mb-3 tracking-wide uppercase">Условное обозначение</h2>
+        <p className="text-sm text-slate-500 mb-3">Пример: <span className="font-semibold text-slate-900">ФВГ-0,37-1-ПП</span></p>
+        <div className="rounded-lg border border-slate-200 overflow-auto">
           <Table>
             <TableHeader>
               <TableRow>
@@ -165,7 +164,7 @@ const GazoochistkaFvg = () => {
               {designation.map((d, i) => (
                 <TableRow key={i}>
                   <TableCell className="text-xs font-medium whitespace-nowrap">{d.code}</TableCell>
-                  <TableCell className="text-xs text-muted-foreground">{d.meaning}</TableCell>
+                  <TableCell className="text-xs text-slate-500">{d.meaning}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
@@ -212,11 +211,11 @@ const GazoochistkaFvg = () => {
 
       {/* Extras */}
       <section className="mb-10">
-        <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">Дополнительная комплектация</h2>
+        <h2 className="text-base font-bold text-slate-900 mb-3 tracking-wide uppercase">Дополнительная комплектация</h2>
         <ul className="space-y-2">
           {extras.map((item, i) => (
-            <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
-              <item.icon className="h-4 w-4 text-primary shrink-0 mt-0.5" />
+            <li key={i} className="flex items-start gap-2 text-sm text-slate-500">
+              <item.icon className="h-4 w-4 text-amber-600 shrink-0 mt-0.5" />
               <span>{item.text}</span>
             </li>
           ))}
@@ -233,10 +232,10 @@ const GazoochistkaFvg = () => {
 
       {/* CTA form */}
       <section id="cta-form" className="mb-10 scroll-mt-24">
-        <Card className="border-border">
+        <Card className="border-slate-200">
           <CardContent className="p-6">
-            <h2 className="text-base font-bold text-foreground mb-1 tracking-wide uppercase">Запросить расчёт</h2>
-            <p className="text-xs text-muted-foreground mb-4">Заполните форму — мы подберём фильтр под ваши параметры и подготовим коммерческое предложение.</p>
+            <h2 className="text-base font-bold text-slate-900 mb-1 tracking-wide uppercase">Запросить расчёт</h2>
+            <p className="text-xs text-slate-500 mb-4">Заполните форму — мы подберём фильтр под ваши параметры и подготовим коммерческое предложение.</p>
             <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-1.5">
                 <Label htmlFor="name" className="text-xs">Имя *</Label>

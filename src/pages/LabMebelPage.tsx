@@ -1,6 +1,5 @@
 import CorporatePageShell from "@/components/corporate/CorporatePageShell";
-import { ProductGrid, AdvantagesGrid, FeatureChecklist, FAQSection } from "@/components/corporate/sections";
-import { findCategory } from "@/data/catalog";
+import { AdvantagesGrid, FeatureChecklist, FAQSection } from "@/components/corporate/sections";
 import { Wrench, ShieldCheck, Clock, Truck, FlaskConical, Settings, Shield } from "lucide-react";
 
 const stats = [
@@ -37,27 +36,21 @@ const faq = [
 ];
 
 const LabMebelPage = () => {
-  const category = findCategory("labmebel");
-
   return (
     <CorporatePageShell
       catalogTabs="labmebel"
       title="Лабораторная мебель из полипропилена"
       subtitle="Столы, шкафы, мойки и тумбы — химически стойкая мебель для лабораторий!"
       heroImage="/images/emkosti-collage-hero.png"
-      breadcrumbLabel="Лабораторная мебель"
+      breadcrumbs={[
+        { label: "Каталог", href: "/catalog" },
+        { label: "Лабораторная мебель" },
+      ]}
       stats={stats}
     >
       <FeatureChecklist items={whyUs} />
       <AdvantagesGrid items={advantages} />
-      {category && (
-        <ProductGrid
-          title="Каталог лабораторной мебели"
-          subcategories={category.subcategories}
-          catIndex={10}
-        />
-      )}
-      <FAQSection items={faq} />
+<FAQSection items={faq} />
     </CorporatePageShell>
   );
 };

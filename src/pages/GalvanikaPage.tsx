@@ -1,7 +1,5 @@
-import { useState } from "react";
 import CorporatePageShell from "@/components/corporate/CorporatePageShell";
-import { ProductGrid, AdvantagesGrid, FeatureChecklist, FAQSection } from "@/components/corporate/sections";
-import { findCategory } from "@/data/catalog";
+import { AdvantagesGrid, FeatureChecklist, FAQSection } from "@/components/corporate/sections";
 import {
   Check, Wrench, ShieldCheck, Clock, Truck, FlaskConical,
   Factory, Zap, Beaker, Settings, Shield,
@@ -79,49 +77,43 @@ const faq = [
 ];
 
 const GalvanikaPage = () => {
-  const [selectedSubId, setSelectedSubId] = useState<string | null>(null);
-  const category = findCategory("galvanika");
-
   return (
     <CorporatePageShell
       catalogTabs="galvanika"
       breadcrumbs={[
-        { label: "Каталог", to: "/catalog" },
+        { label: "Каталог", href: "/catalog" },
         { label: "Гальваника" },
       ]}
       title="Гальваническое оборудование из полимеров"
       subtitle="Проектирование, производство и монтаж гальванических линий и ванн — полный цикл от эскиза до ввода в эксплуатацию!"
       heroImage="/images/emkosti-collage-hero.png"
-      heroImageAlt="Гальваническое оборудование"
       stats={stats}
-      ctaTitle="Готовы заказать гальваническое оборудование?"
-      ctaSubtitle="Оставьте заявку — расчёт в течение 24 часов."
     >
       <FeatureChecklist title="Почему выбирают нас" items={whyUs} />
 
       <section className="mb-10">
-        <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Области применения</h2>
+        <h2 className="text-base font-bold text-slate-900 mb-4 tracking-wide uppercase">Области применения</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
           {applications.map((a, i) => (
-            <div key={i} className="flex items-start gap-2 rounded-lg border border-border bg-card p-3">
-              <a.icon className="h-4 w-4 text-primary shrink-0 mt-0.5" />
-              <span className="text-sm text-foreground">{a.text}</span>
+            <div key={i} className="flex items-start gap-2 rounded-lg border border-slate-200 bg-white p-3">
+              <a.icon className="h-4 w-4 text-amber-600 shrink-0 mt-0.5" />
+              <span className="text-sm text-slate-900">{a.text}</span>
             </div>
           ))}
         </div>
       </section>
 
       <section className="mb-10">
-        <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Материалы</h2>
+        <h2 className="text-base font-bold text-slate-900 mb-4 tracking-wide uppercase">Материалы</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           {materialCards.map((mat, i) => (
             <Card key={i}>
               <CardContent className="p-4">
-                <p className="text-sm font-semibold text-foreground mb-2">{mat.name}</p>
+                <p className="text-sm font-semibold text-slate-900 mb-2">{mat.name}</p>
                 <ul className="space-y-1">
                   {mat.specs.map((s, j) => (
-                    <li key={j} className="text-xs text-muted-foreground flex items-start gap-1.5">
-                      <Check className="h-3 w-3 text-primary shrink-0 mt-0.5" />
+                    <li key={j} className="text-xs text-slate-500 flex items-start gap-1.5">
+                      <Check className="h-3 w-3 text-amber-600 shrink-0 mt-0.5" />
                       <span>{s}</span>
                     </li>
                   ))}
@@ -133,16 +125,16 @@ const GalvanikaPage = () => {
       </section>
 
       <section className="mb-10">
-        <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Виды оборудования</h2>
+        <h2 className="text-base font-bold text-slate-900 mb-4 tracking-wide uppercase">Виды оборудования</h2>
         <Accordion type="multiple" defaultValue={[modifications[0].title]} className="space-y-2">
           {modifications.map((mod) => (
-            <AccordionItem key={mod.title} value={mod.title} className="rounded-lg border border-border bg-card px-4">
-              <AccordionTrigger className="text-sm font-semibold text-foreground hover:no-underline">{mod.title}</AccordionTrigger>
+            <AccordionItem key={mod.title} value={mod.title} className="rounded-lg border border-slate-200 bg-white px-4">
+              <AccordionTrigger className="text-sm font-semibold text-slate-900 hover:no-underline">{mod.title}</AccordionTrigger>
               <AccordionContent>
                 <ul className="space-y-1.5 pb-2">
                   {mod.items.map((item, i) => (
-                    <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
-                      <span className="text-primary mt-1">•</span><span>{item}</span>
+                    <li key={i} className="flex items-start gap-2 text-sm text-slate-500">
+                      <span className="text-amber-600 mt-1">•</span><span>{item}</span>
                     </li>
                   ))}
                 </ul>
@@ -154,16 +146,7 @@ const GalvanikaPage = () => {
 
       <AdvantagesGrid items={advantages} />
 
-      {category && (
-        <ProductGrid
-          title="Каталог гальванического оборудования"
-          catIndex={1}
-          subcategories={category.subcategories}
-          onSelect={setSelectedSubId}
-        />
-      )}
-
-      <FAQSection items={faq} />
+<FAQSection items={faq} />
     </CorporatePageShell>
   );
 };

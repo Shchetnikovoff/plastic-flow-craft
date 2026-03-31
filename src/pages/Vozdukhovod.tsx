@@ -77,29 +77,29 @@ const VozdukhovodContent = () => {
       {/* Description + Characteristics */}
       <div className="grid gap-6 sm:gap-8 md:grid-cols-2 mb-8">
         <div>
-          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">Описание</h2>
-          <p className="text-sm text-muted-foreground leading-relaxed">
+          <h2 className="text-base font-bold text-slate-900 mb-3 tracking-wide uppercase">Описание</h2>
+          <p className="text-sm text-slate-500 leading-relaxed">
             Воздуховоды круглого сечения, изготавливаемые нашей компанией, могут применяться в системах приточно-вытяжной вентиляции, общеобменной вентиляции, системах аспирации и т.д. Изготавливаются воздуховоды из полипропилена, полиэтилена, поливинилхлорида. Выбор материала зависит от конкретных условий эксплуатации воздуховодов.
           </p>
         </div>
         <div>
-          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">Характеристики</h2>
+          <h2 className="text-base font-bold text-slate-900 mb-3 tracking-wide uppercase">Характеристики</h2>
           <div className="grid grid-cols-2 gap-px rounded-lg border overflow-hidden">
-            <div className="bg-card p-3">
-              <span className="block text-xs text-muted-foreground">Диаметр Dn</span>
-              <span className="text-sm font-semibold text-foreground">100–1200 мм</span>
+            <div className="bg-white p-3">
+              <span className="block text-xs text-slate-500">Диаметр Dn</span>
+              <span className="text-sm font-semibold text-slate-900">100–1200 мм</span>
             </div>
-            <div className="bg-card p-3">
-              <span className="block text-xs text-muted-foreground">Соединение</span>
-              <span className="text-sm font-semibold text-foreground">Раструб</span>
+            <div className="bg-white p-3">
+              <span className="block text-xs text-slate-500">Соединение</span>
+              <span className="text-sm font-semibold text-slate-900">Раструб</span>
             </div>
-            <div className="bg-card p-3 border-t">
-              <span className="block text-xs text-muted-foreground">Стенка</span>
-              <span className="text-sm font-semibold text-foreground">2–10 мм</span>
+            <div className="bg-white p-3 border-t">
+              <span className="block text-xs text-slate-500">Стенка</span>
+              <span className="text-sm font-semibold text-slate-900">2–10 мм</span>
             </div>
-            <div className="bg-card p-3 border-t">
-              <span className="block text-xs text-muted-foreground">Длина</span>
-              <span className="text-sm font-semibold text-foreground">500–2000 мм</span>
+            <div className="bg-white p-3 border-t">
+              <span className="block text-xs text-slate-500">Длина</span>
+              <span className="text-sm font-semibold text-slate-900">500–2000 мм</span>
             </div>
           </div>
         </div>
@@ -116,28 +116,28 @@ const VozdukhovodContent = () => {
 
       {/* Table */}
       <div>
-        <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase text-center">
+        <h2 className="text-base font-bold text-slate-900 mb-4 tracking-wide uppercase text-center">
           Технические характеристики — {selectedMaterial}{selectedColor && specs?.colors.length > 1 ? ` — ${selectedColor.name}` : ""}
         </h2>
 
         <div className="rounded-lg border overflow-x-auto">
           <Table className="min-w-[750px]">
             <TableHeader>
-              <TableRow className="bg-primary text-primary-foreground hover:bg-primary">
-                <TableHead className="text-primary-foreground font-semibold text-xs">Артикул</TableHead>
-                <TableHead className="text-primary-foreground font-semibold text-xs text-center">Dn, мм</TableHead>
-                <TableHead className="text-primary-foreground font-semibold text-xs text-center">L, мм</TableHead>
-                <TableHead className="text-primary-foreground font-semibold text-xs text-center">S, мм</TableHead>
-                <TableHead className="text-primary-foreground font-semibold text-xs text-center">Sр, мм</TableHead>
-                <TableHead className="text-primary-foreground font-semibold text-xs text-center whitespace-nowrap">Кол-во</TableHead>
-                <TableHead className="text-primary-foreground font-semibold text-xs text-center">Действие</TableHead>
+              <TableRow className="bg-amber-600 text-white hover:bg-amber-600">
+                <TableHead className="text-white font-semibold text-xs">Артикул</TableHead>
+                <TableHead className="text-white font-semibold text-xs text-center">Dn, мм</TableHead>
+                <TableHead className="text-white font-semibold text-xs text-center">L, мм</TableHead>
+                <TableHead className="text-white font-semibold text-xs text-center">S, мм</TableHead>
+                <TableHead className="text-white font-semibold text-xs text-center">Sр, мм</TableHead>
+                <TableHead className="text-white font-semibold text-xs text-center whitespace-nowrap">Кол-во</TableHead>
+                <TableHead className="text-white font-semibold text-xs text-center">Действие</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {currentSizes.map((size, i) => (
-                <TableRow key={size.article} className={`cursor-pointer transition-colors hover:bg-primary/5 ${i % 2 === 0 ? "bg-card" : "bg-muted/30"}`}
+                <TableRow key={size.article} className={`cursor-pointer transition-colors hover:bg-amber-50 ${i % 2 === 0 ? "bg-white" : "bg-slate-50"}`}
                   onClick={() => navigate(`/product/${encodeURIComponent(size.article)}`)}>
-                  <TableCell className="font-mono text-xs text-primary underline underline-offset-2 whitespace-nowrap">{size.article}</TableCell>
+                  <TableCell className="font-mono text-xs text-amber-600 underline underline-offset-2 whitespace-nowrap">{size.article}</TableCell>
                   <TableCell className="text-center text-sm font-medium">{size.diameter}</TableCell>
                   <TableCell className="text-center" onClick={(e) => e.stopPropagation()}>
                     <Select value={String(getLength(size.article))} onValueChange={(v) => setSelectedLengths((prev) => ({ ...prev, [size.article]: parseInt(v) }))}>
@@ -173,7 +173,6 @@ const VozdukhovodContent = () => {
 const Vozdukhovod = () => (
   <CorporatePageShell
       catalogTabs="ventilyatsiya"
-    productType="vozdukhovod"
     title="Воздуховоды круглого сечения"
     subtitle="Воздуховоды из полипропилена и полиэтилена для промышленной вентиляции"
     heroImage="/images/ventilyatsiya-hero-1.png"

@@ -17,13 +17,13 @@ const NotFound = () => {
       hideCTA
     >
       <section className="text-center py-10">
-        <p className="text-6xl font-bold text-muted-foreground/30 mb-4">404</p>
-        <p className="text-muted-foreground mb-6">
+        <p className="text-6xl font-bold text-slate-300 mb-4">404</p>
+        <p className="text-slate-500 mb-6">
           Запрашиваемая страница не существует или была перемещена.
         </p>
         <Link
           to="/"
-          className="inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors"
+          className="inline-flex items-center gap-2 rounded-md bg-amber-600 px-4 py-2 text-sm font-medium text-white hover:bg-amber-700 transition-colors"
         >
           Вернуться на главную
         </Link>

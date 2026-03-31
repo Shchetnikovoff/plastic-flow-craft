@@ -75,7 +75,6 @@ const VentilyatsiyaPage = () => {
   return (
     <CorporatePageShell
       catalogTabs="ventilyatsiya"
-      productType="otvod"
       title="Промышленная вентиляция из полипропилена"
       subtitle="Воздуховоды, отводы, тройники и фасонные изделия — химически стойкие элементы вентиляции!"
       heroImage="/images/ventilyatsiya-hero-1.png"
@@ -98,7 +97,7 @@ const VentilyatsiyaPage = () => {
           <button
             key={s.id}
             onClick={() => document.getElementById(s.id)?.scrollIntoView({ behavior: "smooth" })}
-            className="rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium text-foreground hover:bg-accent hover:text-accent-foreground transition-colors"
+            className="rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-900 hover:bg-slate-100 hover:text-slate-900 transition-colors"
           >
             {s.label}
           </button>
@@ -107,20 +106,20 @@ const VentilyatsiyaPage = () => {
 
       {/* Description */}
       <section id="opisanie" className="mb-10">
-        <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">Элементы промышленной вентиляции</h2>
-        <p className="text-sm text-muted-foreground leading-relaxed mb-4">Мы производим полный спектр элементов промышленной вентиляции из полипропилена и ПВХ круглого и прямоугольного сечения для работы с агрессивными средами.</p>
-        <h3 className="text-sm font-semibold text-foreground mb-2">Почему выбирают нас:</h3>
+        <h2 className="text-base font-bold text-slate-900 mb-3 tracking-wide uppercase">Элементы промышленной вентиляции</h2>
+        <p className="text-sm text-slate-500 leading-relaxed mb-4">Мы производим полный спектр элементов промышленной вентиляции из полипропилена и ПВХ круглого и прямоугольного сечения для работы с агрессивными средами.</p>
+        <h3 className="text-sm font-semibold text-slate-900 mb-2">Почему выбирают нас:</h3>
         <FeatureChecklist items={whyUs} />
       </section>
 
       {/* Applications */}
       <section id="primenenie" className="mb-10">
-        <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Области применения</h2>
+        <h2 className="text-base font-bold text-slate-900 mb-4 tracking-wide uppercase">Области применения</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
           {applications.map((a, i) => (
-            <div key={i} className="flex items-start gap-2 rounded-lg border border-border bg-card p-3">
-              <a.icon className="h-4 w-4 text-primary shrink-0 mt-0.5" />
-              <span className="text-sm text-foreground">{a.text}</span>
+            <div key={i} className="flex items-start gap-2 rounded-lg border border-slate-200 bg-white p-3">
+              <a.icon className="h-4 w-4 text-amber-600 shrink-0 mt-0.5" />
+              <span className="text-sm text-slate-900">{a.text}</span>
             </div>
           ))}
         </div>
@@ -128,16 +127,16 @@ const VentilyatsiyaPage = () => {
 
       {/* Types */}
       <section id="vidy" className="mb-10">
-        <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Виды элементов</h2>
+        <h2 className="text-base font-bold text-slate-900 mb-4 tracking-wide uppercase">Виды элементов</h2>
         <Accordion type="multiple" defaultValue={[modifications[0].title]} className="space-y-2">
           {modifications.map((mod) => (
-            <AccordionItem key={mod.title} value={mod.title} className="rounded-lg border border-border bg-card px-4">
-              <AccordionTrigger className="text-sm font-semibold text-foreground hover:no-underline">{mod.title}</AccordionTrigger>
+            <AccordionItem key={mod.title} value={mod.title} className="rounded-lg border border-slate-200 bg-white px-4">
+              <AccordionTrigger className="text-sm font-semibold text-slate-900 hover:no-underline">{mod.title}</AccordionTrigger>
               <AccordionContent>
                 <ul className="space-y-1.5 pb-2">
                   {mod.items.map((item, i) => (
-                    <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
-                      <span className="text-primary mt-1">•</span><span>{item}</span>
+                    <li key={i} className="flex items-start gap-2 text-sm text-slate-500">
+                      <span className="text-amber-600 mt-1">•</span><span>{item}</span>
                     </li>
                   ))}
                 </ul>
@@ -149,14 +148,14 @@ const VentilyatsiyaPage = () => {
 
       {/* Advantages */}
       <section id="preimushchestva" className="mb-10">
-        <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Преимущества сотрудничества</h2>
+        <h2 className="text-base font-bold text-slate-900 mb-4 tracking-wide uppercase">Преимущества сотрудничества</h2>
         <AdvantagesGrid items={advantages} />
       </section>
 
       {/* Catalog */}
       {category && (
         <section id="katalog" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Каталог элементов вентиляции</h2>
+          <h2 className="text-base font-bold text-slate-900 mb-4 tracking-wide uppercase">Каталог элементов вентиляции</h2>
           <div className="flex flex-col md:flex-row gap-6">
             <nav className="md:w-[220px] shrink-0">
               <ul className="space-y-0.5">
@@ -166,10 +165,10 @@ const VentilyatsiyaPage = () => {
                     <li key={sub.id}>
                       <button
                         onClick={() => setSelectedSubId(isSelected ? null : sub.id)}
-                        className={`group flex items-baseline gap-2 rounded-md px-3 py-2 text-sm w-full text-left transition-colors ${isSelected ? "bg-primary/10 border border-primary/30" : "hover:bg-muted border border-transparent"}`}
+                        className={`group flex items-baseline gap-2 rounded-md px-3 py-2 text-sm w-full text-left transition-colors ${isSelected ? "bg-amber-50 border border-amber-200" : "hover:bg-slate-100 border border-transparent"}`}
                       >
-                        <span className={`text-xs font-semibold shrink-0 ${isSelected ? "text-primary" : "text-muted-foreground"}`}>{catIndex}.{i + 1}</span>
-                        <span className={`transition-colors ${isSelected ? "text-primary font-semibold" : "text-foreground group-hover:text-primary"}`}>{sub.name}</span>
+                        <span className={`text-xs font-semibold shrink-0 ${isSelected ? "text-amber-600" : "text-slate-500"}`}>{catIndex}.{i + 1}</span>
+                        <span className={`transition-colors ${isSelected ? "text-amber-600 font-semibold" : "text-slate-900 group-hover:text-amber-600"}`}>{sub.name}</span>
                       </button>
                     </li>
                   );
@@ -180,13 +179,13 @@ const VentilyatsiyaPage = () => {
               {(() => {
                 const sel = category.subcategories.find((s) => s.id === selectedSubId);
                 if (sel) return (
-                  <div className="rounded-xl border border-border bg-card overflow-hidden animate-in fade-in-0 slide-in-from-top-2 duration-200">
-                    <div className="aspect-[16/9] bg-muted flex items-center justify-center">
-                      {sel.image ? <img src={sel.image} alt={sel.name} className="w-full h-full object-contain" /> : <ImageOff className="h-12 w-12 text-muted-foreground/40" />}
+                  <div className="rounded-xl border border-slate-200 bg-white overflow-hidden animate-in fade-in-0 slide-in-from-top-2 duration-200">
+                    <div className="aspect-[16/9] bg-slate-100 flex items-center justify-center">
+                      {sel.image ? <img src={sel.image} alt={sel.name} className="w-full h-full object-contain" /> : <ImageOff className="h-12 w-12 text-slate-300" />}
                     </div>
                     <div className="p-5">
-                      <h3 className="text-lg font-bold text-foreground mb-2">{sel.name}</h3>
-                      {sel.externalPath && <Link to={sel.externalPath} className="text-sm font-medium text-primary hover:underline">Перейти на страницу &rarr;</Link>}
+                      <h3 className="text-lg font-bold text-slate-900 mb-2">{sel.name}</h3>
+                      {sel.externalPath && <Link to={sel.externalPath} className="text-sm font-medium text-amber-600 hover:underline">Перейти на страницу &rarr;</Link>}
                     </div>
                   </div>
                 );
@@ -195,17 +194,17 @@ const VentilyatsiyaPage = () => {
                     {category.subcategories.map((sub, i) => {
                       const cc = (
                         <>
-                          <div className="aspect-[4/3] bg-muted flex items-center justify-center">
-                            {sub.image ? <img src={sub.image} alt={sub.name} className="w-full h-full object-contain" /> : <ImageOff className="h-10 w-10 text-muted-foreground/40" />}
+                          <div className="aspect-[4/3] bg-slate-100 flex items-center justify-center">
+                            {sub.image ? <img src={sub.image} alt={sub.name} className="w-full h-full object-contain" /> : <ImageOff className="h-10 w-10 text-slate-300" />}
                           </div>
                           <div className="px-3 py-2.5">
-                            <p className="text-xs text-muted-foreground font-semibold">{catIndex}.{i + 1}</p>
-                            <p className="text-sm font-medium text-foreground group-hover:text-primary transition-colors mt-0.5">{sub.name}</p>
+                            <p className="text-xs text-slate-500 font-semibold">{catIndex}.{i + 1}</p>
+                            <p className="text-sm font-medium text-slate-900 group-hover:text-amber-600 transition-colors mt-0.5">{sub.name}</p>
                           </div>
                         </>
                       );
-                      if (sub.externalPath) return <Link key={sub.id} to={sub.externalPath} className="group rounded-lg border border-border bg-card overflow-hidden hover:border-primary/50 hover:shadow-md transition-all block">{cc}</Link>;
-                      return <button key={sub.id} onClick={() => setSelectedSubId(sub.id)} className="group rounded-lg border border-border bg-card overflow-hidden hover:border-primary/50 hover:shadow-md transition-all text-left">{cc}</button>;
+                      if (sub.externalPath) return <Link key={sub.id} to={sub.externalPath} className="group rounded-lg border border-slate-200 bg-white overflow-hidden hover:border-amber-300 hover:shadow-md transition-all block">{cc}</Link>;
+                      return <button key={sub.id} onClick={() => setSelectedSubId(sub.id)} className="group rounded-lg border border-slate-200 bg-white overflow-hidden hover:border-amber-300 hover:shadow-md transition-all text-left">{cc}</button>;
                     })}
                   </div>
                 );
@@ -222,8 +221,8 @@ const VentilyatsiyaPage = () => {
       <section id="cta-form" className="mb-10 scroll-mt-20">
         <Card>
           <CardContent className="p-6">
-            <h2 className="text-base font-bold text-foreground mb-2 tracking-wide uppercase">Готовы заказать вентиляционные элементы?</h2>
-            <p className="text-sm text-muted-foreground mb-5">Оставьте заявку — расчёт стоимости в течение 24 часов.</p>
+            <h2 className="text-base font-bold text-slate-900 mb-2 tracking-wide uppercase">Готовы заказать вентиляционные элементы?</h2>
+            <p className="text-sm text-slate-500 mb-5">Оставьте заявку — расчёт стоимости в течение 24 часов.</p>
             <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-1.5"><Label className="text-xs">Имя *</Label><Input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Ваше имя" maxLength={100} /></div>
               <div className="space-y-1.5"><Label className="text-xs">Телефон *</Label><Input value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} placeholder="+7 (___) ___-__-__" maxLength={20} /></div>

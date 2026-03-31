@@ -78,30 +78,30 @@ const TroynikContent = () => {
       {/* Description + Characteristics */}
       <div className="grid gap-6 sm:gap-8 md:grid-cols-2 mb-8">
         <div>
-          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">Описание</h2>
-          <p className="text-sm text-muted-foreground leading-relaxed">
+          <h2 className="text-base font-bold text-slate-900 mb-3 tracking-wide uppercase">Описание</h2>
+          <p className="text-sm text-slate-500 leading-relaxed">
             Тройник вентиляционный круглого сечения используется для присоединения ответвлений к основной магистрали воздуховода круглого сечения.
             Обеспечивает надёжное соединение элементов вентиляционной системы.
           </p>
         </div>
         <div>
-          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">Характеристики</h2>
+          <h2 className="text-base font-bold text-slate-900 mb-3 tracking-wide uppercase">Характеристики</h2>
           <div className="grid grid-cols-2 gap-px rounded-lg border overflow-hidden">
-            <div className="bg-card p-3">
-              <span className="block text-xs text-muted-foreground">Диаметр D</span>
-              <span className="text-sm font-semibold text-foreground">100–1200 мм</span>
+            <div className="bg-white p-3">
+              <span className="block text-xs text-slate-500">Диаметр D</span>
+              <span className="text-sm font-semibold text-slate-900">100–1200 мм</span>
             </div>
-            <div className="bg-card p-3">
-              <span className="block text-xs text-muted-foreground">Соединение</span>
-              <span className="text-sm font-semibold text-foreground">{selectedConnection === "flanec" ? "Фланец" : "Раструб"}</span>
+            <div className="bg-white p-3">
+              <span className="block text-xs text-slate-500">Соединение</span>
+              <span className="text-sm font-semibold text-slate-900">{selectedConnection === "flanec" ? "Фланец" : "Раструб"}</span>
             </div>
-            <div className="bg-card p-3 border-t">
-              <span className="block text-xs text-muted-foreground">Стенка</span>
-              <span className="text-sm font-semibold text-foreground">2–10 мм</span>
+            <div className="bg-white p-3 border-t">
+              <span className="block text-xs text-slate-500">Стенка</span>
+              <span className="text-sm font-semibold text-slate-900">2–10 мм</span>
             </div>
-            <div className="bg-card p-3 border-t">
-              <span className="block text-xs text-muted-foreground">Тип</span>
-              <span className="text-sm font-semibold text-foreground">Тройник</span>
+            <div className="bg-white p-3 border-t">
+              <span className="block text-xs text-slate-500">Тип</span>
+              <span className="text-sm font-semibold text-slate-900">Тройник</span>
             </div>
           </div>
         </div>
@@ -125,32 +125,32 @@ const TroynikContent = () => {
 
       {/* Table */}
       <div>
-        <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase text-center">
+        <h2 className="text-base font-bold text-slate-900 mb-4 tracking-wide uppercase text-center">
           Технические характеристики — {selectedMaterial}{selectedColor && specs?.colors.length > 1 ? ` — ${selectedColor.name}` : ""}
         </h2>
 
         <div className="rounded-lg border overflow-x-auto">
           <Table className="min-w-[800px]">
             <TableHeader>
-              <TableRow className="bg-primary text-primary-foreground hover:bg-primary">
-                <TableHead className="text-primary-foreground font-semibold text-xs">Артикул</TableHead>
-                <TableHead className="text-primary-foreground font-semibold text-xs text-center">D, мм</TableHead>
-                <TableHead className="text-primary-foreground font-semibold text-xs text-center">D1, мм</TableHead>
-                <TableHead className="text-primary-foreground font-semibold text-xs text-center">L, мм</TableHead>
-                <TableHead className="text-primary-foreground font-semibold text-xs text-center">L1, мм</TableHead>
-                <TableHead className="text-primary-foreground font-semibold text-xs text-center">A, мм</TableHead>
-                <TableHead className="text-primary-foreground font-semibold text-xs text-center">B, мм</TableHead>
-                <TableHead className="text-primary-foreground font-semibold text-xs text-center">{socketColumnLabel}</TableHead>
-                <TableHead className="text-primary-foreground font-semibold text-xs text-center">S, мм</TableHead>
-                <TableHead className="text-primary-foreground font-semibold text-xs text-center whitespace-nowrap">Кол-во</TableHead>
-                <TableHead className="text-primary-foreground font-semibold text-xs text-center">Действие</TableHead>
+              <TableRow className="bg-amber-600 text-white hover:bg-amber-600">
+                <TableHead className="text-white font-semibold text-xs">Артикул</TableHead>
+                <TableHead className="text-white font-semibold text-xs text-center">D, мм</TableHead>
+                <TableHead className="text-white font-semibold text-xs text-center">D1, мм</TableHead>
+                <TableHead className="text-white font-semibold text-xs text-center">L, мм</TableHead>
+                <TableHead className="text-white font-semibold text-xs text-center">L1, мм</TableHead>
+                <TableHead className="text-white font-semibold text-xs text-center">A, мм</TableHead>
+                <TableHead className="text-white font-semibold text-xs text-center">B, мм</TableHead>
+                <TableHead className="text-white font-semibold text-xs text-center">{socketColumnLabel}</TableHead>
+                <TableHead className="text-white font-semibold text-xs text-center">S, мм</TableHead>
+                <TableHead className="text-white font-semibold text-xs text-center whitespace-nowrap">Кол-во</TableHead>
+                <TableHead className="text-white font-semibold text-xs text-center">Действие</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {currentSizes.map((size, i) => (
-                <TableRow key={size.article} className={`cursor-pointer transition-colors hover:bg-primary/5 ${i % 2 === 0 ? "bg-card" : "bg-muted/30"}`}
+                <TableRow key={size.article} className={`cursor-pointer transition-colors hover:bg-amber-50 ${i % 2 === 0 ? "bg-white" : "bg-slate-50"}`}
                   onClick={() => navigate(`/product/${encodeURIComponent(size.article)}`)}>
-                  <TableCell className="font-mono text-xs text-primary underline underline-offset-2 whitespace-nowrap">{size.article}</TableCell>
+                  <TableCell className="font-mono text-xs text-amber-600 underline underline-offset-2 whitespace-nowrap">{size.article}</TableCell>
                   <TableCell className="text-center text-sm font-medium">{size.d}</TableCell>
                   <TableCell className="text-center text-sm font-medium">{size.d1}</TableCell>
                   <TableCell className="text-center text-sm">{size.l}</TableCell>
@@ -183,7 +183,6 @@ const TroynikContent = () => {
 const Troynik = () => (
   <CorporatePageShell
       catalogTabs="ventilyatsiya"
-    productType="troynik"
     title="Тройники вентиляционные"
     subtitle="Тройники круглого сечения из полипропилена и полиэтилена"
     heroImage="/images/ventilyatsiya-hero-1.png"

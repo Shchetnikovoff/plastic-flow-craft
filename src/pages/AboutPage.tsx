@@ -32,7 +32,7 @@ const AboutPage = () => (
   >
     {/* Description */}
     <section>
-      <p className="text-muted-foreground leading-relaxed">
+      <p className="text-slate-500 leading-relaxed">
         ООО НПО «Нева-Актив» — производственно-инжиниринговая компания, ведущая деятельность по разработке,
         изготовлению и монтажу оборудования из химическистойких инженерных пластиков для гальванических производств
         и защиты окружающей среды от промышленных загрязнений. Решения в области гальванических покрытий,
@@ -44,18 +44,18 @@ const AboutPage = () => (
     <AdvantagesGrid items={strengths} />
 
     {/* Contacts */}
-    <Card className="border-border">
+    <Card className="border-slate-200">
       <CardContent className="p-6 space-y-3">
         <h2 className="text-xl font-bold mb-4">Контакты</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
-          <a href="tel:+79633225540" className="flex items-center gap-2 hover:text-primary transition-colors">
-            <Phone className="h-4 w-4 text-primary shrink-0" /> +7 963 322-55-40
+          <a href="tel:+79633225540" className="flex items-center gap-2 hover:text-amber-600 transition-colors">
+            <Phone className="h-4 w-4 text-amber-600 shrink-0" /> +7 963 322-55-40
           </a>
-          <a href="mailto:osobenkov@list.ru" className="flex items-center gap-2 hover:text-primary transition-colors">
-            <Mail className="h-4 w-4 text-primary shrink-0" /> osobenkov@list.ru
+          <a href="mailto:osobenkov@list.ru" className="flex items-center gap-2 hover:text-amber-600 transition-colors">
+            <Mail className="h-4 w-4 text-amber-600 shrink-0" /> osobenkov@list.ru
           </a>
           <span className="flex items-center gap-2">
-            <MapPin className="h-4 w-4 text-primary shrink-0" /> Ленинградская обл., д. Разметелево
+            <MapPin className="h-4 w-4 text-amber-600 shrink-0" /> Ленинградская обл., д. Разметелево
           </span>
         </div>
       </CardContent>

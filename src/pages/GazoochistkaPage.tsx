@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import CorporatePageShell from "@/components/corporate/CorporatePageShell";
-import { ProductGrid, AdvantagesGrid, DescriptionBlock, FAQSection } from "@/components/corporate/sections";
+import { AdvantagesGrid, DescriptionBlock, FAQSection } from "@/components/corporate/sections";
 import { findCategory } from "@/data/catalog";
 import { Settings, ShieldCheck, Clock, Truck, Wrench, FlaskConical, ImageOff, Factory, Wind, Beaker, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -82,7 +82,6 @@ const GazoochistkaPage = () => {
       title="Газоочистное оборудование из полимеров"
       subtitle="Скрубберы, фильтры и каплеуловители — эффективная очистка промышленных газовых выбросов!"
       heroImage="/images/gazoochistka-hero-1.png"
-      heroImageAlt="Газоочистное оборудование"
       breadcrumbs={[
         { label: "Каталог", href: "/catalog" },
         { label: "Газоочистка" },
@@ -97,12 +96,6 @@ const GazoochistkaPage = () => {
         applications={applications}
       />
 
-      <ProductGrid
-        id="vidy"
-        title="Виды оборудования"
-        products={modifications}
-      />
-
       <AdvantagesGrid
         id="preimushchestva"
         title="Преимущества сотрудничества"
@@ -111,13 +104,13 @@ const GazoochistkaPage = () => {
 
       {category && (
         <section id="katalog" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Каталог газоочистного оборудования</h2>
+          <h2 className="text-base font-bold text-slate-900 mb-4 tracking-wide uppercase">Каталог газоочистного оборудования</h2>
           <div className="flex flex-col md:flex-row gap-6">
-            <nav className="md:w-[220px] shrink-0"><ul className="space-y-0.5">{category.subcategories.map((sub, i) => { const isSelected = selectedSubId === sub.id; return (<li key={sub.id}><button onClick={() => setSelectedSubId(isSelected ? null : sub.id)} className={`group flex items-baseline gap-2 rounded-md px-3 py-2 text-sm w-full text-left transition-colors ${isSelected ? "bg-primary/10 border border-primary/30" : "hover:bg-muted border border-transparent"}`}><span className={`text-xs font-semibold shrink-0 ${isSelected ? "text-primary" : "text-muted-foreground"}`}>{catIndex}.{i + 1}</span><span className={`transition-colors ${isSelected ? "text-primary font-semibold" : "text-foreground group-hover:text-primary"}`}>{sub.name}</span></button></li>); })}</ul></nav>
+            <nav className="md:w-[220px] shrink-0"><ul className="space-y-0.5">{category.subcategories.map((sub, i) => { const isSelected = selectedSubId === sub.id; return (<li key={sub.id}><button onClick={() => setSelectedSubId(isSelected ? null : sub.id)} className={`group flex items-baseline gap-2 rounded-md px-3 py-2 text-sm w-full text-left transition-colors ${isSelected ? "bg-amber-50 border border-amber-200" : "hover:bg-slate-100 border border-transparent"}`}><span className={`text-xs font-semibold shrink-0 ${isSelected ? "text-amber-600" : "text-slate-500"}`}>{catIndex}.{i + 1}</span><span className={`transition-colors ${isSelected ? "text-amber-600 font-semibold" : "text-slate-900 group-hover:text-amber-600"}`}>{sub.name}</span></button></li>); })}</ul></nav>
             <div className="flex-1">{(() => {
               const sel = category.subcategories.find((s) => s.id === selectedSubId);
-              if (sel) return (<div className="rounded-xl border border-border bg-card overflow-hidden animate-in fade-in-0 slide-in-from-top-2 duration-200"><div className="aspect-[16/9] bg-muted flex items-center justify-center">{sel.image ? <img src={sel.image} alt={sel.name} className="w-full h-full object-contain" /> : <ImageOff className="h-12 w-12 text-muted-foreground/40" />}</div><div className="p-5"><h3 className="text-lg font-bold text-foreground mb-2">{sel.name}</h3><p className="text-sm text-muted-foreground mb-4">{sel.description || "Описание уточняйте по запросу."}</p>{sel.externalPath ? <Link to={sel.externalPath} className="text-sm font-medium text-primary hover:underline">Перейти на страницу →</Link> : <a href="#cta-form" className="text-sm font-medium text-primary hover:underline">Запросить расчёт →</a>}</div></div>);
-              return (<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">{category.subcategories.map((sub, i) => { const cc = (<><div className="aspect-[4/3] bg-muted flex items-center justify-center">{sub.image ? <img src={sub.image} alt={sub.name} className="w-full h-full object-contain" /> : <ImageOff className="h-10 w-10 text-muted-foreground/40" />}</div><div className="px-3 py-2.5"><p className="text-xs text-muted-foreground font-semibold">{catIndex}.{i + 1}</p><p className="text-sm font-medium text-foreground group-hover:text-primary transition-colors mt-0.5">{sub.name}</p></div></>); if (sub.externalPath) return <Link key={sub.id} to={sub.externalPath} className="group rounded-lg border border-border bg-card overflow-hidden hover:border-primary/50 hover:shadow-md transition-all block">{cc}</Link>; return <button key={sub.id} onClick={() => setSelectedSubId(sub.id)} className="group rounded-lg border border-border bg-card overflow-hidden hover:border-primary/50 hover:shadow-md transition-all text-left">{cc}</button>; })}</div>);
+              if (sel) return (<div className="rounded-xl border border-slate-200 bg-white overflow-hidden animate-in fade-in-0 slide-in-from-top-2 duration-200"><div className="aspect-[16/9] bg-slate-100 flex items-center justify-center">{sel.image ? <img src={sel.image} alt={sel.name} className="w-full h-full object-contain" /> : <ImageOff className="h-12 w-12 text-slate-300" />}</div><div className="p-5"><h3 className="text-lg font-bold text-slate-900 mb-2">{sel.name}</h3><p className="text-sm text-slate-500 mb-4">{sel.description || "Описание уточняйте по запросу."}</p>{sel.externalPath ? <Link to={sel.externalPath} className="text-sm font-medium text-amber-600 hover:underline">Перейти на страницу →</Link> : <a href="#cta-form" className="text-sm font-medium text-amber-600 hover:underline">Запросить расчёт →</a>}</div></div>);
+              return (<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">{category.subcategories.map((sub, i) => { const cc = (<><div className="aspect-[4/3] bg-slate-100 flex items-center justify-center">{sub.image ? <img src={sub.image} alt={sub.name} className="w-full h-full object-contain" /> : <ImageOff className="h-10 w-10 text-slate-300" />}</div><div className="px-3 py-2.5"><p className="text-xs text-slate-500 font-semibold">{catIndex}.{i + 1}</p><p className="text-sm font-medium text-slate-900 group-hover:text-amber-600 transition-colors mt-0.5">{sub.name}</p></div></>); if (sub.externalPath) return <Link key={sub.id} to={sub.externalPath} className="group rounded-lg border border-slate-200 bg-white overflow-hidden hover:border-amber-300 hover:shadow-md transition-all block">{cc}</Link>; return <button key={sub.id} onClick={() => setSelectedSubId(sub.id)} className="group rounded-lg border border-slate-200 bg-white overflow-hidden hover:border-amber-300 hover:shadow-md transition-all text-left">{cc}</button>; })}</div>);
             })()}</div>
           </div>
         </section>
@@ -127,8 +120,8 @@ const GazoochistkaPage = () => {
 
       <section id="cta-form" className="mb-10 scroll-mt-20">
         <Card><CardContent className="p-6">
-          <h2 className="text-base font-bold text-foreground mb-2 tracking-wide uppercase">Готовы заказать газоочистное оборудование?</h2>
-          <p className="text-sm text-muted-foreground mb-5">Оставьте заявку — расчёт стоимости в течение 24 часов.</p>
+          <h2 className="text-base font-bold text-slate-900 mb-2 tracking-wide uppercase">Готовы заказать газоочистное оборудование?</h2>
+          <p className="text-sm text-slate-500 mb-5">Оставьте заявку — расчёт стоимости в течение 24 часов.</p>
           <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div className="space-y-1.5"><Label className="text-xs">Имя *</Label><Input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Ваше имя" maxLength={100} /></div>
             <div className="space-y-1.5"><Label className="text-xs">Телефон *</Label><Input value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} placeholder="+7 (___) ___-__-__" maxLength={20} /></div>

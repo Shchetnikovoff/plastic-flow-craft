@@ -130,8 +130,8 @@ const GazoochistkaKapleuloviteli = () => {
     caption: string,
   ) => (
     <div className="mb-6">
-      <h3 className="text-sm font-semibold text-foreground mb-2">{caption}</h3>
-      <div className="rounded-lg border border-border overflow-auto">
+      <h3 className="text-sm font-semibold text-slate-900 mb-2">{caption}</h3>
+      <div className="rounded-lg border border-slate-200 overflow-auto">
         <Table>
           <TableHeader>
             <TableRow>
@@ -168,7 +168,6 @@ const GazoochistkaKapleuloviteli = () => {
       title="Каплеуловители из полипропилена"
       subtitle="Удаление капельной влаги и аэрозолей из вентиляционных потоков. Эффективность улавливания — 99,9%. Круглое и прямоугольное сечение, производительность от 125 до 27 500 м³/ч."
       heroImage="/images/gazoochistka-hero-1.png"
-      heroImageAlt="Каплеуловитель круглого сечения"
       breadcrumbs={[
         { label: "Каталог", href: "/catalog" },
         { label: "Газоочистка", href: "/catalog/gazoochistka" },
@@ -209,10 +208,10 @@ const GazoochistkaKapleuloviteli = () => {
 
       {/* Size tables */}
       <section id="modeli" className="mb-10">
-        <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Типоразмерный ряд</h2>
+        <h2 className="text-base font-bold text-slate-900 mb-4 tracking-wide uppercase">Типоразмерный ряд</h2>
         {renderSizeTable(ku1Data, "Серия КУ.1 — стандартная")}
         {renderSizeTable(ku6Data, "Серия КУ.6 — компактная")}
-        <p className="text-xs text-muted-foreground mt-2">
+        <p className="text-xs text-slate-500 mt-2">
           Аэродинамическое сопротивление: 50–300 Па в зависимости от расхода. Для прямоугольного сечения — переходные камеры под размер заказчика.
         </p>
       </section>
@@ -238,10 +237,10 @@ const GazoochistkaKapleuloviteli = () => {
 
       {/* CTA form */}
       <section id="cta-form" className="mb-10 scroll-mt-24">
-        <Card className="border-border">
+        <Card className="border-slate-200">
           <CardContent className="p-6">
-            <h2 className="text-base font-bold text-foreground mb-1 tracking-wide uppercase">Запросить расчёт</h2>
-            <p className="text-xs text-muted-foreground mb-4">Заполните форму — мы подберём каплеуловитель под ваши параметры и подготовим коммерческое предложение.</p>
+            <h2 className="text-base font-bold text-slate-900 mb-1 tracking-wide uppercase">Запросить расчёт</h2>
+            <p className="text-xs text-slate-500 mb-4">Заполните форму — мы подберём каплеуловитель под ваши параметры и подготовим коммерческое предложение.</p>
             <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-1.5">
                 <Label htmlFor="name" className="text-xs">Имя *</Label>

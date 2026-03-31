@@ -15,7 +15,7 @@ const ChemicalResistancePage = () => (
     accentWord="стойкость материалов"
   >
     <section>
-      <p className="text-muted-foreground leading-relaxed mb-6">
+      <p className="text-slate-500 leading-relaxed mb-6">
         Мы используем инженерные полимеры с высокой химической стойкостью для производства
         оборудования, работающего в агрессивных средах. Ниже представлены основные характеристики
         материалов, применяемых в нашей продукции.
@@ -25,10 +25,10 @@ const ChemicalResistancePage = () => (
     <FeatureChecklist title="Материалы и свойства" items={materials} />
 
     <section>
-      <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">
+      <h2 className="text-base font-bold text-slate-900 mb-3 tracking-wide uppercase">
         Подбор материала
       </h2>
-      <p className="text-sm text-muted-foreground leading-relaxed">
+      <p className="text-sm text-slate-500 leading-relaxed">
         Для подбора оптимального материала под вашу среду свяжитесь с нашими инженерами.
         Мы проведём расчёт и предложим решение с учётом температуры, концентрации и давления рабочей среды.
       </p>

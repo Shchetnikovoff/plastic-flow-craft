@@ -29,7 +29,7 @@ interface CorporatePageShellProps {
   stats?: { value: string; label: string }[];
   children: React.ReactNode;
   hideCTA?: boolean;
-  seo: { title: string; description: string; keywords: string };
+  seo?: { title: string; description: string; keywords: string };
   /** Show catalog category tabs bar below stats. Pass current category slug to highlight it. */
   catalogTabs?: string;
 }
@@ -47,7 +47,7 @@ export default function CorporatePageShell({
   seo,
   catalogTabs,
 }: CorporatePageShellProps) {
-  useSEO(seo);
+  useSEO(seo ?? { title, description: subtitle || title, keywords: title });
 
   return (
     <div className="min-h-screen bg-white">
@@ -177,7 +177,7 @@ export default function CorporatePageShell({
         {catalogTabs !== undefined && (
           <section className="w-full bg-slate-50 border-b border-slate-200">
             <div className="mx-auto max-w-[1440px] px-4 md:px-8 py-3">
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap justify-center gap-2">
                 {catalog.map((cat, i) => {
                   const isActive = cat.slug === catalogTabs;
                   return (

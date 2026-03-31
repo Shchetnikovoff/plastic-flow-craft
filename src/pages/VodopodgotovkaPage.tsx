@@ -1,6 +1,5 @@
 import CorporatePageShell from "@/components/corporate/CorporatePageShell";
-import { ProductGrid, AdvantagesGrid, FeatureChecklist, FAQSection } from "@/components/corporate/sections";
-import { findCategory } from "@/data/catalog";
+import { AdvantagesGrid, FeatureChecklist, FAQSection } from "@/components/corporate/sections";
 import { Wrench, ShieldCheck, Clock, Truck, FlaskConical, Settings, Shield } from "lucide-react";
 
 const stats = [
@@ -37,27 +36,21 @@ const faq = [
 ];
 
 const VodopodgotovkaPage = () => {
-  const category = findCategory("vodopodgotovka");
-
   return (
     <CorporatePageShell
       catalogTabs="vodopodgotovka"
       title="Системы водоподготовки"
       subtitle="Обратный осмос, фильтрация и умягчение — комплексные решения для подготовки воды любого качества!"
       heroImage="/images/emkosti-collage-hero.png"
-      breadcrumbLabel="Водоподготовка"
+      breadcrumbs={[
+        { label: "Каталог", href: "/catalog" },
+        { label: "Водоподготовка" },
+      ]}
       stats={stats}
     >
       <FeatureChecklist items={whyUs} />
       <AdvantagesGrid items={advantages} />
-      {category && (
-        <ProductGrid
-          title="Каталог оборудования водоподготовки"
-          subcategories={category.subcategories}
-          catIndex={3}
-        />
-      )}
-      <FAQSection items={faq} />
+<FAQSection items={faq} />
     </CorporatePageShell>
   );
 };
