@@ -37,6 +37,7 @@ const navItems = [
   ]},
   { name: "Вентиляция", href: "/catalog/ventilyatsiya" },
   { name: "Услуги", href: "/catalog/uslugi" },
+  { name: "КП", href: "/kp" },
   { name: "Главная", href: "/" },
   { name: "О компании", href: "/about" },
 ];

@@ -5,6 +5,9 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import AIChatWidget from "./components/ai/AIChatWidget";
+import { KPProvider } from "@/contexts/KPContext";
+import KPRegistry from "./pages/KPRegistry";
+import KPEditor from "./pages/KPEditor";
 import CorporateHome from "./pages/CorporateHome";
 import Index from "./pages/Index";
 import Product from "./pages/Product";
@@ -72,6 +75,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
+      <KPProvider>
       <BrowserRouter>
         <ScrollToTop />
         <Routes>
@@ -134,11 +138,15 @@ const App = () => (
           <Route path="/catalog" element={<CatalogPage />} />
           <Route path="/catalog/:categorySlug" element={<CatalogPage />} />
           <Route path="/catalog/:categorySlug/:subSlug" element={<CatalogPage />} />
+          <Route path="/kp" element={<KPRegistry />} />
+          <Route path="/kp/new" element={<KPEditor />} />
+          <Route path="/kp/:id" element={<KPEditor />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
         <AIChatWidget />
       </BrowserRouter>
+      </KPProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );
