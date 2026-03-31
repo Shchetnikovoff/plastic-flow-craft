@@ -336,13 +336,13 @@ const EmkostiPage = () => {
       {/* Преимущества + FAQ */}
       <section className="w-full bg-slate-50 border-t border-slate-200 py-10 md:py-14">
         <div className="mx-auto max-w-[1440px] px-4 md:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr] gap-0">
             {/* Left — Преимущества */}
-            <div>
-              <h2 className="text-xl md:text-2xl font-bold text-slate-900 mb-5">Преимущества сотрудничества</h2>
+            <div className="rounded-xl border border-slate-200 bg-white p-6">
+              <h2 className="text-lg md:text-xl font-bold text-slate-900 mb-4">Преимущества сотрудничества</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {advantages.map((adv) => (
-                  <div key={adv.title} className="flex gap-3 rounded-lg border border-slate-200 bg-white p-3.5">
+                  <div key={adv.title} className="flex gap-3 p-3 rounded-lg bg-slate-50">
                     <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-amber-500/10">
                       <adv.icon className="h-4 w-4 text-amber-600" />
                     </div>
@@ -355,9 +355,15 @@ const EmkostiPage = () => {
               </div>
             </div>
 
+            {/* Divider */}
+            <div className="hidden lg:flex items-stretch justify-center px-4">
+              <div className="w-px bg-slate-200" />
+            </div>
+            <div className="lg:hidden h-px bg-slate-200 my-4" />
+
             {/* Right — FAQ */}
-            <div>
-              <h2 className="text-xl md:text-2xl font-bold text-slate-900 mb-5">Частые вопросы</h2>
+            <div className="rounded-xl border border-slate-200 bg-white p-6">
+              <h2 className="text-lg md:text-xl font-bold text-slate-900 mb-4">Частые вопросы</h2>
               <div className="space-y-2">
                 {faqEmkosti.map((faq, i) => (
                   <FAQInlineItem key={i} q={faq.q} a={faq.a} />
