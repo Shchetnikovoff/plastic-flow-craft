@@ -87,39 +87,59 @@ const CategoryListing = () => {
       ]}
       seo={{ title: "Каталог продукции | СЗПК Пласт-Металл ПРО", description: "Полный каталог полимерного оборудования", keywords: "каталог, полимерное оборудование" }}
     >
-      {/* Category grid */}
-      <section className="w-full bg-slate-50 py-10 md:py-14">
+      {/* Category sidebar + grid */}
+      <section className="w-full bg-white py-10 md:py-14">
         <div className="mx-auto max-w-[1440px] px-4 md:px-8">
           <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-8">Направления</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {catalog.map((cat) => {
-              const thumb = cat.image || cat.subcategories.find((s) => s.image)?.image;
-              return (
-                <Link
-                  key={cat.id}
-                  to={`/catalog/${cat.slug}`}
-                  className="group relative block rounded-2xl overflow-hidden"
-                >
-                  <div className="aspect-[4/3] bg-slate-100 flex items-center justify-center">
-                    {thumb ? (
-                      <img src={thumb} alt={cat.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                    ) : (
-                      <ImageOff className="h-10 w-10 text-slate-300" />
-                    )}
-                  </div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent" />
-                  <div className="absolute bottom-0 left-0 right-0 p-4">
-                    <h3 className="text-white text-lg font-bold">{cat.name}</h3>
-                    <p className="text-slate-300 text-xs mt-0.5">
-                      {cat.subcategories.length} {cat.subcategories.length === 1 ? "позиция" : cat.subcategories.length < 5 ? "позиции" : "позиций"}
-                    </p>
-                    <span className="inline-flex items-center gap-1 text-amber-400 text-xs font-semibold mt-2 group-hover:gap-2.5 transition-all duration-300">
-                      Подробнее <ArrowRight className="h-3.5 w-3.5" />
-                    </span>
-                  </div>
-                </Link>
-              );
-            })}
+          <div className="flex flex-col md:flex-row gap-6">
+            {/* Sidebar */}
+            <nav className="md:w-[220px] shrink-0">
+              <ul className="space-y-0.5">
+                {catalog.map((cat, i) => (
+                  <li key={cat.id}>
+                    <Link
+                      to={`/catalog/${cat.slug}`}
+                      className="group flex items-baseline gap-2 rounded-md px-3 py-2 text-sm w-full text-left hover:bg-amber-50 border border-transparent hover:border-amber-200 transition-colors"
+                    >
+                      <span className="text-xs font-semibold shrink-0 text-slate-400 group-hover:text-amber-600">{i + 1}</span>
+                      <span className="text-slate-700 group-hover:text-amber-600 transition-colors">{cat.name}</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+
+            {/* Grid */}
+            <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              {catalog.map((cat) => {
+                const thumb = cat.image || cat.subcategories.find((s) => s.image)?.image;
+                return (
+                  <Link
+                    key={cat.id}
+                    to={`/catalog/${cat.slug}`}
+                    className="group relative block rounded-2xl overflow-hidden"
+                  >
+                    <div className="aspect-[4/3] bg-slate-100 flex items-center justify-center">
+                      {thumb ? (
+                        <img src={thumb} alt={cat.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                      ) : (
+                        <ImageOff className="h-10 w-10 text-slate-300" />
+                      )}
+                    </div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent" />
+                    <div className="absolute bottom-0 left-0 right-0 p-4">
+                      <h3 className="text-white text-lg font-bold">{cat.name}</h3>
+                      <p className="text-slate-300 text-xs mt-0.5">
+                        {cat.subcategories.length} {cat.subcategories.length === 1 ? "позиция" : cat.subcategories.length < 5 ? "позиции" : "позиций"}
+                      </p>
+                      <span className="inline-flex items-center gap-1 text-amber-400 text-xs font-semibold mt-2 group-hover:gap-2.5 transition-all duration-300">
+                        Подробнее <ArrowRight className="h-3.5 w-3.5" />
+                      </span>
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
           </div>
         </div>
       </section>
