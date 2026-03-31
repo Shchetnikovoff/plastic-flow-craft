@@ -25,8 +25,8 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 import { toast } from "sonner";
 import ContactFormFields, { type ContactFormData, type ContactFormErrors, validateContactForm } from "@/components/ContactFormFields";
 import { generateSpecPdf } from "@/lib/generateSpecPdf";
-import { generateLetterheadPdf } from "@/lib/generateLetterheadPdf";
 import DimensionOverlay from "@/components/DimensionOverlay";
+import { KPQuickDialog } from "@/components/kp/KPQuickDialog";
 
 /** Image lookup map for tank type + color */
 const tankImageMap: Record<string, Record<string, string>> = {
@@ -514,6 +514,7 @@ const ProductDetailContent = () => {
   const [selectedImage, setSelectedImage] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [pdfDialogOpen, setPdfDialogOpen] = useState(false);
+  const [kpDialogOpen, setKpDialogOpen] = useState(false);
   const [contactData, setContactData] = useState<ContactFormData>({ name: "", email: "", phone: "", inn: "" });
   const [contactErrors, setContactErrors] = useState<ContactFormErrors>({});
 
@@ -745,9 +746,8 @@ const ProductDetailContent = () => {
               <FileDown className="h-4 w-4" />
               Скачать спецификацию (PDF)
             </Button>
-            <Button variant="outline" className="gap-2 w-full mt-2" onClick={async () => { await generateLetterheadPdf(); toast.success("Коммерческое предложение скачано"); }}>
-              <FileDown className="h-4 w-4" />
-              Скачать коммерческое предложение (PDF)
+            <Button onClick={() => setKpDialogOpen(true)} variant="outline" className="gap-2 w-full mt-2">
+              Сформировать КП
             </Button>
           </div>
         </div>
@@ -768,6 +768,17 @@ const ProductDetailContent = () => {
             </Button>
           </DialogContent>
         </Dialog>
+        <KPQuickDialog
+          open={kpDialogOpen}
+          onOpenChange={setKpDialogOpen}
+          product={{
+            article: article,
+            name: emkost.title,
+            imageUrl: emkost.image,
+            specs: {},
+          }}
+          quantity={qty}
+        />
       </main>
     );
   }
@@ -812,11 +823,6 @@ const ProductDetailContent = () => {
       );
       toast.success("PDF-спецификация скачана");
       setPdfDialogOpen(false);
-    };
-
-    const handleFfuKpPdf = async () => {
-      await generateLetterheadPdf();
-      toast.success("Коммерческое предложение скачано");
     };
 
     const handleFfuContactChange = (field: keyof ContactFormData, value: string) => {
@@ -959,9 +965,8 @@ const ProductDetailContent = () => {
               Скачать спецификацию (PDF)
             </Button>
 
-            <Button variant="outline" className="gap-2 w-full mt-2" onClick={handleFfuKpPdf}>
-              <FileDown className="h-4 w-4" />
-              Скачать коммерческое предложение (PDF)
+            <Button onClick={() => setKpDialogOpen(true)} variant="outline" className="gap-2 w-full mt-2">
+              Сформировать КП
             </Button>
           </div>
         </div>
@@ -982,6 +987,17 @@ const ProductDetailContent = () => {
             </Button>
           </DialogContent>
         </Dialog>
+        <KPQuickDialog
+          open={kpDialogOpen}
+          onOpenChange={setKpDialogOpen}
+          product={{
+            article: ffuModel.article,
+            name: `Флотационно-фильтровальная установка ${ffuModel.name}`,
+            imageUrl: "/images/ffu-real-3d.png",
+            specs: {},
+          }}
+          quantity={qty}
+        />
       </main>
     );
   }
@@ -1022,11 +1038,6 @@ const ProductDetailContent = () => {
       );
       toast.success("PDF-спецификация скачана");
       setPdfDialogOpen(false);
-    };
-
-    const handleLamKpPdf = async () => {
-      await generateLetterheadPdf();
-      toast.success("Коммерческое предложение скачано");
     };
 
     const handleLamContactChange = (field: keyof ContactFormData, value: string) => {
@@ -1129,9 +1140,8 @@ const ProductDetailContent = () => {
               Скачать спецификацию (PDF)
             </Button>
 
-            <Button variant="outline" className="gap-2 w-full mt-2" onClick={handleLamKpPdf}>
-              <FileDown className="h-4 w-4" />
-              Скачать коммерческое предложение (PDF)
+            <Button onClick={() => setKpDialogOpen(true)} variant="outline" className="gap-2 w-full mt-2">
+              Сформировать КП
             </Button>
           </div>
         </div>
@@ -1152,6 +1162,17 @@ const ProductDetailContent = () => {
             </Button>
           </DialogContent>
         </Dialog>
+        <KPQuickDialog
+          open={kpDialogOpen}
+          onOpenChange={setKpDialogOpen}
+          product={{
+            article: article,
+            name: `Тонкослойный (ламельный) отстойник ${article}`,
+            imageUrl: lamModel && parseFloat(lamModel.capacity) >= 20 ? "/images/lamelnyj-hero-real.jpg" : "/images/lamelnyj-thumb-new.png",
+            specs: {},
+          }}
+          quantity={qty}
+        />
       </main>
     );
   }
@@ -1204,11 +1225,6 @@ const ProductDetailContent = () => {
       );
       toast.success("PDF-спецификация скачана");
       setPdfDialogOpen(false);
-    };
-
-    const handleSprKpPdf = async () => {
-      await generateLetterheadPdf();
-      toast.success("Коммерческое предложение скачано");
     };
 
     const handleSprContactChange = (field: keyof ContactFormData, value: string) => {
@@ -1318,9 +1334,8 @@ const ProductDetailContent = () => {
               Скачать спецификацию (PDF)
             </Button>
 
-            <Button variant="outline" className="gap-2 w-full mt-2" onClick={handleSprKpPdf}>
-              <FileDown className="h-4 w-4" />
-              Скачать коммерческое предложение (PDF)
+            <Button onClick={() => setKpDialogOpen(true)} variant="outline" className="gap-2 w-full mt-2">
+              Сформировать КП
             </Button>
           </div>
         </div>
@@ -1340,6 +1355,17 @@ const ProductDetailContent = () => {
             </Button>
           </DialogContent>
         </Dialog>
+        <KPQuickDialog
+          open={kpDialogOpen}
+          onOpenChange={setKpDialogOpen}
+          product={{
+            article: sprModel.article,
+            name: `Станция приготовления реагентов ${sprModel.name}`,
+            imageUrl: "/images/spr-hero-ral7032.jpg",
+            specs: {},
+          }}
+          quantity={qty}
+        />
       </main>
     );
   }
@@ -1389,11 +1415,6 @@ const ProductDetailContent = () => {
       );
       toast.success("PDF-спецификация скачана");
       setPdfDialogOpen(false);
-    };
-
-    const handleMoKpPdf = async () => {
-      await generateLetterheadPdf();
-      toast.success("Коммерческое предложение скачано");
     };
 
     const handleMoContactChange = (field: keyof ContactFormData, value: string) => {
@@ -1495,9 +1516,8 @@ const ProductDetailContent = () => {
               Скачать спецификацию (PDF)
             </Button>
 
-            <Button variant="outline" className="gap-2 w-full mt-2" onClick={handleMoKpPdf}>
-              <FileDown className="h-4 w-4" />
-              Скачать коммерческое предложение (PDF)
+            <Button onClick={() => setKpDialogOpen(true)} variant="outline" className="gap-2 w-full mt-2">
+              Сформировать КП
             </Button>
           </div>
         </div>
@@ -1517,6 +1537,17 @@ const ProductDetailContent = () => {
             </Button>
           </DialogContent>
         </Dialog>
+        <KPQuickDialog
+          open={kpDialogOpen}
+          onOpenChange={setKpDialogOpen}
+          product={{
+            article: moModel.article,
+            name: `Мешочный обезвоживатель осадка ${moModel.name}`,
+            imageUrl: "/images/obezvozhivatel-3d-ral7032.jpg",
+            specs: {},
+          }}
+          quantity={qty}
+        />
       </main>
     );
   }
@@ -1611,11 +1642,6 @@ const ProductDetailContent = () => {
       );
       toast.success("PDF-спецификация скачана");
       setPdfDialogOpen(false);
-    };
-
-    const handleZhuKpPdf = async () => {
-      await generateLetterheadPdf();
-      toast.success("Коммерческое предложение скачано");
     };
 
     const handleZhuContactChange = (field: keyof ContactFormData, value: string) => {
@@ -1820,9 +1846,8 @@ const ProductDetailContent = () => {
           Скачать спецификацию (PDF)
         </Button>
 
-        <Button variant="outline" className="gap-2 w-full" onClick={handleZhuKpPdf}>
-          <FileDown className="h-4 w-4" />
-          Скачать коммерческое предложение (PDF)
+        <Button onClick={() => setKpDialogOpen(true)} variant="outline" className="gap-2 w-full">
+          Сформировать КП
         </Button>
 
         <Dialog open={pdfDialogOpen} onOpenChange={setPdfDialogOpen}>
@@ -1840,6 +1865,21 @@ const ProductDetailContent = () => {
             </Button>
           </DialogContent>
         </Dialog>
+        <KPQuickDialog
+          open={kpDialogOpen}
+          onOpenChange={setKpDialogOpen}
+          product={{
+            article: zhuModel.article,
+            name: `Промышленный жироуловитель ${zhuModel.name}`,
+            imageUrl: zhuModel.article.includes(".ЖУП.")
+              ? "/images/zhu-p-schema-rect.png"
+              : zhuModel.article.includes(".ЖУГ.")
+              ? "/images/zhu-g-hero-ral7032.jpg"
+              : "/images/zhu-pv-hero-ral7032.jpg",
+            specs: {},
+          }}
+          quantity={qty}
+        />
       </main>
     );
   }

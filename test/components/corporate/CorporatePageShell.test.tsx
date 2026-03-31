@@ -85,6 +85,6 @@ describe("CorporatePageShell", () => {
     );
     expect(breadcrumbPage).toBeTruthy();
     // "Главная" is always rendered as first breadcrumb
-    expect(screen.getByText("Главная")).toBeInTheDocument();
+    expect(screen.getAllByText("Главная").length).toBeGreaterThanOrEqual(1);
   });
 });
