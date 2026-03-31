@@ -56,6 +56,7 @@ const CategoryListing = () => {
       breadcrumbs={[{ label: "Каталог" }]}
       title="Каталог"
       accentWord="продукции"
+      subtitle="Полный ассортимент полимерного оборудования для промышленных предприятий — от проектирования до монтажа."
       stats={[
         { value: "7+", label: "категорий" },
         { value: "500+", label: "проектов" },
@@ -64,45 +65,42 @@ const CategoryListing = () => {
       ]}
       seo={{ title: "Каталог продукции | СЗПК Пласт-Металл ПРО", description: "Полный каталог полимерного оборудования", keywords: "каталог, полимерное оборудование" }}
     >
-      <section>
-        <p className="text-sm text-muted-foreground mb-5">Полный ассортимент полимерного оборудования для промышленных предприятий — от проектирования до монтажа.</p>
-        <Button onClick={scrollToForm}>Получить расчёт стоимости</Button>
-      </section>
-
       {/* Category grid */}
-      <section>
-        <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Направления</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {catalog.map((cat) => {
-            const thumb = cat.image || cat.subcategories.find((s) => s.image)?.image;
-            return (
-              <Link
-                key={cat.id}
-                to={`/catalog/${cat.slug}`}
-                className="group rounded-lg border border-border bg-card overflow-hidden hover:border-primary/50 hover:shadow-md transition-all"
-              >
-                <div className="aspect-video bg-white flex items-center justify-center">
-                  {thumb ? (
-                    <img src={thumb} alt={cat.name} className="w-full h-full object-contain" />
-                  ) : (
-                    <ImageOff className="h-10 w-10 text-muted-foreground/40" />
-                  )}
-                </div>
-                <div className="px-3 py-2.5">
-                  <h3 className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">
-                    {cat.name}
-                  </h3>
-                  <p className="text-xs text-muted-foreground mt-0.5">
-                    {cat.subcategories.length} {cat.subcategories.length === 1 ? "позиция" : cat.subcategories.length < 5 ? "позиции" : "позиций"}
-                  </p>
-                </div>
-              </Link>
-            );
-          })}
+      <section className="w-full bg-slate-50 py-10 md:py-14">
+        <div className="mx-auto max-w-[1440px] px-4 md:px-8">
+          <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-8">Направления</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {catalog.map((cat) => {
+              const thumb = cat.image || cat.subcategories.find((s) => s.image)?.image;
+              return (
+                <Link
+                  key={cat.id}
+                  to={`/catalog/${cat.slug}`}
+                  className="group relative block rounded-2xl overflow-hidden"
+                >
+                  <div className="aspect-[4/3] bg-slate-100 flex items-center justify-center">
+                    {thumb ? (
+                      <img src={thumb} alt={cat.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                    ) : (
+                      <ImageOff className="h-10 w-10 text-slate-300" />
+                    )}
+                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 p-4">
+                    <h3 className="text-white text-lg font-bold">{cat.name}</h3>
+                    <p className="text-slate-300 text-xs mt-0.5">
+                      {cat.subcategories.length} {cat.subcategories.length === 1 ? "позиция" : cat.subcategories.length < 5 ? "позиции" : "позиций"}
+                    </p>
+                    <span className="inline-flex items-center gap-1 text-amber-400 text-xs font-semibold mt-2 group-hover:gap-2.5 transition-all duration-300">
+                      Подробнее <ArrowRight className="h-3.5 w-3.5" />
+                    </span>
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
         </div>
       </section>
-
-      <CTAForm id="catalog-cta-form" form={form} setForm={setForm} handleSubmit={handleSubmit} />
     </CorporatePageShell>
   );
 };
@@ -119,29 +117,26 @@ const SubcategoryDetail = ({ categorySlug, subSlug }: { categorySlug: string; su
     <CorporatePageShell
       breadcrumbs={[{ label: "Каталог", href: "/catalog" }, { label: category.name, href: `/catalog/${categorySlug}` }, { label: result.subcategory.name }]}
       title={result.subcategory.name}
-      accentWord=""
       seo={{ title: `${result.subcategory.name} | СЗПК`, description: result.subcategory.description || result.subcategory.name, keywords: result.subcategory.name }}
     >
-      <Breadcrumb className="mb-6">
-        <BreadcrumbList>
-          <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog">Каталог</Link></BreadcrumbLink></BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem><BreadcrumbLink asChild><Link to={`/catalog/${category.slug}`}>{category.name}</Link></BreadcrumbLink></BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem><BreadcrumbPage>{result.subcategory.name}</BreadcrumbPage></BreadcrumbItem>
-        </BreadcrumbList>
-      </Breadcrumb>
-
-      <div className="rounded-xl border border-border bg-card p-8">
-        {result.subcategory.image && (
-          <div className="aspect-[16/9] bg-muted rounded-lg overflow-hidden mb-4">
-            <img src={result.subcategory.image} alt={result.subcategory.name} className="w-full h-full object-contain" />
+      <section className="w-full bg-white py-10 md:py-14">
+        <div className="mx-auto max-w-[1440px] px-4 md:px-8">
+          <div className="rounded-xl border border-slate-200 bg-slate-50 overflow-hidden max-w-[800px]">
+            {result.subcategory.image && (
+              <div className="aspect-[16/9] bg-white flex items-center justify-center">
+                <img src={result.subcategory.image} alt={result.subcategory.name} className="w-full h-full object-contain" />
+              </div>
+            )}
+            <div className="p-6">
+              <h2 className="text-xl font-bold text-slate-900 mb-2">{result.subcategory.name}</h2>
+              <p className="text-sm text-slate-500">{result.subcategory.description || "Описание уточняйте по запросу."}</p>
+              <a href="#cta-form" className="inline-flex items-center gap-1.5 mt-4 text-sm font-semibold text-amber-600 hover:text-amber-500">
+                Запросить расчёт <ArrowRight className="h-3.5 w-3.5" />
+              </a>
+            </div>
           </div>
-        )}
-        <h2 className="text-xl font-bold text-foreground mb-2">{result.subcategory.name}</h2>
-        <p className="text-sm text-muted-foreground">{result.subcategory.description || "Описание уточняйте по запросу."}</p>
-        <a href="#cta-form" className="inline-flex items-center gap-1.5 mt-4 text-sm font-medium text-primary hover:underline">Запросить расчёт &#8594;</a>
-      </div>
+        </div>
+      </section>
     </CorporatePageShell>
   );
 };
@@ -159,90 +154,77 @@ const CategoryBrowser = ({ categorySlug }: { categorySlug: string }) => {
     <CorporatePageShell
       breadcrumbs={[{ label: "Каталог", href: "/catalog" }, { label: category.name }]}
       title={category.name}
-      accentWord=""
+      subtitle={category.description}
       seo={{ title: `${category.name} | СЗПК`, description: `${category.name} — полимерное оборудование`, keywords: category.name }}
     >
-      <Breadcrumb>
-        <BreadcrumbList>
-          <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog">Каталог</Link></BreadcrumbLink></BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem><BreadcrumbPage>{category.name}</BreadcrumbPage></BreadcrumbItem>
-        </BreadcrumbList>
-      </Breadcrumb>
+      <section className="w-full bg-white py-10 md:py-14">
+        <div className="mx-auto max-w-[1440px] px-4 md:px-8">
+          <div className="flex flex-col md:flex-row gap-6">
+            {/* Left sidebar */}
+            <nav className="md:w-[220px] shrink-0">
+              <ul className="space-y-0.5">
+                {category.subcategories.map((sub, i) => {
+                  const isSelected = selectedSubId === sub.id;
+                  return (
+                    <li key={sub.id}>
+                      <button
+                        onClick={() => setSelectedSubId(isSelected ? null : sub.id)}
+                        className={`group flex items-baseline gap-2 rounded-md px-3 py-2 text-sm w-full text-left transition-colors ${
+                          isSelected
+                            ? "bg-amber-50 border border-amber-200"
+                            : "hover:bg-slate-50 border border-transparent"
+                        }`}
+                      >
+                        <span className={`text-xs font-semibold shrink-0 ${isSelected ? "text-amber-600" : "text-slate-400"}`}>
+                          {catIndex}.{i + 1}
+                        </span>
+                        <span className={`transition-colors ${isSelected ? "text-amber-600 font-semibold" : "text-slate-700 group-hover:text-amber-600"}`}>
+                          {sub.name}
+                        </span>
+                      </button>
+                    </li>
+                  );
+                })}
+              </ul>
+            </nav>
 
-      {category.description && (
-        <section>
-          <h2 className="text-xl sm:text-2xl font-bold text-foreground">{category.name}</h2>
-          <p className="text-sm text-muted-foreground mt-1">{category.description}</p>
-        </section>
-      )}
-      {!category.description && (
-        <h2 className="text-2xl font-bold text-foreground">{category.name}</h2>
-      )}
-
-      {/* Two-column layout: sidebar + detail card */}
-      <div className="flex flex-col md:flex-row gap-6">
-        {/* Left sidebar */}
-        <nav className="md:w-[260px] shrink-0">
-          <ul className="space-y-0.5">
-            {category.subcategories.map((sub, i) => {
-              const isSelected = selectedSubId === sub.id;
-              return (
-                <li key={sub.id}>
-                  <button
-                    onClick={() => setSelectedSubId(isSelected ? null : sub.id)}
-                    className={`group flex items-baseline gap-2 rounded-md px-3 py-2 text-sm w-full text-left transition-colors ${
-                      isSelected ? "bg-primary/10 border border-primary/30" : "hover:bg-muted border border-transparent"
-                    }`}
-                  >
-                    <span className={`text-xs font-semibold shrink-0 ${isSelected ? "text-primary" : "text-muted-foreground"}`}>
-                      {catIndex}.{i + 1}
-                    </span>
-                    <span className={`transition-colors ${isSelected ? "text-primary font-semibold" : "text-foreground group-hover:text-primary"}`}>
-                      {sub.name}
-                    </span>
-                  </button>
-                </li>
-              );
-            })}
-          </ul>
-        </nav>
-
-        {/* Right content */}
-        <div className="flex-1">
-          {selectedSub ? (
-            <div className="rounded-xl border border-border bg-card overflow-hidden animate-in fade-in-0 slide-in-from-top-2 duration-200">
-              <div className="aspect-[16/9] bg-muted flex items-center justify-center">
-                {selectedSub.image ? (
-                  <img src={selectedSub.image} alt={selectedSub.name} className="w-full h-full object-contain" />
-                ) : (
-                  <ImageOff className="h-12 w-12 text-muted-foreground/40" />
-                )}
-              </div>
-              <div className="p-5">
-                <p className="text-xs text-muted-foreground font-semibold mb-1">
-                  {catIndex}.{category.subcategories.findIndex((s) => s.id === selectedSub.id) + 1}
-                </p>
-                <h3 className="text-lg font-bold text-foreground mb-2">{selectedSub.name}</h3>
-                <p className="text-sm text-muted-foreground mb-4">
-                  {selectedSub.description || "Описание уточняйте по запросу."}
-                </p>
-                {selectedSub.externalPath ? (
-                  <Link to={selectedSub.externalPath} className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline">
-                    Перейти на страницу <ArrowRight className="h-3.5 w-3.5" />
-                  </Link>
-                ) : (
-                  <a href="#cta-form" className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline">
-                    Запросить расчёт &#8594;
-                  </a>
-                )}
-              </div>
+            {/* Right content */}
+            <div className="flex-1">
+              {selectedSub ? (
+                <div className="rounded-xl border border-slate-200 bg-white overflow-hidden animate-in fade-in-0 slide-in-from-top-2 duration-200">
+                  <div className="aspect-[16/9] bg-slate-50 flex items-center justify-center">
+                    {selectedSub.image ? (
+                      <img src={selectedSub.image} alt={selectedSub.name} className="w-full h-full object-contain" />
+                    ) : (
+                      <ImageOff className="h-12 w-12 text-slate-300" />
+                    )}
+                  </div>
+                  <div className="p-5">
+                    <p className="text-xs text-slate-400 font-semibold mb-1">
+                      {catIndex}.{category.subcategories.findIndex((s) => s.id === selectedSub.id) + 1}
+                    </p>
+                    <h3 className="text-lg font-bold text-slate-900 mb-2">{selectedSub.name}</h3>
+                    <p className="text-sm text-slate-500 mb-4">
+                      {selectedSub.description || "Описание уточняйте по запросу."}
+                    </p>
+                    {selectedSub.externalPath ? (
+                      <Link to={selectedSub.externalPath} className="inline-flex items-center gap-1.5 text-sm font-semibold text-amber-600 hover:text-amber-500">
+                        Перейти на страницу <ArrowRight className="h-3.5 w-3.5" />
+                      </Link>
+                    ) : (
+                      <a href="#cta-form" className="inline-flex items-center gap-1.5 text-sm font-semibold text-amber-600 hover:text-amber-500">
+                        Запросить расчёт <ArrowRight className="h-3.5 w-3.5" />
+                      </a>
+                    )}
+                  </div>
+                </div>
+              ) : (
+                <SubcategoryGrid category={category} catIndex={catIndex} onSelect={setSelectedSubId} />
+              )}
             </div>
-          ) : (
-            <SubcategoryGrid category={category} catIndex={catIndex} onSelect={setSelectedSubId} />
-          )}
+          </div>
         </div>
-      </div>
+      </section>
     </CorporatePageShell>
   );
 };
@@ -265,30 +247,32 @@ const SubcategoryGrid = ({ category, catIndex, onSelect }: {
   const renderCard = (sub: typeof category.subcategories[number], i: number) => {
     const cardContent = (
       <>
-        <div className="aspect-[4/3] bg-muted flex items-center justify-center">
+        <div className="aspect-[4/3] bg-slate-50 flex items-center justify-center">
           {sub.image ? (
             <img src={sub.image} alt={sub.name} className="w-full h-full object-contain" />
           ) : (
-            <ImageOff className="h-10 w-10 text-muted-foreground/40" />
+            <ImageOff className="h-10 w-10 text-slate-300" />
           )}
         </div>
         <div className="px-3 py-2.5">
-          <p className="text-xs text-muted-foreground font-semibold">{catIndex}.{i + 1}</p>
-          <p className="text-sm font-medium text-foreground group-hover:text-primary transition-colors mt-0.5">{sub.name}</p>
+          <p className="text-xs text-slate-400 font-semibold">{catIndex}.{i + 1}</p>
+          <p className="text-sm font-medium text-slate-700 group-hover:text-amber-600 transition-colors mt-0.5">{sub.name}</p>
         </div>
       </>
     );
 
+    const cls = "group rounded-lg border border-slate-200 bg-white overflow-hidden hover:border-amber-300 hover:shadow-md transition-all text-left";
+
     if (sub.externalPath) {
       return (
-        <Link key={sub.id} to={sub.externalPath} className="group rounded-lg border border-border bg-card overflow-hidden hover:border-primary/50 hover:shadow-md transition-all text-left block">
+        <Link key={sub.id} to={sub.externalPath} className={`${cls} block`}>
           {cardContent}
         </Link>
       );
     }
 
     return (
-      <button key={sub.id} onClick={() => onSelect(sub.id)} className="group rounded-lg border border-border bg-card overflow-hidden hover:border-primary/50 hover:shadow-md transition-all text-left">
+      <button key={sub.id} onClick={() => onSelect(sub.id)} className={cls}>
         {cardContent}
       </button>
     );
@@ -311,7 +295,7 @@ const SubcategoryGrid = ({ category, catIndex, onSelect }: {
         globalIndex += items.length;
         return (
           <div key={groupName}>
-            {groupName && <h3 className="text-sm font-bold text-foreground mb-3 uppercase tracking-wide">{groupName}</h3>}
+            {groupName && <h3 className="text-sm font-bold text-slate-900 mb-3 uppercase tracking-wide">{groupName}</h3>}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {items.map((sub, i) => renderCard(sub, startIndex + i))}
             </div>
