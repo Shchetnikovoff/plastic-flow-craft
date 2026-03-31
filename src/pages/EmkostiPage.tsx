@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import CorporatePageShell from "@/components/corporate/CorporatePageShell";
-import { AdvantagesGrid, DescriptionBlock, FAQSection } from "@/components/corporate/sections";
+import { DescriptionBlock } from "@/components/corporate/sections";
 import { findCategory } from "@/data/catalog";
-import { ImageOff, Droplets, FlaskConical, Truck, ShieldCheck, Clock, Wrench } from "lucide-react";
+import { ImageOff, Droplets, FlaskConical, Truck, ShieldCheck, Clock, Wrench, ChevronDown } from "lucide-react";
 import {
   Accordion, AccordionContent, AccordionItem, AccordionTrigger,
 } from "@/components/ui/accordion";
@@ -68,6 +68,25 @@ const faqEmkosti = [
   { q: "Есть ли доставка?", a: "Да, доставка спецтранспортом по всей РФ. Производство — Ленинградская область." },
   { q: "Можно заказать по своим чертежам?", a: "Да, изготовим по вашим чертежам и ТЗ, а также спроектируем с нуля под ваши задачи." },
 ];
+
+function FAQInlineItem({ q, a }: { q: string; a: string }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="rounded-lg border border-slate-200 bg-white overflow-hidden">
+      <button
+        type="button"
+        onClick={() => setOpen(!open)}
+        className="flex w-full items-center justify-between px-4 py-3 text-left text-sm font-medium text-slate-900 hover:bg-slate-50 transition-colors"
+      >
+        {q}
+        <ChevronDown className={`h-4 w-4 shrink-0 text-slate-400 transition-transform duration-200 ${open ? "rotate-180" : ""}`} />
+      </button>
+      <div className={`overflow-hidden transition-all duration-200 ${open ? "max-h-96" : "max-h-0"}`}>
+        <p className="px-4 pb-3 text-xs text-slate-500 leading-relaxed">{a}</p>
+      </div>
+    </div>
+  );
+}
 
 const EmkostiPage = () => {
   const [selectedSubId, setSelectedSubId] = useState<string | null>(null);
@@ -314,14 +333,40 @@ const EmkostiPage = () => {
         </div>
       </section>
 
-      {/* Преимущества */}
-      <AdvantagesGrid
-        title="Преимущества сотрудничества"
-        items={advantages}
-      />
+      {/* Преимущества + FAQ */}
+      <section className="w-full bg-slate-50 border-t border-slate-200 py-10 md:py-14">
+        <div className="mx-auto max-w-[1440px] px-4 md:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* Left — Преимущества */}
+            <div>
+              <h2 className="text-xl md:text-2xl font-bold text-slate-900 mb-5">Преимущества сотрудничества</h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {advantages.map((adv) => (
+                  <div key={adv.title} className="flex gap-3 rounded-lg border border-slate-200 bg-white p-3.5">
+                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-amber-500/10">
+                      <adv.icon className="h-4 w-4 text-amber-600" />
+                    </div>
+                    <div>
+                      <h3 className="text-sm font-semibold text-slate-900">{adv.title}</h3>
+                      <p className="text-xs text-slate-500 mt-0.5 leading-snug">{adv.text}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
 
-      {/* FAQ */}
-      <FAQSection items={faqEmkosti} />
+            {/* Right — FAQ */}
+            <div>
+              <h2 className="text-xl md:text-2xl font-bold text-slate-900 mb-5">Частые вопросы</h2>
+              <div className="space-y-2">
+                {faqEmkosti.map((faq, i) => (
+                  <FAQInlineItem key={i} q={faq.q} a={faq.a} />
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </CorporatePageShell>
   );
 };
