@@ -1,12 +1,6 @@
 import { useState } from "react";
 import { Settings, Factory, HardHat, Wrench, FlaskConical, Shield, ShieldCheck, Clock, Truck, ImageOff } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { toast } from "sonner";
 import { findCategory } from "@/data/catalog";
 import CorporatePageShell from "@/components/corporate/CorporatePageShell";
 import { AdvantagesGrid, FeatureChecklist } from "@/components/corporate/sections";
@@ -44,18 +38,9 @@ const advantages = [
 ];
 
 const UslugiPage = () => {
-  const [form, setForm] = useState({ name: "", phone: "", email: "", description: "" });
   const [selectedSubId, setSelectedSubId] = useState<string | null>(null);
   const category = findCategory("uslugi");
   const catIndex = 12;
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!form.name.trim() || !form.phone.trim()) { toast.error("Заполните обязательные поля"); return; }
-    toast.success("Заявка отправлена!");
-    setForm({ name: "", phone: "", email: "", description: "" });
-  };
-  const scrollToForm = () => { document.getElementById("cta-form")?.scrollIntoView({ behavior: "smooth" }); };
 
   return (
     <CorporatePageShell
@@ -70,54 +55,61 @@ const UslugiPage = () => {
       ]}
     >
       {/* Hero images */}
-      <section>
-        <p className="text-sm text-slate-500 mb-5">Проектирование, монтаж и пусконаладка промышленного оборудования — полный цикл от идеи до ввода в эксплуатацию!</p>
-        <Button onClick={scrollToForm}>Оставить заявку</Button>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
-          <div className="rounded-lg border border-slate-200 overflow-hidden bg-white"><img src="/images/uslugi-hero-1.png" alt="Монтаж оборудования" className="w-full object-contain" /></div>
-          <div className="rounded-lg border border-slate-200 overflow-hidden bg-white"><img src="/images/uslugi-hero-2.png" alt="Проектирование и пусконаладка" className="w-full object-contain" /></div>
+      <section className="w-full bg-white py-10 md:py-14">
+        <div className="mx-auto max-w-[1440px] px-4 md:px-8">
+          <p className="text-sm text-slate-500 mb-5">Проектирование, монтаж и пусконаладка промышленного оборудования — полный цикл от идеи до ввода в эксплуатацию!</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="rounded-lg border border-slate-200 overflow-hidden bg-white"><img src="/images/uslugi-hero-1.png" alt="Монтаж оборудования" className="w-full object-contain" /></div>
+            <div className="rounded-lg border border-slate-200 overflow-hidden bg-white"><img src="/images/uslugi-hero-2.png" alt="Проектирование и пусконаладка" className="w-full object-contain" /></div>
+          </div>
         </div>
       </section>
 
       {/* About services */}
-      <section>
-        <h2 className="text-base font-bold text-slate-900 mb-3 tracking-wide uppercase">Проектирование и монтаж: от идеи до результата</h2>
-        <p className="text-sm text-slate-500 leading-relaxed mb-4">Мы оказываем полный спектр услуг по проектированию, монтажу и вводу в эксплуатацию промышленного оборудования: водоочистных и водоподготовительных систем, КНС, ёмкостей и резервуаров.</p>
-        <FeatureChecklist title="Почему выбирают нас" items={whyUs} />
+      <section className="w-full bg-slate-50 border-y border-slate-200 py-10 md:py-14">
+        <div className="mx-auto max-w-[1440px] px-4 md:px-8">
+          <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-3">Проектирование и монтаж: от идеи до результата</h2>
+          <p className="text-sm text-slate-500 leading-relaxed mb-6">Мы оказываем полный спектр услуг по проектированию, монтажу и вводу в эксплуатацию промышленного оборудования: водоочистных и водоподготовительных систем, КНС, ёмкостей и резервуаров.</p>
+          <FeatureChecklist title="Почему выбирают нас" items={whyUs} />
+        </div>
       </section>
 
       {/* Services grid */}
-      <section>
-        <h2 className="text-base font-bold text-slate-900 mb-4 tracking-wide uppercase">Наши услуги</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-          {services.map((a, i) => (
-            <div key={i} className="flex items-start gap-2 rounded-lg border border-slate-200 bg-white p-3">
-              <a.icon className="h-4 w-4 text-amber-600 shrink-0 mt-0.5" />
-              <span className="text-sm text-slate-900">{a.text}</span>
-            </div>
-          ))}
+      <section className="w-full bg-white py-10 md:py-14">
+        <div className="mx-auto max-w-[1440px] px-4 md:px-8">
+          <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-6">Наши услуги</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            {services.map((a, i) => (
+              <div key={i} className="flex items-start gap-2 rounded-xl bg-slate-50 border border-slate-200 p-3">
+                <a.icon className="h-4 w-4 text-amber-600 shrink-0 mt-0.5" />
+                <span className="text-sm text-slate-900">{a.text}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* Work stages accordion */}
-      <section>
-        <h2 className="text-base font-bold text-slate-900 mb-4 tracking-wide uppercase">Этапы работ</h2>
-        <Accordion type="multiple" defaultValue={[modifications[0].title]} className="space-y-2">
-          {modifications.map((mod) => (
-            <AccordionItem key={mod.title} value={mod.title} className="rounded-lg border border-slate-200 bg-white px-4">
-              <AccordionTrigger className="text-sm font-semibold text-slate-900 hover:no-underline">{mod.title}</AccordionTrigger>
-              <AccordionContent>
-                <ul className="space-y-1.5 pb-2">
-                  {mod.items.map((item, i) => (
-                    <li key={i} className="flex items-start gap-2 text-sm text-slate-500">
-                      <span className="text-amber-600 mt-1">&#8226;</span><span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
+      <section className="w-full bg-slate-50 border-y border-slate-200 py-10 md:py-14">
+        <div className="mx-auto max-w-[1440px] px-4 md:px-8">
+          <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-6">Этапы работ</h2>
+          <Accordion type="multiple" defaultValue={[modifications[0].title]} className="space-y-2">
+            {modifications.map((mod) => (
+              <AccordionItem key={mod.title} value={mod.title} className="rounded-lg border border-slate-200 bg-white px-4">
+                <AccordionTrigger className="text-sm font-semibold text-slate-900 hover:no-underline">{mod.title}</AccordionTrigger>
+                <AccordionContent>
+                  <ul className="space-y-1.5 pb-2">
+                    {mod.items.map((item, i) => (
+                      <li key={i} className="flex items-start gap-2 text-sm text-slate-500">
+                        <span className="text-amber-600 mt-1">&#8226;</span><span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
       </section>
 
       {/* Advantages */}
@@ -125,42 +117,29 @@ const UslugiPage = () => {
 
       {/* Service catalog */}
       {category && (
-        <section>
-          <h2 className="text-base font-bold text-slate-900 mb-4 tracking-wide uppercase">Каталог услуг</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {category.subcategories.map((sub, i) => (
-              <button
-                key={sub.id}
-                onClick={() => setSelectedSubId(sub.id)}
-                className="group rounded-lg border border-slate-200 bg-white overflow-hidden hover:border-amber-300 hover:shadow-md transition-all text-left"
-              >
-                <div className="aspect-[4/3] bg-slate-100 flex items-center justify-center">
-                  {sub.image ? <img src={sub.image} alt={sub.name} className="w-full h-full object-contain" /> : <ImageOff className="h-10 w-10 text-slate-300" />}
-                </div>
-                <div className="px-3 py-2.5">
-                  <p className="text-xs text-slate-500 font-semibold">{catIndex}.{i + 1}</p>
-                  <p className="text-sm font-medium text-slate-900 group-hover:text-amber-600 transition-colors mt-0.5">{sub.name}</p>
-                </div>
-              </button>
-            ))}
+        <section className="w-full bg-slate-50 border-y border-slate-200 py-10 md:py-14">
+          <div className="mx-auto max-w-[1440px] px-4 md:px-8">
+            <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-6">Каталог услуг</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {category.subcategories.map((sub, i) => (
+                <button
+                  key={sub.id}
+                  onClick={() => setSelectedSubId(sub.id)}
+                  className="group rounded-lg border border-slate-200 bg-white overflow-hidden hover:border-amber-300 hover:shadow-md transition-all text-left"
+                >
+                  <div className="aspect-[4/3] bg-slate-100 flex items-center justify-center">
+                    {sub.image ? <img src={sub.image} alt={sub.name} className="w-full h-full object-contain" /> : <ImageOff className="h-10 w-10 text-slate-300" />}
+                  </div>
+                  <div className="px-3 py-2.5">
+                    <p className="text-xs text-slate-500 font-semibold">{catIndex}.{i + 1}</p>
+                    <p className="text-sm font-medium text-slate-900 group-hover:text-amber-600 transition-colors mt-0.5">{sub.name}</p>
+                  </div>
+                </button>
+              ))}
+            </div>
           </div>
         </section>
       )}
-
-      {/* CTA form */}
-      <section id="cta-form" className="scroll-mt-20">
-        <Card><CardContent className="p-6">
-          <h2 className="text-base font-bold text-slate-900 mb-2 tracking-wide uppercase">Готовы обсудить проект?</h2>
-          <p className="text-sm text-slate-500 mb-5">Оставьте заявку — мы свяжемся в течение 24 часов.</p>
-          <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="space-y-1.5"><Label className="text-xs">Имя *</Label><Input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Ваше имя" maxLength={100} /></div>
-            <div className="space-y-1.5"><Label className="text-xs">Телефон *</Label><Input value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} placeholder="+7 (___) ___-__-__" maxLength={20} /></div>
-            <div className="space-y-1.5"><Label className="text-xs">E-mail</Label><Input type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="mail@example.com" maxLength={255} /></div>
-            <div className="space-y-1.5 sm:col-span-2"><Label className="text-xs">Описание задачи</Label><Textarea value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} placeholder="Опишите задачу..." rows={3} maxLength={1000} /></div>
-            <div className="sm:col-span-2"><Button type="submit" className="w-full sm:w-auto">Отправить заявку</Button></div>
-          </form>
-        </CardContent></Card>
-      </section>
     </CorporatePageShell>
   );
 };

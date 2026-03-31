@@ -49,61 +49,65 @@ const KnsSvtPage = () => (
     stats={stats}
   >
     {/* Product Table */}
-    <section className="mb-10">
-      <h2 className="text-base font-bold text-slate-900 mb-4 tracking-wide uppercase">Типоразмерный ряд</h2>
-      <div className="rounded-lg border border-slate-200 overflow-x-auto">
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead className="text-xs">Модель</TableHead>
-              <TableHead className="text-xs text-center">D, мм</TableHead>
-              <TableHead className="text-xs text-center">H, мм</TableHead>
-              <TableHead className="text-xs text-center">Q, м³/ч</TableHead>
-              <TableHead className="text-xs text-center">H, м</TableHead>
-              <TableHead className="text-xs text-center">Qmax</TableHead>
-              <TableHead className="text-xs text-center">Hmax</TableHead>
-              <TableHead className="text-xs text-center">Насосы</TableHead>
-              <TableHead className="text-xs text-center">P, кВт</TableHead>
-              <TableHead className="text-xs text-right">Цена, ₽</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {knsSvtProducts.map((p) => (
-              <TableRow key={p.article} className="hover:bg-slate-100/50">
-                <TableCell className="text-sm font-medium">{p.model}</TableCell>
-                <TableCell className="text-sm text-center">{p.diameter}</TableCell>
-                <TableCell className="text-sm text-center">{p.height}</TableCell>
-                <TableCell className="text-sm text-center">{p.flow}</TableCell>
-                <TableCell className="text-sm text-center">{p.head}</TableCell>
-                <TableCell className="text-sm text-center">{p.maxFlow}</TableCell>
-                <TableCell className="text-sm text-center">{p.maxHead}</TableCell>
-                <TableCell className="text-sm text-center">{p.pumpCount}</TableCell>
-                <TableCell className="text-sm text-center">{p.pumpPower}</TableCell>
-                <TableCell className="text-sm text-right whitespace-nowrap">{p.price.toLocaleString("ru-RU")}</TableCell>
+    <section className="w-full bg-white py-10 md:py-14">
+      <div className="mx-auto max-w-[1440px] px-4 md:px-8">
+        <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-6">Типоразмерный ряд</h2>
+        <div className="rounded-lg border border-slate-200 overflow-x-auto">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead className="text-xs">Модель</TableHead>
+                <TableHead className="text-xs text-center">D, мм</TableHead>
+                <TableHead className="text-xs text-center">H, мм</TableHead>
+                <TableHead className="text-xs text-center">Q, м³/ч</TableHead>
+                <TableHead className="text-xs text-center">H, м</TableHead>
+                <TableHead className="text-xs text-center">Qmax</TableHead>
+                <TableHead className="text-xs text-center">Hmax</TableHead>
+                <TableHead className="text-xs text-center">Насосы</TableHead>
+                <TableHead className="text-xs text-center">P, кВт</TableHead>
+                <TableHead className="text-xs text-right">Цена, ₽</TableHead>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+            </TableHeader>
+            <TableBody>
+              {knsSvtProducts.map((p) => (
+                <TableRow key={p.article} className="hover:bg-slate-100/50">
+                  <TableCell className="text-sm font-medium">{p.model}</TableCell>
+                  <TableCell className="text-sm text-center">{p.diameter}</TableCell>
+                  <TableCell className="text-sm text-center">{p.height}</TableCell>
+                  <TableCell className="text-sm text-center">{p.flow}</TableCell>
+                  <TableCell className="text-sm text-center">{p.head}</TableCell>
+                  <TableCell className="text-sm text-center">{p.maxFlow}</TableCell>
+                  <TableCell className="text-sm text-center">{p.maxHead}</TableCell>
+                  <TableCell className="text-sm text-center">{p.pumpCount}</TableCell>
+                  <TableCell className="text-sm text-center">{p.pumpPower}</TableCell>
+                  <TableCell className="text-sm text-right whitespace-nowrap">{p.price.toLocaleString("ru-RU")}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
       </div>
     </section>
 
     <FeatureChecklist title="Особенности конструкции" items={features} />
 
     {/* Specs cards */}
-    <section className="mb-10">
-      <h2 className="text-base font-bold text-slate-900 mb-4 tracking-wide uppercase">Технические характеристики</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-        {specs.map((s) => (
-          <Card key={s.title}>
-            <CardContent className="p-4 flex items-start gap-3">
-              <s.icon className="h-5 w-5 text-amber-600 shrink-0 mt-0.5" />
-              <div>
-                <p className="text-sm font-semibold text-slate-900 mb-1">{s.title}</p>
-                <p className="text-xs text-slate-500">{s.text}</p>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
+    <section className="w-full bg-slate-50 border-y border-slate-200 py-10 md:py-14">
+      <div className="mx-auto max-w-[1440px] px-4 md:px-8">
+        <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-6">Технические характеристики</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          {specs.map((s) => (
+            <Card key={s.title}>
+              <CardContent className="p-4 flex items-start gap-3">
+                <s.icon className="h-5 w-5 text-amber-600 shrink-0 mt-0.5" />
+                <div>
+                  <p className="text-sm font-semibold text-slate-900 mb-1">{s.title}</p>
+                  <p className="text-xs text-slate-500">{s.text}</p>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
       </div>
     </section>
 
