@@ -111,6 +111,7 @@ const faqItems = [
 
 const EmkostiPozharnye = () => (
   <CorporatePageShell
+      catalogTabs="emkosti"
     breadcrumbs={[
       { label: "Каталог", href: "/catalog" },
       { label: "Ёмкости", href: "/catalog/emkosti" },

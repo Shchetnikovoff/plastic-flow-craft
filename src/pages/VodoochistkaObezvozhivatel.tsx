@@ -81,6 +81,7 @@ const partnershipAdvantages = [
 
 const VodoochistkaObezvozhivatel = () => (
   <CorporatePageShell
+      catalogTabs="vodoochistka"
     breadcrumbs={[
       { label: "Каталог", href: "/catalog" },
       { label: "Водоочистка", href: "/catalog/vodoochistka" },

@@ -59,6 +59,7 @@ const ReaktoryPage = () => {
 
   return (
     <CorporatePageShell
+      catalogTabs="reaktory"
       breadcrumbs={[
         { label: "Каталог", to: "/catalog" },
         { label: "Химические реакторы" },

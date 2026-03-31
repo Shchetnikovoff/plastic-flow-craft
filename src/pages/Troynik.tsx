@@ -182,6 +182,7 @@ const TroynikContent = () => {
 
 const Troynik = () => (
   <CorporatePageShell
+      catalogTabs="ventilyatsiya"
     productType="troynik"
     title="Тройники вентиляционные"
     subtitle="Тройники круглого сечения из полипропилена и полиэтилена"

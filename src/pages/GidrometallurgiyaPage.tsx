@@ -41,6 +41,7 @@ const GidrometallurgiyaPage = () => {
 
   return (
     <CorporatePageShell
+      catalogTabs="gidrometallurgiya"
       title="Оборудование для гидрометаллургии"
       subtitle="Реакторы, нутч-фильтры, установки выщелачивания и сорбции — полимерное оборудование для извлечения металлов!"
       heroImage="/images/emkosti-collage-hero.png"

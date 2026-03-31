@@ -41,6 +41,7 @@ const VodopodgotovkaPage = () => {
 
   return (
     <CorporatePageShell
+      catalogTabs="vodopodgotovka"
       title="Системы водоподготовки"
       subtitle="Обратный осмос, фильтрация и умягчение — комплексные решения для подготовки воды любого качества!"
       heroImage="/images/emkosti-collage-hero.png"

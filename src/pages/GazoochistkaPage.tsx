@@ -78,6 +78,7 @@ const GazoochistkaPage = () => {
 
   return (
     <CorporatePageShell
+      catalogTabs="gazoochistka"
       title="Газоочистное оборудование из полимеров"
       subtitle="Скрубберы, фильтры и каплеуловители — эффективная очистка промышленных газовых выбросов!"
       heroImage="/images/gazoochistka-hero-1.png"

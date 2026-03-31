@@ -91,6 +91,7 @@ const faqItems = [
 export default function VodoochistkaZhirouloviteli() {
   return (
     <CorporatePageShell
+      catalogTabs="vodoochistka"
       breadcrumbs={[
         { label: "Каталог", href: "/catalog" },
         { label: "Водоочистка", href: "/catalog/vodoochistka" },

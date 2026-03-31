@@ -84,6 +84,7 @@ const VodoochistkaLamelnyj = () => {
 
   return (
     <CorporatePageShell
+      catalogTabs="vodoochistka"
       breadcrumbs={[
         { label: "Каталог", href: "/catalog" },
         { label: "Водоочистка", href: "/catalog/vodoochistka" },

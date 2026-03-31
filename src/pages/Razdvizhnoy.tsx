@@ -173,6 +173,7 @@ const RazdvizhnoyContent = () => {
 
 const Razdvizhnoy = () => (
   <CorporatePageShell
+      catalogTabs="ventilyatsiya"
     productType="razdvizhnoy"
     title="Раздвижные воздуховоды"
     subtitle="Раздвижные элементы вентиляции из полипропилена и полиэтилена"

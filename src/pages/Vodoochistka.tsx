@@ -104,6 +104,7 @@ const faqItems = [
 
 const Vodoochistka = () => (
   <CorporatePageShell
+      catalogTabs="vodoochistka"
     breadcrumbs={[
       { label: "Каталог", href: "/catalog" },
       { label: "Водоочистка" },

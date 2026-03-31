@@ -172,6 +172,7 @@ const VozdukhovodContent = () => {
 
 const Vozdukhovod = () => (
   <CorporatePageShell
+      catalogTabs="ventilyatsiya"
     productType="vozdukhovod"
     title="Воздуховоды круглого сечения"
     subtitle="Воздуховоды из полипропилена и полиэтилена для промышленной вентиляции"

@@ -59,6 +59,7 @@ const UslugiPage = () => {
 
   return (
     <CorporatePageShell
+      catalogTabs="uslugi"
       title="Услуги и"
       accentWord="сервис"
       stats={[

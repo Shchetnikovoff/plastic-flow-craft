@@ -59,6 +59,7 @@ const KnsPage = () => {
 
   return (
     <CorporatePageShell
+      catalogTabs="kns"
       breadcrumbs={[
         { label: "Каталог", to: "/catalog" },
         { label: "КНС" },

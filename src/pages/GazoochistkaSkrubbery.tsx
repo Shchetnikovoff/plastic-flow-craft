@@ -160,6 +160,7 @@ const GazoochistkaSkrubbery = () => {
 
   return (
     <CorporatePageShell
+      catalogTabs="gazoochistka"
       title="Промышленные скрубберы"
       subtitle="Газоочистное оборудование для удаления токсичных газов, кислотных паров и аэрозолей из промышленных выбросов. Вертикальные и горизонтальные модели производительностью от 100 до 60 000 м³/ч."
       heroImage="/images/gazoochistka-hero-1.png"

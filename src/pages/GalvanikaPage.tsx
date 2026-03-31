@@ -84,6 +84,7 @@ const GalvanikaPage = () => {
 
   return (
     <CorporatePageShell
+      catalogTabs="galvanika"
       breadcrumbs={[
         { label: "Каталог", to: "/catalog" },
         { label: "Гальваника" },

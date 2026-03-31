@@ -74,6 +74,7 @@ const VentilyatsiyaPage = () => {
 
   return (
     <CorporatePageShell
+      catalogTabs="ventilyatsiya"
       productType="otvod"
       title="Промышленная вентиляция из полипропилена"
       subtitle="Воздуховоды, отводы, тройники и фасонные изделия — химически стойкие элементы вентиляции!"

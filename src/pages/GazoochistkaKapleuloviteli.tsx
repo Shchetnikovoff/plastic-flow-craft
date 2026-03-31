@@ -164,6 +164,7 @@ const GazoochistkaKapleuloviteli = () => {
 
   return (
     <CorporatePageShell
+      catalogTabs="gazoochistka"
       title="Каплеуловители из полипропилена"
       subtitle="Удаление капельной влаги и аэрозолей из вентиляционных потоков. Эффективность улавливания — 99,9%. Круглое и прямоугольное сечение, производительность от 125 до 27 500 м³/ч."
       heroImage="/images/gazoochistka-hero-1.png"

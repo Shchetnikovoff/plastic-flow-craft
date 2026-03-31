@@ -12,6 +12,7 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { Check, ArrowRight, Phone, Mail } from "lucide-react";
+import { catalog } from "@/data/catalog";
 
 interface BreadcrumbEntry {
   label: string;
@@ -29,6 +30,8 @@ interface CorporatePageShellProps {
   children: React.ReactNode;
   hideCTA?: boolean;
   seo: { title: string; description: string; keywords: string };
+  /** Show catalog category tabs bar below stats. Pass current category slug to highlight it. */
+  catalogTabs?: string;
 }
 
 export default function CorporatePageShell({
@@ -42,6 +45,7 @@ export default function CorporatePageShell({
   children,
   hideCTA,
   seo,
+  catalogTabs,
 }: CorporatePageShellProps) {
   useSEO(seo);
 
@@ -164,6 +168,33 @@ export default function CorporatePageShell({
                     </div>
                   </div>
                 ))}
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* CATALOG TABS */}
+        {catalogTabs !== undefined && (
+          <section className="w-full bg-slate-50 border-b border-slate-200">
+            <div className="mx-auto max-w-[1440px] px-4 md:px-8 py-3">
+              <div className="flex flex-wrap gap-2">
+                {catalog.map((cat, i) => {
+                  const isActive = cat.slug === catalogTabs;
+                  return (
+                    <Link
+                      key={cat.id}
+                      to={`/catalog/${cat.slug}`}
+                      className={`inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
+                        isActive
+                          ? "bg-amber-500 text-slate-900"
+                          : "bg-white border border-slate-200 text-slate-600 hover:border-amber-300 hover:text-amber-600"
+                      }`}
+                    >
+                      <span className="text-xs font-bold">{i + 1}</span>
+                      {cat.name}
+                    </Link>
+                  );
+                })}
               </div>
             </div>
           </section>

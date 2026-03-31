@@ -41,6 +41,7 @@ const LabMebelPage = () => {
 
   return (
     <CorporatePageShell
+      catalogTabs="labmebel"
       title="Лабораторная мебель из полипропилена"
       subtitle="Столы, шкафы, мойки и тумбы — химически стойкая мебель для лабораторий!"
       heroImage="/images/emkosti-collage-hero.png"

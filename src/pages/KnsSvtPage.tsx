@@ -37,6 +37,7 @@ const faq = [
 
 const KnsSvtPage = () => (
   <CorporatePageShell
+      catalogTabs="kns"
     breadcrumbs={[
       { label: "Каталог", to: "/catalog" },
       { label: "КНС", to: "/catalog/kns" },

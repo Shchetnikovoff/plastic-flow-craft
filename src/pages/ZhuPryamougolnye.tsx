@@ -44,6 +44,7 @@ const tableRows = models.map((m) => [m.article, m.name, m.throughput, m.peakDisc
 const ZhuPryamougolnye = () => {
   return (
     <CorporatePageShell
+      catalogTabs="vodoochistka"
       breadcrumbs={[
         { label: "Каталог", href: "/catalog" },
         { label: "Водоочистка", href: "/catalog/vodoochistka" },

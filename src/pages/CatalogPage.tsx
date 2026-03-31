@@ -323,11 +323,38 @@ const CategoryBrowser = ({ categorySlug }: { categorySlug: string }) => {
       subtitle={category.description}
       seo={{ title: `${category.name} | СЗПК`, description: `${category.name} — полимерное оборудование`, keywords: category.name }}
     >
+      {/* Main categories bar */}
+      <section className="w-full bg-slate-50 border-b border-slate-200">
+        <div className="mx-auto max-w-[1440px] px-4 md:px-8 py-3">
+          <div className="flex flex-wrap gap-2">
+            {catalog.map((cat, i) => {
+              const isActive = cat.slug === categorySlug;
+              return (
+                <Link
+                  key={cat.id}
+                  to={`/catalog/${cat.slug}`}
+                  className={`inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
+                    isActive
+                      ? "bg-amber-500 text-slate-900"
+                      : "bg-white border border-slate-200 text-slate-600 hover:border-amber-300 hover:text-amber-600"
+                  }`}
+                >
+                  <span className="text-xs font-bold">{i + 1}</span>
+                  {cat.name}
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Subcategories */}
       <section className="w-full bg-white py-10 md:py-14">
         <div className="mx-auto max-w-[1440px] px-4 md:px-8">
           <div className="flex flex-col md:flex-row gap-6">
-            {/* Left sidebar */}
+            {/* Left sidebar — subcategories */}
             <nav className="md:w-[220px] shrink-0">
+              <p className="text-xs text-slate-400 font-semibold uppercase tracking-wider px-3 mb-2">Подкатегории</p>
               <ul className="space-y-0.5">
                 {category.subcategories.map((sub, i) => {
                   const isSelected = selectedSubId === sub.id;

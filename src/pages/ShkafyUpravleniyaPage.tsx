@@ -41,6 +41,7 @@ const ShkafyUpravleniyaPage = () => {
 
   return (
     <CorporatePageShell
+      catalogTabs="shkafy-upravleniya"
       title="Шкафы управления"
       subtitle="Автоматизация гальванических линий, очистных сооружений и насосных станций — надёжное управление технологическими процессами!"
       heroImage="/images/emkosti-collage-hero.png"
