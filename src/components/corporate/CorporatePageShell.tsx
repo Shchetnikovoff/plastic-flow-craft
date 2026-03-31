@@ -61,9 +61,9 @@ export default function CorporatePageShell({
           <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/95 to-slate-900/80" />
           <div className="absolute top-1/2 right-0 -translate-y-1/2 w-[500px] h-[500px] bg-amber-500/10 rounded-full blur-[150px]" />
 
-          <div className="relative max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16 md:pt-24 md:pb-20">
+          <div className="relative max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16 md:pt-24 md:pb-20 text-center">
             {/* Breadcrumbs */}
-            <Breadcrumb className="mb-6">
+            <Breadcrumb className="mb-6 justify-center">
               <BreadcrumbList>
                 <BreadcrumbItem>
                   <BreadcrumbLink asChild>
@@ -119,12 +119,12 @@ export default function CorporatePageShell({
             </h1>
 
             {subtitle && (
-              <p className="text-slate-300 text-base md:text-lg lg:text-xl mt-6 leading-relaxed max-w-[600px]">
+              <p className="text-slate-300 text-base md:text-lg lg:text-xl mt-6 leading-relaxed max-w-[600px] mx-auto">
                 {subtitle}
               </p>
             )}
 
-            <div className="flex flex-col sm:flex-row gap-3 mt-8">
+            <div className="flex flex-col sm:flex-row justify-center gap-3 mt-8">
               <Button
                 size="lg"
                 className="rounded-full px-8 text-base font-semibold bg-amber-500 hover:bg-amber-400 text-slate-900 shadow-lg shadow-amber-500/25 h-12"
