@@ -1,0 +1,87 @@
+{
+  // СЗПК Пласт-Металл Про — ИИ-Продавец/Инженер/Маркетолог
+  // CCS CLI proxy (Claude Sonnet 4.6) on localhost:8317
+
+  gateway: {
+    port: 18790,
+    bind: "loopback",
+  },
+
+  models: {
+    providers: [
+      {
+        id: "ccs",
+        api: "openai-completions",
+        baseUrl: "http://localhost:8317",
+        apiKey: "ccs-internal-managed",
+        models: [
+          {
+            id: "claude-sonnet-4-6",
+            contextWindow: 200000,
+          },
+          {
+            id: "claude-haiku-4-5-20251001",
+            contextWindow: 200000,
+          },
+        ]
+      }
+    ]
+  },
+
+  agents: {
+    defaults: {
+      model: {
+        primary: "ccs/claude-sonnet-4-6",
+        fallbacks: ["ccs/claude-haiku-4-5-20251001"],
+      },
+      workspace: "~/.openclaw/workspace-szpk",
+      compaction: {
+        memoryFlush: {
+          enabled: true,
+          softThresholdTokens: 20000,
+        },
+      },
+    },
+  },
+
+  channels: {
+    web: {
+      enabled: true,
+    },
+    telegram: {
+      enabled: true,
+      token: "${TELEGRAM_BOT_TOKEN_SZPK}",
+      dmPolicy: "open",
+      capabilities: {
+        inlineButtons: "dm",
+      },
+    },
+  },
+
+  tools: {
+    allow: [
+      "group:runtime",
+      "web_search",
+      "web_fetch",
+      "memory_search",
+      "memory_get",
+      "message",
+    ],
+  },
+
+  skills: {
+    load: {
+      watch: true,
+      watchDebounceMs: 250,
+    },
+    entries: {
+      "product-catalog": { enabled: true },
+      "chemical-resistance": { enabled: true },
+      "sales-engineer": { enabled: true },
+    },
+  },
+
+  cron: {
+    enabled: false,
+  },
+}
