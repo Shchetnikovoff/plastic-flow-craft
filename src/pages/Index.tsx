@@ -12,12 +12,13 @@ import {
   ArticleBreakdown,
   MaterialSection,
   SelectorBadges,
-  ProductPageShell,
   CharacteristicsGrid,
   QuantityCell,
   AddToCartButton,
   type ArticleSegment,
 } from "@/components/configurator";
+import CorporatePageShell from "@/components/corporate/CorporatePageShell";
+import { FAQSection } from "@/components/corporate/sections";
 
 interface ProductContentProps {
   angle: AngleType;
@@ -203,9 +204,32 @@ const Index = ({ angle = 90 }: IndexProps) => {
   const [selectedConnection, setSelectedConnection] = useState<ConnectionType>("rastrub");
 
   return (
-    <ProductPageShell productType="otvod" angle={angle} connectionType={selectedConnection}>
+    <CorporatePageShell
+      title="Отводы вентиляционные"
+      heroImage="/images/ventilyatsiya-hero-1.png"
+      breadcrumbs={[
+        { label: "Каталог", href: "/catalog" },
+        { label: "Вентиляция", href: "/catalog/ventilyatsiya" },
+        { label: "Отводы" },
+      ]}
+      stats={[
+        { value: "15° — 90°", label: "углы" },
+        { value: "PP / PE", label: "материалы" },
+        { value: "от 7 дней", label: "сроки" },
+        { value: "5 лет", label: "гарантия" },
+      ]}
+    >
       <ProductContent angle={angle} selectedConnection={selectedConnection} setSelectedConnection={setSelectedConnection} />
-    </ProductPageShell>
+      <FAQSection
+        items={[
+          { q: "Как выбрать материал?", a: "Используйте конфигуратор — выберите рабочую среду и температуру, система подберёт оптимальный материал." },
+          { q: "Можно заказать нестандартный размер?", a: "Да, укажите параметры в конфигураторе или свяжитесь с инженером." },
+          { q: "Как формируется артикул?", a: "Артикул генерируется автоматически на основе выбранных параметров." },
+          { q: "Сроки изготовления?", a: "7–21 рабочий день в зависимости от сложности." },
+          { q: "Как оформить заказ?", a: "Добавьте товар в корзину из конфигуратора и оформите заявку." },
+        ]}
+      />
+    </CorporatePageShell>
   );
 };
 

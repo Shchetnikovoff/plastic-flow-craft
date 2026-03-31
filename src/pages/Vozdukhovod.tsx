@@ -10,11 +10,27 @@ import {
   ImageGalleryWithLightbox,
   ArticleBreakdown,
   MaterialSection,
-  ProductPageShell,
   QuantityCell,
   AddToCartButton,
   type ArticleSegment,
 } from "@/components/configurator";
+import CorporatePageShell from "@/components/corporate/CorporatePageShell";
+import { FAQSection } from "@/components/corporate/sections";
+
+const stats = [
+  { value: "Круглые / квадратные", label: "сечения" },
+  { value: "PP / PE", label: "материалы" },
+  { value: "от 7 дней", label: "срок изготовления" },
+  { value: "5 лет", label: "гарантия" },
+];
+
+const faq = [
+  { q: "Какие виды вентиляции вы производите?", a: "Воздуховоды круглого и прямоугольного сечения, тройники, отводы, раздвижные воздуховоды." },
+  { q: "Из каких материалов?", a: "Полипропилен (PP) и полиэтилен (PE)." },
+  { q: "Какие диаметры доступны?", a: "От 50 до 1200 мм для круглых, нестандарт — по ТЗ." },
+  { q: "Сроки?", a: "7–14 рабочих дней." },
+  { q: "Доставка?", a: "Спецтранспортом по всей РФ." },
+];
 
 const VozdukhovodContent = () => {
   const { addItem } = useCart();
@@ -55,7 +71,7 @@ const VozdukhovodContent = () => {
   ];
 
   return (
-    <main className="mx-auto max-w-[960px] px-4 sm:px-6 py-6 sm:py-8">
+    <>
       <ImageGalleryWithLightbox images={vozdukhovodImages} selectedImage={selectedImage} onSelectedImageChange={setSelectedImage} />
 
       {/* Description + Characteristics */}
@@ -145,14 +161,30 @@ const VozdukhovodContent = () => {
           </Table>
         </div>
       </div>
-    </main>
+
+      {/* FAQ */}
+      <div className="mt-10">
+        <FAQSection items={faq} />
+      </div>
+    </>
   );
 };
 
 const Vozdukhovod = () => (
-  <ProductPageShell productType="vozdukhovod">
+  <CorporatePageShell
+    productType="vozdukhovod"
+    title="Воздуховоды круглого сечения"
+    subtitle="Воздуховоды из полипропилена и полиэтилена для промышленной вентиляции"
+    heroImage="/images/ventilyatsiya-hero-1.png"
+    stats={stats}
+    breadcrumbs={[
+      { label: "Каталог", href: "/catalog" },
+      { label: "Вентиляция", href: "/ventilyatsiya" },
+      { label: "Воздуховоды" },
+    ]}
+  >
     <VozdukhovodContent />
-  </ProductPageShell>
+  </CorporatePageShell>
 );
 
 export default Vozdukhovod;

@@ -1,17 +1,13 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import Header from "@/components/Header";
-import CartSheet from "@/components/CartSheet";
-import { CartProvider } from "@/contexts/CartContext";
+import { useNavigate } from "react-router-dom";
 import { Check } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
-import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { toast } from "sonner";
-import PageFooter from "@/components/PageFooter";
+import {
+  Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
+} from "@/components/ui/table";
+import CatalogPageShell from "@/components/layout/CatalogPageShell";
+import FullBleedSection from "@/components/layout/FullBleedSection";
+import MidPageCTA from "@/components/catalog-sections/MidPageCTA";
+
+/* ── static data ── */
 
 const models = [
   { article: "СЗПК.ЖУГ.1.ПП", name: "ЖУГ-1", throughput: "1", peakDischarge: "500", dimensions: "Ø800×L1200" },
@@ -38,129 +34,98 @@ const optionsList = [
   "Лестница для обслуживания (подземные модели)",
 ];
 
-const Inner = () => {
-  const [cartOpen, setCartOpen] = useState(false);
-  const navigate = useNavigate();
-  const [form, setForm] = useState({ name: "", phone: "", email: "", description: "" });
+const sections = [
+  { id: "opisanie", label: "Описание" },
+  { id: "modeli", label: "Модели" },
+  { id: "opcii", label: "Опции" },
+  { id: "cta-form", label: "Заявка" },
+];
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!form.name.trim() || !form.phone.trim()) { toast.error("Заполните обязательные поля"); return; }
-    toast.success("Заявка отправлена!");
-    setForm({ name: "", phone: "", email: "", description: "" });
-  };
+const breadcrumbs = [
+  { label: "Каталог", href: "/catalog" },
+  { label: "Водоочистка", href: "/catalog/vodoochistka" },
+  { label: "Жироуловители", href: "/catalog/vodoochistka/zhirouloviteli" },
+  { label: "Горизонтальные" },
+];
+
+/* ── component ── */
+
+const ZhuGorizontalnye = () => {
+  const navigate = useNavigate();
 
   return (
-    <>
-      <Header onCartOpen={() => setCartOpen(true)} productType="otvod" />
-      <CartSheet open={cartOpen} onOpenChange={setCartOpen} />
-      <main className="mx-auto max-w-[960px] px-4 sm:px-6 py-6 sm:py-8">
-        <Breadcrumb className="mb-6">
-          <BreadcrumbList>
-            <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog">Каталог</Link></BreadcrumbLink></BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog/vodoochistka">Водоочистка</Link></BreadcrumbLink></BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog/vodoochistka/zhirouloviteli">Жироуловители</Link></BreadcrumbLink></BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem><BreadcrumbPage>Горизонтальные</BreadcrumbPage></BreadcrumbItem>
-          </BreadcrumbList>
-        </Breadcrumb>
+    <CatalogPageShell
+      breadcrumbs={breadcrumbs}
+      title="Горизонтальные жироуловители"
+      seoDescription="Горизонтальные жироуловители из ПП для общепита."
+      seoKeywords="жироуловитель горизонтальный, СЗПК"
+      subtitle="Увеличенная зона отстаивания для больших объёмов стоков. Подземное исполнение. Производительность до 25 л/с."
+      heroImages={["/images/zhu-g-hero-ral7032.jpg", "/images/zhu-g-schema1.png", "/images/zhu-g-schema3.png"]}
+      sections={sections}
+      formTitle="Оставить заявку"
+      formSubtitle="Тип объекта, требуемая производительность — мы подберём оптимальный жироуловитель."
+    >
+      {/* Описание (slate-50) */}
+      <FullBleedSection id="opisanie" className="bg-slate-50 border-y border-slate-200 py-10 md:py-14">
+        <h2 className="text-xl font-bold text-slate-900 mb-3 tracking-tight">Описание</h2>
+        <div className="text-sm text-slate-600 leading-relaxed space-y-3">
+          <p>Подземный горизонтальный жироуловитель представляет собой цилиндрическую пластиковую ёмкость, внутри которой оборудованы две камеры. Сверху жироуловитель закрывается крышкой. Сточная вода через входной патрубок поступает в 1-й отсек, выполняющий роль отстойника ила, где происходит отделение крупного мусора и тяжёлых загрязнений, оседающих на дне.</p>
+          <p>Далее вода поступает во 2-й отсек, выполняющий функцию жироуловителя, в котором происходит окончательное отделение жиров. Очищенная вода через распределительный карман поступает в отводящий патрубок и отводится в канализационную сеть.</p>
+          <p>Изготовление в стандартном варианте с диаметром патрубков 110, 160 или 200 мм, а также по проекту заказчика. В комплекте — колодец высотой 500 мм и диаметром 700 мм. Монтаж на бетонное основание H-200 мм с обсыпкой пескоцементной смесью 1:10, слоем не менее 200 мм.</p>
+        </div>
+      </FullBleedSection>
 
-        <section className="mb-10">
-          <p className="text-xs text-muted-foreground uppercase tracking-wider mb-2">ООО СЗПК «Пласт-Металл ПРО»</p>
-          <h1 className="text-2xl sm:text-3xl font-bold text-foreground leading-tight mb-3">Горизонтальные жироуловители</h1>
-          <p className="text-sm text-muted-foreground mb-5">Увеличенная зона отстаивания для больших объёмов стоков. Подземное исполнение. Производительность до 25 л/с.</p>
-          <Button onClick={() => document.getElementById("cta-form")?.scrollIntoView({ behavior: "smooth" })} className="gap-2">Получить расчёт стоимости</Button>
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mt-6">
-            <img src="/images/zhu-g-hero-ral7032.jpg" alt="Горизонтальный жироуловитель" className="rounded-lg border border-border object-contain w-full aspect-[4/3]" />
-            <img src="/images/zhu-g-schema1.png" alt="Схема горизонтального жироуловителя с размерами" className="rounded-lg border border-border object-contain w-full aspect-[4/3]" />
-            <img src="/images/zhu-g-schema3.png" alt="Горизонтальный жироуловитель — вид сбоку" className="rounded-lg border border-border object-contain w-full aspect-[4/3]" />
-          </div>
-        </section>
+      {/* MidPageCTA */}
+      <MidPageCTA text="Нужна консультация по подбору горизонтального жироуловителя?" />
 
-
-        <nav className="mb-8 flex flex-wrap gap-2">
-          {[
-            { id: "opisanie", label: "Описание" },
-            { id: "modeli", label: "Модели" },
-            { id: "opcii", label: "Опции" },
-            { id: "cta-form", label: "Заявка" },
-          ].map((s) => (
-            <button
-              key={s.id}
-              onClick={() => document.getElementById(s.id)?.scrollIntoView({ behavior: "smooth" })}
-              className="rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium text-foreground hover:bg-accent hover:text-accent-foreground transition-colors"
-            >
-              {s.label}
-            </button>
-          ))}
-        </nav>
-
-        <section id="opisanie" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">Описание</h2>
-          <div className="text-sm text-muted-foreground leading-relaxed space-y-3">
-            <p>Подземный горизонтальный жироуловитель представляет собой цилиндрическую пластиковую ёмкость, внутри которой оборудованы две камеры. Сверху жироуловитель закрывается крышкой. Сточная вода через входной патрубок поступает в 1-й отсек, выполняющий роль отстойника ила, где происходит отделение крупного мусора и тяжёлых загрязнений, оседающих на дне.</p>
-            <p>Далее вода поступает во 2-й отсек, выполняющий функцию жироуловителя, в котором происходит окончательное отделение жиров. Очищенная вода через распределительный карман поступает в отводящий патрубок и отводится в канализационную сеть.</p>
-            <p>Изготовление в стандартном варианте с диаметром патрубков 110, 160 или 200 мм, а также по проекту заказчика. В комплекте — колодец высотой 500 мм и диаметром 700 мм. Монтаж на бетонное основание H-200 мм с обсыпкой пескоцементной смесью 1:10, слоем не менее 200 мм.</p>
-          </div>
-        </section>
-
-        <section id="modeli" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Модельный ряд</h2>
-          <div className="rounded-lg border border-border overflow-auto mb-4">
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead className="text-xs">Артикул</TableHead>
-                  <TableHead className="text-xs">Модель</TableHead>
-                  <TableHead className="text-xs text-right">Произв., л/с</TableHead>
-                  <TableHead className="text-xs text-right">Пик. сброс, л</TableHead>
-                  <TableHead className="text-xs text-right">Габариты, мм</TableHead>
+      {/* Модельный ряд (white) */}
+      <FullBleedSection id="modeli" className="bg-white py-10 md:py-14" wide>
+        <h2 className="text-xl font-bold text-slate-900 mb-4 tracking-tight">Модельный ряд</h2>
+        <div className="rounded-lg border border-slate-200 overflow-auto mb-4">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead className="text-xs">Артикул</TableHead>
+                <TableHead className="text-xs">Модель</TableHead>
+                <TableHead className="text-xs text-right">Произв., л/с</TableHead>
+                <TableHead className="text-xs text-right">Пик. сброс, л</TableHead>
+                <TableHead className="text-xs text-right">Габариты, мм</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {models.map((m, i) => (
+                <TableRow
+                  key={m.article}
+                  className={`cursor-pointer hover:bg-amber-50 transition-colors ${i % 2 === 1 ? "bg-muted/50" : ""}`}
+                  onClick={() => navigate(`/product/${encodeURIComponent(m.article)}`)}
+                >
+                  <TableCell className="text-xs font-mono font-medium text-amber-600 underline">{m.article}</TableCell>
+                  <TableCell className="text-xs font-medium">{m.name}</TableCell>
+                  <TableCell className="text-xs text-right">{m.throughput}</TableCell>
+                  <TableCell className="text-xs text-right">{m.peakDischarge}</TableCell>
+                  <TableCell className="text-xs text-right">{m.dimensions}</TableCell>
                 </TableRow>
-              </TableHeader>
-              <TableBody>
-                {models.map((m) => (
-                  <TableRow key={m.article} className="cursor-pointer hover:bg-primary/5 transition-colors" onClick={() => navigate(`/product/${encodeURIComponent(m.article)}`)}>
-                    <TableCell className="text-xs font-mono font-medium text-primary underline">{m.article}</TableCell>
-                    <TableCell className="text-xs font-medium">{m.name}</TableCell>
-                    <TableCell className="text-xs text-right">{m.throughput}</TableCell>
-                    <TableCell className="text-xs text-right">{m.peakDischarge}</TableCell>
-                    <TableCell className="text-xs text-right">{m.dimensions}</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </div>
-          <p className="text-xs text-muted-foreground">Возможно изготовление по индивидуальным размерам.</p>
-        </section>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
+        <p className="text-xs text-slate-500">Возможно изготовление по индивидуальным размерам.</p>
+      </FullBleedSection>
 
-        <section id="opcii" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Дополнительное оборудование</h2>
-          <ul className="space-y-1.5">
-            {optionsList.map((item, i) => (
-              <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
-                <Check className="h-3.5 w-3.5 text-primary shrink-0 mt-0.5" /><span>{item}</span>
-              </li>
-            ))}
-          </ul>
-        </section>
-
-        <section id="cta-form" className="mb-10 rounded-lg border border-border bg-card p-6">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Оставить заявку</h2>
-          <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="space-y-1.5"><Label htmlFor="name" className="text-xs">Имя *</Label><Input id="name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Ваше имя" /></div>
-            <div className="space-y-1.5"><Label htmlFor="phone" className="text-xs">Телефон *</Label><Input id="phone" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} placeholder="+7 (___) ___-__-__" /></div>
-            <div className="space-y-1.5"><Label htmlFor="email" className="text-xs">E-mail</Label><Input id="email" type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="email@example.com" /></div>
-            <div className="space-y-1.5 sm:col-span-2"><Label htmlFor="description" className="text-xs">Описание задачи</Label><Textarea id="description" value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} placeholder="Тип объекта, требуемая производительность…" rows={3} /></div>
-            <div className="sm:col-span-2"><Button type="submit" className="w-full sm:w-auto">Отправить заявку</Button></div>
-          </form>
-        </section>
-        <PageFooter />
-      </main>
-    </>
+      {/* Опции (slate-50) */}
+      <FullBleedSection id="opcii" className="bg-slate-50 border-y border-slate-200 py-10 md:py-14">
+        <h2 className="text-xl font-bold text-slate-900 mb-4 tracking-tight">Дополнительное оборудование</h2>
+        <ul className="space-y-1.5">
+          {optionsList.map((item, i) => (
+            <li key={i} className="flex items-start gap-2 text-sm text-slate-600">
+              <Check className="h-3.5 w-3.5 text-amber-500 shrink-0 mt-0.5" />
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </FullBleedSection>
+    </CatalogPageShell>
   );
 };
 
-const ZhuGorizontalnye = () => (<CartProvider><Inner /></CartProvider>);
 export default ZhuGorizontalnye;

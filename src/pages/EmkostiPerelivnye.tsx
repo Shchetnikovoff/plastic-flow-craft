@@ -1,23 +1,12 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import Header from "@/components/Header";
-import CartSheet from "@/components/CartSheet";
-import { CartProvider } from "@/contexts/CartContext";
+import { useNavigate } from "react-router-dom";
+import CorporatePageShell from "@/components/corporate/CorporatePageShell";
+import { AdvantagesGrid, FeatureChecklist, DarkInfoBlock, FAQSection } from "@/components/corporate/sections";
 import { perelivnyeProducts, ppColors } from "@/data/perelivnyeProducts";
-import { Check, Droplets, Wrench, ShieldCheck, Clock, Truck, FlaskConical, Settings } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
-import {
-  Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
+import { Wrench, ShieldCheck, Clock, Truck, FlaskConical, Settings } from "lucide-react";
 import {
   Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
 } from "@/components/ui/table";
-import { toast } from "sonner";
-import PageFooter from "@/components/PageFooter";
 
 const whyUs = [
   "Изготовление из листового полипропилена (PP-H) толщиной 8–15 мм",
@@ -44,15 +33,6 @@ const features = [
   "Предотвращение перелива воды на обходную дорожку",
 ];
 
-const specs = [
-  { label: "Материал", value: "Полипропилен PP-H" },
-  { label: "Толщина стенки", value: "8–15 мм" },
-  { label: "Температура среды", value: "+5…+40 °C" },
-  { label: "Рабочая среда", value: "Вода (в т. ч. хлорированная)" },
-  { label: "Форма", value: "Прямоугольная" },
-  { label: "Соединение", value: "Трубные штуцеры / фланцы" },
-];
-
 const options = [
   "Патрубки подачи и возврата воды (диаметр по проекту)",
   "Переливной лоток с сеткой-фильтром",
@@ -72,275 +52,129 @@ const advantages = [
   { icon: Wrench, title: "Монтаж и сервис", text: "Установка на объекте, подключение к системе водоподготовки, обучение персонала." },
 ];
 
+const faqItems = [
+  { q: "Из каких материалов?", a: "PP, PE, PVC — подбор по среде и температуре." },
+  { q: "Какой объём?", a: "50 л — 300 м³, нестандарт по ТЗ." },
+  { q: "Сроки?", a: "10–21 день стандарт, от 15 нестандарт." },
+  { q: "Доставка?", a: "Спецтранспорт по всей РФ." },
+  { q: "По своим чертежам?", a: "Да, изготовим и спроектируем." },
+];
 
-const EmkostiPerelivnyeInner = () => {
-  const [cartOpen, setCartOpen] = useState(false);
+const EmkostiPerelivnye = () => {
   const navigate = useNavigate();
-  const [form, setForm] = useState({ name: "", phone: "", email: "", description: "" });
   const [selectedColorCode, setSelectedColorCode] = useState(ppColors[0].code);
   const selectedColor = ppColors.find((c) => c.code === selectedColorCode) || ppColors[0];
   const filteredProducts = perelivnyeProducts.filter((p) => p.colorCode === selectedColorCode);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!form.name.trim() || !form.phone.trim()) {
-      toast.error("Заполните обязательные поля (имя, телефон)");
-      return;
-    }
-    toast.success("Заявка отправлена! Мы свяжемся с вами в ближайшее время.");
-    setForm({ name: "", phone: "", email: "", description: "" });
-  };
-
-  const scrollToForm = () => {
-    document.getElementById("cta-form")?.scrollIntoView({ behavior: "smooth" });
-  };
-
   return (
-    <>
-      <Header onCartOpen={() => setCartOpen(true)} productType="otvod" />
-      <CartSheet open={cartOpen} onOpenChange={setCartOpen} />
-
-      <main className="mx-auto max-w-[960px] px-4 sm:px-6 py-6 sm:py-8">
-        {/* Breadcrumbs */}
-        <Breadcrumb className="mb-6">
-          <BreadcrumbList>
-            <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog">Каталог</Link></BreadcrumbLink></BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog/emkosti">Ёмкости</Link></BreadcrumbLink></BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem><BreadcrumbPage>Переливные ёмкости для бассейнов</BreadcrumbPage></BreadcrumbItem>
-          </BreadcrumbList>
-        </Breadcrumb>
-
-        {/* Hero */}
-        <section className="mb-10">
-          <p className="text-xs text-muted-foreground uppercase tracking-wider mb-2">ООО СЗПК «Пласт-Металл ПРО»</p>
-          <h1 className="text-2xl sm:text-3xl font-bold text-foreground leading-tight mb-3">
-            Переливные ёмкости для бассейнов из полипропилена
-          </h1>
-          <p className="text-sm text-muted-foreground mb-5">
-            Надёжные буферные ёмкости для переливных бассейнов — сбор, хранение и рециркуляция воды.
-          </p>
-          <Button onClick={scrollToForm} className="gap-2">
-            Получить расчёт стоимости
-          </Button>
-
-          {/* Hero image */}
-          <div className="mt-6 rounded-lg border border-border overflow-hidden bg-card">
-            <img src={selectedColorCode === "7032" ? "/images/emkost-perelivnaya-bassein-grey.jpg" : "/images/emkost-perelivnaya-bassein.jpg"} alt="Переливная ёмкость для бассейна из полипропилена" className="w-full h-auto object-contain" />
-          </div>
-        </section>
-
-        {/* Цвет полипропилена */}
-
-        <nav className="mb-8 flex flex-wrap gap-2">
-          {[
-            { id: "cvet", label: "Цвет" },
-            { id: "opisanie", label: "Описание" },
-            { id: "funkcii", label: "Функции" },
-            { id: "primenenie", label: "Применение" },
-            { id: "harakteristiki", label: "Характеристики" },
-            { id: "modeli", label: "Модели" },
-            { id: "preimushchestva", label: "Преимущества" },
-            { id: "cta-form", label: "Заявка" },
-          ].map((s) => (
-            <button
-              key={s.id}
-              onClick={() => document.getElementById(s.id)?.scrollIntoView({ behavior: "smooth" })}
-              className="rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium text-foreground hover:bg-accent hover:text-accent-foreground transition-colors"
-            >
-              {s.label}
-            </button>
-          ))}
-        </nav>
-
-        <section id="cvet" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">Цвет полипропилена</h2>
-          <div className="grid gap-2 sm:grid-cols-2">
+    <CorporatePageShell
+      breadcrumbs={[
+        { label: "Каталог", href: "/catalog" },
+        { label: "Ёмкости", href: "/catalog/emkosti" },
+        { label: "Переливные ёмкости для бассейнов" },
+      ]}
+      title="Переливные ёмкости"
+      accentWord="для бассейнов"
+      subtitle="Надёжные буферные ёмкости для переливных бассейнов — сбор, хранение и рециркуляция воды"
+      badge="Полипропилен PP-H"
+      heroImage="/images/emkosti-collage-hero.png"
+      stats={[
+        { value: "50 л — 300 м³", label: "диапазон объёмов" },
+        { value: "PP / PE / PVC", label: "материалы" },
+        { value: "от 10 дней", label: "срок изготовления" },
+        { value: "5 лет", label: "гарантия" },
+      ]}
+      seo={{
+        title: "Переливные ёмкости для бассейнов из полипропилена",
+        description: "Производство переливных ёмкостей из полипропилена PP-H для бассейнов. Индивидуальные размеры, гарантия 5 лет.",
+        keywords: "переливные ёмкости, ёмкости для бассейнов, полипропилен, буферная ёмкость, СЗПК",
+      }}
+    >
+      {/* Color selector */}
+      <section className="w-full bg-white py-16 md:py-20">
+        <div className="mx-auto max-w-[1440px] px-4 md:px-8">
+          <h2 className="text-2xl md:text-3xl font-bold text-slate-900">Цвет полипропилена</h2>
+          <div className="mt-10 grid gap-3 sm:grid-cols-2">
             {ppColors.map((c) => (
               <div
                 key={c.ral}
                 onClick={() => setSelectedColorCode(c.code)}
-                className={`rounded-lg border bg-card p-3 cursor-pointer transition-all ${
+                className={`rounded-xl border bg-white p-4 cursor-pointer transition-all ${
                   selectedColor.code === c.code
-                    ? "border-primary ring-1 ring-primary shadow-sm"
-                    : "hover:border-muted-foreground"
+                    ? "border-amber-500 ring-1 ring-amber-500 shadow-md"
+                    : "border-slate-200 hover:border-slate-400"
                 }`}
               >
-                <div className="flex items-center gap-2">
-                  <span className="w-5 h-5 rounded-full border border-border shrink-0" style={{ backgroundColor: c.hex }} />
-                  <span className="text-sm font-semibold text-foreground">{c.name}</span>
-                  <span className="text-xs text-muted-foreground">{c.ral}</span>
+                <div className="flex items-center gap-3">
+                  <span className="w-6 h-6 rounded-full border border-slate-200 shrink-0" style={{ backgroundColor: c.hex }} />
+                  <span className="text-sm font-semibold text-slate-900">{c.name}</span>
+                  <span className="text-xs text-slate-500">{c.ral}</span>
                 </div>
-                <p className="text-xs text-muted-foreground mt-1">{c.application}</p>
+                <p className="text-xs text-slate-500 mt-2">{c.application}</p>
               </div>
             ))}
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Intro */}
-        <section className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">
-            Переливные ёмкости: назначение и принцип работы
-          </h2>
-          <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-            Переливная ёмкость — ключевой элемент системы водоподготовки переливного бассейна. Она принимает воду, стекающую через переливной лоток, и служит буферным резервуаром перед подачей в систему фильтрации, обеззараживания и подогрева. Правильно подобранный объём компенсирует колебания уровня воды при использовании бассейна.
-          </p>
-          <h3 className="text-sm font-semibold text-foreground mb-2">Почему выбирают нас:</h3>
-          <ul className="space-y-2">
-            {whyUs.map((item, i) => (
-              <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
-                <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" />
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
-        </section>
+      <DarkInfoBlock
+        title="Назначение и принцип работы"
+        text="Переливная ёмкость — ключевой элемент системы водоподготовки переливного бассейна. Она принимает воду, стекающую через переливной лоток, и служит буферным резервуаром перед подачей в систему фильтрации, обеззараживания и подогрева. Правильно подобранный объём компенсирует колебания уровня воды при использовании бассейна."
+        highlights={[
+          { value: "PP-H", label: "материал" },
+          { value: "8–15 мм", label: "толщина стенки" },
+          { value: "+5…+40 °C", label: "температура среды" },
+          { value: "от 30 лет", label: "срок службы" },
+        ]}
+      />
 
-        {/* Функции */}
-        <section id="funkcii" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Функции переливной ёмкости</h2>
-          <div className="space-y-2">
-            {features.map((item, i) => (
-              <div key={i} className="flex items-start gap-2 rounded-lg border border-border bg-card p-3">
-                <Droplets className="h-4 w-4 text-primary shrink-0 mt-0.5" />
-                <span className="text-sm text-foreground">{item}</span>
-              </div>
-            ))}
-          </div>
-        </section>
+      <FeatureChecklist title="Почему выбирают нас" items={whyUs} />
 
-        {/* Назначение */}
-        <section id="primenenie" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Область применения</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-            {applications.map((app, i) => (
-              <div key={i} className="flex items-start gap-2 rounded-lg border border-border bg-card p-3">
-                <Droplets className="h-4 w-4 text-primary shrink-0 mt-0.5" />
-                <span className="text-sm text-foreground">{app}</span>
-              </div>
-            ))}
-          </div>
-        </section>
+      <FeatureChecklist title="Функции переливной ёмкости" items={features} columns={1} />
 
-        {/* Характеристики */}
-        <section id="harakteristiki" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Технические характеристики</h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 mb-6">
-            {specs.map((spec, i) => (
-              <div key={i} className="rounded-lg border border-border bg-muted/30 p-3">
-                <span className="block text-xs text-muted-foreground">{spec.label}</span>
-                <span className="text-sm font-semibold text-foreground">{spec.value}</span>
-              </div>
-            ))}
-          </div>
+      <FeatureChecklist title="Область применения" items={applications} />
 
-          <h3 className="text-sm font-semibold text-foreground mb-2">Дополнительные опции:</h3>
-          <ul className="space-y-1.5">
-            {options.map((item, i) => (
-              <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
-                <Check className="h-3.5 w-3.5 text-primary shrink-0 mt-0.5" />
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
-        </section>
+      <FeatureChecklist title="Дополнительные опции" items={options} />
 
-        {/* Типоразмерный ряд */}
-        <section id="modeli" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Типоразмерный ряд</h2>
-          <p className="text-sm text-muted-foreground mb-4">
+      {/* Product table */}
+      <section className="w-full bg-white py-16 md:py-20">
+        <div className="mx-auto max-w-[1440px] px-4 md:px-8">
+          <h2 className="text-2xl md:text-3xl font-bold text-slate-900">Типоразмерный ряд</h2>
+          <p className="mt-2 text-slate-500 text-lg">
             Размер ёмкости подбирается в зависимости от объёма бассейна. Ниже представлены стандартные модели — возможно изготовление по индивидуальным размерам.
           </p>
-          <div className="rounded-lg border border-border overflow-auto">
-           <Table>
+          <div className="mt-10 rounded-lg border border-slate-200 overflow-auto">
+            <Table>
               <TableHeader>
-                <TableRow>
-                  <TableHead className="text-xs">Артикул</TableHead>
-                  <TableHead className="text-xs">Объём бассейна</TableHead>
-                  <TableHead className="text-xs text-right">Длина, мм</TableHead>
-                  <TableHead className="text-xs text-right">Ширина, мм</TableHead>
-                  <TableHead className="text-xs text-right">Высота, мм</TableHead>
+                <TableRow className="bg-slate-50">
+                  <TableHead className="text-xs font-semibold text-slate-700">Артикул</TableHead>
+                  <TableHead className="text-xs font-semibold text-slate-700">Объём бассейна</TableHead>
+                  <TableHead className="text-xs font-semibold text-slate-700 text-right">Длина, мм</TableHead>
+                  <TableHead className="text-xs font-semibold text-slate-700 text-right">Ширина, мм</TableHead>
+                  <TableHead className="text-xs font-semibold text-slate-700 text-right">Высота, мм</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {filteredProducts.map((item) => (
-                  <TableRow key={item.article} className="cursor-pointer hover:bg-muted/70" onClick={() => navigate(`/product/${item.article}`)}>
-                      <TableCell className="text-xs font-medium font-mono text-primary">{item.article}</TableCell>
-                      <TableCell className="text-xs font-medium">{item.label}</TableCell>
-                      <TableCell className="text-xs text-right">{item.length.toLocaleString()}</TableCell>
-                      <TableCell className="text-xs text-right">{item.width.toLocaleString()}</TableCell>
-                      <TableCell className="text-xs text-right">{item.height.toLocaleString()}</TableCell>
+                  <TableRow key={item.article} className="cursor-pointer hover:bg-amber-50/50" onClick={() => navigate(`/product/${item.article}`)}>
+                    <TableCell className="text-xs font-medium font-mono text-amber-600">{item.article}</TableCell>
+                    <TableCell className="text-xs font-medium">{item.label}</TableCell>
+                    <TableCell className="text-xs text-right">{item.length.toLocaleString()}</TableCell>
+                    <TableCell className="text-xs text-right">{item.width.toLocaleString()}</TableCell>
+                    <TableCell className="text-xs text-right">{item.height.toLocaleString()}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
             </Table>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Преимущества */}
-        <section id="preimushchestva" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Преимущества сотрудничества</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            {advantages.map((adv) => (
-              <Card key={adv.title}>
-                <CardContent className="p-4 flex items-start gap-3">
-                  <adv.icon className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                  <div>
-                    <p className="text-sm font-semibold text-foreground mb-1">{adv.title}</p>
-                    <p className="text-xs text-muted-foreground leading-relaxed">{adv.text}</p>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </section>
+      <AdvantagesGrid title="Преимущества сотрудничества" items={advantages} />
 
-        {/* CTA Form */}
-        <section id="cta-form" className="mb-10 scroll-mt-8">
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-lg">Готовы заказать переливную ёмкость?</CardTitle>
-              <p className="text-sm text-muted-foreground">
-                Оставьте заявку — наш инженер подберёт объём ёмкости под ваш бассейн и подготовит расчёт стоимости в течение 24 часов.
-              </p>
-            </CardHeader>
-            <CardContent>
-              <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="name" className="text-sm">Имя *</Label>
-                  <Input id="name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Ваше имя" />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="phone" className="text-sm">Телефон *</Label>
-                  <Input id="phone" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} placeholder="+7 (___) ___-__-__" />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="email" className="text-sm">E-mail</Label>
-                  <Input id="email" type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="mail@example.com" />
-                </div>
-                <div className="space-y-2 sm:col-span-2">
-                  <Label htmlFor="description" className="text-sm">Описание задачи</Label>
-                  <Textarea id="description" value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} placeholder="Укажите объём бассейна, тип (скиммерный/переливной), особые требования..." rows={3} />
-                </div>
-                <div className="sm:col-span-2">
-                  <Button type="submit" className="w-full sm:w-auto">Оставить заявку</Button>
-                </div>
-              </form>
-            </CardContent>
-          </Card>
-        </section>
-
-        <PageFooter />
-      </main>
-    </>
+      <FAQSection items={faqItems} />
+    </CorporatePageShell>
   );
 };
-
-const EmkostiPerelivnye = () => (
-  <CartProvider>
-    <EmkostiPerelivnyeInner />
-  </CartProvider>
-);
 
 export default EmkostiPerelivnye;

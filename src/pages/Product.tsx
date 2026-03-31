@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
-import { CartProvider, useCart } from "@/contexts/CartContext";
-import Header from "@/components/Header";
-import CartSheet from "@/components/CartSheet";
+import { useCart } from "@/contexts/CartContext";
+import CorporatePageShell from "@/components/corporate/CorporatePageShell";
+import { FAQSection } from "@/components/corporate/sections";
 import { materials, materialSpecs, connectionTypes, baseSizes, type ConnectionType, type MaterialColor } from "@/data/products";
 import { getProductImages } from "@/data/products";
 import { baseTroynikSizes, troynikImages } from "@/data/troynikProducts";
@@ -2164,16 +2164,28 @@ const ProductDetailContent = () => {
 };
 
 const Product = () => {
-  const [cartOpen, setCartOpen] = useState(false);
-
   return (
-    <CartProvider>
-      <div className="min-h-screen bg-background">
-        <Header onCartOpen={() => setCartOpen(true)} />
-        <ProductDetailContent />
-        <CartSheet open={cartOpen} onOpenChange={setCartOpen} />
-      </div>
-    </CartProvider>
+    <CorporatePageShell
+      title="Конфигуратор"
+      accentWord="продукции"
+      heroImage="/images/emkosti-collage-hero.png"
+      breadcrumbs={[
+        { label: "Каталог", href: "/catalog" },
+        { label: "Продукт" },
+      ]}
+      hideCTA={false}
+    >
+      <ProductDetailContent />
+      <FAQSection
+        items={[
+          { q: "Как выбрать материал?", a: "Используйте конфигуратор — выберите рабочую среду и температуру, система подберёт оптимальный материал." },
+          { q: "Можно заказать нестандартный размер?", a: "Да, укажите параметры в конфигураторе или свяжитесь с инженером." },
+          { q: "Как формируется артикул?", a: "Артикул генерируется автоматически на основе выбранных параметров." },
+          { q: "Сроки изготовления?", a: "7–21 рабочий день в зависимости от сложности." },
+          { q: "Как оформить заказ?", a: "Добавьте товар в корзину из конфигуратора и оформите заявку." },
+        ]}
+      />
+    </CorporatePageShell>
   );
 };
 

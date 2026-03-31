@@ -1,32 +1,32 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import Header from "@/components/Header";
-import CartSheet from "@/components/CartSheet";
-import { CartProvider } from "@/contexts/CartContext";
+import CorporatePageShell from "@/components/corporate/CorporatePageShell";
 import {
-  Check, Droplets, Factory, Wrench, ShieldCheck, Clock, Truck,
+  ProductGrid,
+  AdvantagesGrid,
+  SpecTable,
+  FeatureChecklist,
+  FAQSection,
+  DarkInfoBlock,
+  ApplicationAreas,
+} from "@/components/corporate/sections";
+import {
+  Droplets, Factory, Wrench, ShieldCheck, Clock, Truck,
   FlaskConical, Settings, Zap, Beaker, Waves, Pipette, Gauge,
-  Thermometer, LayoutList,
+  Thermometer,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
-import {
-  Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink,
-  BreadcrumbPage, BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
-import {
-  Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
-} from "@/components/ui/table";
-import {
-  Accordion, AccordionContent, AccordionItem, AccordionTrigger,
-} from "@/components/ui/accordion";
-import { toast } from "sonner";
-import PageFooter from "@/components/PageFooter";
 
 /* ── static data ── */
+
+const purposeItems = [
+  { icon: Droplets, name: "Очистка сточных вод (хозбытовых, промышленных)" },
+  { icon: Waves, name: "Подготовка питьевой воды" },
+  { icon: Factory, name: "Гальваническое производство" },
+  { icon: Beaker, name: "Приготовление солевых растворов" },
+  { icon: Pipette, name: "Бумажное и целлюлозное производство" },
+  { icon: Zap, name: "Нефтехимическая и горнодобывающая промышленность" },
+  { icon: FlaskConical, name: "Пищевая промышленность" },
+  { icon: Gauge, name: "Ливневые очистные сооружения" },
+  { icon: Thermometer, name: "Теплоэнергетика и ЖКХ" },
+];
 
 const whyUs = [
   "Трёхкамерная система непрерывного действия — стабильная концентрация раствора",
@@ -35,24 +35,6 @@ const whyUs = [
   "Производительность до 10 000 л/ч",
   "Панель управления с дисплеем и контролем уровня",
   "Полный цикл: проектирование, производство, доставка, монтаж, сервис",
-];
-
-const purposeItems = [
-  { icon: Droplets, text: "Очистка сточных вод (хозбытовых, промышленных)" },
-  { icon: Waves, text: "Подготовка питьевой воды" },
-  { icon: Factory, text: "Гальваническое производство" },
-  { icon: Beaker, text: "Приготовление солевых растворов" },
-  { icon: Pipette, text: "Бумажное и целлюлозное производство" },
-  { icon: Zap, text: "Нефтехимическая и горнодобывающая промышленность" },
-  { icon: FlaskConical, text: "Пищевая промышленность" },
-  { icon: Gauge, text: "Ливневые очистные сооружения" },
-  { icon: Thermometer, text: "Теплоэнергетика и ЖКХ" },
-];
-
-const processSteps = [
-  { step: "1", title: "Камера смешения", desc: "Сухой или жидкий реагент подаётся в первую камеру, где происходит интенсивное перемешивание с водой и начальное растворение." },
-  { step: "2", title: "Камера созревания", desc: "Во второй камере раствор выдерживается при умеренном перемешивании для полного набухания полимерных цепочек и достижения рабочей вязкости." },
-  { step: "3", title: "Камера дозирования", desc: "Готовый раствор заданной концентрации (0,1–0,5%) поступает из третьей камеры на дозирующий насос для подачи в точку ввода." },
 ];
 
 const constructionElements = [
@@ -69,47 +51,15 @@ const constructionElements = [
   "Корпус из полипропилена / нержавеющей стали",
 ];
 
-const models = [
-  { name: "СПР-500", article: "СЗПК.СПР.500.ПП", capacity: "500", dimensions: "1700×1200×1540" },
-  { name: "СПР-1000", article: "СЗПК.СПР.1000.ПП", capacity: "1 000", dimensions: "2000×1350×1540" },
-  { name: "СПР-2000", article: "СЗПК.СПР.2000.ПП", capacity: "2 000", dimensions: "2300×1450×1940" },
-  { name: "СПР-3000", article: "СЗПК.СПР.3000.ПП", capacity: "3 000", dimensions: "2700×1600×1940" },
-  { name: "СПР-4000", article: "СЗПК.СПР.4000.ПП", capacity: "4 000", dimensions: "3200×1750×1940" },
-  { name: "СПР-5000", article: "СЗПК.СПР.5000.ПП", capacity: "5 000", dimensions: "3300×1850×1940" },
-  { name: "СПР-6000", article: "СЗПК.СПР.6000.ПП", capacity: "6 000", dimensions: "3500×1850×2140" },
-  { name: "СПР-10000", article: "СЗПК.СПР.10000.ПП", capacity: "10 000", dimensions: "3900×1850×2140" },
-];
-
-const commonSpecs = [
-  { label: "Давление", value: "2–6 бар" },
-  { label: "Время выдержки", value: "60 мин" },
-  { label: "Концентрация раствора", value: "0,1–0,5%" },
-  { label: "Степень защиты", value: "IP54" },
-  { label: "Температура эксплуатации", value: "+5…+40 °C" },
-  { label: "Макс. вязкость", value: "2 500 мПа·с" },
-];
-
-const modificationItems = [
-  {
-    q: "Подача сухого реагента",
-    a: "Шнековый или вибрационный дозатор с бункером объёмом от 25 до 200 л. Автоматическая подача порошка по заданному расходу.",
-  },
-  {
-    q: "Подача жидкого реагента",
-    a: "Перистальтический или мембранный насос-дозатор для эмульсий и концентратов. Прямой забор из канистры или IBC-контейнера.",
-  },
-  {
-    q: "Дополнительное перемешивание",
-    a: "Третья камера может оснащаться мешалкой для поддержания однородности раствора при длительном хранении.",
-  },
-  {
-    q: "Автоматика и телеметрия",
-    a: "Интеграция с SCADA/АСУ ТП, удалённый мониторинг, аварийная сигнализация, протоколирование расхода реагента.",
-  },
-  {
-    q: "Исполнение корпуса",
-    a: "Полипропилен (стандарт), нержавеющая сталь AISI 304/316 или комбинированное исполнение для агрессивных сред.",
-  },
+const models: (string | number)[][] = [
+  ["СЗПК.СПР.500.ПП", "СПР-500", "500", "1700×1200×1540"],
+  ["СЗПК.СПР.1000.ПП", "СПР-1000", "1 000", "2000×1350×1540"],
+  ["СЗПК.СПР.2000.ПП", "СПР-2000", "2 000", "2300×1450×1940"],
+  ["СЗПК.СПР.3000.ПП", "СПР-3000", "3 000", "2700×1600×1940"],
+  ["СЗПК.СПР.4000.ПП", "СПР-4000", "4 000", "3200×1750×1940"],
+  ["СЗПК.СПР.5000.ПП", "СПР-5000", "5 000", "3300×1850×1940"],
+  ["СЗПК.СПР.6000.ПП", "СПР-6000", "6 000", "3500×1850×2140"],
+  ["СЗПК.СПР.10000.ПП", "СПР-10000", "10 000", "3900×1850×2140"],
 ];
 
 const partnershipAdvantages = [
@@ -121,262 +71,90 @@ const partnershipAdvantages = [
   { icon: FlaskConical, title: "Гибкость", text: "Нестандартные модификации, интеграция в существующие системы водоочистки." },
 ];
 
+const faqItems = [
+  { q: "Какие типы реагентов можно использовать?", a: "Станции работают с порошковыми и жидкими полимерами: коагулянтами, флокулянтами, полиэлектролитами, а также с солевыми растворами." },
+  { q: "Какой срок изготовления?", a: "Стандартные модели — от 15 рабочих дней. Нестандартные модификации — от 30 рабочих дней в зависимости от комплектации." },
+  { q: "Есть ли гарантия?", a: "Да, гарантия 5 лет на корпус и 1 год на электрооборудование. Также предоставляем постгарантийное обслуживание." },
+  { q: "Можно ли интегрировать с АСУ ТП?", a: "Да, станции поддерживают интеграцию с SCADA и АСУ ТП, удалённый мониторинг и архивирование данных." },
+  { q: "Какие материалы используются для корпуса?", a: "Стандартное исполнение — полипропилен (PP). По запросу — нержавеющая сталь AISI 304/316 или комбинированное исполнение для агрессивных сред." },
+];
+
 /* ── component ── */
 
-const VodoochistkaDozirovanieInner = () => {
-  const [cartOpen, setCartOpen] = useState(false);
-  const [form, setForm] = useState({ name: "", phone: "", email: "", description: "" });
-  const navigate = useNavigate();
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!form.name.trim() || !form.phone.trim()) {
-      toast.error("Заполните обязательные поля (имя, телефон)");
-      return;
-    }
-    toast.success("Заявка отправлена! Мы свяжемся с вами в ближайшее время.");
-    setForm({ name: "", phone: "", email: "", description: "" });
-  };
-
-  const scrollToForm = () => {
-    document.getElementById("cta-form")?.scrollIntoView({ behavior: "smooth" });
-  };
-
+export default function VodoochistkaDozirovanie() {
   return (
-    <>
-      <Header onCartOpen={() => setCartOpen(true)} productType="otvod" />
-      <CartSheet open={cartOpen} onOpenChange={setCartOpen} />
+    <CorporatePageShell
+      breadcrumbs={[
+        { label: "Каталог", href: "/catalog" },
+        { label: "Водоочистка", href: "/catalog/vodoochistka" },
+        { label: "Станции приготовления реагентов" },
+      ]}
+      title="Станции приготовления"
+      accentWord="реагентов"
+      subtitle="Автоматическое приготовление и точное дозирование коагулянта и флокулянта для систем водоочистки любой производительности."
+      badge="Производство под ключ"
+      heroImage="/images/vodoochistka-collage-hero.png"
+      stats={[
+        { value: "ФФУ / ЛО / ЛОС", label: "типы" },
+        { value: "PP / PE", label: "материалы" },
+        { value: "от 14 дней", label: "сроки" },
+        { value: "5 лет", label: "гарантия" },
+      ]}
+      seo={{
+        title: "Станции приготовления реагентов",
+        description: "Станции дозирования реагентов для водоочистки — трёхкамерные системы непрерывного действия. Производительность до 10 000 л/ч. Производство, доставка, монтаж.",
+        keywords: "станция дозирования, приготовление реагентов, водоочистка, флокулянт, коагулянт, дозирование полимеров",
+      }}
+    >
+      {/* Description */}
+      <FeatureChecklist
+        title="Почему выбирают наши станции"
+        subtitle="Трёхкамерная система непрерывного действия с автоматическим управлением"
+        items={whyUs}
+        columns={1}
+      />
 
-      <main className="mx-auto max-w-[960px] px-4 sm:px-6 py-6 sm:py-8">
-        {/* Breadcrumbs */}
-        <Breadcrumb className="mb-6">
-          <BreadcrumbList>
-            <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog">Каталог</Link></BreadcrumbLink></BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog/vodoochistka">Водоочистка</Link></BreadcrumbLink></BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem><BreadcrumbPage>Станции приготовления реагентов</BreadcrumbPage></BreadcrumbItem>
-          </BreadcrumbList>
-        </Breadcrumb>
+      {/* Applications */}
+      <ApplicationAreas
+        title="Назначение и области применения"
+        items={purposeItems}
+      />
 
-        {/* Hero */}
-        <section className="mb-10">
-          <p className="text-xs text-muted-foreground uppercase tracking-wider mb-2">ООО СЗПК «Пласт-Металл ПРО»</p>
-          <h1 className="text-2xl sm:text-3xl font-bold text-foreground leading-tight mb-3">
-            Станции приготовления реагентов
-          </h1>
-          <p className="text-sm text-muted-foreground mb-5">
-            Автоматическое приготовление и точное дозирование коагулянта и флокулянта для систем водоочистки любой производительности.
-          </p>
-          <Button onClick={scrollToForm} className="gap-2">
-            Получить расчёт стоимости
-          </Button>
-          <div className="grid grid-cols-2 gap-3 mt-6">
-            <img src="/images/spr-hero-ral7032.jpg" alt="Станция приготовления реагентов — общий вид" className="rounded-lg border border-border object-contain w-full aspect-[4/3]" />
-            <img src="/images/spr-schema-front.gif" alt="Схема станции приготовления реагентов" className="rounded-lg border border-border object-contain w-full aspect-[4/3]" />
-          </div>
-        </section>
+      {/* How it works */}
+      <DarkInfoBlock
+        title="Принцип работы"
+        text="Станция работает по принципу непрерывного трёхкамерного процесса: в первой камере реагент смешивается с водой, во второй — созревает до рабочей вязкости, из третьей — подаётся дозирующим насосом в систему водоочистки."
+        highlights={[
+          { value: "1", label: "Камера смешения" },
+          { value: "2", label: "Камера созревания" },
+          { value: "3", label: "Камера дозирования" },
+          { value: "0,1–0,5%", label: "Концентрация" },
+        ]}
+      />
 
-        {/* Intro */}
+      {/* Construction elements */}
+      <FeatureChecklist
+        title="Конструктивные элементы"
+        items={constructionElements}
+        columns={2}
+      />
 
-        <nav className="mb-8 flex flex-wrap gap-2">
-          {[
-            { id: "opisanie", label: "Описание" },
-            { id: "naznachenie", label: "Назначение" },
-            { id: "princip", label: "Принцип работы" },
-            { id: "modeli", label: "Модели" },
-            { id: "preimushchestva", label: "Преимущества" },
-            { id: "cta-form", label: "Заявка" },
-          ].map((s) => (
-            <button
-              key={s.id}
-              onClick={() => document.getElementById(s.id)?.scrollIntoView({ behavior: "smooth" })}
-              className="rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium text-foreground hover:bg-accent hover:text-accent-foreground transition-colors"
-            >
-              {s.label}
-            </button>
-          ))}
-        </nav>
+      {/* Model range */}
+      <SpecTable
+        title="Модельный ряд"
+        subtitle="Общие характеристики: давление 2–6 бар, время выдержки 60 мин, концентрация 0,1–0,5%, IP54, +5…+40 °C"
+        headers={["Артикул", "Модель", "Подача воды, л/ч", "Габариты (A×B×C), мм"]}
+        rows={models}
+      />
 
-        <section className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">
-            Станции дозирования: производство под ключ
-          </h2>
-          <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-            Мы проектируем и изготавливаем станции приготовления и дозирования реагентов на базе трёхкамерной системы непрерывного действия. Станции обеспечивают автоматическое растворение порошковых и жидких полимеров (коагулянтов, флокулянтов, полиэлектролитов) с точным дозированием готового раствора в точку ввода.
-          </p>
-          <h3 className="text-sm font-semibold text-foreground mb-2">Почему выбирают наши станции:</h3>
-          <ul className="space-y-2">
-            {whyUs.map((item, i) => (
-              <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
-                <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" />
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
-        </section>
+      {/* Partnership advantages */}
+      <AdvantagesGrid
+        title="Преимущества сотрудничества"
+        items={partnershipAdvantages}
+      />
 
-        {/* Section 1: Назначение */}
-        <section id="naznachenie" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Назначение и области применения</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-            {purposeItems.map((area, i) => (
-              <div key={i} className="flex items-start gap-2 rounded-lg border border-border bg-card p-3">
-                <area.icon className="h-4 w-4 text-primary shrink-0 mt-0.5" />
-                <span className="text-sm text-foreground">{area.text}</span>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Section 2: Принцип работы */}
-        <section id="princip" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Принцип работы</h2>
-
-          <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-            Станция работает по принципу непрерывного трёхкамерного процесса: в первой камере реагент смешивается с водой, во второй — созревает до рабочей вязкости, из третьей — подаётся дозирующим насосом в систему водоочистки.
-          </p>
-
-          <div className="space-y-3 mb-6">
-            {processSteps.map((s) => (
-              <div key={s.step} className="flex gap-3 items-start rounded-lg border border-border bg-card p-3">
-                <span className="flex items-center justify-center h-7 w-7 rounded-full bg-primary text-primary-foreground text-xs font-bold shrink-0">
-                  {s.step}
-                </span>
-                <div>
-                  <p className="text-sm font-semibold text-foreground">{s.title}</p>
-                  <p className="text-xs text-muted-foreground">{s.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <h3 className="text-sm font-semibold text-foreground mb-2">Основные конструктивные элементы:</h3>
-          <ul className="space-y-1.5">
-            {constructionElements.map((el, i) => (
-              <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
-                <LayoutList className="h-3.5 w-3.5 text-primary shrink-0 mt-0.5" />
-                <span>{el}</span>
-              </li>
-            ))}
-          </ul>
-        </section>
-
-        {/* Section 3: Модельный ряд */}
-        <section id="modeli" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Модельный ряд</h2>
-
-          <div className="rounded-lg border border-border overflow-auto">
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead className="text-xs">Артикул</TableHead>
-                  <TableHead className="text-xs">Модель</TableHead>
-                  <TableHead className="text-xs text-right">Подача воды, л/ч</TableHead>
-                  <TableHead className="text-xs text-right">Габариты (A×B×C), мм</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {models.map((m) => (
-                  <TableRow
-                    key={m.name}
-                    className="cursor-pointer hover:bg-primary/5 transition-colors"
-                    onClick={() => navigate(`/product/${encodeURIComponent(m.article)}`)}
-                  >
-                    <TableCell className="text-xs font-mono font-medium text-primary underline">{m.article}</TableCell>
-                    <TableCell className="text-xs font-medium">{m.name}</TableCell>
-                    <TableCell className="text-xs text-right">{m.capacity}</TableCell>
-                    <TableCell className="text-xs text-right">{m.dimensions}</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </div>
-
-          <h3 className="text-sm font-semibold text-foreground mt-4 mb-2">Общие технические характеристики:</h3>
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-            {commonSpecs.map((spec, i) => (
-              <div key={i} className="rounded-lg border border-border bg-card p-3">
-                <p className="text-xs text-muted-foreground">{spec.label}</p>
-                <p className="text-sm font-semibold text-foreground">{spec.value}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Section 4: Модификации и опции */}
-        <section className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Модификации и опции</h2>
-          <Accordion type="single" collapsible className="w-full">
-            {modificationItems.map((item, i) => (
-              <AccordionItem key={i} value={`mod-${i}`}>
-                <AccordionTrigger className="text-sm text-left">{item.q}</AccordionTrigger>
-                <AccordionContent className="text-sm text-muted-foreground">{item.a}</AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
-        </section>
-
-        {/* Section 5: Преимущества сотрудничества */}
-        <section id="preimushchestva" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Преимущества сотрудничества</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            {partnershipAdvantages.map((a, i) => (
-              <Card key={i} className="border-border">
-                <CardContent className="flex items-start gap-3 p-4">
-                  <a.icon className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                  <div>
-                    <p className="text-sm font-semibold text-foreground">{a.title}</p>
-                    <p className="text-xs text-muted-foreground">{a.text}</p>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </section>
-
-        {/* CTA form */}
-        <section id="cta-form" className="mb-10 scroll-mt-20">
-          <Card className="border-border">
-            <CardContent className="p-6">
-              <h2 className="text-base font-bold text-foreground mb-2">Готовы заказать станцию дозирования?</h2>
-              <p className="text-sm text-muted-foreground mb-4">
-                Оставьте заявку, и наш инженер подберёт оптимальную модель, подготовит расчёт стоимости и организует доставку на ваш объект.
-              </p>
-
-              <form onSubmit={handleSubmit} className="space-y-3">
-                <div>
-                  <Label htmlFor="name" className="text-xs">Имя *</Label>
-                  <Input id="name" placeholder="Иван Иванов" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} />
-                </div>
-                <div>
-                  <Label htmlFor="phone" className="text-xs">Телефон *</Label>
-                  <Input id="phone" type="tel" placeholder="+7 900 000-00-00" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} />
-                </div>
-                <div>
-                  <Label htmlFor="email" className="text-xs">E-mail</Label>
-                  <Input id="email" type="email" placeholder="ivanov@company.ru" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
-                </div>
-                <div>
-                  <Label htmlFor="description" className="text-xs">Описание задачи (тип реагента, производительность, требования)</Label>
-                  <Textarea id="description" placeholder="Опишите вашу задачу..." rows={3} value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} />
-                </div>
-                <Button type="submit" className="w-full">Оставить заявку</Button>
-              </form>
-            </CardContent>
-          </Card>
-        </section>
-
-        <PageFooter />
-      </main>
-    </>
+      {/* FAQ */}
+      <FAQSection items={faqItems} />
+    </CorporatePageShell>
   );
-};
-
-const VodoochistkaDozirovanie = () => (
-  <CartProvider>
-    <VodoochistkaDozirovanieInner />
-  </CartProvider>
-);
-
-export default VodoochistkaDozirovanie;
+}

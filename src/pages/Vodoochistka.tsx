@@ -1,27 +1,19 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import Header from "@/components/Header";
-import CartSheet from "@/components/CartSheet";
-import { CartProvider } from "@/contexts/CartContext";
+import CorporatePageShell from "@/components/corporate/CorporatePageShell";
+import {
+  ProductGrid,
+  AdvantagesGrid,
+  FeatureChecklist,
+  ApplicationAreas,
+  DarkInfoBlock,
+  FAQSection,
+} from "@/components/corporate/sections";
 import { findCategory } from "@/data/catalog";
 import {
-  Check, Droplets, Factory, Wrench, ShieldCheck, Clock, Truck,
+  Factory, Wrench, ShieldCheck, Clock, Truck,
   FlaskConical, Settings, Beaker, Shield, Leaf, Zap, Building2, Wheat, ImageOff,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
-import {
-  Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink,
-  BreadcrumbPage, BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
-import {
-  Accordion, AccordionContent, AccordionItem, AccordionTrigger,
-} from "@/components/ui/accordion";
-import { toast } from "sonner";
-import PageFooter from "@/components/PageFooter";
 
 /* ── static data ── */
 
@@ -36,87 +28,40 @@ const whyUs = [
 
 const products = [
   {
-    title: "ФФУ (флотационно-фильтровальная установка)",
-    items: [
-      "Предназначена для глубокой очистки сточных вод от нефтепродуктов, жиров, взвешенных веществ",
-      "Принцип работы: флотация микропузырьками воздуха + фильтрация через полимерные загрузки",
-      "Эффективность: до 95 % очистки от жиров и масел, до 90 % от взвешенных частиц",
-    ],
+    name: "ФФУ (флотационно-фильтровальная установка)",
+    desc: "Глубокая очистка сточных вод от нефтепродуктов, жиров, взвешенных веществ",
+    image: "/images/ffu-real-3d.png",
+    href: "/catalog/vodoochistka/ffu",
   },
   {
-    title: "Ламельный тонкослойный отстойник-сепаратор",
-    items: [
-      "Ускоряет осаждение взвешенных частиц за счёт ламельных модулей",
-      "Компактность: занимает в 3–5 раз меньше места, чем традиционные отстойники",
-      "Применение: очистка промышленных стоков, ливневых вод, подготовка воды для оборотного водоснабжения",
-    ],
+    name: "Ламельный тонкослойный отстойник-сепаратор",
+    desc: "Ускоренное осаждение взвешенных частиц, компактность в 3-5 раз",
+    image: "/images/lamelnyj-thumb-new.png",
+    href: "/catalog/vodoochistka/lamelnyj-otstojnik",
   },
   {
-    title: "Мешочный обезвоживатель осадка",
-    items: [
-      "Предназначен для снижения влажности шлама и осадка после очистки стоков",
-      "Фильтрующий элемент: полимерные мешочные фильтры с разной степенью проницаемости",
-      "Преимущества: простота обслуживания, низкие энергозатраты, компактность",
-    ],
+    name: "Мешочный обезвоживатель осадка",
+    desc: "Снижение влажности шлама и осадка без электроэнергии",
+    image: "/images/obezvozhivatel-3d-ral7032.jpg",
+    href: "/catalog/vodoochistka/obezvozhivatel",
   },
   {
-    title: "Станции приготовления реагентов",
-    items: [
-      "Автоматизированное приготовление и дозирование коагулянтов и флокулянтов",
-      "Материалы: химически стойкий полипропилен или ПВХ",
-      "Комплектация: ёмкости для реагентов, мешалки, насосы-дозаторы, система контроля концентрации",
-    ],
+    name: "Станции приготовления реагентов",
+    desc: "Автоматизированное приготовление и дозирование коагулянтов и флокулянтов",
+    image: "/images/spr-hero-ral7032.jpg",
+    href: "/catalog/vodoochistka",
   },
   {
-    title: "Жироуловители промышленные",
-    items: [
-      "Удаляют жиры и масла из сточных вод предприятий общественного питания, мясоперерабатывающих заводов и др.",
-      "Принцип действия: гравитационное разделение, коалесцентные фильтры",
-      "Производительность: от 1 до 50 л/с (и более по спецзаказу)",
-    ],
+    name: "Жироуловители промышленные",
+    desc: "Удаление жиров и масел из сточных вод предприятий",
+    image: "/images/zhu-vertical-ral.jpg",
+    href: "/catalog/vodoochistka",
   },
   {
-    title: "КОС (комплексные очистные сооружения)",
-    items: [
-      "Модульные системы полной очистки стоков: механическая, физико-химическая, биологическая",
-      "Состав: решётка, песколовка, отстойник, аэротенк, фильтр доочистки, блок обеззараживания",
-      "Применение: коттеджные посёлки, промышленные предприятия, удалённые объекты",
-    ],
-  },
-  {
-    title: "Реагентные шкафы и стойки",
-    items: [
-      "Предназначены для безопасного хранения и дозирования химических реагентов",
-      "Материалы: коррозионностойкий полипропилен или ПВХ",
-      "Комплектация: полки, поддоны для локализации утечек, система вентиляции, сигнализация",
-    ],
-  },
-];
-
-const materialCards = [
-  {
-    name: "Полипропилен (PP)",
-    specs: [
-      "Температурный диапазон: от −20 °C до +100 °C",
-      "Высокая химическая стойкость к большинству реагентов",
-      "Плотность 0,90–0,92 г/см³",
-    ],
-  },
-  {
-    name: "ПВХ (PVC)",
-    specs: [
-      "Температурный диапазон: до +60 °C",
-      "Устойчивость к УФ-излучению (при наличии стабилизаторов)",
-      "Гладкая поверхность, препятствующая зарастанию",
-    ],
-  },
-  {
-    name: "Стеклопластик",
-    specs: [
-      "Повышенная прочность при малом весе",
-      "Долговечность (срок службы свыше 50 лет)",
-      "Химическая инертность к широкому спектру веществ",
-    ],
+    name: "КОС (комплексные очистные сооружения)",
+    desc: "Модульные системы полной очистки стоков: механическая, физико-химическая, биологическая",
+    image: "/images/vodoochistka-kos-kompakt.jpg",
+    href: "/catalog/vodoochistka/los",
   },
 ];
 
@@ -129,12 +74,12 @@ const commonAdvantages = [
 ];
 
 const applicationAreas = [
-  { icon: Factory, text: "Пищевая промышленность (очистка жиросодержащих стоков)" },
-  { icon: Zap, text: "Нефтехимия и машиностроение (удаление нефтепродуктов)" },
-  { icon: Building2, text: "ЖКХ (очистка ливневых и хозяйственно-бытовых стоков)" },
-  { icon: Wheat, text: "Сельское хозяйство (очистка вод после мойки техники, животноводческих комплексов)" },
-  { icon: Beaker, text: "Фармацевтика и медицина (очистка технологических стоков)" },
-  { icon: Leaf, text: "Энергетика (подготовка воды для котлов и теплообменников)" },
+  { icon: Factory, name: "Пищевая промышленность (очистка жиросодержащих стоков)" },
+  { icon: Zap, name: "Нефтехимия и машиностроение (удаление нефтепродуктов)" },
+  { icon: Building2, name: "ЖКХ (очистка ливневых и хозяйственно-бытовых стоков)" },
+  { icon: Wheat, name: "Сельское хозяйство (очистка вод после мойки техники)" },
+  { icon: Beaker, name: "Фармацевтика и медицина (очистка технологических стоков)" },
+  { icon: Leaf, name: "Энергетика (подготовка воды для котлов и теплообменников)" },
 ];
 
 const partnershipAdvantages = [
@@ -147,351 +92,80 @@ const partnershipAdvantages = [
   { icon: Shield, title: "Документация", text: "Предоставим паспорта изделий, сертификаты соответствия и инструкции по эксплуатации." },
 ];
 
+const faqItems = [
+  { q: "Какие системы водоочистки вы производите?", a: "ФФУ, ламельные отстойники, станции дозирования, жироуловители, ЛОС, мешочные обезвоживатели." },
+  { q: "Из каких материалов?", a: "Полипропилен (PP) и полиэтилен (PE) — химически стойкие к агрессивным средам." },
+  { q: "Какие сроки?", a: "14–30 рабочих дней в зависимости от сложности." },
+  { q: "Проектируете под заказ?", a: "Да, проектирование с нуля под параметры вашего объекта." },
+  { q: "Входит ли монтаж?", a: "Да, шеф-монтаж и пусконаладка на объекте заказчика." },
+];
+
 /* ── component ── */
 
-const VodoochistkaInner = () => {
-  const [cartOpen, setCartOpen] = useState(false);
-  const [form, setForm] = useState({ name: "", phone: "", email: "", description: "" });
-  const [selectedSubId, setSelectedSubId] = useState<string | null>(null);
-  const category = findCategory("vodoochistka");
-  const catIndex = 2;
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!form.name.trim() || !form.phone.trim()) {
-      toast.error("Заполните обязательные поля (имя, телефон)");
-      return;
-    }
-    toast.success("Заявка отправлена! Мы свяжемся с вами в ближайшее время.");
-    setForm({ name: "", phone: "", email: "", description: "" });
-  };
-
-  const scrollToForm = () => {
-    document.getElementById("cta-form")?.scrollIntoView({ behavior: "smooth" });
-  };
-
-  return (
-    <>
-      <Header onCartOpen={() => setCartOpen(true)} productType="otvod" />
-      <CartSheet open={cartOpen} onOpenChange={setCartOpen} />
-
-      <main className="mx-auto max-w-[960px] px-4 sm:px-6 py-6 sm:py-8">
-        {/* Breadcrumbs */}
-        <Breadcrumb className="mb-6">
-          <BreadcrumbList>
-            <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog">Каталог</Link></BreadcrumbLink></BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem><BreadcrumbPage>Водоочистка</BreadcrumbPage></BreadcrumbItem>
-          </BreadcrumbList>
-        </Breadcrumb>
-
-        {/* Hero */}
-        <section className="mb-10">
-          <p className="text-xs text-muted-foreground uppercase tracking-wider mb-2">ООО СЗПК «Пласт-Металл ПРО»</p>
-          <h1 className="text-2xl sm:text-3xl font-bold text-foreground leading-tight mb-3">
-            Водоочистное оборудование из полимеров
-          </h1>
-          <p className="text-sm text-muted-foreground mb-5">
-            Полимерное водоочистное оборудование — эффективность, долговечность и устойчивость к агрессивным средам!
-          </p>
-          <Button onClick={scrollToForm} className="gap-2">
-            Получить расчёт стоимости
-          </Button>
-
-          <div className="grid grid-cols-1 lg:grid-cols-[3fr_2fr] gap-4 mt-6">
-            <div className="rounded-xl border border-border overflow-hidden bg-card flex items-center justify-center min-h-[400px]">
-              <img src="/images/vodoochistka-hero-real.jpeg" alt="Водоочистное оборудование из полимеров" className="w-full h-auto object-contain" />
-            </div>
-            <div className="grid grid-cols-3 gap-2">
-              {[
-                { src: "/images/ffu-real-3d.png", alt: "ФФУ" },
-                { src: "/images/lamelnyj-thumb-new.png", alt: "Ламельный отстойник" },
-                { src: "/images/obezvozhivatel-3d-ral7032.jpg", alt: "Обезвоживатель" },
-                { src: "/images/spr-hero-ral7032.jpg", alt: "Станция дозирования" },
-                { src: "/images/zhu-vertical-ral.jpg", alt: "Жироуловители" },
-                { src: "/images/vodoochistka-kos-kompakt.jpg", alt: "КОС" },
-                { src: "/images/vodoochistka-dozirovanie-grundfos.jpg", alt: "Шкафы дозирования" },
-              ].map((img) => (
-                <div key={img.alt} className="rounded-lg border border-border overflow-hidden bg-card flex items-center justify-center aspect-square">
-                  <img src={img.src} alt={img.alt} className="w-full h-full object-contain p-1" />
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Intro */}
-
-        <nav className="mb-8 flex flex-wrap gap-2">
-          {[
-            { id: "opisanie", label: "Описание" },
-            { id: "produkciya", label: "Продукция" },
-            { id: "materialy", label: "Материалы" },
-            { id: "primenenie", label: "Применение" },
-            { id: "preimushchestva", label: "Преимущества" },
-            { id: "katalog", label: "Каталог" },
-            { id: "cta-form", label: "Заявка" },
-          ].map((s) => (
-            <button
-              key={s.id}
-              onClick={() => document.getElementById(s.id)?.scrollIntoView({ behavior: "smooth" })}
-              className="rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium text-foreground hover:bg-accent hover:text-accent-foreground transition-colors"
-            >
-              {s.label}
-            </button>
-          ))}
-        </nav>
-
-        {/* Subcategories grid */}
-        {category && (
-          <section id="katalog" className="mb-10">
-            <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Каталог водоочистного оборудования</h2>
-            <div className="flex flex-col md:flex-row gap-6">
-              <nav className="md:w-[220px] shrink-0">
-                <ul className="space-y-0.5">
-                  {category.subcategories.map((sub, i) => {
-                    const isSelected = selectedSubId === sub.id;
-                    return (
-                      <li key={sub.id}>
-                        <button
-                          onClick={() => setSelectedSubId(isSelected ? null : sub.id)}
-                          className={`group flex items-baseline gap-2 rounded-md px-3 py-2 text-sm w-full text-left transition-colors ${
-                            isSelected ? "bg-primary/10 border border-primary/30" : "hover:bg-muted border border-transparent"
-                          }`}
-                        >
-                          <span className={`text-xs font-semibold shrink-0 ${isSelected ? "text-primary" : "text-muted-foreground"}`}>{catIndex}.{i + 1}</span>
-                          <span className={`transition-colors ${isSelected ? "text-primary font-semibold" : "text-foreground group-hover:text-primary"}`}>{sub.name}</span>
-                        </button>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </nav>
-              <div className="flex-1">
-                {(() => {
-                  const selectedSub = category.subcategories.find((s) => s.id === selectedSubId);
-                  if (selectedSub) {
-                    return (
-                      <div className="rounded-xl border border-border bg-card overflow-hidden animate-in fade-in-0 slide-in-from-top-2 duration-200">
-                        <div className="aspect-[16/9] bg-muted flex items-center justify-center">
-                          {selectedSub.image ? (
-                            <img src={selectedSub.image} alt={selectedSub.name} className="w-full h-full object-contain" />
-                          ) : (
-                            <ImageOff className="h-12 w-12 text-muted-foreground/40" />
-                          )}
-                        </div>
-                        <div className="p-5">
-                          <p className="text-xs text-muted-foreground font-semibold mb-1">
-                            {catIndex}.{category.subcategories.findIndex((s) => s.id === selectedSub.id) + 1}
-                          </p>
-                          <h3 className="text-lg font-bold text-foreground mb-2">{selectedSub.name}</h3>
-                          <p className="text-sm text-muted-foreground mb-4">
-                            {selectedSub.description || "Описание уточняйте по запросу."}
-                          </p>
-                          {selectedSub.externalPath ? (
-                            <Link to={selectedSub.externalPath} className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline">
-                              Перейти на страницу →
-                            </Link>
-                          ) : (
-                            <a href="#cta-form" className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline">
-                              Запросить расчёт →
-                            </a>
-                          )}
-                        </div>
-                      </div>
-                    );
-                  }
-                  return (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      {category.subcategories.map((sub, i) => {
-                        const cardContent = (
-                          <>
-                            <div className="aspect-[4/3] bg-muted flex items-center justify-center">
-                              {sub.image ? (
-                                <img src={sub.image} alt={sub.name} className="w-full h-full object-contain" />
-                              ) : (
-                                <ImageOff className="h-10 w-10 text-muted-foreground/40" />
-                              )}
-                            </div>
-                            <div className="px-3 py-2.5">
-                              <p className="text-xs text-muted-foreground font-semibold">{catIndex}.{i + 1}</p>
-                              <p className="text-sm font-medium text-foreground group-hover:text-primary transition-colors mt-0.5">{sub.name}</p>
-                            </div>
-                          </>
-                        );
-                        if (sub.externalPath) {
-                          return (
-                            <Link key={sub.id} to={sub.externalPath} className="group rounded-lg border border-border bg-card overflow-hidden hover:border-primary/50 hover:shadow-md transition-all text-left block">
-                              {cardContent}
-                            </Link>
-                          );
-                        }
-                        return (
-                          <button key={sub.id} onClick={() => setSelectedSubId(sub.id)} className="group rounded-lg border border-border bg-card overflow-hidden hover:border-primary/50 hover:shadow-md transition-all text-left">
-                            {cardContent}
-                          </button>
-                        );
-                      })}
-                    </div>
-                  );
-                })()}
-              </div>
-            </div>
-          </section>
-        )}
-
-        <section className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">
-            Системы водоочистки из полимерных материалов: от проектирования до ввода в эксплуатацию
-          </h2>
-          <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-            Мы проектируем и производим современное водоочистное оборудование из химически стойких полимеров (полипропилен, ПВХ, стеклопластик) для промышленных предприятий, ЖКХ, сельского хозяйства и коммерческих объектов.
-          </p>
-          <h3 className="text-sm font-semibold text-foreground mb-2">Почему выбирают нас:</h3>
-          <ul className="space-y-2">
-            {whyUs.map((item, i) => (
-              <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
-                <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" />
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
-        </section>
-
-        {/* Section 1: Перечень продукции */}
-        <section id="produkciya" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Перечень продукции</h2>
-          <Accordion type="multiple" defaultValue={[products[0].title]} className="space-y-2">
-            {products.map((prod) => (
-              <AccordionItem key={prod.title} value={prod.title} className="rounded-lg border border-border bg-card px-4">
-                <AccordionTrigger className="text-sm font-semibold text-foreground hover:no-underline">
-                  {prod.title}
-                </AccordionTrigger>
-                <AccordionContent>
-                  <ul className="space-y-1.5 pb-2">
-                    {prod.items.map((item, i) => (
-                      <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
-                        <span className="text-primary mt-1">•</span>
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
-        </section>
-
-        {/* Section 2: Преимущества полимерных материалов */}
-        <section id="preimushchestva" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Преимущества полимерных материалов</h2>
-
-          <h3 className="text-sm font-semibold text-foreground mb-3">Основные материалы:</h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-6">
-            {materialCards.map((mat, i) => (
-              <Card key={i}>
-                <CardContent className="p-4">
-                  <p className="text-sm font-semibold text-foreground mb-2">{mat.name}</p>
-                  <ul className="space-y-1">
-                    {mat.specs.map((s, j) => (
-                      <li key={j} className="text-xs text-muted-foreground flex items-start gap-1.5">
-                        <Check className="h-3 w-3 text-primary shrink-0 mt-0.5" />
-                        <span>{s}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-
-          <h3 className="text-sm font-semibold text-foreground mb-2">Общие преимущества:</h3>
-          <ul className="space-y-1.5">
-            {commonAdvantages.map((item, i) => (
-              <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
-                <Check className="h-3.5 w-3.5 text-primary shrink-0 mt-0.5" />
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
-        </section>
-
-        {/* Section 3: Сферы применения */}
-        <section id="primenenie" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Типовые сферы применения</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-            {applicationAreas.map((area, i) => (
-              <div key={i} className="flex items-start gap-2 rounded-lg border border-border bg-card p-3">
-                <area.icon className="h-4 w-4 text-primary shrink-0 mt-0.5" />
-                <span className="text-sm text-foreground">{area.text}</span>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Section 4: Преимущества сотрудничества */}
-        <section id="preimushchestva" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Преимущества сотрудничества</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            {partnershipAdvantages.map((adv) => (
-              <Card key={adv.title}>
-                <CardContent className="p-4 flex items-start gap-3">
-                  <adv.icon className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                  <div>
-                    <p className="text-sm font-semibold text-foreground mb-1">{adv.title}</p>
-                    <p className="text-xs text-muted-foreground">{adv.text}</p>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </section>
-
-        {/* CTA Form */}
-        <section id="cta-form" className="mb-10 scroll-mt-20">
-          <Card>
-            <CardContent className="p-6">
-              <h2 className="text-base font-bold text-foreground mb-2 tracking-wide uppercase">
-                Готовы заказать водоочистное оборудование?
-              </h2>
-              <p className="text-sm text-muted-foreground mb-5">
-                Оставьте заявку, и наш инженер бесплатно проконсультирует по выбору типа и комплектации оборудования, подготовит схему очистки и расчёт стоимости в течение 24 часов.
-              </p>
-              <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="space-y-1.5">
-                  <Label htmlFor="name" className="text-xs">Имя *</Label>
-                  <Input id="name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Ваше имя" maxLength={100} />
-                </div>
-                <div className="space-y-1.5">
-                  <Label htmlFor="phone" className="text-xs">Телефон *</Label>
-                  <Input id="phone" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} placeholder="+7 (___) ___-__-__" maxLength={20} />
-                </div>
-                <div className="space-y-1.5">
-                  <Label htmlFor="email" className="text-xs">E-mail</Label>
-                  <Input id="email" type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="mail@example.com" maxLength={255} />
-                </div>
-                <div className="space-y-1.5 sm:col-span-2">
-                  <Label htmlFor="desc" className="text-xs">Описание задачи</Label>
-                  <Textarea id="desc" value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} placeholder="Опишите вашу задачу…" rows={3} maxLength={1000} />
-                </div>
-                <div className="sm:col-span-2">
-                  <Button type="submit" className="w-full sm:w-auto">Отправить заявку</Button>
-                </div>
-              </form>
-            </CardContent>
-          </Card>
-        </section>
-
-        <PageFooter />
-      </main>
-    </>
-  );
-};
-
 const Vodoochistka = () => (
-  <CartProvider>
-    <VodoochistkaInner />
-  </CartProvider>
+  <CorporatePageShell
+    breadcrumbs={[
+      { label: "Каталог", href: "/catalog" },
+      { label: "Водоочистка" },
+    ]}
+    title="Водоочистное оборудование"
+    accentWord="из полимеров"
+    subtitle="Полимерное водоочистное оборудование — эффективность, долговечность и устойчивость к агрессивным средам!"
+    badge="Собственное производство"
+    heroImage="/images/vodoochistka-collage-hero.png"
+    stats={[
+      { value: "ФФУ / ЛО / ЛОС", label: "типы оборудования" },
+      { value: "PP / PE", label: "материалы" },
+      { value: "от 14 дней", label: "срок изготовления" },
+      { value: "5 лет", label: "гарантия" },
+    ]}
+    seo={{
+      title: "Водоочистное оборудование из полимеров — СЗПК Пласт-Металл ПРО",
+      description: "Производство водоочистного оборудования из полипропилена и полиэтилена: ФФУ, ламельные отстойники, обезвоживатели, ЛОС. Гарантия 5 лет.",
+      keywords: "водоочистка, ФФУ, ламельный отстойник, обезвоживатель, ЛОС, полипропилен",
+    }}
+  >
+    <DarkInfoBlock
+      title="Системы водоочистки из полимерных материалов"
+      text="Мы проектируем и производим современное водоочистное оборудование из химически стойких полимеров (полипропилен, ПВХ, стеклопластик) для промышленных предприятий, ЖКХ, сельского хозяйства и коммерческих объектов."
+      highlights={[
+        { value: "PP / ПВХ", label: "основные материалы" },
+        { value: "30+ лет", label: "срок службы" },
+        { value: "ГОСТ", label: "соответствие стандартам" },
+        { value: "24/7", label: "техподдержка" },
+      ]}
+    />
+
+    <FeatureChecklist
+      title="Почему выбирают нас"
+      items={whyUs}
+      columns={1}
+    />
+
+    <ProductGrid
+      title="Перечень продукции"
+      subtitle="Полный спектр водоочистного оборудования из полимерных материалов"
+      items={products}
+      columns={3}
+    />
+
+    <ApplicationAreas
+      title="Типовые сферы применения"
+      items={applicationAreas}
+    />
+
+    <FeatureChecklist
+      title="Преимущества полимерных материалов"
+      items={commonAdvantages}
+    />
+
+    <AdvantagesGrid
+      title="Преимущества сотрудничества"
+      items={partnershipAdvantages}
+    />
+
+    <FAQSection items={faqItems} />
+  </CorporatePageShell>
 );
 
 export default Vodoochistka;

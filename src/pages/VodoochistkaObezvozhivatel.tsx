@@ -1,36 +1,18 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import Header from "@/components/Header";
-import CartSheet from "@/components/CartSheet";
-import { CartProvider } from "@/contexts/CartContext";
+import CorporatePageShell from "@/components/corporate/CorporatePageShell";
 import {
-  Check, Droplets, Factory, Wrench, ShieldCheck, Clock, Truck,
-  FlaskConical, Settings, Zap, HelpCircle, Package, Recycle,
+  AdvantagesGrid,
+  SpecTable,
+  ApplicationAreas,
+  FeatureChecklist,
+  DarkInfoBlock,
+  FAQSection,
+} from "@/components/corporate/sections";
+import {
+  Droplets, Factory, Wrench, ShieldCheck, Clock, Truck,
+  FlaskConical, Settings, Zap, Package, Recycle, HelpCircle,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
-import {
-  Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink,
-  BreadcrumbPage, BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
-import {
-  Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
-} from "@/components/ui/table";
-import {
-  Accordion, AccordionContent, AccordionItem, AccordionTrigger,
-} from "@/components/ui/accordion";
-import { toast } from "sonner";
-import PageFooter from "@/components/PageFooter";
 
 /* ── static data ── */
-
-const heroImages = [
-  { src: "/images/obezvozhivatel-hero-ral7032.jpg", alt: "Мешочный обезвоживатель осадка" },
-  { src: "/images/obezvozhivatel-schema-1.webp", alt: "Схема мешочного обезвоживателя" },
-];
 
 const whyUs = [
   "Простота обслуживания — не требует квалифицированного персонала",
@@ -51,45 +33,39 @@ const purposeItems = [
   "Первичная фильтрация суспензий на производственных объектах",
 ];
 
-const processSteps = [
-  { step: "1", title: "Подача осадка", desc: "Шлам или осадок подаётся в приёмную ёмкость обезвоживателя самотёком или насосом." },
-  { step: "2", title: "Распределение", desc: "Осадок равномерно распределяется по фильтрующим мешкам из полимерного материала." },
-  { step: "3", title: "Гравитационная фильтрация", desc: "Вода проходит через стенки мешков под действием силы тяжести, а твёрдые частицы задерживаются внутри." },
-  { step: "4", title: "Обезвоживание", desc: "Постепенно влажность осадка снижается до 70–80%, формируя плотный кек внутри мешка." },
-  { step: "5", title: "Выгрузка", desc: "Заполненные мешки снимаются и утилизируются или отправляются на полигон." },
+const applicationAreas = [
+  { icon: Droplets, name: "Очистные сооружения хозбытовых стоков" },
+  { icon: Factory, name: "Промышленные предприятия (гальваника, металлургия, пищевая)" },
+  { icon: Zap, name: "Ливневые очистные системы" },
+  { icon: Recycle, name: "Полигоны и объекты утилизации отходов" },
+  { icon: Package, name: "Автомойки и сервисные центры" },
+  { icon: HelpCircle, name: "Строительные площадки и карьеры" },
 ];
 
 const models = [
-  { name: "МО-1", article: "СЗПК.МО.01.ПП", capacity: "1,5", bags: "1", dimensions: "700×500×1420" },
-  { name: "МО-2", article: "СЗПК.МО.02.ПП", capacity: "3", bags: "2", dimensions: "1100×500×1480" },
-  { name: "МО-3", article: "СЗПК.МО.03.ПП", capacity: "4,5", bags: "3", dimensions: "1650×500×1480" },
-  { name: "МО-4", article: "СЗПК.МО.04.ПП", capacity: "6", bags: "4", dimensions: "2200×500×1480" },
-  { name: "МО-5", article: "СЗПК.МО.05.ПП", capacity: "7,5", bags: "5", dimensions: "2750×500×1480" },
-  { name: "МО-6", article: "СЗПК.МО.06.ПП", capacity: "9", bags: "6", dimensions: "3300×500×1480" },
-  { name: "МО-12", article: "СЗПК.МО.12.ПП", capacity: "12", bags: "12", dimensions: "6600×500×1480" },
+  { name: "МО-1", article: "СЗПК.МО.01.ПП", capacity: "1,5", bags: "1", dimensions: "700\u00D7500\u00D71420" },
+  { name: "МО-2", article: "СЗПК.МО.02.ПП", capacity: "3", bags: "2", dimensions: "1100\u00D7500\u00D71480" },
+  { name: "МО-3", article: "СЗПК.МО.03.ПП", capacity: "4,5", bags: "3", dimensions: "1650\u00D7500\u00D71480" },
+  { name: "МО-4", article: "СЗПК.МО.04.ПП", capacity: "6", bags: "4", dimensions: "2200\u00D7500\u00D71480" },
+  { name: "МО-5", article: "СЗПК.МО.05.ПП", capacity: "7,5", bags: "5", dimensions: "2750\u00D7500\u00D71480" },
+  { name: "МО-6", article: "СЗПК.МО.06.ПП", capacity: "9", bags: "6", dimensions: "3300\u00D7500\u00D71480" },
+  { name: "МО-12", article: "СЗПК.МО.12.ПП", capacity: "12", bags: "12", dimensions: "6600\u00D7500\u00D71480" },
 ];
 
-const faqItems = [
-  {
-    q: "Как подобрать модель обезвоживателя?",
-    a: "Модель подбирается исходя из суточного объёма осадка. Наши инженеры помогут определить оптимальную модификацию по вашим данным — оставьте заявку, и мы подготовим расчёт.",
-  },
-  {
-    q: "Как часто нужно менять мешки?",
-    a: "Частота замены зависит от концентрации взвесей и объёма осадка. В среднем один мешок работает от нескольких суток до нескольких недель. Мы поставляем расходные мешки отдельно.",
-  },
-  {
-    q: "Подходит ли обезвоживатель для промышленных стоков?",
-    a: "Да, мешочные обезвоживатели применяются для промышленных стоков — гальванических, нефтесодержащих, пищевых и других. При агрессивных средах используются мешки из химстойких материалов.",
-  },
-  {
-    q: "Какая документация поставляется с оборудованием?",
-    a: "В комплект входят: паспорт изделия, руководство по эксплуатации, сертификат соответствия, а также рекомендации по подбору фильтрующих мешков.",
-  },
-  {
-    q: "Какие сроки изготовления и доставки?",
-    a: "Срок изготовления — от 10 до 25 рабочих дней в зависимости от модели. Доставка по всей России транспортной компанией или собственным транспортом.",
-  },
+const obezvozhivatelFaqItems = [
+  { q: "Как подобрать модель обезвоживателя?", a: "Модель подбирается исходя из суточного объёма осадка. Наши инженеры помогут определить оптимальную модификацию по вашим данным — оставьте заявку, и мы подготовим расчёт." },
+  { q: "Как часто нужно менять мешки?", a: "Частота замены зависит от концентрации взвесей и объёма осадка. В среднем один мешок работает от нескольких суток до нескольких недель. Мы поставляем расходные мешки отдельно." },
+  { q: "Подходит ли обезвоживатель для промышленных стоков?", a: "Да, мешочные обезвоживатели применяются для промышленных стоков — гальванических, нефтесодержащих, пищевых и других. При агрессивных средах используются мешки из химстойких материалов." },
+  { q: "Какая документация поставляется с оборудованием?", a: "В комплект входят: паспорт изделия, руководство по эксплуатации, сертификат соответствия, а также рекомендации по подбору фильтрующих мешков." },
+  { q: "Какие сроки изготовления и доставки?", a: "Срок изготовления — от 10 до 25 рабочих дней в зависимости от модели. Доставка по всей России транспортной компанией или собственным транспортом." },
+];
+
+const waterTreatmentFaqItems = [
+  { q: "Какие системы водоочистки вы производите?", a: "ФФУ, ламельные отстойники, станции дозирования, жироуловители, ЛОС, мешочные обезвоживатели." },
+  { q: "Из каких материалов?", a: "Полипропилен (PP) и полиэтилен (PE) — химически стойкие к агрессивным средам." },
+  { q: "Какие сроки?", a: "14–30 рабочих дней в зависимости от сложности." },
+  { q: "Проектируете под заказ?", a: "Да, проектирование с нуля под параметры вашего объекта." },
+  { q: "Входит ли монтаж?", a: "Да, шеф-монтаж и пусконаладка на объекте заказчика." },
 ];
 
 const partnershipAdvantages = [
@@ -103,265 +79,77 @@ const partnershipAdvantages = [
 
 /* ── component ── */
 
-const VodoochistkaObezvozhivatelInner = () => {
-  const [cartOpen, setCartOpen] = useState(false);
-  const [form, setForm] = useState({ name: "", phone: "", email: "", description: "" });
-  const navigate = useNavigate();
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!form.name.trim() || !form.phone.trim()) {
-      toast.error("Заполните обязательные поля (имя, телефон)");
-      return;
-    }
-    toast.success("Заявка отправлена! Мы свяжемся с вами в ближайшее время.");
-    setForm({ name: "", phone: "", email: "", description: "" });
-  };
-
-  const scrollToForm = () => {
-    document.getElementById("cta-form")?.scrollIntoView({ behavior: "smooth" });
-  };
-
-  return (
-    <>
-      <Header onCartOpen={() => setCartOpen(true)} productType="otvod" />
-      <CartSheet open={cartOpen} onOpenChange={setCartOpen} />
-
-      <main className="mx-auto max-w-[960px] px-4 sm:px-6 py-6 sm:py-8">
-        {/* Breadcrumbs */}
-        <Breadcrumb className="mb-6">
-          <BreadcrumbList>
-            <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog">Каталог</Link></BreadcrumbLink></BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog/vodoochistka">Водоочистка</Link></BreadcrumbLink></BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem><BreadcrumbPage>Мешочный обезвоживатель</BreadcrumbPage></BreadcrumbItem>
-          </BreadcrumbList>
-        </Breadcrumb>
-
-        {/* Hero */}
-        <section className="mb-10">
-          <p className="text-xs text-muted-foreground uppercase tracking-wider mb-2">ООО СЗПК «Пласт-Металл ПРО»</p>
-          <h1 className="text-2xl sm:text-3xl font-bold text-foreground leading-tight mb-3">
-            Мешочный обезвоживатель осадка
-          </h1>
-          <p className="text-sm text-muted-foreground mb-5">
-            Эффективное обезвоживание шлама без электроэнергии — компактно, просто, надёжно!
-          </p>
-          <Button onClick={scrollToForm} className="gap-2">
-            Получить расчёт стоимости
-          </Button>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-6">
-            {heroImages.map((img, i) => (
-              <div key={i} className="rounded-lg border border-border overflow-hidden bg-card">
-                <img src={img.src} alt={img.alt} className="w-full object-contain" />
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Intro */}
-
-        <nav className="mb-8 flex flex-wrap gap-2">
-          {[
-            { id: "opisanie", label: "Описание" },
-            { id: "naznachenie", label: "Назначение" },
-            { id: "princip", label: "Принцип работы" },
-            { id: "modeli", label: "Модели" },
-            { id: "preimushchestva", label: "Преимущества" },
-            { id: "cta-form", label: "Заявка" },
-          ].map((s) => (
-            <button
-              key={s.id}
-              onClick={() => document.getElementById(s.id)?.scrollIntoView({ behavior: "smooth" })}
-              className="rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium text-foreground hover:bg-accent hover:text-accent-foreground transition-colors"
-            >
-              {s.label}
-            </button>
-          ))}
-        </nav>
-
-        <section className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">
-            Мешочные обезвоживатели осадка: производство под ключ
-          </h2>
-          <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-            Мы изготавливаем мешочные обезвоживатели осадка для снижения влажности шламов, образующихся на очистных сооружениях хозяйственно-бытовых, ливневых и промышленных стоков. Оборудование работает по принципу гравитационной фильтрации через полимерные мешки — без электричества и движущихся частей.
-          </p>
-          <h3 className="text-sm font-semibold text-foreground mb-2">Почему выбирают наши обезвоживатели:</h3>
-          <ul className="space-y-2">
-            {whyUs.map((item, i) => (
-              <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
-                <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" />
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
-        </section>
-
-        {/* Section 1: Назначение */}
-        <section id="naznachenie" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Назначение и области применения</h2>
-
-          <h3 className="text-sm font-semibold text-foreground mb-2">Мешочные обезвоживатели предназначены для:</h3>
-          <ul className="space-y-1.5 mb-4">
-            {purposeItems.map((item, i) => (
-              <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
-                <span className="text-primary mt-1">•</span>
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
-
-          <h3 className="text-sm font-semibold text-foreground mb-3">Типовые сферы применения:</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-            {[
-              { icon: Droplets, text: "Очистные сооружения хозбытовых стоков" },
-              { icon: Factory, text: "Промышленные предприятия (гальваника, металлургия, пищевая)" },
-              { icon: Zap, text: "Ливневые очистные системы" },
-              { icon: Recycle, text: "Полигоны и объекты утилизации отходов" },
-              { icon: Package, text: "Автомойки и сервисные центры" },
-              { icon: HelpCircle, text: "Строительные площадки и карьеры" },
-            ].map((area, i) => (
-              <div key={i} className="flex items-start gap-2 rounded-lg border border-border bg-card p-3">
-                <area.icon className="h-4 w-4 text-primary shrink-0 mt-0.5" />
-                <span className="text-sm text-foreground">{area.text}</span>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Section 2: Принцип работы */}
-        <section id="princip" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Принцип работы</h2>
-
-          <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-            Обезвоживатель работает по принципу гравитационной фильтрации: осадок подаётся в фильтрующие мешки из полимерного материала с переменной проницаемостью. Вода проходит через стенки мешков, а твёрдые частицы задерживаются, постепенно формируя плотный кек.
-          </p>
-
-          <div className="space-y-3 mb-6">
-            {processSteps.map((s) => (
-              <div key={s.step} className="flex gap-3 items-start rounded-lg border border-border bg-card p-3">
-                <span className="flex items-center justify-center h-7 w-7 rounded-full bg-primary text-primary-foreground text-xs font-bold shrink-0">
-                  {s.step}
-                </span>
-                <div>
-                  <p className="text-sm font-semibold text-foreground">{s.title}</p>
-                  <p className="text-xs text-muted-foreground">{s.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Section 3: Модельный ряд */}
-        <section id="modeli" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Модельный ряд</h2>
-
-          <div className="rounded-lg border border-border overflow-auto text-sm">
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead className="text-xs">Артикул</TableHead>
-                  <TableHead className="text-xs">Модель</TableHead>
-                  <TableHead className="text-xs text-right">Произв., м³/сут</TableHead>
-                  <TableHead className="text-xs text-right">Мешков</TableHead>
-                  <TableHead className="text-xs text-right">Габариты (Д×Ш×В), мм</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {models.map((m) => (
-                  <TableRow
-                    key={m.name}
-                    className="even:bg-muted/30 cursor-pointer hover:bg-accent/50 transition-colors"
-                    onClick={() => navigate(`/product/${encodeURIComponent(m.article)}`)}
-                  >
-                    <TableCell className="text-xs font-mono text-primary underline">{m.article}</TableCell>
-                    <TableCell className="text-xs font-medium">{m.name}</TableCell>
-                    <TableCell className="text-xs text-right">{m.capacity}</TableCell>
-                    <TableCell className="text-xs text-right">{m.bags}</TableCell>
-                    <TableCell className="text-xs text-right">{m.dimensions}</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </div>
-        </section>
-
-        {/* Section 4: FAQ */}
-        <section className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Часто задаваемые вопросы</h2>
-          <Accordion type="single" collapsible className="w-full">
-            {faqItems.map((faq, i) => (
-              <AccordionItem key={i} value={`faq-${i}`}>
-                <AccordionTrigger className="text-sm text-left">{faq.q}</AccordionTrigger>
-                <AccordionContent className="text-sm text-muted-foreground">{faq.a}</AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
-        </section>
-
-        {/* Section 5: Преимущества сотрудничества */}
-        <section id="preimushchestva" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Преимущества сотрудничества</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            {partnershipAdvantages.map((a, i) => (
-              <Card key={i} className="border-border">
-                <CardContent className="flex items-start gap-3 p-4">
-                  <a.icon className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                  <div>
-                    <p className="text-sm font-semibold text-foreground">{a.title}</p>
-                    <p className="text-xs text-muted-foreground">{a.text}</p>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </section>
-
-        {/* CTA form */}
-        <section id="cta-form" className="mb-10 scroll-mt-20">
-          <Card className="border-border">
-            <CardContent className="p-6">
-              <h2 className="text-base font-bold text-foreground mb-2">Готовы заказать мешочный обезвоживатель?</h2>
-              <p className="text-sm text-muted-foreground mb-4">
-                Оставьте заявку, и наш инженер подберёт оптимальную модель, подготовит расчёт стоимости и организует доставку на ваш объект.
-              </p>
-
-              <form onSubmit={handleSubmit} className="space-y-3">
-                <div>
-                  <Label htmlFor="name" className="text-xs">Имя *</Label>
-                  <Input id="name" placeholder="Иван Иванов" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} />
-                </div>
-                <div>
-                  <Label htmlFor="phone" className="text-xs">Телефон *</Label>
-                  <Input id="phone" type="tel" placeholder="+7 900 000-00-00" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} />
-                </div>
-                <div>
-                  <Label htmlFor="email" className="text-xs">E-mail</Label>
-                  <Input id="email" type="email" placeholder="ivanov@company.ru" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
-                </div>
-                <div>
-                  <Label htmlFor="description" className="text-xs">Описание задачи (тип осадка, объём, требования)</Label>
-                  <Textarea id="description" placeholder="Опишите вашу задачу..." rows={3} value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} />
-                </div>
-                <Button type="submit" className="w-full">Оставить заявку</Button>
-              </form>
-            </CardContent>
-          </Card>
-        </section>
-
-        <PageFooter />
-      </main>
-    </>
-  );
-};
-
 const VodoochistkaObezvozhivatel = () => (
-  <CartProvider>
-    <VodoochistkaObezvozhivatelInner />
-  </CartProvider>
+  <CorporatePageShell
+    breadcrumbs={[
+      { label: "Каталог", href: "/catalog" },
+      { label: "Водоочистка", href: "/catalog/vodoochistka" },
+      { label: "Мешочный обезвоживатель" },
+    ]}
+    title="Мешочный обезвоживатель"
+    accentWord="осадка"
+    subtitle="Эффективное обезвоживание шлама без электроэнергии — компактно, просто, надёжно!"
+    badge="Без электроэнергии"
+    heroImage="/images/vodoochistka-collage-hero.png"
+    stats={[
+      { value: "ФФУ / ЛО / ЛОС", label: "типы оборудования" },
+      { value: "PP / PE", label: "материалы" },
+      { value: "от 14 дней", label: "срок изготовления" },
+      { value: "5 лет", label: "гарантия" },
+    ]}
+    seo={{
+      title: "Мешочный обезвоживатель осадка — СЗПК Пласт-Металл ПРО",
+      description: "Производство мешочных обезвоживателей осадка из полипропилена. Гравитационная фильтрация без электроэнергии. Модели от 1,5 до 12 м\u00B3/сут.",
+      keywords: "мешочный обезвоживатель, обезвоживание осадка, шлам, фильтрация, полипропилен",
+    }}
+  >
+    <DarkInfoBlock
+      title="Мешочные обезвоживатели осадка: производство под ключ"
+      text="Мы изготавливаем мешочные обезвоживатели осадка для снижения влажности шламов, образующихся на очистных сооружениях хозяйственно-бытовых, ливневых и промышленных стоков. Оборудование работает по принципу гравитационной фильтрации через полимерные мешки — без электричества и движущихся частей."
+      highlights={[
+        { value: "70–80%", label: "влажность осадка" },
+        { value: "0 кВт", label: "энергозатраты" },
+        { value: "30+ лет", label: "срок службы" },
+        { value: "1–3 дня", label: "монтаж" },
+      ]}
+    />
+
+    <FeatureChecklist
+      title="Почему выбирают наши обезвоживатели"
+      items={whyUs}
+      columns={1}
+    />
+
+    <FeatureChecklist
+      title="Назначение"
+      subtitle="Мешочные обезвоживатели предназначены для:"
+      items={purposeItems}
+      columns={1}
+    />
+
+    <ApplicationAreas
+      title="Типовые сферы применения"
+      items={applicationAreas}
+    />
+
+    <SpecTable
+      title="Модельный ряд"
+      headers={["Артикул", "Модель", "Произв., м\u00B3/сут", "Мешков", "Габариты (Д\u00D7Ш\u00D7В), мм"]}
+      rows={models.map((m) => [m.article, m.name, m.capacity, m.bags, m.dimensions])}
+    />
+
+    <AdvantagesGrid
+      title="Преимущества сотрудничества"
+      items={partnershipAdvantages}
+    />
+
+    <FAQSection
+      title="Вопросы по обезвоживателям"
+      items={obezvozhivatelFaqItems}
+    />
+
+    <FAQSection items={waterTreatmentFaqItems} />
+  </CorporatePageShell>
 );
 
 export default VodoochistkaObezvozhivatel;

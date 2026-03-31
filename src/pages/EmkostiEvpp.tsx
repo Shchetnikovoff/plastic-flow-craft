@@ -1,18 +1,6 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import Header from "@/components/Header";
-import CartSheet from "@/components/CartSheet";
-import { CartProvider } from "@/contexts/CartContext";
-import { Check } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
-import {
-  Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
-import { toast } from "sonner";
-import PageFooter from "@/components/PageFooter";
+import { useNavigate } from "react-router-dom";
+import CorporatePageShell from "@/components/corporate/CorporatePageShell";
+import { FeatureChecklist, SpecTable, FAQSection } from "@/components/corporate/sections";
 import { TankCalculator } from "@/components/configurator";
 
 const models = [
@@ -35,163 +23,95 @@ const models = [
   { art: "СЗПК.ЕВПП.50000", vol: 50000, d: 3050, h: 7000 },
 ];
 
-const EmkostiEvppInner = () => {
-  const [cartOpen, setCartOpen] = useState(false);
-  const [form, setForm] = useState({ name: "", phone: "", email: "", description: "" });
+const features = [
+  "Плоская приварная крыша — жёсткое соединение с цилиндром",
+  "Плоское дно — устойчивость на ровной поверхности",
+  "Люк Ø800 мм в верхней части — удобный доступ для обслуживания",
+  "Съёмная крышка люка на болтовом соединении",
+  "Материал: листовой полипропилен (ПП)",
+  "Объём от 1 000 до 50 000 литров",
+];
+
+const emkostiStats = [
+  { value: "50 л — 300 м³", label: "диапазон объёмов" },
+  { value: "PP / PE / PVC", label: "материалы" },
+  { value: "от 10 дней", label: "срок изготовления" },
+  { value: "5 лет", label: "гарантия" },
+];
+
+const faqEmkosti = [
+  { q: "Из каких материалов изготавливаются ёмкости?", a: "Листовой полипропилен (PP-H, PP-C, PPs), полиэтилен (PE 100), ПВХ (PVC). Подбор — по рабочей среде, температуре и концентрации." },
+  { q: "Какой диапазон объёмов?", a: "От 50 литров до 300 м³. Нестандартные размеры — по ТЗ заказчика." },
+  { q: "Какие сроки изготовления?", a: "Стандартные ёмкости — 10–21 рабочий день. Нестандартные — от 15 дней." },
+  { q: "Есть ли доставка?", a: "Да, доставка спецтранспортом по всей РФ. Производство — Ленинградская область." },
+  { q: "Можно заказать по своим чертежам?", a: "Да, изготовим по вашим чертежам и ТЗ, а также спроектируем с нуля под ваши задачи." },
+];
+
+const EmkostiEvpp = () => {
   const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!form.name.trim() || !form.phone.trim()) {
-      toast.error("Заполните обязательные поля (имя, телефон)");
-      return;
-    }
-    toast.success("Заявка отправлена!");
-    setForm({ name: "", phone: "", email: "", description: "" });
-  };
-
   return (
-    <>
-      <Header onCartOpen={() => setCartOpen(true)} productType="otvod" />
-      <CartSheet open={cartOpen} onOpenChange={setCartOpen} />
-
-      <main className="mx-auto max-w-[960px] px-4 sm:px-6 py-6 sm:py-8">
-        <Breadcrumb className="mb-6">
-          <BreadcrumbList>
-            <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog">Каталог</Link></BreadcrumbLink></BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog/emkosti">Ёмкости</Link></BreadcrumbLink></BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog/emkosti/vertikalnye">Цилиндрические вертикальные</Link></BreadcrumbLink></BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem><BreadcrumbPage>С плоской крышей и плоским дном</BreadcrumbPage></BreadcrumbItem>
-          </BreadcrumbList>
-        </Breadcrumb>
-
-        {/* Hero */}
-        <section className="mb-10">
-          <p className="text-xs text-muted-foreground uppercase tracking-wider mb-2">Раздел 6.1.1</p>
-          <h1 className="text-2xl sm:text-3xl font-bold text-foreground leading-tight mb-3">
-            Вертикальная цилиндрическая ёмкость с плоской крышей и плоским дном
-          </h1>
-          <p className="text-sm text-muted-foreground mb-5">
-            Ёмкости из полипропилена (ПП) цилиндрические вертикальные — стандартная форма с плоской крышей и плоским дном.
-          </p>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
-            <div className="rounded-lg border border-border overflow-hidden bg-card">
+    <CorporatePageShell
+      breadcrumbs={[
+        { label: "Каталог", href: "/catalog" },
+        { label: "Ёмкости", href: "/catalog/emkosti" },
+        { label: "Цилиндрические вертикальные", href: "/catalog/emkosti/vertikalnye" },
+        { label: "С плоской крышей и плоским дном" },
+      ]}
+      title="Вертикальная ёмкость"
+      accentWord="с плоской крышей и плоским дном"
+      subtitle="Ёмкости из полипропилена (ПП) цилиндрические вертикальные — стандартная форма с плоской крышей и плоским дном."
+      badge="Раздел 6.1.1"
+      heroImage="/images/emkosti-collage-hero.png"
+      stats={emkostiStats}
+      seo={{
+        title: "Вертикальная ёмкость с плоской крышей и плоским дном | СЗПК Пласт-Металл ПРО",
+        description: "Цилиндрическая вертикальная ёмкость из полипропилена с плоской крышей и плоским дном. Объём от 1 000 до 50 000 литров.",
+        keywords: "ЕВПП, вертикальная ёмкость, плоская крыша, плоское дно, полипропилен",
+      }}
+    >
+      {/* Hero images */}
+      <section className="w-full bg-white py-16 md:py-20">
+        <div className="mx-auto max-w-[1440px] px-4 md:px-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div className="rounded-2xl border border-slate-200 overflow-hidden bg-slate-50">
               <img src="/images/evpp-flat-hero.png" alt="Вертикальная ёмкость с плоской крышей" className="w-full h-auto object-contain" />
             </div>
-            <div className="rounded-lg border border-border overflow-hidden bg-card">
+            <div className="rounded-2xl border border-slate-200 overflow-hidden bg-slate-50">
               <img src="/images/evpp-flat-schema.png" alt="Схема вертикальной ёмкости" className="w-full h-auto object-contain" loading="lazy" />
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Anchor nav */}
-        <nav className="mb-8 flex flex-wrap gap-2">
-          {[
-            { id: "calculator", label: "Калькулятор" },
-            { id: "opisanie", label: "Описание" },
-            { id: "modeli", label: "Модельный ряд" },
-            { id: "cta-form", label: "Заявка" },
-          ].map((s) => (
-            <button
-              key={s.id}
-              onClick={() => document.getElementById(s.id)?.scrollIntoView({ behavior: "smooth" })}
-              className="rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium text-foreground hover:bg-accent hover:text-accent-foreground transition-colors"
-            >
-              {s.label}
-            </button>
-          ))}
-        </nav>
+      {/* Calculator */}
+      <section className="w-full bg-slate-50 border-y border-slate-200 py-16 md:py-20">
+        <div className="mx-auto max-w-[1440px] px-4 md:px-8">
+          <TankCalculator models={models} defaultType="flat" />
+        </div>
+      </section>
 
-        <TankCalculator models={models} defaultType="flat" />
+      {/* Features */}
+      <FeatureChecklist
+        title="Особенности конструкции"
+        subtitle="Ёмкость полностью закрытая с приваренной к цилиндру крышей. Стандартная форма. Отличительная черта такой ёмкости — это полностью закрытая вертикальная цилиндрическая ёмкость с установленным в верхней части люком диаметром 800 мм со съёмной на болтовом соединении крышкой."
+        items={features}
+        columns={1}
+      />
 
-        {/* Description */}
-        <section id="opisanie" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">Описание</h2>
-          <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-            Ёмкость полностью закрытая с приваренной к цилиндру крышей. Стандартная форма. Отличительная черта такой ёмкости — 
-            это полностью закрытая вертикальная цилиндрическая ёмкость с установленным в верхней части люком диаметром 800 мм 
-            со съёмной на болтовом соединении крышкой.
-          </p>
-          <h3 className="text-sm font-semibold text-foreground mb-2">Особенности конструкции:</h3>
-          <ul className="space-y-2">
-            {[
-              "Плоская приварная крыша — жёсткое соединение с цилиндром",
-              "Плоское дно — устойчивость на ровной поверхности",
-              "Люк Ø800 мм в верхней части — удобный доступ для обслуживания",
-              "Съёмная крышка люка на болтовом соединении",
-              "Материал: листовой полипропилен (ПП)",
-              "Объём от 1 000 до 50 000 литров",
-            ].map((item, i) => (
-              <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
-                <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" />
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
-        </section>
+      {/* Model table */}
+      <SpecTable
+        title="Модельный ряд"
+        subtitle="Кликните на строку для перехода в карточку товара"
+        headers={["Артикул", "Объём, л", "Ø, мм", "H, мм"]}
+        rows={models.map((m) => [m.art, m.vol.toLocaleString("ru-RU"), m.d.toLocaleString("ru-RU"), m.h.toLocaleString("ru-RU")])}
+        caption="Возможно изготовление нестандартных размеров по ТЗ заказчика"
+      />
 
-        {/* Model table */}
-        <section id="modeli" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Модельный ряд</h2>
-          <div className="rounded-lg border border-border overflow-hidden">
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="bg-muted/50">
-                    <th className="px-4 py-3 text-left font-semibold text-foreground">Артикул</th>
-                    <th className="px-4 py-3 text-center font-semibold text-foreground">Объём, л</th>
-                    <th className="px-4 py-3 text-center font-semibold text-foreground">Ø, мм</th>
-                    <th className="px-4 py-3 text-center font-semibold text-foreground">H, мм</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {models.map((m, i) => (
-                    <tr
-                      key={m.art}
-                      onClick={() => navigate(`/product/${encodeURIComponent(m.art)}`)}
-                      className={`cursor-pointer transition-colors hover:bg-primary/5 ${
-                        i % 2 === 0 ? "bg-card" : "bg-muted/20"
-                      }`}
-                    >
-                      <td className="px-4 py-2.5 font-medium text-primary">{m.art}</td>
-                      <td className="px-4 py-2.5 text-center text-foreground">{m.vol.toLocaleString("ru-RU")}</td>
-                      <td className="px-4 py-2.5 text-center text-foreground">{m.d.toLocaleString("ru-RU")}</td>
-                      <td className="px-4 py-2.5 text-center text-foreground">{m.h.toLocaleString("ru-RU")}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <p className="text-xs text-muted-foreground mt-2">Кликните на строку для перехода в карточку товара</p>
-        </section>
-
-        {/* CTA Form */}
-        <section id="cta-form" className="mb-10 scroll-mt-8">
-          <div className="rounded-xl border border-border bg-card p-6 sm:p-8">
-            <h2 className="text-xl font-bold text-foreground mb-2">Запросить расчёт</h2>
-            <p className="text-sm text-muted-foreground mb-4">Оставьте заявку — подготовим КП в течение 24 часов.</p>
-            <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div><Label htmlFor="cta-name">Имя *</Label><Input id="cta-name" placeholder="Иван Иванов" value={form.name} onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))} /></div>
-              <div><Label htmlFor="cta-phone">Телефон *</Label><Input id="cta-phone" type="tel" placeholder="+7 900 000-00-00" value={form.phone} onChange={(e) => setForm((f) => ({ ...f, phone: e.target.value }))} /></div>
-              <div className="sm:col-span-2"><Label htmlFor="cta-desc">Описание задачи</Label><Textarea id="cta-desc" placeholder="Опишите ёмкость: тип, объём, назначение…" value={form.description} onChange={(e) => setForm((f) => ({ ...f, description: e.target.value }))} rows={3} /></div>
-              <div className="sm:col-span-2"><Button type="submit" className="w-full sm:w-auto">Оставить заявку</Button></div>
-            </form>
-          </div>
-        </section>
-
-        <PageFooter />
-      </main>
-    </>
+      {/* FAQ */}
+      <FAQSection items={faqEmkosti} />
+    </CorporatePageShell>
   );
 };
-
-const EmkostiEvpp = () => (
-  <CartProvider><EmkostiEvppInner /></CartProvider>
-);
 
 export default EmkostiEvpp;

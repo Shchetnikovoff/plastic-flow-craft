@@ -1,18 +1,8 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
-import Header from "@/components/Header";
-import CartSheet from "@/components/CartSheet";
-import { CartProvider } from "@/contexts/CartContext";
+import CorporatePageShell from "@/components/corporate/CorporatePageShell";
+import { AdvantagesGrid, FeatureChecklist, DarkInfoBlock, FAQSection } from "@/components/corporate/sections";
 import { pozharnyeRect, pozharnyePodzem, pozharnyeHoriz } from "@/data/pozharnyeProducts";
-import { Check, Box, Wrench, ShieldCheck, Clock, Truck, Settings, Flame, Zap, RefreshCw } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
-import {
-  Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
+import { Wrench, ShieldCheck, Clock, Truck, Settings, Flame, RefreshCw } from "lucide-react";
 import {
   Accordion, AccordionContent, AccordionItem, AccordionTrigger,
 } from "@/components/ui/accordion";
@@ -20,10 +10,6 @@ import {
   Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
 } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { toast } from "sonner";
-import PageFooter from "@/components/PageFooter";
-
-/* ─── static data ─── */
 
 const whyUs = [
   "Соответствие СП 31.13330.2012, СНиП 2.04.02-84 и ГОСТ 12.4.009-83",
@@ -43,6 +29,17 @@ const applications = [
   "Резервное хранение воды с учётом хозяйственно‑питьевых и производственных нужд на время тушения пожара",
   "Размещение на территориях промышленных предприятий, складов, логистических центров",
   "Оснащение коттеджных посёлков, дачных кооперативов и удалённых объектов",
+];
+
+const constructionFeatures = [
+  "Цилиндрическая или прямоугольная форма (горизонтальная/вертикальная)",
+  "Усиленные кольцевые рёбра жёсткости для подземного размещения",
+  "Толщина стенок: от 8 до 25 мм (в зависимости от объёма и глубины залегания)",
+  "Герметичные сварные швы, проверенные вакуумным тестом и опрессовкой",
+  "Возможность изготовления многокамерных резервуаров",
+  "Подземное размещение (с анкерными креплениями против всплытия)",
+  "Наземное размещение (с утеплением корпуса для эксплуатации в холодных регионах)",
+  "В обваловке (для дополнительной защиты и термостабилизации)",
 ];
 
 const modifications = [
@@ -104,199 +101,71 @@ const advantages = [
   { icon: RefreshCw, title: "Гибкость", text: "Возможность доработки конструкции в процессе эксплуатации." },
 ];
 
-/* ─── component ─── */
+const faqItems = [
+  { q: "Из каких материалов?", a: "PP, PE, PVC — подбор по среде и температуре." },
+  { q: "Какой объём?", a: "50 л — 300 м³, нестандарт по ТЗ." },
+  { q: "Сроки?", a: "10–21 день стандарт, от 15 нестандарт." },
+  { q: "Доставка?", a: "Спецтранспорт по всей РФ." },
+  { q: "По своим чертежам?", a: "Да, изготовим и спроектируем." },
+];
 
-const EmkostiPozharnyeInner = () => {
-  const [cartOpen, setCartOpen] = useState(false);
-  const [form, setForm] = useState({ name: "", phone: "", email: "", description: "" });
+const EmkostiPozharnye = () => (
+  <CorporatePageShell
+    breadcrumbs={[
+      { label: "Каталог", href: "/catalog" },
+      { label: "Ёмкости", href: "/catalog/emkosti" },
+      { label: "Пожарные ёмкости" },
+    ]}
+    title="Пожарные ёмкости"
+    accentWord="и резервуары"
+    subtitle="Пожарные резервуары из полипропилена и полиэтилена — надёжное обеспечение пожарной безопасности объектов любого масштаба"
+    badge="СП 31.13330.2012 / ГОСТ 12.4.009-83"
+    heroImage="/images/emkosti-collage-hero.png"
+    stats={[
+      { value: "50 л — 300 м³", label: "диапазон объёмов" },
+      { value: "PP / PE / PVC", label: "материалы" },
+      { value: "от 10 дней", label: "срок изготовления" },
+      { value: "5 лет", label: "гарантия" },
+    ]}
+    seo={{
+      title: "Пожарные ёмкости и резервуары из полипропилена и полиэтилена",
+      description: "Производство пожарных резервуаров из PP и PE. Соответствие СП и ГОСТ. Гарантия 7 лет. Проектирование, доставка, монтаж.",
+      keywords: "пожарные ёмкости, пожарные резервуары, противопожарное водоснабжение, полипропилен, СЗПК",
+    }}
+  >
+    <DarkInfoBlock
+      title="Проектирование, производство и монтаж под ключ"
+      text="Мы изготавливаем пожарные ёмкости и резервуары из листового полипропилена (PP) и полиэтилена (ПНД/HDPE) для систем противопожарного водоснабжения промышленных предприятий, складов, торговых центров, коттеджных посёлков и других объектов."
+      highlights={[
+        { value: "PP / PE", label: "материалы корпуса" },
+        { value: "8–25 мм", label: "толщина стенок" },
+        { value: "от 30 лет", label: "срок службы" },
+        { value: "СП / ГОСТ", label: "соответствие" },
+      ]}
+    />
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!form.name.trim() || !form.phone.trim()) {
-      toast.error("Заполните обязательные поля (имя, телефон)");
-      return;
-    }
-    toast.success("Заявка отправлена! Мы свяжемся с вами в ближайшее время.");
-    setForm({ name: "", phone: "", email: "", description: "" });
-  };
+    <FeatureChecklist title="Почему выбирают нас" items={whyUs} />
 
-  const scrollToForm = () => {
-    document.getElementById("cta-form")?.scrollIntoView({ behavior: "smooth" });
-  };
+    <FeatureChecklist title="Назначение пожарных резервуаров" items={applications} />
 
-  return (
-    <>
-      <Header onCartOpen={() => setCartOpen(true)} productType="otvod" />
-      <CartSheet open={cartOpen} onOpenChange={setCartOpen} />
+    <FeatureChecklist title="Конструктивные особенности" items={constructionFeatures} />
 
-      <main className="mx-auto max-w-[960px] px-4 sm:px-6 py-6 sm:py-8">
-        {/* Breadcrumbs */}
-        <Breadcrumb className="mb-6">
-          <BreadcrumbList>
-            <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog">Каталог</Link></BreadcrumbLink></BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog/emkosti">Ёмкости</Link></BreadcrumbLink></BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem><BreadcrumbPage>Пожарные ёмкости</BreadcrumbPage></BreadcrumbItem>
-          </BreadcrumbList>
-        </Breadcrumb>
-
-        {/* Hero */}
-        <section className="mb-10">
-          <p className="text-xs text-muted-foreground uppercase tracking-wider mb-2">ООО СЗПК «Пласт-Металл ПРО»</p>
-          <h1 className="text-2xl sm:text-3xl font-bold text-foreground leading-tight mb-3">
-            Пожарные ёмкости и резервуары из листового полиэтилена и полипропилена
-          </h1>
-          <p className="text-sm text-muted-foreground mb-5">
-            Пожарные резервуары из полипропилена и полиэтилена — надёжное обеспечение пожарной безопасности объектов любого масштаба!
-          </p>
-          <Button onClick={scrollToForm} className="gap-2">
-            Получить расчёт стоимости
-          </Button>
-
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
-            <div className="rounded-lg border border-border overflow-hidden bg-card">
-              <img src="/images/emkost-pryam-pp-1.png" alt="Пожарная ёмкость прямоугольная" className="w-full object-contain" />
-            </div>
-            <div className="rounded-lg border border-border overflow-hidden bg-card">
-              <img src="/images/emkosti-podzemnye-1.jpg" alt="Подземная пожарная ёмкость" className="w-full object-contain" />
-            </div>
-            <div className="rounded-lg border border-border overflow-hidden bg-card">
-              <img src="/images/emkosti-hero-1.png" alt="Горизонтальная пожарная ёмкость" className="w-full object-contain" />
-            </div>
-          </div>
-        </section>
-
-        {/* Intro */}
-
-        <nav className="mb-8 flex flex-wrap gap-2">
-          {[
-            { id: "opisanie", label: "Описание" },
-            { id: "naznachenie", label: "Назначение" },
-            { id: "materialy", label: "Материалы" },
-            { id: "modifikacii", label: "Модификации" },
-            { id: "modeli", label: "Модели" },
-            { id: "preimushchestva", label: "Преимущества" },
-            { id: "cta-form", label: "Заявка" },
-          ].map((s) => (
-            <button
-              key={s.id}
-              onClick={() => document.getElementById(s.id)?.scrollIntoView({ behavior: "smooth" })}
-              className="rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium text-foreground hover:bg-accent hover:text-accent-foreground transition-colors"
-            >
-              {s.label}
-            </button>
-          ))}
-        </nav>
-
-        <section className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">
-            Пожарные резервуары: проектирование, производство и монтаж под ключ
-          </h2>
-          <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-            Мы изготавливаем пожарные ёмкости и резервуары из листового полипропилена (PP) и полиэтилена (ПНД/HDPE) для систем противопожарного водоснабжения промышленных предприятий, складов, торговых центров, коттеджных посёлков и других объектов.
-          </p>
-          <h3 className="text-sm font-semibold text-foreground mb-2">Почему выбирают нас:</h3>
-          <ul className="space-y-2">
-            {whyUs.map((item, i) => (
-              <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
-                <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" />
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
-        </section>
-
-        {/* Раздел 1: Назначение */}
-        <section id="naznachenie" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Назначение пожарных резервуаров</h2>
-          <p className="text-sm text-muted-foreground mb-3">Наши пожарные ёмкости предназначены для:</p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-            {applications.map((app, i) => (
-              <div key={i} className="flex items-start gap-2 rounded-lg border border-border bg-card p-3">
-                <Box className="h-4 w-4 text-primary shrink-0 mt-0.5" />
-                <span className="text-sm text-foreground">{app}</span>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Раздел 2: Материалы и конструкция */}
-        <section id="opisanie" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Описание материалов и конструкции</h2>
-
-          <h3 className="text-sm font-semibold text-foreground mb-2">Основные материалы:</h3>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
-            <Card>
-              <CardHeader className="pb-2">
-                <CardTitle className="text-sm">Полипропилен (PP)</CardTitle>
-              </CardHeader>
-              <CardContent className="text-xs text-muted-foreground space-y-1">
-                <p>Температурный диапазон: от −20 °C до +100 °C (кратковременно до +110 °C)</p>
-                <p>Высокая прочность и устойчивость к нагрузкам</p>
-                <p>Плотность 0,90–0,92 г/см³, температура плавления 160–170 °C</p>
-                <p>Экологическая безопасность и нетоксичность</p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader className="pb-2">
-                <CardTitle className="text-sm">Полиэтилен (ПНД/HDPE)</CardTitle>
-              </CardHeader>
-              <CardContent className="text-xs text-muted-foreground space-y-1">
-                <p>Температурный диапазон: от −50 °C до +60 °C (кратковременно до +80 °C)</p>
-                <p>Морозостойкость (до −70 °C для некоторых марок)</p>
-                <p>Плотность 0,93–0,97 г/см³, температура плавления ~120–135 °C</p>
-                <p>Водонепроницаемость и устойчивость к коррозии</p>
-              </CardContent>
-            </Card>
-          </div>
-
-          <h3 className="text-sm font-semibold text-foreground mb-2">Конструктивные особенности:</h3>
-          <ul className="space-y-1.5 mb-4">
-            {[
-              "Цилиндрическая или прямоугольная форма (горизонтальная/вертикальная)",
-              "Усиленные кольцевые рёбра жёсткости для подземного размещения",
-              "Толщина стенок: от 8 до 25 мм (в зависимости от объёма и глубины залегания)",
-              "Герметичные сварные швы, проверенные вакуумным тестом и опрессовкой",
-              "Возможность изготовления многокамерных резервуаров",
-            ].map((item, i) => (
-              <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
-                <Check className="h-3.5 w-3.5 text-primary shrink-0 mt-0.5" />
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
-
-          <h3 className="text-sm font-semibold text-foreground mb-2">Варианты размещения:</h3>
-          <ul className="space-y-1.5">
-            {[
-              "Подземное (с анкерными креплениями против всплытия)",
-              "Наземное (с утеплением корпуса для эксплуатации в холодных регионах)",
-              "В обваловке (для дополнительной защиты и термостабилизации)",
-            ].map((item, i) => (
-              <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
-                <Check className="h-3.5 w-3.5 text-primary shrink-0 mt-0.5" />
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
-        </section>
-
-        {/* Раздел 3: Виды и модификации */}
-        <section id="modifikacii" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Виды и модификации пожарных резервуаров</h2>
-          <Accordion type="multiple" defaultValue={["По объёму"]} className="space-y-2">
+    {/* Modifications accordion */}
+    <section className="w-full bg-slate-50 py-16 md:py-20">
+      <div className="mx-auto max-w-[1440px] px-4 md:px-8">
+        <h2 className="text-2xl md:text-3xl font-bold text-slate-900">Виды и модификации пожарных резервуаров</h2>
+        <div className="mt-10">
+          <Accordion type="multiple" defaultValue={["По объёму"]} className="space-y-3">
             {modifications.map((mod) => (
-              <AccordionItem key={mod.title} value={mod.title} className="rounded-lg border border-border bg-card px-4">
-                <AccordionTrigger className="text-sm font-semibold text-foreground hover:no-underline">
+              <AccordionItem key={mod.title} value={mod.title} className="rounded-xl border border-slate-200 bg-white px-5">
+                <AccordionTrigger className="text-sm font-semibold text-slate-900 hover:no-underline">
                   {mod.title}
                 </AccordionTrigger>
                 <AccordionContent>
-                  <ul className="space-y-1.5 pb-2">
+                  <ul className="space-y-2 pb-2">
                     {mod.items.map((item, i) => (
-                      <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
-                        <span className="text-primary mt-1">•</span>
+                      <li key={i} className="flex items-start gap-2 text-sm text-slate-600">
+                        <span className="text-amber-500 mt-1">•</span>
                         <span>{item}</span>
                       </li>
                     ))}
@@ -305,35 +174,39 @@ const EmkostiPozharnyeInner = () => {
               </AccordionItem>
             ))}
           </Accordion>
-        </section>
+        </div>
+      </div>
+    </section>
 
-        {/* Типоразмерный ряд */}
-        <section id="modeli" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Типоразмерный ряд пожарных ёмкостей</h2>
+    {/* Product tables with tabs */}
+    <section className="w-full bg-white py-16 md:py-20">
+      <div className="mx-auto max-w-[1440px] px-4 md:px-8">
+        <h2 className="text-2xl md:text-3xl font-bold text-slate-900">Типоразмерный ряд пожарных ёмкостей</h2>
 
+        <div className="mt-10">
           <Tabs defaultValue="rect" className="w-full">
-            <TabsList className="mb-4">
+            <TabsList className="mb-6">
               <TabsTrigger value="rect">Прямоугольные</TabsTrigger>
               <TabsTrigger value="podzem">Подземные</TabsTrigger>
               <TabsTrigger value="horiz">Горизонтальные</TabsTrigger>
             </TabsList>
 
             <TabsContent value="rect">
-              <div className="rounded-lg border border-border overflow-auto">
+              <div className="rounded-lg border border-slate-200 overflow-auto">
                 <Table>
                   <TableHeader>
-                    <TableRow>
-                      <TableHead className="text-xs">Артикул</TableHead>
-                      <TableHead className="text-xs text-right">Объём, л</TableHead>
-                      <TableHead className="text-xs text-right">Длина, мм</TableHead>
-                      <TableHead className="text-xs text-right">Ширина, мм</TableHead>
-                      <TableHead className="text-xs text-right">Высота, мм</TableHead>
+                    <TableRow className="bg-slate-50">
+                      <TableHead className="text-xs font-semibold text-slate-700">Артикул</TableHead>
+                      <TableHead className="text-xs font-semibold text-slate-700 text-right">Объём, л</TableHead>
+                      <TableHead className="text-xs font-semibold text-slate-700 text-right">Длина, мм</TableHead>
+                      <TableHead className="text-xs font-semibold text-slate-700 text-right">Ширина, мм</TableHead>
+                      <TableHead className="text-xs font-semibold text-slate-700 text-right">Высота, мм</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
                     {pozharnyeRect.map((item) => (
-                      <TableRow key={item.article}>
-                        <TableCell className="text-xs font-medium"><Link to={`/product/${item.article}`} className="text-primary hover:underline">{item.article}</Link></TableCell>
+                      <TableRow key={item.article} className="hover:bg-amber-50/50">
+                        <TableCell className="text-xs font-medium"><Link to={`/product/${item.article}`} className="text-amber-600 hover:underline">{item.article}</Link></TableCell>
                         <TableCell className="text-xs text-right">{item.volume.toLocaleString()}</TableCell>
                         <TableCell className="text-xs text-right">{item.length.toLocaleString()}</TableCell>
                         <TableCell className="text-xs text-right">{item.width.toLocaleString()}</TableCell>
@@ -346,20 +219,20 @@ const EmkostiPozharnyeInner = () => {
             </TabsContent>
 
             <TabsContent value="podzem">
-              <div className="rounded-lg border border-border overflow-auto">
+              <div className="rounded-lg border border-slate-200 overflow-auto">
                 <Table>
                   <TableHeader>
-                    <TableRow>
-                      <TableHead className="text-xs">Артикул</TableHead>
-                      <TableHead className="text-xs text-right">Объём, м³</TableHead>
-                      <TableHead className="text-xs text-right">Ø корпуса, мм</TableHead>
-                      <TableHead className="text-xs text-right">Длина (L), мм</TableHead>
+                    <TableRow className="bg-slate-50">
+                      <TableHead className="text-xs font-semibold text-slate-700">Артикул</TableHead>
+                      <TableHead className="text-xs font-semibold text-slate-700 text-right">Объём, м³</TableHead>
+                      <TableHead className="text-xs font-semibold text-slate-700 text-right">Ø корпуса, мм</TableHead>
+                      <TableHead className="text-xs font-semibold text-slate-700 text-right">Длина (L), мм</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
                     {pozharnyePodzem.map((item) => (
-                      <TableRow key={item.article}>
-                        <TableCell className="text-xs font-medium"><Link to={`/product/${item.article}`} className="text-primary hover:underline">{item.article}</Link></TableCell>
+                      <TableRow key={item.article} className="hover:bg-amber-50/50">
+                        <TableCell className="text-xs font-medium"><Link to={`/product/${item.article}`} className="text-amber-600 hover:underline">{item.article}</Link></TableCell>
                         <TableCell className="text-xs text-right">{item.volumeM3}</TableCell>
                         <TableCell className="text-xs text-right">{item.diameter.toLocaleString()}</TableCell>
                         <TableCell className="text-xs text-right">{item.length.toLocaleString()}</TableCell>
@@ -371,20 +244,20 @@ const EmkostiPozharnyeInner = () => {
             </TabsContent>
 
             <TabsContent value="horiz">
-              <div className="rounded-lg border border-border overflow-auto">
+              <div className="rounded-lg border border-slate-200 overflow-auto">
                 <Table>
                   <TableHeader>
-                    <TableRow>
-                      <TableHead className="text-xs">Артикул</TableHead>
-                      <TableHead className="text-xs text-right">Объём, л</TableHead>
-                      <TableHead className="text-xs text-right">Ø корпуса, мм</TableHead>
-                      <TableHead className="text-xs text-right">Длина (L), мм</TableHead>
+                    <TableRow className="bg-slate-50">
+                      <TableHead className="text-xs font-semibold text-slate-700">Артикул</TableHead>
+                      <TableHead className="text-xs font-semibold text-slate-700 text-right">Объём, л</TableHead>
+                      <TableHead className="text-xs font-semibold text-slate-700 text-right">Ø корпуса, мм</TableHead>
+                      <TableHead className="text-xs font-semibold text-slate-700 text-right">Длина (L), мм</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
                     {pozharnyeHoriz.map((item) => (
-                      <TableRow key={item.article}>
-                        <TableCell className="text-xs font-medium"><Link to={`/product/${item.article}`} className="text-primary hover:underline">{item.article}</Link></TableCell>
+                      <TableRow key={item.article} className="hover:bg-amber-50/50">
+                        <TableCell className="text-xs font-medium"><Link to={`/product/${item.article}`} className="text-amber-600 hover:underline">{item.article}</Link></TableCell>
                         <TableCell className="text-xs text-right">{item.volume.toLocaleString()}</TableCell>
                         <TableCell className="text-xs text-right">{item.diameter.toLocaleString()}</TableCell>
                         <TableCell className="text-xs text-right">{item.length.toLocaleString()}</TableCell>
@@ -395,71 +268,14 @@ const EmkostiPozharnyeInner = () => {
               </div>
             </TabsContent>
           </Tabs>
-        </section>
+        </div>
+      </div>
+    </section>
 
-        {/* Раздел 4: Преимущества */}
-        <section id="preimushchestva" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Преимущества сотрудничества</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            {advantages.map((adv) => (
-              <Card key={adv.title}>
-                <CardContent className="p-4 flex items-start gap-3">
-                  <adv.icon className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                  <div>
-                    <p className="text-sm font-semibold text-foreground mb-1">{adv.title}</p>
-                    <p className="text-xs text-muted-foreground leading-relaxed">{adv.text}</p>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </section>
+    <AdvantagesGrid title="Преимущества сотрудничества" items={advantages} />
 
-        {/* CTA Form */}
-        <section id="cta-form" className="mb-10 scroll-mt-8">
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-lg">Готовы заказать пожарный резервуар?</CardTitle>
-              <p className="text-sm text-muted-foreground">
-                Оставьте заявку, и наш инженер бесплатно проконсультирует по выбору материала, объёма и опций, подготовит 3D‑модель и расчёт стоимости в течение 24 часов, а также организует доставку и монтаж на вашем объекте с соблюдением всех норм пожарной безопасности.
-              </p>
-            </CardHeader>
-            <CardContent>
-              <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="name" className="text-sm">Имя *</Label>
-                  <Input id="name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Ваше имя" />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="phone" className="text-sm">Телефон *</Label>
-                  <Input id="phone" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} placeholder="+7 (___) ___-__-__" />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="email" className="text-sm">E-mail</Label>
-                  <Input id="email" type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="mail@example.com" />
-                </div>
-                <div className="space-y-2 sm:col-span-2">
-                  <Label htmlFor="description" className="text-sm">Описание задачи</Label>
-                  <Textarea id="description" value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} placeholder="Укажите тип объекта, требуемый объём запаса воды, условия размещения..." rows={3} />
-                </div>
-                <div className="sm:col-span-2">
-                  <Button type="submit" className="w-full sm:w-auto">Оставить заявку</Button>
-                </div>
-              </form>
-            </CardContent>
-          </Card>
-        </section>
-
-        <PageFooter />
-      </main>
-    </>
-  );
-};
-
-const EmkostiPozharnye = () => (
-  <CartProvider>
-    <EmkostiPozharnyeInner />
-  </CartProvider>
+    <FAQSection items={faqItems} />
+  </CorporatePageShell>
 );
 
 export default EmkostiPozharnye;

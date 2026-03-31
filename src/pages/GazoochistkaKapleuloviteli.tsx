@@ -1,10 +1,8 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import Header from "@/components/Header";
-import CartSheet from "@/components/CartSheet";
-import { CartProvider } from "@/contexts/CartContext";
+import CorporatePageShell from "@/components/corporate/CorporatePageShell";
+import { FeatureChecklist, AdvantagesGrid, SpecTable, ApplicationAreas, FAQSection, DarkInfoBlock } from "@/components/corporate/sections";
 import {
-  Check, Settings, ShieldCheck, Clock, Wrench, Truck, FlaskConical,
+  Settings, ShieldCheck, Clock, Wrench, Truck, FlaskConical,
   Wind, Droplets, Package, Gauge, Layers,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -13,14 +11,9 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import {
-  Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink,
-  BreadcrumbPage, BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
-import {
   Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
 } from "@/components/ui/table";
 import { toast } from "sonner";
-import PageFooter from "@/components/PageFooter";
 
 /* ── static data ── */
 
@@ -102,10 +95,24 @@ const partnershipAdvantages = [
   { icon: FlaskConical, title: "Документация", text: "Паспорт изделия, проект, сертификаты соответствия." },
 ];
 
+const stats = [
+  { value: "Скрубберы / ФВГ", label: "типы оборудования" },
+  { value: "PP / PVC", label: "материалы" },
+  { value: "от 14 дней", label: "срок изготовления" },
+  { value: "5 лет", label: "гарантия" },
+];
+
+const faqItems = [
+  { q: "Какие типы газоочистного оборудования?", a: "Скрубберы (вертикальные и горизонтальные), фильтры ФВГ, каплеуловители." },
+  { q: "Из каких материалов?", a: "Полипропилен (PP) и ПВХ (PVC) — стойкие к агрессивным газам и парам." },
+  { q: "Какая производительность?", a: "От 500 до 100 000 м³/ч в зависимости от модели." },
+  { q: "Сроки изготовления?", a: "14–30 рабочих дней." },
+  { q: "Выполняете монтаж?", a: "Да, шеф-монтаж и пусконаладка включены." },
+];
+
 /* ── component ── */
 
-const GazoochistkaKapleuloviteliInner = () => {
-  const [cartOpen, setCartOpen] = useState(false);
+const GazoochistkaKapleuloviteli = () => {
   const [form, setForm] = useState({ name: "", phone: "", email: "", description: "" });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -116,10 +123,6 @@ const GazoochistkaKapleuloviteliInner = () => {
     }
     toast.success("Заявка отправлена! Мы свяжемся с вами в ближайшее время.");
     setForm({ name: "", phone: "", email: "", description: "" });
-  };
-
-  const scrollToForm = () => {
-    document.getElementById("cta-form")?.scrollIntoView({ behavior: "smooth" });
   };
 
   const renderSizeTable = (
@@ -160,233 +163,114 @@ const GazoochistkaKapleuloviteliInner = () => {
   );
 
   return (
-    <>
-      <Header onCartOpen={() => setCartOpen(true)} productType="otvod" />
-      <CartSheet open={cartOpen} onOpenChange={setCartOpen} />
+    <CorporatePageShell
+      title="Каплеуловители из полипропилена"
+      subtitle="Удаление капельной влаги и аэрозолей из вентиляционных потоков. Эффективность улавливания — 99,9%. Круглое и прямоугольное сечение, производительность от 125 до 27 500 м³/ч."
+      heroImage="/images/gazoochistka-hero-1.png"
+      heroImageAlt="Каплеуловитель круглого сечения"
+      breadcrumbs={[
+        { label: "Каталог", href: "/catalog" },
+        { label: "Газоочистка", href: "/catalog/gazoochistka" },
+        { label: "Каплеуловители" },
+      ]}
+      stats={stats}
+    >
+      <FeatureChecklist
+        id="opisanie"
+        title="Почему выбирают наши каплеуловители"
+        items={whyUs}
+      />
 
-      <main className="mx-auto max-w-[960px] px-4 sm:px-6 py-6 sm:py-8">
-        {/* Breadcrumbs */}
-        <Breadcrumb className="mb-6">
-          <BreadcrumbList>
-            <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog">Каталог</Link></BreadcrumbLink></BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog/gazoochistka">Газоочистка</Link></BreadcrumbLink></BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem><BreadcrumbPage>Каплеуловители</BreadcrumbPage></BreadcrumbItem>
-          </BreadcrumbList>
-        </Breadcrumb>
+      <ApplicationAreas
+        id="primenenie"
+        title="Область применения"
+        items={applications}
+      />
 
-        {/* Hero */}
-        <section className="mb-10">
-          <p className="text-xs text-muted-foreground uppercase tracking-wider mb-2">ООО СЗПК «Пласт-Металл ПРО»</p>
-          <h1 className="text-2xl sm:text-3xl font-bold text-foreground leading-tight mb-3">
-            Каплеуловители из полипропилена
-          </h1>
-          <p className="text-sm text-muted-foreground mb-5">
-            Удаление капельной влаги и аэрозолей из вентиляционных потоков. Эффективность улавливания — 99,9%. Круглое и прямоугольное сечение, производительность от 125 до 27 500 м³/ч.
-          </p>
-          <Button onClick={scrollToForm} className="gap-2">Получить расчёт стоимости</Button>
-          <div className="grid grid-cols-2 gap-3 mt-6">
-            <img src="/images/kapleulovitel-hero-1.png" alt="Каплеуловитель круглого сечения" className="rounded-lg border border-border object-contain w-full aspect-[4/3]" />
-            <img src="/images/kapleulovitel-hero-2.png" alt="Каплеуловитель — ламельный блок" className="rounded-lg border border-border object-contain w-full aspect-[4/3]" />
-          </div>
-        </section>
+      <DarkInfoBlock id="princip" title="Принцип работы">
+        <p>
+          Загрязнённый воздушный поток проходит через блок ламелей — тонких пластин, деформированных в двух плоскостях. При изменении направления движения воздуха возникают центробежные силы, под действием которых капли жидкости осаждаются на ребристой поверхности ламелей.
+        </p>
+        <p>
+          Осаждённая жидкость стекает вниз по каналам ламелей и отводится через дренажный патрубок. Очищенный воздух выходит через выходной патрубок каплеуловителя.
+        </p>
+      </DarkInfoBlock>
 
-        {/* Why us */}
+      <AdvantagesGrid
+        title="Устройство и преимущества"
+        items={advantages}
+      />
 
-        <nav className="mb-8 flex flex-wrap gap-2">
-          {[
-            { id: "opisanie", label: "Описание" },
-            { id: "primenenie", label: "Применение" },
-            { id: "preimushchestva", label: "Преимущества" },
-            { id: "modeli", label: "Модели" },
-            { id: "cta-form", label: "Заявка" },
-          ].map((s) => (
-            <button
-              key={s.id}
-              onClick={() => document.getElementById(s.id)?.scrollIntoView({ behavior: "smooth" })}
-              className="rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium text-foreground hover:bg-accent hover:text-accent-foreground transition-colors"
-            >
-              {s.label}
-            </button>
-          ))}
-        </nav>
+      <DarkInfoBlock title="Как подобрать каплеуловитель">
+        <p>
+          Подбор осуществляется по расходу воздуха — выбирается ближайший типоразмер в меньшую сторону. Для прямоугольного сечения воздуховода изготавливаются переходные камеры под имеющиеся размеры заказчика.
+        </p>
+        <p>
+          Также доступны поворотные и несоосные камеры для нестандартных условий монтажа.
+        </p>
+      </DarkInfoBlock>
 
-        <section id="opisanie" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">Почему выбирают наши каплеуловители</h2>
-          <ul className="space-y-2">
-            {whyUs.map((item, i) => (
-              <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
-                <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" />
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
-        </section>
+      {/* Size tables */}
+      <section id="modeli" className="mb-10">
+        <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Типоразмерный ряд</h2>
+        {renderSizeTable(ku1Data, "Серия КУ.1 — стандартная")}
+        {renderSizeTable(ku6Data, "Серия КУ.6 — компактная")}
+        <p className="text-xs text-muted-foreground mt-2">
+          Аэродинамическое сопротивление: 50–300 Па в зависимости от расхода. Для прямоугольного сечения — переходные камеры под размер заказчика.
+        </p>
+      </section>
 
-        {/* Applications */}
-        <section id="primenenie" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Область применения</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            {applications.map((a, i) => (
-              <Card key={i} className="border-border">
-                <CardContent className="p-4">
-                  <div className="flex items-start gap-3">
-                    <a.icon className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                    <div>
-                      <p className="text-sm font-semibold text-foreground mb-1">{a.title}</p>
-                      <p className="text-xs text-muted-foreground">{a.text}</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </section>
+      <AdvantagesGrid
+        id="preimushchestva"
+        title="Преимущества сотрудничества"
+        items={partnershipAdvantages}
+      />
 
-        {/* Principle */}
-        <section id="princip" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">Принцип работы</h2>
-          <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
-            <p>
-              Загрязнённый воздушный поток проходит через блок ламелей — тонких пластин, деформированных в двух плоскостях. При изменении направления движения воздуха возникают центробежные силы, под действием которых капли жидкости осаждаются на ребристой поверхности ламелей.
-            </p>
-            <p>
-              Осаждённая жидкость стекает вниз по каналам ламелей и отводится через дренажный патрубок. Очищенный воздух выходит через выходной патрубок каплеуловителя.
-            </p>
-          </div>
-        </section>
+      <SpecTable
+        title="Типоразмерный ряд каплеуловителей КУ.1"
+        columns={[
+          { key: "model", label: "Модель" },
+          { key: "flow", label: "Расход воздуха, м³/ч", align: "right" },
+          { key: "mass", label: "Масса, кг", align: "right" },
+        ]}
+        rows={ku1ProductData}
+        striped
+      />
 
-        {/* Advantages */}
-        <section className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Устройство и преимущества</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            {advantages.map((a, i) => (
-              <Card key={i} className="border-border">
-                <CardContent className="p-4">
-                  <div className="flex items-start gap-3">
-                    <a.icon className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                    <div>
-                      <p className="text-sm font-semibold text-foreground mb-1">{a.title}</p>
-                      <p className="text-xs text-muted-foreground">{a.text}</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </section>
+      <FAQSection items={faqItems} />
 
-        {/* How to select */}
-        <section className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">Как подобрать каплеуловитель</h2>
-          <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
-            <p>
-              Подбор осуществляется по расходу воздуха — выбирается ближайший типоразмер в меньшую сторону. Для прямоугольного сечения воздуховода изготавливаются переходные камеры под имеющиеся размеры заказчика.
-            </p>
-            <p>
-              Также доступны поворотные и несоосные камеры для нестандартных условий монтажа.
-            </p>
-          </div>
-        </section>
-
-        {/* Size tables */}
-        <section id="modeli" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Типоразмерный ряд</h2>
-          {renderSizeTable(ku1Data, "Серия КУ.1 — стандартная")}
-          {renderSizeTable(ku6Data, "Серия КУ.6 — компактная")}
-          <p className="text-xs text-muted-foreground mt-2">
-            Аэродинамическое сопротивление: 50–300 Па в зависимости от расхода. Для прямоугольного сечения — переходные камеры под размер заказчика.
-          </p>
-        </section>
-
-        {/* Partnership */}
-        <section id="preimushchestva" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Преимущества сотрудничества</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            {partnershipAdvantages.map((a, i) => (
-              <Card key={i} className="border-border">
-                <CardContent className="p-4">
-                  <div className="flex items-start gap-3">
-                    <a.icon className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                    <div>
-                      <p className="text-sm font-semibold text-foreground mb-1">{a.title}</p>
-                      <p className="text-xs text-muted-foreground">{a.text}</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </section>
-
-        {/* КУ.1 Product table */}
-        <section id="modeli" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Типоразмерный ряд каплеуловителей КУ.1</h2>
-          <p className="text-sm text-muted-foreground mb-3">Эффективность очистки капельной влаги — 99,9%</p>
-          <div className="rounded-lg border border-border overflow-auto">
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead className="text-xs">Модель</TableHead>
-                  <TableHead className="text-xs text-right">Расход воздуха, м³/ч</TableHead>
-                  <TableHead className="text-xs text-right">Масса, кг</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {ku1ProductData.map((r, i) => (
-                  <TableRow key={i} className={i % 2 === 1 ? "bg-muted/50" : ""}>
-                    <TableCell className="text-xs font-medium">{r.model}</TableCell>
-                    <TableCell className="text-xs text-right">{r.flow}</TableCell>
-                    <TableCell className="text-xs text-right">{r.mass}</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </div>
-        </section>
-
-        {/* CTA form */}
-        <section id="cta-form" className="mb-10 scroll-mt-24">
-          <Card className="border-border">
-            <CardContent className="p-6">
-              <h2 className="text-base font-bold text-foreground mb-1 tracking-wide uppercase">Запросить расчёт</h2>
-              <p className="text-xs text-muted-foreground mb-4">Заполните форму — мы подберём каплеуловитель под ваши параметры и подготовим коммерческое предложение.</p>
-              <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="space-y-1.5">
-                  <Label htmlFor="name" className="text-xs">Имя *</Label>
-                  <Input id="name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Иван Петров" />
-                </div>
-                <div className="space-y-1.5">
-                  <Label htmlFor="phone" className="text-xs">Телефон *</Label>
-                  <Input id="phone" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} placeholder="+7 (___) ___-__-__" />
-                </div>
-                <div className="space-y-1.5 sm:col-span-2">
-                  <Label htmlFor="email" className="text-xs">E-mail</Label>
-                  <Input id="email" type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="info@company.ru" />
-                </div>
-                <div className="space-y-1.5 sm:col-span-2">
-                  <Label htmlFor="description" className="text-xs">Описание задачи</Label>
-                  <Textarea id="description" value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} placeholder="Расход воздуха, тип среды, размеры воздуховода…" rows={4} />
-                </div>
-                <div className="sm:col-span-2">
-                  <Button type="submit" className="w-full sm:w-auto">Отправить заявку</Button>
-                </div>
-              </form>
-            </CardContent>
-          </Card>
-        </section>
-
-        <PageFooter />
-      </main>
-    </>
+      {/* CTA form */}
+      <section id="cta-form" className="mb-10 scroll-mt-24">
+        <Card className="border-border">
+          <CardContent className="p-6">
+            <h2 className="text-base font-bold text-foreground mb-1 tracking-wide uppercase">Запросить расчёт</h2>
+            <p className="text-xs text-muted-foreground mb-4">Заполните форму — мы подберём каплеуловитель под ваши параметры и подготовим коммерческое предложение.</p>
+            <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="space-y-1.5">
+                <Label htmlFor="name" className="text-xs">Имя *</Label>
+                <Input id="name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Иван Петров" />
+              </div>
+              <div className="space-y-1.5">
+                <Label htmlFor="phone" className="text-xs">Телефон *</Label>
+                <Input id="phone" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} placeholder="+7 (___) ___-__-__" />
+              </div>
+              <div className="space-y-1.5 sm:col-span-2">
+                <Label htmlFor="email" className="text-xs">E-mail</Label>
+                <Input id="email" type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="info@company.ru" />
+              </div>
+              <div className="space-y-1.5 sm:col-span-2">
+                <Label htmlFor="description" className="text-xs">Описание задачи</Label>
+                <Textarea id="description" value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} placeholder="Расход воздуха, тип среды, размеры воздуховода…" rows={4} />
+              </div>
+              <div className="sm:col-span-2">
+                <Button type="submit" className="w-full sm:w-auto">Отправить заявку</Button>
+              </div>
+            </form>
+          </CardContent>
+        </Card>
+      </section>
+    </CorporatePageShell>
   );
 };
-
-const GazoochistkaKapleuloviteli = () => (
-  <CartProvider>
-    <GazoochistkaKapleuloviteliInner />
-  </CartProvider>
-);
 
 export default GazoochistkaKapleuloviteli;

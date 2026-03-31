@@ -1,22 +1,10 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
-import Header from "@/components/Header";
-import CartSheet from "@/components/CartSheet";
-import { CartProvider } from "@/contexts/CartContext";
-import { Check, Box, Wrench, ShieldCheck, Clock, Truck, Beaker, Settings } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
-import {
-  Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
+import CorporatePageShell from "@/components/corporate/CorporatePageShell";
+import { AdvantagesGrid, ApplicationAreas, FeatureChecklist, DarkInfoBlock, FAQSection } from "@/components/corporate/sections";
+import { Box, Wrench, ShieldCheck, Clock, Truck, Beaker, Settings } from "lucide-react";
 import {
   Accordion, AccordionContent, AccordionItem, AccordionTrigger,
 } from "@/components/ui/accordion";
-import { toast } from "sonner";
-import PageFooter from "@/components/PageFooter";
 
 const whyUs = [
   "Собственное производство с применением экструзионной сварки",
@@ -28,17 +16,21 @@ const whyUs = [
 ];
 
 const applications = [
-  "Хранение питьевой и технической воды, в т. ч. пожарных запасов",
-  "Работа с агрессивными средами: кислотами, щелочами, солевыми растворами, реагентами",
-  "Пищевая промышленность (сиропы, растительные масла, молочные продукты, закваски)",
-  "Сбор и временное хранение промышленных стоков",
-  "Системы водоподготовки и водоочистки",
-  "Хранение ГСМ, отработанных масел, топлива",
-  "Транспортировка и хранение сыпучих материалов (удобрения, зерно, строительные смеси)",
-  "Технологические процессы в химической, фармацевтической и гальванической промышленности",
+  { icon: Box, name: "Хранение питьевой и технической воды, в т. ч. пожарных запасов" },
+  { icon: Box, name: "Работа с агрессивными средами: кислотами, щелочами, солевыми растворами, реагентами" },
+  { icon: Box, name: "Пищевая промышленность (сиропы, растительные масла, молочные продукты, закваски)" },
+  { icon: Box, name: "Сбор и временное хранение промышленных стоков" },
+  { icon: Box, name: "Системы водоподготовки и водоочистки" },
+  { icon: Box, name: "Хранение ГСМ, отработанных масел, топлива" },
+  { icon: Box, name: "Транспортировка и хранение сыпучих материалов (удобрения, зерно, строительные смеси)" },
+  { icon: Box, name: "Технологические процессы в химической, фармацевтической и гальванической промышленности" },
 ];
 
-const constructionAdvantages = [
+const constructionFeatures = [
+  "Прямоугольный корпус из листового пластика, изготовленный методом экструзионной сварки",
+  "Наружная металлическая обрешётка для равномерного распределения нагрузки",
+  "Толщина стенок: от 5 до 25 мм (подбирается в зависимости от назначения)",
+  "Возможность установки внутренних перегородок и отсеков",
   "Компактность — эффективное использование площади за счёт прямоугольной формы",
   "Устойчивость — металлический каркас предотвращает деформацию при заполнении",
   "Ремонтопригодность — локальный ремонт без демонтажа всей системы",
@@ -98,8 +90,6 @@ const advantages = [
   { icon: Beaker, title: "Гибкость", text: "Возможность доработки конструкции в процессе эксплуатации." },
 ];
 
-
-
 const subtypes = [
   {
     id: "gorizontalnye",
@@ -107,7 +97,6 @@ const subtypes = [
     image: "/images/emkost-pryam-goriz-card.png",
     path: "/catalog/emkosti/pryamougolnye/gorizontalnye",
     description: "Горизонтальная компоновка — длина больше высоты. Объём от 1 000 до 50 000 л.",
-    imgFilter: undefined as string | undefined,
   },
   {
     id: "vertikalnye",
@@ -115,208 +104,98 @@ const subtypes = [
     image: "/images/emkost-pryam-vert-card.png",
     path: "/catalog/emkosti/pryamougolnye/vertikalnye",
     description: "Вертикальная компоновка — высота больше ширины. Объём от 500 до 25 000 л.",
-    imgFilter: undefined as string | undefined,
   },
 ];
 
-const EmkostiPryamougolnyeInner = () => {
-  const [cartOpen, setCartOpen] = useState(false);
-  const [form, setForm] = useState({ name: "", phone: "", email: "", description: "" });
+const faqItems = [
+  { q: "Из каких материалов?", a: "PP, PE, PVC — подбор по среде и температуре." },
+  { q: "Какой объём?", a: "50 л — 300 м³, нестандарт по ТЗ." },
+  { q: "Сроки?", a: "10–21 день стандарт, от 15 нестандарт." },
+  { q: "Доставка?", a: "Спецтранспорт по всей РФ." },
+  { q: "По своим чертежам?", a: "Да, изготовим и спроектируем." },
+];
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!form.name.trim() || !form.phone.trim()) {
-      toast.error("Заполните обязательные поля (имя, телефон)");
-      return;
-    }
-    toast.success("Заявка отправлена! Мы свяжемся с вами в ближайшее время.");
-    setForm({ name: "", phone: "", email: "", description: "" });
-  };
-
-  const scrollToForm = () => {
-    document.getElementById("cta-form")?.scrollIntoView({ behavior: "smooth" });
-  };
-
-  return (
-    <>
-      <Header onCartOpen={() => setCartOpen(true)} productType="otvod" />
-      <CartSheet open={cartOpen} onOpenChange={setCartOpen} />
-
-      <main className="mx-auto max-w-[960px] px-4 sm:px-6 py-6 sm:py-8">
-        {/* Breadcrumbs */}
-        <Breadcrumb className="mb-6">
-          <BreadcrumbList>
-            <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog">Каталог</Link></BreadcrumbLink></BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog/emkosti">Ёмкости</Link></BreadcrumbLink></BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem><BreadcrumbPage>Прямоугольные ёмкости в обрешётке</BreadcrumbPage></BreadcrumbItem>
-          </BreadcrumbList>
-        </Breadcrumb>
-
-        {/* Hero */}
-        <section className="mb-10">
-          <p className="text-xs text-muted-foreground uppercase tracking-wider mb-2">ООО СЗПК «Пласт-Металл ПРО»</p>
-          <h1 className="text-2xl sm:text-3xl font-bold text-foreground leading-tight mb-3">
-            Прямоугольные ёмкости из полипропилена и полиэтилена в обрешётке
-          </h1>
-          <p className="text-sm text-muted-foreground mb-5">
-            Оптимальное решение для компактного и надёжного хранения жидкостей и сыпучих материалов!
-          </p>
-          <Button onClick={scrollToForm} className="gap-2">
-            Получить расчёт стоимости
-          </Button>
-
-          {/* Hero images */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
-            <div className="rounded-lg border border-border overflow-hidden bg-card">
-              <img src="/images/emkost-pryam-real-4.png" alt="Рендер ёмкости из полипропилена в обрешётке" className="w-full object-contain" />
-            </div>
-            <div className="rounded-lg border border-border overflow-hidden bg-card">
-              <img src="/images/emkost-pryam-real-2.jpg" alt="Ёмкость из полиэтилена в обрешётке — фото" className="w-full object-contain" />
-            </div>
-            <div className="rounded-lg border border-border overflow-hidden bg-card">
-              <img src="/images/emkost-pryam-real-3.png" alt="Ёмкость из полипропилена в металлической обрешётке" className="w-full object-contain" />
-            </div>
-          </div>
-        </section>
-
-        {/* Intro */}
-
-        <nav className="mb-8 flex flex-wrap gap-2">
-          {[
-            { id: "katalog", label: "Каталог" },
-            { id: "opisanie", label: "Описание" },
-            { id: "naznachenie", label: "Назначение" },
-            { id: "materialy", label: "Материалы" },
-            { id: "modifikacii", label: "Модификации" },
-            { id: "preimushchestva", label: "Преимущества" },
-            { id: "cta-form", label: "Заявка" },
-          ].map((s) => (
-            <button
-              key={s.id}
-              onClick={() => document.getElementById(s.id)?.scrollIntoView({ behavior: "smooth" })}
-              className="rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium text-foreground hover:bg-accent hover:text-accent-foreground transition-colors"
+const EmkostiPryamougolnye = () => (
+  <CorporatePageShell
+    breadcrumbs={[
+      { label: "Каталог", href: "/catalog" },
+      { label: "Ёмкости", href: "/catalog/emkosti" },
+      { label: "Прямоугольные ёмкости в обрешётке" },
+    ]}
+    title="Прямоугольные ёмкости"
+    accentWord="в обрешётке"
+    subtitle="Оптимальное решение для компактного и надёжного хранения жидкостей и сыпучих материалов"
+    badge="Собственное производство"
+    heroImage="/images/emkosti-collage-hero.png"
+    stats={[
+      { value: "50 л — 300 м³", label: "диапазон объёмов" },
+      { value: "PP / PE / PVC", label: "материалы" },
+      { value: "от 10 дней", label: "срок изготовления" },
+      { value: "5 лет", label: "гарантия" },
+    ]}
+    seo={{
+      title: "Прямоугольные ёмкости в обрешётке из полипропилена и полиэтилена",
+      description: "Производство прямоугольных ёмкостей из PP и PE в металлической обрешётке. Объём от 100 л до 100 м³. Гарантия 5 лет.",
+      keywords: "прямоугольные ёмкости, ёмкости в обрешётке, полипропилен, полиэтилен, СЗПК",
+    }}
+  >
+    {/* Subtypes grid */}
+    <section className="w-full bg-white py-16 md:py-20">
+      <div className="mx-auto max-w-[1440px] px-4 md:px-8">
+        <h2 className="text-2xl md:text-3xl font-bold text-slate-900">Типы прямоугольных ёмкостей</h2>
+        <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-6">
+          {subtypes.map((sub) => (
+            <Link
+              key={sub.id}
+              to={sub.path}
+              className="group relative block overflow-hidden rounded-2xl border border-slate-200 hover:border-amber-400 hover:shadow-lg transition-all"
             >
-              {s.label}
-            </button>
-          ))}
-        </nav>
-
-        {/* Subtypes grid */}
-        <section id="katalog" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Типы прямоугольных ёмкостей</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {subtypes.map((sub) => (
-              <Link
-                key={sub.id}
-                to={sub.path}
-                className="group rounded-lg border border-border bg-card overflow-hidden hover:border-primary/50 hover:shadow-md transition-all block"
-              >
-                <div className="aspect-[4/3] bg-muted flex items-center justify-center">
-                  <img src={sub.image} alt={sub.name} className="w-full h-full object-contain" style={sub.imgFilter ? { filter: sub.imgFilter } : undefined} />
-                </div>
-                <div className="px-4 py-3">
-                  <h3 className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">{sub.name}</h3>
-                  <p className="text-xs text-muted-foreground mt-1">{sub.description}</p>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </section>
-
-        <section className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">
-            Прямоугольные ёмкости в металлическом каркасе: от проектирования до монтажа
-          </h2>
-          <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-            Мы производим промышленные прямоугольные ёмкости из листового полипропилена (PP) и полиэтилена (ПНД/HDPE) с усилением в виде наружной металлической обрешётки. Конструкции идеально подходят для хранения химически активных веществ, воды, пищевых продуктов и сыпучих материалов в условиях ограниченного пространства.
-          </p>
-          <h3 className="text-sm font-semibold text-foreground mb-2">Почему выбирают нас:</h3>
-          <ul className="space-y-2">
-            {whyUs.map((item, i) => (
-              <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
-                <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" />
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
-        </section>
-
-        {/* Назначение */}
-        <section id="naznachenie" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Назначение прямоугольных ёмкостей в обрешётке</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-            {applications.map((app, i) => (
-              <div key={i} className="flex items-start gap-2 rounded-lg border border-border bg-card p-3">
-                <Box className="h-4 w-4 text-primary shrink-0 mt-0.5" />
-                <span className="text-sm text-foreground">{app}</span>
+              <div className="aspect-[4/3] bg-slate-50 flex items-center justify-center">
+                <img src={sub.image} alt={sub.name} className="w-full h-full object-contain" />
               </div>
-            ))}
-          </div>
-        </section>
+              <div className="px-5 py-4">
+                <h3 className="text-base font-semibold text-slate-900 group-hover:text-amber-600 transition-colors">{sub.name}</h3>
+                <p className="text-sm text-slate-500 mt-1">{sub.description}</p>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </section>
 
-        {/* Материалы и конструкция */}
-        <section id="opisanie" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Описание материалов и конструкции</h2>
+    <DarkInfoBlock
+      title="От проектирования до монтажа"
+      text="Мы производим промышленные прямоугольные ёмкости из листового полипропилена (PP) и полиэтилена (ПНД/HDPE) с усилением в виде наружной металлической обрешётки. Конструкции идеально подходят для хранения химически активных веществ, воды, пищевых продуктов и сыпучих материалов в условиях ограниченного пространства."
+      highlights={[
+        { value: "PP / PE", label: "материалы корпуса" },
+        { value: "5–25 мм", label: "толщина стенок" },
+        { value: "до 50 лет", label: "срок службы" },
+        { value: "ГОСТ / ТУ", label: "соответствие" },
+      ]}
+    />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-            <Card>
-              <CardContent className="p-4">
-                <p className="text-sm font-semibold text-foreground mb-2">Полипропилен (PP)</p>
-                <ul className="space-y-1 text-xs text-muted-foreground">
-                  <li>Температура: от −20 °C до +100 °C (кратковр. +110 °C)</li>
-                  <li>Высокая химическая стойкость к кислотам, щелочам, растворителям</li>
-                  <li>Плотность 0,90–0,92 г/см³, t плавл. 160–170 °C</li>
-                </ul>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="p-4">
-                <p className="text-sm font-semibold text-foreground mb-2">Полиэтилен (ПНД/HDPE)</p>
-                <ul className="space-y-1 text-xs text-muted-foreground">
-                  <li>Температура: от −50 °C до +60 °C (кратковр. +80 °C)</li>
-                  <li>Устойчивость к УФ‑излучению и замерзанию</li>
-                  <li>Плотность 0,93–0,97 г/см³, t плавл. ~120–135 °C</li>
-                </ul>
-              </CardContent>
-            </Card>
-          </div>
+    <FeatureChecklist title="Почему выбирают нас" items={whyUs} />
 
-          <h3 className="text-sm font-semibold text-foreground mb-2">Конструкция:</h3>
-          <ul className="space-y-1.5 text-sm text-muted-foreground mb-6">
-            <li className="flex items-start gap-2"><Check className="h-3.5 w-3.5 text-primary shrink-0 mt-0.5" /><span>Прямоугольный корпус из листового пластика, изготовленный методом экструзионной сварки</span></li>
-            <li className="flex items-start gap-2"><Check className="h-3.5 w-3.5 text-primary shrink-0 mt-0.5" /><span>Наружная металлическая обрешётка для равномерного распределения нагрузки</span></li>
-            <li className="flex items-start gap-2"><Check className="h-3.5 w-3.5 text-primary shrink-0 mt-0.5" /><span>Толщина стенок: от 5 до 25 мм (подбирается в зависимости от назначения)</span></li>
-            <li className="flex items-start gap-2"><Check className="h-3.5 w-3.5 text-primary shrink-0 mt-0.5" /><span>Возможность установки внутренних перегородок и отсеков</span></li>
-          </ul>
+    <ApplicationAreas title="Назначение прямоугольных ёмкостей" items={applications} />
 
+    <FeatureChecklist title="Конструкция и преимущества" items={constructionFeatures} />
 
-          <h3 className="text-sm font-semibold text-foreground mb-2">Преимущества конструкции:</h3>
-          <ul className="space-y-1.5">
-            {constructionAdvantages.map((item, i) => (
-              <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
-                <Check className="h-3.5 w-3.5 text-primary shrink-0 mt-0.5" />
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
-        </section>
-
-        {/* Виды и модификации */}
-        <section id="modifikacii" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Виды и модификации</h2>
-          <Accordion type="multiple" defaultValue={["По объёму"]} className="space-y-2">
+    {/* Modifications accordion */}
+    <section className="w-full bg-slate-50 py-16 md:py-20">
+      <div className="mx-auto max-w-[1440px] px-4 md:px-8">
+        <h2 className="text-2xl md:text-3xl font-bold text-slate-900">Виды и модификации</h2>
+        <div className="mt-10">
+          <Accordion type="multiple" defaultValue={["По объёму"]} className="space-y-3">
             {modifications.map((mod) => (
-              <AccordionItem key={mod.title} value={mod.title} className="rounded-lg border border-border bg-card px-4">
-                <AccordionTrigger className="text-sm font-semibold text-foreground hover:no-underline">
+              <AccordionItem key={mod.title} value={mod.title} className="rounded-xl border border-slate-200 bg-white px-5">
+                <AccordionTrigger className="text-sm font-semibold text-slate-900 hover:no-underline">
                   {mod.title}
                 </AccordionTrigger>
                 <AccordionContent>
-                  <ul className="space-y-1.5 pb-2">
+                  <ul className="space-y-2 pb-2">
                     {mod.items.map((item, i) => (
-                      <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
-                        <span className="text-primary mt-1">•</span>
+                      <li key={i} className="flex items-start gap-2 text-sm text-slate-600">
+                        <span className="text-amber-500 mt-1">•</span>
                         <span>{item}</span>
                       </li>
                     ))}
@@ -325,76 +204,14 @@ const EmkostiPryamougolnyeInner = () => {
               </AccordionItem>
             ))}
           </Accordion>
-        </section>
+        </div>
+      </div>
+    </section>
 
-        {/* Moved: Типоразмерный ряд is now above Описание */}
+    <AdvantagesGrid title="Преимущества сотрудничества" items={advantages} />
 
-        {/* Преимущества сотрудничества */}
-        <section id="preimushchestva" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Преимущества сотрудничества</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            {advantages.map((adv) => (
-              <Card key={adv.title}>
-                <CardContent className="p-4 flex items-start gap-3">
-                  <adv.icon className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                  <div>
-                    <p className="text-sm font-semibold text-foreground mb-1">{adv.title}</p>
-                    <p className="text-xs text-muted-foreground leading-relaxed">{adv.text}</p>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </section>
-
-        {/* Duplicate table removed — now in "modeli" section above */}
-
-        {/* CTA Form */}
-        <section id="cta-form" className="mb-10 scroll-mt-8">
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-lg">Готовы заказать прямоугольную ёмкость в обрешётке?</CardTitle>
-              <p className="text-sm text-muted-foreground">
-                Оставьте заявку, и наш инженер бесплатно проконсультирует, подготовит 3D‑модель и расчёт стоимости в течение 24 часов.
-              </p>
-            </CardHeader>
-            <CardContent>
-              <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="name" className="text-sm">Имя *</Label>
-                  <Input id="name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Ваше имя" />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="phone" className="text-sm">Телефон *</Label>
-                  <Input id="phone" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} placeholder="+7 (___) ___-__-__" />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="email" className="text-sm">E-mail</Label>
-                  <Input id="email" type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="mail@example.com" />
-                </div>
-                <div className="space-y-2 sm:col-span-2">
-                  <Label htmlFor="description" className="text-sm">Описание задачи</Label>
-                  <Textarea id="description" value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} placeholder="Опишите вашу задачу..." rows={3} />
-                </div>
-                <div className="sm:col-span-2">
-                  <Button type="submit" className="w-full sm:w-auto">Оставить заявку</Button>
-                </div>
-              </form>
-            </CardContent>
-          </Card>
-        </section>
-
-        <PageFooter />
-      </main>
-    </>
-  );
-};
-
-
-const EmkostiPryamougolnye = () => (
-  <CartProvider>
-    <EmkostiPryamougolnyeInner />
-  </CartProvider>
+    <FAQSection items={faqItems} />
+  </CorporatePageShell>
 );
 
 export default EmkostiPryamougolnye;

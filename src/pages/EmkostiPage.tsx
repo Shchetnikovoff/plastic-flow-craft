@@ -1,23 +1,12 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import Header from "@/components/Header";
-import CartSheet from "@/components/CartSheet";
-import { CartProvider } from "@/contexts/CartContext";
+import CorporatePageShell from "@/components/corporate/CorporatePageShell";
+import { AdvantagesGrid, ApplicationAreas, FeatureChecklist, FAQSection } from "@/components/corporate/sections";
 import { findCategory } from "@/data/catalog";
-import { ImageOff, Check, Droplets, FlaskConical, Truck, ShieldCheck, Clock, Wrench } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
-import {
-  Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
+import { ImageOff, Droplets, FlaskConical, Truck, ShieldCheck, Clock, Wrench } from "lucide-react";
 import {
   Accordion, AccordionContent, AccordionItem, AccordionTrigger,
 } from "@/components/ui/accordion";
-import { toast } from "sonner";
-import PageFooter from "@/components/PageFooter";
 
 const whyUs = [
   "Собственное производство с ЧПУ-оборудованием и экструзионной сваркой",
@@ -28,13 +17,14 @@ const whyUs = [
 ];
 
 const applications = [
-  "Хранение и транспортировка питьевой и технической воды",
-  "Работа с агрессивными средами: кислотами, щелочами, солевыми растворами, реагентами",
-  "Пищевая промышленность (молоко, масла, соки, спиртосодержащие жидкости)",
-  "Системы водоподготовки, водоочистки и канализации",
-  "Накопление ливневых и паводковых вод, пожарные резервуары",
-  "Хранение минеральных удобрений, пестицидов и ядохимикатов",
-  "Технологические процессы в гальванике, металлургии, машиностроении",
+  { icon: Droplets, name: "Хранение и транспортировка питьевой и технической воды" },
+  { icon: FlaskConical, name: "Работа с агрессивными средами: кислотами, щелочами, солевыми растворами" },
+  { icon: Droplets, name: "Пищевая промышленность (молоко, масла, соки)" },
+  { icon: Droplets, name: "Системы водоподготовки, водоочистки и канализации" },
+  { icon: Droplets, name: "Накопление ливневых и паводковых вод, пожарные резервуары" },
+  { icon: FlaskConical, name: "Хранение минеральных удобрений, пестицидов и ядохимикатов" },
+  { icon: Wrench, name: "Технологические процессы в гальванике, металлургии" },
+  { icon: Truck, name: "Транспортировка и логистика жидкостей" },
 ];
 
 const advantages = [
@@ -64,106 +54,50 @@ const modifications = [
   },
 ];
 
-const EmkostiPageInner = () => {
-  const [cartOpen, setCartOpen] = useState(false);
-  const [form, setForm] = useState({ name: "", phone: "", email: "", description: "" });
+const emkostiStats = [
+  { value: "50 л — 300 м³", label: "диапазон объёмов" },
+  { value: "PP / PE / PVC", label: "материалы" },
+  { value: "от 10 дней", label: "срок изготовления" },
+  { value: "5 лет", label: "гарантия" },
+];
+
+const faqEmkosti = [
+  { q: "Из каких материалов изготавливаются ёмкости?", a: "Листовой полипропилен (PP-H, PP-C, PPs), полиэтилен (PE 100), ПВХ (PVC). Подбор — по рабочей среде, температуре и концентрации." },
+  { q: "Какой диапазон объёмов?", a: "От 50 литров до 300 м³. Нестандартные размеры — по ТЗ заказчика." },
+  { q: "Какие сроки изготовления?", a: "Стандартные ёмкости — 10–21 рабочий день. Нестандартные — от 15 дней." },
+  { q: "Есть ли доставка?", a: "Да, доставка спецтранспортом по всей РФ. Производство — Ленинградская область." },
+  { q: "Можно заказать по своим чертежам?", a: "Да, изготовим по вашим чертежам и ТЗ, а также спроектируем с нуля под ваши задачи." },
+];
+
+const EmkostiPage = () => {
   const [selectedSubId, setSelectedSubId] = useState<string | null>(null);
   const category = findCategory("emkosti");
-  const catIndex = 6; // Ёмкости is 6th category
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!form.name.trim() || !form.phone.trim()) {
-      toast.error("Заполните обязательные поля (имя, телефон)");
-      return;
-    }
-    toast.success("Заявка отправлена! Мы свяжемся с вами в ближайшее время.");
-    setForm({ name: "", phone: "", email: "", description: "" });
-  };
-
-  const scrollToForm = () => {
-    document.getElementById("cta-form")?.scrollIntoView({ behavior: "smooth" });
-  };
+  const catIndex = 6;
 
   return (
-    <>
-      <Header onCartOpen={() => setCartOpen(true)} productType="otvod" />
-      <CartSheet open={cartOpen} onOpenChange={setCartOpen} />
-
-      <main className="mx-auto max-w-[960px] px-4 sm:px-6 py-6 sm:py-8">
-        {/* Breadcrumbs */}
-        <Breadcrumb className="mb-6">
-          <BreadcrumbList>
-            <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog">Каталог</Link></BreadcrumbLink></BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem><BreadcrumbPage>Ёмкости</BreadcrumbPage></BreadcrumbItem>
-          </BreadcrumbList>
-        </Breadcrumb>
-
-        {/* Hero */}
-        <section className="mb-10">
-          <p className="text-xs text-muted-foreground uppercase tracking-wider mb-2">ООО СЗПК «Пласт-Металл ПРО»</p>
-          <h1 className="text-2xl sm:text-3xl font-bold text-foreground leading-tight mb-3">
-            Промышленные ёмкости из листового полипропилена и полиэтилена
-          </h1>
-          <p className="text-sm text-muted-foreground mb-5">
-            Надёжность, проверенная временем!
-          </p>
-          <Button onClick={scrollToForm} className="gap-2">
-            Получить расчёт стоимости
-          </Button>
-
-          {/* Hero collage */}
-          <div className="grid grid-cols-1 lg:grid-cols-[3fr_2fr] gap-4 mt-6">
-            <div className="rounded-xl border border-border overflow-hidden bg-card flex items-center justify-center min-h-[400px]">
-              <img src="/images/emkosti-hero-2.png" alt="Ёмкость в разрезе" className="w-full h-auto object-contain" />
-            </div>
-            <div className="grid grid-cols-3 gap-2">
-              {[
-                { src: "/images/emkosti-vert-pp-group.png", alt: "Вертикальные ёмкости" },
-                { src: "/images/emkost-horiz-group.png", alt: "Горизонтальные ёмкости" },
-                { src: "/images/emkosti-podzemnye-1.jpg", alt: "Подземные ёмкости" },
-                { src: "/images/emkost-pryam-pp-1.png", alt: "Прямоугольные ёмкости" },
-                { src: "/images/emkost-pryam-pp-2.png", alt: "Пожарные ёмкости" },
-                { src: "/images/emkosti-sejsmicheskie.png", alt: "Сейсмические ёмкости" },
-                { src: "/images/emkosti-shchelochi-thumb.png", alt: "Ёмкости для щелочи" },
-                { src: "/images/emkosti-kisloty-thumb.png", alt: "Ёмкости для кислоты" },
-                { src: "/images/emkost-perelivnaya-bassein.jpg", alt: "Переливные ёмкости" },
-              ].map((img) => (
-                <div key={img.src} className="rounded-lg border border-border overflow-hidden bg-card aspect-square flex items-center justify-center p-1">
-                  <img src={img.src} alt={img.alt} className="w-full h-full object-contain" />
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Anchor nav */}
-        <nav className="mb-8 flex flex-wrap gap-2">
-          {[
-            { id: "katalog", label: "Каталог" },
-            { id: "opisanie", label: "Описание" },
-            { id: "naznachenie", label: "Назначение" },
-            { id: "materialy", label: "Материалы" },
-            { id: "modifikacii", label: "Модификации" },
-            { id: "preimushchestva", label: "Преимущества" },
-            { id: "cta-form", label: "Заявка" },
-          ].map((s) => (
-            <button
-              key={s.id}
-              onClick={() => document.getElementById(s.id)?.scrollIntoView({ behavior: "smooth" })}
-              className="rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium text-foreground hover:bg-accent hover:text-accent-foreground transition-colors"
-            >
-              {s.label}
-            </button>
-          ))}
-        </nav>
-
-        {/* Каталог ёмкостей — moved up */}
-        {category && (
-          <section id="katalog" className="mb-10">
-            <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Каталог ёмкостей</h2>
-            <div className="flex flex-col md:flex-row gap-6">
+    <CorporatePageShell
+      breadcrumbs={[
+        { label: "Каталог", href: "/catalog" },
+        { label: "Ёмкости" },
+      ]}
+      title="Промышленные ёмкости"
+      accentWord="из полипропилена и полиэтилена"
+      subtitle="Надёжность, проверенная временем! Изготовление по типовым и индивидуальным проектам."
+      badge="Собственное производство"
+      heroImage="/images/emkosti-collage-hero.png"
+      stats={emkostiStats}
+      seo={{
+        title: "Промышленные ёмкости из полипропилена и полиэтилена | СЗПК Пласт-Металл ПРО",
+        description: "Производство промышленных ёмкостей из листового полипропилена и полиэтилена. Объём от 50 л до 300 м³. Гарантия 5 лет.",
+        keywords: "ёмкости полипропилен, ёмкости полиэтилен, промышленные ёмкости, ёмкости на заказ",
+      }}
+    >
+      {/* Каталог ёмкостей */}
+      {category && (
+        <section className="w-full bg-white py-16 md:py-20">
+          <div className="mx-auto max-w-[1440px] px-4 md:px-8">
+            <h2 className="text-2xl md:text-3xl font-bold text-slate-900">Каталог ёмкостей</h2>
+            <div className="mt-10 flex flex-col md:flex-row gap-6">
               <nav className="md:w-[220px] shrink-0">
                 <ul className="space-y-0.5">
                   {category.subcategories.map((sub, i) => {
@@ -174,12 +108,12 @@ const EmkostiPageInner = () => {
                           onClick={() => setSelectedSubId(isSelected ? null : sub.id)}
                           className={`group flex items-baseline gap-2 rounded-md px-3 py-2 text-sm w-full text-left transition-colors ${
                             isSelected
-                              ? "bg-primary/10 border border-primary/30"
-                              : "hover:bg-muted border border-transparent"
+                              ? "bg-amber-50 border border-amber-200"
+                              : "hover:bg-slate-50 border border-transparent"
                           }`}
                         >
-                          <span className={`text-xs font-semibold shrink-0 ${isSelected ? "text-primary" : "text-muted-foreground"}`}>{catIndex}.{i + 1}</span>
-                          <span className={`transition-colors ${isSelected ? "text-primary font-semibold" : "text-foreground group-hover:text-primary"}`}>{sub.name}</span>
+                          <span className={`text-xs font-semibold shrink-0 ${isSelected ? "text-amber-600" : "text-slate-400"}`}>{catIndex}.{i + 1}</span>
+                          <span className={`transition-colors ${isSelected ? "text-amber-600 font-semibold" : "text-slate-700 group-hover:text-amber-600"}`}>{sub.name}</span>
                         </button>
                       </li>
                     );
@@ -191,31 +125,31 @@ const EmkostiPageInner = () => {
                   const selectedSub = category.subcategories.find((s) => s.id === selectedSubId);
                   if (selectedSub) {
                     return (
-                      <div className="rounded-xl border border-border bg-card overflow-hidden animate-in fade-in-0 slide-in-from-top-2 duration-200">
-                        <div className="aspect-[16/9] bg-muted flex items-center justify-center">
+                      <div className="rounded-xl border border-slate-200 bg-white overflow-hidden animate-in fade-in-0 slide-in-from-top-2 duration-200">
+                        <div className="aspect-[16/9] bg-slate-50 flex items-center justify-center">
                           {selectedSub.image ? (
                             <img src={selectedSub.image} alt={selectedSub.name} className="w-full h-full object-contain" />
                           ) : (
-                            <ImageOff className="h-12 w-12 text-muted-foreground/40" />
+                            <ImageOff className="h-12 w-12 text-slate-300" />
                           )}
                         </div>
                         <div className="p-5">
-                          <p className="text-xs text-muted-foreground font-semibold mb-1">
+                          <p className="text-xs text-slate-400 font-semibold mb-1">
                             {catIndex}.{category.subcategories.findIndex((s) => s.id === selectedSub.id) + 1}
                           </p>
-                          <h3 className="text-lg font-bold text-foreground mb-2">{selectedSub.name}</h3>
-                          <p className="text-sm text-muted-foreground mb-4">
+                          <h3 className="text-lg font-bold text-slate-900 mb-2">{selectedSub.name}</h3>
+                          <p className="text-sm text-slate-500 mb-4">
                             {selectedSub.description || "Описание уточняйте по запросу."}
                           </p>
                           {selectedSub.externalPath ? (
                             <Link
                               to={selectedSub.externalPath}
-                              className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline"
+                              className="inline-flex items-center gap-1.5 text-sm font-medium text-amber-600 hover:underline"
                             >
                               Перейти на страницу →
                             </Link>
                           ) : (
-                            <a href="#cta-form" className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline">
+                            <a href="#cta-form" className="inline-flex items-center gap-1.5 text-sm font-medium text-amber-600 hover:underline">
                               Запросить расчёт →
                             </a>
                           )}
@@ -228,16 +162,16 @@ const EmkostiPageInner = () => {
                       {category.subcategories.map((sub, i) => {
                         const cardContent = (
                           <>
-                            <div className="aspect-[4/3] bg-muted flex items-center justify-center">
+                            <div className="aspect-[4/3] bg-slate-50 flex items-center justify-center">
                               {sub.image ? (
                                 <img src={sub.image} alt={sub.name} className="w-full h-full object-contain" />
                               ) : (
-                                <ImageOff className="h-10 w-10 text-muted-foreground/40" />
+                                <ImageOff className="h-10 w-10 text-slate-300" />
                               )}
                             </div>
                             <div className="px-3 py-2.5">
-                              <p className="text-xs text-muted-foreground font-semibold">{catIndex}.{i + 1}</p>
-                              <p className="text-sm font-medium text-foreground group-hover:text-primary transition-colors mt-0.5">{sub.name}</p>
+                              <p className="text-xs text-slate-400 font-semibold">{catIndex}.{i + 1}</p>
+                              <p className="text-sm font-medium text-slate-700 group-hover:text-amber-600 transition-colors mt-0.5">{sub.name}</p>
                             </div>
                           </>
                         );
@@ -247,7 +181,7 @@ const EmkostiPageInner = () => {
                             <Link
                               key={sub.id}
                               to={sub.externalPath}
-                              className="group rounded-lg border border-border bg-card overflow-hidden hover:border-primary/50 hover:shadow-md transition-all text-left block"
+                              className="group rounded-lg border border-slate-200 bg-white overflow-hidden hover:border-amber-300 hover:shadow-md transition-all text-left block"
                             >
                               {cardContent}
                             </Link>
@@ -258,7 +192,7 @@ const EmkostiPageInner = () => {
                           <button
                             key={sub.id}
                             onClick={() => setSelectedSubId(sub.id)}
-                            className="group rounded-lg border border-border bg-card overflow-hidden hover:border-primary/50 hover:shadow-md transition-all text-left"
+                            className="group rounded-lg border border-slate-200 bg-white overflow-hidden hover:border-amber-300 hover:shadow-md transition-all text-left"
                           >
                             {cardContent}
                           </button>
@@ -269,197 +203,111 @@ const EmkostiPageInner = () => {
                 })()}
               </div>
             </div>
-          </section>
-        )}
-
-        {/* Описание */}
-        <section id="opisanie" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">
-            Промышленные ёмкости на заказ: от эскиза до монтажа
-          </h2>
-          <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-            Мы производим промышленные ёмкости из листового полипропилена (PP) и полиэтилена (ПНД/HDPE) любой сложности и объёма — под задачи химической, пищевой, фармацевтической промышленности, сельского хозяйства, ЖКХ и строительства.
-          </p>
-          <h3 className="text-sm font-semibold text-foreground mb-2">Почему выбирают нас:</h3>
-          <ul className="space-y-2">
-            {whyUs.map((item, i) => (
-              <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
-                <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" />
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
+          </div>
         </section>
+      )}
 
-        {/* Назначение */}
-        <section id="naznachenie" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Назначение ёмкостей</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-            {applications.map((app, i) => (
-              <div key={i} className="flex items-start gap-2 rounded-lg border border-border bg-card p-3">
-                <Droplets className="h-4 w-4 text-primary shrink-0 mt-0.5" />
-                <span className="text-sm text-foreground">{app}</span>
+      {/* Описание */}
+      <FeatureChecklist
+        title="Промышленные ёмкости на заказ: от эскиза до монтажа"
+        subtitle="Мы производим промышленные ёмкости из листового полипропилена (PP) и полиэтилена (ПНД/HDPE) любой сложности и объёма — под задачи химической, пищевой, фармацевтической промышленности, сельского хозяйства, ЖКХ и строительства."
+        items={whyUs}
+        columns={1}
+      />
+
+      {/* Назначение */}
+      <ApplicationAreas
+        title="Назначение ёмкостей"
+        items={applications}
+      />
+
+      {/* Материалы — custom section kept inline */}
+      <section className="w-full bg-white py-16 md:py-20">
+        <div className="mx-auto max-w-[1440px] px-4 md:px-8">
+          <h2 className="text-2xl md:text-3xl font-bold text-slate-900">Описание материалов</h2>
+          <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="rounded-xl border border-slate-200 p-6">
+              <h3 className="text-lg font-bold text-slate-900 mb-4">Полипропилен (PP)</h3>
+              <div className="grid grid-cols-2 gap-px rounded-lg border border-slate-200 overflow-hidden mb-4">
+                <div className="bg-slate-50 p-3"><span className="block text-xs text-slate-400">Температура</span><span className="text-sm font-semibold text-slate-900">-20...+100 °C</span></div>
+                <div className="bg-slate-50 p-3"><span className="block text-xs text-slate-400">Плотность</span><span className="text-sm font-semibold text-slate-900">0,90-0,92 г/см³</span></div>
+                <div className="bg-slate-50 p-3 border-t border-slate-200"><span className="block text-xs text-slate-400">Плавление</span><span className="text-sm font-semibold text-slate-900">160-170 °C</span></div>
+                <div className="bg-slate-50 p-3 border-t border-slate-200"><span className="block text-xs text-slate-400">Хим. стойкость</span><span className="text-sm font-semibold text-slate-900">Высокая</span></div>
               </div>
-            ))}
+              <p className="text-sm text-slate-500">Идеален для агрессивных сред и повышенных температур.</p>
+            </div>
+            <div className="rounded-xl border border-slate-200 p-6">
+              <h3 className="text-lg font-bold text-slate-900 mb-4">Полиэтилен (ПНД/HDPE)</h3>
+              <div className="grid grid-cols-2 gap-px rounded-lg border border-slate-200 overflow-hidden mb-4">
+                <div className="bg-slate-50 p-3"><span className="block text-xs text-slate-400">Температура</span><span className="text-sm font-semibold text-slate-900">-50...+60 °C</span></div>
+                <div className="bg-slate-50 p-3"><span className="block text-xs text-slate-400">Плотность</span><span className="text-sm font-semibold text-slate-900">0,93-0,97 г/см³</span></div>
+                <div className="bg-slate-50 p-3 border-t border-slate-200"><span className="block text-xs text-slate-400">Плавление</span><span className="text-sm font-semibold text-slate-900">120-135 °C</span></div>
+                <div className="bg-slate-50 p-3 border-t border-slate-200"><span className="block text-xs text-slate-400">УФ-стойкость</span><span className="text-sm font-semibold text-slate-900">Высокая</span></div>
+              </div>
+              <p className="text-sm text-slate-500">Оптимален для воды, пищевых продуктов и эксплуатации на открытом воздухе.</p>
+            </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Материалы */}
-        <section id="materialy" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Описание материалов</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-            <Card>
-              <CardHeader className="pb-3">
-                <CardTitle className="text-lg">Полипропилен (PP)</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-2 text-sm text-muted-foreground">
-                <div className="grid grid-cols-2 gap-px rounded-lg border overflow-hidden">
-                  <div className="bg-muted/30 p-2.5"><span className="block text-xs text-muted-foreground">Температура</span><span className="text-sm font-semibold text-foreground">−20…+100 °C</span></div>
-                  <div className="bg-muted/30 p-2.5"><span className="block text-xs text-muted-foreground">Плотность</span><span className="text-sm font-semibold text-foreground">0,90–0,92 г/см³</span></div>
-                  <div className="bg-muted/30 p-2.5 border-t"><span className="block text-xs text-muted-foreground">Плавление</span><span className="text-sm font-semibold text-foreground">160–170 °C</span></div>
-                  <div className="bg-muted/30 p-2.5 border-t"><span className="block text-xs text-muted-foreground">Хим. стойкость</span><span className="text-sm font-semibold text-foreground">Высокая</span></div>
-                </div>
-                <p>Идеален для агрессивных сред и повышенных температур.</p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader className="pb-3">
-                <CardTitle className="text-lg">Полиэтилен (ПНД/HDPE)</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-2 text-sm text-muted-foreground">
-                <div className="grid grid-cols-2 gap-px rounded-lg border overflow-hidden">
-                  <div className="bg-muted/30 p-2.5"><span className="block text-xs text-muted-foreground">Температура</span><span className="text-sm font-semibold text-foreground">−50…+60 °C</span></div>
-                  <div className="bg-muted/30 p-2.5"><span className="block text-xs text-muted-foreground">Плотность</span><span className="text-sm font-semibold text-foreground">0,93–0,97 г/см³</span></div>
-                  <div className="bg-muted/30 p-2.5 border-t"><span className="block text-xs text-muted-foreground">Плавление</span><span className="text-sm font-semibold text-foreground">120–135 °C</span></div>
-                  <div className="bg-muted/30 p-2.5 border-t"><span className="block text-xs text-muted-foreground">УФ‑стойкость</span><span className="text-sm font-semibold text-foreground">Высокая</span></div>
-                </div>
-                <p>Оптимален для воды, пищевых продуктов и эксплуатации на открытом воздухе.</p>
-              </CardContent>
-            </Card>
-          </div>
-          <div className="rounded-lg border border-border bg-card p-4">
-            <h3 className="text-sm font-semibold text-foreground mb-2">Оба материала:</h3>
-            <ul className="space-y-1.5">
-              {["Не подвержены коррозии", "Экологически безопасны и пригодны для вторичной переработки", "Имеют малый вес, упрощающий транспортировку и монтаж"].map((item, i) => (
-                <li key={i} className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <Check className="h-3.5 w-3.5 text-primary shrink-0" />
-                  <span>{item}</span>
-                </li>
+      {/* Виды и модификации */}
+      <section className="w-full bg-slate-50 border-y border-slate-200 py-16 md:py-20">
+        <div className="mx-auto max-w-[1440px] px-4 md:px-8">
+          <h2 className="text-2xl md:text-3xl font-bold text-slate-900">Виды и модификации ёмкостей</h2>
+          <div className="mt-10">
+            <Accordion type="multiple" defaultValue={["По форме"]} className="space-y-3">
+              {modifications.map((mod) => (
+                <AccordionItem key={mod.title} value={mod.title} className="rounded-lg border border-slate-200 bg-white px-5">
+                  <AccordionTrigger className="text-sm font-semibold text-slate-900 hover:no-underline">
+                    {mod.title}
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <ul className="space-y-2 pb-2">
+                      {mod.items.map((item, i) => (
+                        <li key={i} className="flex items-start gap-2 text-sm text-slate-500">
+                          <span className="text-amber-500 mt-1">•</span>
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </AccordionContent>
+                </AccordionItem>
               ))}
-            </ul>
+            </Accordion>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Виды и модификации */}
-        <section id="modifikacii" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Виды и модификации ёмкостей</h2>
-          <Accordion type="multiple" defaultValue={["По форме"]} className="space-y-2">
-            {modifications.map((mod) => (
-              <AccordionItem key={mod.title} value={mod.title} className="rounded-lg border border-border bg-card px-4">
-                <AccordionTrigger className="text-sm font-semibold text-foreground hover:no-underline">
-                  {mod.title}
-                </AccordionTrigger>
-                <AccordionContent>
-                  <ul className="space-y-1.5 pb-2">
-                    {mod.items.map((item, i) => (
-                      <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
-                        <span className="text-primary mt-1">•</span>
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
-        </section>
-
-        {/* CTA to configurator */}
-        <section className="mb-10">
+      {/* CTA to configurator */}
+      <section className="w-full bg-white py-16 md:py-20">
+        <div className="mx-auto max-w-[1440px] px-4 md:px-8">
           <Link
             to="/catalog/emkosti/konfigurator"
-            className="block rounded-xl border-2 border-primary/30 bg-primary/5 p-6 sm:p-8 text-center hover:border-primary/60 hover:bg-primary/10 transition-all group"
+            className="block rounded-2xl border-2 border-amber-300 bg-amber-50 p-8 sm:p-10 text-center hover:border-amber-500 hover:bg-amber-100/50 transition-all group"
           >
-            <h2 className="text-lg sm:text-xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
+            <h2 className="text-xl sm:text-2xl font-bold text-slate-900 mb-2 group-hover:text-amber-600 transition-colors">
               Конфигуратор ёмкостей
             </h2>
-            <p className="text-sm text-muted-foreground mb-4">
+            <p className="text-sm text-slate-500 mb-4">
               Подберите тип, материал и размер ёмкости. Добавьте в корзину и оформите заявку.
             </p>
-            <span className="inline-flex items-center gap-2 text-sm font-semibold text-primary">
+            <span className="inline-flex items-center gap-2 text-sm font-semibold text-amber-600">
               Перейти к конфигуратору →
             </span>
           </Link>
-        </section>
+        </div>
+      </section>
 
-        {/* Преимущества */}
-        <section id="preimushchestva" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Преимущества сотрудничества</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            {advantages.map((adv) => (
-              <div key={adv.title} className="rounded-lg border border-border bg-card p-4">
-                <adv.icon className="h-6 w-6 text-primary mb-2" />
-                <h3 className="text-sm font-semibold text-foreground mb-1">{adv.title}</h3>
-                <p className="text-xs text-muted-foreground leading-relaxed">{adv.text}</p>
-              </div>
-            ))}
-          </div>
-        </section>
+      {/* Преимущества */}
+      <AdvantagesGrid
+        title="Преимущества сотрудничества"
+        items={advantages}
+      />
 
-        {/* CTA Form */}
-        <section id="cta-form" className="mb-10 scroll-mt-8">
-          <div className="rounded-xl border border-border bg-card p-6 sm:p-8">
-            <h2 className="text-xl font-bold text-foreground mb-2">Готовы заказать ёмкость?</h2>
-            <p className="text-sm text-muted-foreground mb-1">Оставьте заявку, и наш инженер:</p>
-            <ul className="space-y-1 mb-5">
-              {[
-                "Бесплатно проконсультирует по выбору материала и конструкции.",
-                "Подготовит 3D-модель и расчёт стоимости в течение 24 часов.",
-                "Организует доставку и монтаж на вашем объекте.",
-              ].map((item, i) => (
-                <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
-                  <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-            <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div>
-                <Label htmlFor="cta-name">Имя *</Label>
-                <Input id="cta-name" placeholder="Иван Иванов" value={form.name} onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))} maxLength={100} />
-              </div>
-              <div>
-                <Label htmlFor="cta-phone">Телефон *</Label>
-                <Input id="cta-phone" type="tel" placeholder="+7 900 000-00-00" value={form.phone} onChange={(e) => setForm((f) => ({ ...f, phone: e.target.value }))} maxLength={20} />
-              </div>
-              <div>
-                <Label htmlFor="cta-email">E-mail</Label>
-                <Input id="cta-email" type="email" placeholder="ivanov@company.ru" value={form.email} onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))} maxLength={255} />
-              </div>
-              <div className="sm:col-span-2">
-                <Label htmlFor="cta-desc">Описание задачи</Label>
-                <Textarea id="cta-desc" placeholder="Опишите требуемую ёмкость: тип, объём, назначение…" value={form.description} onChange={(e) => setForm((f) => ({ ...f, description: e.target.value }))} rows={3} maxLength={2000} />
-              </div>
-              <div className="sm:col-span-2">
-                <Button type="submit" className="w-full sm:w-auto">Оставить заявку</Button>
-              </div>
-            </form>
-            <p className="text-xs text-muted-foreground mt-4">
-              Или звоните: <a href="tel:+79633225540" className="text-primary hover:underline">+7 (963) 322-55-40</a>
-            </p>
-          </div>
-        </section>
-
-        <PageFooter />
-      </main>
-    </>
+      {/* FAQ */}
+      <FAQSection items={faqEmkosti} />
+    </CorporatePageShell>
   );
 };
-
-const EmkostiPage = () => (
-  <CartProvider>
-    <EmkostiPageInner />
-  </CartProvider>
-);
 
 export default EmkostiPage;
