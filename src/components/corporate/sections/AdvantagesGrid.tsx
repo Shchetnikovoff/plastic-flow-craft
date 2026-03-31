@@ -20,16 +20,16 @@ export default function AdvantagesGrid({
   items,
 }: AdvantagesGridProps) {
   return (
-    <section className="w-full bg-white py-16 md:py-20">
+    <section className="w-full bg-white py-10 md:py-14">
       <div className="mx-auto max-w-[1440px] px-4 md:px-8">
         <h2 className="text-2xl md:text-3xl font-bold text-slate-900">{title}</h2>
         {subtitle && (
-          <p data-testid="section-subtitle" className="mt-2 text-slate-500 text-lg">
+          <p data-testid="section-subtitle" className="mt-2 text-slate-500 text-sm">
             {subtitle}
           </p>
         )}
 
-        <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {items.map((item) => {
             const Icon = item.icon;
             const content = (

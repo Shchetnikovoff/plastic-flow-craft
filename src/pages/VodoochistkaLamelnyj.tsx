@@ -2,7 +2,7 @@ import CorporatePageShell from "@/components/corporate/CorporatePageShell";
 import {
   AdvantagesGrid,
   SpecTable,
-  ApplicationAreas,
+  DescriptionBlock,
   FeatureChecklist,
   DarkInfoBlock,
   FAQSection,
@@ -117,15 +117,11 @@ const VodoochistkaLamelnyj = () => {
         ]}
       />
 
-      <FeatureChecklist
+      <DescriptionBlock
         title="Почему выбирают наши ламельные отстойники"
-        items={whyUs}
-        columns={1}
-      />
-
-      <ApplicationAreas
-        title="Типовые сферы применения"
-        items={applicationAreas}
+        features={whyUs}
+        applicationsTitle="Типовые сферы применения"
+        applications={applicationAreas}
       />
 
       <FeatureChecklist

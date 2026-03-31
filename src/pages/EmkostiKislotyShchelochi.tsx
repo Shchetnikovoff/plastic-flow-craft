@@ -1,5 +1,5 @@
 import CorporatePageShell from "@/components/corporate/CorporatePageShell";
-import { AdvantagesGrid, ApplicationAreas, FeatureChecklist, DarkInfoBlock, FAQSection, SpecTable } from "@/components/corporate/sections";
+import { AdvantagesGrid, DescriptionBlock, FeatureChecklist, DarkInfoBlock, FAQSection, SpecTable } from "@/components/corporate/sections";
 import type { LucideIcon } from "lucide-react";
 import {
   Wrench, ShieldCheck, Clock, Truck,
@@ -147,9 +147,7 @@ const EmkostiKislotyShchelochi = () => (
       ]}
     />
 
-    <FeatureChecklist title="Почему выбирают нас" items={whyUs} />
-
-    <ApplicationAreas title="Назначение ёмкостей" items={purposes} />
+    <DescriptionBlock title="Почему выбирают нас" features={whyUs} applicationsTitle="Назначение ёмкостей" applications={purposes} />
 
     <FeatureChecklist title="Описание материалов" items={materialFeatures} columns={1} />
 

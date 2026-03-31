@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import CorporatePageShell from "@/components/corporate/CorporatePageShell";
-import { AdvantagesGrid, ApplicationAreas, FeatureChecklist, FAQSection } from "@/components/corporate/sections";
+import { AdvantagesGrid, DescriptionBlock, FAQSection } from "@/components/corporate/sections";
 import { findCategory } from "@/data/catalog";
 import { ImageOff, Droplets, FlaskConical, Truck, ShieldCheck, Clock, Wrench } from "lucide-react";
 import {
@@ -207,18 +207,13 @@ const EmkostiPage = () => {
         </section>
       )}
 
-      {/* Описание */}
-      <FeatureChecklist
+      {/* Описание + Назначение */}
+      <DescriptionBlock
         title="Промышленные ёмкости на заказ: от эскиза до монтажа"
         subtitle="Мы производим промышленные ёмкости из листового полипропилена (PP) и полиэтилена (ПНД/HDPE) любой сложности и объёма — под задачи химической, пищевой, фармацевтической промышленности, сельского хозяйства, ЖКХ и строительства."
-        items={whyUs}
-        columns={1}
-      />
-
-      {/* Назначение */}
-      <ApplicationAreas
-        title="Назначение ёмкостей"
-        items={applications}
+        features={whyUs}
+        applicationsTitle="Назначение ёмкостей"
+        applications={applications}
       />
 
       {/* Материалы — custom section kept inline */}

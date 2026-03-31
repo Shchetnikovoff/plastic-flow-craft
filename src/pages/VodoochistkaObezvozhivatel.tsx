@@ -2,7 +2,7 @@ import CorporatePageShell from "@/components/corporate/CorporatePageShell";
 import {
   AdvantagesGrid,
   SpecTable,
-  ApplicationAreas,
+  DescriptionBlock,
   FeatureChecklist,
   DarkInfoBlock,
   FAQSection,
@@ -120,16 +120,12 @@ const VodoochistkaObezvozhivatel = () => (
       columns={1}
     />
 
-    <FeatureChecklist
+    <DescriptionBlock
       title="Назначение"
       subtitle="Мешочные обезвоживатели предназначены для:"
-      items={purposeItems}
-      columns={1}
-    />
-
-    <ApplicationAreas
-      title="Типовые сферы применения"
-      items={applicationAreas}
+      features={purposeItems}
+      applicationsTitle="Типовые сферы применения"
+      applications={applicationAreas}
     />
 
     <SpecTable

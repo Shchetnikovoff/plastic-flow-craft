@@ -1,6 +1,6 @@
 import { useState } from "react";
 import CorporatePageShell from "@/components/corporate/CorporatePageShell";
-import { FeatureChecklist, AdvantagesGrid, SpecTable, ApplicationAreas, FAQSection, DarkInfoBlock } from "@/components/corporate/sections";
+import { DescriptionBlock, AdvantagesGrid, SpecTable, FAQSection, DarkInfoBlock } from "@/components/corporate/sections";
 import {
   Settings, ShieldCheck, Clock, Wrench, Truck, FlaskConical,
   Wind, Droplets, Package, Gauge, Layers,
@@ -175,16 +175,12 @@ const GazoochistkaKapleuloviteli = () => {
       ]}
       stats={stats}
     >
-      <FeatureChecklist
+      <DescriptionBlock
         id="opisanie"
         title="Почему выбирают наши каплеуловители"
-        items={whyUs}
-      />
-
-      <ApplicationAreas
-        id="primenenie"
-        title="Область применения"
-        items={applications}
+        features={whyUs}
+        applicationsTitle="Область применения"
+        applications={applications}
       />
 
       <DarkInfoBlock id="princip" title="Принцип работы">

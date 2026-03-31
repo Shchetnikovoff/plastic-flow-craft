@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import CorporatePageShell from "@/components/corporate/CorporatePageShell";
-import { AdvantagesGrid, ApplicationAreas, FeatureChecklist, DarkInfoBlock, FAQSection } from "@/components/corporate/sections";
+import { AdvantagesGrid, DescriptionBlock, FeatureChecklist, DarkInfoBlock, FAQSection } from "@/components/corporate/sections";
 import { Box, Wrench, ShieldCheck, Clock, Truck, Beaker, Settings } from "lucide-react";
 import {
   Accordion, AccordionContent, AccordionItem, AccordionTrigger,
@@ -174,9 +174,7 @@ const EmkostiPryamougolnye = () => (
       ]}
     />
 
-    <FeatureChecklist title="Почему выбирают нас" items={whyUs} />
-
-    <ApplicationAreas title="Назначение прямоугольных ёмкостей" items={applications} />
+    <DescriptionBlock title="Почему выбирают нас" features={whyUs} applicationsTitle="Назначение прямоугольных ёмкостей" applications={applications} />
 
     <FeatureChecklist title="Конструкция и преимущества" items={constructionFeatures} />
 

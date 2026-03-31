@@ -3,10 +3,10 @@ import {
   ProductGrid,
   AdvantagesGrid,
   SpecTable,
+  DescriptionBlock,
   FeatureChecklist,
   FAQSection,
   DarkInfoBlock,
-  ApplicationAreas,
 } from "@/components/corporate/sections";
 import {
   Droplets, Factory, Wrench, ShieldCheck, Clock, Truck,
@@ -107,17 +107,12 @@ export default function VodoochistkaDozirovanie() {
       }}
     >
       {/* Description */}
-      <FeatureChecklist
+      <DescriptionBlock
         title="Почему выбирают наши станции"
         subtitle="Трёхкамерная система непрерывного действия с автоматическим управлением"
-        items={whyUs}
-        columns={1}
-      />
-
-      {/* Applications */}
-      <ApplicationAreas
-        title="Назначение и области применения"
-        items={purposeItems}
+        features={whyUs}
+        applicationsTitle="Назначение и области применения"
+        applications={purposeItems}
       />
 
       {/* How it works */}

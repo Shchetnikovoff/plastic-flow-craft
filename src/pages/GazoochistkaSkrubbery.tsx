@@ -1,6 +1,6 @@
 import { useState } from "react";
 import CorporatePageShell from "@/components/corporate/CorporatePageShell";
-import { FeatureChecklist, AdvantagesGrid, SpecTable, ApplicationAreas, FAQSection, DarkInfoBlock } from "@/components/corporate/sections";
+import { DescriptionBlock, AdvantagesGrid, SpecTable, FAQSection, DarkInfoBlock } from "@/components/corporate/sections";
 import {
   Check, Factory, Wrench, ShieldCheck, Clock, Truck,
   FlaskConical, Settings, Wind, Flame, Droplets, Beaker,
@@ -177,9 +177,11 @@ const GazoochistkaSkrubbery = () => {
         </p>
       </DarkInfoBlock>
 
-      <FeatureChecklist
+      <DescriptionBlock
         title="Почему выбирают наши скрубберы"
-        items={whyUs}
+        features={whyUs}
+        applicationsTitle="Области применения"
+        applications={applications}
       />
 
       {/* Product tabs */}
@@ -237,13 +239,6 @@ const GazoochistkaSkrubbery = () => {
         ]}
         rows={ctModels}
         striped
-      />
-
-      <ApplicationAreas
-        id="primenenie"
-        title="Области применения"
-        items={applications}
-        columns={3}
       />
 
       {/* Kit */}

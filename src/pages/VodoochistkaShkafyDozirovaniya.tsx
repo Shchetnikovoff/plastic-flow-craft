@@ -4,7 +4,7 @@ import {
   FeatureChecklist,
   FAQSection,
   DarkInfoBlock,
-  ApplicationAreas,
+  DescriptionBlock,
 } from "@/components/corporate/sections";
 import {
   Droplets, Factory, Wrench, ShieldCheck, Clock, Truck,
@@ -123,17 +123,12 @@ export default function VodoochistkaShkafyDozirovaniya() {
         ]}
       />
 
-      {/* Construction features */}
-      <FeatureChecklist
+      {/* Construction features + Applications */}
+      <DescriptionBlock
         title="Особенности конструкции"
-        items={constructionFeatures}
-        columns={1}
-      />
-
-      {/* Applications */}
-      <ApplicationAreas
-        title="Области применения"
-        items={applications}
+        features={constructionFeatures}
+        applicationsTitle="Области применения"
+        applications={applications}
       />
 
       {/* Partnership advantages */}

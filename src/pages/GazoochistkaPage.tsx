@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import CorporatePageShell from "@/components/corporate/CorporatePageShell";
-import { ProductGrid, AdvantagesGrid, ApplicationAreas, FeatureChecklist, FAQSection } from "@/components/corporate/sections";
+import { ProductGrid, AdvantagesGrid, DescriptionBlock, FAQSection } from "@/components/corporate/sections";
 import { findCategory } from "@/data/catalog";
 import { Settings, ShieldCheck, Clock, Truck, Wrench, FlaskConical, ImageOff, Factory, Wind, Beaker, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -88,16 +88,12 @@ const GazoochistkaPage = () => {
       ]}
       stats={stats}
     >
-      <FeatureChecklist
+      <DescriptionBlock
         id="opisanie"
         title="Почему выбирают нас"
-        items={whyUs}
-      />
-
-      <ApplicationAreas
-        id="primenenie"
-        title="Области применения"
-        items={applications}
+        features={whyUs}
+        applicationsTitle="Области применения"
+        applications={applications}
       />
 
       <ProductGrid

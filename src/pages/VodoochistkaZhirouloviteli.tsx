@@ -2,10 +2,10 @@ import CorporatePageShell from "@/components/corporate/CorporatePageShell";
 import {
   ProductGrid,
   AdvantagesGrid,
+  DescriptionBlock,
   FeatureChecklist,
   FAQSection,
   DarkInfoBlock,
-  ApplicationAreas,
 } from "@/components/corporate/sections";
 import {
   Droplets, Factory, Wrench, ShieldCheck, Clock, Truck,
@@ -121,18 +121,13 @@ export default function VodoochistkaZhirouloviteli() {
         columns={2}
       />
 
-      {/* Why us */}
-      <FeatureChecklist
+      {/* Why us + Applications */}
+      <DescriptionBlock
         title="Почему выбирают наши жироуловители"
         subtitle="Надёжная защита канализации с гарантией 5 лет"
-        items={whyUs}
-        columns={1}
-      />
-
-      {/* Applications */}
-      <ApplicationAreas
-        title="Назначение и области применения"
-        items={purposeItems}
+        features={whyUs}
+        applicationsTitle="Назначение и области применения"
+        applications={purposeItems}
       />
 
       {/* How it works */}

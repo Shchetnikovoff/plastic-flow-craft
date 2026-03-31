@@ -3,7 +3,7 @@ import CorporatePageShell from "@/components/corporate/CorporatePageShell";
 import {
   AdvantagesGrid,
   SpecTable,
-  ApplicationAreas,
+  DescriptionBlock,
   FeatureChecklist,
   DarkInfoBlock,
   FAQSection,
@@ -120,15 +120,11 @@ const VodoochistkaFfu = () => {
         ]}
       />
 
-      <FeatureChecklist
+      <DescriptionBlock
         title="Почему выбирают наши ФФУ"
-        items={whyUs}
-        columns={1}
-      />
-
-      <ApplicationAreas
-        title="Типовые сферы применения"
-        items={applicationAreas}
+        features={whyUs}
+        applicationsTitle="Типовые сферы применения"
+        applications={applicationAreas}
       />
 
       <FeatureChecklist

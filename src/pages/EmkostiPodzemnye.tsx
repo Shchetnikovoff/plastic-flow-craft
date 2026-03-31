@@ -3,9 +3,8 @@ import { Settings, ShieldCheck, Clock, Truck, FlaskConical, Wrench, Droplets } f
 import CorporatePageShell from "@/components/corporate/CorporatePageShell";
 import {
   SpecTable,
-  FeatureChecklist,
+  DescriptionBlock,
   AdvantagesGrid,
-  ApplicationAreas,
   DarkInfoBlock,
   FAQSection,
 } from "@/components/corporate/sections";
@@ -98,16 +97,12 @@ const EmkostiPodzemnye = () => {
         rows={specRows}
       />
 
-      <FeatureChecklist
+      <DescriptionBlock
         title="Почему выбирают нас"
         subtitle="Мы проектируем и изготавливаем промышленные подземные ёмкости из спиральновитых труб (СВП) для систем водоснабжения, канализации, ливневых стоков, хранения технической воды и нефтепродуктов."
-        items={whyUs}
-        columns={1}
-      />
-
-      <ApplicationAreas
-        title="Назначение подземных ёмкостей"
-        items={applications}
+        features={whyUs}
+        applicationsTitle="Назначение подземных ёмкостей"
+        applications={applications}
       />
 
       <DarkInfoBlock

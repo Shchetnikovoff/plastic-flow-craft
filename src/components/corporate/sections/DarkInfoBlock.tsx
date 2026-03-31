@@ -9,7 +9,7 @@ interface DarkInfoBlockProps {
 
 export default function DarkInfoBlock({ title, text, highlights, children }: DarkInfoBlockProps) {
   return (
-    <section className="w-full bg-slate-900 py-16 md:py-20">
+    <section className="w-full bg-slate-900 py-10 md:py-14">
       <div className="mx-auto max-w-[1440px] px-4 md:px-8">
         <h2 className="text-2xl md:text-3xl font-bold text-white">{title}</h2>
         <p className="mt-4 max-w-3xl text-slate-300 leading-relaxed">{text}</p>
