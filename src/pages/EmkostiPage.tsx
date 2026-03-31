@@ -216,78 +216,99 @@ const EmkostiPage = () => {
         applications={applications}
       />
 
-      {/* Материалы — custom section kept inline */}
-      <section className="w-full bg-white py-16 md:py-20">
+      {/* Материалы, модификации и конфигуратор — единый тёмный блок */}
+      <section className="w-full bg-slate-900 py-10 md:py-14">
         <div className="mx-auto max-w-[1440px] px-4 md:px-8">
-          <h2 className="text-2xl md:text-3xl font-bold text-slate-900">Описание материалов</h2>
-          <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="rounded-xl border border-slate-200 p-6">
-              <h3 className="text-lg font-bold text-slate-900 mb-4">Полипропилен (PP)</h3>
-              <div className="grid grid-cols-2 gap-px rounded-lg border border-slate-200 overflow-hidden mb-4">
-                <div className="bg-slate-50 p-3"><span className="block text-xs text-slate-400">Температура</span><span className="text-sm font-semibold text-slate-900">-20...+100 °C</span></div>
-                <div className="bg-slate-50 p-3"><span className="block text-xs text-slate-400">Плотность</span><span className="text-sm font-semibold text-slate-900">0,90-0,92 г/см³</span></div>
-                <div className="bg-slate-50 p-3 border-t border-slate-200"><span className="block text-xs text-slate-400">Плавление</span><span className="text-sm font-semibold text-slate-900">160-170 °C</span></div>
-                <div className="bg-slate-50 p-3 border-t border-slate-200"><span className="block text-xs text-slate-400">Хим. стойкость</span><span className="text-sm font-semibold text-slate-900">Высокая</span></div>
+          <h2 className="text-2xl md:text-3xl font-bold text-white">Материалы и модификации</h2>
+          <p className="mt-2 text-sm text-slate-400 max-w-[600px]">
+            Подбираем оптимальный материал под вашу рабочую среду, температуру и условия эксплуатации
+          </p>
+
+          <div className="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-5">
+            {/* PP */}
+            <div className="rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm p-5">
+              <h3 className="text-base font-bold text-white mb-3">Полипропилен (PP)</h3>
+              <div className="grid grid-cols-2 gap-2 mb-3">
+                <div className="rounded-lg bg-white/5 p-2.5">
+                  <span className="block text-[10px] text-slate-500 uppercase tracking-wider">Температура</span>
+                  <span className="text-sm font-semibold text-amber-400">-20...+100 °C</span>
+                </div>
+                <div className="rounded-lg bg-white/5 p-2.5">
+                  <span className="block text-[10px] text-slate-500 uppercase tracking-wider">Плотность</span>
+                  <span className="text-sm font-semibold text-amber-400">0,90-0,92</span>
+                </div>
+                <div className="rounded-lg bg-white/5 p-2.5">
+                  <span className="block text-[10px] text-slate-500 uppercase tracking-wider">Плавление</span>
+                  <span className="text-sm font-semibold text-amber-400">160-170 °C</span>
+                </div>
+                <div className="rounded-lg bg-white/5 p-2.5">
+                  <span className="block text-[10px] text-slate-500 uppercase tracking-wider">Хим. стойкость</span>
+                  <span className="text-sm font-semibold text-amber-400">Высокая</span>
+                </div>
               </div>
-              <p className="text-sm text-slate-500">Идеален для агрессивных сред и повышенных температур.</p>
+              <p className="text-xs text-slate-400">Идеален для агрессивных сред и повышенных температур.</p>
             </div>
-            <div className="rounded-xl border border-slate-200 p-6">
-              <h3 className="text-lg font-bold text-slate-900 mb-4">Полиэтилен (ПНД/HDPE)</h3>
-              <div className="grid grid-cols-2 gap-px rounded-lg border border-slate-200 overflow-hidden mb-4">
-                <div className="bg-slate-50 p-3"><span className="block text-xs text-slate-400">Температура</span><span className="text-sm font-semibold text-slate-900">-50...+60 °C</span></div>
-                <div className="bg-slate-50 p-3"><span className="block text-xs text-slate-400">Плотность</span><span className="text-sm font-semibold text-slate-900">0,93-0,97 г/см³</span></div>
-                <div className="bg-slate-50 p-3 border-t border-slate-200"><span className="block text-xs text-slate-400">Плавление</span><span className="text-sm font-semibold text-slate-900">120-135 °C</span></div>
-                <div className="bg-slate-50 p-3 border-t border-slate-200"><span className="block text-xs text-slate-400">УФ-стойкость</span><span className="text-sm font-semibold text-slate-900">Высокая</span></div>
+
+            {/* PE */}
+            <div className="rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm p-5">
+              <h3 className="text-base font-bold text-white mb-3">Полиэтилен (ПНД/HDPE)</h3>
+              <div className="grid grid-cols-2 gap-2 mb-3">
+                <div className="rounded-lg bg-white/5 p-2.5">
+                  <span className="block text-[10px] text-slate-500 uppercase tracking-wider">Температура</span>
+                  <span className="text-sm font-semibold text-amber-400">-50...+60 °C</span>
+                </div>
+                <div className="rounded-lg bg-white/5 p-2.5">
+                  <span className="block text-[10px] text-slate-500 uppercase tracking-wider">Плотность</span>
+                  <span className="text-sm font-semibold text-amber-400">0,93-0,97</span>
+                </div>
+                <div className="rounded-lg bg-white/5 p-2.5">
+                  <span className="block text-[10px] text-slate-500 uppercase tracking-wider">Плавление</span>
+                  <span className="text-sm font-semibold text-amber-400">120-135 °C</span>
+                </div>
+                <div className="rounded-lg bg-white/5 p-2.5">
+                  <span className="block text-[10px] text-slate-500 uppercase tracking-wider">УФ-стойкость</span>
+                  <span className="text-sm font-semibold text-amber-400">Высокая</span>
+                </div>
               </div>
-              <p className="text-sm text-slate-500">Оптимален для воды, пищевых продуктов и эксплуатации на открытом воздухе.</p>
+              <p className="text-xs text-slate-400">Оптимален для воды, пищевых продуктов и эксплуатации на открытом воздухе.</p>
+            </div>
+
+            {/* Модификации */}
+            <div className="rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm p-5">
+              <h3 className="text-base font-bold text-white mb-3">Виды и модификации</h3>
+              <Accordion type="multiple" defaultValue={["По форме"]} className="space-y-1.5">
+                {modifications.map((mod) => (
+                  <AccordionItem key={mod.title} value={mod.title} className="rounded-lg border border-white/10 bg-white/5 px-3">
+                    <AccordionTrigger className="text-xs font-semibold text-slate-300 hover:text-white hover:no-underline py-2.5">
+                      {mod.title}
+                    </AccordionTrigger>
+                    <AccordionContent>
+                      <ul className="space-y-1.5 pb-2">
+                        {mod.items.map((item, i) => (
+                          <li key={i} className="flex items-start gap-2 text-xs text-slate-400">
+                            <span className="text-amber-500 mt-0.5">•</span>
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* Виды и модификации */}
-      <section className="w-full bg-slate-50 border-y border-slate-200 py-16 md:py-20">
-        <div className="mx-auto max-w-[1440px] px-4 md:px-8">
-          <h2 className="text-2xl md:text-3xl font-bold text-slate-900">Виды и модификации ёмкостей</h2>
-          <div className="mt-10">
-            <Accordion type="multiple" defaultValue={["По форме"]} className="space-y-3">
-              {modifications.map((mod) => (
-                <AccordionItem key={mod.title} value={mod.title} className="rounded-lg border border-slate-200 bg-white px-5">
-                  <AccordionTrigger className="text-sm font-semibold text-slate-900 hover:no-underline">
-                    {mod.title}
-                  </AccordionTrigger>
-                  <AccordionContent>
-                    <ul className="space-y-2 pb-2">
-                      {mod.items.map((item, i) => (
-                        <li key={i} className="flex items-start gap-2 text-sm text-slate-500">
-                          <span className="text-amber-500 mt-1">•</span>
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA to configurator */}
-      <section className="w-full bg-white py-16 md:py-20">
-        <div className="mx-auto max-w-[1440px] px-4 md:px-8">
+          {/* CTA конфигуратор */}
           <Link
             to="/catalog/emkosti/konfigurator"
-            className="block rounded-2xl border-2 border-amber-300 bg-amber-50 p-8 sm:p-10 text-center hover:border-amber-500 hover:bg-amber-100/50 transition-all group"
+            className="mt-8 flex items-center justify-between rounded-xl border border-amber-500/30 bg-amber-500/10 px-6 py-4 hover:bg-amber-500/20 transition-all group"
           >
-            <h2 className="text-xl sm:text-2xl font-bold text-slate-900 mb-2 group-hover:text-amber-600 transition-colors">
-              Конфигуратор ёмкостей
-            </h2>
-            <p className="text-sm text-slate-500 mb-4">
-              Подберите тип, материал и размер ёмкости. Добавьте в корзину и оформите заявку.
-            </p>
-            <span className="inline-flex items-center gap-2 text-sm font-semibold text-amber-600">
-              Перейти к конфигуратору →
+            <div>
+              <h3 className="text-base font-bold text-white group-hover:text-amber-400 transition-colors">Конфигуратор ёмкостей</h3>
+              <p className="text-xs text-slate-400 mt-0.5">Подберите тип, материал и размер. Добавьте в корзину и оформите заявку.</p>
+            </div>
+            <span className="text-sm font-semibold text-amber-400 shrink-0 ml-4">
+              Открыть →
             </span>
           </Link>
         </div>
