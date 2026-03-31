@@ -1,6 +1,9 @@
 import { useParams, Link, Navigate } from "react-router-dom";
 import { useState } from "react";
-import { ArrowRight, ImageOff } from "lucide-react";
+import {
+  ArrowRight, ImageOff, FlaskConical, Zap, Building2, Droplets,
+  Beaker, Factory, Atom, Wind, ChevronDown, Check,
+} from "lucide-react";
 import { catalog, findCategory, findSubcategory } from "@/data/catalog";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -45,6 +48,25 @@ const CTAForm = ({ id, form, setForm, handleSubmit }: {
     </CardContent></Card>
   </section>
 );
+
+function CatalogFAQItem({ q, a }: { q: string; a: string }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="rounded-lg border border-slate-200 bg-white overflow-hidden">
+      <button
+        type="button"
+        onClick={() => setOpen(!open)}
+        className="flex w-full items-center justify-between px-4 py-3 text-left text-sm font-medium text-slate-900 hover:bg-slate-50 transition-colors"
+      >
+        {q}
+        <ChevronDown className={`h-4 w-4 shrink-0 text-slate-400 transition-transform duration-200 ${open ? "rotate-180" : ""}`} />
+      </button>
+      <div className={`overflow-hidden transition-all duration-200 ${open ? "max-h-96" : "max-h-0"}`}>
+        <p className="px-4 pb-3 text-xs text-slate-500 leading-relaxed">{a}</p>
+      </div>
+    </div>
+  );
+}
 
 /* ── Category listing (root /catalog) ── */
 const CategoryListing = () => {
@@ -98,6 +120,130 @@ const CategoryListing = () => {
                 </Link>
               );
             })}
+          </div>
+        </div>
+      </section>
+
+      {/* ══════ ОТРАСЛИ ══════ */}
+      <section className="w-full bg-white py-10 md:py-14 border-b border-slate-200">
+        <div className="mx-auto max-w-[1440px] px-4 md:px-8">
+          <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-2">Отрасли применения</h2>
+          <p className="text-sm text-slate-500 mb-8">Наше оборудование работает в ключевых отраслях промышленности</p>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            {[
+              { icon: FlaskConical, name: "Химическая промышленность", href: "/catalog/emkosti/kisloty-shchelochi" },
+              { icon: Zap, name: "Гальваника", href: "/catalog/galvanika" },
+              { icon: Building2, name: "Металлургия", href: "/catalog/gidrometallurgiya" },
+              { icon: Droplets, name: "Водоподготовка", href: "/catalog/vodopodgotovka" },
+              { icon: Beaker, name: "Фармацевтика", href: "/catalog/emkosti" },
+              { icon: Factory, name: "Пищевая отрасль", href: "/catalog/vodoochistka" },
+              { icon: Atom, name: "Нефтехимия", href: "/catalog/reaktory" },
+              { icon: Wind, name: "ЦБК и полиграфия", href: "/catalog/gazoochistka" },
+            ].map((ind) => (
+              <Link key={ind.name} to={ind.href} className="group flex flex-col items-center gap-2 p-4 rounded-xl bg-slate-50 border border-slate-200 hover:border-amber-300 hover:shadow-md transition-all">
+                <div className="h-10 w-10 rounded-full bg-slate-900 flex items-center justify-center group-hover:bg-amber-500 transition-colors">
+                  <ind.icon className="h-4 w-4 text-amber-400 group-hover:text-slate-900 transition-colors" />
+                </div>
+                <span className="text-xs md:text-sm font-semibold text-slate-700 text-center leading-tight group-hover:text-amber-600 transition-colors">{ind.name}</span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ══════ СРАВНИТЕЛЬНАЯ ТАБЛИЦА ══════ */}
+      <section className="w-full bg-slate-50 py-10 md:py-14">
+        <div className="mx-auto max-w-[1440px] px-4 md:px-8">
+          <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-2">Сравнение категорий оборудования</h2>
+          <p className="text-sm text-slate-500 mb-8">Основные характеристики по направлениям</p>
+          <div className="overflow-x-auto rounded-xl border border-slate-200">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="bg-slate-900 text-white">
+                  <th className="text-left px-4 py-3 text-xs font-semibold uppercase tracking-wider">Категория</th>
+                  <th className="text-left px-4 py-3 text-xs font-semibold uppercase tracking-wider">Материалы</th>
+                  <th className="text-left px-4 py-3 text-xs font-semibold uppercase tracking-wider">Температура</th>
+                  <th className="text-left px-4 py-3 text-xs font-semibold uppercase tracking-wider">Объём / Размер</th>
+                  <th className="text-left px-4 py-3 text-xs font-semibold uppercase tracking-wider">Срок</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  ["Ёмкости", "PP, PE, PVC", "-50...+100 °C", "50 л — 300 м³", "10–21 дн."],
+                  ["Водоочистка", "PP, PE", "-20...+80 °C", "до 100 м³/ч", "14–30 дн."],
+                  ["Газоочистка", "PP, PVC", "-20...+80 °C", "500–100 000 м³/ч", "14–30 дн."],
+                  ["Вентиляция", "PP, PE", "-20...+80 °C", "Ø 50–1200 мм", "7–14 дн."],
+                  ["КНС", "PP, PE", "-20...+60 °C", "до 50 м³", "21–30 дн."],
+                  ["Реакторы", "PP, PE, PVC", "-20...+100 °C", "до 50 м³", "21–30 дн."],
+                  ["Гальваника", "PP, PVC", "-20...+80 °C", "по ТЗ", "14–30 дн."],
+                ].map((row, i) => (
+                  <tr key={i} className={`${i % 2 === 0 ? "bg-white" : "bg-slate-50"} hover:bg-amber-50/50 transition-colors`}>
+                    <td className="px-4 py-3 font-semibold text-slate-900">{row[0]}</td>
+                    <td className="px-4 py-3 text-slate-600">{row[1]}</td>
+                    <td className="px-4 py-3 text-slate-600">{row[2]}</td>
+                    <td className="px-4 py-3 text-slate-600">{row[3]}</td>
+                    <td className="px-4 py-3 text-slate-600">{row[4]}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════ FAQ + SEO ТЕКСТ (2 колонки) ══════ */}
+      <section className="w-full bg-white py-10 md:py-14">
+        <div className="mx-auto max-w-[1440px] px-4 md:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr] gap-0">
+            {/* FAQ */}
+            <div className="rounded-xl border border-slate-200 bg-slate-50 p-6">
+              <h2 className="text-lg md:text-xl font-bold text-slate-900 mb-4">Частые вопросы</h2>
+              <div className="space-y-2">
+                {[
+                  { q: "Как выбрать ёмкость из полипропилена?", a: "Определите рабочую среду, температуру и объём. Наши инженеры подберут оптимальный материал (PP, PE или PVC) и конструкцию ёмкости." },
+                  { q: "Какой срок службы полимерного оборудования?", a: "От 30 до 50 лет при соблюдении условий эксплуатации. Полипропилен и полиэтилен не подвержены коррозии." },
+                  { q: "Работаете с нестандартными заказами?", a: "Да, проектируем и изготавливаем оборудование любой сложности по чертежам заказчика или разрабатываем проект с нуля." },
+                  { q: "Какие стандарты соблюдаете?", a: "ГОСТ, ТУ и международные стандарты качества. Все материалы сертифицированы." },
+                  { q: "Выполняете монтаж?", a: "Да — полный цикл: доставка, шеф-монтаж, пусконаладка, обучение персонала и гарантийное обслуживание." },
+                ].map((faq, i) => (
+                  <CatalogFAQItem key={i} q={faq.q} a={faq.a} />
+                ))}
+              </div>
+            </div>
+
+            {/* Divider */}
+            <div className="hidden lg:flex items-stretch justify-center px-4">
+              <div className="w-px bg-slate-200" />
+            </div>
+            <div className="lg:hidden h-px bg-slate-200 my-4" />
+
+            {/* SEO текст */}
+            <div className="rounded-xl border border-slate-200 bg-slate-50 p-6">
+              <h2 className="text-lg md:text-xl font-bold text-slate-900 mb-4">Полимерное оборудование от производителя</h2>
+              <div className="space-y-3 text-sm text-slate-600 leading-relaxed">
+                <p>
+                  ООО СЗПК «Пласт-Металл Про» — производственно-инжиниринговая компания, специализирующаяся на
+                  разработке, изготовлении и монтаже промышленного оборудования из химически стойких полимеров:
+                  полипропилена (PP), полиэтилена (PE) и поливинилхлорида (PVC).
+                </p>
+                <p>
+                  Наш каталог включает более 7 категорий оборудования: промышленные ёмкости объёмом от 50 литров
+                  до 300 м³, системы водоочистки (ФФУ, ламельные отстойники, станции дозирования), газоочистное
+                  оборудование (скрубберы, фильтры ФВГ, каплеуловители), вентиляцию из полипропилена, канализационные
+                  насосные станции, химические реакторы и гальваническое оборудование.
+                </p>
+                <p>
+                  Собственное производство с ЧПУ-оборудованием расположено в Ленинградской области. Осуществляем
+                  доставку и монтаж по всей России и СНГ. Гарантия на всё оборудование — 5 лет, срок службы —
+                  от 30 лет. Работаем как по типовым проектам, так и по индивидуальным ТЗ.
+                </p>
+              </div>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {["полимерное оборудование", "ёмкости из полипропилена", "водоочистка", "газоочистка", "скрубберы", "КНС", "ГОСТ"].map((tag) => (
+                  <span key={tag} className="inline-block rounded-full bg-slate-200 px-3 py-1 text-xs text-slate-600">{tag}</span>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
