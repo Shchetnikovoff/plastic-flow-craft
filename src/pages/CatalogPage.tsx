@@ -53,6 +53,7 @@ const CategoryListing = () => {
 
   return (
     <CorporatePageShell
+      breadcrumbs={[{ label: "Каталог" }]}
       title="Каталог"
       accentWord="продукции"
       stats={[
@@ -61,6 +62,7 @@ const CategoryListing = () => {
         { value: "PP / PE / PVC", label: "материалы" },
         { value: "5 лет", label: "гарантия" },
       ]}
+      seo={{ title: "Каталог продукции | СЗПК Пласт-Металл ПРО", description: "Полный каталог полимерного оборудования", keywords: "каталог, полимерное оборудование" }}
     >
       <section>
         <p className="text-sm text-muted-foreground mb-5">Полный ассортимент полимерного оборудования для промышленных предприятий — от проектирования до монтажа.</p>
@@ -114,7 +116,12 @@ const SubcategoryDetail = ({ categorySlug, subSlug }: { categorySlug: string; su
   if (result.subcategory.externalPath) return <Navigate to={result.subcategory.externalPath} replace />;
 
   return (
-    <CorporatePageShell title={result.subcategory.name} accentWord="">
+    <CorporatePageShell
+      breadcrumbs={[{ label: "Каталог", href: "/catalog" }, { label: category.name, href: `/catalog/${categorySlug}` }, { label: result.subcategory.name }]}
+      title={result.subcategory.name}
+      accentWord=""
+      seo={{ title: `${result.subcategory.name} | СЗПК`, description: result.subcategory.description || result.subcategory.name, keywords: result.subcategory.name }}
+    >
       <Breadcrumb className="mb-6">
         <BreadcrumbList>
           <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog">Каталог</Link></BreadcrumbLink></BreadcrumbItem>
@@ -149,7 +156,12 @@ const CategoryBrowser = ({ categorySlug }: { categorySlug: string }) => {
   const selectedSub = category.subcategories.find((s) => s.id === selectedSubId);
 
   return (
-    <CorporatePageShell title={category.name} accentWord="">
+    <CorporatePageShell
+      breadcrumbs={[{ label: "Каталог", href: "/catalog" }, { label: category.name }]}
+      title={category.name}
+      accentWord=""
+      seo={{ title: `${category.name} | СЗПК`, description: `${category.name} — полимерное оборудование`, keywords: category.name }}
+    >
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog">Каталог</Link></BreadcrumbLink></BreadcrumbItem>
