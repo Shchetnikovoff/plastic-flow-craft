@@ -1,11 +1,5 @@
-import { useNavigate } from "react-router-dom";
-import { Check } from "lucide-react";
-import {
-  Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
-} from "@/components/ui/table";
-import CatalogPageShell from "@/components/layout/CatalogPageShell";
-import FullBleedSection from "@/components/layout/FullBleedSection";
-import MidPageCTA from "@/components/catalog-sections/MidPageCTA";
+import CorporatePageShell from "@/components/corporate/CorporatePageShell";
+import { SpecTable, FeatureChecklist, FAQSection } from "@/components/corporate/sections";
 
 /* ── static data ── */
 
@@ -34,97 +28,59 @@ const optionsList = [
   "Лестница для обслуживания (подземные модели)",
 ];
 
-const sections = [
-  { id: "opisanie", label: "Описание" },
-  { id: "modeli", label: "Модели" },
-  { id: "opcii", label: "Опции" },
-  { id: "cta-form", label: "Заявка" },
+const faqItems = [
+  { q: "Какие типы жироуловителей?", a: "Подземные вертикальные, наземные вертикальные, горизонтальные, прямоугольные." },
+  { q: "Из каких материалов?", a: "PP и PE — химически стойкие." },
+  { q: "Сроки?", a: "14–21 рабочий день." },
+  { q: "Доставка?", a: "По всей РФ." },
+  { q: "Гарантия?", a: "5 лет." },
 ];
 
-const breadcrumbs = [
-  { label: "Каталог", href: "/catalog" },
-  { label: "Водоочистка", href: "/catalog/vodoochistka" },
-  { label: "Жироуловители", href: "/catalog/vodoochistka/zhirouloviteli" },
-  { label: "Горизонтальные" },
-];
+const tableHeaders = ["Артикул", "Модель", "Произв., л/с", "Пик. сброс, л", "Габариты, мм"];
+const tableRows = models.map((m) => [m.article, m.name, m.throughput, m.peakDischarge, m.dimensions]);
 
 /* ── component ── */
 
 const ZhuGorizontalnye = () => {
-  const navigate = useNavigate();
-
   return (
-    <CatalogPageShell
-      breadcrumbs={breadcrumbs}
+    <CorporatePageShell
+      breadcrumbs={[
+        { label: "Каталог", href: "/catalog" },
+        { label: "Водоочистка", href: "/catalog/vodoochistka" },
+        { label: "Жироуловители", href: "/catalog/vodoochistka/zhirouloviteli" },
+        { label: "Горизонтальные" },
+      ]}
       title="Горизонтальные жироуловители"
-      seoDescription="Горизонтальные жироуловители из ПП для общепита."
-      seoKeywords="жироуловитель горизонтальный, СЗПК"
       subtitle="Увеличенная зона отстаивания для больших объёмов стоков. Подземное исполнение. Производительность до 25 л/с."
-      heroImages={["/images/zhu-g-hero-ral7032.jpg", "/images/zhu-g-schema1.png", "/images/zhu-g-schema3.png"]}
-      sections={sections}
-      formTitle="Оставить заявку"
-      formSubtitle="Тип объекта, требуемая производительность — мы подберём оптимальный жироуловитель."
+      heroImage="/images/vodoochistka-collage-hero.png"
+      stats={[
+        { value: "Жироуловители", label: "тип оборудования" },
+        { value: "PP / PE", label: "материалы" },
+        { value: "от 14 дней", label: "сроки" },
+        { value: "5 лет", label: "гарантия" },
+      ]}
+      seo={{
+        title: "Горизонтальные жироуловители",
+        description: "Горизонтальные жироуловители из ПП для общепита.",
+        keywords: "жироуловитель горизонтальный, СЗПК",
+      }}
     >
-      {/* Описание (slate-50) */}
-      <FullBleedSection id="opisanie" className="bg-slate-50 border-y border-slate-200 py-10 md:py-14">
-        <h2 className="text-xl font-bold text-slate-900 mb-3 tracking-tight">Описание</h2>
-        <div className="text-sm text-slate-600 leading-relaxed space-y-3">
-          <p>Подземный горизонтальный жироуловитель представляет собой цилиндрическую пластиковую ёмкость, внутри которой оборудованы две камеры. Сверху жироуловитель закрывается крышкой. Сточная вода через входной патрубок поступает в 1-й отсек, выполняющий роль отстойника ила, где происходит отделение крупного мусора и тяжёлых загрязнений, оседающих на дне.</p>
-          <p>Далее вода поступает во 2-й отсек, выполняющий функцию жироуловителя, в котором происходит окончательное отделение жиров. Очищенная вода через распределительный карман поступает в отводящий патрубок и отводится в канализационную сеть.</p>
-          <p>Изготовление в стандартном варианте с диаметром патрубков 110, 160 или 200 мм, а также по проекту заказчика. В комплекте — колодец высотой 500 мм и диаметром 700 мм. Монтаж на бетонное основание H-200 мм с обсыпкой пескоцементной смесью 1:10, слоем не менее 200 мм.</p>
-        </div>
-      </FullBleedSection>
+      <SpecTable
+        title="Модельный ряд"
+        subtitle="Горизонтальные жироуловители производительностью от 1 до 25 л/с"
+        headers={tableHeaders}
+        rows={tableRows}
+        caption="Возможно изготовление по индивидуальным размерам."
+      />
 
-      {/* MidPageCTA */}
-      <MidPageCTA text="Нужна консультация по подбору горизонтального жироуловителя?" />
+      <FeatureChecklist
+        title="Дополнительное оборудование"
+        items={optionsList}
+        columns={1}
+      />
 
-      {/* Модельный ряд (white) */}
-      <FullBleedSection id="modeli" className="bg-white py-10 md:py-14" wide>
-        <h2 className="text-xl font-bold text-slate-900 mb-4 tracking-tight">Модельный ряд</h2>
-        <div className="rounded-lg border border-slate-200 overflow-auto mb-4">
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead className="text-xs">Артикул</TableHead>
-                <TableHead className="text-xs">Модель</TableHead>
-                <TableHead className="text-xs text-right">Произв., л/с</TableHead>
-                <TableHead className="text-xs text-right">Пик. сброс, л</TableHead>
-                <TableHead className="text-xs text-right">Габариты, мм</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {models.map((m, i) => (
-                <TableRow
-                  key={m.article}
-                  className={`cursor-pointer hover:bg-amber-50 transition-colors ${i % 2 === 1 ? "bg-muted/50" : ""}`}
-                  onClick={() => navigate(`/product/${encodeURIComponent(m.article)}`)}
-                >
-                  <TableCell className="text-xs font-mono font-medium text-amber-600 underline">{m.article}</TableCell>
-                  <TableCell className="text-xs font-medium">{m.name}</TableCell>
-                  <TableCell className="text-xs text-right">{m.throughput}</TableCell>
-                  <TableCell className="text-xs text-right">{m.peakDischarge}</TableCell>
-                  <TableCell className="text-xs text-right">{m.dimensions}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </div>
-        <p className="text-xs text-slate-500">Возможно изготовление по индивидуальным размерам.</p>
-      </FullBleedSection>
-
-      {/* Опции (slate-50) */}
-      <FullBleedSection id="opcii" className="bg-slate-50 border-y border-slate-200 py-10 md:py-14">
-        <h2 className="text-xl font-bold text-slate-900 mb-4 tracking-tight">Дополнительное оборудование</h2>
-        <ul className="space-y-1.5">
-          {optionsList.map((item, i) => (
-            <li key={i} className="flex items-start gap-2 text-sm text-slate-600">
-              <Check className="h-3.5 w-3.5 text-amber-500 shrink-0 mt-0.5" />
-              <span>{item}</span>
-            </li>
-          ))}
-        </ul>
-      </FullBleedSection>
-    </CatalogPageShell>
+      <FAQSection items={faqItems} />
+    </CorporatePageShell>
   );
 };
 
