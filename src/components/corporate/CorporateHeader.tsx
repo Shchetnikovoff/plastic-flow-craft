@@ -2,7 +2,14 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
-import { Menu, ChevronDown, Phone } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import {
+  DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Menu, ChevronDown, Phone, ShoppingCart, FileText } from "lucide-react";
+import { useCart } from "@/contexts/CartContext";
+import { generateLetterhead } from "@/lib/generateLetterhead";
+import { generateLetterheadPdf } from "@/lib/generateLetterheadPdf";
 
 const navItems = [
   { name: "Ёмкости", href: "/catalog/emkosti", hasSub: true, sub: [
@@ -33,6 +40,29 @@ const navItems = [
   { name: "Главная", href: "/" },
   { name: "О компании", href: "/about" },
 ];
+
+function CartButton() {
+  try {
+    const { totalItems } = useCart();
+    return (
+      <Button variant="ghost" size="icon" className="h-8 w-8 text-slate-400 hover:text-white hover:bg-slate-800 relative">
+        <ShoppingCart className="h-4 w-4" />
+        {totalItems > 0 && (
+          <Badge className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-amber-500 text-slate-900 p-0 text-[9px] font-bold">
+            {totalItems}
+          </Badge>
+        )}
+      </Button>
+    );
+  } catch {
+    // No CartProvider — render disabled button
+    return (
+      <Button variant="ghost" size="icon" className="h-8 w-8 text-slate-600 cursor-default">
+        <ShoppingCart className="h-4 w-4" />
+      </Button>
+    );
+  }
+}
 
 function NavDropdown({ item }: { item: typeof navItems[number] }) {
   const [open, setOpen] = useState(false);
@@ -95,8 +125,28 @@ export default function CorporateHeader() {
         </nav>
 
         {/* Right side */}
-        <div className="flex items-center gap-3 shrink-0">
-          <a href="tel:+78122426006" className="hidden md:flex items-center gap-1.5 text-xs text-slate-400 hover:text-white transition-colors">
+        <div className="flex items-center gap-2 shrink-0">
+          {/* Скачать бланк КП */}
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" size="icon" className="h-8 w-8 text-slate-400 hover:text-white hover:bg-slate-800" title="Скачать бланк КП">
+                <FileText className="h-4 w-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="bg-slate-800 border-slate-700">
+              <DropdownMenuItem onClick={() => generateLetterhead()} className="text-slate-200 hover:bg-slate-700 hover:text-white cursor-pointer">
+                Скачать Word (.docx)
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => generateLetterheadPdf()} className="text-slate-200 hover:bg-slate-700 hover:text-white cursor-pointer">
+                Скачать PDF (.pdf)
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+
+          {/* Корзина */}
+          <CartButton />
+
+          <a href="tel:+78122426006" className="hidden md:flex items-center gap-1.5 text-xs text-slate-400 hover:text-white transition-colors ml-1">
             <Phone className="h-3 w-3" />
             +7 (812) 242-60-06
           </a>
