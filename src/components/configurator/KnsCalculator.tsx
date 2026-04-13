@@ -102,6 +102,7 @@ const KnsCalculator = () => {
   const [inletPipe, setInletPipe] = useState<PipelineParams>({ ...defaultPipeline });
   const [outletPipe, setOutletPipe] = useState<PipelineParams>({ ...defaultPipeline });
   const [contact, setContact] = useState({ company: "", person: "", phone: "", email: "", address: "" });
+  const [contactErrors, setContactErrors] = useState<Record<string, string>>({});
 
   const allProducts = useMemo(() => [
     ...knsSvtProducts.map((p) => ({ ...p, mat: "pe" as KnsMaterial })),
@@ -137,6 +138,14 @@ const KnsCalculator = () => {
 
   const handleDownloadPdf = async () => {
     if (!recommended) return;
+    const errors: Record<string, string> = {};
+    if (!contact.person.trim()) errors.person = "Укажите контактное лицо";
+    if (!contact.phone.trim()) errors.phone = "Укажите телефон";
+    setContactErrors(errors);
+    if (Object.keys(errors).length > 0) {
+      toast.error("Заполните обязательные поля");
+      return;
+    }
     try {
       await generateKnsOprosnyList({
         wastewaterType: wastewaterLabel,
@@ -311,12 +320,14 @@ const KnsCalculator = () => {
                 <Input value={contact.company} onChange={(e) => setContact((p) => ({ ...p, company: e.target.value }))} placeholder="ООО «Название»" maxLength={200} className="h-8 text-xs" />
               </div>
               <div className="space-y-1">
-                <Label className="text-[11px] text-muted-foreground">Контактное лицо</Label>
-                <Input value={contact.person} onChange={(e) => setContact((p) => ({ ...p, person: e.target.value }))} placeholder="Ф.И.О." maxLength={100} className="h-8 text-xs" />
+                <Label className="text-[11px] text-muted-foreground">Контактное лицо *</Label>
+                <Input value={contact.person} onChange={(e) => { setContact((p) => ({ ...p, person: e.target.value })); setContactErrors((p) => ({ ...p, person: "" })); }} placeholder="Ф.И.О." maxLength={100} className={`h-8 text-xs ${contactErrors.person ? "border-destructive" : ""}`} />
+                {contactErrors.person && <span className="text-[10px] text-destructive">{contactErrors.person}</span>}
               </div>
               <div className="space-y-1">
-                <Label className="text-[11px] text-muted-foreground">Телефон</Label>
-                <Input value={contact.phone} onChange={(e) => setContact((p) => ({ ...p, phone: e.target.value }))} placeholder="+7 (___) ___-__-__" maxLength={20} className="h-8 text-xs" />
+                <Label className="text-[11px] text-muted-foreground">Телефон *</Label>
+                <Input value={contact.phone} onChange={(e) => { setContact((p) => ({ ...p, phone: e.target.value })); setContactErrors((p) => ({ ...p, phone: "" })); }} placeholder="+7 (___) ___-__-__" maxLength={20} className={`h-8 text-xs ${contactErrors.phone ? "border-destructive" : ""}`} />
+                {contactErrors.phone && <span className="text-[10px] text-destructive">{contactErrors.phone}</span>}
               </div>
               <div className="space-y-1">
                 <Label className="text-[11px] text-muted-foreground">E-mail</Label>
