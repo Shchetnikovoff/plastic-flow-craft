@@ -767,7 +767,7 @@ const ProductDetailContent = () => {
               <FileDown className="h-4 w-4" />
               Скачать спецификацию (PDF)
             </Button>
-            <Button variant="outline" className="gap-2 w-full mt-2" onClick={async () => { await generateLetterheadPdf({ model: emkost.title, article, specs: [["Объём", `${emkost.volume.toLocaleString()} л`], ...(emkost.diameter > 0 ? [["Диаметр (D)", `${emkost.diameter.toLocaleString()} мм`] as [string,string]] : []), [emkost.heightLabel, `${emkost.heightOrLength.toLocaleString()} мм`], ["Материал", emkost.materialName]] }); toast.success("Коммерческое предложение скачано"); }}>
+            <Button variant="outline" className="gap-2 w-full mt-2" onClick={() => openKpDialog({ model: emkost.title, article, specs: [["Объём", `${emkost.volume.toLocaleString()} л`], ...(emkost.diameter > 0 ? [["Диаметр (D)", `${emkost.diameter.toLocaleString()} мм`] as [string,string]] : []), [emkost.heightLabel, `${emkost.heightOrLength.toLocaleString()} мм`], ["Материал", emkost.materialName]] })}>
               <FileDown className="h-4 w-4" />
               Скачать коммерческое предложение (PDF)
             </Button>
