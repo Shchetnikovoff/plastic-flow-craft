@@ -329,12 +329,18 @@ const KnsCalculator = () => {
                       </p>
                     )}
                   </div>
-                  <Button asChild size="sm" className="gap-1.5">
-                    <Link to={`/product/${encodeURIComponent(recommended.article)}`}>
-                      Перейти к товару
-                      <ArrowRight className="h-4 w-4" />
-                    </Link>
-                  </Button>
+                  <div className="flex flex-wrap gap-2">
+                    <Button asChild size="sm" className="gap-1.5">
+                      <Link to={`/product/${encodeURIComponent(recommended.article)}`}>
+                        Перейти к товару
+                        <ArrowRight className="h-4 w-4" />
+                      </Link>
+                    </Button>
+                    <Button size="sm" variant="outline" className="gap-1.5" onClick={handleDownloadPdf}>
+                      <Download className="h-4 w-4" />
+                      Скачать опросный лист (PDF)
+                    </Button>
+                  </div>
                 </div>
               </div>
             </div>
