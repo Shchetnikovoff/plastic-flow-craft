@@ -782,6 +782,46 @@ const ProductDetailContent = () => {
         toast.success(`${knsPpItem.model} (${qty} шт.) добавлен в корзину`);
       };
 
+      const handleKnsPpSpecPdf = async () => {
+        const errors = validateContactForm(contactData);
+        setContactErrors(errors);
+        if (Object.keys(errors).length > 0) return;
+
+        await generateSpecPdf(
+          {
+            article,
+            diameter: knsPpItem.diameter,
+            wallThickness: 0,
+            socketThickness: 0,
+            availableLength: null,
+            connectionName: "",
+            materialName: knsPpItem.material,
+            extraRows: [
+              ["Модель", knsPpItem.model],
+              ["Диаметр корпуса", `${knsPpItem.diameter} мм`],
+              ["Высота", `${knsPpItem.height} мм`],
+              ["Производительность (Q)", `${knsPpItem.flow} м³/ч`],
+              ["Напор (H)", `${knsPpItem.head} м`],
+              ["Макс. расход (Qmax)", `${knsPpItem.maxFlow} м³/ч`],
+              ["Макс. напор (Hmax)", `${knsPpItem.maxHead} м`],
+              ["Кол-во насосов", `${knsPpItem.pumpCount} шт.`],
+              ["Мощность насосов", `${knsPpItem.pumpPower} кВт`],
+              ["Материал корпуса", knsPpItem.material],
+            ],
+          },
+          contactData
+        );
+        toast.success("PDF-спецификация скачана");
+        setPdfDialogOpen(false);
+      };
+
+      const handleKnsPpContactChange = (field: keyof ContactFormData, value: string) => {
+        setContactData((prev) => ({ ...prev, [field]: value }));
+        if (contactErrors[field]) {
+          setContactErrors((prev) => ({ ...prev, [field]: undefined }));
+        }
+      };
+
       return (
         <main className="mx-auto max-w-[960px] px-4 sm:px-6 py-6 sm:py-8">
           <Breadcrumb className="mb-6">
