@@ -245,6 +245,15 @@ const KnsCalculator = () => {
             </div>
           </div>
 
+          {/* Pipeline parameters */}
+          <div>
+            <span className="text-sm font-semibold text-foreground mb-3 block">Параметры трубопроводов</span>
+            <div className="space-y-3">
+              <PipelineSection title="Подводящий трубопровод" value={inletPipe} onChange={setInletPipe} />
+              <PipelineSection title="Напорный трубопровод" value={outletPipe} onChange={setOutletPipe} />
+            </div>
+          </div>
+
           {/* Additional equipment */}
           <div>
             <span className="text-sm font-semibold text-foreground mb-3 block">Дополнительное оборудование</span>
