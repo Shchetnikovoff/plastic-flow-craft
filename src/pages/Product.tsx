@@ -1008,7 +1008,8 @@ const ProductDetailContent = () => {
               <Button variant="secondary" className="gap-2 w-full mt-2" onClick={() => { addToKp({ model: knsSvtItem.model, article: knsSvtItem.article, specs: [["Диаметр корпуса", `${knsSvtItem.diameter} мм`], ["Высота", `${knsSvtItem.height} мм`], ["Производительность (Q)", `${knsSvtItem.flow} м³/ч`], ["Напор (H)", `${knsSvtItem.head} м`], ["Макс. расход (Qmax)", `${knsSvtItem.maxFlow} м³/ч`], ["Макс. напор (Hmax)", `${knsSvtItem.maxHead} м`], ["Кол-во насосов", `${knsSvtItem.pumpCount} шт.`], ["Мощность насосов", `${knsSvtItem.pumpPower} кВт`], ["Материал корпуса", knsSvtItem.material]] }); toast.success("Добавлено в КП"); }}>
                 <ClipboardList className="h-4 w-4" />
                 Добавить в КП
-          </div>
+              </Button>
+            </div>
 
           <Dialog open={pdfDialogOpen} onOpenChange={setPdfDialogOpen}>
             <DialogContent className="max-w-md">
