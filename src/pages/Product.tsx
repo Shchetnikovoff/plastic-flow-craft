@@ -944,7 +944,17 @@ const ProductDetailContent = () => {
               <h1 className="text-xl sm:text-2xl font-bold text-foreground mb-1">
                 {knsSvtItem.model}
               </h1>
-              <p className="font-mono text-sm text-muted-foreground mb-4">{knsSvtItem.article}</p>
+              <p className="font-mono text-sm text-muted-foreground mb-2">{knsSvtItem.article}</p>
+
+              <ArticleBreakdown
+                exampleArticle={knsSvtItem.article}
+                segments={[
+                  { value: "СЗПК", label: "Компания", desc: "ООО СЗПК «Пласт-Металл Про»" },
+                  { value: "КНС", label: "Тип изделия", desc: "Канализационная насосная станция" },
+                  { value: "ПЭ", label: "Материал", desc: "Полиэтилен" },
+                  { value: `${knsSvtItem.flow}-${knsSvtItem.head}`, label: "Q-H", desc: `Произв. ${knsSvtItem.flow} м³/ч, напор ${knsSvtItem.head} м` },
+                ]}
+              />
 
               <p className="text-sm text-muted-foreground mb-6">
                 Канализационная насосная станция в корпусе из полиэтилена. Производительность {knsSvtItem.flow} м³/ч, напор {knsSvtItem.head} м. Корпус устойчив к коррозии, срок службы от 30 лет.
@@ -1117,7 +1127,17 @@ const ProductDetailContent = () => {
               <h1 className="text-xl sm:text-2xl font-bold text-foreground mb-1">
                 {knsPpItem.model}
               </h1>
-              <p className="font-mono text-sm text-muted-foreground mb-4">{knsPpItem.article}</p>
+              <p className="font-mono text-sm text-muted-foreground mb-2">{knsPpItem.article}</p>
+
+              <ArticleBreakdown
+                exampleArticle={knsPpItem.article}
+                segments={[
+                  { value: "СЗПК", label: "Компания", desc: "ООО СЗПК «Пласт-Металл Про»" },
+                  { value: "КНС", label: "Тип изделия", desc: "Канализационная насосная станция" },
+                  { value: "ПП", label: "Материал", desc: "Полипропилен" },
+                  { value: `${knsPpItem.flow}-${knsPpItem.head}`, label: "Q-H", desc: `Произв. ${knsPpItem.flow} м³/ч, напор ${knsPpItem.head} м` },
+                ]}
+              />
 
               <p className="text-sm text-muted-foreground mb-6">
                 Канализационная насосная станция в корпусе из полипропилена. Производительность {knsPpItem.flow} м³/ч, напор {knsPpItem.head} м. Корпус химически стоек к кислотам и щелочам, срок службы от 25 лет.
