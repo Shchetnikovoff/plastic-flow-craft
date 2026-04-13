@@ -24,11 +24,13 @@ export async function generateLetterheadPdf(
   const margin = 20;
   const contentW = pw - margin * 2;
 
-  // Load logo
+  // Load images
   let logoData: string | null = null;
-  try {
-    logoData = await loadImageAsBase64("/images/logo.png");
-  } catch { /* skip */ }
+  let stampData: string | null = null;
+  let signatureData: string | null = null;
+  try { logoData = await loadImageAsBase64("/images/logo.png"); } catch { /* skip */ }
+  try { stampData = await loadImageAsBase64("/images/stamp.png"); } catch { /* skip */ }
+  try { signatureData = await loadImageAsBase64("/images/signature.png"); } catch { /* skip */ }
 
   // Helper: ensure space, add page if needed
   const ensureSpace = (needed: number) => {
@@ -308,10 +310,10 @@ export async function generateLetterheadPdf(
     }
   }
 
-  // === Signature ===
-  // Place signature at bottom or after content, whichever is lower
-  const sigY = Math.max(y + 15, ph - 55);
-  if (sigY > ph - 30) {
+  // === Signature block ===
+  const sigBlockH = 45;
+  const sigY = Math.max(y + 15, ph - 65);
+  if (sigY + sigBlockH > ph - 20) {
     doc.addPage();
     y = 30;
   } else {
@@ -324,9 +326,23 @@ export async function generateLetterheadPdf(
   doc.text("С уважением,", margin, y);
   y += 7;
   doc.text("Директор ООО СЗПК «Пласт-Металл Про»", margin, y);
-  y += 10;
-  doc.setTextColor(153);
-  doc.text("_________________ / _________________ /", margin, y);
+  y += 5;
+
+  // Signature image
+  if (signatureData) {
+    doc.addImage(signatureData, "PNG", margin + 2, y - 2, 35, 17);
+  }
+
+  // Stamp image (overlapping signature area for realism)
+  if (stampData) {
+    doc.addImage(stampData, "PNG", margin + 55, y - 12, 30, 30);
+  }
+
+  y += 18;
+  doc.setTextColor(51);
+  doc.setFontSize(10);
+  doc.setFont("PTSans", "normal");
+  doc.text("_________________ / И.А. Попов /", margin, y);
 
   // === FOOTER (on every page) ===
   const totalPages = doc.getNumberOfPages();
