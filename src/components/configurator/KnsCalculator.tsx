@@ -102,6 +102,7 @@ const KnsCalculator = () => {
   const [inletPipe, setInletPipe] = useState<PipelineParams>({ ...defaultPipeline });
   const [outletPipe, setOutletPipe] = useState<PipelineParams>({ ...defaultPipeline });
   const [contact, setContact] = useState({ company: "", person: "", phone: "", email: "", address: "" });
+  const [contactErrors, setContactErrors] = useState<Record<string, string>>({});
 
   const allProducts = useMemo(() => [
     ...knsSvtProducts.map((p) => ({ ...p, mat: "pe" as KnsMaterial })),
@@ -137,6 +138,14 @@ const KnsCalculator = () => {
 
   const handleDownloadPdf = async () => {
     if (!recommended) return;
+    const errors: Record<string, string> = {};
+    if (!contact.person.trim()) errors.person = "Укажите контактное лицо";
+    if (!contact.phone.trim()) errors.phone = "Укажите телефон";
+    setContactErrors(errors);
+    if (Object.keys(errors).length > 0) {
+      toast.error("Заполните обязательные поля");
+      return;
+    }
     try {
       await generateKnsOprosnyList({
         wastewaterType: wastewaterLabel,
