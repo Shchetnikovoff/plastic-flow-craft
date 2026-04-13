@@ -30,6 +30,7 @@ import ContactFormFields, { type ContactFormData, type ContactFormErrors, valida
 import { generateSpecPdf } from "@/lib/generateSpecPdf";
 import { generateLetterheadPdf, type LetterheadProductData } from "@/lib/generateLetterheadPdf";
 import DimensionOverlay from "@/components/DimensionOverlay";
+import KpSheet from "@/components/KpSheet";
 
 /** Image lookup map for tank type + color */
 const tankImageMap: Record<string, Record<string, string>> = {
