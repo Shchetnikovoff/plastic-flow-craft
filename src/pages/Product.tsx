@@ -907,7 +907,30 @@ const ProductDetailContent = () => {
                   В корзину
                 </Button>
               </div>
+
+              <Button variant="outline" className="gap-2 w-full mt-3" onClick={() => setPdfDialogOpen(true)}>
+                <FileDown className="h-4 w-4" />
+                Скачать спецификацию (PDF)
+              </Button>
             </div>
+          </div>
+
+          <Dialog open={pdfDialogOpen} onOpenChange={setPdfDialogOpen}>
+            <DialogContent className="max-w-md">
+              <DialogHeader>
+                <DialogTitle>Скачать спецификацию</DialogTitle>
+                <DialogDescription>
+                  Заполните контактные данные для скачивания PDF-спецификации
+                </DialogDescription>
+              </DialogHeader>
+              <ContactFormFields data={contactData} errors={contactErrors} onChange={handleKnsPpContactChange} />
+              <Button className="w-full gap-2 mt-2" onClick={handleKnsPpSpecPdf}>
+                <FileDown className="h-4 w-4" />
+                Скачать PDF
+              </Button>
+            </DialogContent>
+          </Dialog>
+        </main>
           </div>
         </main>
       );
