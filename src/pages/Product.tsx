@@ -1,6 +1,7 @@
 import { useState, useRef, useCallback } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { CartProvider, useCart } from "@/contexts/CartContext";
+import { KpProvider, useKp } from "@/contexts/KpContext";
 import Header from "@/components/Header";
 import CartSheet from "@/components/CartSheet";
 import { materials, materialSpecs, connectionTypes, baseSizes, type ConnectionType, type MaterialColor } from "@/data/products";
@@ -21,7 +22,7 @@ import { knsSvtProducts } from "@/data/knsSvtProducts";
 import ArticleBreakdown, { type ArticleSegment } from "@/components/configurator/ArticleBreakdown";
 import ImageGalleryWithLightbox from "@/components/configurator/ImageGalleryWithLightbox";
 import { Button } from "@/components/ui/button";
-import { ShoppingCart, Plus, Minus, ChevronLeft, ChevronRight, FileDown } from "lucide-react";
+import { ShoppingCart, Plus, Minus, ChevronLeft, ChevronRight, FileDown, ClipboardList } from "lucide-react";
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { toast } from "sonner";
@@ -29,6 +30,7 @@ import ContactFormFields, { type ContactFormData, type ContactFormErrors, valida
 import { generateSpecPdf } from "@/lib/generateSpecPdf";
 import { generateLetterheadPdf, type LetterheadProductData } from "@/lib/generateLetterheadPdf";
 import DimensionOverlay from "@/components/DimensionOverlay";
+import KpSheet from "@/components/KpSheet";
 
 /** Image lookup map for tank type + color */
 const tankImageMap: Record<string, Record<string, string>> = {
@@ -512,6 +514,7 @@ function parseArticle(article: string) {
 const ProductDetailContent = () => {
   const { article } = useParams<{ article: string }>();
   const { addItem } = useCart();
+  const { addItem: addToKp } = useKp();
   const [qty, setQty] = useState(1);
   const [selectedImage, setSelectedImage] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
@@ -830,6 +833,10 @@ const ProductDetailContent = () => {
               <FileDown className="h-4 w-4" />
               Скачать коммерческое предложение (PDF)
             </Button>
+            <Button variant="secondary" className="gap-2 w-full mt-2" onClick={() => { addToKp({ model: emkost.title, article, specs: [["Объём", `${emkost.volume.toLocaleString()} л`], ...(emkost.diameter > 0 ? [["Диаметр (D)", `${emkost.diameter.toLocaleString()} мм`] as [string,string]] : []), [emkost.heightLabel, `${emkost.heightOrLength.toLocaleString()} мм`], ["Материал", emkost.materialName]] }); toast.success("Добавлено в КП"); }}>
+              <ClipboardList className="h-4 w-4" />
+              Добавить в КП
+            </Button>
           </div>
         </div>
 
@@ -998,6 +1005,10 @@ const ProductDetailContent = () => {
                 <FileDown className="h-4 w-4" />
                 Скачать коммерческое предложение (PDF)
               </Button>
+              <Button variant="secondary" className="gap-2 w-full mt-2" onClick={() => { addToKp({ model: knsSvtItem.model, article: knsSvtItem.article, specs: [["Диаметр корпуса", `${knsSvtItem.diameter} мм`], ["Высота", `${knsSvtItem.height} мм`], ["Производительность (Q)", `${knsSvtItem.flow} м³/ч`], ["Напор (H)", `${knsSvtItem.head} м`], ["Макс. расход (Qmax)", `${knsSvtItem.maxFlow} м³/ч`], ["Макс. напор (Hmax)", `${knsSvtItem.maxHead} м`], ["Кол-во насосов", `${knsSvtItem.pumpCount} шт.`], ["Мощность насосов", `${knsSvtItem.pumpPower} кВт`], ["Материал корпуса", knsSvtItem.material]] }); toast.success("Добавлено в КП"); }}>
+                <ClipboardList className="h-4 w-4" />
+                Добавить в КП
+              </Button>
             </div>
           </div>
 
@@ -1165,6 +1176,10 @@ const ProductDetailContent = () => {
               <Button variant="outline" className="gap-2 w-full mt-2" onClick={() => openKpDialog({ model: knsPpItem.model, article: knsPpItem.article, specs: [["Диаметр корпуса", `${knsPpItem.diameter} мм`], ["Высота", `${knsPpItem.height} мм`], ["Производительность (Q)", `${knsPpItem.flow} м³/ч`], ["Напор (H)", `${knsPpItem.head} м`], ["Макс. расход (Qmax)", `${knsPpItem.maxFlow} м³/ч`], ["Макс. напор (Hmax)", `${knsPpItem.maxHead} м`], ["Кол-во насосов", `${knsPpItem.pumpCount} шт.`], ["Мощность насосов", `${knsPpItem.pumpPower} кВт`], ["Материал корпуса", knsPpItem.material]] })}>
                 <FileDown className="h-4 w-4" />
                 Скачать коммерческое предложение (PDF)
+              </Button>
+              <Button variant="secondary" className="gap-2 w-full mt-2" onClick={() => { addToKp({ model: knsPpItem.model, article: knsPpItem.article, specs: [["Диаметр корпуса", `${knsPpItem.diameter} мм`], ["Высота", `${knsPpItem.height} мм`], ["Производительность (Q)", `${knsPpItem.flow} м³/ч`], ["Напор (H)", `${knsPpItem.head} м`], ["Макс. расход (Qmax)", `${knsPpItem.maxFlow} м³/ч`], ["Макс. напор (Hmax)", `${knsPpItem.maxHead} м`], ["Кол-во насосов", `${knsPpItem.pumpCount} шт.`], ["Мощность насосов", `${knsPpItem.pumpPower} кВт`], ["Материал корпуса", knsPpItem.material]] }); toast.success("Добавлено в КП"); }}>
+                <ClipboardList className="h-4 w-4" />
+                Добавить в КП
               </Button>
             </div>
           </div>
@@ -1379,6 +1394,10 @@ const ProductDetailContent = () => {
             <Button variant="outline" className="gap-2 w-full mt-2" onClick={handleFfuKpPdf}>
               <FileDown className="h-4 w-4" />
               Скачать коммерческое предложение (PDF)
+            </Button>
+            <Button variant="secondary" className="gap-2 w-full mt-2" onClick={() => { addToKp({ model: `ФФУ ${ffuModel.name}`, article: ffuModel.article, specs: [["Производительность", `${ffuModel.capacity} м³/ч`], ["Мощность", `${ffuModel.power} кВт`], ["Габариты", `${ffuModel.dimensions} мм`]] }); toast.success("Добавлено в КП"); }}>
+              <ClipboardList className="h-4 w-4" />
+              Добавить в КП
             </Button>
           </div>
         </div>
@@ -2585,14 +2604,18 @@ const ProductDetailContent = () => {
 
 const Product = () => {
   const [cartOpen, setCartOpen] = useState(false);
+  const [kpOpen, setKpOpen] = useState(false);
 
   return (
     <CartProvider>
-      <div className="min-h-screen bg-background">
-        <Header onCartOpen={() => setCartOpen(true)} />
-        <ProductDetailContent />
-        <CartSheet open={cartOpen} onOpenChange={setCartOpen} />
-      </div>
+      <KpProvider>
+        <div className="min-h-screen bg-background">
+          <Header onCartOpen={() => setCartOpen(true)} onKpOpen={() => setKpOpen(true)} />
+          <ProductDetailContent />
+          <CartSheet open={cartOpen} onOpenChange={setCartOpen} />
+          <KpSheet open={kpOpen} onOpenChange={setKpOpen} />
+        </div>
+      </KpProvider>
     </CartProvider>
   );
 };
