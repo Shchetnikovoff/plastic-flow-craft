@@ -5,6 +5,7 @@ import CartSheet from "@/components/CartSheet";
 import { CartProvider } from "@/contexts/CartContext";
 import { findCategory } from "@/data/catalog";
 import { Check, Wrench, ShieldCheck, Clock, Truck, FlaskConical, ImageOff, Droplets, Factory, Settings, Shield } from "lucide-react";
+import KnsCalculator from "@/components/configurator/KnsCalculator";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -76,6 +77,7 @@ const Inner = () => {
           </div>
         </section>
 
+        <KnsCalculator />
 
         <nav className="mb-8 flex flex-wrap gap-2">
           {[
