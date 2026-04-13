@@ -1395,6 +1395,10 @@ const ProductDetailContent = () => {
               <FileDown className="h-4 w-4" />
               Скачать коммерческое предложение (PDF)
             </Button>
+            <Button variant="secondary" className="gap-2 w-full mt-2" onClick={() => { addToKp({ model: `ФФУ ${ffuModel.name}`, article: ffuModel.article, specs: [["Производительность", `${ffuModel.capacity} м³/ч`], ["Мощность", `${ffuModel.power} кВт`], ["Габариты", `${ffuModel.dimensions} мм`]] }); toast.success("Добавлено в КП"); }}>
+              <ClipboardList className="h-4 w-4" />
+              Добавить в КП
+            </Button>
           </div>
         </div>
 
