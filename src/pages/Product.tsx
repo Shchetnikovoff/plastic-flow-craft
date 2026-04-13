@@ -839,7 +839,7 @@ const ProductDetailContent = () => {
           <div className="grid gap-8 md:grid-cols-2">
             <div>
               <div className="aspect-[4/3] overflow-hidden rounded-lg border bg-card">
-                <img src="/images/kns-pp-cutaway-v2.jpg" alt={`${knsPpItem.model} — КНС из полипропилена`} className="h-full w-full object-contain p-4" />
+                <img src="/images/kns-pp-cutaway-v3.jpg" alt={`${knsPpItem.model} — КНС из полипропилена`} className="h-full w-full object-contain p-4" />
               </div>
             </div>
 

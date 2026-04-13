@@ -66,7 +66,7 @@ const KnsPpPage = () => {
           </p>
           <Button onClick={scrollToForm}>Получить расчёт стоимости</Button>
           <div className="mt-6 rounded-lg border border-border overflow-hidden bg-card">
-             <img src="/images/kns-pp-cutaway-v2.jpg" alt="КНС в корпусе из полипропилена — разрез" className="w-full object-contain" />
+             <img src="/images/kns-pp-cutaway-v3.jpg" alt="КНС в корпусе из полипропилена — разрез" className="w-full object-contain" />
           </div>
         </section>
 
