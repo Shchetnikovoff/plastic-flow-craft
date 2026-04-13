@@ -85,7 +85,6 @@ const KnsPpPage = () => {
                   <TableHead className="text-xs text-center">Hmax</TableHead>
                   <TableHead className="text-xs text-center">Насосы</TableHead>
                   <TableHead className="text-xs text-center">P, кВт</TableHead>
-                  <TableHead className="text-xs text-right">Цена, ₽</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -100,7 +99,6 @@ const KnsPpPage = () => {
                     <TableCell className="text-sm text-center">{p.maxHead}</TableCell>
                     <TableCell className="text-sm text-center">{p.pumpCount}</TableCell>
                     <TableCell className="text-sm text-center">{p.pumpPower}</TableCell>
-                    <TableCell className="text-sm text-right whitespace-nowrap">{p.price.toLocaleString("ru-RU")}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
