@@ -5,6 +5,8 @@ import { Slider } from "@/components/ui/slider";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { ArrowRight, Droplets, Factory, CloudRain, FlaskConical } from "lucide-react";
 import ArticleBreakdown, { type ArticleSegment } from "./ArticleBreakdown";
 import { knsSvtProducts } from "@/data/knsSvtProducts";
@@ -12,6 +14,16 @@ import { knsPpProducts } from "@/data/knsPpProducts";
 
 type WastewaterType = "domestic" | "industrial" | "stormwater" | "other";
 type KnsMaterial = "pe" | "pp";
+
+interface PipelineParams {
+  count: string;
+  diameter: string;
+  material: string;
+  depth: string;
+}
+
+const defaultPipeline: PipelineParams = { count: "1", diameter: "", material: "", depth: "" };
+const pipeMaterials = ["ПВХ", "ПЭ", "ПП", "Чугун", "Сталь"];
 
 const wastewaterOptions: { id: WastewaterType; label: string; icon: React.ElementType }[] = [
   { id: "domestic", label: "Хоз.-бытовые", icon: Droplets },
@@ -34,6 +46,50 @@ const equipmentOptions = [
   { id: "insulation", label: "Утепление корпуса КНС" },
 ];
 
+const PipelineSection = ({ title, value, onChange }: { title: string; value: PipelineParams; onChange: (v: PipelineParams) => void }) => (
+  <div className="rounded-lg border border-border bg-muted/30 p-3 space-y-2">
+    <span className="text-xs font-semibold text-foreground uppercase tracking-wide">{title}</span>
+    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+      <div className="space-y-1">
+        <Label className="text-[11px] text-muted-foreground">Кол-во, шт.</Label>
+        <Input
+          type="number" min={1} max={4}
+          value={value.count}
+          onChange={(e) => onChange({ ...value, count: e.target.value })}
+          className="h-8 text-xs"
+        />
+      </div>
+      <div className="space-y-1">
+        <Label className="text-[11px] text-muted-foreground">Диаметр, мм</Label>
+        <Input
+          type="number" min={50} max={1000} placeholder="110"
+          value={value.diameter}
+          onChange={(e) => onChange({ ...value, diameter: e.target.value })}
+          className="h-8 text-xs"
+        />
+      </div>
+      <div className="space-y-1">
+        <Label className="text-[11px] text-muted-foreground">Материал</Label>
+        <Select value={value.material} onValueChange={(v) => onChange({ ...value, material: v })}>
+          <SelectTrigger className="h-8 text-xs"><SelectValue placeholder="Выбрать" /></SelectTrigger>
+          <SelectContent>
+            {pipeMaterials.map((m) => <SelectItem key={m} value={m} className="text-xs">{m}</SelectItem>)}
+          </SelectContent>
+        </Select>
+      </div>
+      <div className="space-y-1">
+        <Label className="text-[11px] text-muted-foreground">Глубина залож., м</Label>
+        <Input
+          type="number" min={0} max={20} step={0.1} placeholder="1.5"
+          value={value.depth}
+          onChange={(e) => onChange({ ...value, depth: e.target.value })}
+          className="h-8 text-xs"
+        />
+      </div>
+    </div>
+  </div>
+);
+
 const KnsCalculator = () => {
   const [wastewaterType, setWastewaterType] = useState<WastewaterType>("domestic");
   const [material, setMaterial] = useState<KnsMaterial>("pp");
@@ -41,6 +97,8 @@ const KnsCalculator = () => {
   const [head, setHead] = useState(15);
   const [pumpCount, setPumpCount] = useState(2);
   const [equipment, setEquipment] = useState<Record<string, boolean>>({});
+  const [inletPipe, setInletPipe] = useState<PipelineParams>({ ...defaultPipeline });
+  const [outletPipe, setOutletPipe] = useState<PipelineParams>({ ...defaultPipeline });
 
   const allProducts = useMemo(() => [
     ...knsSvtProducts.map((p) => ({ ...p, mat: "pe" as KnsMaterial })),
@@ -187,6 +245,15 @@ const KnsCalculator = () => {
             </div>
           </div>
 
+          {/* Pipeline parameters */}
+          <div>
+            <span className="text-sm font-semibold text-foreground mb-3 block">Параметры трубопроводов</span>
+            <div className="space-y-3">
+              <PipelineSection title="Подводящий трубопровод" value={inletPipe} onChange={setInletPipe} />
+              <PipelineSection title="Напорный трубопровод" value={outletPipe} onChange={setOutletPipe} />
+            </div>
+          </div>
+
           {/* Additional equipment */}
           <div>
             <span className="text-sm font-semibold text-foreground mb-3 block">Дополнительное оборудование</span>
@@ -221,6 +288,12 @@ const KnsCalculator = () => {
                       · {recommended.pumpCount} насоса × {recommended.pumpPower} кВт
                       · {matLabel}
                     </p>
+                    {(inletPipe.diameter || outletPipe.diameter) && (
+                      <p className="text-xs text-muted-foreground mt-1">
+                        {inletPipe.diameter && <><span className="font-medium">Подвод:</span> Ø{inletPipe.diameter} мм{inletPipe.material && `, ${inletPipe.material}`}{inletPipe.depth && `, глуб. ${inletPipe.depth} м`} · </>}
+                        {outletPipe.diameter && <><span className="font-medium">Напор:</span> Ø{outletPipe.diameter} мм{outletPipe.material && `, ${outletPipe.material}`}{outletPipe.depth && `, глуб. ${outletPipe.depth} м`}</>}
+                      </p>
+                    )}
                     {selectedEquipmentList.length > 0 && (
                       <p className="text-xs text-muted-foreground mt-1">
                         <span className="font-medium">Доп. оборудование:</span> {selectedEquipmentList.join(", ")}
