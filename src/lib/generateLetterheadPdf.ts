@@ -10,12 +10,19 @@ export interface LetterheadProductData {
   pricePerUnit?: number;
 }
 
-export async function generateLetterheadPdf(product?: LetterheadProductData) {
+const fmt = (n: number) =>
+  n.toLocaleString("ru-RU", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+export async function generateLetterheadPdf(
+  product?: LetterheadProductData,
+  multiProducts?: LetterheadProductData[]
+) {
   const doc = new jsPDF({ orientation: "portrait", unit: "mm", format: "a4" });
   await registerCyrillicFont(doc);
   const pw = doc.internal.pageSize.getWidth();
   const ph = doc.internal.pageSize.getHeight();
   const margin = 20;
+  const contentW = pw - margin * 2;
 
   // Load logo
   let logoData: string | null = null;
@@ -23,19 +30,25 @@ export async function generateLetterheadPdf(product?: LetterheadProductData) {
     logoData = await loadImageAsBase64("/images/logo.png");
   } catch { /* skip */ }
 
+  // Helper: ensure space, add page if needed
+  const ensureSpace = (needed: number) => {
+    if (y + needed > ph - 60) {
+      doc.addPage();
+      y = 20;
+    }
+  };
+
   // === HEADER ===
   let y = 15;
   if (logoData) {
     doc.addImage(logoData, "PNG", margin, y - 8, 42, 20);
   }
 
-  // Company name
   doc.setFontSize(13);
   doc.setTextColor(30, 58, 95);
   doc.setFont("PTSans", "bold");
   doc.text("ООО СЗПК «Пласт-Металл Про»", margin + 46, y + 1);
 
-  // Contact info right-aligned
   doc.setFontSize(8);
   doc.setTextColor(102);
   doc.setFont("PTSans", "normal");
@@ -44,7 +57,6 @@ export async function generateLetterheadPdf(product?: LetterheadProductData) {
 
   y += 16;
 
-  // Blue separator line
   doc.setDrawColor(30, 58, 95);
   doc.setLineWidth(0.5);
   doc.line(margin, y, pw - margin, y);
@@ -96,10 +108,114 @@ export async function generateLetterheadPdf(product?: LetterheadProductData) {
   );
   y += 10;
 
-  if (product) {
-    // === Product info block ===
-    const contentW = pw - margin * 2;
+  // ===== MULTI-PRODUCT MODE =====
+  if (multiProducts && multiProducts.length > 0) {
+    const rowH = 7;
 
+    multiProducts.forEach((p, idx) => {
+      ensureSpace(30);
+
+      // Product number + title
+      doc.setFont("PTSans", "bold");
+      doc.setFontSize(11);
+      doc.setTextColor(30, 58, 95);
+      doc.text(`${idx + 1}. ${p.model}`, margin, y);
+      y += 6;
+
+      doc.setFont("PTSans", "normal");
+      doc.setFontSize(9);
+      doc.setTextColor(102);
+      doc.text(`Артикул: ${p.article}`, margin + 5, y);
+      y += 7;
+
+      // Mini specs table
+      const colLabel = contentW * 0.45;
+
+      doc.setFillColor(30, 58, 95);
+      doc.rect(margin, y, contentW, rowH, "F");
+      doc.setFont("PTSans", "bold");
+      doc.setFontSize(8);
+      doc.setTextColor(255);
+      doc.text("Характеристика", margin + 3, y + 5);
+      doc.text("Значение", margin + colLabel + 3, y + 5);
+      y += rowH;
+
+      doc.setFont("PTSans", "normal");
+      doc.setFontSize(8);
+
+      p.specs.forEach(([label, value], i) => {
+        ensureSpace(rowH);
+        if (i % 2 === 0) {
+          doc.setFillColor(245, 247, 250);
+          doc.rect(margin, y, contentW, rowH, "F");
+        }
+        doc.setDrawColor(220);
+        doc.setLineWidth(0.2);
+        doc.line(margin, y + rowH, margin + contentW, y + rowH);
+        doc.setTextColor(51);
+        doc.text(label, margin + 3, y + 5);
+        doc.setTextColor(30, 30, 30);
+        doc.text(value, margin + colLabel + 3, y + 5);
+        y += rowH;
+      });
+
+      y += 3;
+
+      // Quantity + price line
+      doc.setFontSize(9);
+      doc.setTextColor(51);
+      const qty = p.quantity ?? 0;
+      const price = p.pricePerUnit ?? 0;
+
+      const qtyText = qty > 0 ? `${qty} шт.` : "____ шт.";
+      const priceText = price > 0 ? `${fmt(price)} руб.` : "________ руб.";
+      const sumText = qty > 0 && price > 0 ? `${fmt(qty * price)} руб.` : "________ руб.";
+
+      doc.setFont("PTSans", "normal");
+      doc.text(`Кол-во: ${qtyText}    Цена: ${priceText}    Сумма: ${sumText}`, margin + 5, y);
+      y += 8;
+
+      // Separator between products
+      if (idx < multiProducts.length - 1) {
+        doc.setDrawColor(200);
+        doc.setLineWidth(0.3);
+        doc.line(margin, y, pw - margin, y);
+        y += 6;
+      }
+    });
+
+    // Grand total
+    y += 4;
+    ensureSpace(25);
+    const grandTotal = multiProducts.reduce((s, p) => s + (p.quantity ?? 0) * (p.pricePerUnit ?? 0), 0);
+
+    if (grandTotal > 0) {
+      doc.setDrawColor(30, 58, 95);
+      doc.setLineWidth(0.5);
+      doc.line(margin, y, pw - margin, y);
+      y += 7;
+
+      doc.setFont("PTSans", "bold");
+      doc.setFontSize(11);
+      doc.setTextColor(51);
+      doc.text(`Итого без НДС: ${fmt(grandTotal)} руб.`, margin, y);
+      y += 7;
+      doc.text(`Итого с НДС (20%): ${fmt(grandTotal * 1.2)} руб.`, margin, y);
+      y += 10;
+    }
+
+    // Terms
+    doc.setFont("PTSans", "normal");
+    doc.setFontSize(9);
+    doc.setTextColor(102);
+    doc.text("Срок изготовления: 10–25 рабочих дней с момента оплаты.", margin, y);
+    y += 5;
+    doc.text("Условия оплаты: 70% предоплата, 30% перед отгрузкой.", margin, y);
+    y += 5;
+    doc.text("Срок действия предложения: 30 календарных дней.", margin, y);
+
+  // ===== SINGLE PRODUCT MODE =====
+  } else if (product) {
     // Product model title
     doc.setFont("PTSans", "bold");
     doc.setFontSize(13);
@@ -107,7 +223,6 @@ export async function generateLetterheadPdf(product?: LetterheadProductData) {
     doc.text(product.model, margin, y);
     y += 7;
 
-    // Article
     doc.setFont("PTSans", "normal");
     doc.setFontSize(10);
     doc.setTextColor(102);
@@ -116,10 +231,8 @@ export async function generateLetterheadPdf(product?: LetterheadProductData) {
 
     // Specs table
     const colLabel = contentW * 0.45;
-    const colValue = contentW * 0.55;
     const rowH = 7;
 
-    // Table header
     doc.setFillColor(30, 58, 95);
     doc.rect(margin, y, contentW, rowH, "F");
     doc.setFont("PTSans", "bold");
@@ -133,28 +246,18 @@ export async function generateLetterheadPdf(product?: LetterheadProductData) {
     doc.setFontSize(9);
 
     product.specs.forEach(([label, value], i) => {
-      // Check page overflow
-      if (y + rowH > ph - 60) {
-        doc.addPage();
-        y = 20;
-      }
-
-      const bg = i % 2 === 0;
-      if (bg) {
+      ensureSpace(rowH);
+      if (i % 2 === 0) {
         doc.setFillColor(245, 247, 250);
         doc.rect(margin, y, contentW, rowH, "F");
       }
-
-      // Row borders
       doc.setDrawColor(220);
       doc.setLineWidth(0.2);
       doc.line(margin, y + rowH, margin + contentW, y + rowH);
-
       doc.setTextColor(51);
       doc.text(label, margin + 3, y + 5);
       doc.setTextColor(30, 30, 30);
       doc.text(value, margin + colLabel + 3, y + 5);
-
       y += rowH;
     });
 
@@ -170,15 +273,10 @@ export async function generateLetterheadPdf(product?: LetterheadProductData) {
     doc.setFontSize(10);
     doc.setTextColor(51);
 
-    if (qty > 0) {
-      doc.text(`Количество: ${qty} шт.`, margin, y);
-    } else {
-      doc.text("Количество: __________ шт.", margin, y);
-    }
+    doc.text(qty > 0 ? `Количество: ${qty} шт.` : "Количество: __________ шт.", margin, y);
     y += 7;
 
     if (price > 0) {
-      const fmt = (n: number) => n.toLocaleString("ru-RU", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
       doc.text(`Стоимость за единицу: ${fmt(price)} руб. (без НДС)`, margin, y);
       y += 7;
       doc.text(`Итого: ${fmt(total)} руб. (без НДС)`, margin, y);
@@ -193,7 +291,6 @@ export async function generateLetterheadPdf(product?: LetterheadProductData) {
     }
     y += 10;
 
-    // Terms
     doc.setFontSize(9);
     doc.setTextColor(102);
     doc.text("Срок изготовления: 10–25 рабочих дней с момента оплаты.", margin, y);
@@ -201,8 +298,9 @@ export async function generateLetterheadPdf(product?: LetterheadProductData) {
     doc.text("Условия оплаты: 70% предоплата, 30% перед отгрузкой.", margin, y);
     y += 5;
     doc.text("Срок действия предложения: 30 календарных дней.", margin, y);
+
+  // ===== BLANK MODE =====
   } else {
-    // Empty lines for content (legacy fallback)
     doc.setDrawColor(230);
     for (let i = 0; i < 18; i++) {
       doc.line(margin, y, pw - margin, y);
@@ -211,7 +309,15 @@ export async function generateLetterheadPdf(product?: LetterheadProductData) {
   }
 
   // === Signature ===
-  y = ph - 55;
+  // Place signature at bottom or after content, whichever is lower
+  const sigY = Math.max(y + 15, ph - 55);
+  if (sigY > ph - 30) {
+    doc.addPage();
+    y = 30;
+  } else {
+    y = sigY;
+  }
+
   doc.setTextColor(51);
   doc.setFontSize(11);
   doc.setFont("PTSans", "normal");
@@ -222,30 +328,36 @@ export async function generateLetterheadPdf(product?: LetterheadProductData) {
   doc.setTextColor(153);
   doc.text("_________________ / _________________ /", margin, y);
 
-  // === FOOTER ===
-  const footerY = ph - 15;
-  doc.setDrawColor(30, 58, 95);
-  doc.setLineWidth(0.5);
-  doc.line(margin, footerY - 4, pw - margin, footerY - 4);
+  // === FOOTER (on every page) ===
+  const totalPages = doc.getNumberOfPages();
+  for (let p = 1; p <= totalPages; p++) {
+    doc.setPage(p);
+    const footerY = ph - 15;
+    doc.setDrawColor(30, 58, 95);
+    doc.setLineWidth(0.5);
+    doc.line(margin, footerY - 4, pw - margin, footerY - 4);
 
-  doc.setFontSize(7);
-  doc.setTextColor(153);
-  doc.setFont("PTSans", "normal");
-  doc.text(
-    "ООО СЗПК «Пласт-Металл Про»  |  ИНН: 7806634460  |  Ленинградская обл., д. Разметелево, ул. Строителей 27",
-    pw / 2,
-    footerY,
-    { align: "center" }
-  );
-  doc.text(
-    "Тел.: +7 963 322-55-40  |  E-mail: osobenkov@list.ru",
-    pw / 2,
-    footerY + 4,
-    { align: "center" }
-  );
+    doc.setFontSize(7);
+    doc.setTextColor(153);
+    doc.setFont("PTSans", "normal");
+    doc.text(
+      "ООО СЗПК «Пласт-Металл Про»  |  ИНН: 7806634460  |  Ленинградская обл., д. Разметелево, ул. Строителей 27",
+      pw / 2, footerY, { align: "center" }
+    );
+    doc.text(
+      "Тел.: +7 963 322-55-40  |  E-mail: osobenkov@list.ru",
+      pw / 2, footerY + 4, { align: "center" }
+    );
 
-  const filename = product
-    ? `КП_${product.article.replace(/\./g, "_")}.pdf`
-    : "Коммерческое_предложение_ПластМеталлПро.pdf";
+    if (totalPages > 1) {
+      doc.text(`Стр. ${p} из ${totalPages}`, pw - margin, footerY - 8, { align: "right" });
+    }
+  }
+
+  const filename = multiProducts && multiProducts.length > 0
+    ? "КП_ПластМеталлПро.pdf"
+    : product
+      ? `КП_${product.article.replace(/\./g, "_")}.pdf`
+      : "Коммерческое_предложение_ПластМеталлПро.pdf";
   doc.save(filename);
 }
