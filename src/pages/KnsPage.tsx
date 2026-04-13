@@ -14,6 +14,8 @@ import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbP
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { toast } from "sonner";
 import PageFooter from "@/components/PageFooter";
+import { knsSvtProducts } from "@/data/knsSvtProducts";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 const whyUs = [
   "Собственное производство КНС из полипропилена и стеклопластика (SVT)",
@@ -83,6 +85,7 @@ const Inner = () => {
             { id: "primenenie", label: "Применение" },
             { id: "vidy", label: "Виды" },
             { id: "preimushchestva", label: "Преимущества" },
+            { id: "modeli", label: "Модели" },
             { id: "katalog", label: "Каталог" },
             { id: "cta-form", label: "Заявка" },
           ].map((s) => (
@@ -118,6 +121,40 @@ const Inner = () => {
         <section id="preimushchestva" className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Преимущества сотрудничества</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">{advantages.map((adv) => (<Card key={adv.title}><CardContent className="p-4 flex items-start gap-3"><adv.icon className="h-5 w-5 text-primary shrink-0 mt-0.5" /><div><p className="text-sm font-semibold text-foreground mb-1">{adv.title}</p><p className="text-xs text-muted-foreground">{adv.text}</p></div></CardContent></Card>))}</div>
+        </section>
+
+        <section id="modeli" className="mb-10">
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Модельный ряд КНС</h2>
+          <p className="text-sm text-muted-foreground mb-4">Стандартные модели КНС в корпусе из стеклопластика (SVT). Все станции комплектуются 2 насосами (1 рабочий + 1 резервный).</p>
+          <div className="rounded-lg border border-border overflow-x-auto">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead className="text-xs whitespace-nowrap">Модель</TableHead>
+                  <TableHead className="text-xs whitespace-nowrap text-center">Ø корпуса, мм</TableHead>
+                  <TableHead className="text-xs whitespace-nowrap text-center">Высота, мм</TableHead>
+                  <TableHead className="text-xs whitespace-nowrap text-center">Произв-ть, м³/ч</TableHead>
+                  <TableHead className="text-xs whitespace-nowrap text-center">Напор, м</TableHead>
+                  <TableHead className="text-xs whitespace-nowrap text-center">Мощность, кВт</TableHead>
+                  <TableHead className="text-xs whitespace-nowrap text-center">Насосы</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {knsSvtProducts.map((p) => (
+                  <TableRow key={p.article}>
+                    <TableCell className="text-sm font-medium whitespace-nowrap">{p.model}</TableCell>
+                    <TableCell className="text-sm text-center">{p.diameter}</TableCell>
+                    <TableCell className="text-sm text-center">{p.height}</TableCell>
+                    <TableCell className="text-sm text-center">{p.flow}</TableCell>
+                    <TableCell className="text-sm text-center">{p.head}</TableCell>
+                    <TableCell className="text-sm text-center">{p.pumpPower}</TableCell>
+                    <TableCell className="text-sm text-center">{p.pumpCount} (1+1)</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
+          <p className="text-xs text-muted-foreground mt-3">* Возможно изготовление КНС по индивидуальным параметрам. Для расчёта стоимости оставьте заявку.</p>
         </section>
 
         {category && (
