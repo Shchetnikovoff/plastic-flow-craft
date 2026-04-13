@@ -6,6 +6,8 @@ export interface LetterheadProductData {
   model: string;
   article: string;
   specs: [string, string][];
+  quantity?: number;
+  pricePerUnit?: number;
 }
 
 export async function generateLetterheadPdf(product?: LetterheadProductData) {
@@ -157,15 +159,37 @@ export async function generateLetterheadPdf(product?: LetterheadProductData) {
 
     y += 6;
 
-    // Quantity / price placeholder
+    // Quantity / price
+    const qty = product.quantity ?? 0;
+    const price = product.pricePerUnit ?? 0;
+    const total = qty * price;
+    const totalVat = total * 1.2;
+
     doc.setFont("PTSans", "normal");
     doc.setFontSize(10);
     doc.setTextColor(51);
-    doc.text("Количество: __________ шт.", margin, y);
+
+    if (qty > 0) {
+      doc.text(`Количество: ${qty} шт.`, margin, y);
+    } else {
+      doc.text("Количество: __________ шт.", margin, y);
+    }
     y += 7;
-    doc.text("Стоимость: __________________ руб. (без НДС)", margin, y);
-    y += 7;
-    doc.text("Стоимость с НДС (20%): __________________ руб.", margin, y);
+
+    if (price > 0) {
+      const fmt = (n: number) => n.toLocaleString("ru-RU", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      doc.text(`Стоимость за единицу: ${fmt(price)} руб. (без НДС)`, margin, y);
+      y += 7;
+      doc.text(`Итого: ${fmt(total)} руб. (без НДС)`, margin, y);
+      y += 7;
+      doc.setFont("PTSans", "bold");
+      doc.text(`Итого с НДС (20%): ${fmt(totalVat)} руб.`, margin, y);
+      doc.setFont("PTSans", "normal");
+    } else {
+      doc.text("Стоимость: __________________ руб. (без НДС)", margin, y);
+      y += 7;
+      doc.text("Стоимость с НДС (20%): __________________ руб.", margin, y);
+    }
     y += 10;
 
     // Terms
