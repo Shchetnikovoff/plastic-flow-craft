@@ -104,6 +104,7 @@ const KnsSvtPage = () => {
               </TableBody>
             </Table>
           </div>
+          <p className="text-xs text-muted-foreground mt-3">Изготовление КНС нестандартных размеров — по запросу. Свяжитесь с нами для расчёта.</p>
         </section>
 
         {/* Features */}
