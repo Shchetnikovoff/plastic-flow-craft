@@ -1,6 +1,7 @@
 import { useState, useRef, useCallback } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { CartProvider, useCart } from "@/contexts/CartContext";
+import { KpProvider, useKp } from "@/contexts/KpContext";
 import Header from "@/components/Header";
 import CartSheet from "@/components/CartSheet";
 import { materials, materialSpecs, connectionTypes, baseSizes, type ConnectionType, type MaterialColor } from "@/data/products";
@@ -2585,14 +2586,18 @@ const ProductDetailContent = () => {
 
 const Product = () => {
   const [cartOpen, setCartOpen] = useState(false);
+  const [kpOpen, setKpOpen] = useState(false);
 
   return (
     <CartProvider>
-      <div className="min-h-screen bg-background">
-        <Header onCartOpen={() => setCartOpen(true)} />
-        <ProductDetailContent />
-        <CartSheet open={cartOpen} onOpenChange={setCartOpen} />
-      </div>
+      <KpProvider>
+        <div className="min-h-screen bg-background">
+          <Header onCartOpen={() => setCartOpen(true)} onKpOpen={() => setKpOpen(true)} />
+          <ProductDetailContent />
+          <CartSheet open={cartOpen} onOpenChange={setCartOpen} />
+          <KpSheet open={kpOpen} onOpenChange={setKpOpen} />
+        </div>
+      </KpProvider>
     </CartProvider>
   );
 };
