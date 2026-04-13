@@ -17,6 +17,7 @@ import { pryamougolnyeVertikalnyeProducts } from "@/data/pryamougolnyeVertikalny
 import { ffuModels } from "@/data/ffuProducts";
 import { lamelnyjModels, parseLamelnyjArticle } from "@/data/lamelnyjProducts";
 import { knsPpProducts } from "@/data/knsPpProducts";
+import { knsSvtProducts } from "@/data/knsSvtProducts";
 import ArticleBreakdown, { type ArticleSegment } from "@/components/configurator/ArticleBreakdown";
 import ImageGalleryWithLightbox from "@/components/configurator/ImageGalleryWithLightbox";
 import { Button } from "@/components/ui/button";
@@ -771,6 +772,176 @@ const ProductDetailContent = () => {
         </Dialog>
       </main>
     );
+  }
+
+  // Try KNS SVT
+  if (article.startsWith("КНС-SVT-")) {
+    const knsSvtItem = knsSvtProducts.find((p) => p.article === article);
+    if (knsSvtItem) {
+      const handleAddKnsSvt = () => {
+        addItem({ article, diameter: knsSvtItem.diameter, wallThickness: 0 }, qty);
+        toast.success(`${knsSvtItem.model} (${qty} шт.) добавлен в корзину`);
+      };
+
+      const handleKnsSvtSpecPdf = async () => {
+        const errors = validateContactForm(contactData);
+        setContactErrors(errors);
+        if (Object.keys(errors).length > 0) return;
+
+        await generateSpecPdf(
+          {
+            article,
+            diameter: knsSvtItem.diameter,
+            wallThickness: 0,
+            socketThickness: 0,
+            availableLength: null,
+            connectionName: "",
+            materialName: knsSvtItem.material,
+            extraRows: [
+              ["Модель", knsSvtItem.model],
+              ["Диаметр корпуса", `${knsSvtItem.diameter} мм`],
+              ["Высота", `${knsSvtItem.height} мм`],
+              ["Производительность (Q)", `${knsSvtItem.flow} м³/ч`],
+              ["Напор (H)", `${knsSvtItem.head} м`],
+              ["Макс. расход (Qmax)", `${knsSvtItem.maxFlow} м³/ч`],
+              ["Макс. напор (Hmax)", `${knsSvtItem.maxHead} м`],
+              ["Кол-во насосов", `${knsSvtItem.pumpCount} шт.`],
+              ["Мощность насосов", `${knsSvtItem.pumpPower} кВт`],
+              ["Материал корпуса", knsSvtItem.material],
+            ],
+          },
+          contactData
+        );
+        toast.success("PDF-спецификация скачана");
+        setPdfDialogOpen(false);
+      };
+
+      const handleKnsSvtContactChange = (field: keyof ContactFormData, value: string) => {
+        setContactData((prev) => ({ ...prev, [field]: value }));
+        if (contactErrors[field]) {
+          setContactErrors((prev) => ({ ...prev, [field]: undefined }));
+        }
+      };
+
+      return (
+        <main className="mx-auto max-w-[960px] px-4 sm:px-6 py-6 sm:py-8">
+          <Breadcrumb className="mb-6">
+            <BreadcrumbList>
+              <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog">Каталог</Link></BreadcrumbLink></BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog/kns">КНС</Link></BreadcrumbLink></BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog/kns/v-korpuse-svt">КНС в корпусе SVT</Link></BreadcrumbLink></BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem><BreadcrumbPage>{knsSvtItem.model}</BreadcrumbPage></BreadcrumbItem>
+            </BreadcrumbList>
+          </Breadcrumb>
+
+          <div className="grid gap-8 md:grid-cols-2">
+            <div>
+              <div className="aspect-[4/3] overflow-hidden rounded-lg border bg-card">
+                <img src="/images/kns-svt-cutaway.jpg" alt={`${knsSvtItem.model} — КНС в корпусе SVT`} className="h-full w-full object-contain p-4" />
+              </div>
+            </div>
+
+            <div>
+              <h1 className="text-xl sm:text-2xl font-bold text-foreground mb-1">
+                {knsSvtItem.model}
+              </h1>
+              <p className="font-mono text-sm text-muted-foreground mb-4">{knsSvtItem.article}</p>
+
+              <p className="text-sm text-muted-foreground mb-6">
+                Канализационная насосная станция в корпусе из стеклопластика SVT. Производительность {knsSvtItem.flow} м³/ч, напор {knsSvtItem.head} м. Корпус устойчив к коррозии, срок службы от 30 лет.
+              </p>
+
+              <div className="grid grid-cols-2 gap-px rounded-lg border overflow-hidden mb-4">
+                <div className="bg-card p-3">
+                  <span className="block text-xs text-muted-foreground">Диаметр корпуса</span>
+                  <span className="text-sm font-semibold text-foreground">{knsSvtItem.diameter} мм</span>
+                </div>
+                <div className="bg-card p-3">
+                  <span className="block text-xs text-muted-foreground">Высота</span>
+                  <span className="text-sm font-semibold text-foreground">{knsSvtItem.height} мм</span>
+                </div>
+                <div className="bg-card p-3 border-t">
+                  <span className="block text-xs text-muted-foreground">Производительность (Q)</span>
+                  <span className="text-sm font-semibold text-foreground">{knsSvtItem.flow} м³/ч</span>
+                </div>
+                <div className="bg-card p-3 border-t">
+                  <span className="block text-xs text-muted-foreground">Напор (H)</span>
+                  <span className="text-sm font-semibold text-foreground">{knsSvtItem.head} м</span>
+                </div>
+                <div className="bg-card p-3 border-t">
+                  <span className="block text-xs text-muted-foreground">Макс. расход (Qmax)</span>
+                  <span className="text-sm font-semibold text-foreground">{knsSvtItem.maxFlow} м³/ч</span>
+                </div>
+                <div className="bg-card p-3 border-t">
+                  <span className="block text-xs text-muted-foreground">Макс. напор (Hmax)</span>
+                  <span className="text-sm font-semibold text-foreground">{knsSvtItem.maxHead} м</span>
+                </div>
+                <div className="bg-card p-3 border-t">
+                  <span className="block text-xs text-muted-foreground">Кол-во насосов</span>
+                  <span className="text-sm font-semibold text-foreground">{knsSvtItem.pumpCount} шт.</span>
+                </div>
+                <div className="bg-card p-3 border-t">
+                  <span className="block text-xs text-muted-foreground">Мощность насосов</span>
+                  <span className="text-sm font-semibold text-foreground">{knsSvtItem.pumpPower} кВт</span>
+                </div>
+                <div className="bg-card p-3 border-t col-span-2">
+                  <span className="block text-xs text-muted-foreground">Материал корпуса</span>
+                  <span className="text-sm font-semibold text-foreground">{knsSvtItem.material}</span>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-3">
+                <div className="flex items-center gap-1 border rounded-md">
+                  <Button variant="ghost" size="icon" className="h-9 w-9" onClick={() => setQty((q) => Math.max(1, q - 1))}>
+                    <Minus className="h-4 w-4" />
+                  </Button>
+                  <span className="w-10 text-center text-sm font-medium">{qty}</span>
+                  <Button variant="ghost" size="icon" className="h-9 w-9" onClick={() => setQty((q) => q + 1)}>
+                    <Plus className="h-4 w-4" />
+                  </Button>
+                </div>
+                <Button className="gap-2 flex-1" onClick={handleAddKnsSvt}>
+                  <ShoppingCart className="h-4 w-4" />
+                  В корзину
+                </Button>
+              </div>
+
+              <Button variant="outline" className="gap-2 w-full mt-3" onClick={() => setPdfDialogOpen(true)}>
+                <FileDown className="h-4 w-4" />
+                Скачать спецификацию (PDF)
+              </Button>
+
+              <Button variant="outline" className="gap-2 w-full mt-2" onClick={async () => {
+                await generateLetterheadPdf();
+                toast.success("Коммерческое предложение скачано");
+              }}>
+                <FileDown className="h-4 w-4" />
+                Скачать коммерческое предложение (PDF)
+              </Button>
+            </div>
+          </div>
+
+          <Dialog open={pdfDialogOpen} onOpenChange={setPdfDialogOpen}>
+            <DialogContent className="max-w-md">
+              <DialogHeader>
+                <DialogTitle>Скачать спецификацию</DialogTitle>
+                <DialogDescription>
+                  Заполните контактные данные для скачивания PDF-спецификации
+                </DialogDescription>
+              </DialogHeader>
+              <ContactFormFields data={contactData} errors={contactErrors} onChange={handleKnsSvtContactChange} />
+              <Button className="w-full gap-2 mt-2" onClick={handleKnsSvtSpecPdf}>
+                <FileDown className="h-4 w-4" />
+                Скачать PDF
+              </Button>
+            </DialogContent>
+          </Dialog>
+        </main>
+      );
+    }
   }
 
   // Try KNS PP (СЗПК.КНС.ПП.)

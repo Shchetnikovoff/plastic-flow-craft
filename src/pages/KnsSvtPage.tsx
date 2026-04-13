@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ProductPageShell from "@/components/configurator/ProductPageShell";
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
@@ -29,6 +29,7 @@ const specs = [
 ];
 
 const KnsSvtPage = () => {
+  const navigate = useNavigate();
   const [form, setForm] = useState({ name: "", phone: "", email: "", description: "" });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -83,13 +84,12 @@ const KnsSvtPage = () => {
                   <TableHead className="text-xs text-center">Qmax</TableHead>
                   <TableHead className="text-xs text-center">Hmax</TableHead>
                   <TableHead className="text-xs text-center">Насосы</TableHead>
-                  <TableHead className="text-xs text-center">P, кВт</TableHead>
-                  <TableHead className="text-xs text-right">Цена, ₽</TableHead>
+                   <TableHead className="text-xs text-center">P, кВт</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {knsSvtProducts.map((p) => (
-                  <TableRow key={p.article} className="hover:bg-muted/50">
+                  <TableRow key={p.article} className="hover:bg-muted/50 cursor-pointer" onClick={() => navigate(`/product/${encodeURIComponent(p.article)}`)}>
                     <TableCell className="text-sm font-medium">{p.model}</TableCell>
                     <TableCell className="text-sm text-center">{p.diameter}</TableCell>
                     <TableCell className="text-sm text-center">{p.height}</TableCell>
@@ -98,8 +98,7 @@ const KnsSvtPage = () => {
                     <TableCell className="text-sm text-center">{p.maxFlow}</TableCell>
                     <TableCell className="text-sm text-center">{p.maxHead}</TableCell>
                     <TableCell className="text-sm text-center">{p.pumpCount}</TableCell>
-                    <TableCell className="text-sm text-center">{p.pumpPower}</TableCell>
-                    <TableCell className="text-sm text-right whitespace-nowrap">{p.price.toLocaleString("ru-RU")}</TableCell>
+                     <TableCell className="text-sm text-center">{p.pumpPower}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
