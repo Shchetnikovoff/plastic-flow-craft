@@ -870,7 +870,7 @@ const ProductDetailContent = () => {
   }
 
   // Try KNS SVT
-  if (article.startsWith("КНС-SVT-")) {
+  if (article.startsWith("СЗПК.КНС.ПЭ.")) {
     const knsSvtItem = knsSvtProducts.find((p) => p.article === article);
     if (knsSvtItem) {
       const handleAddKnsSvt = () => {
