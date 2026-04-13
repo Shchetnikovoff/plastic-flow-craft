@@ -131,6 +131,33 @@ const KnsCalculator = () => {
 
   const matCode = material === "pe" ? "ПЭ" : "ПП";
   const matLabel = material === "pe" ? "Полиэтилен" : "Полипропилен";
+  const wastewaterLabel = wastewaterOptions.find((w) => w.id === wastewaterType)?.label || "";
+  const pumpSchemeLabel = pumpCount === 2 ? "1 рабочий + 1 резервный" : pumpCount === 3 ? "2 рабочих + 1 резервный" : "3 рабочих + 1 резервный";
+
+  const handleDownloadPdf = async () => {
+    if (!recommended) return;
+    try {
+      await generateKnsOprosnyList({
+        wastewaterType: wastewaterLabel,
+        material: matLabel,
+        flow,
+        head,
+        pumpScheme: pumpSchemeLabel,
+        inletPipe,
+        outletPipe,
+        equipment: selectedEquipmentList as string[],
+        recommendedModel: recommended.model,
+        recommendedArticle: recommended.article,
+        recommendedDiameter: recommended.diameter,
+        recommendedHeight: recommended.height,
+        recommendedPumpCount: recommended.pumpCount,
+        recommendedPumpPower: recommended.pumpPower,
+      });
+      toast.success("Опросный лист скачан");
+    } catch {
+      toast.error("Ошибка при генерации PDF");
+    }
+  };
 
   const articleSegments: ArticleSegment[] = recommended
     ? [
