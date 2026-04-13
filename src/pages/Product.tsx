@@ -16,6 +16,7 @@ import { pryamougolnyeProducts } from "@/data/pryamougolnyeProducts";
 import { pryamougolnyeVertikalnyeProducts } from "@/data/pryamougolnyeVertikalnyeProducts";
 import { ffuModels } from "@/data/ffuProducts";
 import { lamelnyjModels, parseLamelnyjArticle } from "@/data/lamelnyjProducts";
+import { knsPpProducts } from "@/data/knsPpProducts";
 import ArticleBreakdown, { type ArticleSegment } from "@/components/configurator/ArticleBreakdown";
 import ImageGalleryWithLightbox from "@/components/configurator/ImageGalleryWithLightbox";
 import { Button } from "@/components/ui/button";
@@ -770,6 +771,107 @@ const ProductDetailContent = () => {
         </Dialog>
       </main>
     );
+  }
+
+  // Try KNS PP (СЗПК.КНС.ПП.)
+  if (article.startsWith("СЗПК.КНС.ПП.")) {
+    const knsPpItem = knsPpProducts.find((p) => p.article === article);
+    if (knsPpItem) {
+      const handleAddKnsPp = () => {
+        addItem({ article, diameter: knsPpItem.diameter, wallThickness: 0 }, qty);
+        toast.success(`${knsPpItem.model} (${qty} шт.) добавлен в корзину`);
+      };
+
+      return (
+        <main className="mx-auto max-w-[960px] px-4 sm:px-6 py-6 sm:py-8">
+          <Breadcrumb className="mb-6">
+            <BreadcrumbList>
+              <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog">Каталог</Link></BreadcrumbLink></BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog/kns">КНС</Link></BreadcrumbLink></BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog/kns/v-korpuse-polipropilen">КНС из полипропилена</Link></BreadcrumbLink></BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem><BreadcrumbPage>{knsPpItem.model}</BreadcrumbPage></BreadcrumbItem>
+            </BreadcrumbList>
+          </Breadcrumb>
+
+          <div className="grid gap-8 md:grid-cols-2">
+            <div>
+              <div className="aspect-[4/3] overflow-hidden rounded-lg border bg-card">
+                <img src="/images/kns-pp-cutaway-v2.jpg" alt={`${knsPpItem.model} — КНС из полипропилена`} className="h-full w-full object-contain p-4" />
+              </div>
+            </div>
+
+            <div>
+              <h1 className="text-xl sm:text-2xl font-bold text-foreground mb-1">
+                {knsPpItem.model}
+              </h1>
+              <p className="font-mono text-sm text-muted-foreground mb-4">{knsPpItem.article}</p>
+
+              <p className="text-sm text-muted-foreground mb-6">
+                Канализационная насосная станция в корпусе из полипропилена. Производительность {knsPpItem.flow} м³/ч, напор {knsPpItem.head} м. Корпус химически стоек к кислотам и щелочам, срок службы от 25 лет.
+              </p>
+
+              <div className="grid grid-cols-2 gap-px rounded-lg border overflow-hidden mb-4">
+                <div className="bg-card p-3">
+                  <span className="block text-xs text-muted-foreground">Диаметр корпуса</span>
+                  <span className="text-sm font-semibold text-foreground">{knsPpItem.diameter} мм</span>
+                </div>
+                <div className="bg-card p-3">
+                  <span className="block text-xs text-muted-foreground">Высота</span>
+                  <span className="text-sm font-semibold text-foreground">{knsPpItem.height} мм</span>
+                </div>
+                <div className="bg-card p-3 border-t">
+                  <span className="block text-xs text-muted-foreground">Производительность (Q)</span>
+                  <span className="text-sm font-semibold text-foreground">{knsPpItem.flow} м³/ч</span>
+                </div>
+                <div className="bg-card p-3 border-t">
+                  <span className="block text-xs text-muted-foreground">Напор (H)</span>
+                  <span className="text-sm font-semibold text-foreground">{knsPpItem.head} м</span>
+                </div>
+                <div className="bg-card p-3 border-t">
+                  <span className="block text-xs text-muted-foreground">Макс. расход (Qmax)</span>
+                  <span className="text-sm font-semibold text-foreground">{knsPpItem.maxFlow} м³/ч</span>
+                </div>
+                <div className="bg-card p-3 border-t">
+                  <span className="block text-xs text-muted-foreground">Макс. напор (Hmax)</span>
+                  <span className="text-sm font-semibold text-foreground">{knsPpItem.maxHead} м</span>
+                </div>
+                <div className="bg-card p-3 border-t">
+                  <span className="block text-xs text-muted-foreground">Кол-во насосов</span>
+                  <span className="text-sm font-semibold text-foreground">{knsPpItem.pumpCount} шт.</span>
+                </div>
+                <div className="bg-card p-3 border-t">
+                  <span className="block text-xs text-muted-foreground">Мощность насосов</span>
+                  <span className="text-sm font-semibold text-foreground">{knsPpItem.pumpPower} кВт</span>
+                </div>
+                <div className="bg-card p-3 border-t col-span-2">
+                  <span className="block text-xs text-muted-foreground">Материал корпуса</span>
+                  <span className="text-sm font-semibold text-foreground">{knsPpItem.material}</span>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-3">
+                <div className="flex items-center gap-1 border rounded-md">
+                  <Button variant="ghost" size="icon" className="h-9 w-9" onClick={() => setQty((q) => Math.max(1, q - 1))}>
+                    <Minus className="h-4 w-4" />
+                  </Button>
+                  <span className="w-10 text-center text-sm font-medium">{qty}</span>
+                  <Button variant="ghost" size="icon" className="h-9 w-9" onClick={() => setQty((q) => q + 1)}>
+                    <Plus className="h-4 w-4" />
+                  </Button>
+                </div>
+                <Button className="gap-2 flex-1" onClick={handleAddKnsPp}>
+                  <ShoppingCart className="h-4 w-4" />
+                  В корзину
+                </Button>
+              </div>
+            </div>
+          </div>
+        </main>
+      );
+    }
   }
 
   // Try FFU
