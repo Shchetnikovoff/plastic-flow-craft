@@ -1367,8 +1367,7 @@ const ProductDetailContent = () => {
     };
 
     const handleLamKpPdf = async () => {
-      const parsed = parseLamelnyjArticle(article);
-      await generateLetterheadPdf({ model: `Ламельный отстойник ${parsed?.model || article}`, article, specs: parsed ? [["Производительность", `${parsed.capacity} м³/ч`], ["Материал", parsed.materialName]] : [] });
+      await generateLetterheadPdf({ model: `Тонкослойный (ламельный) отстойник ${lamModel.article}`, article, specs: [["Производительность", `${lamModel.capacity} м³/ч`], ["Габариты (Д×Ш×В)", `${lamModel.dimensions} мм`], ["Материал корпуса", lamParsed.materialName]] });
       toast.success("Коммерческое предложение скачано");
     };
 
