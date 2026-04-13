@@ -1,24 +1,17 @@
 
 
-## Plan: Add Commercial Proposal (КП) PDF Button to KNS PP Product Card
+## Plan: Align KNS SVT table section with KNS PP
 
-### Goal
-Add a "Скачать коммерческое предложение (PDF)" button to KNS PP product detail pages, matching existing behavior on FFU, lamelnyj, and other product cards.
+### What changes
+The KNS SVT table is already structurally identical to KNS PP. The only missing element is the helper note below the table.
 
-### Changes
+### Change
 
-**`src/pages/Product.tsx`** (single edit, ~3 lines)
-- After the existing spec PDF button (line 914), add a new button calling `generateLetterheadPdf()` with a success toast — identical pattern to FFU/lamelnyj products (e.g. line 749).
+**`src/pages/KnsSvtPage.tsx`** — Add the note paragraph after the closing `</div>` of the table (after line 106):
 
 ```tsx
-<Button variant="outline" className="gap-2 w-full mt-2" onClick={async () => {
-  await generateLetterheadPdf();
-  toast.success("Коммерческое предложение скачано");
-}}>
-  <FileDown className="h-4 w-4" />
-  Скачать коммерческое предложение (PDF)
-</Button>
+<p className="text-xs text-muted-foreground mt-3">Изготовление КНС нестандартных размеров — по запросу. Свяжитесь с нами для расчёта.</p>
 ```
 
-No other files need changes — `generateLetterheadPdf` is already imported.
+One line addition, no other changes needed.
 
