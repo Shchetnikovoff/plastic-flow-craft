@@ -81,6 +81,7 @@ const Inner = () => {
 
         <nav className="mb-8 flex flex-wrap gap-2">
           {[
+            { id: "calculator", label: "Калькулятор" },
             { id: "opisanie", label: "Описание" },
             { id: "primenenie", label: "Применение" },
             { id: "vidy", label: "Виды" },
