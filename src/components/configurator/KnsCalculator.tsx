@@ -7,10 +7,12 @@ import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { ArrowRight, Droplets, Factory, CloudRain, FlaskConical } from "lucide-react";
+import { ArrowRight, Droplets, Factory, CloudRain, FlaskConical, Download } from "lucide-react";
+import { toast } from "sonner";
 import ArticleBreakdown, { type ArticleSegment } from "./ArticleBreakdown";
 import { knsSvtProducts } from "@/data/knsSvtProducts";
 import { knsPpProducts } from "@/data/knsPpProducts";
+import { generateKnsOprosnyList } from "@/lib/generateKnsOprosnyList";
 
 type WastewaterType = "domestic" | "industrial" | "stormwater" | "other";
 type KnsMaterial = "pe" | "pp";
@@ -129,6 +131,33 @@ const KnsCalculator = () => {
 
   const matCode = material === "pe" ? "ПЭ" : "ПП";
   const matLabel = material === "pe" ? "Полиэтилен" : "Полипропилен";
+  const wastewaterLabel = wastewaterOptions.find((w) => w.id === wastewaterType)?.label || "";
+  const pumpSchemeLabel = pumpCount === 2 ? "1 рабочий + 1 резервный" : pumpCount === 3 ? "2 рабочих + 1 резервный" : "3 рабочих + 1 резервный";
+
+  const handleDownloadPdf = async () => {
+    if (!recommended) return;
+    try {
+      await generateKnsOprosnyList({
+        wastewaterType: wastewaterLabel,
+        material: matLabel,
+        flow,
+        head,
+        pumpScheme: pumpSchemeLabel,
+        inletPipe,
+        outletPipe,
+        equipment: selectedEquipmentList as string[],
+        recommendedModel: recommended.model,
+        recommendedArticle: recommended.article,
+        recommendedDiameter: recommended.diameter,
+        recommendedHeight: recommended.height,
+        recommendedPumpCount: recommended.pumpCount,
+        recommendedPumpPower: recommended.pumpPower,
+      });
+      toast.success("Опросный лист скачан");
+    } catch {
+      toast.error("Ошибка при генерации PDF");
+    }
+  };
 
   const articleSegments: ArticleSegment[] = recommended
     ? [
@@ -300,12 +329,18 @@ const KnsCalculator = () => {
                       </p>
                     )}
                   </div>
-                  <Button asChild size="sm" className="gap-1.5">
-                    <Link to={`/product/${encodeURIComponent(recommended.article)}`}>
-                      Перейти к товару
-                      <ArrowRight className="h-4 w-4" />
-                    </Link>
-                  </Button>
+                  <div className="flex flex-wrap gap-2">
+                    <Button asChild size="sm" className="gap-1.5">
+                      <Link to={`/product/${encodeURIComponent(recommended.article)}`}>
+                        Перейти к товару
+                        <ArrowRight className="h-4 w-4" />
+                      </Link>
+                    </Button>
+                    <Button size="sm" variant="outline" className="gap-1.5" onClick={handleDownloadPdf}>
+                      <Download className="h-4 w-4" />
+                      Скачать опросный лист (PDF)
+                    </Button>
+                  </div>
                 </div>
               </div>
             </div>
