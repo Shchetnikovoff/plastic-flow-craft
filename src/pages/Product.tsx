@@ -2510,6 +2510,62 @@ const ProductDetailContent = () => {
           </Button>
         </DialogContent>
       </Dialog>
+
+      {/* KP (Commercial Proposal) Dialog */}
+      <Dialog open={kpDialogOpen} onOpenChange={setKpDialogOpen}>
+        <DialogContent className="max-w-sm">
+          <DialogHeader>
+            <DialogTitle>Коммерческое предложение</DialogTitle>
+            <DialogDescription>
+              Укажите количество и цену (необязательно) — они будут включены в PDF
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4">
+            <div className="space-y-1.5">
+              <Label className="text-xs">Количество, шт.</Label>
+              <Input
+                type="number"
+                min="1"
+                max="99999"
+                placeholder="Например: 2"
+                value={kpQty}
+                onChange={(e) => setKpQty(e.target.value.replace(/[^0-9]/g, "").slice(0, 5))}
+              />
+            </div>
+            <div className="space-y-1.5">
+              <Label className="text-xs">Цена за единицу, руб. (без НДС)</Label>
+              <Input
+                type="text"
+                inputMode="decimal"
+                placeholder="Например: 150 000"
+                value={kpPrice}
+                onChange={(e) => setKpPrice(e.target.value.replace(/[^0-9.,\s]/g, "").slice(0, 15))}
+              />
+            </div>
+            {kpQty && kpPrice && (() => {
+              const q = parseInt(kpQty, 10);
+              const p = parseFloat(kpPrice.replace(",", ".").replace(/\s/g, ""));
+              if (!isNaN(q) && !isNaN(p) && q > 0 && p > 0) {
+                const total = q * p;
+                const totalVat = total * 1.2;
+                const fmt = (n: number) => n.toLocaleString("ru-RU", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                return (
+                  <div className="rounded-md bg-muted p-3 text-xs space-y-1">
+                    <p className="text-muted-foreground">Итого: <span className="font-semibold text-foreground">{fmt(total)} руб.</span> (без НДС)</p>
+                    <p className="text-muted-foreground">С НДС (20%): <span className="font-semibold text-foreground">{fmt(totalVat)} руб.</span></p>
+                  </div>
+                );
+              }
+              return null;
+            })()}
+            <Button className="w-full gap-2" onClick={handleKpDownload}>
+              <FileDown className="h-4 w-4" />
+              Скачать КП (PDF)
+            </Button>
+            <p className="text-[11px] text-muted-foreground text-center">Поля не обязательны — оставьте пустыми для бланка</p>
+          </div>
+        </DialogContent>
+      </Dialog>
     </main>
   );
 };
