@@ -833,6 +833,9 @@ const ProductDetailContent = () => {
               <FileDown className="h-4 w-4" />
               Скачать коммерческое предложение (PDF)
             </Button>
+            <Button variant="secondary" className="gap-2 w-full mt-2" onClick={() => { addToKp({ model: emkost.title, article, specs: [["Объём", `${emkost.volume.toLocaleString()} л`], ...(emkost.diameter > 0 ? [["Диаметр (D)", `${emkost.diameter.toLocaleString()} мм`] as [string,string]] : []), [emkost.heightLabel, `${emkost.heightOrLength.toLocaleString()} мм`], ["Материал", emkost.materialName]] }); toast.success("Добавлено в КП"); }}>
+              <ClipboardList className="h-4 w-4" />
+              Добавить в КП
           </div>
         </div>
 
@@ -1001,7 +1004,9 @@ const ProductDetailContent = () => {
                 <FileDown className="h-4 w-4" />
                 Скачать коммерческое предложение (PDF)
               </Button>
-            </div>
+              <Button variant="secondary" className="gap-2 w-full mt-2" onClick={() => { addToKp({ model: knsSvtItem.model, article: knsSvtItem.article, specs: [["Диаметр корпуса", `${knsSvtItem.diameter} мм`], ["Высота", `${knsSvtItem.height} мм`], ["Производительность (Q)", `${knsSvtItem.flow} м³/ч`], ["Напор (H)", `${knsSvtItem.head} м`], ["Макс. расход (Qmax)", `${knsSvtItem.maxFlow} м³/ч`], ["Макс. напор (Hmax)", `${knsSvtItem.maxHead} м`], ["Кол-во насосов", `${knsSvtItem.pumpCount} шт.`], ["Мощность насосов", `${knsSvtItem.pumpPower} кВт`], ["Материал корпуса", knsSvtItem.material]] }); toast.success("Добавлено в КП"); }}>
+                <ClipboardList className="h-4 w-4" />
+                Добавить в КП
           </div>
 
           <Dialog open={pdfDialogOpen} onOpenChange={setPdfDialogOpen}>
@@ -1169,7 +1174,9 @@ const ProductDetailContent = () => {
                 <FileDown className="h-4 w-4" />
                 Скачать коммерческое предложение (PDF)
               </Button>
-            </div>
+              <Button variant="secondary" className="gap-2 w-full mt-2" onClick={() => { addToKp({ model: knsPpItem.model, article: knsPpItem.article, specs: [["Диаметр корпуса", `${knsPpItem.diameter} мм`], ["Высота", `${knsPpItem.height} мм`], ["Производительность (Q)", `${knsPpItem.flow} м³/ч`], ["Напор (H)", `${knsPpItem.head} м`], ["Макс. расход (Qmax)", `${knsPpItem.maxFlow} м³/ч`], ["Макс. напор (Hmax)", `${knsPpItem.maxHead} м`], ["Кол-во насосов", `${knsPpItem.pumpCount} шт.`], ["Мощность насосов", `${knsPpItem.pumpPower} кВт`], ["Материал корпуса", knsPpItem.material]] }); toast.success("Добавлено в КП"); }}>
+                <ClipboardList className="h-4 w-4" />
+                Добавить в КП
           </div>
 
           <Dialog open={pdfDialogOpen} onOpenChange={setPdfDialogOpen}>
