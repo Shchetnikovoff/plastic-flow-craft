@@ -17,6 +17,7 @@ import { pryamougolnyeVertikalnyeProducts } from "@/data/pryamougolnyeVertikalny
 import { ffuModels } from "@/data/ffuProducts";
 import { lamelnyjModels, parseLamelnyjArticle } from "@/data/lamelnyjProducts";
 import { knsPpProducts } from "@/data/knsPpProducts";
+import { knsSvtProducts } from "@/data/knsSvtProducts";
 import ArticleBreakdown, { type ArticleSegment } from "@/components/configurator/ArticleBreakdown";
 import ImageGalleryWithLightbox from "@/components/configurator/ImageGalleryWithLightbox";
 import { Button } from "@/components/ui/button";
