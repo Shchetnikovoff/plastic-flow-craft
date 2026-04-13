@@ -325,7 +325,7 @@ export async function generateLetterheadPdf(
   doc.setFont("PTSans", "normal");
   doc.text("С уважением,", margin, y);
   y += 7;
-  doc.text("Директор ООО СЗПК «Пласт-Металл Про»", margin, y);
+  doc.text("Генеральный директор ООО СЗПК «Пласт-Металл Про»", margin, y);
   y += 5;
 
   // Signature image
