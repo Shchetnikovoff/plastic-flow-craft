@@ -288,6 +288,12 @@ const KnsCalculator = () => {
                       · {recommended.pumpCount} насоса × {recommended.pumpPower} кВт
                       · {matLabel}
                     </p>
+                    {(inletPipe.diameter || outletPipe.diameter) && (
+                      <p className="text-xs text-muted-foreground mt-1">
+                        {inletPipe.diameter && <><span className="font-medium">Подвод:</span> Ø{inletPipe.diameter} мм{inletPipe.material && `, ${inletPipe.material}`}{inletPipe.depth && `, глуб. ${inletPipe.depth} м`} · </>}
+                        {outletPipe.diameter && <><span className="font-medium">Напор:</span> Ø{outletPipe.diameter} мм{outletPipe.material && `, ${outletPipe.material}`}{outletPipe.depth && `, глуб. ${outletPipe.depth} м`}</>}
+                      </p>
+                    )}
                     {selectedEquipmentList.length > 0 && (
                       <p className="text-xs text-muted-foreground mt-1">
                         <span className="font-medium">Доп. оборудование:</span> {selectedEquipmentList.join(", ")}
