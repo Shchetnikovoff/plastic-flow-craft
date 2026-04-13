@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useCallback } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { CartProvider, useCart } from "@/contexts/CartContext";
 import Header from "@/components/Header";
@@ -27,7 +27,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 import { toast } from "sonner";
 import ContactFormFields, { type ContactFormData, type ContactFormErrors, validateContactForm } from "@/components/ContactFormFields";
 import { generateSpecPdf } from "@/lib/generateSpecPdf";
-import { generateLetterheadPdf } from "@/lib/generateLetterheadPdf";
+import { generateLetterheadPdf, type LetterheadProductData } from "@/lib/generateLetterheadPdf";
 import DimensionOverlay from "@/components/DimensionOverlay";
 
 /** Image lookup map for tank type + color */
