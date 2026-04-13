@@ -1569,6 +1569,10 @@ const ProductDetailContent = () => {
               <FileDown className="h-4 w-4" />
               Скачать коммерческое предложение (PDF)
             </Button>
+            <Button variant="secondary" className="gap-2 w-full mt-2" onClick={() => { addToKp({ model: `Тонкослойный (ламельный) отстойник ${lamModel.name}`, article: lamModel.article, specs: [["Производительность", `${lamModel.capacity} м³/ч`], ["Габариты (Д×Ш×В)", `${lamModel.dimensions} мм`], ["Масса (сух./раб.)", `${lamModel.mass} кг`], ["Материал корпуса", lamParsed.materialName]] }); toast.success("Добавлено в КП"); }}>
+              <ClipboardList className="h-4 w-4" />
+              Добавить в КП
+            </Button>
           </div>
         </div>
 
@@ -1758,6 +1762,10 @@ const ProductDetailContent = () => {
               <FileDown className="h-4 w-4" />
               Скачать коммерческое предложение (PDF)
             </Button>
+            <Button variant="secondary" className="gap-2 w-full mt-2" onClick={() => { addToKp({ model: `Станция приготовления реагентов ${sprModel.name}`, article: sprModel.article, specs: [["Производительность", `${sprModel.capacity} л/ч`], ["Габариты (A×B×C)", `${sprModel.dimensions} мм`], ["Материал корпуса", "Полипропилен (ПП)"]] }); toast.success("Добавлено в КП"); }}>
+              <ClipboardList className="h-4 w-4" />
+              Добавить в КП
+            </Button>
           </div>
         </div>
 
@@ -1934,6 +1942,10 @@ const ProductDetailContent = () => {
             <Button variant="outline" className="gap-2 w-full mt-2" onClick={handleMoKpPdf}>
               <FileDown className="h-4 w-4" />
               Скачать коммерческое предложение (PDF)
+            </Button>
+            <Button variant="secondary" className="gap-2 w-full mt-2" onClick={() => { addToKp({ model: `Мешочный обезвоживатель осадка ${moModel.name}`, article: moModel.article, specs: [["Производительность", `${moModel.capacity} м³/сут`], ["Количество мешков", moModel.bags], ["Габариты (Д×Ш×В)", `${moModel.dimensions} мм`], ["Материал корпуса", "Полипропилен (ПП)"]] }); toast.success("Добавлено в КП"); }}>
+              <ClipboardList className="h-4 w-4" />
+              Добавить в КП
             </Button>
           </div>
         </div>
