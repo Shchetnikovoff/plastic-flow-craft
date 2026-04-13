@@ -516,6 +516,10 @@ const ProductDetailContent = () => {
   const [selectedImage, setSelectedImage] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [pdfDialogOpen, setPdfDialogOpen] = useState(false);
+  const [kpDialogOpen, setKpDialogOpen] = useState(false);
+  const [kpQty, setKpQty] = useState("");
+  const [kpPrice, setKpPrice] = useState("");
+  const kpProductRef = useRef<Omit<LetterheadProductData, "quantity" | "pricePerUnit"> | null>(null);
   const [contactData, setContactData] = useState<ContactFormData>({ name: "", email: "", phone: "", inn: "" });
   const [contactErrors, setContactErrors] = useState<ContactFormErrors>({});
 
