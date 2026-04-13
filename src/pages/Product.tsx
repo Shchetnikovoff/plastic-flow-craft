@@ -627,6 +627,14 @@ const ProductDetailContent = () => {
           availableLength: null,
           connectionName: "",
           materialName: emkost.materialName,
+          productTitle: emkost.title,
+          extraRows: [
+            ["Объём", `${emkost.volume.toLocaleString()} л`],
+            ...(emkost.diameter > 0 ? [["Диаметр (D)", `${emkost.diameter.toLocaleString()} мм`] as [string, string]] : []),
+            [emkost.heightLabel, `${emkost.heightOrLength.toLocaleString()} мм`],
+            ["Материал", emkost.materialName],
+            ...(emkost.colorLabel ? [["Цвет", emkost.colorLabel] as [string, string]] : []),
+          ],
         },
         contactData
       );
@@ -884,6 +892,7 @@ const ProductDetailContent = () => {
             availableLength: null,
             connectionName: "",
             materialName: knsSvtItem.material,
+            productTitle: `КНС в корпусе SVT ${knsSvtItem.model}`,
             extraRows: [
               ["Модель", knsSvtItem.model],
               ["Диаметр корпуса", `${knsSvtItem.diameter} мм`],
@@ -1056,6 +1065,7 @@ const ProductDetailContent = () => {
             availableLength: null,
             connectionName: "",
             materialName: knsPpItem.material,
+            productTitle: `КНС из полипропилена ${knsPpItem.model}`,
             extraRows: [
               ["Модель", knsPpItem.model],
               ["Диаметр корпуса", `${knsPpItem.diameter} мм`],
@@ -1248,7 +1258,7 @@ const ProductDetailContent = () => {
     };
 
     const handleFfuKpPdf = () => {
-      openKpDialog({ model: `Флотационно-фильтровальная установка ${ffuModel.name}`, article: ffuModel.article, specs: [["Производительность", `${ffuModel.capacity} м³/ч`], ["Мощность", `${ffuModel.power} кВт`], ["Габариты (Д×Ш×В)", `${ffuModel.dimensions} мм`], ["Масса сухая", `${ffuModel.massDry} т`], ["Масса с водой", `${ffuModel.massWet} т`], ["Материал корпуса", "Полипропилен / ПВХ / Стеклопластик"]] });
+      openKpDialog({ model: `Флотационно-фильтровальная установка ${ffuModel.name}`, article: ffuModel.article, specs: [["Производительность", `${ffuModel.capacity} м³/ч`], ["Мощность", `${ffuModel.power} кВт`], ["Габариты (Д×Ш×В)", `${ffuModel.dimensions} мм`], ["Масса сухая", `${ffuModel.massDry} т`], ["Масса с водой", `${ffuModel.massWet} т`], ["Материал корпуса", "Полипропилен / ПВХ / Стеклопластик"], ["Рабочая температура", "до +60 °C"]] });
     };
 
     const handleFfuContactChange = (field: keyof ContactFormData, value: string) => {
@@ -1395,7 +1405,7 @@ const ProductDetailContent = () => {
               <FileDown className="h-4 w-4" />
               Скачать коммерческое предложение (PDF)
             </Button>
-            <Button variant="secondary" className="gap-2 w-full mt-2" onClick={() => { addToKp({ model: `ФФУ ${ffuModel.name}`, article: ffuModel.article, specs: [["Производительность", `${ffuModel.capacity} м³/ч`], ["Мощность", `${ffuModel.power} кВт`], ["Габариты", `${ffuModel.dimensions} мм`]] }); toast.success("Добавлено в КП"); }}>
+            <Button variant="secondary" className="gap-2 w-full mt-2" onClick={() => { addToKp({ model: `Флотационно-фильтровальная установка ${ffuModel.name}`, article: ffuModel.article, specs: [["Производительность", `${ffuModel.capacity} м³/ч`], ["Мощность", `${ffuModel.power} кВт`], ["Габариты (Д×Ш×В)", `${ffuModel.dimensions} мм`], ["Масса сухая", `${ffuModel.massDry} т`], ["Масса с водой", `${ffuModel.massWet} т`], ["Материал корпуса", "Полипропилен / ПВХ / Стеклопластик"], ["Рабочая температура", "до +60 °C"]] }); toast.success("Добавлено в КП"); }}>
               <ClipboardList className="h-4 w-4" />
               Добавить в КП
             </Button>
@@ -1462,7 +1472,7 @@ const ProductDetailContent = () => {
     };
 
     const handleLamKpPdf = () => {
-      openKpDialog({ model: `Тонкослойный (ламельный) отстойник ${lamModel.article}`, article, specs: [["Производительность", `${lamModel.capacity} м³/ч`], ["Габариты (Д×Ш×В)", `${lamModel.dimensions} мм`], ["Материал корпуса", lamParsed.materialName]] });
+      openKpDialog({ model: `Тонкослойный (ламельный) отстойник ${lamModel.name}`, article, specs: [["Производительность", `${lamModel.capacity} м³/ч`], ["Габариты (Д×Ш×В)", `${lamModel.dimensions} мм`], ["Масса (сух./раб.)", `${lamModel.mass} кг`], ["Материал корпуса", lamParsed.materialName], ["Рабочая температура", "до +60 °C"]] });
     };
 
     const handleLamContactChange = (field: keyof ContactFormData, value: string) => {
@@ -1569,7 +1579,7 @@ const ProductDetailContent = () => {
               <FileDown className="h-4 w-4" />
               Скачать коммерческое предложение (PDF)
             </Button>
-            <Button variant="secondary" className="gap-2 w-full mt-2" onClick={() => { addToKp({ model: `Тонкослойный (ламельный) отстойник ${lamModel.name}`, article: lamModel.article, specs: [["Производительность", `${lamModel.capacity} м³/ч`], ["Габариты (Д×Ш×В)", `${lamModel.dimensions} мм`], ["Масса (сух./раб.)", `${lamModel.mass} кг`], ["Материал корпуса", lamParsed.materialName]] }); toast.success("Добавлено в КП"); }}>
+            <Button variant="secondary" className="gap-2 w-full mt-2" onClick={() => { addToKp({ model: `Тонкослойный (ламельный) отстойник ${lamModel.name}`, article: lamModel.article, specs: [["Производительность", `${lamModel.capacity} м³/ч`], ["Габариты (Д×Ш×В)", `${lamModel.dimensions} мм`], ["Масса (сух./раб.)", `${lamModel.mass} кг`], ["Материал корпуса", lamParsed.materialName], ["Рабочая температура", "до +60 °C"]] }); toast.success("Добавлено в КП"); }}>
               <ClipboardList className="h-4 w-4" />
               Добавить в КП
             </Button>
@@ -1648,7 +1658,7 @@ const ProductDetailContent = () => {
     };
 
     const handleSprKpPdf = () => {
-      openKpDialog({ model: `Станция приготовления реагентов ${sprModel.name}`, article: sprModel.article, specs: [["Производительность", `${sprModel.capacity} л/ч`], ["Габариты (A×B×C)", `${sprModel.dimensions} мм`], ["Материал корпуса", "Полипропилен (ПП)"]] });
+      openKpDialog({ model: `Станция приготовления реагентов ${sprModel.name}`, article: sprModel.article, specs: [["Производительность", `${sprModel.capacity} л/ч`], ["Габариты (A×B×C)", `${sprModel.dimensions} мм`], ["Материал корпуса", "Полипропилен (ПП)"], ["Давление", "2–6 бар"], ["Время выдержки", "60 мин"], ["Концентрация раствора", "0,1–0,5%"], ["Степень защиты", "IP54"], ["Температура эксплуатации", "+5…+40 °C"]] });
     };
 
     const handleSprContactChange = (field: keyof ContactFormData, value: string) => {
@@ -1762,7 +1772,7 @@ const ProductDetailContent = () => {
               <FileDown className="h-4 w-4" />
               Скачать коммерческое предложение (PDF)
             </Button>
-            <Button variant="secondary" className="gap-2 w-full mt-2" onClick={() => { addToKp({ model: `Станция приготовления реагентов ${sprModel.name}`, article: sprModel.article, specs: [["Производительность", `${sprModel.capacity} л/ч`], ["Габариты (A×B×C)", `${sprModel.dimensions} мм`], ["Материал корпуса", "Полипропилен (ПП)"]] }); toast.success("Добавлено в КП"); }}>
+            <Button variant="secondary" className="gap-2 w-full mt-2" onClick={() => { addToKp({ model: `Станция приготовления реагентов ${sprModel.name}`, article: sprModel.article, specs: [["Производительность", `${sprModel.capacity} л/ч`], ["Габариты (A×B×C)", `${sprModel.dimensions} мм`], ["Материал корпуса", "Полипропилен (ПП)"], ["Давление", "2–6 бар"], ["Время выдержки", "60 мин"], ["Концентрация раствора", "0,1–0,5%"], ["Степень защиты", "IP54"], ["Температура эксплуатации", "+5…+40 °C"]] }); toast.success("Добавлено в КП"); }}>
               <ClipboardList className="h-4 w-4" />
               Добавить в КП
             </Button>
@@ -1837,7 +1847,7 @@ const ProductDetailContent = () => {
     };
 
     const handleMoKpPdf = () => {
-      openKpDialog({ model: `Мешочный обезвоживатель осадка ${moModel.name}`, article: moModel.article, specs: [["Производительность", `${moModel.capacity} м³/сут`], ["Количество мешков", moModel.bags], ["Габариты (Д×Ш×В)", `${moModel.dimensions} мм`], ["Материал корпуса", "Полипропилен (ПП)"]] });
+      openKpDialog({ model: `Мешочный обезвоживатель осадка ${moModel.name}`, article: moModel.article, specs: [["Производительность", `${moModel.capacity} м³/сут`], ["Количество мешков", moModel.bags], ["Габариты (Д×Ш×В)", `${moModel.dimensions} мм`], ["Материал корпуса", "Полипропилен (ПП)"], ["Принцип работы", "Гравитационная фильтрация"], ["Энергопотребление", "Не требуется"]] });
     };
 
     const handleMoContactChange = (field: keyof ContactFormData, value: string) => {
@@ -1943,7 +1953,7 @@ const ProductDetailContent = () => {
               <FileDown className="h-4 w-4" />
               Скачать коммерческое предложение (PDF)
             </Button>
-            <Button variant="secondary" className="gap-2 w-full mt-2" onClick={() => { addToKp({ model: `Мешочный обезвоживатель осадка ${moModel.name}`, article: moModel.article, specs: [["Производительность", `${moModel.capacity} м³/сут`], ["Количество мешков", moModel.bags], ["Габариты (Д×Ш×В)", `${moModel.dimensions} мм`], ["Материал корпуса", "Полипропилен (ПП)"]] }); toast.success("Добавлено в КП"); }}>
+            <Button variant="secondary" className="gap-2 w-full mt-2" onClick={() => { addToKp({ model: `Мешочный обезвоживатель осадка ${moModel.name}`, article: moModel.article, specs: [["Производительность", `${moModel.capacity} м³/сут`], ["Количество мешков", moModel.bags], ["Габариты (Д×Ш×В)", `${moModel.dimensions} мм`], ["Материал корпуса", "Полипропилен (ПП)"], ["Принцип работы", "Гравитационная фильтрация"], ["Энергопотребление", "Не требуется"]] }); toast.success("Добавлено в КП"); }}>
               <ClipboardList className="h-4 w-4" />
               Добавить в КП
             </Button>
@@ -2063,7 +2073,7 @@ const ProductDetailContent = () => {
     };
 
     const handleZhuKpPdf = () => {
-      openKpDialog({ model: `Промышленный жироуловитель ${zhuModel.name}`, article: zhuModel.article, specs: [["Производительность", `${zhuModel.throughput} л/с`], ["Пиковый сброс", `${zhuModel.peakDischarge} л`], [zhuModel.article.includes(".ЖУП.") ? "Длина×Ширина" : "Ø корпуса", `${zhuModel.diameter} мм`], ["Высота", `${zhuModel.height} мм`], ["Ø патрубков", `${zhuModel.pipeDiameter} мм`], ["Способ установки", zhuModel.installType], ["Материал корпуса", "Полипропилен (ПП)"]] });
+      openKpDialog({ model: `Промышленный жироуловитель ${zhuModel.name}`, article: zhuModel.article, specs: [["Производительность", `${zhuModel.throughput} л/с`], ["Пиковый сброс", `${zhuModel.peakDischarge} л`], [zhuModel.article.includes(".ЖУП.") ? "Длина×Ширина корпуса" : "Ø корпуса", `${zhuModel.diameter} мм`], [zhuModel.article.includes(".ЖУП.") ? "Высота ёмкости" : "Высота корпуса", `${zhuModel.height} мм`], [zhuModel.article.includes(".ЖУП.") ? "Высота колодца" : "Ø колодца", `${zhuModel.wellDiameter} мм`], ["Высота входа", `${zhuModel.inletHeight} мм`], ["Высота выхода", `${zhuModel.outletHeight} мм`], ["Ø патрубков", `${zhuModel.pipeDiameter} мм`], ["Способ установки", zhuModel.installType], ["Материал корпуса", "Полипропилен (ПП)"], ["Принцип работы", "Гравитационная сепарация"]] });
     };
 
     const handleZhuContactChange = (field: keyof ContactFormData, value: string) => {
@@ -2273,7 +2283,7 @@ const ProductDetailContent = () => {
           Скачать коммерческое предложение (PDF)
         </Button>
 
-        <Button variant="secondary" className="gap-2 w-full mt-2" onClick={() => { addToKp({ model: `Жироуловитель ${zhuModel.name}`, article: zhuModel.article, specs: [["Производительность", `${zhuModel.throughput} л/с`], ["Пиковый сброс", `${zhuModel.peakDischarge} л`], ["Диаметр", `${zhuModel.diameter} мм`], ["Высота", `${zhuModel.height} мм`], ["Тип установки", zhuModel.installType]] }); toast.success("Добавлено в КП"); }}>
+        <Button variant="secondary" className="gap-2 w-full mt-2" onClick={() => { addToKp({ model: `Промышленный жироуловитель ${zhuModel.name}`, article: zhuModel.article, specs: [["Производительность", `${zhuModel.throughput} л/с`], ["Пиковый сброс", `${zhuModel.peakDischarge} л`], [zhuModel.article.includes(".ЖУП.") ? "Длина×Ширина корпуса" : "Ø корпуса", `${zhuModel.diameter} мм`], [zhuModel.article.includes(".ЖУП.") ? "Высота ёмкости" : "Высота корпуса", `${zhuModel.height} мм`], [zhuModel.article.includes(".ЖУП.") ? "Высота колодца" : "Ø колодца", `${zhuModel.wellDiameter} мм`], ["Высота входа", `${zhuModel.inletHeight} мм`], ["Высота выхода", `${zhuModel.outletHeight} мм`], ["Ø патрубков", `${zhuModel.pipeDiameter} мм`], ["Способ установки", zhuModel.installType], ["Материал корпуса", "Полипропилен (ПП)"], ["Принцип работы", "Гравитационная сепарация"]] }); toast.success("Добавлено в КП"); }}>
           <ClipboardList className="h-4 w-4" />
           Добавить в КП
         </Button>
