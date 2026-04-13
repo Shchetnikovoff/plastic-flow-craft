@@ -1,30 +1,22 @@
 
 
-## Plan: Clickable KNS PP Product Rows with Detail Pages
+## Plan: Remove Watermarks from KNS PP Image and Apply Everywhere
 
 ### Goal
-Make each row in the KNS PP product table clickable, navigating to `/product/{article}` where a full product card is displayed with image, description, and technical specs.
+Remove the "СВ ПОЛИМЕР" watermarks from the uploaded 3D render of the polypropylene KNS, then use the cleaned image as the main visual across all KNS PP pages and product cards.
 
-### Changes
+### Steps
 
-**1. `src/pages/KnsPpPage.tsx`**
-- Add `useNavigate` from react-router-dom
-- Make each `<TableRow>` clickable with `onClick={() => navigate(`/product/${encodeURIComponent(p.article)}`)}`
-- Add `cursor-pointer` class to rows
+1. **Process the uploaded image** — Copy `user-uploads://i-3.webp` to `/tmp/`, use the AI image editing skill to remove the two "СВ ПОЛИМЕР" watermarks (top and bottom of the cylinder), output a clean PNG.
 
-**2. `src/pages/Product.tsx`**
-- Import `knsPpProducts` from `@/data/knsPpProducts`
-- Add a KNS PP article resolver function that matches articles starting with `СЗПК.КНС.ПП.`
-- Returns product data with:
-  - Title: model name (e.g. "КНС-ПП 10-5")
-  - Image: `/images/kns-pp-cutaway-v2.jpg`
-  - Technical specs grid: diameter, height, flow, head, maxFlow, maxHead, pumpCount, pumpPower, material
-  - Description text about polypropylene KNS
-  - Breadcrumb back to `/catalog/kns/v-korpuse-polipropilen`
-- Add KNS PP rendering block in the main component (following existing product type patterns)
+2. **Save the cleaned image** — Copy the result to `public/images/kns-pp-cutaway-v3.jpg` (replacing the current generated image).
 
-### Technical Details
-- Article format: `СЗПК.КНС.ПП.{Q}-{H}` — resolved by prefix match in Product.tsx
-- Reuses existing `ImageGalleryWithLightbox`, `ArticleBreakdown`, and breadcrumb components
-- No new routes needed — uses existing `/product/:article` route
+3. **Verify references are correct** — The following files already reference `kns-pp-cutaway-v3.jpg`:
+   - `src/pages/KnsPpPage.tsx` (hero section)
+   - `src/pages/Product.tsx` (product detail cards)
+   - `src/data/catalog.ts` (catalog tile)
+   
+   No code changes needed if the filename stays the same.
+
+4. **QA** — Visually inspect the cleaned image to confirm watermarks are fully removed and the render quality is preserved.
 
