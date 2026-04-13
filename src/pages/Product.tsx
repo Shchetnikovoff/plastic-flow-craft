@@ -849,6 +849,7 @@ const ProductDetailContent = () => {
             </Button>
           </DialogContent>
         </Dialog>
+        {kpDialog}
       </main>
     );
   }
@@ -1015,6 +1016,7 @@ const ProductDetailContent = () => {
               </Button>
             </DialogContent>
           </Dialog>
+          {kpDialog}
         </main>
       );
     }
@@ -1182,6 +1184,7 @@ const ProductDetailContent = () => {
               </Button>
             </DialogContent>
           </Dialog>
+          {kpDialog}
         </main>
       );
     }
@@ -1396,6 +1399,7 @@ const ProductDetailContent = () => {
             </Button>
           </DialogContent>
         </Dialog>
+        {kpDialog}
       </main>
     );
   }
@@ -1565,6 +1569,7 @@ const ProductDetailContent = () => {
             </Button>
           </DialogContent>
         </Dialog>
+        {kpDialog}
       </main>
     );
   }
@@ -1752,6 +1757,7 @@ const ProductDetailContent = () => {
             </Button>
           </DialogContent>
         </Dialog>
+        {kpDialog}
       </main>
     );
   }
@@ -1928,6 +1934,7 @@ const ProductDetailContent = () => {
             </Button>
           </DialogContent>
         </Dialog>
+        {kpDialog}
       </main>
     );
   }
@@ -2250,6 +2257,7 @@ const ProductDetailContent = () => {
             </Button>
           </DialogContent>
         </Dialog>
+        {kpDialog}
       </main>
     );
   }
