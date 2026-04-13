@@ -1,4 +1,4 @@
-import { ShoppingCart, Phone, Mail, MapPin, FileText, ChevronDown, Menu, X } from "lucide-react";
+import { ShoppingCart, Phone, Mail, MapPin, FileText, ChevronDown, Menu, X, ClipboardList } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
@@ -10,6 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useCart } from "@/contexts/CartContext";
+import { useKp } from "@/contexts/KpContext";
 import { supportedAngles, connectionTypes, type AngleType, type ConnectionType } from "@/data/products";
 import { catalog } from "@/data/catalog";
 import { generateLetterhead } from "@/lib/generateLetterhead";
@@ -19,13 +20,16 @@ export type ProductType = "otvod" | "troynik" | "razdvizhnoy" | "vozdukhovod";
 
 interface HeaderProps {
   onCartOpen: () => void;
+  onKpOpen?: () => void;
   angle?: AngleType;
   connectionType?: ConnectionType;
   productType?: ProductType;
 }
 
-const Header = ({ onCartOpen, angle = 90, connectionType = "rastrub", productType = "otvod" }: HeaderProps) => {
+const Header = ({ onCartOpen, onKpOpen, angle = 90, connectionType = "rastrub", productType = "otvod" }: HeaderProps) => {
   const { totalItems } = useCart();
+  let kpCount = 0;
+  try { const kp = useKp(); kpCount = kp.totalItems; } catch { /* KpProvider not available */ }
   const location = useLocation();
   const [openCat, setOpenCat] = useState<string | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
