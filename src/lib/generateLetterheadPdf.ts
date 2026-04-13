@@ -6,6 +6,8 @@ export interface LetterheadProductData {
   model: string;
   article: string;
   specs: [string, string][];
+  quantity?: number;
+  pricePerUnit?: number;
 }
 
 export async function generateLetterheadPdf(product?: LetterheadProductData) {
