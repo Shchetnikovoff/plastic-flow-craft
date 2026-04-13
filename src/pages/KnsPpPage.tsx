@@ -10,9 +10,8 @@ import { Label } from "@/components/ui/label";
 import { Check, ShieldCheck, Wrench, Settings } from "lucide-react";
 import { knsPpProducts } from "@/data/knsPpProducts";
 import { toast } from "sonner";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import PageFooter from "@/components/PageFooter";
-import { removeWatermark } from "@/lib/removeWatermark";
 
 const features = [
   "Корпус из листового полипропилена — химическая стойкость к кислотам и щелочам",
