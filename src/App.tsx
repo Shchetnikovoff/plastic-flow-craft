@@ -47,6 +47,7 @@ import ReaktoryPage from "./pages/ReaktoryPage";
 import GidrometallurgiyaPage from "./pages/GidrometallurgiyaPage";
 import KnsPage from "./pages/KnsPage";
 import KnsSvtPage from "./pages/KnsSvtPage";
+import KnsPpPage from "./pages/KnsPpPage";
 import GalvanikaPage from "./pages/GalvanikaPage";
 import VodopodgotovkaPage from "./pages/VodopodgotovkaPage";
 import LabMebelPage from "./pages/LabMebelPage";
@@ -111,6 +112,7 @@ const App = () => (
           <Route path="/catalog/reaktory" element={<ReaktoryPage />} />
           <Route path="/catalog/gidrometallurgiya" element={<GidrometallurgiyaPage />} />
           <Route path="/catalog/kns/v-korpuse-svt" element={<KnsSvtPage />} />
+          <Route path="/catalog/kns/v-korpuse-polipropilen" element={<KnsPpPage />} />
           <Route path="/catalog/kns" element={<KnsPage />} />
           <Route path="/catalog/galvanika" element={<GalvanikaPage />} />
           <Route path="/catalog/vodopodgotovka" element={<VodopodgotovkaPage />} />
