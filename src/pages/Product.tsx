@@ -931,8 +931,6 @@ const ProductDetailContent = () => {
             </DialogContent>
           </Dialog>
         </main>
-          </div>
-        </main>
       );
     }
   }
