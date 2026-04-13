@@ -342,7 +342,7 @@ export async function generateLetterheadPdf(
   doc.setTextColor(51);
   doc.setFontSize(10);
   doc.setFont("PTSans", "normal");
-  doc.text("_________________ / И.А. Попов /", margin, y);
+  doc.text("_________________ / А.В. Особенкова /", margin, y);
 
   // === FOOTER (on every page) ===
   const totalPages = doc.getNumberOfPages();
