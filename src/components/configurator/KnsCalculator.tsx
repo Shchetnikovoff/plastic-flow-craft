@@ -1,0 +1,246 @@
+import { useState, useMemo } from "react";
+import { Link } from "react-router-dom";
+import { Badge } from "@/components/ui/badge";
+import { Slider } from "@/components/ui/slider";
+import { Button } from "@/components/ui/button";
+import { Switch } from "@/components/ui/switch";
+import { Label } from "@/components/ui/label";
+import { ArrowRight, Droplets, Factory, CloudRain, FlaskConical } from "lucide-react";
+import ArticleBreakdown, { type ArticleSegment } from "./ArticleBreakdown";
+import { knsSvtProducts } from "@/data/knsSvtProducts";
+import { knsPpProducts } from "@/data/knsPpProducts";
+
+type WastewaterType = "domestic" | "industrial" | "stormwater" | "other";
+type KnsMaterial = "pe" | "pp";
+
+const wastewaterOptions: { id: WastewaterType; label: string; icon: React.ElementType }[] = [
+  { id: "domestic", label: "Хоз.-бытовые", icon: Droplets },
+  { id: "industrial", label: "Промышленные", icon: Factory },
+  { id: "stormwater", label: "Ливневые", icon: CloudRain },
+  { id: "other", label: "Другое", icon: FlaskConical },
+];
+
+const materialOptions: { id: KnsMaterial; label: string; desc: string }[] = [
+  { id: "pe", label: "Полиэтилен (ПЭ)", desc: "Корпус из полиэтилена — высокая прочность, срок службы от 30 лет" },
+  { id: "pp", label: "Полипропилен (ПП)", desc: "Химическая стойкость к агрессивным средам, сварная конструкция" },
+];
+
+const equipmentOptions = [
+  { id: "basket", label: "Сороудерживающая корзина" },
+  { id: "gate", label: "Шиберная задвижка на подводящем трубопроводе" },
+  { id: "gateWell", label: "Колодец с шиберной задвижкой" },
+  { id: "flowMeter", label: "Колодец с запорной арматурой и расходомером" },
+  { id: "pavilion", label: "Павильон-укрытие с грузоподъемным механизмом" },
+  { id: "insulation", label: "Утепление корпуса КНС" },
+];
+
+const KnsCalculator = () => {
+  const [wastewaterType, setWastewaterType] = useState<WastewaterType>("domestic");
+  const [material, setMaterial] = useState<KnsMaterial>("pp");
+  const [flow, setFlow] = useState(20);
+  const [head, setHead] = useState(15);
+  const [pumpCount, setPumpCount] = useState(2);
+  const [equipment, setEquipment] = useState<Record<string, boolean>>({});
+
+  const allProducts = useMemo(() => [
+    ...knsSvtProducts.map((p) => ({ ...p, mat: "pe" as KnsMaterial })),
+    ...knsPpProducts.map((p) => ({ ...p, mat: "pp" as KnsMaterial })),
+  ], []);
+
+  const recommended = useMemo(() => {
+    const filtered = allProducts.filter((p) => p.mat === material);
+    // Find best match: flow >= requested AND head >= requested, then smallest
+    const matching = filtered.filter((p) => p.flow >= flow && p.head >= head);
+    if (matching.length > 0) {
+      matching.sort((a, b) => (a.flow + a.head) - (b.flow + b.head));
+      return matching[0];
+    }
+    // Fallback: closest by combined distance
+    const sorted = [...filtered].sort((a, b) => {
+      const distA = Math.abs(a.flow - flow) + Math.abs(a.head - head);
+      const distB = Math.abs(b.flow - flow) + Math.abs(b.head - head);
+      return distA - distB;
+    });
+    return sorted[0] || null;
+  }, [allProducts, material, flow, head]);
+
+  const selectedEquipmentList = Object.entries(equipment)
+    .filter(([, v]) => v)
+    .map(([k]) => equipmentOptions.find((e) => e.id === k)?.label)
+    .filter(Boolean);
+
+  const matCode = material === "pe" ? "ПЭ" : "ПП";
+  const matLabel = material === "pe" ? "Полиэтилен" : "Полипропилен";
+
+  const articleSegments: ArticleSegment[] = recommended
+    ? [
+        { value: "СЗПК", label: "Компания", desc: "ООО СЗПК «Пласт-Металл Про»" },
+        { value: "КНС", label: "Тип изделия", desc: "Канализационная насосная станция" },
+        { value: matCode, label: "Материал", desc: matLabel },
+        { value: `${recommended.flow}-${recommended.head}`, label: "Q-H", desc: `Произв. ${recommended.flow} м³/ч, напор ${recommended.head} м` },
+      ]
+    : [];
+
+  return (
+    <section id="calculator" className="mb-10 scroll-mt-8">
+      <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">
+        Калькулятор подбора КНС
+      </h2>
+      <div className="rounded-xl border border-border bg-card p-5 sm:p-6">
+        <div className="space-y-6">
+          {/* Wastewater type */}
+          <div>
+            <span className="text-sm font-semibold text-foreground mb-2 block">Тип перекачиваемых сточных вод</span>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+              {wastewaterOptions.map((w) => (
+                <div
+                  key={w.id}
+                  onClick={() => setWastewaterType(w.id)}
+                  className={`flex items-center gap-2 rounded-lg border p-3 cursor-pointer transition-all ${
+                    wastewaterType === w.id
+                      ? "border-primary ring-1 ring-primary shadow-sm bg-primary/5"
+                      : "border-border hover:border-muted-foreground bg-card"
+                  }`}
+                >
+                  <w.icon className="h-4 w-4 text-primary shrink-0" />
+                  <span className="text-xs font-medium text-foreground">{w.label}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Material */}
+          <div>
+            <span className="text-sm font-semibold text-foreground mb-2 block">Материал корпуса</span>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              {materialOptions.map((m) => (
+                <div
+                  key={m.id}
+                  onClick={() => setMaterial(m.id)}
+                  className={`rounded-lg border p-3 cursor-pointer transition-all ${
+                    material === m.id
+                      ? "border-primary ring-1 ring-primary shadow-sm bg-primary/5"
+                      : "border-border hover:border-muted-foreground bg-card"
+                  }`}
+                >
+                  <span className="text-sm font-semibold text-foreground">{m.label}</span>
+                  <p className="text-xs text-muted-foreground mt-0.5">{m.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Flow & Head sliders */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div>
+              <label className="text-sm font-semibold text-foreground mb-3 block">
+                Производительность (Q): <span className="text-primary">{flow} м³/ч</span>
+              </label>
+              <Slider
+                min={5}
+                max={80}
+                step={5}
+                value={[flow]}
+                onValueChange={([v]) => setFlow(v)}
+              />
+              <div className="flex justify-between text-xs text-muted-foreground mt-1">
+                <span>5 м³/ч</span>
+                <span>80 м³/ч</span>
+              </div>
+            </div>
+            <div>
+              <label className="text-sm font-semibold text-foreground mb-3 block">
+                Требуемый напор (H): <span className="text-primary">{head} м</span>
+              </label>
+              <Slider
+                min={5}
+                max={40}
+                step={5}
+                value={[head]}
+                onValueChange={([v]) => setHead(v)}
+              />
+              <div className="flex justify-between text-xs text-muted-foreground mt-1">
+                <span>5 м</span>
+                <span>40 м</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Pump count */}
+          <div>
+            <span className="text-sm font-semibold text-foreground mb-2 block">Рабочая схема</span>
+            <div className="flex flex-wrap gap-2">
+              {[2, 3, 4].map((n) => (
+                <Badge
+                  key={n}
+                  variant="outline"
+                  className={`rounded-full px-3 py-1.5 text-xs font-medium cursor-pointer transition-colors ${
+                    pumpCount === n
+                      ? "border-primary text-primary bg-primary/5"
+                      : "hover:border-primary/50 hover:text-primary/80"
+                  }`}
+                  onClick={() => setPumpCount(n)}
+                >
+                  {n === 2 ? "1 раб. + 1 рез." : n === 3 ? "2 раб. + 1 рез." : "3 раб. + 1 рез."}
+                </Badge>
+              ))}
+            </div>
+          </div>
+
+          {/* Additional equipment */}
+          <div>
+            <span className="text-sm font-semibold text-foreground mb-3 block">Дополнительное оборудование</span>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              {equipmentOptions.map((eq) => (
+                <div key={eq.id} className="flex items-center gap-2 rounded-lg border border-border bg-card p-2.5">
+                  <Switch
+                    id={eq.id}
+                    checked={!!equipment[eq.id]}
+                    onCheckedChange={(v) => setEquipment((prev) => ({ ...prev, [eq.id]: v }))}
+                  />
+                  <Label htmlFor={eq.id} className="text-xs text-foreground cursor-pointer">{eq.label}</Label>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Result */}
+          {recommended && (
+            <div className="space-y-3">
+              <ArticleBreakdown exampleArticle={recommended.article} segments={articleSegments} />
+
+              <div className="rounded-lg border border-primary/20 bg-primary/5 p-4">
+                <div className="flex flex-wrap items-center justify-between gap-3">
+                  <div className="space-y-1">
+                    <p className="text-sm font-semibold text-foreground">
+                      Рекомендованная модель: <span className="text-primary">{recommended.model}</span>
+                    </p>
+                    <p className="text-xs text-muted-foreground">
+                      {recommended.article} · Ø{recommended.diameter} мм · H {recommended.height} мм
+                      · Q {recommended.flow} м³/ч · Напор {recommended.head} м
+                      · {recommended.pumpCount} насоса × {recommended.pumpPower} кВт
+                      · {matLabel}
+                    </p>
+                    {selectedEquipmentList.length > 0 && (
+                      <p className="text-xs text-muted-foreground mt-1">
+                        <span className="font-medium">Доп. оборудование:</span> {selectedEquipmentList.join(", ")}
+                      </p>
+                    )}
+                  </div>
+                  <Button asChild size="sm" className="gap-1.5">
+                    <Link to={`/product/${encodeURIComponent(recommended.article)}`}>
+                      Перейти к товару
+                      <ArrowRight className="h-4 w-4" />
+                    </Link>
+                  </Button>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default KnsCalculator;
