@@ -2273,6 +2273,11 @@ const ProductDetailContent = () => {
           Скачать коммерческое предложение (PDF)
         </Button>
 
+        <Button variant="secondary" className="gap-2 w-full mt-2" onClick={() => { addToKp({ model: `Жироуловитель ${zhuModel.name}`, article: zhuModel.article, specs: [["Производительность", `${zhuModel.throughput} л/с`], ["Пиковый сброс", `${zhuModel.peakDischarge} л`], ["Диаметр", `${zhuModel.diameter} мм`], ["Высота", `${zhuModel.height} мм`], ["Тип установки", zhuModel.installType]] }); toast.success("Добавлено в КП"); }}>
+          <ClipboardList className="h-4 w-4" />
+          Добавить в КП
+        </Button>
+
         <Dialog open={pdfDialogOpen} onOpenChange={setPdfDialogOpen}>
           <DialogContent className="max-w-md">
             <DialogHeader>
