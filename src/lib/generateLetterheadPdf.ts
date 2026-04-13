@@ -26,22 +26,23 @@ export async function generateLetterheadPdf(product?: LetterheadProductData) {
   // === HEADER ===
   let y = 15;
   if (logoData) {
-    doc.addImage(logoData, "PNG", margin, y - 5, 28, 13);
+    doc.addImage(logoData, "PNG", margin, y - 8, 42, 20);
   }
 
   // Company name
-  doc.setFontSize(11);
+  doc.setFontSize(13);
   doc.setTextColor(30, 58, 95);
   doc.setFont("PTSans", "bold");
-  doc.text("ООО СЗПК «Пласт-Металл Про»", margin + 32, y + 1);
+  doc.text("ООО СЗПК «Пласт-Металл Про»", margin + 46, y + 1);
 
   // Contact info right-aligned
   doc.setFontSize(8);
   doc.setTextColor(102);
   doc.setFont("PTSans", "normal");
   doc.text("+7 963 322-55-40  |  osobenkov@list.ru", pw - margin, y + 1, { align: "right" });
+  doc.text("Ленинградская обл., д. Разметелево, ул. Строителей 27", pw - margin, y + 5, { align: "right" });
 
-  y += 10;
+  y += 16;
 
   // Blue separator line
   doc.setDrawColor(30, 58, 95);
