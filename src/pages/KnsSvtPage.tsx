@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ProductPageShell from "@/components/configurator/ProductPageShell";
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
@@ -29,6 +29,7 @@ const specs = [
 ];
 
 const KnsSvtPage = () => {
+  const navigate = useNavigate();
   const [form, setForm] = useState({ name: "", phone: "", email: "", description: "" });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -89,7 +90,7 @@ const KnsSvtPage = () => {
               </TableHeader>
               <TableBody>
                 {knsSvtProducts.map((p) => (
-                  <TableRow key={p.article} className="hover:bg-muted/50">
+                  <TableRow key={p.article} className="hover:bg-muted/50 cursor-pointer" onClick={() => navigate(`/product/${encodeURIComponent(p.article)}`)}>
                     <TableCell className="text-sm font-medium">{p.model}</TableCell>
                     <TableCell className="text-sm text-center">{p.diameter}</TableCell>
                     <TableCell className="text-sm text-center">{p.height}</TableCell>
