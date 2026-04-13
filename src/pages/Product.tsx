@@ -523,6 +523,22 @@ const ProductDetailContent = () => {
   const [contactData, setContactData] = useState<ContactFormData>({ name: "", email: "", phone: "", inn: "" });
   const [contactErrors, setContactErrors] = useState<ContactFormErrors>({});
 
+  const openKpDialog = useCallback((product: Omit<LetterheadProductData, "quantity" | "pricePerUnit">) => {
+    kpProductRef.current = product;
+    setKpQty("");
+    setKpPrice("");
+    setKpDialogOpen(true);
+  }, []);
+
+  const handleKpDownload = useCallback(async () => {
+    if (!kpProductRef.current) return;
+    const quantity = kpQty ? parseInt(kpQty, 10) : undefined;
+    const pricePerUnit = kpPrice ? parseFloat(kpPrice.replace(",", ".").replace(/\s/g, "")) : undefined;
+    await generateLetterheadPdf({ ...kpProductRef.current, quantity, pricePerUnit });
+    toast.success("Коммерческое предложение скачано");
+    setKpDialogOpen(false);
+  }, [kpQty, kpPrice]);
+
   const navigate = useNavigate();
 
   if (!article) return <div className="p-8 text-center text-muted-foreground">Артикул не указан</div>;
