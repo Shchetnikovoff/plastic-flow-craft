@@ -947,7 +947,7 @@ const ProductDetailContent = () => {
               <p className="font-mono text-sm text-muted-foreground mb-4">{knsSvtItem.article}</p>
 
               <p className="text-sm text-muted-foreground mb-6">
-                Канализационная насосная станция в корпусе из стеклопластика SVT. Производительность {knsSvtItem.flow} м³/ч, напор {knsSvtItem.head} м. Корпус устойчив к коррозии, срок службы от 30 лет.
+                Канализационная насосная станция в корпусе из полиэтилена. Производительность {knsSvtItem.flow} м³/ч, напор {knsSvtItem.head} м. Корпус устойчив к коррозии, срок службы от 30 лет.
               </p>
 
               <div className="grid grid-cols-2 gap-px rounded-lg border overflow-hidden mb-4">
