@@ -2,7 +2,13 @@ import { jsPDF } from "jspdf";
 import { loadImageAsBase64 } from "./imageUtils";
 import { registerCyrillicFont } from "./pdfFonts";
 
-export async function generateLetterheadPdf() {
+export interface LetterheadProductData {
+  model: string;
+  article: string;
+  specs: [string, string][];
+}
+
+export async function generateLetterheadPdf(product?: LetterheadProductData) {
   const doc = new jsPDF({ orientation: "portrait", unit: "mm", format: "a4" });
   await registerCyrillicFont(doc);
   const pw = doc.internal.pageSize.getWidth();
@@ -87,17 +93,103 @@ export async function generateLetterheadPdf() {
   );
   y += 10;
 
-  // Empty lines for content
-  doc.setDrawColor(230);
-  for (let i = 0; i < 18; i++) {
-    doc.line(margin, y, pw - margin, y);
-    y += 8;
+  if (product) {
+    // === Product info block ===
+    const contentW = pw - margin * 2;
+
+    // Product model title
+    doc.setFont("PTSans", "bold");
+    doc.setFontSize(13);
+    doc.setTextColor(30, 58, 95);
+    doc.text(product.model, margin, y);
+    y += 7;
+
+    // Article
+    doc.setFont("PTSans", "normal");
+    doc.setFontSize(10);
+    doc.setTextColor(102);
+    doc.text(`Артикул: ${product.article}`, margin, y);
+    y += 9;
+
+    // Specs table
+    const colLabel = contentW * 0.45;
+    const colValue = contentW * 0.55;
+    const rowH = 7;
+
+    // Table header
+    doc.setFillColor(30, 58, 95);
+    doc.rect(margin, y, contentW, rowH, "F");
+    doc.setFont("PTSans", "bold");
+    doc.setFontSize(9);
+    doc.setTextColor(255);
+    doc.text("Характеристика", margin + 3, y + 5);
+    doc.text("Значение", margin + colLabel + 3, y + 5);
+    y += rowH;
+
+    doc.setFont("PTSans", "normal");
+    doc.setFontSize(9);
+
+    product.specs.forEach(([label, value], i) => {
+      // Check page overflow
+      if (y + rowH > ph - 60) {
+        doc.addPage();
+        y = 20;
+      }
+
+      const bg = i % 2 === 0;
+      if (bg) {
+        doc.setFillColor(245, 247, 250);
+        doc.rect(margin, y, contentW, rowH, "F");
+      }
+
+      // Row borders
+      doc.setDrawColor(220);
+      doc.setLineWidth(0.2);
+      doc.line(margin, y + rowH, margin + contentW, y + rowH);
+
+      doc.setTextColor(51);
+      doc.text(label, margin + 3, y + 5);
+      doc.setTextColor(30, 30, 30);
+      doc.text(value, margin + colLabel + 3, y + 5);
+
+      y += rowH;
+    });
+
+    y += 6;
+
+    // Quantity / price placeholder
+    doc.setFont("PTSans", "normal");
+    doc.setFontSize(10);
+    doc.setTextColor(51);
+    doc.text("Количество: __________ шт.", margin, y);
+    y += 7;
+    doc.text("Стоимость: __________________ руб. (без НДС)", margin, y);
+    y += 7;
+    doc.text("Стоимость с НДС (20%): __________________ руб.", margin, y);
+    y += 10;
+
+    // Terms
+    doc.setFontSize(9);
+    doc.setTextColor(102);
+    doc.text("Срок изготовления: 10–25 рабочих дней с момента оплаты.", margin, y);
+    y += 5;
+    doc.text("Условия оплаты: 70% предоплата, 30% перед отгрузкой.", margin, y);
+    y += 5;
+    doc.text("Срок действия предложения: 30 календарных дней.", margin, y);
+  } else {
+    // Empty lines for content (legacy fallback)
+    doc.setDrawColor(230);
+    for (let i = 0; i < 18; i++) {
+      doc.line(margin, y, pw - margin, y);
+      y += 8;
+    }
   }
 
   // === Signature ===
   y = ph - 55;
   doc.setTextColor(51);
   doc.setFontSize(11);
+  doc.setFont("PTSans", "normal");
   doc.text("С уважением,", margin, y);
   y += 7;
   doc.text("Директор ООО СЗПК «Пласт-Металл Про»", margin, y);
@@ -127,5 +219,8 @@ export async function generateLetterheadPdf() {
     { align: "center" }
   );
 
-  doc.save("Коммерческое_предложение_ПластМеталлПро.pdf");
+  const filename = product
+    ? `КП_${product.article.replace(/\./g, "_")}.pdf`
+    : "Коммерческое_предложение_ПластМеталлПро.pdf";
+  doc.save(filename);
 }
