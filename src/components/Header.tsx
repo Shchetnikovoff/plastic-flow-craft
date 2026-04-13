@@ -116,6 +116,16 @@ const Header = ({ onCartOpen, onKpOpen, angle = 90, connectionType = "rastrub", 
               <DropdownMenuItem onClick={() => generateLetterheadPdf()}>Скачать PDF (.pdf)</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
+          {onKpOpen && (
+            <Button variant="outline" size="icon" className="relative" onClick={onKpOpen} title="Коммерческое предложение">
+              <ClipboardList className="h-5 w-5" />
+              {kpCount > 0 && (
+                <Badge className="absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-primary-foreground p-0 text-[10px]">
+                  {kpCount}
+                </Badge>
+              )}
+            </Button>
+          )}
           <Button variant="outline" size="icon" className="relative" onClick={onCartOpen}>
             <ShoppingCart className="h-5 w-5" />
             {totalItems > 0 && (
