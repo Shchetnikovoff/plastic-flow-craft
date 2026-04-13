@@ -101,6 +101,7 @@ const KnsCalculator = () => {
   const [equipment, setEquipment] = useState<Record<string, boolean>>({});
   const [inletPipe, setInletPipe] = useState<PipelineParams>({ ...defaultPipeline });
   const [outletPipe, setOutletPipe] = useState<PipelineParams>({ ...defaultPipeline });
+  const [contact, setContact] = useState({ company: "", person: "", phone: "", email: "", address: "" });
 
   const allProducts = useMemo(() => [
     ...knsSvtProducts.map((p) => ({ ...p, mat: "pe" as KnsMaterial })),
