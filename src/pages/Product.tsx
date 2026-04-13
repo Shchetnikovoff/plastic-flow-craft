@@ -514,6 +514,7 @@ function parseArticle(article: string) {
 const ProductDetailContent = () => {
   const { article } = useParams<{ article: string }>();
   const { addItem } = useCart();
+  const { addItem: addToKp } = useKp();
   const [qty, setQty] = useState(1);
   const [selectedImage, setSelectedImage] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
