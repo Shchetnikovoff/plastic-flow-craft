@@ -1010,16 +1010,8 @@ const ProductDetailContent = () => {
                 Добавить в КП
               </Button>
             </div>
+          </div>
 
-          <Dialog open={pdfDialogOpen} onOpenChange={setPdfDialogOpen}>
-            <DialogContent className="max-w-md">
-              <DialogHeader>
-                <DialogTitle>Скачать спецификацию</DialogTitle>
-                <DialogDescription>
-                  Заполните контактные данные для скачивания PDF-спецификации
-                </DialogDescription>
-              </DialogHeader>
-              <ContactFormFields data={contactData} errors={contactErrors} onChange={handleKnsSvtContactChange} />
               <Button className="w-full gap-2 mt-2" onClick={handleKnsSvtSpecPdf}>
                 <FileDown className="h-4 w-4" />
                 Скачать PDF
