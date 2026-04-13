@@ -627,6 +627,14 @@ const ProductDetailContent = () => {
           availableLength: null,
           connectionName: "",
           materialName: emkost.materialName,
+          productTitle: emkost.title,
+          extraRows: [
+            ["Объём", `${emkost.volume.toLocaleString()} л`],
+            ...(emkost.diameter > 0 ? [["Диаметр (D)", `${emkost.diameter.toLocaleString()} мм`] as [string, string]] : []),
+            [emkost.heightLabel, `${emkost.heightOrLength.toLocaleString()} мм`],
+            ["Материал", emkost.materialName],
+            ...(emkost.colorLabel ? [["Цвет", emkost.colorLabel] as [string, string]] : []),
+          ],
         },
         contactData
       );
@@ -884,6 +892,7 @@ const ProductDetailContent = () => {
             availableLength: null,
             connectionName: "",
             materialName: knsSvtItem.material,
+            productTitle: `КНС в корпусе SVT ${knsSvtItem.model}`,
             extraRows: [
               ["Модель", knsSvtItem.model],
               ["Диаметр корпуса", `${knsSvtItem.diameter} мм`],
@@ -1056,6 +1065,7 @@ const ProductDetailContent = () => {
             availableLength: null,
             connectionName: "",
             materialName: knsPpItem.material,
+            productTitle: `КНС из полипропилена ${knsPpItem.model}`,
             extraRows: [
               ["Модель", knsPpItem.model],
               ["Диаметр корпуса", `${knsPpItem.diameter} мм`],
