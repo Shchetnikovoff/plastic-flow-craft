@@ -2283,7 +2283,7 @@ const ProductDetailContent = () => {
           Скачать коммерческое предложение (PDF)
         </Button>
 
-        <Button variant="secondary" className="gap-2 w-full mt-2" onClick={() => { addToKp({ model: `Жироуловитель ${zhuModel.name}`, article: zhuModel.article, specs: [["Производительность", `${zhuModel.throughput} л/с`], ["Пиковый сброс", `${zhuModel.peakDischarge} л`], ["Диаметр", `${zhuModel.diameter} мм`], ["Высота", `${zhuModel.height} мм`], ["Тип установки", zhuModel.installType]] }); toast.success("Добавлено в КП"); }}>
+        <Button variant="secondary" className="gap-2 w-full mt-2" onClick={() => { addToKp({ model: `Промышленный жироуловитель ${zhuModel.name}`, article: zhuModel.article, specs: [["Производительность", `${zhuModel.throughput} л/с`], ["Пиковый сброс", `${zhuModel.peakDischarge} л`], [zhuModel.article.includes(".ЖУП.") ? "Длина×Ширина корпуса" : "Ø корпуса", `${zhuModel.diameter} мм`], [zhuModel.article.includes(".ЖУП.") ? "Высота ёмкости" : "Высота корпуса", `${zhuModel.height} мм`], [zhuModel.article.includes(".ЖУП.") ? "Высота колодца" : "Ø колодца", `${zhuModel.wellDiameter} мм`], ["Высота входа", `${zhuModel.inletHeight} мм`], ["Высота выхода", `${zhuModel.outletHeight} мм`], ["Ø патрубков", `${zhuModel.pipeDiameter} мм`], ["Способ установки", zhuModel.installType], ["Материал корпуса", "Полипропилен (ПП)"], ["Принцип работы", "Гравитационная сепарация"]] }); toast.success("Добавлено в КП"); }}>
           <ClipboardList className="h-4 w-4" />
           Добавить в КП
         </Button>
