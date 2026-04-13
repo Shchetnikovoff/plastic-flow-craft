@@ -1405,7 +1405,7 @@ const ProductDetailContent = () => {
               <FileDown className="h-4 w-4" />
               Скачать коммерческое предложение (PDF)
             </Button>
-            <Button variant="secondary" className="gap-2 w-full mt-2" onClick={() => { addToKp({ model: `ФФУ ${ffuModel.name}`, article: ffuModel.article, specs: [["Производительность", `${ffuModel.capacity} м³/ч`], ["Мощность", `${ffuModel.power} кВт`], ["Габариты", `${ffuModel.dimensions} мм`]] }); toast.success("Добавлено в КП"); }}>
+            <Button variant="secondary" className="gap-2 w-full mt-2" onClick={() => { addToKp({ model: `Флотационно-фильтровальная установка ${ffuModel.name}`, article: ffuModel.article, specs: [["Производительность", `${ffuModel.capacity} м³/ч`], ["Мощность", `${ffuModel.power} кВт`], ["Габариты (Д×Ш×В)", `${ffuModel.dimensions} мм`], ["Масса сухая", `${ffuModel.massDry} т`], ["Масса с водой", `${ffuModel.massWet} т`], ["Материал корпуса", "Полипропилен / ПВХ / Стеклопластик"], ["Рабочая температура", "до +60 °C"]] }); toast.success("Добавлено в КП"); }}>
               <ClipboardList className="h-4 w-4" />
               Добавить в КП
             </Button>
@@ -1579,7 +1579,7 @@ const ProductDetailContent = () => {
               <FileDown className="h-4 w-4" />
               Скачать коммерческое предложение (PDF)
             </Button>
-            <Button variant="secondary" className="gap-2 w-full mt-2" onClick={() => { addToKp({ model: `Тонкослойный (ламельный) отстойник ${lamModel.name}`, article: lamModel.article, specs: [["Производительность", `${lamModel.capacity} м³/ч`], ["Габариты (Д×Ш×В)", `${lamModel.dimensions} мм`], ["Масса (сух./раб.)", `${lamModel.mass} кг`], ["Материал корпуса", lamParsed.materialName]] }); toast.success("Добавлено в КП"); }}>
+            <Button variant="secondary" className="gap-2 w-full mt-2" onClick={() => { addToKp({ model: `Тонкослойный (ламельный) отстойник ${lamModel.name}`, article: lamModel.article, specs: [["Производительность", `${lamModel.capacity} м³/ч`], ["Габариты (Д×Ш×В)", `${lamModel.dimensions} мм`], ["Масса (сух./раб.)", `${lamModel.mass} кг`], ["Материал корпуса", lamParsed.materialName], ["Рабочая температура", "до +60 °C"]] }); toast.success("Добавлено в КП"); }}>
               <ClipboardList className="h-4 w-4" />
               Добавить в КП
             </Button>
@@ -1772,7 +1772,7 @@ const ProductDetailContent = () => {
               <FileDown className="h-4 w-4" />
               Скачать коммерческое предложение (PDF)
             </Button>
-            <Button variant="secondary" className="gap-2 w-full mt-2" onClick={() => { addToKp({ model: `Станция приготовления реагентов ${sprModel.name}`, article: sprModel.article, specs: [["Производительность", `${sprModel.capacity} л/ч`], ["Габариты (A×B×C)", `${sprModel.dimensions} мм`], ["Материал корпуса", "Полипропилен (ПП)"]] }); toast.success("Добавлено в КП"); }}>
+            <Button variant="secondary" className="gap-2 w-full mt-2" onClick={() => { addToKp({ model: `Станция приготовления реагентов ${sprModel.name}`, article: sprModel.article, specs: [["Производительность", `${sprModel.capacity} л/ч`], ["Габариты (A×B×C)", `${sprModel.dimensions} мм`], ["Материал корпуса", "Полипропилен (ПП)"], ["Давление", "2–6 бар"], ["Время выдержки", "60 мин"], ["Концентрация раствора", "0,1–0,5%"], ["Степень защиты", "IP54"], ["Температура эксплуатации", "+5…+40 °C"]] }); toast.success("Добавлено в КП"); }}>
               <ClipboardList className="h-4 w-4" />
               Добавить в КП
             </Button>
@@ -1953,7 +1953,7 @@ const ProductDetailContent = () => {
               <FileDown className="h-4 w-4" />
               Скачать коммерческое предложение (PDF)
             </Button>
-            <Button variant="secondary" className="gap-2 w-full mt-2" onClick={() => { addToKp({ model: `Мешочный обезвоживатель осадка ${moModel.name}`, article: moModel.article, specs: [["Производительность", `${moModel.capacity} м³/сут`], ["Количество мешков", moModel.bags], ["Габариты (Д×Ш×В)", `${moModel.dimensions} мм`], ["Материал корпуса", "Полипропилен (ПП)"]] }); toast.success("Добавлено в КП"); }}>
+            <Button variant="secondary" className="gap-2 w-full mt-2" onClick={() => { addToKp({ model: `Мешочный обезвоживатель осадка ${moModel.name}`, article: moModel.article, specs: [["Производительность", `${moModel.capacity} м³/сут`], ["Количество мешков", moModel.bags], ["Габариты (Д×Ш×В)", `${moModel.dimensions} мм`], ["Материал корпуса", "Полипропилен (ПП)"], ["Принцип работы", "Гравитационная фильтрация"], ["Энергопотребление", "Не требуется"]] }); toast.success("Добавлено в КП"); }}>
               <ClipboardList className="h-4 w-4" />
               Добавить в КП
             </Button>
