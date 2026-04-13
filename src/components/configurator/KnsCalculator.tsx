@@ -7,10 +7,12 @@ import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { ArrowRight, Droplets, Factory, CloudRain, FlaskConical } from "lucide-react";
+import { ArrowRight, Droplets, Factory, CloudRain, FlaskConical, Download } from "lucide-react";
+import { toast } from "sonner";
 import ArticleBreakdown, { type ArticleSegment } from "./ArticleBreakdown";
 import { knsSvtProducts } from "@/data/knsSvtProducts";
 import { knsPpProducts } from "@/data/knsPpProducts";
+import { generateKnsOprosnyList } from "@/lib/generateKnsOprosnyList";
 
 type WastewaterType = "domestic" | "industrial" | "stormwater" | "other";
 type KnsMaterial = "pe" | "pp";
