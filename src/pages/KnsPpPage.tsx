@@ -31,6 +31,13 @@ const specs = [
 
 const KnsPpPage = () => {
   const [form, setForm] = useState({ name: "", phone: "", email: "", description: "" });
+  const [heroSrc, setHeroSrc] = useState("/images/kns-pp-cutaway.jpg");
+
+  useEffect(() => {
+    removeWatermark("/images/kns-pp-cutaway.jpg", [0.22, 0.58, 0.5, 0.2])
+      .then(setHeroSrc)
+      .catch(() => {});
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
