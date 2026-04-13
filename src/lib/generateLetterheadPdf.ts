@@ -24,11 +24,13 @@ export async function generateLetterheadPdf(
   const margin = 20;
   const contentW = pw - margin * 2;
 
-  // Load logo
+  // Load images
   let logoData: string | null = null;
-  try {
-    logoData = await loadImageAsBase64("/images/logo.png");
-  } catch { /* skip */ }
+  let stampData: string | null = null;
+  let signatureData: string | null = null;
+  try { logoData = await loadImageAsBase64("/images/logo.png"); } catch { /* skip */ }
+  try { stampData = await loadImageAsBase64("/images/stamp.png"); } catch { /* skip */ }
+  try { signatureData = await loadImageAsBase64("/images/signature.png"); } catch { /* skip */ }
 
   // Helper: ensure space, add page if needed
   const ensureSpace = (needed: number) => {
