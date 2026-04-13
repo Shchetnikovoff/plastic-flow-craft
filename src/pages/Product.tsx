@@ -934,10 +934,7 @@ const ProductDetailContent = () => {
                 Скачать спецификацию (PDF)
               </Button>
 
-              <Button variant="outline" className="gap-2 w-full mt-2" onClick={async () => {
-                await generateLetterheadPdf({ model: knsSvtItem.model, article: knsSvtItem.article, specs: [["Диаметр корпуса", `${knsSvtItem.diameter} мм`], ["Высота", `${knsSvtItem.height} мм`], ["Производительность (Q)", `${knsSvtItem.flow} м³/ч`], ["Напор (H)", `${knsSvtItem.head} м`], ["Макс. расход (Qmax)", `${knsSvtItem.maxFlow} м³/ч`], ["Макс. напор (Hmax)", `${knsSvtItem.maxHead} м`], ["Кол-во насосов", `${knsSvtItem.pumpCount} шт.`], ["Мощность насосов", `${knsSvtItem.pumpPower} кВт`], ["Материал корпуса", knsSvtItem.material]] });
-                toast.success("Коммерческое предложение скачано");
-              }}>
+              <Button variant="outline" className="gap-2 w-full mt-2" onClick={() => openKpDialog({ model: knsSvtItem.model, article: knsSvtItem.article, specs: [["Диаметр корпуса", `${knsSvtItem.diameter} мм`], ["Высота", `${knsSvtItem.height} мм`], ["Производительность (Q)", `${knsSvtItem.flow} м³/ч`], ["Напор (H)", `${knsSvtItem.head} м`], ["Макс. расход (Qmax)", `${knsSvtItem.maxFlow} м³/ч`], ["Макс. напор (Hmax)", `${knsSvtItem.maxHead} м`], ["Кол-во насосов", `${knsSvtItem.pumpCount} шт.`], ["Мощность насосов", `${knsSvtItem.pumpPower} кВт`], ["Материал корпуса", knsSvtItem.material]] })}>
                 <FileDown className="h-4 w-4" />
                 Скачать коммерческое предложение (PDF)
               </Button>
@@ -1104,10 +1101,7 @@ const ProductDetailContent = () => {
                 Скачать спецификацию (PDF)
               </Button>
 
-              <Button variant="outline" className="gap-2 w-full mt-2" onClick={async () => {
-                await generateLetterheadPdf({ model: knsPpItem.model, article: knsPpItem.article, specs: [["Диаметр корпуса", `${knsPpItem.diameter} мм`], ["Высота", `${knsPpItem.height} мм`], ["Производительность (Q)", `${knsPpItem.flow} м³/ч`], ["Напор (H)", `${knsPpItem.head} м`], ["Макс. расход (Qmax)", `${knsPpItem.maxFlow} м³/ч`], ["Макс. напор (Hmax)", `${knsPpItem.maxHead} м`], ["Кол-во насосов", `${knsPpItem.pumpCount} шт.`], ["Мощность насосов", `${knsPpItem.pumpPower} кВт`], ["Материал корпуса", knsPpItem.material]] });
-                toast.success("Коммерческое предложение скачано");
-              }}>
+              <Button variant="outline" className="gap-2 w-full mt-2" onClick={() => openKpDialog({ model: knsPpItem.model, article: knsPpItem.article, specs: [["Диаметр корпуса", `${knsPpItem.diameter} мм`], ["Высота", `${knsPpItem.height} мм`], ["Производительность (Q)", `${knsPpItem.flow} м³/ч`], ["Напор (H)", `${knsPpItem.head} м`], ["Макс. расход (Qmax)", `${knsPpItem.maxFlow} м³/ч`], ["Макс. напор (Hmax)", `${knsPpItem.maxHead} м`], ["Кол-во насосов", `${knsPpItem.pumpCount} шт.`], ["Мощность насосов", `${knsPpItem.pumpPower} кВт`], ["Материал корпуса", knsPpItem.material]] })}>
                 <FileDown className="h-4 w-4" />
                 Скачать коммерческое предложение (PDF)
               </Button>
@@ -1176,9 +1170,8 @@ const ProductDetailContent = () => {
       setPdfDialogOpen(false);
     };
 
-    const handleFfuKpPdf = async () => {
-      await generateLetterheadPdf({ model: `Флотационно-фильтровальная установка ${ffuModel.name}`, article: ffuModel.article, specs: [["Производительность", `${ffuModel.capacity} м³/ч`], ["Мощность", `${ffuModel.power} кВт`], ["Габариты (Д×Ш×В)", `${ffuModel.dimensions} мм`], ["Масса сухая", `${ffuModel.massDry} т`], ["Масса с водой", `${ffuModel.massWet} т`], ["Материал корпуса", "Полипропилен / ПВХ / Стеклопластик"]] });
-      toast.success("Коммерческое предложение скачано");
+    const handleFfuKpPdf = () => {
+      openKpDialog({ model: `Флотационно-фильтровальная установка ${ffuModel.name}`, article: ffuModel.article, specs: [["Производительность", `${ffuModel.capacity} м³/ч`], ["Мощность", `${ffuModel.power} кВт`], ["Габариты (Д×Ш×В)", `${ffuModel.dimensions} мм`], ["Масса сухая", `${ffuModel.massDry} т`], ["Масса с водой", `${ffuModel.massWet} т`], ["Материал корпуса", "Полипропилен / ПВХ / Стеклопластик"]] });
     };
 
     const handleFfuContactChange = (field: keyof ContactFormData, value: string) => {
@@ -1386,9 +1379,8 @@ const ProductDetailContent = () => {
       setPdfDialogOpen(false);
     };
 
-    const handleLamKpPdf = async () => {
-      await generateLetterheadPdf({ model: `Тонкослойный (ламельный) отстойник ${lamModel.article}`, article, specs: [["Производительность", `${lamModel.capacity} м³/ч`], ["Габариты (Д×Ш×В)", `${lamModel.dimensions} мм`], ["Материал корпуса", lamParsed.materialName]] });
-      toast.success("Коммерческое предложение скачано");
+    const handleLamKpPdf = () => {
+      openKpDialog({ model: `Тонкослойный (ламельный) отстойник ${lamModel.article}`, article, specs: [["Производительность", `${lamModel.capacity} м³/ч`], ["Габариты (Д×Ш×В)", `${lamModel.dimensions} мм`], ["Материал корпуса", lamParsed.materialName]] });
     };
 
     const handleLamContactChange = (field: keyof ContactFormData, value: string) => {
@@ -1568,9 +1560,8 @@ const ProductDetailContent = () => {
       setPdfDialogOpen(false);
     };
 
-    const handleSprKpPdf = async () => {
-      await generateLetterheadPdf({ model: `Станция приготовления реагентов ${sprModel.name}`, article: sprModel.article, specs: [["Производительность", `${sprModel.capacity} л/ч`], ["Габариты (A×B×C)", `${sprModel.dimensions} мм`], ["Материал корпуса", "Полипропилен (ПП)"]] });
-      toast.success("Коммерческое предложение скачано");
+    const handleSprKpPdf = () => {
+      openKpDialog({ model: `Станция приготовления реагентов ${sprModel.name}`, article: sprModel.article, specs: [["Производительность", `${sprModel.capacity} л/ч`], ["Габариты (A×B×C)", `${sprModel.dimensions} мм`], ["Материал корпуса", "Полипропилен (ПП)"]] });
     };
 
     const handleSprContactChange = (field: keyof ContactFormData, value: string) => {
@@ -1753,9 +1744,8 @@ const ProductDetailContent = () => {
       setPdfDialogOpen(false);
     };
 
-    const handleMoKpPdf = async () => {
-      await generateLetterheadPdf({ model: `Мешочный обезвоживатель осадка ${moModel.name}`, article: moModel.article, specs: [["Производительность", `${moModel.capacity} м³/сут`], ["Количество мешков", moModel.bags], ["Габариты (Д×Ш×В)", `${moModel.dimensions} мм`], ["Материал корпуса", "Полипропилен (ПП)"]] });
-      toast.success("Коммерческое предложение скачано");
+    const handleMoKpPdf = () => {
+      openKpDialog({ model: `Мешочный обезвоживатель осадка ${moModel.name}`, article: moModel.article, specs: [["Производительность", `${moModel.capacity} м³/сут`], ["Количество мешков", moModel.bags], ["Габариты (Д×Ш×В)", `${moModel.dimensions} мм`], ["Материал корпуса", "Полипропилен (ПП)"]] });
     };
 
     const handleMoContactChange = (field: keyof ContactFormData, value: string) => {
@@ -1975,9 +1965,8 @@ const ProductDetailContent = () => {
       setPdfDialogOpen(false);
     };
 
-    const handleZhuKpPdf = async () => {
-      await generateLetterheadPdf({ model: `Промышленный жироуловитель ${zhuModel.name}`, article: zhuModel.article, specs: [["Производительность", `${zhuModel.throughput} л/с`], ["Пиковый сброс", `${zhuModel.peakDischarge} л`], [zhuModel.article.includes(".ЖУП.") ? "Длина×Ширина" : "Ø корпуса", `${zhuModel.diameter} мм`], ["Высота", `${zhuModel.height} мм`], ["Ø патрубков", `${zhuModel.pipeDiameter} мм`], ["Способ установки", zhuModel.installType], ["Материал корпуса", "Полипропилен (ПП)"]] });
-      toast.success("Коммерческое предложение скачано");
+    const handleZhuKpPdf = () => {
+      openKpDialog({ model: `Промышленный жироуловитель ${zhuModel.name}`, article: zhuModel.article, specs: [["Производительность", `${zhuModel.throughput} л/с`], ["Пиковый сброс", `${zhuModel.peakDischarge} л`], [zhuModel.article.includes(".ЖУП.") ? "Длина×Ширина" : "Ø корпуса", `${zhuModel.diameter} мм`], ["Высота", `${zhuModel.height} мм`], ["Ø патрубков", `${zhuModel.pipeDiameter} мм`], ["Способ установки", zhuModel.installType], ["Материал корпуса", "Полипропилен (ПП)"]] });
     };
 
     const handleZhuContactChange = (field: keyof ContactFormData, value: string) => {
