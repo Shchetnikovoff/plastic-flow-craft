@@ -24,6 +24,7 @@ export interface KnsOprosnyData {
   recommendedHeight: number;
   recommendedPumpCount: number;
   recommendedPumpPower: number;
+  contact: { company: string; person: string; phone: string; email: string; address: string };
 }
 
 export async function generateKnsOprosnyList(data: KnsOprosnyData) {
@@ -173,22 +174,13 @@ export async function generateKnsOprosnyList(data: KnsOprosnyData) {
   }
   y += 4;
 
-  // ── Contact fields (blank) ──
+  // ── Contact fields ──
   sectionTitle("8. Контактные данные заказчика");
-  const blankRow = (label: string) => {
-    doc.setFontSize(9);
-    doc.setFont("PTSans", "bold");
-    doc.setTextColor(60);
-    doc.text(label, leftM + 2, y);
-    doc.setDrawColor(180);
-    doc.setLineWidth(0.2);
-    doc.line(80, y, rightM, y);
-    y += 8;
-  };
-  blankRow("Заказчик:");
-  blankRow("Контактное лицо:");
-  blankRow("Телефон / E-mail:");
-  blankRow("Адрес объекта:");
+  const c = data.contact;
+  row("Заказчик:", c.company || "—");
+  row("Контактное лицо:", c.person || "—");
+  twoCol("Телефон:", c.phone || "—", "E-mail:", c.email || "—");
+  row("Адрес объекта:", c.address || "—");
 
   // ── Footer ──
   y = doc.internal.pageSize.getHeight() - 16;
