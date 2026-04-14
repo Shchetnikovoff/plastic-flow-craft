@@ -27,6 +27,7 @@ import { losProducts } from "@/data/losProducts";
 import { scrubberProducts } from "@/data/scrubberProducts";
 import { scrubberHorizProducts } from "@/data/scrubberHorizProducts";
 import { fvgProducts } from "@/data/fvgProducts";
+import { kapleulovitelProducts } from "@/data/kapleulovitelProducts";
 import ArticleBreakdown, { type ArticleSegment } from "@/components/configurator/ArticleBreakdown";
 import ImageGalleryWithLightbox from "@/components/configurator/ImageGalleryWithLightbox";
 import { Button } from "@/components/ui/button";
@@ -2844,6 +2845,103 @@ const ProductDetailContent = () => {
             </DialogHeader>
             <ContactFormFields data={contactData} errors={contactErrors} onChange={handleFvgContactChange} />
             <Button onClick={handleFvgSpecPdf} className="w-full gap-2 mt-2">
+              <FileDown className="h-4 w-4" /> Скачать PDF
+            </Button>
+          </DialogContent>
+        </Dialog>
+        {kpDialog}
+      </main>
+    );
+  }
+
+  // Try Kapleulovitel (СЗПК.КУ*)
+  const kuItem = kapleulovitelProducts.find((p) => p.article === article);
+  if (kuItem) {
+    const kuSpecs: [string, string][] = [
+      ["Модель", kuItem.model],
+      ["Серия", kuItem.series],
+      ["Расход воздуха", `${kuItem.flow} м³/ч`],
+      ["Диаметр патрубков (Д)", kuItem.D],
+      ["Размер А", `${kuItem.A} мм`],
+      ["Размер Б", `${kuItem.B} мм`],
+      ["Размер В", `${kuItem.V} мм`],
+      ["Масса", `${kuItem.mass} кг`],
+      ["Материал", "Полипропилен (ПП)"],
+      ["Эффективность очистки", "99,9%"],
+    ];
+
+    const handleKuSpecPdf = async () => {
+      const errors = validateContactForm(contactData);
+      setContactErrors(errors);
+      if (Object.keys(errors).length > 0) return;
+      await generateSpecPdf(
+        {
+          article: kuItem.article,
+          diameter: 0, wallThickness: 0, socketThickness: 0, availableLength: 0,
+          connectionName: "", materialName: "Полипропилен (ПП)",
+          productTitle: kuItem.name,
+          imageUrl: kuItem.images[0],
+          extraRows: [
+            ["Наименование", kuItem.name],
+            ["Артикул", kuItem.article],
+            ...kuSpecs,
+          ],
+        },
+        contactData
+      );
+      toast.success("PDF-спецификация скачана");
+      setPdfDialogOpen(false);
+    };
+
+    const handleKuContactChange = (field: keyof ContactFormData, value: string) => {
+      setContactData((prev) => ({ ...prev, [field]: value }));
+      if (contactErrors[field]) setContactErrors((prev) => ({ ...prev, [field]: undefined }));
+    };
+
+    return (
+      <main className="mx-auto max-w-[960px] px-4 sm:px-6 py-6 sm:py-8">
+        <Breadcrumb className="mb-6"><BreadcrumbList>
+          <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog">Каталог</Link></BreadcrumbLink></BreadcrumbItem><BreadcrumbSeparator />
+          <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog/gazoochistka">Газоочистка</Link></BreadcrumbLink></BreadcrumbItem><BreadcrumbSeparator />
+          <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog/gazoochistka/kapleuloviteli">Каплеуловители</Link></BreadcrumbLink></BreadcrumbItem><BreadcrumbSeparator />
+          <BreadcrumbItem><BreadcrumbPage>{kuItem.article}</BreadcrumbPage></BreadcrumbItem>
+        </BreadcrumbList></Breadcrumb>
+        <div className="grid gap-8 md:grid-cols-2">
+          <ScrubberImageGallery images={kuItem.images} />
+          <div>
+            <h1 className="text-xl sm:text-2xl font-bold text-foreground mb-1">{kuItem.name}</h1>
+            <p className="font-mono text-sm text-muted-foreground mb-4">{kuItem.article}</p>
+            <ArticleBreakdown exampleArticle={kuItem.article} segments={[
+              { value: kuItem.series.replace(".", ""), label: "Серия", desc: `Серия ${kuItem.series}` },
+              { value: kuItem.article.split(".")[2], label: "Расход", desc: `${kuItem.flow} м³/ч` },
+            ]} />
+            <div className="mt-4 space-y-2 text-sm">
+              {kuSpecs.map(([label, value]) => (
+                <div key={label} className="flex justify-between border-b pb-1"><span className="text-muted-foreground">{label}</span><span className="font-medium">{value}</span></div>
+              ))}
+            </div>
+            <div className="flex flex-col gap-2 mt-6">
+              <Button variant="outline" className="gap-2 w-full" onClick={() => setPdfDialogOpen(true)}>
+                <FileDown className="h-4 w-4" /> Скачать спецификацию (PDF)
+              </Button>
+              <Button variant="outline" className="gap-2 w-full" onClick={() => openKpDialog({ model: kuItem.name, article: kuItem.article, specs: kuSpecs, imageUrl: kuItem.images[0] })}>
+                <FileDown className="h-4 w-4" /> Скачать коммерческое предложение (PDF)
+              </Button>
+              <Button variant="secondary" className="gap-2 w-full" onClick={() => { addToKp({ model: kuItem.name, article: kuItem.article, specs: kuSpecs, imageUrl: kuItem.images[0] }); toast.success("Добавлено в КП"); }}>
+                <ClipboardList className="h-4 w-4" /> Добавить в КП
+              </Button>
+            </div>
+          </div>
+        </div>
+
+        <Dialog open={pdfDialogOpen} onOpenChange={setPdfDialogOpen}>
+          <DialogContent className="max-w-md">
+            <DialogHeader>
+              <DialogTitle>Скачать спецификацию</DialogTitle>
+              <DialogDescription>Заполните контактные данные для скачивания PDF</DialogDescription>
+            </DialogHeader>
+            <ContactFormFields data={contactData} errors={contactErrors} onChange={handleKuContactChange} />
+            <Button onClick={handleKuSpecPdf} className="w-full gap-2 mt-2">
               <FileDown className="h-4 w-4" /> Скачать PDF
             </Button>
           </DialogContent>
