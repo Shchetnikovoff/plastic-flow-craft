@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { kapleulovitelProducts } from "@/data/kapleulovitelProducts";
 import Header from "@/components/Header";
 import CartSheet from "@/components/CartSheet";
 import { CartProvider } from "@/contexts/CartContext";
@@ -88,6 +89,7 @@ const partnershipAdvantages = [
 /* ── component ── */
 
 const GazoochistkaKapleuloviteliInner = () => {
+  const navigate = useNavigate();
   const [cartOpen, setCartOpen] = useState(false);
   const [form, setForm] = useState({ name: "", phone: "", email: "", description: "" });
 
@@ -108,6 +110,7 @@ const GazoochistkaKapleuloviteliInner = () => {
   const renderSizeTable = (
     data: typeof ku1Data,
     caption: string,
+    seriesPrefix: string,
   ) => (
     <div className="mb-6">
       <h3 className="text-sm font-semibold text-foreground mb-2">{caption}</h3>
@@ -125,17 +128,32 @@ const GazoochistkaKapleuloviteliInner = () => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {data.map((r, i) => (
-              <TableRow key={i}>
-                <TableCell className="text-xs font-medium">КУ-{r.size}</TableCell>
-                <TableCell className="text-xs text-right">{r.flow}</TableCell>
-                <TableCell className="text-xs text-right">{r.D}</TableCell>
-                <TableCell className="text-xs text-right">{r.A}</TableCell>
-                <TableCell className="text-xs text-right">{r.B}</TableCell>
-                <TableCell className="text-xs text-right">{r.V}</TableCell>
-                <TableCell className="text-xs text-right">{r.mass}</TableCell>
-              </TableRow>
-            ))}
+            {data.map((r, i) => {
+              const kuItem = kapleulovitelProducts.find(
+                (p) => p.model === `${seriesPrefix}-${r.size}`
+              );
+              return (
+                <TableRow
+                  key={i}
+                  className={kuItem ? "cursor-pointer hover:bg-accent/50 transition-colors" : ""}
+                  onClick={() => kuItem && navigate(`/product/${kuItem.article}`)}
+                >
+                  <TableCell className="text-xs font-medium">
+                    {kuItem ? (
+                      <span className="text-primary underline underline-offset-2">{seriesPrefix}-{r.size}</span>
+                    ) : (
+                      <>КУ-{r.size}</>
+                    )}
+                  </TableCell>
+                  <TableCell className="text-xs text-right">{r.flow}</TableCell>
+                  <TableCell className="text-xs text-right">{r.D}</TableCell>
+                  <TableCell className="text-xs text-right">{r.A}</TableCell>
+                  <TableCell className="text-xs text-right">{r.B}</TableCell>
+                  <TableCell className="text-xs text-right">{r.V}</TableCell>
+                  <TableCell className="text-xs text-right">{r.mass}</TableCell>
+                </TableRow>
+              );
+            })}
           </TableBody>
         </Table>
       </div>
