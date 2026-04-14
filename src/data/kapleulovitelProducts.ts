@@ -13,8 +13,10 @@ export interface KapleulovitelProduct {
 }
 
 const defaultImages = [
-  "/images/kapleulovitel-hero-1.png",
-  "/images/kapleulovitel-hero-2.png",
+  "/images/kapleulovitel-photo-1.jpg",
+  "/images/kapleulovitel-photo-2.jpg",
+  "/images/kapleulovitel-photo-3.jpg",
+  "/images/kapleulovitel-device.png",
 ];
 
 export const kapleulovitelProducts: KapleulovitelProduct[] = [
