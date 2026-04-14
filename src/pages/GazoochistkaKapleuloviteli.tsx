@@ -5,7 +5,7 @@ import CartSheet from "@/components/CartSheet";
 import { CartProvider } from "@/contexts/CartContext";
 import {
   Check, Settings, ShieldCheck, Clock, Wrench, Truck, FlaskConical,
-  Wind, Droplets, Package, Gauge, Layers,
+  Wind, Package, Gauge, Layers,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
