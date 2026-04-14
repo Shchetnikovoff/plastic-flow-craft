@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { fvgProducts } from "@/data/fvgProducts";
 import Header from "@/components/Header";
 import CartSheet from "@/components/CartSheet";
 import { CartProvider } from "@/contexts/CartContext";
@@ -86,6 +87,7 @@ const partnershipAdvantages = [
 /* ── component ── */
 
 const GazoochistkaFvgInner = () => {
+  const navigate = useNavigate();
   const [cartOpen, setCartOpen] = useState(false);
   const [form, setForm] = useState({ name: "", phone: "", email: "", description: "" });
 
@@ -131,7 +133,7 @@ const GazoochistkaFvgInner = () => {
           </p>
           <Button onClick={scrollToForm} className="gap-2">Получить расчёт стоимости</Button>
           <div className="grid grid-cols-2 gap-3 mt-6">
-            <img src="/images/fvg-real-1.png" alt="Фильтр ФВГ — общий вид" className="rounded-lg border border-border object-contain w-full aspect-[4/3]" />
+            <img src="/images/fvg-render-clean.png" alt="Фильтр ФВГ — общий вид" className="rounded-lg border border-border object-contain w-full aspect-[4/3]" />
             <img src="/images/fvg-real-2.png" alt="Фильтрующие элементы ФВГ" className="rounded-lg border border-border object-contain w-full aspect-[4/3]" />
           </div>
         </section>
@@ -238,9 +240,11 @@ const GazoochistkaFvgInner = () => {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {specs.map((s, i) => (
-                  <TableRow key={i}>
-                    <TableCell className="text-xs font-medium">{s.model}</TableCell>
+                {specs.map((s, i) => {
+                  const fvgItem = fvgProducts.find(p => p.model === s.model);
+                  return (
+                  <TableRow key={i} className={fvgItem ? "cursor-pointer hover:bg-accent/50 transition-colors" : ""} onClick={() => fvgItem && navigate(`/product/${fvgItem.article}`)}>
+                    <TableCell className="text-xs font-medium">{fvgItem ? <span className="text-primary underline underline-offset-2">{s.model}</span> : s.model}</TableCell>
                     <TableCell className="text-xs text-right">{s.flow}</TableCell>
                     <TableCell className="text-xs text-right">{s.area}</TableCell>
                     <TableCell className="text-xs text-right">{s.conc}</TableCell>
@@ -248,7 +252,8 @@ const GazoochistkaFvgInner = () => {
                     <TableCell className="text-xs text-right">{s.rEnd}</TableCell>
                     <TableCell className="text-xs text-right">{s.eff}</TableCell>
                   </TableRow>
-                ))}
+                  );
+                })}
               </TableBody>
             </Table>
           </div>
@@ -273,9 +278,11 @@ const GazoochistkaFvgInner = () => {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {dims.map((d, i) => (
-                  <TableRow key={i}>
-                    <TableCell className="text-xs font-medium">{d.model}</TableCell>
+                {dims.map((d, i) => {
+                  const fvgItem = fvgProducts.find(p => p.model === d.model);
+                  return (
+                  <TableRow key={i} className={fvgItem ? "cursor-pointer hover:bg-accent/50 transition-colors" : ""} onClick={() => fvgItem && navigate(`/product/${fvgItem.article}`)}>
+                    <TableCell className="text-xs font-medium">{fvgItem ? <span className="text-primary underline underline-offset-2">{d.model}</span> : d.model}</TableCell>
                     <TableCell className="text-xs text-right">{d.L}</TableCell>
                     <TableCell className="text-xs text-right">{d.L1}</TableCell>
                     <TableCell className="text-xs text-right">{d.H}</TableCell>
@@ -285,7 +292,8 @@ const GazoochistkaFvgInner = () => {
                     <TableCell className="text-xs text-right">{d.D1}</TableCell>
                     <TableCell className="text-xs text-right">{d.D2}</TableCell>
                   </TableRow>
-                ))}
+                  );
+                })}
               </TableBody>
             </Table>
           </div>
