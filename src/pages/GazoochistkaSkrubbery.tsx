@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 import CartSheet from "@/components/CartSheet";
 import { CartProvider } from "@/contexts/CartContext";
@@ -19,61 +19,19 @@ import {
 import {
   Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
 } from "@/components/ui/table";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
 import PageFooter from "@/components/PageFooter";
+import { scrubberProducts } from "@/data/scrubberProducts";
 
 /* ── static data ── */
 
 const whyUs = [
   "Степень очистки газов до 99,99%",
-  "Производительность до 100 000 м³/ч",
+  "Производительность до 40 000 м³/ч",
   "Рабочая температура газов до +400 °C",
   "Химически стойкие материалы: ПП, ПЭ, нержавеющая сталь, титан, фторопласт",
   "Полный цикл: проектирование, производство, доставка, монтаж",
   "Гарантия 5 лет на все изделия",
-];
-
-const chModels = [
-  { model: "СН-0.1", flow: "100", dimensions: "1050×1550×3900" },
-  { model: "СН-0.5", flow: "500", dimensions: "1050×1550×4000" },
-  { model: "СН-1", flow: "1 000", dimensions: "1050×1550×4100" },
-  { model: "СН-1.5", flow: "1 500", dimensions: "1050×1650×4200" },
-  { model: "СН-2", flow: "2 000", dimensions: "1150×1700×4400" },
-  { model: "СН-3", flow: "3 000", dimensions: "1250×1790×4600" },
-  { model: "СН-4", flow: "4 000", dimensions: "1350×1900×4700" },
-  { model: "СН-5", flow: "5 000", dimensions: "1450×2000×4890" },
-  { model: "СН-6", flow: "6 000", dimensions: "1550×2150×5200" },
-  { model: "СН-8", flow: "8 000", dimensions: "1680×2300×5400" },
-  { model: "СН-10", flow: "10 000", dimensions: "1800×2400×5600" },
-  { model: "СН-12", flow: "12 000", dimensions: "2000×2550×5790" },
-  { model: "СН-15", flow: "15 000", dimensions: "2150×2850×5910" },
-  { model: "СН-20", flow: "20 000", dimensions: "2390×3100×6100" },
-  { model: "СН-25", flow: "25 000", dimensions: "2600×3250×6400" },
-  { model: "СН-30", flow: "30 000", dimensions: "3000×3600×6700" },
-  { model: "СН-40", flow: "40 000", dimensions: "3180×3780×7400" },
-];
-
-const ctModels = [
-  { model: "СТ-0.5", flow: "500", dimensions: "2250×1050×1550" },
-  { model: "СТ-1", flow: "1 000", dimensions: "2250×1050×1550" },
-  { model: "СТ-1.5", flow: "1 500", dimensions: "2250×1050×1550" },
-  { model: "СТ-2", flow: "2 000", dimensions: "2250×1150×1650" },
-  { model: "СТ-2.5", flow: "2 500", dimensions: "2250×1150×1650" },
-  { model: "СТ-3", flow: "3 000", dimensions: "2400×1400×1800" },
-  { model: "СТ-4", flow: "4 000", dimensions: "2400×1450×1800" },
-  { model: "СТ-5", flow: "5 000", dimensions: "2400×1450×1850" },
-  { model: "СТ-6", flow: "6 000", dimensions: "2525×1500×1900" },
-  { model: "СТ-8", flow: "8 000", dimensions: "2575×1600×1990" },
-  { model: "СТ-10", flow: "10 000", dimensions: "2725×1650×2015" },
-  { model: "СТ-12", flow: "12 000", dimensions: "2800×1700×2100" },
-  { model: "СТ-16", flow: "16 000", dimensions: "2850×1750×2200" },
-  { model: "СТ-20", flow: "20 000", dimensions: "2900×1800×2300" },
-  { model: "СТ-25", flow: "25 000", dimensions: "3450×2000×2400" },
-  { model: "СТ-30", flow: "30 000", dimensions: "3600×2200×2500" },
-  { model: "СТ-40", flow: "40 000", dimensions: "3600×2350×2700" },
-  { model: "СТ-50", flow: "50 000", dimensions: "3700×2350×2800" },
-  { model: "СТ-60", flow: "60 000", dimensions: "3700×2350×3000" },
 ];
 
 const applications = [
@@ -115,8 +73,7 @@ const options = [
 /* ── component ── */
 
 const GazoochistkaSkrubberyInner = () => {
-  const [searchParams] = useSearchParams();
-  const defaultTab = searchParams.get("tab") === "horizontal" ? "horizontal" : "vertical";
+  const navigate = useNavigate();
   const [cartOpen, setCartOpen] = useState(false);
   const [form, setForm] = useState({ name: "", phone: "", email: "", description: "" });
 
@@ -134,29 +91,6 @@ const GazoochistkaSkrubberyInner = () => {
     document.getElementById("cta-form")?.scrollIntoView({ behavior: "smooth" });
   };
 
-  const renderTable = (models: typeof chModels) => (
-    <div className="rounded-lg border border-border overflow-auto text-sm">
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead className="text-xs">Модель</TableHead>
-            <TableHead className="text-xs text-right">Произв., м³/ч</TableHead>
-            <TableHead className="text-xs text-right">Габариты (Д×Ш×В), мм</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {models.map((m, i) => (
-            <TableRow key={i} className={i % 2 === 1 ? "bg-muted/30" : ""}>
-              <TableCell className="text-xs font-medium">{m.model}</TableCell>
-              <TableCell className="text-xs text-right">{m.flow}</TableCell>
-              <TableCell className="text-xs text-right">{m.dimensions}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </div>
-  );
-
   return (
     <>
       <Header onCartOpen={() => setCartOpen(true)} productType="otvod" />
@@ -170,7 +104,7 @@ const GazoochistkaSkrubberyInner = () => {
             <BreadcrumbSeparator />
             <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog/gazoochistka">Газоочистка</Link></BreadcrumbLink></BreadcrumbItem>
             <BreadcrumbSeparator />
-            <BreadcrumbItem><BreadcrumbPage>Скрубберы</BreadcrumbPage></BreadcrumbItem>
+            <BreadcrumbItem><BreadcrumbPage>Скрубберы вертикальные</BreadcrumbPage></BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
 
@@ -178,34 +112,27 @@ const GazoochistkaSkrubberyInner = () => {
         <section className="mb-10">
           <p className="text-xs text-muted-foreground uppercase tracking-wider mb-2">ООО СЗПК «Пласт-Металл ПРО»</p>
           <h1 className="text-2xl sm:text-3xl font-bold text-foreground leading-tight mb-3">
-            Промышленные скрубберы
+            Скрубберы вертикальные (серия СН)
           </h1>
           <p className="text-sm text-muted-foreground mb-5">
-            Газоочистное оборудование для удаления токсичных газов, кислотных паров и аэрозолей из промышленных выбросов. Вертикальные и горизонтальные модели производительностью от 100 до 60 000 м³/ч.
+            Насадочные абсорберы мокрого типа для очистки газовоздушных выбросов от химически активных газов, аэрозолей и паров кислот. Производительность от 100 до 40 000 м³/ч.
           </p>
           <Button onClick={scrollToForm} className="gap-2">
             Получить расчёт стоимости
           </Button>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-6">
-            <div className="rounded-lg border border-border overflow-hidden bg-card">
-              <img src="/images/skrubber-vert-real-1.jpg" alt="Скруббер вертикальный" className="w-full object-contain" />
-              <p className="text-xs text-muted-foreground p-2 text-center">Скруббер вертикальный (серия СН)</p>
-            </div>
-            <div className="rounded-lg border border-border overflow-hidden bg-card">
-              <img src="/images/skrubber-goriz-real-1.jpg" alt="Скруббер горизонтальный" className="w-full object-contain" />
-              <p className="text-xs text-muted-foreground p-2 text-center">Скруббер горизонтальный (серия СТ)</p>
-            </div>
+          <div className="mt-6 rounded-lg border border-border overflow-hidden bg-card max-w-md mx-auto">
+            <img src="/images/skrubber-vert-real-1.jpg" alt="Скруббер вертикальный" className="w-full object-contain" />
+            <p className="text-xs text-muted-foreground p-2 text-center">Скруббер вертикальный (серия СН)</p>
           </div>
         </section>
 
-        {/* Intro */}
-
+        {/* Anchor nav */}
         <nav className="mb-8 flex flex-wrap gap-2">
           {[
+            { id: "modeli", label: "Модели" },
             { id: "opisanie", label: "Описание" },
             { id: "primenenie", label: "Применение" },
-            { id: "modeli", label: "Модели" },
             { id: "preimushchestva", label: "Преимущества" },
             { id: "cta-form", label: "Заявка" },
           ].map((s) => (
@@ -219,7 +146,48 @@ const GazoochistkaSkrubberyInner = () => {
           ))}
         </nav>
 
-        <section className="mb-10">
+        {/* Models table */}
+        <section id="modeli" className="mb-10">
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Типоразмерный ряд</h2>
+          <div className="flex flex-col sm:flex-row gap-4 mb-4">
+            <img src="/images/skrubber-vert-real-2.jpg" alt="Скруббер вертикальный" className="w-full sm:w-48 object-contain rounded-lg border border-border" />
+            <div>
+              <h3 className="text-sm font-semibold text-foreground mb-1">Скруббер вертикальный со стационарной насадкой (серия СН)</h3>
+              <p className="text-xs text-muted-foreground">
+                Насадочный абсорбер с неподвижным слоем для очистки от химически активных газов, аэрозолей и туманов. Производительность от 100 до 40 000 м³/ч. Применяется в гальванике, металлургии, химической и нефтехимической промышленности.
+              </p>
+            </div>
+          </div>
+          <div className="rounded-lg border border-border overflow-auto text-sm">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead className="text-xs">Артикул</TableHead>
+                  <TableHead className="text-xs">Модель</TableHead>
+                  <TableHead className="text-xs text-right">Произв., м³/ч</TableHead>
+                  <TableHead className="text-xs text-right">Габариты (Д×Ш×В), мм</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {scrubberProducts.map((m, i) => (
+                  <TableRow
+                    key={m.article}
+                    className={`cursor-pointer transition-colors hover:bg-accent/50 ${i % 2 === 1 ? "bg-muted/30" : ""}`}
+                    onClick={() => navigate(`/product/${encodeURIComponent(m.article)}`)}
+                  >
+                    <TableCell className="text-xs font-mono text-primary">{m.article}</TableCell>
+                    <TableCell className="text-xs font-medium">{m.model}</TableCell>
+                    <TableCell className="text-xs text-right">{m.flowFormatted}</TableCell>
+                    <TableCell className="text-xs text-right">{m.dimensions}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
+        </section>
+
+        {/* Description */}
+        <section id="opisanie" className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">
             Эффективная очистка промышленных газов
           </h2>
@@ -235,46 +203,6 @@ const GazoochistkaSkrubberyInner = () => {
               </li>
             ))}
           </ul>
-        </section>
-
-        {/* Product tabs */}
-        <section id="modeli" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Типоразмерный ряд</h2>
-
-          <Tabs defaultValue={defaultTab} className="w-full">
-            <TabsList className="w-full grid grid-cols-2 mb-4">
-              <TabsTrigger value="vertical" className="text-xs sm:text-sm">Вертикальные (серия СН)</TabsTrigger>
-              <TabsTrigger value="horizontal" className="text-xs sm:text-sm">Горизонтальные (серия СТ)</TabsTrigger>
-            </TabsList>
-
-            {/* Vertical CH tab */}
-            <TabsContent value="vertical">
-              <div className="flex flex-col sm:flex-row gap-4 mb-4">
-                <img src="/images/skrubber-vert-real-2.jpg" alt="Скруббер вертикальный" className="w-full sm:w-48 object-contain rounded-lg border border-border" />
-                <div>
-                  <h3 className="text-sm font-semibold text-foreground mb-1">Скруббер вертикальный со стационарной насадкой (серия СН)</h3>
-                  <p className="text-xs text-muted-foreground">
-                    Насадочный абсорбер с неподвижным слоем для очистки от химически активных газов, аэрозолей и туманов. Производительность от 100 до 40 000 м³/ч. Применяется в гальванике, металлургии, химической и нефтехимической промышленности.
-                  </p>
-                </div>
-              </div>
-              {renderTable(chModels)}
-            </TabsContent>
-
-            {/* Horizontal CT tab */}
-            <TabsContent value="horizontal">
-              <div className="flex flex-col sm:flex-row gap-4 mb-4">
-                <img src="/images/skrubber-goriz-real-3.png" alt="Скруббер горизонтальный" className="w-full sm:w-48 object-contain rounded-lg border border-border" />
-                <div>
-                  <h3 className="text-sm font-semibold text-foreground mb-1">Скруббер горизонтальный (серия СТ)</h3>
-                  <p className="text-xs text-muted-foreground">
-                    Компактный горизонтальный абсорбер для объектов с ограниченной высотой помещения (до 3 м). Производительность от 500 до 60 000 м³/ч. Оптимален для встраивания в существующие системы вентиляции.
-                  </p>
-                </div>
-              </div>
-              {renderTable(ctModels)}
-            </TabsContent>
-          </Tabs>
         </section>
 
         {/* Applications */}
