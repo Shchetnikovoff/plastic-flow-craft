@@ -1,24 +1,31 @@
 
 
-## Plan: Replace leaching unit image with uploaded render, recolor to industrial palette
+## Plan: Переименовать КОС → ЛОС и вынести в отдельную категорию каталога
 
-### What needs to happen
+### Что будет сделано
 
-1. **Copy uploaded image** to `public/images/gm-vyshchelach.png`, replacing the current placeholder.
+1. **`src/data/catalog.ts`** — Удалить подраздел "КОС" (id: v7) из категории "Водоочистка". Добавить новую top-level категорию "ЛОС" после "КНС" со следующей структурой:
+   ```
+   {
+     id: "los",
+     name: "ЛОС",
+     slug: "los",
+     subcategories: [
+       { id: "los1", name: "ЛОС — локальные очистные сооружения", slug: "los", 
+         externalPath: "/catalog/vodoochistka/los", image: "/images/vodoochistka-kos-kompakt.jpg" }
+     ]
+   }
+   ```
 
-2. **Recolor the image** using Canvas API processing (similar to the existing `src/lib/processImage.ts` pattern) to match the project's industrial color standard:
-   - Equipment body: Grey RAL 7032 (~#B8B4A8)
-   - The uploaded image is already mostly grey, so only the blue motor/gearbox accent needs to stay blue (it matches the project convention of blue accents for motors).
-   - The body is already close to the correct grey tone. A light hue/saturation adjustment via Canvas API will unify it with the RAL 7032 standard used across the catalog.
+2. **`src/pages/VodoochistkaLos.tsx`** — Обновить хлебные крошки: заменить "Водоочистка" на "ЛОС" (`/catalog/los`).
 
-3. **No code changes needed** — the image path `gm-vyshchelach.png` is already referenced in:
-   - `src/data/catalog.ts` (subcategory card)
-   - `src/pages/Product.tsx` (product detail pages + KP button)
+3. **`src/App.tsx`** — Добавить маршрут `/catalog/los` (переиспользуя страницу VodoochistkaLos или создав редирект). Сохранить старый маршрут `/catalog/vodoochistka/los` для совместимости.
 
-### Steps
+4. **`src/pages/Vodoochistka.tsx`** — Если на странице Водоочистка перечислен раздел КОС в каком-либо виде, удалить его оттуда.
 
-1. Copy `user-uploads://inpro-equipment-reac.jpg` to `public/images/gm-vyshchelach.png`
-2. Write a Python script to adjust the image colors: desaturate the body toward RAL 7032 grey while preserving the blue motor accent
-3. Overwrite the file with the recolored version
-4. Verify the result visually
+### Технические детали
+
+- Категория "ЛОС" будет вставлена в массив `catalog` после объекта с id "kns" (индекс 3)
+- Маршрут страницы останется прежним (`VodoochistkaLos` компонент), изменятся только навигация и хлебные крошки
+- В Header категория появится автоматически, т.к. навигация строится из `catalog`
 
