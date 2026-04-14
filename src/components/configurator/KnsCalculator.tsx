@@ -140,7 +140,16 @@ const KnsCalculator = () => {
     if (!recommended) return;
     const errors: Record<string, string> = {};
     if (!contact.person.trim()) errors.person = "Укажите контактное лицо";
-    if (!contact.phone.trim()) errors.phone = "Укажите телефон";
+    const phone = contact.phone.trim();
+    if (!phone) {
+      errors.phone = "Укажите телефон";
+    } else if (!/^\+?[\d\s\-()]{7,20}$/.test(phone)) {
+      errors.phone = "Неверный формат телефона";
+    }
+    const email = contact.email.trim();
+    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      errors.email = "Неверный формат e-mail";
+    }
     setContactErrors(errors);
     if (Object.keys(errors).length > 0) {
       toast.error("Заполните обязательные поля");
@@ -331,7 +340,8 @@ const KnsCalculator = () => {
               </div>
               <div className="space-y-1">
                 <Label className="text-[11px] text-muted-foreground">E-mail</Label>
-                <Input type="email" value={contact.email} onChange={(e) => setContact((p) => ({ ...p, email: e.target.value }))} placeholder="mail@example.com" maxLength={255} className="h-8 text-xs" />
+                <Input type="email" value={contact.email} onChange={(e) => { setContact((p) => ({ ...p, email: e.target.value })); setContactErrors((p) => ({ ...p, email: "" })); }} placeholder="mail@example.com" maxLength={255} className={`h-8 text-xs ${contactErrors.email ? "border-destructive" : ""}`} />
+                {contactErrors.email && <span className="text-[10px] text-destructive">{contactErrors.email}</span>}
               </div>
               <div className="space-y-1 sm:col-span-2">
                 <Label className="text-[11px] text-muted-foreground">Адрес объекта</Label>
