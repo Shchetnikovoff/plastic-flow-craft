@@ -2618,7 +2618,7 @@ const ProductDetailContent = () => {
           <BreadcrumbItem><BreadcrumbPage>{scrubberItem.article}</BreadcrumbPage></BreadcrumbItem>
         </BreadcrumbList></Breadcrumb>
         <div className="grid gap-8 md:grid-cols-2">
-          <ImageGalleryWithLightbox images={scrubberItem.images} />
+          <ScrubberGallery images={scrubberItem.images} />
           <div>
             <h1 className="text-xl sm:text-2xl font-bold text-foreground mb-1">{scrubberItem.name}</h1>
             <p className="font-mono text-sm text-muted-foreground mb-4">{scrubberItem.article}</p>
