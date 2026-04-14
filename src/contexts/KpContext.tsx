@@ -6,6 +6,7 @@ export interface KpItem {
   specs: [string, string][];
   quantity: number;
   pricePerUnit: number;
+  imageUrl?: string;
 }
 
 interface KpContextType {

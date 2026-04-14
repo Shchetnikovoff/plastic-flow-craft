@@ -635,6 +635,8 @@ const ProductDetailContent = () => {
             ["Материал", emkost.materialName],
             ...(emkost.colorLabel ? [["Цвет", emkost.colorLabel] as [string, string]] : []),
           ],
+          imageUrl: emkost.image,
+          schemaUrl: "schemaImage" in emkost ? emkost.schemaImage as string : undefined,
         },
         contactData
       );
@@ -837,11 +839,11 @@ const ProductDetailContent = () => {
               <FileDown className="h-4 w-4" />
               Скачать спецификацию (PDF)
             </Button>
-            <Button variant="outline" className="gap-2 w-full mt-2" onClick={() => openKpDialog({ model: emkost.title, article, specs: [["Объём", `${emkost.volume.toLocaleString()} л`], ...(emkost.diameter > 0 ? [["Диаметр (D)", `${emkost.diameter.toLocaleString()} мм`] as [string,string]] : []), [emkost.heightLabel, `${emkost.heightOrLength.toLocaleString()} мм`], ["Материал", emkost.materialName]] })}>
+            <Button variant="outline" className="gap-2 w-full mt-2" onClick={() => openKpDialog({ model: emkost.title, article, specs: [["Объём", `${emkost.volume.toLocaleString()} л`], ...(emkost.diameter > 0 ? [["Диаметр (D)", `${emkost.diameter.toLocaleString()} мм`] as [string,string]] : []), [emkost.heightLabel, `${emkost.heightOrLength.toLocaleString()} мм`], ["Материал", emkost.materialName]], imageUrl: emkost.image })}>
               <FileDown className="h-4 w-4" />
               Скачать коммерческое предложение (PDF)
             </Button>
-            <Button variant="secondary" className="gap-2 w-full mt-2" onClick={() => { addToKp({ model: emkost.title, article, specs: [["Объём", `${emkost.volume.toLocaleString()} л`], ...(emkost.diameter > 0 ? [["Диаметр (D)", `${emkost.diameter.toLocaleString()} мм`] as [string,string]] : []), [emkost.heightLabel, `${emkost.heightOrLength.toLocaleString()} мм`], ["Материал", emkost.materialName]] }); toast.success("Добавлено в КП"); }}>
+            <Button variant="secondary" className="gap-2 w-full mt-2" onClick={() => { addToKp({ model: emkost.title, article, specs: [["Объём", `${emkost.volume.toLocaleString()} л`], ...(emkost.diameter > 0 ? [["Диаметр (D)", `${emkost.diameter.toLocaleString()} мм`] as [string,string]] : []), [emkost.heightLabel, `${emkost.heightOrLength.toLocaleString()} мм`], ["Материал", emkost.materialName]], imageUrl: emkost.image }); toast.success("Добавлено в КП"); }}>
               <ClipboardList className="h-4 w-4" />
               Добавить в КП
             </Button>
@@ -905,6 +907,7 @@ const ProductDetailContent = () => {
               ["Мощность насосов", `${knsSvtItem.pumpPower} кВт`],
               ["Материал корпуса", knsSvtItem.material],
             ],
+            imageUrl: "/images/kns-svt-cutaway.jpg",
           },
           contactData
         );
@@ -1020,11 +1023,11 @@ const ProductDetailContent = () => {
                 Скачать спецификацию (PDF)
               </Button>
 
-              <Button variant="outline" className="gap-2 w-full mt-2" onClick={() => openKpDialog({ model: knsSvtItem.model, article: knsSvtItem.article, specs: [["Диаметр корпуса", `${knsSvtItem.diameter} мм`], ["Высота", `${knsSvtItem.height} мм`], ["Производительность (Q)", `${knsSvtItem.flow} м³/ч`], ["Напор (H)", `${knsSvtItem.head} м`], ["Макс. расход (Qmax)", `${knsSvtItem.maxFlow} м³/ч`], ["Макс. напор (Hmax)", `${knsSvtItem.maxHead} м`], ["Кол-во насосов", `${knsSvtItem.pumpCount} шт.`], ["Мощность насосов", `${knsSvtItem.pumpPower} кВт`], ["Материал корпуса", knsSvtItem.material]] })}>
+              <Button variant="outline" className="gap-2 w-full mt-2" onClick={() => openKpDialog({ model: knsSvtItem.model, article: knsSvtItem.article, specs: [["Диаметр корпуса", `${knsSvtItem.diameter} мм`], ["Высота", `${knsSvtItem.height} мм`], ["Производительность (Q)", `${knsSvtItem.flow} м³/ч`], ["Напор (H)", `${knsSvtItem.head} м`], ["Макс. расход (Qmax)", `${knsSvtItem.maxFlow} м³/ч`], ["Макс. напор (Hmax)", `${knsSvtItem.maxHead} м`], ["Кол-во насосов", `${knsSvtItem.pumpCount} шт.`], ["Мощность насосов", `${knsSvtItem.pumpPower} кВт`], ["Материал корпуса", knsSvtItem.material]], imageUrl: "/images/kns-svt-cutaway.jpg" })}>
                 <FileDown className="h-4 w-4" />
                 Скачать коммерческое предложение (PDF)
               </Button>
-              <Button variant="secondary" className="gap-2 w-full mt-2" onClick={() => { addToKp({ model: knsSvtItem.model, article: knsSvtItem.article, specs: [["Диаметр корпуса", `${knsSvtItem.diameter} мм`], ["Высота", `${knsSvtItem.height} мм`], ["Производительность (Q)", `${knsSvtItem.flow} м³/ч`], ["Напор (H)", `${knsSvtItem.head} м`], ["Макс. расход (Qmax)", `${knsSvtItem.maxFlow} м³/ч`], ["Макс. напор (Hmax)", `${knsSvtItem.maxHead} м`], ["Кол-во насосов", `${knsSvtItem.pumpCount} шт.`], ["Мощность насосов", `${knsSvtItem.pumpPower} кВт`], ["Материал корпуса", knsSvtItem.material]] }); toast.success("Добавлено в КП"); }}>
+              <Button variant="secondary" className="gap-2 w-full mt-2" onClick={() => { addToKp({ model: knsSvtItem.model, article: knsSvtItem.article, specs: [["Диаметр корпуса", `${knsSvtItem.diameter} мм`], ["Высота", `${knsSvtItem.height} мм`], ["Производительность (Q)", `${knsSvtItem.flow} м³/ч`], ["Напор (H)", `${knsSvtItem.head} м`], ["Макс. расход (Qmax)", `${knsSvtItem.maxFlow} м³/ч`], ["Макс. напор (Hmax)", `${knsSvtItem.maxHead} м`], ["Кол-во насосов", `${knsSvtItem.pumpCount} шт.`], ["Мощность насосов", `${knsSvtItem.pumpPower} кВт`], ["Материал корпуса", knsSvtItem.material]], imageUrl: "/images/kns-svt-cutaway.jpg" }); toast.success("Добавлено в КП"); }}>
                 <ClipboardList className="h-4 w-4" />
                 Добавить в КП
               </Button>
@@ -1088,6 +1091,7 @@ const ProductDetailContent = () => {
               ["Мощность насосов", `${knsPpItem.pumpPower} кВт`],
               ["Материал корпуса", knsPpItem.material],
             ],
+            imageUrl: "/images/kns-pp-cutaway-v3.jpg",
           },
           contactData
         );
@@ -1203,11 +1207,11 @@ const ProductDetailContent = () => {
                 Скачать спецификацию (PDF)
               </Button>
 
-              <Button variant="outline" className="gap-2 w-full mt-2" onClick={() => openKpDialog({ model: knsPpItem.model, article: knsPpItem.article, specs: [["Диаметр корпуса", `${knsPpItem.diameter} мм`], ["Высота", `${knsPpItem.height} мм`], ["Производительность (Q)", `${knsPpItem.flow} м³/ч`], ["Напор (H)", `${knsPpItem.head} м`], ["Макс. расход (Qmax)", `${knsPpItem.maxFlow} м³/ч`], ["Макс. напор (Hmax)", `${knsPpItem.maxHead} м`], ["Кол-во насосов", `${knsPpItem.pumpCount} шт.`], ["Мощность насосов", `${knsPpItem.pumpPower} кВт`], ["Материал корпуса", knsPpItem.material]] })}>
+              <Button variant="outline" className="gap-2 w-full mt-2" onClick={() => openKpDialog({ model: knsPpItem.model, article: knsPpItem.article, specs: [["Диаметр корпуса", `${knsPpItem.diameter} мм`], ["Высота", `${knsPpItem.height} мм`], ["Производительность (Q)", `${knsPpItem.flow} м³/ч`], ["Напор (H)", `${knsPpItem.head} м`], ["Макс. расход (Qmax)", `${knsPpItem.maxFlow} м³/ч`], ["Макс. напор (Hmax)", `${knsPpItem.maxHead} м`], ["Кол-во насосов", `${knsPpItem.pumpCount} шт.`], ["Мощность насосов", `${knsPpItem.pumpPower} кВт`], ["Материал корпуса", knsPpItem.material]], imageUrl: "/images/kns-pp-cutaway-v3.jpg" })}>
                 <FileDown className="h-4 w-4" />
                 Скачать коммерческое предложение (PDF)
               </Button>
-              <Button variant="secondary" className="gap-2 w-full mt-2" onClick={() => { addToKp({ model: knsPpItem.model, article: knsPpItem.article, specs: [["Диаметр корпуса", `${knsPpItem.diameter} мм`], ["Высота", `${knsPpItem.height} мм`], ["Производительность (Q)", `${knsPpItem.flow} м³/ч`], ["Напор (H)", `${knsPpItem.head} м`], ["Макс. расход (Qmax)", `${knsPpItem.maxFlow} м³/ч`], ["Макс. напор (Hmax)", `${knsPpItem.maxHead} м`], ["Кол-во насосов", `${knsPpItem.pumpCount} шт.`], ["Мощность насосов", `${knsPpItem.pumpPower} кВт`], ["Материал корпуса", knsPpItem.material]] }); toast.success("Добавлено в КП"); }}>
+              <Button variant="secondary" className="gap-2 w-full mt-2" onClick={() => { addToKp({ model: knsPpItem.model, article: knsPpItem.article, specs: [["Диаметр корпуса", `${knsPpItem.diameter} мм`], ["Высота", `${knsPpItem.height} мм`], ["Производительность (Q)", `${knsPpItem.flow} м³/ч`], ["Напор (H)", `${knsPpItem.head} м`], ["Макс. расход (Qmax)", `${knsPpItem.maxFlow} м³/ч`], ["Макс. напор (Hmax)", `${knsPpItem.maxHead} м`], ["Кол-во насосов", `${knsPpItem.pumpCount} шт.`], ["Мощность насосов", `${knsPpItem.pumpPower} кВт`], ["Материал корпуса", knsPpItem.material]], imageUrl: "/images/kns-pp-cutaway-v3.jpg" }); toast.success("Добавлено в КП"); }}>
                 <ClipboardList className="h-4 w-4" />
                 Добавить в КП
               </Button>
@@ -1270,6 +1274,7 @@ const ProductDetailContent = () => {
             ["Взвеш. вещества (локальная)", "15–40 мг/л"],
             ["Взвеш. вещества (глубокая)", "3 мг/л"],
           ],
+          imageUrl: "/images/ffu-real-3d.png",
         },
         contactData
       );
@@ -1278,7 +1283,7 @@ const ProductDetailContent = () => {
     };
 
     const handleFfuKpPdf = () => {
-      openKpDialog({ model: `Флотационно-фильтровальная установка ${ffuModel.name}`, article: ffuModel.article, specs: [["Производительность", `${ffuModel.capacity} м³/ч`], ["Мощность", `${ffuModel.power} кВт`], ["Габариты (Д×Ш×В)", `${ffuModel.dimensions} мм`], ["Масса сухая", `${ffuModel.massDry} т`], ["Масса с водой", `${ffuModel.massWet} т`], ["Материал корпуса", "Полипропилен / ПВХ / Стеклопластик"], ["Рабочая температура", "до +60 °C"]] });
+      openKpDialog({ model: `Флотационно-фильтровальная установка ${ffuModel.name}`, article: ffuModel.article, specs: [["Производительность", `${ffuModel.capacity} м³/ч`], ["Мощность", `${ffuModel.power} кВт`], ["Габариты (Д×Ш×В)", `${ffuModel.dimensions} мм`], ["Масса сухая", `${ffuModel.massDry} т`], ["Масса с водой", `${ffuModel.massWet} т`], ["Материал корпуса", "Полипропилен / ПВХ / Стеклопластик"], ["Рабочая температура", "до +60 °C"]], imageUrl: "/images/ffu-real-3d.png" });
     };
 
     const handleFfuContactChange = (field: keyof ContactFormData, value: string) => {
@@ -1425,7 +1430,7 @@ const ProductDetailContent = () => {
               <FileDown className="h-4 w-4" />
               Скачать коммерческое предложение (PDF)
             </Button>
-            <Button variant="secondary" className="gap-2 w-full mt-2" onClick={() => { addToKp({ model: `Флотационно-фильтровальная установка ${ffuModel.name}`, article: ffuModel.article, specs: [["Производительность", `${ffuModel.capacity} м³/ч`], ["Мощность", `${ffuModel.power} кВт`], ["Габариты (Д×Ш×В)", `${ffuModel.dimensions} мм`], ["Масса сухая", `${ffuModel.massDry} т`], ["Масса с водой", `${ffuModel.massWet} т`], ["Материал корпуса", "Полипропилен / ПВХ / Стеклопластик"], ["Рабочая температура", "до +60 °C"]] }); toast.success("Добавлено в КП"); }}>
+            <Button variant="secondary" className="gap-2 w-full mt-2" onClick={() => { addToKp({ model: `Флотационно-фильтровальная установка ${ffuModel.name}`, article: ffuModel.article, specs: [["Производительность", `${ffuModel.capacity} м³/ч`], ["Мощность", `${ffuModel.power} кВт`], ["Габариты (Д×Ш×В)", `${ffuModel.dimensions} мм`], ["Масса сухая", `${ffuModel.massDry} т`], ["Масса с водой", `${ffuModel.massWet} т`], ["Материал корпуса", "Полипропилен / ПВХ / Стеклопластик"], ["Рабочая температура", "до +60 °C"]], imageUrl: "/images/ffu-real-3d.png" }); toast.success("Добавлено в КП"); }}>
               <ClipboardList className="h-4 w-4" />
               Добавить в КП
             </Button>
@@ -1484,6 +1489,7 @@ const ProductDetailContent = () => {
             ["Материал корпуса", "Полипропилен / ПВХ / Стеклопластик"],
             ["Рабочая температура", "до +60 °C"],
           ],
+          imageUrl: lamModel && parseFloat(lamModel.capacity) >= 20 ? "/images/lamelnyj-hero-real.jpg" : "/images/lamelnyj-thumb-new.png",
         },
         contactData
       );
@@ -1492,7 +1498,7 @@ const ProductDetailContent = () => {
     };
 
     const handleLamKpPdf = () => {
-      openKpDialog({ model: `Тонкослойный (ламельный) отстойник ${lamModel.name}`, article, specs: [["Производительность", `${lamModel.capacity} м³/ч`], ["Габариты (Д×Ш×В)", `${lamModel.dimensions} мм`], ["Масса (сух./раб.)", `${lamModel.mass} кг`], ["Материал корпуса", lamParsed.materialName], ["Рабочая температура", "до +60 °C"]] });
+      openKpDialog({ model: `Тонкослойный (ламельный) отстойник ${lamModel.name}`, article, specs: [["Производительность", `${lamModel.capacity} м³/ч`], ["Габариты (Д×Ш×В)", `${lamModel.dimensions} мм`], ["Масса (сух./раб.)", `${lamModel.mass} кг`], ["Материал корпуса", lamParsed.materialName], ["Рабочая температура", "до +60 °C"]], imageUrl: lamModel && parseFloat(lamModel.capacity) >= 20 ? "/images/lamelnyj-hero-real.jpg" : "/images/lamelnyj-thumb-new.png" });
     };
 
     const handleLamContactChange = (field: keyof ContactFormData, value: string) => {
@@ -1599,7 +1605,7 @@ const ProductDetailContent = () => {
               <FileDown className="h-4 w-4" />
               Скачать коммерческое предложение (PDF)
             </Button>
-            <Button variant="secondary" className="gap-2 w-full mt-2" onClick={() => { addToKp({ model: `Тонкослойный (ламельный) отстойник ${lamModel.name}`, article: lamModel.article, specs: [["Производительность", `${lamModel.capacity} м³/ч`], ["Габариты (Д×Ш×В)", `${lamModel.dimensions} мм`], ["Масса (сух./раб.)", `${lamModel.mass} кг`], ["Материал корпуса", lamParsed.materialName], ["Рабочая температура", "до +60 °C"]] }); toast.success("Добавлено в КП"); }}>
+            <Button variant="secondary" className="gap-2 w-full mt-2" onClick={() => { addToKp({ model: `Тонкослойный (ламельный) отстойник ${lamModel.name}`, article: lamModel.article, specs: [["Производительность", `${lamModel.capacity} м³/ч`], ["Габариты (Д×Ш×В)", `${lamModel.dimensions} мм`], ["Масса (сух./раб.)", `${lamModel.mass} кг`], ["Материал корпуса", lamParsed.materialName], ["Рабочая температура", "до +60 °C"]], imageUrl: lamModel && parseFloat(lamModel.capacity) >= 20 ? "/images/lamelnyj-hero-real.jpg" : "/images/lamelnyj-thumb-new.png" }); toast.success("Добавлено в КП"); }}>
               <ClipboardList className="h-4 w-4" />
               Добавить в КП
             </Button>
@@ -1670,6 +1676,7 @@ const ProductDetailContent = () => {
             ["Степень защиты", "IP54"],
             ["Температура эксплуатации", "+5…+40 °C"],
           ],
+          imageUrl: "/images/spr-hero-ral7032.jpg",
         },
         contactData
       );
@@ -1678,7 +1685,7 @@ const ProductDetailContent = () => {
     };
 
     const handleSprKpPdf = () => {
-      openKpDialog({ model: `Станция приготовления реагентов ${sprModel.name}`, article: sprModel.article, specs: [["Производительность", `${sprModel.capacity} л/ч`], ["Габариты (A×B×C)", `${sprModel.dimensions} мм`], ["Материал корпуса", "Полипропилен (ПП)"], ["Давление", "2–6 бар"], ["Время выдержки", "60 мин"], ["Концентрация раствора", "0,1–0,5%"], ["Степень защиты", "IP54"], ["Температура эксплуатации", "+5…+40 °C"]] });
+      openKpDialog({ model: `Станция приготовления реагентов ${sprModel.name}`, article: sprModel.article, specs: [["Производительность", `${sprModel.capacity} л/ч`], ["Габариты (A×B×C)", `${sprModel.dimensions} мм`], ["Материал корпуса", "Полипропилен (ПП)"], ["Давление", "2–6 бар"], ["Время выдержки", "60 мин"], ["Концентрация раствора", "0,1–0,5%"], ["Степень защиты", "IP54"], ["Температура эксплуатации", "+5…+40 °C"]], imageUrl: "/images/spr-hero-ral7032.jpg" });
     };
 
     const handleSprContactChange = (field: keyof ContactFormData, value: string) => {
@@ -1792,7 +1799,7 @@ const ProductDetailContent = () => {
               <FileDown className="h-4 w-4" />
               Скачать коммерческое предложение (PDF)
             </Button>
-            <Button variant="secondary" className="gap-2 w-full mt-2" onClick={() => { addToKp({ model: `Станция приготовления реагентов ${sprModel.name}`, article: sprModel.article, specs: [["Производительность", `${sprModel.capacity} л/ч`], ["Габариты (A×B×C)", `${sprModel.dimensions} мм`], ["Материал корпуса", "Полипропилен (ПП)"], ["Давление", "2–6 бар"], ["Время выдержки", "60 мин"], ["Концентрация раствора", "0,1–0,5%"], ["Степень защиты", "IP54"], ["Температура эксплуатации", "+5…+40 °C"]] }); toast.success("Добавлено в КП"); }}>
+            <Button variant="secondary" className="gap-2 w-full mt-2" onClick={() => { addToKp({ model: `Станция приготовления реагентов ${sprModel.name}`, article: sprModel.article, specs: [["Производительность", `${sprModel.capacity} л/ч`], ["Габариты (A×B×C)", `${sprModel.dimensions} мм`], ["Материал корпуса", "Полипропилен (ПП)"], ["Давление", "2–6 бар"], ["Время выдержки", "60 мин"], ["Концентрация раствора", "0,1–0,5%"], ["Степень защиты", "IP54"], ["Температура эксплуатации", "+5…+40 °C"]], imageUrl: "/images/spr-hero-ral7032.jpg" }); toast.success("Добавлено в КП"); }}>
               <ClipboardList className="h-4 w-4" />
               Добавить в КП
             </Button>
@@ -1859,6 +1866,7 @@ const ProductDetailContent = () => {
             ["Принцип работы", "Гравитационная фильтрация"],
             ["Энергопотребление", "Не требуется"],
           ],
+          imageUrl: "/images/obezvozhivatel-3d-ral7032.jpg",
         },
         contactData
       );
@@ -1867,7 +1875,7 @@ const ProductDetailContent = () => {
     };
 
     const handleMoKpPdf = () => {
-      openKpDialog({ model: `Мешочный обезвоживатель осадка ${moModel.name}`, article: moModel.article, specs: [["Производительность", `${moModel.capacity} м³/сут`], ["Количество мешков", moModel.bags], ["Габариты (Д×Ш×В)", `${moModel.dimensions} мм`], ["Материал корпуса", "Полипропилен (ПП)"], ["Принцип работы", "Гравитационная фильтрация"], ["Энергопотребление", "Не требуется"]] });
+      openKpDialog({ model: `Мешочный обезвоживатель осадка ${moModel.name}`, article: moModel.article, specs: [["Производительность", `${moModel.capacity} м³/сут`], ["Количество мешков", moModel.bags], ["Габариты (Д×Ш×В)", `${moModel.dimensions} мм`], ["Материал корпуса", "Полипропилен (ПП)"], ["Принцип работы", "Гравитационная фильтрация"], ["Энергопотребление", "Не требуется"]], imageUrl: "/images/obezvozhivatel-3d-ral7032.jpg" });
     };
 
     const handleMoContactChange = (field: keyof ContactFormData, value: string) => {
@@ -1973,7 +1981,7 @@ const ProductDetailContent = () => {
               <FileDown className="h-4 w-4" />
               Скачать коммерческое предложение (PDF)
             </Button>
-            <Button variant="secondary" className="gap-2 w-full mt-2" onClick={() => { addToKp({ model: `Мешочный обезвоживатель осадка ${moModel.name}`, article: moModel.article, specs: [["Производительность", `${moModel.capacity} м³/сут`], ["Количество мешков", moModel.bags], ["Габариты (Д×Ш×В)", `${moModel.dimensions} мм`], ["Материал корпуса", "Полипропилен (ПП)"], ["Принцип работы", "Гравитационная фильтрация"], ["Энергопотребление", "Не требуется"]] }); toast.success("Добавлено в КП"); }}>
+            <Button variant="secondary" className="gap-2 w-full mt-2" onClick={() => { addToKp({ model: `Мешочный обезвоживатель осадка ${moModel.name}`, article: moModel.article, specs: [["Производительность", `${moModel.capacity} м³/сут`], ["Количество мешков", moModel.bags], ["Габариты (Д×Ш×В)", `${moModel.dimensions} мм`], ["Материал корпуса", "Полипропилен (ПП)"], ["Принцип работы", "Гравитационная фильтрация"], ["Энергопотребление", "Не требуется"]], imageUrl: "/images/obezvozhivatel-3d-ral7032.jpg" }); toast.success("Добавлено в КП"); }}>
               <ClipboardList className="h-4 w-4" />
               Добавить в КП
             </Button>
@@ -2093,7 +2101,7 @@ const ProductDetailContent = () => {
     };
 
     const handleZhuKpPdf = () => {
-      openKpDialog({ model: `Промышленный жироуловитель ${zhuModel.name}`, article: zhuModel.article, specs: [["Производительность", `${zhuModel.throughput} л/с`], ["Пиковый сброс", `${zhuModel.peakDischarge} л`], [zhuModel.article.includes(".ЖУП.") ? "Длина×Ширина корпуса" : "Ø корпуса", `${zhuModel.diameter} мм`], [zhuModel.article.includes(".ЖУП.") ? "Высота ёмкости" : "Высота корпуса", `${zhuModel.height} мм`], [zhuModel.article.includes(".ЖУП.") ? "Высота колодца" : "Ø колодца", `${zhuModel.wellDiameter} мм`], ["Высота входа", `${zhuModel.inletHeight} мм`], ["Высота выхода", `${zhuModel.outletHeight} мм`], ["Ø патрубков", `${zhuModel.pipeDiameter} мм`], ["Способ установки", zhuModel.installType], ["Материал корпуса", "Полипропилен (ПП)"], ["Принцип работы", "Гравитационная сепарация"]] });
+      openKpDialog({ model: `Промышленный жироуловитель ${zhuModel.name}`, article: zhuModel.article, specs: [["Производительность", `${zhuModel.throughput} л/с`], ["Пиковый сброс", `${zhuModel.peakDischarge} л`], [zhuModel.article.includes(".ЖУП.") ? "Длина×Ширина корпуса" : "Ø корпуса", `${zhuModel.diameter} мм`], [zhuModel.article.includes(".ЖУП.") ? "Высота ёмкости" : "Высота корпуса", `${zhuModel.height} мм`], [zhuModel.article.includes(".ЖУП.") ? "Высота колодца" : "Ø колодца", `${zhuModel.wellDiameter} мм`], ["Высота входа", `${zhuModel.inletHeight} мм`], ["Высота выхода", `${zhuModel.outletHeight} мм`], ["Ø патрубков", `${zhuModel.pipeDiameter} мм`], ["Способ установки", zhuModel.installType], ["Материал корпуса", "Полипропилен (ПП)"], ["Принцип работы", "Гравитационная сепарация"]], imageUrl: zhuModel.article.includes(".ЖУП.") ? "/images/zhu-p-hero-ral7032.jpg" : zhuModel.article.includes(".ЖУГ.") ? "/images/zhu-g-hero-ral7032.jpg" : "/images/zhu-pv-hero-ral7032.jpg" });
     };
 
     const handleZhuContactChange = (field: keyof ContactFormData, value: string) => {
@@ -2303,7 +2311,7 @@ const ProductDetailContent = () => {
           Скачать коммерческое предложение (PDF)
         </Button>
 
-        <Button variant="secondary" className="gap-2 w-full mt-2" onClick={() => { addToKp({ model: `Промышленный жироуловитель ${zhuModel.name}`, article: zhuModel.article, specs: [["Производительность", `${zhuModel.throughput} л/с`], ["Пиковый сброс", `${zhuModel.peakDischarge} л`], [zhuModel.article.includes(".ЖУП.") ? "Длина×Ширина корпуса" : "Ø корпуса", `${zhuModel.diameter} мм`], [zhuModel.article.includes(".ЖУП.") ? "Высота ёмкости" : "Высота корпуса", `${zhuModel.height} мм`], [zhuModel.article.includes(".ЖУП.") ? "Высота колодца" : "Ø колодца", `${zhuModel.wellDiameter} мм`], ["Высота входа", `${zhuModel.inletHeight} мм`], ["Высота выхода", `${zhuModel.outletHeight} мм`], ["Ø патрубков", `${zhuModel.pipeDiameter} мм`], ["Способ установки", zhuModel.installType], ["Материал корпуса", "Полипропилен (ПП)"], ["Принцип работы", "Гравитационная сепарация"]] }); toast.success("Добавлено в КП"); }}>
+        <Button variant="secondary" className="gap-2 w-full mt-2" onClick={() => { addToKp({ model: `Промышленный жироуловитель ${zhuModel.name}`, article: zhuModel.article, specs: [["Производительность", `${zhuModel.throughput} л/с`], ["Пиковый сброс", `${zhuModel.peakDischarge} л`], [zhuModel.article.includes(".ЖУП.") ? "Длина×Ширина корпуса" : "Ø корпуса", `${zhuModel.diameter} мм`], [zhuModel.article.includes(".ЖУП.") ? "Высота ёмкости" : "Высота корпуса", `${zhuModel.height} мм`], [zhuModel.article.includes(".ЖУП.") ? "Высота колодца" : "Ø колодца", `${zhuModel.wellDiameter} мм`], ["Высота входа", `${zhuModel.inletHeight} мм`], ["Высота выхода", `${zhuModel.outletHeight} мм`], ["Ø патрубков", `${zhuModel.pipeDiameter} мм`], ["Способ установки", zhuModel.installType], ["Материал корпуса", "Полипропилен (ПП)"], ["Принцип работы", "Гравитационная сепарация"]], imageUrl: zhuModel.article.includes(".ЖУП.") ? "/images/zhu-p-hero-ral7032.jpg" : zhuModel.article.includes(".ЖУГ.") ? "/images/zhu-g-hero-ral7032.jpg" : "/images/zhu-pv-hero-ral7032.jpg" }); toast.success("Добавлено в КП"); }}>
           <ClipboardList className="h-4 w-4" />
           Добавить в КП
         </Button>
@@ -2383,6 +2391,7 @@ const ProductDetailContent = () => {
         chemicalResistance: specs?.chemicalResistance,
         colorName: color?.name,
         colorRal: color?.ral,
+        imageUrl: productImages[0],
       },
       contactData
     );
