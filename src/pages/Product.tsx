@@ -1866,7 +1866,7 @@ const ProductDetailContent = () => {
             ["Принцип работы", "Гравитационная фильтрация"],
             ["Энергопотребление", "Не требуется"],
           ],
-          imageUrl: "/images/mo-hero.jpg",
+          imageUrl: "/images/obezvozhivatel-3d-ral7032.jpg",
         },
         contactData
       );
@@ -1875,7 +1875,7 @@ const ProductDetailContent = () => {
     };
 
     const handleMoKpPdf = () => {
-      openKpDialog({ model: `Мешочный обезвоживатель осадка ${moModel.name}`, article: moModel.article, specs: [["Производительность", `${moModel.capacity} м³/сут`], ["Количество мешков", moModel.bags], ["Габариты (Д×Ш×В)", `${moModel.dimensions} мм`], ["Материал корпуса", "Полипропилен (ПП)"], ["Принцип работы", "Гравитационная фильтрация"], ["Энергопотребление", "Не требуется"]], imageUrl: "/images/mo-hero.jpg" });
+      openKpDialog({ model: `Мешочный обезвоживатель осадка ${moModel.name}`, article: moModel.article, specs: [["Производительность", `${moModel.capacity} м³/сут`], ["Количество мешков", moModel.bags], ["Габариты (Д×Ш×В)", `${moModel.dimensions} мм`], ["Материал корпуса", "Полипропилен (ПП)"], ["Принцип работы", "Гравитационная фильтрация"], ["Энергопотребление", "Не требуется"]], imageUrl: "/images/obezvozhivatel-3d-ral7032.jpg" });
     };
 
     const handleMoContactChange = (field: keyof ContactFormData, value: string) => {
@@ -1981,7 +1981,7 @@ const ProductDetailContent = () => {
               <FileDown className="h-4 w-4" />
               Скачать коммерческое предложение (PDF)
             </Button>
-            <Button variant="secondary" className="gap-2 w-full mt-2" onClick={() => { addToKp({ model: `Мешочный обезвоживатель осадка ${moModel.name}`, article: moModel.article, specs: [["Производительность", `${moModel.capacity} м³/сут`], ["Количество мешков", moModel.bags], ["Габариты (Д×Ш×В)", `${moModel.dimensions} мм`], ["Материал корпуса", "Полипропилен (ПП)"], ["Принцип работы", "Гравитационная фильтрация"], ["Энергопотребление", "Не требуется"]], imageUrl: "/images/mo-hero.jpg" }); toast.success("Добавлено в КП"); }}>
+            <Button variant="secondary" className="gap-2 w-full mt-2" onClick={() => { addToKp({ model: `Мешочный обезвоживатель осадка ${moModel.name}`, article: moModel.article, specs: [["Производительность", `${moModel.capacity} м³/сут`], ["Количество мешков", moModel.bags], ["Габариты (Д×Ш×В)", `${moModel.dimensions} мм`], ["Материал корпуса", "Полипропилен (ПП)"], ["Принцип работы", "Гравитационная фильтрация"], ["Энергопотребление", "Не требуется"]], imageUrl: "/images/obezvozhivatel-3d-ral7032.jpg" }); toast.success("Добавлено в КП"); }}>
               <ClipboardList className="h-4 w-4" />
               Добавить в КП
             </Button>
@@ -2101,7 +2101,7 @@ const ProductDetailContent = () => {
     };
 
     const handleZhuKpPdf = () => {
-      openKpDialog({ model: `Промышленный жироуловитель ${zhuModel.name}`, article: zhuModel.article, specs: [["Производительность", `${zhuModel.throughput} л/с`], ["Пиковый сброс", `${zhuModel.peakDischarge} л`], [zhuModel.article.includes(".ЖУП.") ? "Длина×Ширина корпуса" : "Ø корпуса", `${zhuModel.diameter} мм`], [zhuModel.article.includes(".ЖУП.") ? "Высота ёмкости" : "Высота корпуса", `${zhuModel.height} мм`], [zhuModel.article.includes(".ЖУП.") ? "Высота колодца" : "Ø колодца", `${zhuModel.wellDiameter} мм`], ["Высота входа", `${zhuModel.inletHeight} мм`], ["Высота выхода", `${zhuModel.outletHeight} мм`], ["Ø патрубков", `${zhuModel.pipeDiameter} мм`], ["Способ установки", zhuModel.installType], ["Материал корпуса", "Полипропилен (ПП)"], ["Принцип работы", "Гравитационная сепарация"]], imageUrl: zhuModel.article.includes(".ЖУП.") ? "/images/zhu-pryamougolnye-render.jpg" : zhuModel.article.includes(".ЖУГ.") ? "/images/zhu-gorizontalnye-render.jpg" : "/images/zhu-podzemnye-render.jpg" });
+      openKpDialog({ model: `Промышленный жироуловитель ${zhuModel.name}`, article: zhuModel.article, specs: [["Производительность", `${zhuModel.throughput} л/с`], ["Пиковый сброс", `${zhuModel.peakDischarge} л`], [zhuModel.article.includes(".ЖУП.") ? "Длина×Ширина корпуса" : "Ø корпуса", `${zhuModel.diameter} мм`], [zhuModel.article.includes(".ЖУП.") ? "Высота ёмкости" : "Высота корпуса", `${zhuModel.height} мм`], [zhuModel.article.includes(".ЖУП.") ? "Высота колодца" : "Ø колодца", `${zhuModel.wellDiameter} мм`], ["Высота входа", `${zhuModel.inletHeight} мм`], ["Высота выхода", `${zhuModel.outletHeight} мм`], ["Ø патрубков", `${zhuModel.pipeDiameter} мм`], ["Способ установки", zhuModel.installType], ["Материал корпуса", "Полипропилен (ПП)"], ["Принцип работы", "Гравитационная сепарация"]], imageUrl: zhuModel.article.includes(".ЖУП.") ? "/images/zhu-p-hero-ral7032.jpg" : zhuModel.article.includes(".ЖУГ.") ? "/images/zhu-g-hero-ral7032.jpg" : "/images/zhu-pv-hero-ral7032.jpg" });
     };
 
     const handleZhuContactChange = (field: keyof ContactFormData, value: string) => {
@@ -2311,7 +2311,7 @@ const ProductDetailContent = () => {
           Скачать коммерческое предложение (PDF)
         </Button>
 
-        <Button variant="secondary" className="gap-2 w-full mt-2" onClick={() => { addToKp({ model: `Промышленный жироуловитель ${zhuModel.name}`, article: zhuModel.article, specs: [["Производительность", `${zhuModel.throughput} л/с`], ["Пиковый сброс", `${zhuModel.peakDischarge} л`], [zhuModel.article.includes(".ЖУП.") ? "Длина×Ширина корпуса" : "Ø корпуса", `${zhuModel.diameter} мм`], [zhuModel.article.includes(".ЖУП.") ? "Высота ёмкости" : "Высота корпуса", `${zhuModel.height} мм`], [zhuModel.article.includes(".ЖУП.") ? "Высота колодца" : "Ø колодца", `${zhuModel.wellDiameter} мм`], ["Высота входа", `${zhuModel.inletHeight} мм`], ["Высота выхода", `${zhuModel.outletHeight} мм`], ["Ø патрубков", `${zhuModel.pipeDiameter} мм`], ["Способ установки", zhuModel.installType], ["Материал корпуса", "Полипропилен (ПП)"], ["Принцип работы", "Гравитационная сепарация"]], imageUrl: zhuModel.article.includes(".ЖУП.") ? "/images/zhu-pryamougolnye-render.jpg" : zhuModel.article.includes(".ЖУГ.") ? "/images/zhu-gorizontalnye-render.jpg" : "/images/zhu-podzemnye-render.jpg" }); toast.success("Добавлено в КП"); }}>
+        <Button variant="secondary" className="gap-2 w-full mt-2" onClick={() => { addToKp({ model: `Промышленный жироуловитель ${zhuModel.name}`, article: zhuModel.article, specs: [["Производительность", `${zhuModel.throughput} л/с`], ["Пиковый сброс", `${zhuModel.peakDischarge} л`], [zhuModel.article.includes(".ЖУП.") ? "Длина×Ширина корпуса" : "Ø корпуса", `${zhuModel.diameter} мм`], [zhuModel.article.includes(".ЖУП.") ? "Высота ёмкости" : "Высота корпуса", `${zhuModel.height} мм`], [zhuModel.article.includes(".ЖУП.") ? "Высота колодца" : "Ø колодца", `${zhuModel.wellDiameter} мм`], ["Высота входа", `${zhuModel.inletHeight} мм`], ["Высота выхода", `${zhuModel.outletHeight} мм`], ["Ø патрубков", `${zhuModel.pipeDiameter} мм`], ["Способ установки", zhuModel.installType], ["Материал корпуса", "Полипропилен (ПП)"], ["Принцип работы", "Гравитационная сепарация"]], imageUrl: zhuModel.article.includes(".ЖУП.") ? "/images/zhu-p-hero-ral7032.jpg" : zhuModel.article.includes(".ЖУГ.") ? "/images/zhu-g-hero-ral7032.jpg" : "/images/zhu-pv-hero-ral7032.jpg" }); toast.success("Добавлено в КП"); }}>
           <ClipboardList className="h-4 w-4" />
           Добавить в КП
         </Button>
