@@ -2563,6 +2563,12 @@ const ProductDetailContent = () => {
     );
   }
 
+  // Scrubber gallery wrapper
+  const ScrubberImageGallery = ({ images }: { images: string[] }) => {
+    const [sel, setSel] = useState(0);
+    return <ImageGalleryWithLightbox images={images} selectedImage={sel} onSelectedImageChange={setSel} />;
+  };
+
   // Try Scrubber (СЗПК.СН.*)
   const scrubberItem = scrubberProducts.find((p) => p.article === article);
   if (scrubberItem) {
@@ -2589,7 +2595,7 @@ const ProductDetailContent = () => {
           connectionName: "",
           materialName: "Полипропилен (ПП)",
           productTitle: scrubberItem.name,
-          imageUrl: scrubberItem.image,
+          imageUrl: scrubberItem.images[0],
           extraRows: [
             ["Наименование", scrubberItem.name],
             ["Артикул", scrubberItem.article],
@@ -2618,7 +2624,7 @@ const ProductDetailContent = () => {
           <BreadcrumbItem><BreadcrumbPage>{scrubberItem.article}</BreadcrumbPage></BreadcrumbItem>
         </BreadcrumbList></Breadcrumb>
         <div className="grid gap-8 md:grid-cols-2">
-          <div><div className="aspect-[4/3] overflow-hidden rounded-lg border bg-card flex items-center justify-center"><img src={scrubberItem.image} alt={scrubberItem.name} className="h-full w-full object-contain p-4" /></div></div>
+          <ScrubberImageGallery images={scrubberItem.images} />
           <div>
             <h1 className="text-xl sm:text-2xl font-bold text-foreground mb-1">{scrubberItem.name}</h1>
             <p className="font-mono text-sm text-muted-foreground mb-4">{scrubberItem.article}</p>
@@ -2635,7 +2641,7 @@ const ProductDetailContent = () => {
               <Button variant="outline" className="gap-2 w-full" onClick={() => setPdfDialogOpen(true)}>
                 <FileDown className="h-4 w-4" /> Скачать спецификацию (PDF)
               </Button>
-              <Button variant="secondary" className="gap-2 w-full" onClick={() => { addToKp({ model: scrubberItem.name, article: scrubberItem.article, specs: scrubberSpecs, imageUrl: scrubberItem.image }); toast.success("Добавлено в КП"); }}>
+              <Button variant="secondary" className="gap-2 w-full" onClick={() => { addToKp({ model: scrubberItem.name, article: scrubberItem.article, specs: scrubberSpecs, imageUrl: scrubberItem.images[0] }); toast.success("Добавлено в КП"); }}>
                 <ClipboardList className="h-4 w-4" /> Добавить в КП
               </Button>
             </div>
