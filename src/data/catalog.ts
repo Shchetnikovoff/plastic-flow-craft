@@ -82,7 +82,7 @@ export const catalog: CatalogCategory[] = [
     slug: "gidrometallurgiya",
     subcategories: [
       { id: "gm1", name: "Реактор химического осаждения металла", slug: "reaktor-osazhdeniya", image: "/images/gm-reaktor.png", description: "Реакторы для химического осаждения металлов из растворов. Корпуса из полипропилена, оснащение перемешивающими устройствами и системой нагрева/охлаждения." },
-      { id: "gm2", name: "Нутч-фильтр", slug: "nutch-filtr", image: "/images/gm-nutch.png", description: "Нутч-фильтры из полипропилена для вакуумной фильтрации пульп и суспензий. Химическая стойкость к кислотам и щелочам. Площадь фильтрации от 0,5 до 10 м²." },
+      { id: "gm2", name: "Нутч-фильтр", slug: "nutch-filtr", externalPath: "/catalog/gidrometallurgiya/nutch-filtr", image: "/images/nutch-filtr-vakuum.jpg", description: "Нутч-фильтры из полипропилена для вакуумной фильтрации пульп и суспензий. Химическая стойкость к кислотам и щелочам. Площадь фильтрации от 0,05 до 1,54 м²." },
       { id: "gm3", name: "Установки выщелачивания", slug: "vyshchelachivaniye", image: "/images/gm-vyshchelach.png", description: "Установки для кислотного и щелочного выщелачивания руд и концентратов. Реакторы с мешалками из химически стойких полимеров. Производительность по проекту заказчика." },
       { id: "gm4", name: "Установки сорбционные", slug: "sorbtsionnye", image: "/images/gm-sorbtsionnye.png", description: "Сорбционные колонны и установки из полипропилена для извлечения металлов из растворов. Устойчивы к агрессивным средам, длительный ресурс работы." },
     ],

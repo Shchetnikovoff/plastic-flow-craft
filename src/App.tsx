@@ -45,6 +45,7 @@ import GazoochistkaPage from "./pages/GazoochistkaPage";
 import VentilyatsiyaPage from "./pages/VentilyatsiyaPage";
 import ReaktoryPage from "./pages/ReaktoryPage";
 import GidrometallurgiyaPage from "./pages/GidrometallurgiyaPage";
+import NutchFiltrPage from "./pages/NutchFiltrPage";
 import KnsPage from "./pages/KnsPage";
 import KnsSvtPage from "./pages/KnsSvtPage";
 import KnsPpPage from "./pages/KnsPpPage";
@@ -110,6 +111,7 @@ const App = () => (
           <Route path="/catalog/gazoochistka" element={<GazoochistkaPage />} />
           <Route path="/catalog/ventilyatsiya" element={<VentilyatsiyaPage />} />
           <Route path="/catalog/reaktory" element={<ReaktoryPage />} />
+          <Route path="/catalog/gidrometallurgiya/nutch-filtr" element={<NutchFiltrPage />} />
           <Route path="/catalog/gidrometallurgiya" element={<GidrometallurgiyaPage />} />
           <Route path="/catalog/kns/v-korpuse-svt" element={<KnsSvtPage />} />
           <Route path="/catalog/kns/v-korpuse-polipropilen" element={<KnsPpPage />} />
