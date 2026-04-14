@@ -162,6 +162,7 @@ const VodoochistkaLosInner = () => {
 
         <nav className="mb-8 flex flex-wrap gap-2">
           {[
+            { id: "calculator", label: "Калькулятор" },
             { id: "opisanie", label: "Описание" },
             { id: "modeli", label: "Модели" },
             { id: "preimushchestva", label: "Преимущества" },
@@ -177,7 +178,10 @@ const VodoochistkaLosInner = () => {
           ))}
         </nav>
 
-        <section className="mb-10">
+        {/* Calculator */}
+        <LosCalculator />
+
+        <section id="opisanie" className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">
             Комплексные решения очистки сточных вод
           </h2>
