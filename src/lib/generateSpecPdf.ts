@@ -17,6 +17,8 @@ interface ProductSpec {
   colorRal?: string;
   productTitle?: string;
   extraRows?: [string, string][];
+  imageUrl?: string;
+  schemaUrl?: string;
 }
 
 export async function generateSpecPdf(product: ProductSpec, contact: ContactFormData) {
@@ -29,6 +31,16 @@ export async function generateSpecPdf(product: ProductSpec, contact: ContactForm
   try {
     logoData = await loadImageAsBase64("/images/logo.png");
   } catch { /* skip logo if failed */ }
+
+  // Load product image & schema
+  let productImageData: string | null = null;
+  let schemaImageData: string | null = null;
+  if (product.imageUrl) {
+    try { productImageData = await loadImageAsBase64(product.imageUrl); } catch { /* skip */ }
+  }
+  if (product.schemaUrl) {
+    try { schemaImageData = await loadImageAsBase64(product.schemaUrl); } catch { /* skip */ }
+  }
 
   // Header with logo
   if (logoData) {
@@ -53,12 +65,29 @@ export async function generateSpecPdf(product: ProductSpec, contact: ContactForm
   doc.setDrawColor(200);
   doc.line(20, 53, pageWidth - 20, 53);
 
+  let y = 60;
+  const labelX = 25;
+  const valueX = 95;
+
+  // Product image(s)
+  if (productImageData || schemaImageData) {
+    const imgW = productImageData && schemaImageData ? 75 : 80;
+    const imgH = productImageData && schemaImageData ? 55 : 60;
+    
+    if (productImageData && schemaImageData) {
+      doc.addImage(productImageData, "PNG", 25, y, imgW, imgH);
+      doc.addImage(schemaImageData, "PNG", 105, y, imgW, imgH);
+    } else if (productImageData) {
+      doc.addImage(productImageData, "PNG", (pageWidth - imgW) / 2, y, imgW, imgH);
+    } else if (schemaImageData) {
+      doc.addImage(schemaImageData, "PNG", (pageWidth - imgW) / 2, y, imgW, imgH);
+    }
+    y += (productImageData && schemaImageData ? imgH : imgH) + 8;
+  }
+
   // Product details
   doc.setFontSize(11);
   doc.setTextColor(0);
-  let y = 64;
-  const labelX = 25;
-  const valueX = 95;
 
   const rows: [string, string][] = product.extraRows
     ? [["Наименование", product.productTitle || product.article], ["Артикул", product.article], ...product.extraRows]

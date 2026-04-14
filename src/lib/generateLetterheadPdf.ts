@@ -8,6 +8,7 @@ export interface LetterheadProductData {
   specs: [string, string][];
   quantity?: number;
   pricePerUnit?: number;
+  imageUrl?: string;
 }
 
 const fmt = (n: number) =>
@@ -22,7 +23,6 @@ export async function generateLetterheadPdf(
   const pw = doc.internal.pageSize.getWidth();
   const ph = doc.internal.pageSize.getHeight();
   const margin = 20;
-  const contentW = pw - margin * 2;
   const labelX = margin + 5;
   const valueX = margin + 80;
 
@@ -98,8 +98,21 @@ export async function generateLetterheadPdf(
   doc.text("ООО СЗПК «Пласт-Металл Про» предлагает Вашему вниманию следующую продукцию:", margin, y);
   y += 10;
 
+  // ===== Helper to load & render product image =====
+  const renderProductImage = async (imageUrl?: string) => {
+    if (!imageUrl) return;
+    try {
+      const imgData = await loadImageAsBase64(imageUrl);
+      ensureSpace(55);
+      const imgW = 60;
+      const imgH = 45;
+      doc.addImage(imgData, "PNG", (pw - imgW) / 2, y, imgW, imgH);
+      y += imgH + 5;
+    } catch { /* skip image if loading fails */ }
+  };
+
   // ===== RENDER PRODUCT(S) =====
-  const renderProduct = (p: LetterheadProductData, idx?: number) => {
+  const renderProduct = async (p: LetterheadProductData, idx?: number) => {
     ensureSpace(30);
 
     // Product title
@@ -122,6 +135,9 @@ export async function generateLetterheadPdf(
     doc.setLineWidth(0.3);
     doc.line(margin, y, pw - margin, y);
     y += 8;
+
+    // Product image
+    await renderProductImage(p.imageUrl);
 
     // Specs rows (spec style: bold label, normal value)
     doc.setFontSize(11);
@@ -178,8 +194,8 @@ export async function generateLetterheadPdf(
   };
 
   if (multiProducts && multiProducts.length > 0) {
-    multiProducts.forEach((p, idx) => {
-      renderProduct(p, idx);
+    for (let idx = 0; idx < multiProducts.length; idx++) {
+      await renderProduct(multiProducts[idx], idx);
       if (idx < multiProducts.length - 1) {
         y += 4;
         doc.setDrawColor(200);
@@ -187,7 +203,7 @@ export async function generateLetterheadPdf(
         doc.line(margin, y, pw - margin, y);
         y += 8;
       }
-    });
+    }
 
     // Grand total
     const grandTotal = multiProducts.reduce((s, p) => s + (p.quantity ?? 0) * (p.pricePerUnit ?? 0), 0);
@@ -208,7 +224,7 @@ export async function generateLetterheadPdf(
       y += 10;
     }
   } else if (product) {
-    renderProduct(product);
+    await renderProduct(product);
   } else {
     // Blank mode
     doc.setDrawColor(230);
