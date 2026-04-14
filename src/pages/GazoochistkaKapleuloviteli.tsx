@@ -188,7 +188,7 @@ const GazoochistkaKapleuloviteliInner = () => {
           </p>
           <Button onClick={scrollToForm} className="gap-2">Получить расчёт стоимости</Button>
           <div className="grid grid-cols-2 gap-3 mt-6">
-            <img src="/images/kapleulovitel-photo-1.jpg" alt="Каплеуловитель — готовое изделие" className="rounded-lg border border-border object-contain w-full aspect-[4/3]" />
+            <img src="/images/kapleulovitel-render-main.webp" alt="Каплеуловитель из полипропилена" className="rounded-lg border border-border object-contain w-full aspect-[4/3]" />
             <img src="/images/kapleulovitel-scheme-2.png" alt="Каплеуловитель — схема работы" className="rounded-lg border border-border object-contain w-full aspect-[4/3]" />
           </div>
         </section>
