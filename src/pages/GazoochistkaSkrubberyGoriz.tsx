@@ -6,6 +6,7 @@ import { CartProvider } from "@/contexts/CartContext";
 import {
   Check, Factory, Wrench, ShieldCheck, Clock, Truck,
   FlaskConical, Settings, Wind, Flame, Droplets, Beaker,
+  Gauge, Thermometer, Zap, ArrowRight,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -25,22 +26,30 @@ import { scrubberHorizProducts } from "@/data/scrubberHorizProducts";
 
 /* ── static data ── */
 
+const keySpecs = [
+  { icon: Gauge, label: "Производительность", value: "до 60 000 м³/ч" },
+  { icon: Thermometer, label: "Температура газов", value: "+5…+80 °C (до +400 °C)" },
+  { icon: Zap, label: "Степень очистки", value: "до 99,9 %" },
+  { icon: ArrowRight, label: "Сопротивление", value: "до 750 Па" },
+];
+
 const whyUs = [
-  "Компактные габариты при высокой производительности",
-  "Производительность до 30 000 м³/ч",
-  "Рабочая температура газов до +400 °C",
-  "Химически стойкие материалы: ПП, ПЭ, нержавеющая сталь",
-  "Идеально для помещений с ограниченной высотой",
+  "Компактные габариты — минимальная высота размещения от 1 550 мм",
+  "Движение газа параллельно основанию — не требует высоких помещений",
+  "Производительность от 500 до 60 000 м³/ч",
+  "Рабочая температура газов до +400 °C (с теплоизоляцией)",
+  "Степень очистки до 99,9 % при правильном подборе насадки и реагента",
+  "Химически стойкие материалы: ПП, ПЭ, нержавеющая сталь, титан, фторопласт",
   "Гарантия 5 лет на все изделия",
 ];
 
 const applications = [
-  { icon: Beaker, title: "Гальваническое производство", text: "Очистка паров кислот, щелочей, хромового ангидрида при травлении и нанесении покрытий." },
-  { icon: Factory, title: "Металлургия", text: "Удаление пыли, оксидов металлов, кислотных газов из отходящих потоков." },
-  { icon: FlaskConical, title: "Химия и нефтехимия", text: "Абсорбция HCl, HF, SO₂, NOx, NH₃, H₂S и других токсичных компонентов." },
-  { icon: Wind, title: "ЦБК и полиграфия", text: "Очистка от хлора, диоксида хлора, сероводорода, меркаптанов." },
-  { icon: Flame, title: "Лакокрасочная промышленность", text: "Улавливание паров растворителей, аэрозолей красок и лаков." },
-  { icon: Droplets, title: "Очистные и пищевая отрасль", text: "Дезодорация, удаление аммиака, сероводорода, органических соединений." },
+  { icon: Beaker, title: "Гальваническое производство", text: "Очистка паров кислот, щелочей, хромового ангидрида при травлении, обезжиривании и нанесении покрытий." },
+  { icon: Factory, title: "Металлургия и машиностроение", text: "Удаление пыли, оксидов металлов, кислотных газов из отходящих потоков плавильных и термических печей." },
+  { icon: FlaskConical, title: "Химия и нефтехимия", text: "Абсорбция HCl, HF, SO₂, NOx, NH₃, H₂S, Cl₂ и других токсичных компонентов." },
+  { icon: Wind, title: "ЦБК и полиграфия", text: "Очистка от хлора, диоксида хлора, сероводорода, меркаптанов при отбеливании и варке целлюлозы." },
+  { icon: Flame, title: "Лакокрасочная и микроэлектроника", text: "Улавливание паров растворителей, аэрозолей красок и лаков, кислотных паров травления." },
+  { icon: Droplets, title: "Пищевая и энергетическая отрасль", text: "Дезодорация, удаление аммиака, сероводорода, органических соединений, очистка дымовых газов." },
 ];
 
 const partnershipAdvantages = [
@@ -53,21 +62,32 @@ const partnershipAdvantages = [
 ];
 
 const baseKit = [
-  "Абсорбционная камера (корпус из ПП / ПЭ / нержавеющей стали)",
-  "Насадка (кольца Палля, Рашига или седла Intalox)",
-  "Бак-сборник орошающей жидкости",
-  "Циркуляционный насос",
-  "Каплеуловитель (сепаратор капель)",
+  "Горизонтальная абсорбционная камера (корпус из ПП / ПЭ / нержавеющей стали)",
+  "Насадочный слой (кольца Палля, Рашига, седла Intalox, блочная насадка)",
+  "Бак-сборник орошающей жидкости с поддоном",
+  "Циркуляционный насос (химстойкое исполнение)",
+  "Каплеуловитель (демистер / сепаратор капель)",
+  "Система орошения с форсунками",
   "Панель управления",
 ];
 
 const options = [
   "Газоходы из ПП / ПЭ / нержавеющей стали",
-  "Центробежный вентилятор (в химстойком исполнении)",
-  "Система дозирования реагентов",
-  "Датчики pH, давления, уровня",
-  "Теплоизоляция корпуса",
+  "Центробежный вентилятор в химстойком исполнении",
+  "Система дозирования реагентов (автоматическая)",
+  "Датчики pH, давления, уровня, температуры",
+  "Теплоизоляция корпуса (для высокотемпературных газов)",
   "Взрывозащищённое электрооборудование",
+  "Второй ряд форсунок для повышения степени очистки",
+];
+
+const constructionMaterials = [
+  { name: "Полипропилен (ПП)", desc: "Основной материал, стоек к большинству кислот и щелочей. Температура до +100 °C." },
+  { name: "Полиэтилен (ПЭ 100)", desc: "Повышенная ударная вязкость, морозостойкость до –60 °C." },
+  { name: "Нержавеющая сталь", desc: "AISI 304/316. Высокая прочность, температура до +400 °C." },
+  { name: "Титан", desc: "Исключительная коррозионная стойкость к хлорсодержащим средам." },
+  { name: "Фторопласт (PVDF)", desc: "Стойкость к агрессивным кислотам (HF, H₂SO₄ конц.), температура до +150 °C." },
+  { name: "Стеклопластик (СПЛ)", desc: "Лёгкий и прочный, стоек к широкому спектру сред." },
 ];
 
 /* ── component ── */
@@ -112,18 +132,35 @@ const GazoochistkaSkrubberyGorizInner = () => {
         <section className="mb-10">
           <p className="text-xs text-muted-foreground uppercase tracking-wider mb-2">ООО СЗПК «Пласт-Металл ПРО»</p>
           <h1 className="text-2xl sm:text-3xl font-bold text-foreground leading-tight mb-3">
-            Скрубберы горизонтальные (серия СГ)
+            Скрубберы горизонтальные промышленные (серия СГ)
           </h1>
           <p className="text-sm text-muted-foreground mb-5">
-            Горизонтальные насадочные абсорберы мокрого типа для очистки газовоздушных выбросов. Компактная конструкция для помещений с ограниченной высотой. Производительность от 500 до 30 000 м³/ч.
+            Горизонтальные насадочные абсорберы мокрого типа для очистки газовоздушных выбросов от химически активных газов, аэрозолей и паров кислот.
+            Компактная конструкция с горизонтальным расположением корпуса — оптимальное решение для помещений с ограниченной высотой потолков.
+            Производительность от 500 до 60 000 м³/ч. Степень очистки до 99,9 %.
           </p>
           <Button onClick={scrollToForm} className="gap-2">
             Получить расчёт стоимости
           </Button>
 
           <div className="mt-6 rounded-lg border border-border overflow-hidden bg-card max-w-md mx-auto">
-            <img src="/images/skrubber-vert-real-1.jpg" alt="Скруббер горизонтальный" className="w-full object-contain" />
-            <p className="text-xs text-muted-foreground p-2 text-center">Скруббер горизонтальный (серия СГ)</p>
+            <img src="/images/skrubber-goriz-render.png" alt="Скруббер горизонтальный промышленный" className="w-full object-contain" />
+            <p className="text-xs text-muted-foreground p-2 text-center">Скруббер горизонтальный промышленный (серия СГ)</p>
+          </div>
+        </section>
+
+        {/* Key specs */}
+        <section className="mb-10">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            {keySpecs.map((s, i) => (
+              <Card key={i} className="border-border">
+                <CardContent className="p-3 text-center">
+                  <s.icon className="h-5 w-5 text-primary mx-auto mb-1" />
+                  <p className="text-xs text-muted-foreground mb-0.5">{s.label}</p>
+                  <p className="text-sm font-semibold text-foreground">{s.value}</p>
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </section>
 
@@ -132,7 +169,9 @@ const GazoochistkaSkrubberyGorizInner = () => {
           {[
             { id: "modeli", label: "Модели" },
             { id: "opisanie", label: "Описание" },
+            { id: "konstruktsiya", label: "Конструкция" },
             { id: "primenenie", label: "Применение" },
+            { id: "materialy", label: "Материалы" },
             { id: "preimushchestva", label: "Преимущества" },
             { id: "cta-form", label: "Заявка" },
           ].map((s) => (
@@ -148,13 +187,15 @@ const GazoochistkaSkrubberyGorizInner = () => {
 
         {/* Models table */}
         <section id="modeli" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Типоразмерный ряд</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Типоразмерный ряд (19 моделей)</h2>
           <div className="flex flex-col sm:flex-row gap-4 mb-4">
-            <img src="/images/skrubber-vert-real-2.jpg" alt="Скруббер горизонтальный" className="w-full sm:w-48 object-contain rounded-lg border border-border" />
+            <img src="/images/skrubber-goriz-render.png" alt="Скруббер горизонтальный" className="w-full sm:w-48 object-contain rounded-lg border border-border" />
             <div>
               <h3 className="text-sm font-semibold text-foreground mb-1">Скруббер горизонтальный с насадочным слоем (серия СГ)</h3>
               <p className="text-xs text-muted-foreground">
-                Горизонтальный абсорбер с неподвижным слоем насадки для очистки от химически активных газов, аэрозолей и туманов. Производительность от 500 до 30 000 м³/ч. Оптимален для размещения в помещениях с низкими потолками.
+                Горизонтальный абсорбер с неподвижным слоем насадки для очистки от химически активных газов, аэрозолей и туманов.
+                Движение загрязнённого газа — параллельно основанию, что позволяет размещать оборудование в помещениях с высотой потолков от 3 м.
+                Производительность от 500 до 60 000 м³/ч.
               </p>
             </div>
           </div>
@@ -165,6 +206,7 @@ const GazoochistkaSkrubberyGorizInner = () => {
                   <TableHead className="text-xs">Артикул</TableHead>
                   <TableHead className="text-xs">Модель</TableHead>
                   <TableHead className="text-xs text-right">Произв., м³/ч</TableHead>
+                  <TableHead className="text-xs text-right">D, мм</TableHead>
                   <TableHead className="text-xs text-right">Габариты (Д×Ш×В), мм</TableHead>
                 </TableRow>
               </TableHeader>
@@ -178,6 +220,7 @@ const GazoochistkaSkrubberyGorizInner = () => {
                     <TableCell className="text-xs font-mono text-primary">{m.article}</TableCell>
                     <TableCell className="text-xs font-medium">{m.model}</TableCell>
                     <TableCell className="text-xs text-right">{m.flowFormatted}</TableCell>
+                    <TableCell className="text-xs text-right">{m.diameter}</TableCell>
                     <TableCell className="text-xs text-right">{m.dimensions}</TableCell>
                   </TableRow>
                 ))}
@@ -192,7 +235,11 @@ const GazoochistkaSkrubberyGorizInner = () => {
             Компактная очистка промышленных газов
           </h2>
           <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-            Горизонтальные скрубберы — насадочные абсорберы мокрого типа с горизонтальным расположением корпуса. Предназначены для очистки газовоздушных выбросов от химически активных газов, аэрозолей и паров кислот. Основное преимущество — компактная конструкция, позволяющая размещать оборудование в помещениях с ограниченной высотой потолков.
+            Горизонтальные скрубберы серии СГ — насадочные абсорберы мокрого типа с горизонтальным расположением корпуса.
+            Загрязнённый газ поступает через входной патрубок и движется параллельно основанию через слой насадки,
+            орошаемой химическим реагентом. Вредные вещества поглощаются жидкостью, а очищенный воздух проходит через
+            каплеуловитель и выбрасывается в атмосферу. Основное преимущество — минимальная высота установки (от 1 550 мм),
+            что позволяет эксплуатировать скруббер в помещениях с низкими потолками и на эстакадах.
           </p>
           <h3 className="text-sm font-semibold text-foreground mb-2">Преимущества горизонтальных скрубберов:</h3>
           <ul className="space-y-2">
@@ -203,6 +250,32 @@ const GazoochistkaSkrubberyGorizInner = () => {
               </li>
             ))}
           </ul>
+        </section>
+
+        {/* Construction */}
+        <section id="konstruktsiya" className="mb-10">
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Конструктивные особенности</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div>
+              <p className="text-sm text-muted-foreground leading-relaxed mb-3">
+                Корпус скруббера — горизонтальный цилиндр или прямоугольное сечение, внутри которого размещён слой насадки.
+                Газ входит с одной стороны и проходит через орошаемую насадку, контактируя с реагентом.
+              </p>
+              <p className="text-sm text-muted-foreground leading-relaxed mb-3">
+                Основные обозначения на чертеже:
+              </p>
+              <ul className="space-y-1.5 text-sm text-muted-foreground">
+                <li className="flex items-start gap-2"><Check className="h-4 w-4 text-primary shrink-0 mt-0.5" /><span><strong>D</strong> — диаметр входного/выходного патрубка</span></li>
+                <li className="flex items-start gap-2"><Check className="h-4 w-4 text-primary shrink-0 mt-0.5" /><span><strong>h</strong> — высота корпуса</span></li>
+                <li className="flex items-start gap-2"><Check className="h-4 w-4 text-primary shrink-0 mt-0.5" /><span><strong>a</strong> — длина корпуса (по оси газового потока)</span></li>
+                <li className="flex items-start gap-2"><Check className="h-4 w-4 text-primary shrink-0 mt-0.5" /><span><strong>b</strong> — ширина корпуса</span></li>
+              </ul>
+            </div>
+            <div className="rounded-lg border border-border overflow-hidden bg-card">
+              <img src="/images/skrubber-goriz-chertezh.webp" alt="Чертёж горизонтального скруббера с размерами D, h, a, b" className="w-full object-contain" />
+              <p className="text-xs text-muted-foreground p-2 text-center">Габаритный чертёж горизонтального скруббера (серия СГ)</p>
+            </div>
+          </div>
         </section>
 
         {/* Applications */}
@@ -219,6 +292,21 @@ const GazoochistkaSkrubberyGorizInner = () => {
                       <p className="text-xs text-muted-foreground">{a.text}</p>
                     </div>
                   </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </section>
+
+        {/* Materials */}
+        <section id="materialy" className="mb-10">
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Конструкционные материалы</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            {constructionMaterials.map((m, i) => (
+              <Card key={i} className="border-border">
+                <CardContent className="p-4">
+                  <p className="text-sm font-semibold text-foreground mb-1">{m.name}</p>
+                  <p className="text-xs text-muted-foreground">{m.desc}</p>
                 </CardContent>
               </Card>
             ))}
