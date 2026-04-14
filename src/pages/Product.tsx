@@ -635,6 +635,8 @@ const ProductDetailContent = () => {
             ["Материал", emkost.materialName],
             ...(emkost.colorLabel ? [["Цвет", emkost.colorLabel] as [string, string]] : []),
           ],
+          imageUrl: emkost.image,
+          schemaUrl: "schemaImage" in emkost ? emkost.schemaImage as string : undefined,
         },
         contactData
       );
