@@ -20,6 +20,9 @@ import { lamelnyjModels, parseLamelnyjArticle } from "@/data/lamelnyjProducts";
 import { knsPpProducts } from "@/data/knsPpProducts";
 import { knsSvtProducts } from "@/data/knsSvtProducts";
 import { nutchFiltrProducts } from "@/data/nutchFiltrProducts";
+import { reaktorOsazhdeniyaProducts } from "@/data/reaktorOsazhdeniyaProducts";
+import { vyshchelachProducts } from "@/data/vyshchelachProducts";
+import { sorbtsionnyeProducts } from "@/data/sorbtsionnyeProducts";
 import ArticleBreakdown, { type ArticleSegment } from "@/components/configurator/ArticleBreakdown";
 import ImageGalleryWithLightbox from "@/components/configurator/ImageGalleryWithLightbox";
 import { Button } from "@/components/ui/button";
@@ -2333,6 +2336,126 @@ const ProductDetailContent = () => {
           </DialogContent>
         </Dialog>
         {kpDialog}
+      </main>
+    );
+  }
+
+  // ====== Hydrometallurgy generic product cards ======
+  const reaktorOsazhItem = reaktorOsazhdeniyaProducts.find((p) => p.article === article);
+  if (reaktorOsazhItem) {
+    return (
+      <main className="mx-auto max-w-[960px] px-4 sm:px-6 py-6 sm:py-8">
+        <Breadcrumb className="mb-6"><BreadcrumbList>
+          <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog">Каталог</Link></BreadcrumbLink></BreadcrumbItem><BreadcrumbSeparator />
+          <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog/gidrometallurgiya">Гидрометаллургия</Link></BreadcrumbLink></BreadcrumbItem><BreadcrumbSeparator />
+          <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog/gidrometallurgiya/reaktor-osazhdeniya">Реакторы осаждения</Link></BreadcrumbLink></BreadcrumbItem><BreadcrumbSeparator />
+          <BreadcrumbItem><BreadcrumbPage>{reaktorOsazhItem.article}</BreadcrumbPage></BreadcrumbItem>
+        </BreadcrumbList></Breadcrumb>
+        <div className="grid gap-8 md:grid-cols-2">
+          <div><div className="aspect-[4/3] overflow-hidden rounded-lg border bg-card flex items-center justify-center"><img src="/images/gm-reaktor.png" alt={reaktorOsazhItem.name} className="h-full w-full object-contain p-4" /></div></div>
+          <div>
+            <h1 className="text-xl sm:text-2xl font-bold text-foreground mb-1">{reaktorOsazhItem.name}</h1>
+            <p className="font-mono text-sm text-muted-foreground mb-4">{reaktorOsazhItem.article}</p>
+            <ArticleBreakdown exampleArticle={reaktorOsazhItem.article} segments={[
+              { value: "РХО", label: "Тип", desc: "Реактор хим. осаждения" },
+              { value: String(reaktorOsazhItem.volume), label: "Объём", desc: "Рабочий объём, м³" },
+              { value: String(reaktorOsazhItem.diam), label: "∅ корпуса", desc: "Диаметр, мм" },
+              { value: "ПП", label: "Материал", desc: "Полипропилен" },
+            ]} />
+            <div className="mt-4 space-y-2 text-sm">
+              <div className="flex justify-between border-b pb-1"><span className="text-muted-foreground">Объём</span><span className="font-medium">{reaktorOsazhItem.volume} м³</span></div>
+              <div className="flex justify-between border-b pb-1"><span className="text-muted-foreground">Диаметр корпуса</span><span className="font-medium">{reaktorOsazhItem.diam} мм</span></div>
+              <div className="flex justify-between border-b pb-1"><span className="text-muted-foreground">Высота</span><span className="font-medium">{reaktorOsazhItem.height} мм</span></div>
+              <div className="flex justify-between border-b pb-1"><span className="text-muted-foreground">Мешалка</span><span className="font-medium">{reaktorOsazhItem.mixerType}</span></div>
+              <div className="flex justify-between border-b pb-1"><span className="text-muted-foreground">Обороты</span><span className="font-medium">{reaktorOsazhItem.mixerRpm} об/мин</span></div>
+              <div className="flex justify-between border-b pb-1"><span className="text-muted-foreground">Материал</span><span className="font-medium">{reaktorOsazhItem.material}</span></div>
+            </div>
+            <div className="flex flex-col gap-2 mt-6">
+              <Button variant="secondary" className="gap-2 w-full" onClick={() => { addToKp({ model: reaktorOsazhItem.name, article: reaktorOsazhItem.article, specs: [["Объём", `${reaktorOsazhItem.volume} м³`], ["Диаметр", `${reaktorOsazhItem.diam} мм`], ["Высота", `${reaktorOsazhItem.height} мм`], ["Мешалка", reaktorOsazhItem.mixerType], ["Материал", reaktorOsazhItem.material]], imageUrl: "/images/gm-reaktor.png" }); toast.success("Добавлено в КП"); }}>
+                <ClipboardList className="h-4 w-4" /> Добавить в КП
+              </Button>
+            </div>
+          </div>
+        </div>
+      </main>
+    );
+  }
+
+  const vyshchelachItem = vyshchelachProducts.find((p) => p.article === article);
+  if (vyshchelachItem) {
+    return (
+      <main className="mx-auto max-w-[960px] px-4 sm:px-6 py-6 sm:py-8">
+        <Breadcrumb className="mb-6"><BreadcrumbList>
+          <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog">Каталог</Link></BreadcrumbLink></BreadcrumbItem><BreadcrumbSeparator />
+          <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog/gidrometallurgiya">Гидрометаллургия</Link></BreadcrumbLink></BreadcrumbItem><BreadcrumbSeparator />
+          <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog/gidrometallurgiya/vyshchelachivaniye">Установки выщелачивания</Link></BreadcrumbLink></BreadcrumbItem><BreadcrumbSeparator />
+          <BreadcrumbItem><BreadcrumbPage>{vyshchelachItem.article}</BreadcrumbPage></BreadcrumbItem>
+        </BreadcrumbList></Breadcrumb>
+        <div className="grid gap-8 md:grid-cols-2">
+          <div><div className="aspect-[4/3] overflow-hidden rounded-lg border bg-card flex items-center justify-center"><img src="/images/gm-vyshchelach.png" alt={vyshchelachItem.name} className="h-full w-full object-contain p-4" /></div></div>
+          <div>
+            <h1 className="text-xl sm:text-2xl font-bold text-foreground mb-1">{vyshchelachItem.name}</h1>
+            <p className="font-mono text-sm text-muted-foreground mb-4">{vyshchelachItem.article}</p>
+            <ArticleBreakdown exampleArticle={vyshchelachItem.article} segments={[
+              { value: "УВ", label: "Тип", desc: "Установка выщелачивания" },
+              { value: String(vyshchelachItem.volume), label: "Объём", desc: "Рабочий объём, м³" },
+              { value: String(vyshchelachItem.diam), label: "∅ корпуса", desc: "Диаметр, мм" },
+              { value: "ПП", label: "Материал", desc: "Полипропилен" },
+            ]} />
+            <div className="mt-4 space-y-2 text-sm">
+              <div className="flex justify-between border-b pb-1"><span className="text-muted-foreground">Объём</span><span className="font-medium">{vyshchelachItem.volume} м³</span></div>
+              <div className="flex justify-between border-b pb-1"><span className="text-muted-foreground">Диаметр корпуса</span><span className="font-medium">{vyshchelachItem.diam} мм</span></div>
+              <div className="flex justify-between border-b pb-1"><span className="text-muted-foreground">Высота</span><span className="font-medium">{vyshchelachItem.height} мм</span></div>
+              <div className="flex justify-between border-b pb-1"><span className="text-muted-foreground">Мешалка</span><span className="font-medium">{vyshchelachItem.mixerType}</span></div>
+              <div className="flex justify-between border-b pb-1"><span className="text-muted-foreground">Нагрев</span><span className="font-medium">{vyshchelachItem.heatingType}</span></div>
+              <div className="flex justify-between border-b pb-1"><span className="text-muted-foreground">Материал</span><span className="font-medium">{vyshchelachItem.material}</span></div>
+            </div>
+            <div className="flex flex-col gap-2 mt-6">
+              <Button variant="secondary" className="gap-2 w-full" onClick={() => { addToKp({ model: vyshchelachItem.name, article: vyshchelachItem.article, specs: [["Объём", `${vyshchelachItem.volume} м³`], ["Диаметр", `${vyshchelachItem.diam} мм`], ["Высота", `${vyshchelachItem.height} мм`], ["Мешалка", vyshchelachItem.mixerType], ["Нагрев", vyshchelachItem.heatingType], ["Материал", vyshchelachItem.material]], imageUrl: "/images/gm-vyshchelach.png" }); toast.success("Добавлено в КП"); }}>
+                <ClipboardList className="h-4 w-4" /> Добавить в КП
+              </Button>
+            </div>
+          </div>
+        </div>
+      </main>
+    );
+  }
+
+  const sorbItem = sorbtsionnyeProducts.find((p) => p.article === article);
+  if (sorbItem) {
+    return (
+      <main className="mx-auto max-w-[960px] px-4 sm:px-6 py-6 sm:py-8">
+        <Breadcrumb className="mb-6"><BreadcrumbList>
+          <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog">Каталог</Link></BreadcrumbLink></BreadcrumbItem><BreadcrumbSeparator />
+          <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog/gidrometallurgiya">Гидрометаллургия</Link></BreadcrumbLink></BreadcrumbItem><BreadcrumbSeparator />
+          <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog/gidrometallurgiya/sorbtsionnye">Сорбционные установки</Link></BreadcrumbLink></BreadcrumbItem><BreadcrumbSeparator />
+          <BreadcrumbItem><BreadcrumbPage>{sorbItem.article}</BreadcrumbPage></BreadcrumbItem>
+        </BreadcrumbList></Breadcrumb>
+        <div className="grid gap-8 md:grid-cols-2">
+          <div><div className="aspect-[4/3] overflow-hidden rounded-lg border bg-card flex items-center justify-center"><img src="/images/gm-sorbtsionnye.png" alt={sorbItem.name} className="h-full w-full object-contain p-4" /></div></div>
+          <div>
+            <h1 className="text-xl sm:text-2xl font-bold text-foreground mb-1">{sorbItem.name}</h1>
+            <p className="font-mono text-sm text-muted-foreground mb-4">{sorbItem.article}</p>
+            <ArticleBreakdown exampleArticle={sorbItem.article} segments={[
+              { value: "СК", label: "Тип", desc: "Сорбционная колонна" },
+              { value: String(sorbItem.volume), label: "Объём", desc: "Рабочий объём, м³" },
+              { value: String(sorbItem.diam), label: "∅ корпуса", desc: "Диаметр, мм" },
+              { value: "ПП", label: "Материал", desc: "Полипропилен" },
+            ]} />
+            <div className="mt-4 space-y-2 text-sm">
+              <div className="flex justify-between border-b pb-1"><span className="text-muted-foreground">Объём</span><span className="font-medium">{sorbItem.volume} м³</span></div>
+              <div className="flex justify-between border-b pb-1"><span className="text-muted-foreground">Диаметр корпуса</span><span className="font-medium">{sorbItem.diam} мм</span></div>
+              <div className="flex justify-between border-b pb-1"><span className="text-muted-foreground">Высота</span><span className="font-medium">{sorbItem.height} мм</span></div>
+              <div className="flex justify-between border-b pb-1"><span className="text-muted-foreground">Тип дна</span><span className="font-medium">{sorbItem.bottomType}</span></div>
+              <div className="flex justify-between border-b pb-1"><span className="text-muted-foreground">Материал</span><span className="font-medium">{sorbItem.material}</span></div>
+            </div>
+            <div className="flex flex-col gap-2 mt-6">
+              <Button variant="secondary" className="gap-2 w-full" onClick={() => { addToKp({ model: sorbItem.name, article: sorbItem.article, specs: [["Объём", `${sorbItem.volume} м³`], ["Диаметр", `${sorbItem.diam} мм`], ["Высота", `${sorbItem.height} мм`], ["Тип дна", sorbItem.bottomType], ["Материал", sorbItem.material]], imageUrl: "/images/gm-sorbtsionnye.png" }); toast.success("Добавлено в КП"); }}>
+                <ClipboardList className="h-4 w-4" /> Добавить в КП
+              </Button>
+            </div>
+          </div>
+        </div>
       </main>
     );
   }
