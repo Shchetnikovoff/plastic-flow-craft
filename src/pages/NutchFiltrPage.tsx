@@ -29,13 +29,12 @@ const specs = [
   { icon: Wrench, title: "Применение", text: "Вакуумная фильтрация пульп и суспензий в гидрометаллургии, химической и фармацевтической промышленности." },
 ];
 
-const articleParts = [
-  { code: "НФ", label: "Нутч-фильтр" },
-  { code: "Л / П", label: "Лабораторный / Промышленный" },
-  { code: "0,79", label: "Площадь фильтрации, м²" },
-  { code: "1000", label: "Диаметр корпуса, мм" },
-  { code: "ПП", label: "Материал (ПП, ПНД, ПВДФ)" },
-  { code: "НК", label: "Низкий корпус (компакт)" },
+const articleSegments = [
+  { value: "НФ", label: "Тип", desc: "Нутч-фильтр" },
+  { value: "П", label: "Класс", desc: "Лабораторный (Л) / Промышленный (П)" },
+  { value: "0,79", label: "S фильтр.", desc: "Площадь фильтрации, м²" },
+  { value: "1000", label: "∅ корпуса", desc: "Диаметр корпуса, мм" },
+  { value: "ПП", label: "Материал", desc: "ПП, ПНД или ПВДФ" },
 ];
 
 const formatPrice = (p: number) => p.toLocaleString("ru-RU") + " ₽";
@@ -117,12 +116,10 @@ const NutchFiltrPage = () => {
           </div>
         </section>
 
-        {/* Article Breakdown */}
         <section className="mb-10">
           <ArticleBreakdown
-            title="Расшифровка артикула нутч-фильтра"
-            example="НФ-П-0,79-1000-ПП"
-            parts={articleParts}
+            exampleArticle="НФ-П-0,79-1000-ПП"
+            segments={articleSegments}
           />
         </section>
 
