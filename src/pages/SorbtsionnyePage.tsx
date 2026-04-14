@@ -98,7 +98,7 @@ const SorbtsionnyePage = () => {
 
         <section className="mb-8">
           <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">Расшифровка артикула</h2>
-          <ArticleBreakdown segments={articleSegments} />
+          <ArticleBreakdown exampleArticle="СК-5,0-1400 ПП" segments={articleSegments} />
         </section>
 
         <section className="mb-8">

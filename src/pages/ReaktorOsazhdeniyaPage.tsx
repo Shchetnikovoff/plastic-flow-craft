@@ -100,7 +100,7 @@ const ReaktorOsazhdeniyaPage = () => {
 
         <section className="mb-8">
           <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">Расшифровка артикула</h2>
-          <ArticleBreakdown segments={articleSegments} />
+          <ArticleBreakdown exampleArticle="РХО-5,0-1600 ПП" segments={articleSegments} />
         </section>
 
         <section className="mb-8">
