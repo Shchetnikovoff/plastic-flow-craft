@@ -2563,6 +2563,12 @@ const ProductDetailContent = () => {
     );
   }
 
+  // Scrubber gallery wrapper
+  const ScrubberImageGallery = ({ images }: { images: string[] }) => {
+    const [sel, setSel] = useState(0);
+    return <ImageGalleryWithLightbox images={images} selectedImage={sel} onSelectedImageChange={setSel} />;
+  };
+
   // Try Scrubber (СЗПК.СН.*)
   const scrubberItem = scrubberProducts.find((p) => p.article === article);
   if (scrubberItem) {
