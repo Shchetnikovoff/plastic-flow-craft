@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 import CartSheet from "@/components/CartSheet";
 import { CartProvider } from "@/contexts/CartContext";
@@ -95,6 +95,7 @@ const partnershipAdvantages = [
 
 const VodoochistkaLosInner = () => {
   const [cartOpen, setCartOpen] = useState(false);
+  const navigate = useNavigate();
   const [form, setForm] = useState({ name: "", phone: "", email: "", description: "" });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -230,8 +231,8 @@ const VodoochistkaLosInner = () => {
                   </TableHeader>
                   <TableBody>
                     {losModels.map((m, i) => (
-                      <TableRow key={i}>
-                        <TableCell className="text-xs font-medium">{m.throughput}</TableCell>
+                      <TableRow key={i} className="cursor-pointer hover:bg-accent/50 transition-colors" onClick={() => navigate(`/product/СЗПК.ЛОС.СВТ.${m.throughput}`)}>
+                        <TableCell className="text-xs font-medium text-primary underline">{m.throughput}</TableCell>
                         <TableCell className="text-xs text-right">{m.diameter}</TableCell>
                         <TableCell className="text-xs text-right">{m.length}</TableCell>
                         <TableCell className="text-xs text-right">{m.drop}</TableCell>
@@ -268,8 +269,8 @@ const VodoochistkaLosInner = () => {
                   </TableHeader>
                   <TableBody>
                     {peskModels.map((m, i) => (
-                      <TableRow key={i}>
-                        <TableCell className="text-xs font-medium">{m.throughput}</TableCell>
+                      <TableRow key={i} className="cursor-pointer hover:bg-accent/50 transition-colors" onClick={() => navigate(`/product/СЗПК.ПУ.СВТ.${m.throughput}`)}>
+                        <TableCell className="text-xs font-medium text-primary underline">{m.throughput}</TableCell>
                         <TableCell className="text-xs text-right">{m.diameter}</TableCell>
                         <TableCell className="text-xs text-right">{m.length}</TableCell>
                         <TableCell className="text-xs text-right">{m.drop}</TableCell>
@@ -304,8 +305,8 @@ const VodoochistkaLosInner = () => {
                   </TableHeader>
                   <TableBody>
                     {neftModels.map((m, i) => (
-                      <TableRow key={i}>
-                        <TableCell className="text-xs font-medium">{m.throughput}</TableCell>
+                      <TableRow key={i} className="cursor-pointer hover:bg-accent/50 transition-colors" onClick={() => navigate(`/product/СЗПК.НУ.СВТ.${m.throughput}`)}>
+                        <TableCell className="text-xs font-medium text-primary underline">{m.throughput}</TableCell>
                         <TableCell className="text-xs text-right">{m.diameter}</TableCell>
                         <TableCell className="text-xs text-right">{m.length}</TableCell>
                         <TableCell className="text-xs text-right">{m.pipes}</TableCell>
