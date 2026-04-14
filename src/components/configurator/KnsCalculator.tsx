@@ -140,7 +140,16 @@ const KnsCalculator = () => {
     if (!recommended) return;
     const errors: Record<string, string> = {};
     if (!contact.person.trim()) errors.person = "Укажите контактное лицо";
-    if (!contact.phone.trim()) errors.phone = "Укажите телефон";
+    const phone = contact.phone.trim();
+    if (!phone) {
+      errors.phone = "Укажите телефон";
+    } else if (!/^\+?[\d\s\-()]{7,20}$/.test(phone)) {
+      errors.phone = "Неверный формат телефона";
+    }
+    const email = contact.email.trim();
+    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      errors.email = "Неверный формат e-mail";
+    }
     setContactErrors(errors);
     if (Object.keys(errors).length > 0) {
       toast.error("Заполните обязательные поля");
