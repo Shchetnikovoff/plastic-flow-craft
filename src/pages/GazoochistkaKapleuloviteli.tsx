@@ -188,8 +188,8 @@ const GazoochistkaKapleuloviteliInner = () => {
           </p>
           <Button onClick={scrollToForm} className="gap-2">Получить расчёт стоимости</Button>
           <div className="grid grid-cols-2 gap-3 mt-6">
-            <img src="/images/kapleulovitel-hero-1.png" alt="Каплеуловитель круглого сечения" className="rounded-lg border border-border object-contain w-full aspect-[4/3]" />
-            <img src="/images/kapleulovitel-hero-2.png" alt="Каплеуловитель — ламельный блок" className="rounded-lg border border-border object-contain w-full aspect-[4/3]" />
+            <img src="/images/kapleulovitel-photo-1.jpg" alt="Каплеуловитель — готовое изделие" className="rounded-lg border border-border object-contain w-full aspect-[4/3]" />
+            <img src="/images/kapleulovitel-scheme-2.png" alt="Каплеуловитель — схема работы" className="rounded-lg border border-border object-contain w-full aspect-[4/3]" />
           </div>
         </section>
 
@@ -325,9 +325,9 @@ const GazoochistkaKapleuloviteliInner = () => {
         <section className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Фото готовой продукции</h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-            <img src="/images/kapleulovitel-hero-1.png" alt="Каплеуловитель — вид спереди" className="rounded-lg border border-border object-contain w-full aspect-[4/3]" />
-            <img src="/images/kapleulovitel-hero-2.png" alt="Каплеуловитель — ламельный блок" className="rounded-lg border border-border object-contain w-full aspect-[4/3]" />
-            <img src="/images/kapleulovitel-hero-1.png" alt="Каплеуловитель — в сборе" className="rounded-lg border border-border object-contain w-full aspect-[4/3]" />
+            <img src="/images/kapleulovitel-photo-1.jpg" alt="Каплеуловитель — вид спереди" className="rounded-lg border border-border object-contain w-full aspect-[4/3]" />
+            <img src="/images/kapleulovitel-photo-2.jpg" alt="Каплеуловитель — ламельный блок" className="rounded-lg border border-border object-contain w-full aspect-[4/3]" />
+            <img src="/images/kapleulovitel-photo-3.jpg" alt="Каплеуловитель — в сборе" className="rounded-lg border border-border object-contain w-full aspect-[4/3]" />
           </div>
         </section>
 
