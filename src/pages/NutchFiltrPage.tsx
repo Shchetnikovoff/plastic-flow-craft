@@ -130,7 +130,7 @@ const NutchFiltrPage = () => {
                 <TableCell className="text-sm text-center">{p.suspVol}</TableCell>
                 <TableCell className="text-sm text-center">{p.filtVol}</TableCell>
                 <TableCell className="text-sm text-center">{p.perforation}</TableCell>
-                <TableCell className="text-sm text-right font-medium">{formatPrice(p.price)}</TableCell>
+                
                 <TableCell className="text-center">
                   <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => openSpecDialog(p)} title="Скачать спецификацию PDF">
                     <FileDown className="h-4 w-4" />
