@@ -25,6 +25,7 @@ import { vyshchelachProducts } from "@/data/vyshchelachProducts";
 import { sorbtsionnyeProducts } from "@/data/sorbtsionnyeProducts";
 import { losProducts } from "@/data/losProducts";
 import { scrubberProducts } from "@/data/scrubberProducts";
+import { scrubberHorizProducts } from "@/data/scrubberHorizProducts";
 import ArticleBreakdown, { type ArticleSegment } from "@/components/configurator/ArticleBreakdown";
 import ImageGalleryWithLightbox from "@/components/configurator/ImageGalleryWithLightbox";
 import { Button } from "@/components/ui/button";
@@ -2657,6 +2658,94 @@ const ProductDetailContent = () => {
             </DialogHeader>
             <ContactFormFields data={contactData} errors={contactErrors} onChange={handleScrubberContactChange} />
             <Button className="w-full gap-2 mt-2" onClick={handleScrubberSpecPdf}>
+              <FileDown className="h-4 w-4" /> Скачать PDF
+            </Button>
+          </DialogContent>
+        </Dialog>
+      </main>
+    );
+  }
+
+  // Try Horizontal Scrubber (СЗПК.СГ.*)
+  const scrubberHorizItem = scrubberHorizProducts.find((p) => p.article === article);
+  if (scrubberHorizItem) {
+    const hSpecs: [string, string][] = [
+      ["Модель", scrubberHorizItem.model],
+      ["Производительность", `${scrubberHorizItem.flowFormatted} м³/ч`],
+      ["Габариты (Д×Ш×В)", `${scrubberHorizItem.dimensions} мм`],
+      ["Материал корпуса", "Полипропилен (ПП) / Полиэтилен (ПЭ)"],
+      ["Тип насадки", "Кольца Палля / Рашига / Intalox"],
+    ];
+
+    const handleHorizScrubberSpecPdf = async () => {
+      const errors = validateContactForm(contactData);
+      setContactErrors(errors);
+      if (Object.keys(errors).length > 0) return;
+      await generateSpecPdf(
+        {
+          article: scrubberHorizItem.article,
+          diameter: 0, wallThickness: 0, socketThickness: 0, availableLength: 0,
+          connectionName: "", materialName: "Полипропилен (ПП)",
+          productTitle: scrubberHorizItem.name,
+          imageUrl: scrubberHorizItem.images[0],
+          extraRows: [
+            ["Наименование", scrubberHorizItem.name],
+            ["Артикул", scrubberHorizItem.article],
+            ...hSpecs,
+          ],
+        },
+        contactData
+      );
+      toast.success("PDF-спецификация скачана");
+      setPdfDialogOpen(false);
+    };
+
+    const handleHorizContactChange = (field: keyof ContactFormData, value: string) => {
+      setContactData((prev) => ({ ...prev, [field]: value }));
+      if (contactErrors[field]) setContactErrors((prev) => ({ ...prev, [field]: undefined }));
+    };
+
+    return (
+      <main className="mx-auto max-w-[960px] px-4 sm:px-6 py-6 sm:py-8">
+        <Breadcrumb className="mb-6"><BreadcrumbList>
+          <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog">Каталог</Link></BreadcrumbLink></BreadcrumbItem><BreadcrumbSeparator />
+          <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog/gazoochistka">Газоочистка</Link></BreadcrumbLink></BreadcrumbItem><BreadcrumbSeparator />
+          <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog/gazoochistka/skrubbery-gorizontalnye">Скрубберы горизонтальные</Link></BreadcrumbLink></BreadcrumbItem><BreadcrumbSeparator />
+          <BreadcrumbItem><BreadcrumbPage>{scrubberHorizItem.article}</BreadcrumbPage></BreadcrumbItem>
+        </BreadcrumbList></Breadcrumb>
+        <div className="grid gap-8 md:grid-cols-2">
+          <ScrubberImageGallery images={scrubberHorizItem.images} />
+          <div>
+            <h1 className="text-xl sm:text-2xl font-bold text-foreground mb-1">{scrubberHorizItem.name}</h1>
+            <p className="font-mono text-sm text-muted-foreground mb-4">{scrubberHorizItem.article}</p>
+            <ArticleBreakdown exampleArticle={scrubberHorizItem.article} segments={[
+              { value: "СГ", label: "Серия", desc: "Скруббер горизонтальный" },
+              { value: String(scrubberHorizItem.flow), label: "Произв.", desc: "Производительность, м³/ч" },
+            ]} />
+            <div className="mt-4 space-y-2 text-sm">
+              {hSpecs.map(([label, value]) => (
+                <div key={label} className="flex justify-between border-b pb-1"><span className="text-muted-foreground">{label}</span><span className="font-medium">{value}</span></div>
+              ))}
+            </div>
+            <div className="flex flex-col gap-2 mt-6">
+              <Button variant="outline" className="gap-2 w-full" onClick={() => setPdfDialogOpen(true)}>
+                <FileDown className="h-4 w-4" /> Скачать спецификацию (PDF)
+              </Button>
+              <Button variant="secondary" className="gap-2 w-full" onClick={() => { addToKp({ model: scrubberHorizItem.name, article: scrubberHorizItem.article, specs: hSpecs, imageUrl: scrubberHorizItem.images[0] }); toast.success("Добавлено в КП"); }}>
+                <ClipboardList className="h-4 w-4" /> Добавить в КП
+              </Button>
+            </div>
+          </div>
+        </div>
+
+        <Dialog open={pdfDialogOpen} onOpenChange={setPdfDialogOpen}>
+          <DialogContent className="max-w-md">
+            <DialogHeader>
+              <DialogTitle>Скачать спецификацию</DialogTitle>
+              <DialogDescription>Заполните контактные данные для скачивания PDF</DialogDescription>
+            </DialogHeader>
+            <ContactFormFields data={contactData} errors={contactErrors} onChange={handleHorizContactChange} />
+            <Button onClick={handleHorizScrubberSpecPdf} className="w-full gap-2 mt-2">
               <FileDown className="h-4 w-4" /> Скачать PDF
             </Button>
           </DialogContent>
