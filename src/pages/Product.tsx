@@ -2429,9 +2429,12 @@ const ProductDetailContent = () => {
               <div className="flex justify-between border-b pb-1"><span className="text-muted-foreground">Материал</span><span className="font-medium">Полипропилен PP-H</span></div>
             </div>
 
-            <div className="flex gap-2 mt-6">
-              <Button variant="outline" className="gap-2" onClick={() => setPdfDialogOpen(true)}>
-                <FileDown className="h-4 w-4" /> Скачать спецификацию
+            <div className="flex flex-col gap-2 mt-6">
+              <Button variant="outline" className="gap-2 w-full" onClick={() => setPdfDialogOpen(true)}>
+                <FileDown className="h-4 w-4" /> Скачать спецификацию (PDF)
+              </Button>
+              <Button variant="secondary" className="gap-2 w-full" onClick={() => { addToKp({ model: `Нутч-фильтр ${nutchItem.article}`, article: nutchItem.article, specs: [["Диаметр корпуса", `${nutchItem.diam} мм`], ["Площадь фильтрации", `${nutchItem.area} м²`], ["Объём суспензии", `${nutchItem.suspVol} л`], ["Объём фильтрата", `${nutchItem.filtVol} л`], ["Перфорация (∅/шаг)", `${nutchItem.perforation} мм`], ["Материал", "Полипропилен PP-H"]], imageUrl: "/images/nutch-filtr-vakuum.jpg" }); toast.success("Добавлено в КП"); }}>
+                <ClipboardList className="h-4 w-4" /> Добавить в КП
               </Button>
             </div>
           </div>
