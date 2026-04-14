@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import LosCalculator from "@/components/configurator/LosCalculator";
 import Header from "@/components/Header";
 import CartSheet from "@/components/CartSheet";
 import { CartProvider } from "@/contexts/CartContext";
