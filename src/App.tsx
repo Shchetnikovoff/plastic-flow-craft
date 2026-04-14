@@ -35,6 +35,7 @@ import VodoochistkaZhirouloviteli from "./pages/VodoochistkaZhirouloviteli";
 import VodoochistkaLos from "./pages/VodoochistkaLos";
 import VodoochistkaShkafyDozirovaniya from "./pages/VodoochistkaShkafyDozirovaniya";
 import GazoochistkaSkrubbery from "./pages/GazoochistkaSkrubbery";
+import GazoochistkaSkrubberyGoriz from "./pages/GazoochistkaSkrubberyGoriz";
 import ZhuPodzemnyeVertikalnye from "./pages/ZhuPodzemnyeVertikalnye";
 import ZhuNazemnyeVertikalnye from "./pages/ZhuNazemnyeVertikalnye";
 import ZhuGorizontalnye from "./pages/ZhuGorizontalnye";
@@ -110,6 +111,7 @@ const App = () => (
           <Route path="/catalog/vodoochistka/shkafy-dozirovaniya" element={<VodoochistkaShkafyDozirovaniya />} />
           <Route path="/catalog/vodoochistka" element={<Vodoochistka />} />
           <Route path="/catalog/gazoochistka/skrubbery" element={<GazoochistkaSkrubbery />} />
+          <Route path="/catalog/gazoochistka/skrubbery-gorizontalnye" element={<GazoochistkaSkrubberyGoriz />} />
           <Route path="/catalog/gazoochistka/fvg" element={<GazoochistkaFvg />} />
           <Route path="/catalog/gazoochistka/kapleuloviteli" element={<GazoochistkaKapleuloviteli />} />
           <Route path="/catalog/gazoochistka" element={<GazoochistkaPage />} />
