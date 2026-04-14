@@ -71,9 +71,8 @@ const Inner = () => {
           <h1 className="text-2xl sm:text-3xl font-bold text-foreground leading-tight mb-3">Оборудование для гидрометаллургии</h1>
           <p className="text-sm text-muted-foreground mb-5">Реакторы, нутч-фильтры, установки выщелачивания и сорбции — полимерное оборудование для извлечения металлов!</p>
           <Button onClick={scrollToForm}>Получить расчёт стоимости</Button>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
-<div className="rounded-lg border border-border overflow-hidden bg-card"><img src="/images/gidrometallurgiya-hero-1.png" alt="Оборудование для гидрометаллургии" className="w-full object-contain" /></div>
-            <div className="rounded-lg border border-border overflow-hidden bg-card"><img src="/images/gidrometallurgiya-hero-2.png" alt="Реакторы и фильтры" className="w-full object-contain" /></div>
+          <div className="rounded-lg border border-border overflow-hidden bg-card mt-6">
+            <img src="/images/gidrometallurgiya-hero-collage.png" alt="Оборудование для гидрометаллургии — реакторы, нутч-фильтры, установки выщелачивания и сорбции" className="w-full object-contain" />
           </div>
         </section>
 
