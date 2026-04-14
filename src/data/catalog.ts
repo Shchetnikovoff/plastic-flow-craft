@@ -71,8 +71,12 @@ export const catalog: CatalogCategory[] = [
     id: "los",
     name: "ЛОС",
     slug: "los",
+    image: "/images/los-hero-new.jpg",
+    description: "Локальные очистные сооружения из СВТ — глубокая очистка хозяйственно-бытовых, ливневых и промышленных стоков.",
     subcategories: [
-      { id: "los1", name: "ЛОС — локальные очистные сооружения", slug: "los", externalPath: "/catalog/los", image: "/images/vodoochistka-kos-kompakt.jpg", description: "Глубокая очистка хозяйственно-бытовых, ливневых и промышленных сточных вод. Корпус из спиральновитых труб СВТ для подземной установки." },
+      { id: "los1", name: "ЛОС — локальные очистные сооружения", slug: "los", externalPath: "/catalog/los", image: "/images/los-hero-1.jpg", description: "Глубокая очистка хозяйственно-бытовых, ливневых и промышленных сточных вод. Многоступенчатая система: механическая очистка, отстаивание, сорбционная доочистка." },
+      { id: "los2", name: "Пескоуловители", slug: "peskouloviteli", externalPath: "/catalog/los", image: "/images/los-peskoulovitel-1.jpg", description: "Очистка поверхностных сточных вод от тонкодисперсных взвешенных частиц. Гравитационный принцип действия. Первая ступень очистки." },
+      { id: "los3", name: "Нефтеуловители", slug: "nefteuloviteli", externalPath: "/catalog/los", image: "/images/los-nefteulovitel-1.jpg", description: "Выделение нефтепродуктов из поверхностных и производственных стоков. Применяется на АЗС, автомойках, промышленных площадках." },
     ],
   },
   {
