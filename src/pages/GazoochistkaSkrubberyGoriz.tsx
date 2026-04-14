@@ -144,7 +144,7 @@ const GazoochistkaSkrubberyGorizInner = () => {
           </Button>
 
           <div className="mt-6 rounded-lg border border-border overflow-hidden bg-card max-w-md mx-auto">
-            <img src="/images/skrubber-goriz-render.png" alt="Скруббер горизонтальный промышленный" className="w-full object-contain" />
+            <img src="/images/skrubber-goriz-render-clean.png" alt="Скруббер горизонтальный промышленный" className="w-full object-contain" />
             <p className="text-xs text-muted-foreground p-2 text-center">Скруббер горизонтальный промышленный (серия СГ)</p>
           </div>
         </section>
@@ -189,7 +189,7 @@ const GazoochistkaSkrubberyGorizInner = () => {
         <section id="modeli" className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Типоразмерный ряд (19 моделей)</h2>
           <div className="flex flex-col sm:flex-row gap-4 mb-4">
-            <img src="/images/skrubber-goriz-render.png" alt="Скруббер горизонтальный" className="w-full sm:w-48 object-contain rounded-lg border border-border" />
+            <img src="/images/skrubber-goriz-render-clean.png" alt="Скруббер горизонтальный" className="w-full sm:w-48 object-contain rounded-lg border border-border" />
             <div>
               <h3 className="text-sm font-semibold text-foreground mb-1">Скруббер горизонтальный с насадочным слоем (серия СГ)</h3>
               <p className="text-xs text-muted-foreground">
