@@ -5,7 +5,7 @@ import CartSheet from "@/components/CartSheet";
 import { CartProvider } from "@/contexts/CartContext";
 import {
   Check, Settings, ShieldCheck, Clock, Wrench, Truck, FlaskConical,
-  Wind, Droplets, Package, Gauge, Layers,
+  Wind, Package, Gauge, Layers,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -56,37 +56,20 @@ const advantages = [
 ];
 
 const ku1Data = [
-  { size: "300", flow: "300", D: "125–250", A: "672–532", B: "308", V: "299", mass: "6" },
-  { size: "500", flow: "500", D: "125–250", A: "732–532", B: "308", V: "402", mass: "7" },
-  { size: "1000", flow: "1 000", D: "160–315", A: "816–576", B: "308", V: "504", mass: "8" },
-  { size: "1500", flow: "1 500", D: "200–400", A: "930–650", B: "380", V: "608", mass: "12" },
-  { size: "2000", flow: "2 000", D: "250–400", A: "930–690", B: "380", V: "708", mass: "14" },
-  { size: "3000", flow: "3 000", D: "250–500", A: "1110–770", B: "455", V: "812", mass: "18" },
-  { size: "4000", flow: "4 000", D: "315–500", A: "1110–810", B: "455", V: "912", mass: "22" },
-  { size: "5000", flow: "5 000", D: "315–630", A: "1260–870", B: "530", V: "1014", mass: "28" },
-  { size: "7500", flow: "7 500", D: "400–630", A: "1260–950", B: "530", V: "1216", mass: "35" },
-  { size: "10000", flow: "10 000", D: "400–800", A: "1500–1050", B: "605", V: "1418", mass: "45" },
-  { size: "15000", flow: "15 000", D: "500–1000", A: "1740–1210", B: "680", V: "1622", mass: "62" },
-  { size: "20000", flow: "20 000", D: "630–1000", A: "1740–1290", B: "680", V: "1926", mass: "80" },
-  { size: "25000", flow: "25 000", D: "630–1250", A: "2040–1410", B: "780", V: "2128", mass: "100" },
-  { size: "27500", flow: "27 500", D: "800–1250", A: "2040–1490", B: "780", V: "2330", mass: "115" },
-];
-
-const ku1ProductData = [
-  { model: "КУ.1-300", flow: "250-300", mass: "6" },
-  { model: "КУ.1-500", flow: "250-500", mass: "7" },
-  { model: "КУ.1-900", flow: "400-900", mass: "9" },
-  { model: "КУ.1-1400", flow: "200-1400", mass: "12" },
-  { model: "КУ.1-2200", flow: "250-2200", mass: "16" },
-  { model: "КУ.1-3400", flow: "315-3400", mass: "19" },
-  { model: "КУ.1-5500", flow: "400-5500", mass: "29" },
-  { model: "КУ.1-6900", flow: "450-6900", mass: "35" },
-  { model: "КУ.1-8500", flow: "500-8500", mass: "42" },
-  { model: "КУ.1-10700", flow: "560-10700", mass: "45" },
-  { model: "КУ.1-13500", flow: "630-13500", mass: "50" },
-  { model: "КУ.1-17000", flow: "710-17000", mass: "59" },
-  { model: "КУ.1-22000", flow: "800-22000", mass: "74" },
-  { model: "КУ.1-27500", flow: "900-27500", mass: "92" },
+  { size: "300", flow: "300", D: "от 125 до 250", A: "от 672 до 532", B: "308", V: "299", mass: "6" },
+  { size: "500", flow: "500", D: "от 125 до 250", A: "от 732 до 532", B: "308", V: "402", mass: "7" },
+  { size: "900", flow: "900", D: "от 160 до 400", A: "от 732 до 532", B: "408", V: "432", mass: "9" },
+  { size: "1400", flow: "1 400", D: "от 200 до 400", A: "от 932 до 532", B: "408", V: "592", mass: "12" },
+  { size: "2200", flow: "2 200", D: "от 250 до 400", A: "от 932 до 532", B: "708", V: "502", mass: "16" },
+  { size: "3400", flow: "3 400", D: "от 315 до 630", A: "от 932 до 532", B: "708", V: "682", mass: "19" },
+  { size: "5500", flow: "5 500", D: "от 400 до 710", A: "от 1132 до 532", B: "714", V: "1002", mass: "29" },
+  { size: "6900", flow: "6 900", D: "от 450 до 710", A: "от 1332 до 532", B: "714", V: "1232", mass: "35" },
+  { size: "8500", flow: "8 500", D: "от 500 до 630", A: "от 1532 до 530", B: "714", V: "1472", mass: "42" },
+  { size: "10700", flow: "10 700", D: "от 560 до 800", A: "от 1332 до 532", B: "1314", V: "982", mass: "45" },
+  { size: "13500", flow: "13 500", D: "от 630 до 1100", A: "от 1232 до 532", B: "1314", V: "1202", mass: "50" },
+  { size: "17000", flow: "17 000", D: "от 710 до 1250", A: "от 1332 до 532", B: "1314", V: "1472", mass: "59" },
+  { size: "22000", flow: "22 000", D: "от 800 до 1250", A: "от 1632 до 532", B: "1314", V: "1852", mass: "74" },
+  { size: "27500", flow: "27 500", D: "от 900 до 1250", A: "от 2032 до 532", B: "1314", V: "2282", mass: "92" },
 ];
 
 const ku6Data = [
@@ -320,29 +303,13 @@ const GazoochistkaKapleuloviteliInner = () => {
           </div>
         </section>
 
-        {/* КУ.1 Product table */}
-        <section id="modeli" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Типоразмерный ряд каплеуловителей КУ.1</h2>
-          <p className="text-sm text-muted-foreground mb-3">Эффективность очистки капельной влаги — 99,9%</p>
-          <div className="rounded-lg border border-border overflow-auto">
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead className="text-xs">Модель</TableHead>
-                  <TableHead className="text-xs text-right">Расход воздуха, м³/ч</TableHead>
-                  <TableHead className="text-xs text-right">Масса, кг</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {ku1ProductData.map((r, i) => (
-                  <TableRow key={i} className={i % 2 === 1 ? "bg-muted/50" : ""}>
-                    <TableCell className="text-xs font-medium">{r.model}</TableCell>
-                    <TableCell className="text-xs text-right">{r.flow}</TableCell>
-                    <TableCell className="text-xs text-right">{r.mass}</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+        {/* Фото готовой продукции */}
+        <section className="mb-10">
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Фото готовой продукции</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <img src="/images/kapleulovitel-hero-1.png" alt="Каплеуловитель — вид спереди" className="rounded-lg border border-border object-contain w-full aspect-[4/3]" />
+            <img src="/images/kapleulovitel-hero-2.png" alt="Каплеуловитель — ламельный блок" className="rounded-lg border border-border object-contain w-full aspect-[4/3]" />
+            <img src="/images/kapleulovitel-hero-1.png" alt="Каплеуловитель — в сборе" className="rounded-lg border border-border object-contain w-full aspect-[4/3]" />
           </div>
         </section>
 
