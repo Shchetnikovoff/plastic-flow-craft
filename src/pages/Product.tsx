@@ -24,6 +24,7 @@ import { reaktorOsazhdeniyaProducts } from "@/data/reaktorOsazhdeniyaProducts";
 import { vyshchelachProducts } from "@/data/vyshchelachProducts";
 import { sorbtsionnyeProducts } from "@/data/sorbtsionnyeProducts";
 import { losProducts } from "@/data/losProducts";
+import { scrubberProducts } from "@/data/scrubberProducts";
 import ArticleBreakdown, { type ArticleSegment } from "@/components/configurator/ArticleBreakdown";
 import ImageGalleryWithLightbox from "@/components/configurator/ImageGalleryWithLightbox";
 import { Button } from "@/components/ui/button";
