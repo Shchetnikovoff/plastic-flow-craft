@@ -19,6 +19,7 @@ import { ffuModels } from "@/data/ffuProducts";
 import { lamelnyjModels, parseLamelnyjArticle } from "@/data/lamelnyjProducts";
 import { knsPpProducts } from "@/data/knsPpProducts";
 import { knsSvtProducts } from "@/data/knsSvtProducts";
+import { nutchFiltrProducts } from "@/data/nutchFiltrProducts";
 import ArticleBreakdown, { type ArticleSegment } from "@/components/configurator/ArticleBreakdown";
 import ImageGalleryWithLightbox from "@/components/configurator/ImageGalleryWithLightbox";
 import { Button } from "@/components/ui/button";
@@ -2332,6 +2333,123 @@ const ProductDetailContent = () => {
           </DialogContent>
         </Dialog>
         {kpDialog}
+      </main>
+    );
+  }
+
+  // Try Nutch Filter (НФ-)
+  const nutchItem = nutchFiltrProducts.find((p) => p.article === article);
+  if (nutchItem) {
+    const handleNutchSpecPdf = async () => {
+      const errors = validateContactForm(contactData);
+      setContactErrors(errors);
+      if (Object.keys(errors).length > 0) return;
+
+      await generateSpecPdf(
+        {
+          article,
+          diameter: nutchItem.diam,
+          wallThickness: 0,
+          socketThickness: 0,
+          availableLength: null,
+          connectionName: "",
+          materialName: "Полипропилен PP-H",
+          productTitle: `Нутч-фильтр ${nutchItem.article}`,
+          imageUrl: "/images/nutch-filtr-vakuum.jpg",
+          extraRows: [
+            ["Наименование", `Нутч-фильтр ${nutchItem.article}`],
+            ["Артикул", nutchItem.article],
+            ["Диаметр корпуса", `${nutchItem.diam} мм`],
+            ["Площадь фильтрации", `${nutchItem.area} м²`],
+            ["Высота ёмкости суспензии", `${nutchItem.suspH} мм`],
+            ["Объём суспензии", `${nutchItem.suspVol} л`],
+            ["Высота ёмкости фильтрата", `${nutchItem.filtH} мм`],
+            ["Объём фильтрата", `${nutchItem.filtVol} л`],
+            ["Перфорация (∅/шаг)", `${nutchItem.perforation} мм`],
+            ["Материал", "Полипропилен PP-H"],
+          ],
+        },
+        contactData
+      );
+      toast.success("PDF-спецификация скачана");
+      setPdfDialogOpen(false);
+    };
+
+    const handleNutchContactChange = (field: keyof ContactFormData, value: string) => {
+      setContactData((prev) => ({ ...prev, [field]: value }));
+      if (contactErrors[field]) {
+        setContactErrors((prev) => ({ ...prev, [field]: undefined }));
+      }
+    };
+
+    return (
+      <main className="mx-auto max-w-[960px] px-4 sm:px-6 py-6 sm:py-8">
+        <Breadcrumb className="mb-6">
+          <BreadcrumbList>
+            <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog">Каталог</Link></BreadcrumbLink></BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog/gidrometallurgiya">Гидрометаллургия</Link></BreadcrumbLink></BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog/gidrometallurgiya/nutch-filtr">Нутч-фильтры</Link></BreadcrumbLink></BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem><BreadcrumbPage>{nutchItem.article}</BreadcrumbPage></BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
+
+        <div className="grid gap-8 md:grid-cols-2">
+          <div>
+            <div className="aspect-[4/3] overflow-hidden rounded-lg border bg-card">
+              <img src="/images/nutch-filtr-vakuum.jpg" alt={`Нутч-фильтр ${nutchItem.article}`} className="h-full w-full object-contain p-4" />
+            </div>
+          </div>
+
+          <div>
+            <h1 className="text-xl sm:text-2xl font-bold text-foreground mb-1">
+              Нутч-фильтр {nutchItem.article}
+            </h1>
+            <p className="font-mono text-sm text-muted-foreground mb-4">{nutchItem.article}</p>
+
+            <ArticleBreakdown
+              exampleArticle={nutchItem.article}
+              segments={[
+                { value: "НФ", label: "Тип", desc: "Нутч-фильтр" },
+                { value: nutchItem.article.includes("Л-") ? "Л" : "П", label: "Класс", desc: nutchItem.article.includes("Л-") ? "Лабораторный" : "Промышленный" },
+                { value: String(nutchItem.area), label: "S фильтр.", desc: "Площадь фильтрации, м²" },
+                { value: String(nutchItem.diam), label: "∅ корпуса", desc: "Диаметр корпуса, мм" },
+                { value: "ПП", label: "Материал", desc: "Полипропилен" },
+              ]}
+            />
+
+            <div className="mt-4 space-y-2 text-sm">
+              <div className="flex justify-between border-b pb-1"><span className="text-muted-foreground">Диаметр корпуса</span><span className="font-medium">{nutchItem.diam} мм</span></div>
+              <div className="flex justify-between border-b pb-1"><span className="text-muted-foreground">Площадь фильтрации</span><span className="font-medium">{nutchItem.area} м²</span></div>
+              <div className="flex justify-between border-b pb-1"><span className="text-muted-foreground">Объём суспензии</span><span className="font-medium">{nutchItem.suspVol} л</span></div>
+              <div className="flex justify-between border-b pb-1"><span className="text-muted-foreground">Объём фильтрата</span><span className="font-medium">{nutchItem.filtVol} л</span></div>
+              <div className="flex justify-between border-b pb-1"><span className="text-muted-foreground">Перфорация (∅/шаг)</span><span className="font-medium">{nutchItem.perforation} мм</span></div>
+              <div className="flex justify-between border-b pb-1"><span className="text-muted-foreground">Материал</span><span className="font-medium">Полипропилен PP-H</span></div>
+            </div>
+
+            <div className="flex gap-2 mt-6">
+              <Button variant="outline" className="gap-2" onClick={() => setPdfDialogOpen(true)}>
+                <FileDown className="h-4 w-4" /> Скачать спецификацию
+              </Button>
+            </div>
+          </div>
+        </div>
+
+        {/* PDF Download Dialog */}
+        <Dialog open={pdfDialogOpen} onOpenChange={setPdfDialogOpen}>
+          <DialogContent className="max-w-md">
+            <DialogHeader>
+              <DialogTitle>Скачать спецификацию</DialogTitle>
+              <DialogDescription>Заполните контактные данные для скачивания PDF</DialogDescription>
+            </DialogHeader>
+            <ContactFormFields data={contactData} errors={contactErrors} onChange={handleNutchContactChange} />
+            <Button className="w-full gap-2 mt-2" onClick={handleNutchSpecPdf}>
+              <FileDown className="h-4 w-4" /> Скачать PDF
+            </Button>
+          </DialogContent>
+        </Dialog>
       </main>
     );
   }
