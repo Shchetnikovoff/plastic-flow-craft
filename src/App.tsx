@@ -114,6 +114,9 @@ const App = () => (
           <Route path="/catalog/gazoochistka" element={<GazoochistkaPage />} />
           <Route path="/catalog/ventilyatsiya" element={<VentilyatsiyaPage />} />
           <Route path="/catalog/reaktory" element={<ReaktoryPage />} />
+          <Route path="/catalog/gidrometallurgiya/reaktor-osazhdeniya" element={<ReaktorOsazhdeniyaPage />} />
+          <Route path="/catalog/gidrometallurgiya/vyshchelachivaniye" element={<VyshchelachPage />} />
+          <Route path="/catalog/gidrometallurgiya/sorbtsionnye" element={<SorbtsionnyePage />} />
           <Route path="/catalog/gidrometallurgiya/nutch-filtr" element={<NutchFiltrPage />} />
           <Route path="/catalog/gidrometallurgiya" element={<GidrometallurgiyaPage />} />
           <Route path="/catalog/kns/v-korpuse-svt" element={<KnsSvtPage />} />
