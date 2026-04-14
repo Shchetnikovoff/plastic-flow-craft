@@ -7,9 +7,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { Check, ShieldCheck, Wrench, Settings } from "lucide-react";
-import { nutchFiltrProducts } from "@/data/nutchFiltrProducts";
+import { Check, ShieldCheck, Wrench, Settings, FileDown } from "lucide-react";
+import { nutchFiltrProducts, type NutchFiltrProduct } from "@/data/nutchFiltrProducts";
 import ArticleBreakdown from "@/components/configurator/ArticleBreakdown";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import ContactFormFields, { type ContactFormData, validateContactForm } from "@/components/ContactFormFields";
+import { generateSpecPdf } from "@/lib/generateSpecPdf";
 import { toast } from "sonner";
 import { useState } from "react";
 import PageFooter from "@/components/PageFooter";
@@ -41,6 +44,10 @@ const formatPrice = (p: number) => p.toLocaleString("ru-RU") + " ₽";
 
 const NutchFiltrPage = () => {
   const [form, setForm] = useState({ name: "", phone: "", email: "", description: "" });
+  const [specDialog, setSpecDialog] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<NutchFiltrProduct | null>(null);
+  const [contact, setContact] = useState<ContactFormData>({ name: "", email: "", phone: "", inn: "" });
+  const [contactErrors, setContactErrors] = useState({});
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -50,6 +57,49 @@ const NutchFiltrPage = () => {
   };
 
   const scrollToForm = () => document.getElementById("cta-form")?.scrollIntoView({ behavior: "smooth" });
+
+  const openSpecDialog = (product: NutchFiltrProduct) => {
+    setSelectedProduct(product);
+    setSpecDialog(true);
+  };
+
+  const handleDownloadSpec = async () => {
+    const errors = validateContactForm(contact);
+    if (Object.keys(errors).length > 0) {
+      setContactErrors(errors);
+      return;
+    }
+    if (!selectedProduct) return;
+
+    const p = selectedProduct;
+    await generateSpecPdf({
+      article: p.article,
+      diameter: p.diam,
+      wallThickness: 0,
+      socketThickness: 0,
+      availableLength: null,
+      connectionName: "",
+      materialName: "Полипропилен PP-H",
+      productTitle: `Нутч-фильтр ${p.article}`,
+      imageUrl: "/images/nutch-filtr-vakuum.jpg",
+      extraRows: [
+        ["Наименование", `Нутч-фильтр ${p.article}`],
+        ["Артикул", p.article],
+        ["Диаметр корпуса", `${p.diam} мм`],
+        ["Площадь фильтрации", `${p.area} м²`],
+        ["Высота ёмкости суспензии", `${p.suspH} мм`],
+        ["Объём суспензии", `${p.suspVol} л`],
+        ["Высота ёмкости фильтрата", `${p.filtH} мм`],
+        ["Объём фильтрата", `${p.filtVol} л`],
+        ["Перфорация (∅/шаг)", `${p.perforation} мм`],
+        ["Материал", "Полипропилен PP-H"],
+        ["Цена с НДС", formatPrice(p.price)],
+      ],
+    }, contact);
+
+    toast.success("Спецификация скачана!");
+    setSpecDialog(false);
+  };
 
   const standardProducts = nutchFiltrProducts.filter(p => p.group === "standard");
   const compactProducts = nutchFiltrProducts.filter(p => p.group === "compact");
@@ -68,6 +118,7 @@ const NutchFiltrPage = () => {
               <TableHead className="text-xs text-center">V фильтрата, л</TableHead>
               <TableHead className="text-xs text-center">Перфорация, мм</TableHead>
               <TableHead className="text-xs text-right">Цена с НДС</TableHead>
+              <TableHead className="text-xs text-center w-10">PDF</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -80,6 +131,11 @@ const NutchFiltrPage = () => {
                 <TableCell className="text-sm text-center">{p.filtVol}</TableCell>
                 <TableCell className="text-sm text-center">{p.perforation}</TableCell>
                 <TableCell className="text-sm text-right font-medium">{formatPrice(p.price)}</TableCell>
+                <TableCell className="text-center">
+                  <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => openSpecDialog(p)} title="Скачать спецификацию PDF">
+                    <FileDown className="h-4 w-4" />
+                  </Button>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
@@ -181,6 +237,22 @@ const NutchFiltrPage = () => {
 
         <PageFooter />
       </main>
+
+      {/* Spec PDF Dialog */}
+      <Dialog open={specDialog} onOpenChange={setSpecDialog}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle className="text-base">Скачать спецификацию</DialogTitle>
+          </DialogHeader>
+          {selectedProduct && (
+            <p className="text-sm text-muted-foreground mb-2">{selectedProduct.article}</p>
+          )}
+          <ContactFormFields data={contact} errors={contactErrors} onChange={(d) => { setContact(d); setContactErrors({}); }} />
+          <Button onClick={handleDownloadSpec} className="w-full mt-2">
+            <FileDown className="h-4 w-4 mr-2" /> Скачать PDF
+          </Button>
+        </DialogContent>
+      </Dialog>
     </ProductPageShell>
   );
 };
