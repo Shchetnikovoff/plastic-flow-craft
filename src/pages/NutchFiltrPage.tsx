@@ -119,20 +119,18 @@ const NutchFiltrPage = () => {
               <TableHead className="text-xs text-center">V фильтрата, л</TableHead>
               <TableHead className="text-xs text-center">Перфорация, мм</TableHead>
               <TableHead className="text-xs text-center w-10">PDF</TableHead>
-              <TableHead className="text-xs text-center w-10">PDF</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {products.map((p) => (
-              <TableRow key={p.article} className="hover:bg-muted/50">
+              <TableRow key={p.article} className="hover:bg-muted/50 cursor-pointer" onClick={() => navigate(`/product/${encodeURIComponent(p.article)}`)}>
                 <TableCell className="text-sm font-medium">{p.article}</TableCell>
                 <TableCell className="text-sm text-center">{p.diam}</TableCell>
                 <TableCell className="text-sm text-center">{p.area}</TableCell>
                 <TableCell className="text-sm text-center">{p.suspVol}</TableCell>
                 <TableCell className="text-sm text-center">{p.filtVol}</TableCell>
                 <TableCell className="text-sm text-center">{p.perforation}</TableCell>
-                
-                <TableCell className="text-center">
+                <TableCell className="text-center" onClick={(e) => e.stopPropagation()}>
                   <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => openSpecDialog(p)} title="Скачать спецификацию PDF">
                     <FileDown className="h-4 w-4" />
                   </Button>
