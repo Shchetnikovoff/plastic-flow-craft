@@ -2672,9 +2672,11 @@ const ProductDetailContent = () => {
     const hSpecs: [string, string][] = [
       ["Модель", scrubberHorizItem.model],
       ["Производительность", `${scrubberHorizItem.flowFormatted} м³/ч`],
+      ["Диаметр патрубка (D)", `${scrubberHorizItem.diameter} мм`],
       ["Габариты (Д×Ш×В)", `${scrubberHorizItem.dimensions} мм`],
-      ["Материал корпуса", "Полипропилен (ПП) / Полиэтилен (ПЭ)"],
+      ["Материал корпуса", "ПП / ПЭ / нерж. сталь / титан / фторопласт"],
       ["Тип насадки", "Кольца Палля / Рашига / Intalox"],
+      ["Степень очистки", "до 99,9 %"],
     ];
 
     const handleHorizScrubberSpecPdf = async () => {
