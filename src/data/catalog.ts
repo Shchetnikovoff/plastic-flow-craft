@@ -54,7 +54,7 @@ export const catalog: CatalogCategory[] = [
       { id: "v3", name: "Мешочный обезвоживатель осадка", slug: "meshochnyj-obezvozhivatel", externalPath: "/catalog/vodoochistka/meshochnyj-obezvozhivatel", image: "/images/obezvozhivatel-3d-ral7032.jpg" },
       { id: "v4", name: "Станции приготовления реагентов", slug: "stantsiya-dozirovaniya", externalPath: "/catalog/vodoochistka/stantsiya-dozirovaniya", image: "/images/spr-hero-ral7032.jpg" },
       { id: "v6", name: "Жироуловители промышленные", slug: "zhirouloviteli", externalPath: "/catalog/vodoochistka/zhirouloviteli", image: "/images/zhu-vertical-ral.jpg" },
-      { id: "v7", name: "КОС — комплексные очистные сооружения", slug: "los", externalPath: "/catalog/vodoochistka/los", image: "/images/vodoochistka-kos-kompakt.jpg" },
+      
       { id: "v8", name: "Шкафы и стойки дозирования", slug: "shkafy-dozirovaniya", externalPath: "/catalog/vodoochistka/shkafy-dozirovaniya", image: "/images/vodoochistka-dozirovanie-grundfos.jpg" },
     ],
   },
@@ -65,6 +65,14 @@ export const catalog: CatalogCategory[] = [
     subcategories: [
       { id: "k1", name: "КНС в корпусе SVT", slug: "v-korpuse-svt", image: "/images/kns-svt-cutaway.jpg", externalPath: "/catalog/kns/v-korpuse-svt", description: "Канализационные насосные станции в корпусе SVT из стеклопластика. Высокая прочность, устойчивость к грунтовым водам. Комплектация насосами и автоматикой под проект." },
       { id: "k2", name: "КНС в корпусе из полипропилена", slug: "v-korpuse-polipropilen", externalPath: "/catalog/kns/v-korpuse-polipropilen", image: "/images/kns-pp-cutaway-v3.jpg", description: "Канализационные насосные станции в полипропиленовом корпусе. Лёгкий монтаж, химическая стойкость, долговечность. Объём и конфигурация по техзаданию заказчика." },
+    ],
+  },
+  {
+    id: "los",
+    name: "ЛОС",
+    slug: "los",
+    subcategories: [
+      { id: "los1", name: "ЛОС — локальные очистные сооружения", slug: "los", externalPath: "/catalog/los", image: "/images/vodoochistka-kos-kompakt.jpg", description: "Глубокая очистка хозяйственно-бытовых, ливневых и промышленных сточных вод. Корпус из спиральновитых труб СВТ для подземной установки." },
     ],
   },
   {

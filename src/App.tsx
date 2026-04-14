@@ -33,6 +33,7 @@ import VodoochistkaObezvozhivatel from "./pages/VodoochistkaObezvozhivatel";
 import VodoochistkaDozirovanie from "./pages/VodoochistkaDozirovanie";
 import VodoochistkaZhirouloviteli from "./pages/VodoochistkaZhirouloviteli";
 import VodoochistkaLos from "./pages/VodoochistkaLos";
+import LosPage from "./pages/VodoochistkaLos";
 import VodoochistkaShkafyDozirovaniya from "./pages/VodoochistkaShkafyDozirovaniya";
 import GazoochistkaSkrubbery from "./pages/GazoochistkaSkrubbery";
 import ZhuPodzemnyeVertikalnye from "./pages/ZhuPodzemnyeVertikalnye";
