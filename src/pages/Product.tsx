@@ -839,11 +839,11 @@ const ProductDetailContent = () => {
               <FileDown className="h-4 w-4" />
               Скачать спецификацию (PDF)
             </Button>
-            <Button variant="outline" className="gap-2 w-full mt-2" onClick={() => openKpDialog({ model: emkost.title, article, specs: [["Объём", `${emkost.volume.toLocaleString()} л`], ...(emkost.diameter > 0 ? [["Диаметр (D)", `${emkost.diameter.toLocaleString()} мм`] as [string,string]] : []), [emkost.heightLabel, `${emkost.heightOrLength.toLocaleString()} мм`], ["Материал", emkost.materialName]] })}>
+            <Button variant="outline" className="gap-2 w-full mt-2" onClick={() => openKpDialog({ model: emkost.title, article, specs: [["Объём", `${emkost.volume.toLocaleString()} л`], ...(emkost.diameter > 0 ? [["Диаметр (D)", `${emkost.diameter.toLocaleString()} мм`] as [string,string]] : []), [emkost.heightLabel, `${emkost.heightOrLength.toLocaleString()} мм`], ["Материал", emkost.materialName]], imageUrl: emkost.image })}>
               <FileDown className="h-4 w-4" />
               Скачать коммерческое предложение (PDF)
             </Button>
-            <Button variant="secondary" className="gap-2 w-full mt-2" onClick={() => { addToKp({ model: emkost.title, article, specs: [["Объём", `${emkost.volume.toLocaleString()} л`], ...(emkost.diameter > 0 ? [["Диаметр (D)", `${emkost.diameter.toLocaleString()} мм`] as [string,string]] : []), [emkost.heightLabel, `${emkost.heightOrLength.toLocaleString()} мм`], ["Материал", emkost.materialName]] }); toast.success("Добавлено в КП"); }}>
+            <Button variant="secondary" className="gap-2 w-full mt-2" onClick={() => { addToKp({ model: emkost.title, article, specs: [["Объём", `${emkost.volume.toLocaleString()} л`], ...(emkost.diameter > 0 ? [["Диаметр (D)", `${emkost.diameter.toLocaleString()} мм`] as [string,string]] : []), [emkost.heightLabel, `${emkost.heightOrLength.toLocaleString()} мм`], ["Материал", emkost.materialName]], imageUrl: emkost.image }); toast.success("Добавлено в КП"); }}>
               <ClipboardList className="h-4 w-4" />
               Добавить в КП
             </Button>
