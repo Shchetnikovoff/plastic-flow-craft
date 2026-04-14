@@ -265,6 +265,7 @@ const GazoochistkaKapleuloviteliInner = () => {
         {/* Advantages */}
         <section className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Устройство и преимущества</h2>
+          <img src="/images/kapleulovitel-device.png" alt="Устройство каплеуловителя" className="rounded-lg border border-border object-contain w-full max-w-[500px] mx-auto mb-4" />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
             {advantages.map((a, i) => (
               <Card key={i} className="border-border">
