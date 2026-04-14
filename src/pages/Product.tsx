@@ -23,6 +23,7 @@ import { nutchFiltrProducts } from "@/data/nutchFiltrProducts";
 import { reaktorOsazhdeniyaProducts } from "@/data/reaktorOsazhdeniyaProducts";
 import { vyshchelachProducts } from "@/data/vyshchelachProducts";
 import { sorbtsionnyeProducts } from "@/data/sorbtsionnyeProducts";
+import { losProducts } from "@/data/losProducts";
 import ArticleBreakdown, { type ArticleSegment } from "@/components/configurator/ArticleBreakdown";
 import ImageGalleryWithLightbox from "@/components/configurator/ImageGalleryWithLightbox";
 import { Button } from "@/components/ui/button";
@@ -2451,6 +2452,55 @@ const ProductDetailContent = () => {
             </div>
             <div className="flex flex-col gap-2 mt-6">
               <Button variant="secondary" className="gap-2 w-full" onClick={() => { addToKp({ model: sorbItem.name, article: sorbItem.article, specs: [["Объём", `${sorbItem.volume} м³`], ["Диаметр", `${sorbItem.diam} мм`], ["Высота", `${sorbItem.height} мм`], ["Тип дна", sorbItem.bottomType], ["Материал", sorbItem.material]], imageUrl: "/images/gm-sorbtsionnye.png" }); toast.success("Добавлено в КП"); }}>
+                <ClipboardList className="h-4 w-4" /> Добавить в КП
+              </Button>
+            </div>
+          </div>
+        </div>
+      </main>
+    );
+  }
+
+  // Try LOS / Peskoulovitel / Nefteulovitel
+  const losItem = losProducts.find((p) => p.article === article);
+  if (losItem) {
+    const specs: [string, string][] = [
+      ["Производительность", `${losItem.throughput} л/с`],
+      ["Диаметр корпуса", `${losItem.diameter} мм`],
+      ["Длина", `${losItem.length} мм`],
+      ["Ø труб", `${losItem.pipes} мм`],
+    ];
+    if (losItem.drop) specs.push(["Перепад", `${losItem.drop} мм`]);
+    if (losItem.sorbent) specs.push(["Объём сорбента", `${losItem.sorbent} м³`]);
+    specs.push(["Материал корпуса", "СВТ (стеклопластик)"]);
+
+    const typeLabels: Record<string, string> = { los: "ЛОС", pesk: "Пескоуловитель", neft: "Нефтеуловитель" };
+    const typeDescs: Record<string, string> = { los: "Локальное очистное сооружение", pesk: "Пескоуловитель", neft: "Нефтеуловитель" };
+
+    return (
+      <main className="mx-auto max-w-[960px] px-4 sm:px-6 py-6 sm:py-8">
+        <Breadcrumb className="mb-6"><BreadcrumbList>
+          <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog">Каталог</Link></BreadcrumbLink></BreadcrumbItem><BreadcrumbSeparator />
+          <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog/los">ЛОС</Link></BreadcrumbLink></BreadcrumbItem><BreadcrumbSeparator />
+          <BreadcrumbItem><BreadcrumbPage>{losItem.article}</BreadcrumbPage></BreadcrumbItem>
+        </BreadcrumbList></Breadcrumb>
+        <div className="grid gap-8 md:grid-cols-2">
+          <div><div className="aspect-[4/3] overflow-hidden rounded-lg border bg-card flex items-center justify-center"><img src={losItem.image} alt={losItem.name} className="h-full w-full object-contain p-4" /></div></div>
+          <div>
+            <h1 className="text-xl sm:text-2xl font-bold text-foreground mb-1">{losItem.name}</h1>
+            <p className="font-mono text-sm text-muted-foreground mb-4">{losItem.article}</p>
+            <ArticleBreakdown exampleArticle={losItem.article} segments={[
+              { value: typeLabels[losItem.type] || losItem.type, label: "Тип", desc: typeDescs[losItem.type] },
+              { value: "СВТ", label: "Корпус", desc: "Спиральновитая труба" },
+              { value: String(losItem.throughput), label: "Произв.", desc: "Производительность, л/с" },
+            ]} />
+            <div className="mt-4 space-y-2 text-sm">
+              {specs.map(([label, value]) => (
+                <div key={label} className="flex justify-between border-b pb-1"><span className="text-muted-foreground">{label}</span><span className="font-medium">{value}</span></div>
+              ))}
+            </div>
+            <div className="flex flex-col gap-2 mt-6">
+              <Button variant="secondary" className="gap-2 w-full" onClick={() => { addToKp({ model: losItem.name, article: losItem.article, specs, imageUrl: losItem.image }); toast.success("Добавлено в КП"); }}>
                 <ClipboardList className="h-4 w-4" /> Добавить в КП
               </Button>
             </div>
