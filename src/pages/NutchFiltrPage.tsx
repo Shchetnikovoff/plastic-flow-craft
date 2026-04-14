@@ -93,7 +93,7 @@ const NutchFiltrPage = () => {
         ["Объём фильтрата", `${p.filtVol} л`],
         ["Перфорация (∅/шаг)", `${p.perforation} мм`],
         ["Материал", "Полипропилен PP-H"],
-        ["Цена с НДС", formatPrice(p.price)],
+        
       ],
     }, contact);
 
