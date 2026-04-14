@@ -93,7 +93,7 @@ const NutchFiltrPage = () => {
         ["Объём фильтрата", `${p.filtVol} л`],
         ["Перфорация (∅/шаг)", `${p.perforation} мм`],
         ["Материал", "Полипропилен PP-H"],
-        ["Цена с НДС", formatPrice(p.price)],
+        
       ],
     }, contact);
 
@@ -117,7 +117,7 @@ const NutchFiltrPage = () => {
               <TableHead className="text-xs text-center">V суспензии, л</TableHead>
               <TableHead className="text-xs text-center">V фильтрата, л</TableHead>
               <TableHead className="text-xs text-center">Перфорация, мм</TableHead>
-              <TableHead className="text-xs text-right">Цена с НДС</TableHead>
+              <TableHead className="text-xs text-center w-10">PDF</TableHead>
               <TableHead className="text-xs text-center w-10">PDF</TableHead>
             </TableRow>
           </TableHeader>
@@ -130,7 +130,7 @@ const NutchFiltrPage = () => {
                 <TableCell className="text-sm text-center">{p.suspVol}</TableCell>
                 <TableCell className="text-sm text-center">{p.filtVol}</TableCell>
                 <TableCell className="text-sm text-center">{p.perforation}</TableCell>
-                <TableCell className="text-sm text-right font-medium">{formatPrice(p.price)}</TableCell>
+                
                 <TableCell className="text-center">
                   <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => openSpecDialog(p)} title="Скачать спецификацию PDF">
                     <FileDown className="h-4 w-4" />
