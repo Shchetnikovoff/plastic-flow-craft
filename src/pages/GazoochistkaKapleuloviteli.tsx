@@ -303,29 +303,13 @@ const GazoochistkaKapleuloviteliInner = () => {
           </div>
         </section>
 
-        {/* КУ.1 Product table */}
-        <section id="modeli" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Типоразмерный ряд каплеуловителей КУ.1</h2>
-          <p className="text-sm text-muted-foreground mb-3">Эффективность очистки капельной влаги — 99,9%</p>
-          <div className="rounded-lg border border-border overflow-auto">
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead className="text-xs">Модель</TableHead>
-                  <TableHead className="text-xs text-right">Расход воздуха, м³/ч</TableHead>
-                  <TableHead className="text-xs text-right">Масса, кг</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {ku1ProductData.map((r, i) => (
-                  <TableRow key={i} className={i % 2 === 1 ? "bg-muted/50" : ""}>
-                    <TableCell className="text-xs font-medium">{r.model}</TableCell>
-                    <TableCell className="text-xs text-right">{r.flow}</TableCell>
-                    <TableCell className="text-xs text-right">{r.mass}</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+        {/* Фото готовой продукции */}
+        <section className="mb-10">
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Фото готовой продукции</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <img src="/images/kapleulovitel-hero-1.png" alt="Каплеуловитель — вид спереди" className="rounded-lg border border-border object-contain w-full aspect-[4/3]" />
+            <img src="/images/kapleulovitel-hero-2.png" alt="Каплеуловитель — ламельный блок" className="rounded-lg border border-border object-contain w-full aspect-[4/3]" />
+            <img src="/images/kapleulovitel-hero-1.png" alt="Каплеуловитель — в сборе" className="rounded-lg border border-border object-contain w-full aspect-[4/3]" />
           </div>
         </section>
 
