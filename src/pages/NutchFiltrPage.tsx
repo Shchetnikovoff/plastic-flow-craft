@@ -43,6 +43,7 @@ const articleSegments = [
 const formatPrice = (p: number) => p.toLocaleString("ru-RU") + " ₽";
 
 const NutchFiltrPage = () => {
+  const navigate = useNavigate();
   const [form, setForm] = useState({ name: "", phone: "", email: "", description: "" });
   const [specDialog, setSpecDialog] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<NutchFiltrProduct | null>(null);
