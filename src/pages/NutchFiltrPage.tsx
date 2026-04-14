@@ -247,7 +247,7 @@ const NutchFiltrPage = () => {
           {selectedProduct && (
             <p className="text-sm text-muted-foreground mb-2">{selectedProduct.article}</p>
           )}
-          <ContactFormFields data={contact} errors={contactErrors} onChange={(d) => { setContact(d); setContactErrors({}); }} />
+          <ContactFormFields data={contact} errors={contactErrors} onChange={(field, value) => { setContact(prev => ({ ...prev, [field]: value })); setContactErrors({}); }} />
           <Button onClick={handleDownloadSpec} className="w-full mt-2">
             <FileDown className="h-4 w-4 mr-2" /> Скачать PDF
           </Button>
