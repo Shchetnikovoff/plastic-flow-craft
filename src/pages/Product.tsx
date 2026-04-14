@@ -2464,18 +2464,53 @@ const ProductDetailContent = () => {
   // Try LOS / Peskoulovitel / Nefteulovitel
   const losItem = losProducts.find((p) => p.article === article);
   if (losItem) {
-    const specs: [string, string][] = [
+    const losSpecs: [string, string][] = [
       ["Производительность", `${losItem.throughput} л/с`],
       ["Диаметр корпуса", `${losItem.diameter} мм`],
       ["Длина", `${losItem.length} мм`],
       ["Ø труб", `${losItem.pipes} мм`],
     ];
-    if (losItem.drop) specs.push(["Перепад", `${losItem.drop} мм`]);
-    if (losItem.sorbent) specs.push(["Объём сорбента", `${losItem.sorbent} м³`]);
-    specs.push(["Материал корпуса", "СВТ (стеклопластик)"]);
+    if (losItem.drop) losSpecs.push(["Перепад", `${losItem.drop} мм`]);
+    if (losItem.sorbent) losSpecs.push(["Объём сорбента", `${losItem.sorbent} м³`]);
+    losSpecs.push(["Материал корпуса", "СВТ (стеклопластик)"]);
 
     const typeLabels: Record<string, string> = { los: "ЛОС", pesk: "Пескоуловитель", neft: "Нефтеуловитель" };
     const typeDescs: Record<string, string> = { los: "Локальное очистное сооружение", pesk: "Пескоуловитель", neft: "Нефтеуловитель" };
+
+    const handleLosSpecPdf = async () => {
+      const errors = validateContactForm(contactData);
+      setContactErrors(errors);
+      if (Object.keys(errors).length > 0) return;
+
+      await generateSpecPdf(
+        {
+          article: losItem.article,
+          diameter: losItem.diameter,
+          wallThickness: 0,
+          socketThickness: 0,
+          availableLength: losItem.length,
+          connectionName: "",
+          materialName: "СВТ (стеклопластик)",
+          productTitle: losItem.name,
+          imageUrl: losItem.image,
+          extraRows: [
+            ["Наименование", losItem.name],
+            ["Артикул", losItem.article],
+            ...losSpecs,
+          ],
+        },
+        contactData
+      );
+      toast.success("PDF-спецификация скачана");
+      setPdfDialogOpen(false);
+    };
+
+    const handleLosContactChange = (field: keyof ContactFormData, value: string) => {
+      setContactData((prev) => ({ ...prev, [field]: value }));
+      if (contactErrors[field]) {
+        setContactErrors((prev) => ({ ...prev, [field]: undefined }));
+      }
+    };
 
     return (
       <main className="mx-auto max-w-[960px] px-4 sm:px-6 py-6 sm:py-8">
@@ -2495,17 +2530,34 @@ const ProductDetailContent = () => {
               { value: String(losItem.throughput), label: "Произв.", desc: "Производительность, л/с" },
             ]} />
             <div className="mt-4 space-y-2 text-sm">
-              {specs.map(([label, value]) => (
+              {losSpecs.map(([label, value]) => (
                 <div key={label} className="flex justify-between border-b pb-1"><span className="text-muted-foreground">{label}</span><span className="font-medium">{value}</span></div>
               ))}
             </div>
             <div className="flex flex-col gap-2 mt-6">
-              <Button variant="secondary" className="gap-2 w-full" onClick={() => { addToKp({ model: losItem.name, article: losItem.article, specs, imageUrl: losItem.image }); toast.success("Добавлено в КП"); }}>
+              <Button variant="outline" className="gap-2 w-full" onClick={() => setPdfDialogOpen(true)}>
+                <FileDown className="h-4 w-4" /> Скачать спецификацию (PDF)
+              </Button>
+              <Button variant="secondary" className="gap-2 w-full" onClick={() => { addToKp({ model: losItem.name, article: losItem.article, specs: losSpecs, imageUrl: losItem.image }); toast.success("Добавлено в КП"); }}>
                 <ClipboardList className="h-4 w-4" /> Добавить в КП
               </Button>
             </div>
           </div>
         </div>
+
+        {/* PDF Download Dialog */}
+        <Dialog open={pdfDialogOpen} onOpenChange={setPdfDialogOpen}>
+          <DialogContent className="max-w-md">
+            <DialogHeader>
+              <DialogTitle>Скачать спецификацию</DialogTitle>
+              <DialogDescription>Заполните контактные данные для скачивания PDF</DialogDescription>
+            </DialogHeader>
+            <ContactFormFields data={contactData} errors={contactErrors} onChange={handleLosContactChange} />
+            <Button className="w-full gap-2 mt-2" onClick={handleLosSpecPdf}>
+              <FileDown className="h-4 w-4" /> Скачать PDF
+            </Button>
+          </DialogContent>
+        </Dialog>
       </main>
     );
   }
