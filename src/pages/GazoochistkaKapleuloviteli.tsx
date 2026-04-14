@@ -248,6 +248,10 @@ const GazoochistkaKapleuloviteliInner = () => {
         {/* Principle */}
         <section id="princip" className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">Принцип работы</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+            <img src="/images/kapleulovitel-scheme-1.png" alt="Схема каплеуловителя — принцип работы" className="rounded-lg border border-border object-contain w-full" />
+            <img src="/images/kapleulovitel-scheme-2.png" alt="Схема каплеуловителя — устройство" className="rounded-lg border border-border object-contain w-full" />
+          </div>
           <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
             <p>
               Загрязнённый воздушный поток проходит через блок ламелей — тонких пластин, деформированных в двух плоскостях. При изменении направления движения воздуха возникают центробежные силы, под действием которых капли жидкости осаждаются на ребристой поверхности ламелей.
@@ -261,6 +265,7 @@ const GazoochistkaKapleuloviteliInner = () => {
         {/* Advantages */}
         <section className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Устройство и преимущества</h2>
+          <img src="/images/kapleulovitel-device.png" alt="Устройство каплеуловителя" className="rounded-lg border border-border object-contain w-full max-w-[500px] mx-auto mb-4" />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
             {advantages.map((a, i) => (
               <Card key={i} className="border-border">
@@ -294,7 +299,13 @@ const GazoochistkaKapleuloviteliInner = () => {
         {/* Size tables */}
         <section id="modeli" className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Типоразмерный ряд</h2>
+          <div className="mb-4">
+            <img src="/images/kapleulovitel-ku1-drawing.jpg" alt="Чертёж каплеуловителя КУ.1 — габаритные размеры" className="rounded-lg border border-border object-contain w-full max-w-[600px] mx-auto" />
+          </div>
           {renderSizeTable(ku1Data, "Серия КУ.1 — стандартная", "КУ.1")}
+          <div className="mb-4 mt-6">
+            <img src="/images/kapleulovitel-ku6-drawing.jpg" alt="Чертёж каплеуловителя КУ.6 — габаритные размеры" className="rounded-lg border border-border object-contain w-full max-w-[600px] mx-auto" />
+          </div>
           {renderSizeTable(ku6Data, "Серия КУ.6 — компактная", "КУ.6")}
           <p className="text-xs text-muted-foreground mt-2">
             Аэродинамическое сопротивление: 50–300 Па в зависимости от расхода. Для прямоугольного сечения — переходные камеры под размер заказчика.
