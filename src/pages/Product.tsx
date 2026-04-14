@@ -27,6 +27,7 @@ import { losProducts } from "@/data/losProducts";
 import { scrubberProducts } from "@/data/scrubberProducts";
 import { scrubberHorizProducts } from "@/data/scrubberHorizProducts";
 import { fvgProducts } from "@/data/fvgProducts";
+import { kapleulovitelProducts } from "@/data/kapleulovitelProducts";
 import ArticleBreakdown, { type ArticleSegment } from "@/components/configurator/ArticleBreakdown";
 import ImageGalleryWithLightbox from "@/components/configurator/ImageGalleryWithLightbox";
 import { Button } from "@/components/ui/button";
