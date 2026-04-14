@@ -294,8 +294,8 @@ const GazoochistkaKapleuloviteliInner = () => {
         {/* Size tables */}
         <section id="modeli" className="mb-10">
           <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Типоразмерный ряд</h2>
-          {renderSizeTable(ku1Data, "Серия КУ.1 — стандартная")}
-          {renderSizeTable(ku6Data, "Серия КУ.6 — компактная")}
+          {renderSizeTable(ku1Data, "Серия КУ.1 — стандартная", "КУ.1")}
+          {renderSizeTable(ku6Data, "Серия КУ.6 — компактная", "КУ.6")}
           <p className="text-xs text-muted-foreground mt-2">
             Аэродинамическое сопротивление: 50–300 Па в зависимости от расхода. Для прямоугольного сечения — переходные камеры под размер заказчика.
           </p>
