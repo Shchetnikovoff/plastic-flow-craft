@@ -10,10 +10,8 @@ export interface ScrubberHorizProduct {
 }
 
 const defaultImages = [
-  "/images/skrubber-goriz-render.png",
+  "/images/skrubber-goriz-render-clean.png",
   "/images/skrubber-goriz-chertezh.webp",
-  "/images/skrubber-vert-real-1.jpg",
-  "/images/skrubber-vert-real-2.jpg",
 ];
 
 export const scrubberHorizProducts: ScrubberHorizProduct[] = [
