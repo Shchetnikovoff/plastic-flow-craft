@@ -2617,8 +2617,7 @@ const ProductDetailContent = () => {
           <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog/gazoochistka/skrubbery">Скрубберы</Link></BreadcrumbLink></BreadcrumbItem><BreadcrumbSeparator />
           <BreadcrumbItem><BreadcrumbPage>{scrubberItem.article}</BreadcrumbPage></BreadcrumbItem>
         </BreadcrumbList></Breadcrumb>
-        <div className="grid gap-8 md:grid-cols-2">
-          <ScrubberGallery images={scrubberItem.images} />
+        <ScrubberGalleryCard images={scrubberItem.images} name={scrubberItem.name} />
           <div>
             <h1 className="text-xl sm:text-2xl font-bold text-foreground mb-1">{scrubberItem.name}</h1>
             <p className="font-mono text-sm text-muted-foreground mb-4">{scrubberItem.article}</p>
