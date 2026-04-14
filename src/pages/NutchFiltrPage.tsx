@@ -117,7 +117,7 @@ const NutchFiltrPage = () => {
               <TableHead className="text-xs text-center">V суспензии, л</TableHead>
               <TableHead className="text-xs text-center">V фильтрата, л</TableHead>
               <TableHead className="text-xs text-center">Перфорация, мм</TableHead>
-              <TableHead className="text-xs text-right">Цена с НДС</TableHead>
+              <TableHead className="text-xs text-center w-10">PDF</TableHead>
               <TableHead className="text-xs text-center w-10">PDF</TableHead>
             </TableRow>
           </TableHeader>
