@@ -265,7 +265,8 @@ const VodoochistkaLosInner = () => {
                 <Table>
                   <TableHeader>
                     <TableRow>
-                      <TableHead className="text-xs">Произв., л/с</TableHead>
+                      <TableHead className="text-xs">Артикул</TableHead>
+                      <TableHead className="text-xs text-right">Произв., л/с</TableHead>
                       <TableHead className="text-xs text-right">Ø, мм</TableHead>
                       <TableHead className="text-xs text-right">Длина, мм</TableHead>
                       <TableHead className="text-xs text-right">Перепад, мм</TableHead>
@@ -273,15 +274,19 @@ const VodoochistkaLosInner = () => {
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {peskModels.map((m, i) => (
-                      <TableRow key={i} className="cursor-pointer hover:bg-accent/50 transition-colors" onClick={() => navigate(`/product/СЗПК.ПУ.СВТ.${m.throughput}`)}>
-                        <TableCell className="text-xs font-medium text-primary underline">{m.throughput}</TableCell>
+                    {peskModels.map((m, i) => {
+                      const art = `СЗПК.ПУ.СВТ.${m.throughput}`;
+                      return (
+                      <TableRow key={i} className="cursor-pointer hover:bg-accent/50 transition-colors" onClick={() => navigate(`/product/${art}`)}>
+                        <TableCell className="text-xs font-medium text-primary underline whitespace-nowrap">{art}</TableCell>
+                        <TableCell className="text-xs text-right">{m.throughput}</TableCell>
                         <TableCell className="text-xs text-right">{m.diameter}</TableCell>
                         <TableCell className="text-xs text-right">{m.length}</TableCell>
                         <TableCell className="text-xs text-right">{m.drop}</TableCell>
                         <TableCell className="text-xs text-right">{m.pipes}</TableCell>
                       </TableRow>
-                    ))}
+                      );
+                    })}
                   </TableBody>
                 </Table>
               </div>
@@ -302,21 +307,26 @@ const VodoochistkaLosInner = () => {
                 <Table>
                   <TableHeader>
                     <TableRow>
-                      <TableHead className="text-xs">Произв., л/с</TableHead>
+                      <TableHead className="text-xs">Артикул</TableHead>
+                      <TableHead className="text-xs text-right">Произв., л/с</TableHead>
                       <TableHead className="text-xs text-right">Ø, мм</TableHead>
                       <TableHead className="text-xs text-right">Длина, мм</TableHead>
                       <TableHead className="text-xs text-right">Ø труб, мм</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {neftModels.map((m, i) => (
-                      <TableRow key={i} className="cursor-pointer hover:bg-accent/50 transition-colors" onClick={() => navigate(`/product/СЗПК.НУ.СВТ.${m.throughput}`)}>
-                        <TableCell className="text-xs font-medium text-primary underline">{m.throughput}</TableCell>
+                    {neftModels.map((m, i) => {
+                      const art = `СЗПК.НУ.СВТ.${m.throughput}`;
+                      return (
+                      <TableRow key={i} className="cursor-pointer hover:bg-accent/50 transition-colors" onClick={() => navigate(`/product/${art}`)}>
+                        <TableCell className="text-xs font-medium text-primary underline whitespace-nowrap">{art}</TableCell>
+                        <TableCell className="text-xs text-right">{m.throughput}</TableCell>
                         <TableCell className="text-xs text-right">{m.diameter}</TableCell>
                         <TableCell className="text-xs text-right">{m.length}</TableCell>
                         <TableCell className="text-xs text-right">{m.pipes}</TableCell>
                       </TableRow>
-                    ))}
+                      );
+                    })}
                   </TableBody>
                 </Table>
               </div>
