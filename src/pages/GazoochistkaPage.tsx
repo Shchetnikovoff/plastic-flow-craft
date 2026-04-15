@@ -67,19 +67,43 @@ const GazoochistkaPageInner = () => {
     <>
       <Header onCartOpen={() => setCartOpen(true)} productType="otvod" />
       <CartSheet open={cartOpen} onOpenChange={setCartOpen} />
-      <main className="mx-auto max-w-[960px] px-4 sm:px-6 py-6 sm:py-8">
-        <Breadcrumb className="mb-6"><BreadcrumbList><BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog">Каталог</Link></BreadcrumbLink></BreadcrumbItem><BreadcrumbSeparator /><BreadcrumbItem><BreadcrumbPage>Газоочистка</BreadcrumbPage></BreadcrumbItem></BreadcrumbList></Breadcrumb>
 
-        <section className="mb-10">
-          <p className="text-xs text-muted-foreground uppercase tracking-wider mb-2">ООО СЗПК «Пласт-Металл ПРО»</p>
-          <h1 className="text-2xl sm:text-3xl font-bold text-foreground leading-tight mb-3">Газоочистное оборудование из полимеров</h1>
-          <p className="text-sm text-muted-foreground mb-5">Скрубберы, фильтры и каплеуловители — эффективная очистка промышленных газовых выбросов!</p>
-          <Button onClick={scrollToForm}>Получить расчёт стоимости</Button>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
-<div className="rounded-lg border border-border overflow-hidden bg-card"><img src="/images/gazoochistka-hero-1.png" alt="Газоочистное оборудование" className="w-full object-contain" /></div>
-            <div className="rounded-lg border border-border overflow-hidden bg-card"><img src="/images/gazoochistka-hero-2.png" alt="Скрубберы и фильтры" className="w-full object-contain" /></div>
+      <section className="bg-slate-900 text-white">
+        <div className="mx-auto max-w-[960px] px-4 sm:px-6 py-10 sm:py-14">
+          <Breadcrumb className="mb-6">
+            <BreadcrumbList className="text-slate-400">
+              <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog" className="text-slate-400 hover:text-amber-400">Каталог</Link></BreadcrumbLink></BreadcrumbItem>
+              <BreadcrumbSeparator className="text-slate-600" />
+              <BreadcrumbItem><BreadcrumbPage className="text-slate-200">Газоочистка</BreadcrumbPage></BreadcrumbItem>
+            </BreadcrumbList>
+          </Breadcrumb>
+          <p className="text-[11px] text-amber-400 uppercase tracking-[0.2em] font-semibold mb-3">ООО СЗПК «Пласт-Металл ПРО»</p>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-4">
+            Газоочистное <span className="text-amber-400">оборудование</span> из полимеров
+          </h1>
+          <p className="text-sm sm:text-base text-slate-300 mb-6 max-w-2xl leading-relaxed">
+            Скрубберы, фильтры и каплеуловители — эффективная очистка промышленных газовых выбросов из химически стойких полимеров.
+          </p>
+          <div className="flex flex-wrap gap-3 mb-8">
+            <Button onClick={scrollToForm} className="bg-amber-500 hover:bg-amber-400 text-slate-900 font-semibold rounded-full shadow-lg shadow-amber-500/25">
+              Получить расчёт стоимости
+            </Button>
+            <Button
+              variant="outline"
+              onClick={() => document.getElementById("katalog")?.scrollIntoView({ behavior: "smooth" })}
+              className="bg-transparent border-slate-600 text-white hover:bg-slate-800 hover:text-amber-400 hover:border-slate-500 rounded-full"
+            >
+              Смотреть каталог
+            </Button>
           </div>
-        </section>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="rounded-lg border border-slate-800 overflow-hidden bg-slate-800/50"><img src="/images/gazoochistka-hero-1.png" alt="Газоочистное оборудование" className="w-full object-contain" /></div>
+            <div className="rounded-lg border border-slate-800 overflow-hidden bg-slate-800/50"><img src="/images/gazoochistka-hero-2.png" alt="Скрубберы и фильтры" className="w-full object-contain" /></div>
+          </div>
+        </div>
+      </section>
+
+      <main className="mx-auto max-w-[960px] px-4 sm:px-6 py-6 sm:py-8">
 
 
         <nav className="mb-8 flex flex-wrap gap-2">
