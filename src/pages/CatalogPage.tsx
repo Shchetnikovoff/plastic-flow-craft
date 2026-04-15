@@ -60,7 +60,7 @@ const CatalogPageInner = () => {
                   <Link
                     key={cat.id}
                     to={`/catalog/${cat.slug}`}
-                    className="group rounded-lg border border-border bg-card overflow-hidden hover:border-primary/50 hover:shadow-md transition-all"
+                    className="group rounded-lg border border-border bg-card overflow-hidden hover:border-amber-400/60 hover:shadow-lg hover:shadow-amber-500/10 hover:scale-[1.02] transition-all"
                   >
                     <div className="aspect-video bg-white flex items-center justify-center">
                       {thumb ? (
@@ -70,7 +70,7 @@ const CatalogPageInner = () => {
                       )}
                     </div>
                     <div className="px-3 py-2.5">
-                      <h3 className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">
+                      <h3 className="text-sm font-semibold text-foreground group-hover:text-amber-500 transition-colors">
                         {cat.name}
                       </h3>
                       <p className="text-xs text-muted-foreground mt-0.5">
@@ -212,7 +212,7 @@ const CatalogPageInner = () => {
                       <span className={`text-xs font-semibold shrink-0 ${isSelected ? "text-primary" : "text-muted-foreground"}`}>
                         {catIndex}.{i + 1}
                       </span>
-                      <span className={`transition-colors ${isSelected ? "text-primary font-semibold" : "text-foreground group-hover:text-primary"}`}>
+                      <span className={`transition-colors ${isSelected ? "text-primary font-semibold" : "text-foreground group-hover:text-amber-500"}`}>
                         {sub.name}
                       </span>
                     </button>
@@ -285,7 +285,7 @@ const CatalogPageInner = () => {
                       </div>
                       <div className="px-3 py-2.5">
                         <p className="text-xs text-muted-foreground font-semibold">{catIndex}.{i + 1}</p>
-                        <p className="text-sm font-medium text-foreground group-hover:text-primary transition-colors mt-0.5">
+                        <p className="text-sm font-medium text-foreground group-hover:text-amber-500 transition-colors mt-0.5">
                           {sub.name}
                         </p>
                       </div>
@@ -297,7 +297,7 @@ const CatalogPageInner = () => {
                       <Link
                         key={sub.id}
                         to={sub.externalPath}
-                        className="group rounded-lg border border-border bg-card overflow-hidden hover:border-primary/50 hover:shadow-md transition-all text-left block"
+                        className="group rounded-lg border border-border bg-card overflow-hidden hover:border-amber-400/60 hover:shadow-lg hover:shadow-amber-500/10 hover:scale-[1.02] transition-all text-left block"
                       >
                         {cardContent}
                       </Link>
@@ -308,7 +308,7 @@ const CatalogPageInner = () => {
                     <button
                       key={sub.id}
                       onClick={() => setSelectedSubId(sub.id)}
-                      className="group rounded-lg border border-border bg-card overflow-hidden hover:border-primary/50 hover:shadow-md transition-all text-left"
+                      className="group rounded-lg border border-border bg-card overflow-hidden hover:border-amber-400/60 hover:shadow-lg hover:shadow-amber-500/10 hover:scale-[1.02] transition-all text-left"
                     >
                       {cardContent}
                     </button>

@@ -211,13 +211,13 @@ const EmkostiPryamougolnyeInner = () => {
               <Link
                 key={sub.id}
                 to={sub.path}
-                className="group rounded-lg border border-border bg-card overflow-hidden hover:border-primary/50 hover:shadow-md transition-all block"
+                className="group rounded-lg border border-border bg-card overflow-hidden hover:border-amber-400/60 hover:shadow-lg hover:shadow-amber-500/10 hover:scale-[1.02] transition-all block"
               >
                 <div className="aspect-[4/3] bg-muted flex items-center justify-center">
                   <img src={sub.image} alt={sub.name} className="w-full h-full object-contain" style={sub.imgFilter ? { filter: sub.imgFilter } : undefined} />
                 </div>
                 <div className="px-4 py-3">
-                  <h3 className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">{sub.name}</h3>
+                  <h3 className="text-sm font-semibold text-foreground group-hover:text-amber-500 transition-colors">{sub.name}</h3>
                   <p className="text-xs text-muted-foreground mt-1">{sub.description}</p>
                 </div>
               </Link>

@@ -290,7 +290,7 @@ const VodoochistkaInner = () => {
                           }`}
                         >
                           <span className={`text-xs font-semibold shrink-0 ${isSelected ? "text-primary" : "text-muted-foreground"}`}>{catIndex}.{i + 1}</span>
-                          <span className={`transition-colors ${isSelected ? "text-primary font-semibold" : "text-foreground group-hover:text-primary"}`}>{sub.name}</span>
+                          <span className={`transition-colors ${isSelected ? "text-primary font-semibold" : "text-foreground group-hover:text-amber-500"}`}>{sub.name}</span>
                         </button>
                       </li>
                     );
@@ -345,19 +345,19 @@ const VodoochistkaInner = () => {
                             </div>
                             <div className="px-3 py-2.5">
                               <p className="text-xs text-muted-foreground font-semibold">{catIndex}.{i + 1}</p>
-                              <p className="text-sm font-medium text-foreground group-hover:text-primary transition-colors mt-0.5">{sub.name}</p>
+                              <p className="text-sm font-medium text-foreground group-hover:text-amber-500 transition-colors mt-0.5">{sub.name}</p>
                             </div>
                           </>
                         );
                         if (sub.externalPath) {
                           return (
-                            <Link key={sub.id} to={sub.externalPath} className="group rounded-lg border border-border bg-card overflow-hidden hover:border-primary/50 hover:shadow-md transition-all text-left block">
+                            <Link key={sub.id} to={sub.externalPath} className="group rounded-lg border border-border bg-card overflow-hidden hover:border-amber-400/60 hover:shadow-lg hover:shadow-amber-500/10 hover:scale-[1.02] transition-all text-left block">
                               {cardContent}
                             </Link>
                           );
                         }
                         return (
-                          <button key={sub.id} onClick={() => setSelectedSubId(sub.id)} className="group rounded-lg border border-border bg-card overflow-hidden hover:border-primary/50 hover:shadow-md transition-all text-left">
+                          <button key={sub.id} onClick={() => setSelectedSubId(sub.id)} className="group rounded-lg border border-border bg-card overflow-hidden hover:border-amber-400/60 hover:shadow-lg hover:shadow-amber-500/10 hover:scale-[1.02] transition-all text-left">
                             {cardContent}
                           </button>
                         );
