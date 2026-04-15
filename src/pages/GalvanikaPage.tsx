@@ -131,6 +131,29 @@ const GalvanikaPageInner = () => {
         </div>
       </section>
 
+      <section className="border-t border-slate-800 bg-slate-900 text-white">
+        <div className="mx-auto max-w-[960px] px-4 sm:px-6 py-6 sm:py-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+            <div>
+              <div className="text-2xl sm:text-3xl font-bold text-amber-400">30+</div>
+              <div className="text-[11px] sm:text-xs text-slate-400 mt-1 uppercase tracking-wider">лет срок службы</div>
+            </div>
+            <div>
+              <div className="text-2xl sm:text-3xl font-bold text-amber-400">500+</div>
+              <div className="text-[11px] sm:text-xs text-slate-400 mt-1 uppercase tracking-wider">реализованных проектов</div>
+            </div>
+            <div>
+              <div className="text-2xl sm:text-3xl font-bold text-amber-400">5 лет</div>
+              <div className="text-[11px] sm:text-xs text-slate-400 mt-1 uppercase tracking-wider">гарантия</div>
+            </div>
+            <div>
+              <div className="text-2xl sm:text-3xl font-bold text-amber-400">24 ч</div>
+              <div className="text-[11px] sm:text-xs text-slate-400 mt-1 uppercase tracking-wider">расчёт стоимости</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <main className="mx-auto max-w-[960px] px-4 sm:px-6 py-6 sm:py-8">
 
         <section className="mb-10">
