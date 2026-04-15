@@ -105,7 +105,7 @@ const EmkostiGorizontalnyeInner = () => {
 
         {/* Subtypes grid */}
         <section id="katalog" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Типы горизонтальных ёмкостей</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Типы горизонтальных ёмкостей</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {subtypes.map((sub) => (
               <Link
@@ -127,7 +127,7 @@ const EmkostiGorizontalnyeInner = () => {
 
         {/* CTA Form */}
         <section id="cta-form" className="mb-10 scroll-mt-8">
-          <div className="rounded-xl border border-border bg-card p-6 sm:p-8">
+          <div className="rounded-xl bg-slate-900 text-white p-6 sm:p-8">
             <h2 className="text-xl font-bold text-foreground mb-2">Запросить расчёт</h2>
             <p className="text-sm text-muted-foreground mb-4">Оставьте заявку — подготовим КП в течение 24 часов.</p>
             <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-3">

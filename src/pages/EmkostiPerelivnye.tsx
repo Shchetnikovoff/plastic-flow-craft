@@ -155,7 +155,7 @@ const EmkostiPerelivnyeInner = () => {
         </nav>
 
         <section id="cvet" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">Цвет полипропилена</h2>
+          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Цвет полипропилена</h2>
           <div className="grid gap-2 sm:grid-cols-2">
             {ppColors.map((c) => (
               <div
@@ -180,7 +180,7 @@ const EmkostiPerelivnyeInner = () => {
 
         {/* Intro */}
         <section className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">
+          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase border-l-4 border-amber-400 pl-3">
             Переливные ёмкости: назначение и принцип работы
           </h2>
           <p className="text-sm text-muted-foreground leading-relaxed mb-4">
@@ -199,7 +199,7 @@ const EmkostiPerelivnyeInner = () => {
 
         {/* Функции */}
         <section id="funkcii" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Функции переливной ёмкости</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Функции переливной ёмкости</h2>
           <div className="space-y-2">
             {features.map((item, i) => (
               <div key={i} className="flex items-start gap-2 rounded-lg border border-border bg-card p-3">
@@ -212,7 +212,7 @@ const EmkostiPerelivnyeInner = () => {
 
         {/* Назначение */}
         <section id="primenenie" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Область применения</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Область применения</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             {applications.map((app, i) => (
               <div key={i} className="flex items-start gap-2 rounded-lg border border-border bg-card p-3">
@@ -225,7 +225,7 @@ const EmkostiPerelivnyeInner = () => {
 
         {/* Характеристики */}
         <section id="harakteristiki" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Технические характеристики</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Технические характеристики</h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 mb-6">
             {specs.map((spec, i) => (
               <div key={i} className="rounded-lg border border-border bg-muted/30 p-3">
@@ -248,7 +248,7 @@ const EmkostiPerelivnyeInner = () => {
 
         {/* Типоразмерный ряд */}
         <section id="modeli" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Типоразмерный ряд</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Типоразмерный ряд</h2>
           <p className="text-sm text-muted-foreground mb-4">
             Размер ёмкости подбирается в зависимости от объёма бассейна. Ниже представлены стандартные модели — возможно изготовление по индивидуальным размерам.
           </p>
@@ -280,10 +280,10 @@ const EmkostiPerelivnyeInner = () => {
 
         {/* Преимущества */}
         <section id="preimushchestva" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Преимущества сотрудничества</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Преимущества сотрудничества</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
             {advantages.map((adv) => (
-              <Card key={adv.title}>
+              <Card key={adv.title} className="hover:border-amber-400/50 hover:shadow-md transition-all">
                 <CardContent className="p-4 flex items-start gap-3">
                   <adv.icon className="h-5 w-5 text-primary shrink-0 mt-0.5" />
                   <div>

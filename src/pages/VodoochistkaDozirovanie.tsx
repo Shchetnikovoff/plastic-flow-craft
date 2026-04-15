@@ -199,7 +199,7 @@ const VodoochistkaDozirovanieInner = () => {
         </nav>
 
         <section className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">
+          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase border-l-4 border-amber-400 pl-3">
             Станции дозирования: производство под ключ
           </h2>
           <p className="text-sm text-muted-foreground leading-relaxed mb-4">
@@ -218,7 +218,7 @@ const VodoochistkaDozirovanieInner = () => {
 
         {/* Section 1: Назначение */}
         <section id="naznachenie" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Назначение и области применения</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Назначение и области применения</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             {purposeItems.map((area, i) => (
               <div key={i} className="flex items-start gap-2 rounded-lg border border-border bg-card p-3">
@@ -231,7 +231,7 @@ const VodoochistkaDozirovanieInner = () => {
 
         {/* Section 2: Принцип работы */}
         <section id="princip" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Принцип работы</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Принцип работы</h2>
 
           <p className="text-sm text-muted-foreground leading-relaxed mb-4">
             Станция работает по принципу непрерывного трёхкамерного процесса: в первой камере реагент смешивается с водой, во второй — созревает до рабочей вязкости, из третьей — подаётся дозирующим насосом в систему водоочистки.
@@ -264,7 +264,7 @@ const VodoochistkaDozirovanieInner = () => {
 
         {/* Section 3: Модельный ряд */}
         <section id="modeli" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Модельный ряд</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Модельный ряд</h2>
 
           <div className="rounded-lg border border-border overflow-auto">
             <Table>
@@ -306,7 +306,7 @@ const VodoochistkaDozirovanieInner = () => {
 
         {/* Section 4: Модификации и опции */}
         <section className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Модификации и опции</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Модификации и опции</h2>
           <Accordion type="single" collapsible className="w-full">
             {modificationItems.map((item, i) => (
               <AccordionItem key={i} value={`mod-${i}`}>
@@ -319,7 +319,7 @@ const VodoochistkaDozirovanieInner = () => {
 
         {/* Section 5: Преимущества сотрудничества */}
         <section id="preimushchestva" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Преимущества сотрудничества</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Преимущества сотрудничества</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {partnershipAdvantages.map((a, i) => (
               <Card key={i} className="border-border">

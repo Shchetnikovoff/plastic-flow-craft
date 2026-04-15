@@ -52,7 +52,7 @@ const CatalogPageInner = () => {
 
           {/* Category grid */}
           <section className="mb-10">
-            <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Направления</h2>
+            <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Направления</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {catalog.map((cat) => {
                 const thumb = cat.image || cat.subcategories.find((s) => s.image)?.image;
@@ -85,17 +85,17 @@ const CatalogPageInner = () => {
 
           {/* CTA form */}
           <section id="catalog-cta-form" className="mb-10 scroll-mt-20">
-            <Card><CardContent className="p-6">
-              <h2 className="text-base font-bold text-foreground mb-2 tracking-wide uppercase">Нужна консультация или расчёт?</h2>
+            <div className="rounded-xl bg-slate-900 text-white p-6 sm:p-8">
+              <h2 className="text-base font-bold text-white mb-2 tracking-wide uppercase">Нужна консультация или расчёт?</h2>
               <p className="text-sm text-muted-foreground mb-5">Оставьте заявку — ответим в течение 24 часов.</p>
               <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div className="space-y-1.5"><Label className="text-xs">Имя *</Label><Input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Ваше имя" maxLength={100} /></div>
                 <div className="space-y-1.5"><Label className="text-xs">Телефон *</Label><Input value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} placeholder="+7 (___) ___-__-__" maxLength={20} /></div>
                 <div className="space-y-1.5"><Label className="text-xs">E-mail</Label><Input type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="mail@example.com" maxLength={255} /></div>
                 <div className="space-y-1.5 sm:col-span-3"><Label className="text-xs">Описание задачи</Label><Textarea value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} placeholder="Опишите задачу…" rows={3} maxLength={1000} /></div>
-                <div className="sm:col-span-3"><Button type="submit" className="w-full sm:w-auto">Отправить заявку</Button></div>
+                <div className="sm:col-span-3"><Button type="submit" className="w-full sm:w-auto bg-amber-500 hover:bg-amber-400 text-slate-900 font-semibold rounded-full">Отправить заявку</Button></div>
               </form>
-            </CardContent></Card>
+            </div>
           </section>
 
           <PageFooter />

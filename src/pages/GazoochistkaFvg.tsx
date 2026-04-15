@@ -157,7 +157,7 @@ const GazoochistkaFvgInner = () => {
         </nav>
 
         <section id="opisanie" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">Почему выбирают наши фильтры</h2>
+          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Почему выбирают наши фильтры</h2>
           <ul className="space-y-2">
             {whyUs.map((item, i) => (
               <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
@@ -170,7 +170,7 @@ const GazoochistkaFvgInner = () => {
 
         {/* Filter sizes info */}
         <section id="opisanie" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">Размерный ряд фильтров</h2>
+          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Размерный ряд фильтров</h2>
           <div className="space-y-2 text-sm text-muted-foreground leading-relaxed">
             <p>
               Выпускаются 5 типоразмеров фильтров с площадью поверхности фильтрования: <span className="font-semibold text-foreground">0,37</span>, <span className="font-semibold text-foreground">0,74</span>, <span className="font-semibold text-foreground">1,6</span>, <span className="font-semibold text-foreground">3,2</span> и <span className="font-semibold text-foreground">6,4</span> м².
@@ -183,7 +183,7 @@ const GazoochistkaFvgInner = () => {
 
         {/* Principle */}
         <section id="princip" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">Принцип работы</h2>
+          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Принцип работы</h2>
           <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
             <p>
               Внутри корпуса фильтра размещена кассета с фильтрующим иглопробивным полотном на основе полипропилена. Кассета изготовлена в виде вертикально расположенных складок. Установка и смена кассет осуществляются через монтажный люк в верхней части корпуса.
@@ -199,7 +199,7 @@ const GazoochistkaFvgInner = () => {
 
         {/* Designation */}
         <section id="opisanie" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">Условное обозначение</h2>
+          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Условное обозначение</h2>
           <p className="text-sm text-muted-foreground mb-3">Пример: <span className="font-semibold text-foreground">ФВГ-0,37-1-ПП</span></p>
           <div className="rounded-lg border border-border overflow-auto">
             <Table>
@@ -223,7 +223,7 @@ const GazoochistkaFvgInner = () => {
 
         {/* Specs table */}
         <section id="harakteristiki" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Технические характеристики</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Технические характеристики</h2>
           <div className="rounded-lg border border-border overflow-auto">
             <Table>
               <TableHeader>
@@ -256,7 +256,7 @@ const GazoochistkaFvgInner = () => {
 
         {/* Dimensions table */}
         <section className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Габаритные размеры, мм</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Габаритные размеры, мм</h2>
           <div className="rounded-lg border border-border overflow-auto">
             <Table>
               <TableHeader>
@@ -293,7 +293,7 @@ const GazoochistkaFvgInner = () => {
 
         {/* Wet cleaning advantages */}
         <section className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Достоинства мокрой очистки газов</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Достоинства мокрой очистки газов</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {wetAdvantages.map((a, i) => (
               <Card key={i} className="border-border">
@@ -313,7 +313,7 @@ const GazoochistkaFvgInner = () => {
 
         {/* Extras */}
         <section className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">Дополнительная комплектация</h2>
+          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Дополнительная комплектация</h2>
           <ul className="space-y-2">
             {extras.map((item, i) => (
               <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
@@ -326,7 +326,7 @@ const GazoochistkaFvgInner = () => {
 
         {/* Partnership */}
         <section id="preimushchestva" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Преимущества сотрудничества</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Преимущества сотрудничества</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
             {partnershipAdvantages.map((a, i) => (
               <Card key={i} className="border-border">
@@ -368,7 +368,7 @@ const GazoochistkaFvgInner = () => {
                   <Textarea id="description" value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} placeholder="Тип производства, состав выбросов, требуемая производительность…" rows={4} />
                 </div>
                 <div className="sm:col-span-2">
-                  <Button type="submit" className="w-full sm:w-auto">Отправить заявку</Button>
+                  <Button type="submit" className="w-full sm:w-auto bg-amber-500 hover:bg-amber-400 text-slate-900 font-semibold rounded-full">Отправить заявку</Button>
                 </div>
               </form>
             </CardContent>

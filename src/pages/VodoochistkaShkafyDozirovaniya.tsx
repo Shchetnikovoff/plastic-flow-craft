@@ -189,7 +189,7 @@ const VodoochistkaShkafyDozirovaniyaInner = () => {
         </nav>
 
         <section className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">
+          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase border-l-4 border-amber-400 pl-3">
             Дозировочные шкафы: производство под ключ
           </h2>
           <p className="text-sm text-muted-foreground leading-relaxed mb-4">
@@ -208,7 +208,7 @@ const VodoochistkaShkafyDozirovaniyaInner = () => {
 
         {/* Section 1: Основные компоненты */}
         <section id="komponenty" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Основные компоненты</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Основные компоненты</h2>
           <div className="rounded-lg border border-border overflow-hidden">
             {components.map((c, i) => (
               <div key={i} className={`flex items-start gap-2 p-3 text-sm ${i % 2 === 1 ? "bg-muted/50" : "bg-card"}`}>
@@ -221,7 +221,7 @@ const VodoochistkaShkafyDozirovaniyaInner = () => {
 
         {/* Section 2: Функции */}
         <section className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Функции шкафов управления</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Функции шкафов управления</h2>
           <div className="rounded-lg border border-border overflow-hidden">
             {functions.map((s, i) => (
               <div key={s.step} className={`flex gap-3 items-start p-3 ${i % 2 === 1 ? "bg-muted/50" : "bg-card"}`}>
@@ -239,7 +239,7 @@ const VodoochistkaShkafyDozirovaniyaInner = () => {
 
         {/* Section 3: Типы шкафов */}
         <section className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Типы шкафов и стоек</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Типы шкафов и стоек</h2>
           <Accordion type="single" collapsible className="w-full">
             {cabinetTypes.map((item, i) => (
               <AccordionItem key={i} value={`type-${i}`}>
@@ -252,7 +252,7 @@ const VodoochistkaShkafyDozirovaniyaInner = () => {
 
         {/* Section 4: Особенности конструкции */}
         <section className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Особенности конструкции</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Особенности конструкции</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             {constructionFeatures.map((f, i) => (
               <div key={i} className="rounded-lg border border-border bg-card p-3">
@@ -265,7 +265,7 @@ const VodoochistkaShkafyDozirovaniyaInner = () => {
 
         {/* Section 5: Области применения */}
         <section id="primenenie" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Области применения</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Области применения</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             {applications.map((a, i) => (
               <div key={i} className="flex items-start gap-2 rounded-lg border border-border bg-card p-3">
@@ -278,7 +278,7 @@ const VodoochistkaShkafyDozirovaniyaInner = () => {
 
         {/* Section 6: Преимущества сотрудничества */}
         <section id="preimushchestva" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Преимущества сотрудничества</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Преимущества сотрудничества</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {partnershipAdvantages.map((a, i) => (
               <Card key={i} className="border-border">
@@ -320,7 +320,7 @@ const VodoochistkaShkafyDozirovaniyaInner = () => {
                   <Textarea id="description" value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} placeholder="Тип реагента, требуемая производительность, условия эксплуатации…" rows={3} />
                 </div>
                 <div className="sm:col-span-2">
-                  <Button type="submit" className="w-full sm:w-auto">Отправить заявку</Button>
+                  <Button type="submit" className="w-full sm:w-auto bg-amber-500 hover:bg-amber-400 text-slate-900 font-semibold rounded-full">Отправить заявку</Button>
                 </div>
               </form>
             </CardContent>

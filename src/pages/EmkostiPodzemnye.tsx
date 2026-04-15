@@ -203,7 +203,7 @@ const EmkostiPodzemnyeInner = () => {
 
         {/* Типоразмерный ряд */}
         <section id="modeli" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Типоразмерный ряд</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Типоразмерный ряд</h2>
           <div className="rounded-lg border border-border overflow-auto">
             <Table>
               <TableHeader>
@@ -235,7 +235,7 @@ const EmkostiPodzemnyeInner = () => {
 
         {/* Intro / Description */}
         <section id="opisanie" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">
+          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase border-l-4 border-amber-400 pl-3">
             Подземные резервуары на заказ: от проектирования до ввода в эксплуатацию
           </h2>
           <p className="text-sm text-muted-foreground leading-relaxed mb-4">
@@ -254,7 +254,7 @@ const EmkostiPodzemnyeInner = () => {
 
         {/* Section 1: Назначение */}
         <section id="naznachenie" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Назначение подземных ёмкостей</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Назначение подземных ёмкостей</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             {applications.map((app, i) => (
               <div key={i} className="flex items-start gap-2 rounded-lg border border-border bg-card p-3">
@@ -267,7 +267,7 @@ const EmkostiPodzemnyeInner = () => {
 
         {/* Section 2: Технология и материалы */}
         <section id="materialy" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Технология и материалы</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Технология и материалы</h2>
           <p className="text-sm text-muted-foreground leading-relaxed mb-4">
             Спиральновитые трубы (СВП) — это гофрированные полимерные или металлополимерные конструкции, формируемые методом спиральной навивки с последующей сваркой швов.
           </p>
@@ -307,7 +307,7 @@ const EmkostiPodzemnyeInner = () => {
 
         {/* Section 3: Виды и модификации */}
         <section id="modifikacii" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Виды и модификации</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Виды и модификации</h2>
           <Accordion type="multiple" defaultValue={["По назначению"]} className="space-y-2">
             {modifications.map((mod) => (
               <AccordionItem key={mod.title} value={mod.title} className="rounded-lg border border-border bg-card px-4">
@@ -331,10 +331,10 @@ const EmkostiPodzemnyeInner = () => {
 
         {/* Section 4: Преимущества сотрудничества */}
         <section id="preimushchestva" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Преимущества сотрудничества</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Преимущества сотрудничества</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
             {advantages.map((adv) => (
-              <Card key={adv.title}>
+              <Card key={adv.title} className="hover:border-amber-400/50 hover:shadow-md transition-all">
                 <CardContent className="p-4 flex items-start gap-3">
                   <adv.icon className="h-5 w-5 text-primary shrink-0 mt-0.5" />
                   <div>

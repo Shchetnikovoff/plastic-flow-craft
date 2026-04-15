@@ -192,7 +192,7 @@ const EmkostiPageInner = () => {
         {/* Каталог ёмкостей — moved up */}
         {category && (
           <section id="katalog" className="mb-10">
-            <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Каталог ёмкостей</h2>
+            <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Каталог ёмкостей</h2>
             <div className="flex flex-col md:flex-row gap-6">
               <nav className="md:w-[220px] shrink-0">
                 <ul className="space-y-0.5">
@@ -304,7 +304,7 @@ const EmkostiPageInner = () => {
 
         {/* Описание */}
         <section id="opisanie" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">
+          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase border-l-4 border-amber-400 pl-3">
             Промышленные ёмкости на заказ: от эскиза до монтажа
           </h2>
           <p className="text-sm text-muted-foreground leading-relaxed mb-4">
@@ -323,7 +323,7 @@ const EmkostiPageInner = () => {
 
         {/* Назначение */}
         <section id="naznachenie" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Назначение ёмкостей</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Назначение ёмкостей</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             {applications.map((app, i) => (
               <div key={i} className="flex items-start gap-2 rounded-lg border border-border bg-card p-3">
@@ -336,7 +336,7 @@ const EmkostiPageInner = () => {
 
         {/* Материалы */}
         <section id="materialy" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Описание материалов</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Описание материалов</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             <Card>
               <CardHeader className="pb-3">
@@ -382,7 +382,7 @@ const EmkostiPageInner = () => {
 
         {/* Виды и модификации */}
         <section id="modifikacii" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Виды и модификации ёмкостей</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Виды и модификации ёмкостей</h2>
           <Accordion type="multiple" defaultValue={["По форме"]} className="space-y-2">
             {modifications.map((mod) => (
               <AccordionItem key={mod.title} value={mod.title} className="rounded-lg border border-border bg-card px-4">
@@ -424,7 +424,7 @@ const EmkostiPageInner = () => {
 
         {/* Преимущества */}
         <section id="preimushchestva" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Преимущества сотрудничества</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Преимущества сотрудничества</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
             {advantages.map((adv) => (
               <div key={adv.title} className="rounded-lg border border-border bg-card p-4">
@@ -438,7 +438,7 @@ const EmkostiPageInner = () => {
 
         {/* CTA Form */}
         <section id="cta-form" className="mb-10 scroll-mt-8">
-          <div className="rounded-xl border border-border bg-card p-6 sm:p-8">
+          <div className="rounded-xl bg-slate-900 text-white p-6 sm:p-8">
             <h2 className="text-xl font-bold text-foreground mb-2">Готовы заказать ёмкость?</h2>
             <p className="text-sm text-muted-foreground mb-1">Оставьте заявку, и наш инженер:</p>
             <ul className="space-y-1 mb-5">

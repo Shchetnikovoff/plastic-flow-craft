@@ -177,7 +177,7 @@ const VodoochistkaLosInner = () => {
         </nav>
 
         <section className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">
+          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase border-l-4 border-amber-400 pl-3">
             Комплексные решения очистки сточных вод
           </h2>
           <p className="text-sm text-muted-foreground leading-relaxed mb-4">
@@ -196,7 +196,7 @@ const VodoochistkaLosInner = () => {
 
         {/* Product tabs */}
         <section id="modeli" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Типоразмерный ряд</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Типоразмерный ряд</h2>
 
           <Tabs defaultValue="los" className="w-full">
             <TabsList className="w-full grid grid-cols-3 mb-4">
@@ -324,7 +324,7 @@ const VodoochistkaLosInner = () => {
 
         {/* Преимущества */}
         <section id="preimushchestva" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Преимущества сотрудничества</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Преимущества сотрудничества</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {partnershipAdvantages.map((a, i) => (
               <Card key={i} className="border-border">
@@ -342,7 +342,7 @@ const VodoochistkaLosInner = () => {
 
         {/* CTA Form */}
         <section id="cta-form" className="mb-10 rounded-lg border border-border bg-card p-6">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Оставить заявку</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Оставить заявку</h2>
           <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-1.5">
               <Label htmlFor="name" className="text-xs">Имя *</Label>
@@ -361,7 +361,7 @@ const VodoochistkaLosInner = () => {
               <Textarea id="description" value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} placeholder="Опишите ваш объект, требуемую производительность, состав стоков..." rows={3} />
             </div>
             <div className="sm:col-span-2">
-              <Button type="submit" className="w-full sm:w-auto">Отправить заявку</Button>
+              <Button type="submit" className="w-full sm:w-auto bg-amber-500 hover:bg-amber-400 text-slate-900 font-semibold rounded-full">Отправить заявку</Button>
             </div>
           </form>
         </section>

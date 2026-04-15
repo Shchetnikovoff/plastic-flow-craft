@@ -213,7 +213,7 @@ const GazoochistkaKapleuloviteliInner = () => {
         </nav>
 
         <section id="opisanie" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">Почему выбирают наши каплеуловители</h2>
+          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Почему выбирают наши каплеуловители</h2>
           <ul className="space-y-2">
             {whyUs.map((item, i) => (
               <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
@@ -226,7 +226,7 @@ const GazoochistkaKapleuloviteliInner = () => {
 
         {/* Applications */}
         <section id="primenenie" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Область применения</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Область применения</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {applications.map((a, i) => (
               <Card key={i} className="border-border">
@@ -246,7 +246,7 @@ const GazoochistkaKapleuloviteliInner = () => {
 
         {/* Principle */}
         <section id="princip" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">Принцип работы</h2>
+          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Принцип работы</h2>
           <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
             <p>
               Загрязнённый воздушный поток проходит через блок ламелей — тонких пластин, деформированных в двух плоскостях. При изменении направления движения воздуха возникают центробежные силы, под действием которых капли жидкости осаждаются на ребристой поверхности ламелей.
@@ -259,7 +259,7 @@ const GazoochistkaKapleuloviteliInner = () => {
 
         {/* Advantages */}
         <section className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Устройство и преимущества</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Устройство и преимущества</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
             {advantages.map((a, i) => (
               <Card key={i} className="border-border">
@@ -279,7 +279,7 @@ const GazoochistkaKapleuloviteliInner = () => {
 
         {/* How to select */}
         <section className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">Как подобрать каплеуловитель</h2>
+          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Как подобрать каплеуловитель</h2>
           <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
             <p>
               Подбор осуществляется по расходу воздуха — выбирается ближайший типоразмер в меньшую сторону. Для прямоугольного сечения воздуховода изготавливаются переходные камеры под имеющиеся размеры заказчика.
@@ -292,7 +292,7 @@ const GazoochistkaKapleuloviteliInner = () => {
 
         {/* Size tables */}
         <section id="modeli" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Типоразмерный ряд</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Типоразмерный ряд</h2>
           {renderSizeTable(ku1Data, "Серия КУ.1 — стандартная")}
           {renderSizeTable(ku6Data, "Серия КУ.6 — компактная")}
           <p className="text-xs text-muted-foreground mt-2">
@@ -302,7 +302,7 @@ const GazoochistkaKapleuloviteliInner = () => {
 
         {/* Partnership */}
         <section id="preimushchestva" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Преимущества сотрудничества</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Преимущества сотрудничества</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
             {partnershipAdvantages.map((a, i) => (
               <Card key={i} className="border-border">
@@ -322,7 +322,7 @@ const GazoochistkaKapleuloviteliInner = () => {
 
         {/* КУ.1 Product table */}
         <section id="modeli" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Типоразмерный ряд каплеуловителей КУ.1</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Типоразмерный ряд каплеуловителей КУ.1</h2>
           <p className="text-sm text-muted-foreground mb-3">Эффективность очистки капельной влаги — 99,9%</p>
           <div className="rounded-lg border border-border overflow-auto">
             <Table>
@@ -370,7 +370,7 @@ const GazoochistkaKapleuloviteliInner = () => {
                   <Textarea id="description" value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} placeholder="Расход воздуха, тип среды, размеры воздуховода…" rows={4} />
                 </div>
                 <div className="sm:col-span-2">
-                  <Button type="submit" className="w-full sm:w-auto">Отправить заявку</Button>
+                  <Button type="submit" className="w-full sm:w-auto bg-amber-500 hover:bg-amber-400 text-slate-900 font-semibold rounded-full">Отправить заявку</Button>
                 </div>
               </form>
             </CardContent>

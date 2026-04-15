@@ -178,7 +178,7 @@ const VodoochistkaZhirouloviteliInner = () => {
 
         {/* Section: Виды */}
         <section id="vidy" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Виды жироуловителей</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Виды жироуловителей</h2>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             {typeCards.map((card, i) => (
               <Card
@@ -200,7 +200,7 @@ const VodoochistkaZhirouloviteliInner = () => {
 
         {/* Intro */}
         <section id="opisanie" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">
+          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase border-l-4 border-amber-400 pl-3">
             Жироуловители для промышленных и коммерческих объектов
           </h2>
           <p className="text-sm text-muted-foreground leading-relaxed mb-4">
@@ -222,7 +222,7 @@ const VodoochistkaZhirouloviteliInner = () => {
 
         {/* Section: Назначение */}
         <section id="naznachenie" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Назначение и области применения</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Назначение и области применения</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             {purposeItems.map((area, i) => (
               <div key={i} className="flex items-start gap-2 rounded-lg border border-border bg-card p-3">
@@ -238,7 +238,7 @@ const VodoochistkaZhirouloviteliInner = () => {
 
         {/* Section 4: Принцип работы */}
         <section id="princip" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Принцип работы</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Принцип работы</h2>
           <div className="space-y-3">
             {processSteps.map((s) => (
               <div key={s.step} className="flex gap-3 items-start rounded-lg border border-border bg-card p-3">
@@ -256,7 +256,7 @@ const VodoochistkaZhirouloviteliInner = () => {
 
         {/* Section 5: Доп. опции */}
         <section id="opcii" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Дополнительные опции</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Дополнительные опции</h2>
           <ul className="space-y-1.5">
             {optionsList.map((item, i) => (
               <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
@@ -269,7 +269,7 @@ const VodoochistkaZhirouloviteliInner = () => {
 
         {/* Section 6: Преимущества */}
         <section id="preimushchestva" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Преимущества сотрудничества</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Преимущества сотрудничества</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {partnershipAdvantages.map((a, i) => (
               <Card key={i} className="border-border">
@@ -289,7 +289,7 @@ const VodoochistkaZhirouloviteliInner = () => {
 
 
         <section id="cta-form" className="mb-10 rounded-lg border border-border bg-card p-6">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Оставить заявку</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Оставить заявку</h2>
           <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-1.5">
               <Label htmlFor="name" className="text-xs">Имя *</Label>
@@ -308,7 +308,7 @@ const VodoochistkaZhirouloviteliInner = () => {
               <Textarea id="description" value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} placeholder="Тип объекта, требуемая производительность, особые условия…" rows={3} />
             </div>
             <div className="sm:col-span-2">
-              <Button type="submit" className="w-full sm:w-auto">Отправить заявку</Button>
+              <Button type="submit" className="w-full sm:w-auto bg-amber-500 hover:bg-amber-400 text-slate-900 font-semibold rounded-full">Отправить заявку</Button>
             </div>
           </form>
         </section>

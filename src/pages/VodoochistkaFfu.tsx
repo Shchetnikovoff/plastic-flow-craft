@@ -200,7 +200,7 @@ const VodoochistkaFfuInner = () => {
         </nav>
 
         <section className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">
+          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase border-l-4 border-amber-400 pl-3">
             Флотационно-фильтровальные установки для глубокой очистки стоков
           </h2>
           <p className="text-sm text-muted-foreground leading-relaxed mb-4">
@@ -219,7 +219,7 @@ const VodoochistkaFfuInner = () => {
 
         {/* Section 1: Назначение и области применения */}
         <section id="naznachenie" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Назначение и области применения</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Назначение и области применения</h2>
 
           <h3 className="text-sm font-semibold text-foreground mb-2">ФФУ предназначены для очистки:</h3>
           <ul className="space-y-1.5 mb-4">
@@ -254,7 +254,7 @@ const VodoochistkaFfuInner = () => {
 
         {/* Section 2: Принцип работы и конструкция */}
         <section id="princip" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Принцип работы и конструкция</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Принцип работы и конструкция</h2>
 
           <h3 className="text-sm font-semibold text-foreground mb-3">Принцип действия ФФУ:</h3>
           <div className="space-y-3 mb-6">
@@ -284,7 +284,7 @@ const VodoochistkaFfuInner = () => {
 
         {/* Section 3: Модельный ряд */}
         <section id="harakteristiki" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Технические характеристики и модельный ряд</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Технические характеристики и модельный ряд</h2>
 
           <h3 className="text-sm font-semibold text-foreground mb-3">Базовые модели ФФУ:</h3>
           <div className="rounded-lg border border-border overflow-auto mb-6">
@@ -343,7 +343,7 @@ const VodoochistkaFfuInner = () => {
 
         {/* Section 4: Модификации и опции */}
         <section className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Модификации и опции</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Модификации и опции</h2>
 
           <h3 className="text-sm font-semibold text-foreground mb-2">Модификации ФФУ:</h3>
           <ul className="space-y-1.5 mb-4">
@@ -368,10 +368,10 @@ const VodoochistkaFfuInner = () => {
 
         {/* Section 5: Преимущества сотрудничества */}
         <section id="preimushchestva" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Преимущества сотрудничества</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Преимущества сотрудничества</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
             {partnershipAdvantages.map((adv) => (
-              <Card key={adv.title}>
+              <Card key={adv.title} className="hover:border-amber-400/50 hover:shadow-md transition-all">
                 <CardContent className="p-4 flex items-start gap-3">
                   <adv.icon className="h-5 w-5 text-primary shrink-0 mt-0.5" />
                   <div>
@@ -410,7 +410,7 @@ const VodoochistkaFfuInner = () => {
                   <Textarea id="desc" placeholder="Опишите вашу задачу, объём стоков, тип загрязнений..." rows={3} value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} />
                 </div>
                 <div className="sm:col-span-2">
-                  <Button type="submit" className="w-full sm:w-auto">Отправить заявку</Button>
+                  <Button type="submit" className="w-full sm:w-auto bg-amber-500 hover:bg-amber-400 text-slate-900 font-semibold rounded-full">Отправить заявку</Button>
                 </div>
               </form>
             </CardContent>

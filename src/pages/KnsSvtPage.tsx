@@ -70,7 +70,7 @@ const KnsSvtPage = () => {
 
         {/* Product Table */}
         <section className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Типоразмерный ряд</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Типоразмерный ряд</h2>
           <div className="rounded-lg border border-border overflow-x-auto">
             <Table>
               <TableHeader>
@@ -109,7 +109,7 @@ const KnsSvtPage = () => {
 
         {/* Features */}
         <section className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">Особенности конструкции</h2>
+          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Особенности конструкции</h2>
           <ul className="space-y-2">
             {features.map((item, i) => (
               <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
@@ -122,7 +122,7 @@ const KnsSvtPage = () => {
 
         {/* Specs cards */}
         <section className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Технические характеристики</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Технические характеристики</h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             {specs.map((s) => (
               <Card key={s.title}>
@@ -142,14 +142,14 @@ const KnsSvtPage = () => {
         <section id="cta-form" className="mb-10 scroll-mt-20">
           <Card>
             <CardContent className="p-6">
-              <h2 className="text-base font-bold text-foreground mb-2 tracking-wide uppercase">Заказать КНС в корпусе SVT</h2>
-              <p className="text-sm text-muted-foreground mb-5">Оставьте заявку — расчёт в течение 24 часов.</p>
+              <h2 className="text-base font-bold text-white mb-2 tracking-wide uppercase">Заказать КНС в корпусе SVT</h2>
+              <p className="text-sm text-slate-300 mb-5">Оставьте заявку — расчёт в течение 24 часов.</p>
               <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1.5"><Label className="text-xs">Имя *</Label><Input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Ваше имя" maxLength={100} /></div>
                 <div className="space-y-1.5"><Label className="text-xs">Телефон *</Label><Input value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} placeholder="+7 (___) ___-__-__" maxLength={20} /></div>
                 <div className="space-y-1.5"><Label className="text-xs">E-mail</Label><Input type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="mail@example.com" maxLength={255} /></div>
                 <div className="space-y-1.5 sm:col-span-2"><Label className="text-xs">Описание задачи</Label><Textarea value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} placeholder="Расход, напор, глубина заложения…" rows={3} maxLength={1000} /></div>
-                <div className="sm:col-span-2"><Button type="submit" className="w-full sm:w-auto">Отправить заявку</Button></div>
+                <div className="sm:col-span-2"><Button type="submit" className="w-full sm:w-auto bg-amber-500 hover:bg-amber-400 text-slate-900 font-semibold rounded-full">Отправить заявку</Button></div>
               </form>
             </CardContent>
           </Card>

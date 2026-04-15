@@ -111,7 +111,7 @@ const EmkostiGorizontalnyeVysokieInner = () => {
 
         {/* Description */}
         <section id="opisanie" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">Описание</h2>
+          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Описание</h2>
           <p className="text-sm text-muted-foreground leading-relaxed mb-4">
             Горизонтальная цилиндрическая ёмкость с плоской крышей и плоским дном на высоких ложементах из листового полипропилена. Предназначена для хранения и транспортировки воды, химических реагентов и технических жидкостей. Высокие ложементы обеспечивают удобный доступ к нижним штуцерам и упрощают обвязку трубопроводами.
           </p>
@@ -136,7 +136,7 @@ const EmkostiGorizontalnyeVysokieInner = () => {
 
         {/* Model table */}
         <section id="modeli" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Модельный ряд</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Модельный ряд</h2>
           <div className="rounded-lg border border-border overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
@@ -174,7 +174,7 @@ const EmkostiGorizontalnyeVysokieInner = () => {
 
         {/* CTA Form */}
         <section id="cta-form" className="mb-10 scroll-mt-8">
-          <div className="rounded-xl border border-border bg-card p-6 sm:p-8">
+          <div className="rounded-xl bg-slate-900 text-white p-6 sm:p-8">
             <h2 className="text-xl font-bold text-foreground mb-2">Запросить расчёт</h2>
             <p className="text-sm text-muted-foreground mb-4">Оставьте заявку — подготовим КП в течение 24 часов.</p>
             <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-3">

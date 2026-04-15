@@ -275,7 +275,7 @@ const VodoochistkaInner = () => {
         {/* Subcategories grid */}
         {category && (
           <section id="katalog" className="mb-10">
-            <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Каталог водоочистного оборудования</h2>
+            <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Каталог водоочистного оборудования</h2>
             <div className="flex flex-col md:flex-row gap-6">
               <nav className="md:w-[220px] shrink-0">
                 <ul className="space-y-0.5">
@@ -371,7 +371,7 @@ const VodoochistkaInner = () => {
         )}
 
         <section className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">
+          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase border-l-4 border-amber-400 pl-3">
             Системы водоочистки из полимерных материалов: от проектирования до ввода в эксплуатацию
           </h2>
           <p className="text-sm text-muted-foreground leading-relaxed mb-4">
@@ -390,7 +390,7 @@ const VodoochistkaInner = () => {
 
         {/* Section 1: Перечень продукции */}
         <section id="produkciya" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Перечень продукции</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Перечень продукции</h2>
           <Accordion type="multiple" defaultValue={[products[0].title]} className="space-y-2">
             {products.map((prod) => (
               <AccordionItem key={prod.title} value={prod.title} className="rounded-lg border border-border bg-card px-4">
@@ -414,7 +414,7 @@ const VodoochistkaInner = () => {
 
         {/* Section 2: Преимущества полимерных материалов */}
         <section id="preimushchestva" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Преимущества полимерных материалов</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Преимущества полимерных материалов</h2>
 
           <h3 className="text-sm font-semibold text-foreground mb-3">Основные материалы:</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-6">
@@ -448,7 +448,7 @@ const VodoochistkaInner = () => {
 
         {/* Section 3: Сферы применения */}
         <section id="primenenie" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Типовые сферы применения</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Типовые сферы применения</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             {applicationAreas.map((area, i) => (
               <div key={i} className="flex items-start gap-2 rounded-lg border border-border bg-card p-3">
@@ -461,10 +461,10 @@ const VodoochistkaInner = () => {
 
         {/* Section 4: Преимущества сотрудничества */}
         <section id="preimushchestva" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Преимущества сотрудничества</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Преимущества сотрудничества</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
             {partnershipAdvantages.map((adv) => (
-              <Card key={adv.title}>
+              <Card key={adv.title} className="hover:border-amber-400/50 hover:shadow-md transition-all">
                 <CardContent className="p-4 flex items-start gap-3">
                   <adv.icon className="h-5 w-5 text-primary shrink-0 mt-0.5" />
                   <div>
@@ -481,10 +481,10 @@ const VodoochistkaInner = () => {
         <section id="cta-form" className="mb-10 scroll-mt-20">
           <Card>
             <CardContent className="p-6">
-              <h2 className="text-base font-bold text-foreground mb-2 tracking-wide uppercase">
+              <h2 className="text-base font-bold text-white mb-2 tracking-wide uppercase">
                 Готовы заказать водоочистное оборудование?
               </h2>
-              <p className="text-sm text-muted-foreground mb-5">
+              <p className="text-sm text-slate-300 mb-5">
                 Оставьте заявку, и наш инженер бесплатно проконсультирует по выбору типа и комплектации оборудования, подготовит схему очистки и расчёт стоимости в течение 24 часов.
               </p>
               <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -505,7 +505,7 @@ const VodoochistkaInner = () => {
                   <Textarea id="desc" value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} placeholder="Опишите вашу задачу…" rows={3} maxLength={1000} />
                 </div>
                 <div className="sm:col-span-2">
-                  <Button type="submit" className="w-full sm:w-auto">Отправить заявку</Button>
+                  <Button type="submit" className="w-full sm:w-auto bg-amber-500 hover:bg-amber-400 text-slate-900 font-semibold rounded-full">Отправить заявку</Button>
                 </div>
               </form>
             </CardContent>

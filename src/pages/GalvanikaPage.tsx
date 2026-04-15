@@ -157,7 +157,7 @@ const GalvanikaPageInner = () => {
       <main className="mx-auto max-w-[960px] px-4 sm:px-6 py-6 sm:py-8">
 
         <section className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">Гальваническое оборудование: от проектирования до монтажа</h2>
+          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Гальваническое оборудование: от проектирования до монтажа</h2>
           <p className="text-sm text-muted-foreground leading-relaxed mb-4">Мы проектируем и производим полный спектр гальванического оборудования из химически стойких полимеров для нанесения покрытий, подготовки поверхности и электрохимической обработки металлов.</p>
           <h3 className="text-sm font-semibold text-foreground mb-2">Почему выбирают нас:</h3>
           <ul className="space-y-2">
@@ -166,14 +166,14 @@ const GalvanikaPageInner = () => {
         </section>
 
         <section className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Области применения</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Области применения</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             {applications.map((area, i) => (<div key={i} className="flex items-start gap-2 rounded-lg border border-border bg-card p-3"><area.icon className="h-4 w-4 text-primary shrink-0 mt-0.5" /><span className="text-sm text-foreground">{area.text}</span></div>))}
           </div>
         </section>
 
         <section className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Материалы</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Материалы</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
             {materialCards.map((mat, i) => (
               <Card key={i}><CardContent className="p-4"><p className="text-sm font-semibold text-foreground mb-2">{mat.name}</p>
@@ -184,7 +184,7 @@ const GalvanikaPageInner = () => {
         </section>
 
         <section className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Виды оборудования</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Виды оборудования</h2>
           <Accordion type="multiple" defaultValue={[modifications[0].title]} className="space-y-2">
             {modifications.map((mod) => (
               <AccordionItem key={mod.title} value={mod.title} className="rounded-lg border border-border bg-card px-4">
@@ -196,15 +196,15 @@ const GalvanikaPageInner = () => {
         </section>
 
         <section className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Преимущества сотрудничества</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Преимущества сотрудничества</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            {advantages.map((adv) => (<Card key={adv.title}><CardContent className="p-4 flex items-start gap-3"><adv.icon className="h-5 w-5 text-primary shrink-0 mt-0.5" /><div><p className="text-sm font-semibold text-foreground mb-1">{adv.title}</p><p className="text-xs text-muted-foreground">{adv.text}</p></div></CardContent></Card>))}
+            {advantages.map((adv) => (<Card key={adv.title} className="hover:border-amber-400/50 hover:shadow-md transition-all"><CardContent className="p-4 flex items-start gap-3"><adv.icon className="h-5 w-5 text-primary shrink-0 mt-0.5" /><div><p className="text-sm font-semibold text-foreground mb-1">{adv.title}</p><p className="text-xs text-muted-foreground">{adv.text}</p></div></CardContent></Card>))}
           </div>
         </section>
 
         {category && (
           <section className="mb-10">
-            <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Каталог гальванического оборудования</h2>
+            <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Каталог гальванического оборудования</h2>
             <div className="flex flex-col md:flex-row gap-6">
               <nav className="md:w-[220px] shrink-0"><ul className="space-y-0.5">
                 {category.subcategories.map((sub, i) => {
@@ -230,17 +230,17 @@ const GalvanikaPageInner = () => {
         )}
 
         <section id="cta-form" className="mb-10 scroll-mt-20">
-          <Card><CardContent className="p-6">
-            <h2 className="text-base font-bold text-foreground mb-2 tracking-wide uppercase">Готовы заказать гальваническое оборудование?</h2>
-            <p className="text-sm text-muted-foreground mb-5">Оставьте заявку, и наш инженер бесплатно проконсультирует по выбору оборудования и подготовит расчёт стоимости в течение 24 часов.</p>
+          <div className="rounded-xl bg-slate-900 text-white p-6 sm:p-8">
+            <h2 className="text-base font-bold text-white mb-2 tracking-wide uppercase">Готовы заказать гальваническое оборудование?</h2>
+            <p className="text-sm text-slate-300 mb-5">Оставьте заявку, и наш инженер бесплатно проконсультирует по выбору оборудования и подготовит расчёт стоимости в течение 24 часов.</p>
             <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-1.5"><Label htmlFor="name" className="text-xs">Имя *</Label><Input id="name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Ваше имя" maxLength={100} /></div>
               <div className="space-y-1.5"><Label htmlFor="phone" className="text-xs">Телефон *</Label><Input id="phone" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} placeholder="+7 (___) ___-__-__" maxLength={20} /></div>
               <div className="space-y-1.5"><Label htmlFor="email" className="text-xs">E-mail</Label><Input id="email" type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="mail@example.com" maxLength={255} /></div>
               <div className="space-y-1.5 sm:col-span-2"><Label htmlFor="desc" className="text-xs">Описание задачи</Label><Textarea id="desc" value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} placeholder="Опишите вашу задачу…" rows={3} maxLength={1000} /></div>
-              <div className="sm:col-span-2"><Button type="submit" className="w-full sm:w-auto">Отправить заявку</Button></div>
+              <div className="sm:col-span-2"><Button type="submit" className="w-full sm:w-auto bg-amber-500 hover:bg-amber-400 text-slate-900 font-semibold rounded-full">Отправить заявку</Button></div>
             </form>
-          </CardContent></Card>
+          </div>
         </section>
         <PageFooter />
       </main>

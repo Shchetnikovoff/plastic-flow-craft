@@ -183,7 +183,7 @@ const VodoochistkaObezvozhivatelInner = () => {
         </nav>
 
         <section className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">
+          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase border-l-4 border-amber-400 pl-3">
             Мешочные обезвоживатели осадка: производство под ключ
           </h2>
           <p className="text-sm text-muted-foreground leading-relaxed mb-4">
@@ -202,7 +202,7 @@ const VodoochistkaObezvozhivatelInner = () => {
 
         {/* Section 1: Назначение */}
         <section id="naznachenie" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Назначение и области применения</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Назначение и области применения</h2>
 
           <h3 className="text-sm font-semibold text-foreground mb-2">Мешочные обезвоживатели предназначены для:</h3>
           <ul className="space-y-1.5 mb-4">
@@ -234,7 +234,7 @@ const VodoochistkaObezvozhivatelInner = () => {
 
         {/* Section 2: Принцип работы */}
         <section id="princip" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Принцип работы</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Принцип работы</h2>
 
           <p className="text-sm text-muted-foreground leading-relaxed mb-4">
             Обезвоживатель работает по принципу гравитационной фильтрации: осадок подаётся в фильтрующие мешки из полимерного материала с переменной проницаемостью. Вода проходит через стенки мешков, а твёрдые частицы задерживаются, постепенно формируя плотный кек.
@@ -257,7 +257,7 @@ const VodoochistkaObezvozhivatelInner = () => {
 
         {/* Section 3: Модельный ряд */}
         <section id="modeli" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Модельный ряд</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Модельный ряд</h2>
 
           <div className="rounded-lg border border-border overflow-auto text-sm">
             <Table>
@@ -291,7 +291,7 @@ const VodoochistkaObezvozhivatelInner = () => {
 
         {/* Section 4: FAQ */}
         <section className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Часто задаваемые вопросы</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Часто задаваемые вопросы</h2>
           <Accordion type="single" collapsible className="w-full">
             {faqItems.map((faq, i) => (
               <AccordionItem key={i} value={`faq-${i}`}>
@@ -304,7 +304,7 @@ const VodoochistkaObezvozhivatelInner = () => {
 
         {/* Section 5: Преимущества сотрудничества */}
         <section id="preimushchestva" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Преимущества сотрудничества</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Преимущества сотрудничества</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {partnershipAdvantages.map((a, i) => (
               <Card key={i} className="border-border">

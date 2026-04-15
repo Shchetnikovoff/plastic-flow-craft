@@ -66,14 +66,14 @@ const RazdvizhnoyContent = () => {
       {/* Description + Characteristics */}
       <div className="grid gap-6 sm:gap-8 md:grid-cols-2 mb-8">
         <div>
-          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">Описание</h2>
+          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Описание</h2>
           <p className="text-sm text-muted-foreground leading-relaxed">
             Раздвижной элемент — воздуховод, состоящий из трёх секций с возможностью регулировки длины до двух раз.
             Применяется при монтаже вентиляции, когда трудно подобрать точную длину воздуховода.
           </p>
         </div>
         <div>
-          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">Характеристики</h2>
+          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Характеристики</h2>
           <div className="grid grid-cols-2 gap-px rounded-lg border overflow-hidden">
             <div className="bg-card p-3">
               <span className="block text-xs text-muted-foreground">Диаметр Dn</span>

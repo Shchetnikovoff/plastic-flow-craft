@@ -227,7 +227,7 @@ const EmkostiKislotyShchelochiInner = () => {
         </nav>
 
         <section className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">
+          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase border-l-4 border-amber-400 pl-3">
             Ёмкости для кислот и щелочей: от проектирования до монтажа
           </h2>
           <p className="text-sm text-muted-foreground leading-relaxed mb-4">
@@ -246,7 +246,7 @@ const EmkostiKislotyShchelochiInner = () => {
 
         {/* Section 1: Назначение */}
         <section id="naznachenie" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Назначение ёмкостей</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Назначение ёмкостей</h2>
           <p className="text-sm text-muted-foreground mb-3">Наши ёмкости предназначены для:</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             {purposes.map((p, i) => (
@@ -260,7 +260,7 @@ const EmkostiKislotyShchelochiInner = () => {
 
         {/* Section 2: Материалы */}
         <section id="opisanie" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Описание материалов</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Описание материалов</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-6">
             {materialCards.map((mat, i) => (
@@ -307,7 +307,7 @@ const EmkostiKislotyShchelochiInner = () => {
 
         {/* Section: Интерактивный подбор материала */}
         <section id="podbor" className="mb-10 scroll-mt-20">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">
             Интерактивный подбор материала
           </h2>
           <Card>
@@ -319,7 +319,7 @@ const EmkostiKislotyShchelochiInner = () => {
 
         {/* Section 3: Виды и модификации */}
         <section id="modifikacii" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Виды и модификации ёмкостей</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Виды и модификации ёмкостей</h2>
           <Accordion type="multiple" defaultValue={[modifications[0].title]} className="space-y-2">
             {modifications.map((mod) => (
               <AccordionItem key={mod.title} value={mod.title} className="rounded-lg border border-border bg-card px-4">
@@ -343,10 +343,10 @@ const EmkostiKislotyShchelochiInner = () => {
 
         {/* Section 4: Преимущества сотрудничества */}
         <section id="preimushchestva" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Преимущества сотрудничества</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Преимущества сотрудничества</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
             {partnershipAdvantages.map((adv) => (
-              <Card key={adv.title}>
+              <Card key={adv.title} className="hover:border-amber-400/50 hover:shadow-md transition-all">
                 <CardContent className="p-4 flex items-start gap-3">
                   <adv.icon className="h-5 w-5 text-primary shrink-0 mt-0.5" />
                   <div>
@@ -363,10 +363,10 @@ const EmkostiKislotyShchelochiInner = () => {
         <section id="cta-form" className="mb-10 scroll-mt-20">
           <Card>
             <CardContent className="p-6">
-              <h2 className="text-base font-bold text-foreground mb-2 tracking-wide uppercase">
+              <h2 className="text-base font-bold text-white mb-2 tracking-wide uppercase">
                 Готовы заказать ёмкость для кислот или щелочей?
               </h2>
-              <p className="text-sm text-muted-foreground mb-5">
+              <p className="text-sm text-slate-300 mb-5">
                 Оставьте заявку, и наш инженер бесплатно проконсультирует по выбору материала и комплектации, подготовит расчёт стоимости в течение 24 часов.
               </p>
               <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -387,7 +387,7 @@ const EmkostiKislotyShchelochiInner = () => {
                   <Textarea id="desc" value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} placeholder="Опишите вашу задачу…" rows={3} maxLength={1000} />
                 </div>
                 <div className="sm:col-span-2">
-                  <Button type="submit" className="w-full sm:w-auto">Отправить заявку</Button>
+                  <Button type="submit" className="w-full sm:w-auto bg-amber-500 hover:bg-amber-400 text-slate-900 font-semibold rounded-full">Отправить заявку</Button>
                 </div>
               </form>
             </CardContent>

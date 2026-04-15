@@ -205,7 +205,7 @@ const EmkostiPryamougolnyeInner = () => {
 
         {/* Subtypes grid */}
         <section id="katalog" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Типы прямоугольных ёмкостей</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Типы прямоугольных ёмкостей</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {subtypes.map((sub) => (
               <Link
@@ -226,7 +226,7 @@ const EmkostiPryamougolnyeInner = () => {
         </section>
 
         <section className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase">
+          <h2 className="text-base font-bold text-foreground mb-3 tracking-wide uppercase border-l-4 border-amber-400 pl-3">
             Прямоугольные ёмкости в металлическом каркасе: от проектирования до монтажа
           </h2>
           <p className="text-sm text-muted-foreground leading-relaxed mb-4">
@@ -245,7 +245,7 @@ const EmkostiPryamougolnyeInner = () => {
 
         {/* Назначение */}
         <section id="naznachenie" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Назначение прямоугольных ёмкостей в обрешётке</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Назначение прямоугольных ёмкостей в обрешётке</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             {applications.map((app, i) => (
               <div key={i} className="flex items-start gap-2 rounded-lg border border-border bg-card p-3">
@@ -258,7 +258,7 @@ const EmkostiPryamougolnyeInner = () => {
 
         {/* Материалы и конструкция */}
         <section id="opisanie" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Описание материалов и конструкции</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Описание материалов и конструкции</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
             <Card>
@@ -305,7 +305,7 @@ const EmkostiPryamougolnyeInner = () => {
 
         {/* Виды и модификации */}
         <section id="modifikacii" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Виды и модификации</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Виды и модификации</h2>
           <Accordion type="multiple" defaultValue={["По объёму"]} className="space-y-2">
             {modifications.map((mod) => (
               <AccordionItem key={mod.title} value={mod.title} className="rounded-lg border border-border bg-card px-4">
@@ -331,10 +331,10 @@ const EmkostiPryamougolnyeInner = () => {
 
         {/* Преимущества сотрудничества */}
         <section id="preimushchestva" className="mb-10">
-          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase">Преимущества сотрудничества</h2>
+          <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Преимущества сотрудничества</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
             {advantages.map((adv) => (
-              <Card key={adv.title}>
+              <Card key={adv.title} className="hover:border-amber-400/50 hover:shadow-md transition-all">
                 <CardContent className="p-4 flex items-start gap-3">
                   <adv.icon className="h-5 w-5 text-primary shrink-0 mt-0.5" />
                   <div>
