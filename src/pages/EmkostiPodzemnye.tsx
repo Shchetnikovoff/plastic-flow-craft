@@ -257,7 +257,7 @@ const EmkostiPodzemnyeInner = () => {
           <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Назначение подземных ёмкостей</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             {applications.map((app, i) => (
-              <div key={i} className="flex items-start gap-2 rounded-lg border border-border bg-card p-3">
+              <div key={i} className="flex items-start gap-2 rounded-lg border border-slate-200 bg-white p-3 hover:border-amber-400/40 hover:bg-amber-50/40 transition-colors">
                 <Droplets className="h-4 w-4 text-primary shrink-0 mt-0.5" />
                 <span className="text-sm text-foreground">{app}</span>
               </div>
@@ -310,8 +310,8 @@ const EmkostiPodzemnyeInner = () => {
           <h2 className="text-base font-bold text-foreground mb-4 tracking-wide uppercase border-l-4 border-amber-400 pl-3">Виды и модификации</h2>
           <Accordion type="multiple" defaultValue={["По назначению"]} className="space-y-2">
             {modifications.map((mod) => (
-              <AccordionItem key={mod.title} value={mod.title} className="rounded-lg border border-border bg-card px-4">
-                <AccordionTrigger className="text-sm font-semibold text-foreground hover:no-underline">
+              <AccordionItem key={mod.title} value={mod.title} className="rounded-lg border border-slate-200 bg-white px-4">
+                <AccordionTrigger className="text-sm font-semibold text-foreground hover:no-underline hover:text-amber-600">
                   {mod.title}
                 </AccordionTrigger>
                 <AccordionContent>
