@@ -68,7 +68,7 @@ const Header = ({ onCartOpen, angle = 90, connectionType = "rastrub", productTyp
   };
 
   return (
-    <header className="border-b bg-card">
+    <header className="border-b border-slate-800 bg-slate-900">
       {/* Top bar */}
       <div className="mx-auto flex max-w-[960px] items-center justify-between px-4 sm:px-6 py-3 sm:py-4">
         <div className="flex items-center gap-3 sm:gap-4 min-w-0">
@@ -80,17 +80,17 @@ const Header = ({ onCartOpen, angle = 90, connectionType = "rastrub", productTyp
             />
           </Link>
           <div className="min-w-0">
-            <h1 className="text-sm sm:text-base md:text-lg font-bold text-foreground leading-tight">
+            <h1 className="text-sm sm:text-base md:text-lg font-bold text-white leading-tight">
               ООО СЗПК «Пласт-Металл Про»
             </h1>
-            <p className="text-[10px] sm:text-xs text-muted-foreground mt-0.5">
+            <p className="text-[10px] sm:text-xs text-slate-400 mt-0.5">
               Производство оборудования из полимеров
             </p>
-            <div className="hidden sm:flex items-center gap-3 mt-1 text-[11px] text-muted-foreground flex-wrap">
-              <a href="tel:+79633225540" className="flex items-center gap-1 hover:text-primary transition-colors">
+            <div className="hidden sm:flex items-center gap-3 mt-1 text-[11px] text-slate-400 flex-wrap">
+              <a href="tel:+79633225540" className="flex items-center gap-1 hover:text-amber-400 transition-colors">
                 <Phone className="h-3 w-3 shrink-0" /> +7 963 322-55-40
               </a>
-              <a href="mailto:osobenkov@list.ru" className="flex items-center gap-1 hover:text-primary transition-colors">
+              <a href="mailto:osobenkov@list.ru" className="flex items-center gap-1 hover:text-amber-400 transition-colors">
                 <Mail className="h-3 w-3 shrink-0" /> osobenkov@list.ru
               </a>
               <span className="hidden md:flex items-center gap-1">
@@ -103,7 +103,7 @@ const Header = ({ onCartOpen, angle = 90, connectionType = "rastrub", productTyp
         <div className="flex items-center gap-2 sm:gap-3 shrink-0">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="outline" size="icon" title="Скачать бланк КП">
+              <Button variant="outline" size="icon" title="Скачать бланк КП" className="bg-slate-800 border-slate-700 text-slate-200 hover:bg-slate-700 hover:text-amber-400">
                 <FileText className="h-5 w-5" />
               </Button>
             </DropdownMenuTrigger>
@@ -112,10 +112,10 @@ const Header = ({ onCartOpen, angle = 90, connectionType = "rastrub", productTyp
               <DropdownMenuItem onClick={() => generateLetterheadPdf()}>Скачать PDF (.pdf)</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
-          <Button variant="outline" size="icon" className="relative" onClick={onCartOpen}>
+          <Button variant="outline" size="icon" className="relative bg-slate-800 border-slate-700 text-slate-200 hover:bg-slate-700 hover:text-amber-400" onClick={onCartOpen}>
             <ShoppingCart className="h-5 w-5" />
             {totalItems > 0 && (
-              <Badge className="absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-accent text-accent-foreground p-0 text-[10px]">
+              <Badge className="absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-amber-500 text-slate-900 p-0 text-[10px]">
                 {totalItems}
               </Badge>
             )}
@@ -124,7 +124,7 @@ const Header = ({ onCartOpen, angle = 90, connectionType = "rastrub", productTyp
           <Button
             variant="ghost"
             size="icon"
-            className="md:hidden"
+            className="md:hidden text-slate-200 hover:bg-slate-800 hover:text-amber-400"
             onClick={() => setMobileOpen(!mobileOpen)}
           >
             {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -133,7 +133,7 @@ const Header = ({ onCartOpen, angle = 90, connectionType = "rastrub", productTyp
       </div>
 
       {/* Desktop category navigation */}
-      <div ref={navRef} className="hidden md:block border-t border-border bg-muted/30 relative">
+      <div ref={navRef} className="hidden md:block border-t border-slate-800 bg-slate-900/95 relative">
         <div className="mx-auto max-w-[960px] px-4 sm:px-6 overflow-x-auto scrollbar-none">
           <nav className="flex items-center gap-0">
             {catalog.map((cat) => {
@@ -143,8 +143,8 @@ const Header = ({ onCartOpen, angle = 90, connectionType = "rastrub", productTyp
                     to={`/catalog/${cat.slug}`}
                     className={`whitespace-nowrap pl-3 pr-1 py-2.5 text-xs font-semibold transition-colors border-b-2 ${
                       isActiveCat(cat.slug)
-                        ? "border-primary text-primary"
-                        : "border-transparent text-muted-foreground hover:text-foreground hover:border-border"
+                        ? "border-amber-400 text-amber-400"
+                        : "border-transparent text-slate-300 hover:text-amber-400 hover:border-slate-700"
                     }`}
                   >
                     {cat.name}
@@ -152,7 +152,7 @@ const Header = ({ onCartOpen, angle = 90, connectionType = "rastrub", productTyp
                   <button
                     onClick={() => setOpenCat(openCat === cat.slug ? null : cat.slug)}
                     className={`pr-3 py-2.5 border-b-2 ${
-                      isActiveCat(cat.slug) ? "border-primary text-primary" : openCat === cat.slug ? "border-primary/50 text-foreground" : "border-transparent text-muted-foreground hover:text-foreground"
+                      isActiveCat(cat.slug) ? "border-amber-400 text-amber-400" : openCat === cat.slug ? "border-amber-400/50 text-amber-400" : "border-transparent text-slate-300 hover:text-amber-400"
                     }`}
                   >
                     <ChevronDown className={`h-3 w-3 transition-transform ${openCat === cat.slug ? "rotate-180" : ""}`} />
@@ -164,8 +164,8 @@ const Header = ({ onCartOpen, angle = 90, connectionType = "rastrub", productTyp
               to="/about"
               className={`whitespace-nowrap px-3 py-2.5 text-xs font-semibold transition-colors border-b-2 ${
                 location.pathname === "/about"
-                  ? "border-primary text-primary"
-                  : "border-transparent text-muted-foreground hover:text-foreground hover:border-border"
+                  ? "border-amber-400 text-amber-400"
+                  : "border-transparent text-slate-300 hover:text-amber-400 hover:border-slate-700"
               }`}
             >
               О компании
@@ -176,7 +176,7 @@ const Header = ({ onCartOpen, angle = 90, connectionType = "rastrub", productTyp
           const cat = catalog.find((c) => c.slug === openCat);
           if (!cat) return null;
           return (
-            <div className="absolute left-0 right-0 top-full z-50 border-t border-border bg-card shadow-lg">
+            <div className="absolute left-0 right-0 top-full z-50 border-t border-slate-800 bg-slate-900 shadow-lg">
               <div className="mx-auto max-w-[960px] px-4 sm:px-6 py-2">
                 <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-0.5">
                   {cat.subcategories.map((sub) => {
@@ -185,7 +185,7 @@ const Header = ({ onCartOpen, angle = 90, connectionType = "rastrub", productTyp
                       <Link
                         key={sub.id}
                         to={href}
-                        className="block px-3 py-1.5 text-sm text-foreground hover:bg-muted rounded transition-colors"
+                        className="block px-3 py-1.5 text-sm text-slate-300 hover:bg-slate-800 hover:text-amber-400 rounded transition-colors"
                       >
                         {sub.name}
                       </Link>
@@ -200,7 +200,7 @@ const Header = ({ onCartOpen, angle = 90, connectionType = "rastrub", productTyp
 
       {/* Mobile navigation */}
       {mobileOpen && (
-        <div className="md:hidden border-t border-border bg-card max-h-[70vh] overflow-y-auto">
+        <div className="md:hidden border-t border-slate-800 bg-slate-900 max-h-[70vh] overflow-y-auto">
           <div className="px-4 py-3 space-y-1">
             {catalog.map((cat) => (
               <div key={cat.id}>
@@ -210,14 +210,14 @@ const Header = ({ onCartOpen, angle = 90, connectionType = "rastrub", productTyp
                       <Link
                         to={`/catalog/${cat.slug}`}
                         className={`flex-1 px-3 py-2 text-sm font-semibold rounded-lg transition-colors ${
-                          isActiveCat(cat.slug) ? "text-primary bg-primary/5" : "text-foreground hover:bg-muted"
+                          isActiveCat(cat.slug) ? "text-amber-400 bg-slate-800" : "text-slate-200 hover:bg-slate-800 hover:text-amber-400"
                         }`}
                       >
                         {cat.name}
                       </Link>
                       <button
                         onClick={() => setOpenCat(openCat === cat.slug ? null : cat.slug)}
-                        className="px-2 py-2"
+                        className="px-2 py-2 text-slate-300"
                       >
                         <ChevronDown className={`h-4 w-4 transition-transform ${openCat === cat.slug ? "rotate-180" : ""}`} />
                       </button>
@@ -225,14 +225,14 @@ const Header = ({ onCartOpen, angle = 90, connectionType = "rastrub", productTyp
                   );
                 })()}
                 {openCat === cat.slug && (
-                  <div className="ml-3 border-l-2 border-border pl-3 py-1 space-y-0.5">
+                  <div className="ml-3 border-l-2 border-slate-800 pl-3 py-1 space-y-0.5">
                     {cat.subcategories.map((sub) => {
                       const href = sub.externalPath || `/catalog/${cat.slug}/${sub.slug}`;
                       return (
                         <Link
                           key={sub.id}
                           to={href}
-                          className="block px-3 py-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                          className="block px-3 py-1.5 text-sm text-slate-400 hover:text-amber-400 transition-colors"
                         >
                           {sub.name}
                         </Link>
@@ -245,7 +245,7 @@ const Header = ({ onCartOpen, angle = 90, connectionType = "rastrub", productTyp
             <Link
               to="/about"
               className={`block px-3 py-2 text-sm font-semibold rounded-lg transition-colors ${
-                location.pathname === "/about" ? "text-primary bg-primary/5" : "text-foreground hover:bg-muted"
+                location.pathname === "/about" ? "text-amber-400 bg-slate-800" : "text-slate-200 hover:bg-slate-800 hover:text-amber-400"
               }`}
             >
               О компании
