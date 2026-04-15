@@ -64,19 +64,43 @@ const Inner = () => {
     <>
       <Header onCartOpen={() => setCartOpen(true)} productType="otvod" />
       <CartSheet open={cartOpen} onOpenChange={setCartOpen} />
-      <main className="mx-auto max-w-[960px] px-4 sm:px-6 py-6 sm:py-8">
-        <Breadcrumb className="mb-6"><BreadcrumbList><BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog">Каталог</Link></BreadcrumbLink></BreadcrumbItem><BreadcrumbSeparator /><BreadcrumbItem><BreadcrumbPage>КНС</BreadcrumbPage></BreadcrumbItem></BreadcrumbList></Breadcrumb>
 
-        <section className="mb-10">
-          <p className="text-xs text-muted-foreground uppercase tracking-wider mb-2">ООО СЗПК «Пласт-Металл ПРО»</p>
-          <h1 className="text-2xl sm:text-3xl font-bold text-foreground leading-tight mb-3">Канализационные насосные станции (КНС)</h1>
-          <p className="text-sm text-muted-foreground mb-5">КНС из полипропилена и стеклопластика — надёжное водоотведение для любых объектов!</p>
-          <Button onClick={scrollToForm}>Получить расчёт стоимости</Button>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
-<div className="rounded-lg border border-border overflow-hidden bg-card"><img src="/images/kns-hero-1.png" alt="КНС канализационная насосная станция" className="w-full object-contain" /></div>
-            <div className="rounded-lg border border-border overflow-hidden bg-card"><img src="/images/kns-hero-2.png" alt="КНС в корпусе SVT" className="w-full object-contain" /></div>
+      <section className="bg-slate-900 text-white">
+        <div className="mx-auto max-w-[960px] px-4 sm:px-6 py-10 sm:py-14">
+          <Breadcrumb className="mb-6">
+            <BreadcrumbList className="text-slate-400">
+              <BreadcrumbItem><BreadcrumbLink asChild><Link to="/catalog" className="text-slate-400 hover:text-amber-400">Каталог</Link></BreadcrumbLink></BreadcrumbItem>
+              <BreadcrumbSeparator className="text-slate-600" />
+              <BreadcrumbItem><BreadcrumbPage className="text-slate-200">КНС</BreadcrumbPage></BreadcrumbItem>
+            </BreadcrumbList>
+          </Breadcrumb>
+          <p className="text-[11px] text-amber-400 uppercase tracking-[0.2em] font-semibold mb-3">ООО СЗПК «Пласт-Металл ПРО»</p>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-4">
+            Канализационные <span className="text-amber-400">насосные станции</span>
+          </h1>
+          <p className="text-sm sm:text-base text-slate-300 mb-6 max-w-2xl leading-relaxed">
+            КНС из полипропилена и стеклопластика — надёжное водоотведение для любых объектов. Проектирование, производство и монтаж по всей России.
+          </p>
+          <div className="flex flex-wrap gap-3 mb-8">
+            <Button onClick={scrollToForm} className="bg-amber-500 hover:bg-amber-400 text-slate-900 font-semibold rounded-full shadow-lg shadow-amber-500/25">
+              Получить расчёт стоимости
+            </Button>
+            <Button
+              variant="outline"
+              onClick={() => document.getElementById("modeli")?.scrollIntoView({ behavior: "smooth" })}
+              className="bg-transparent border-slate-600 text-white hover:bg-slate-800 hover:text-amber-400 hover:border-slate-500 rounded-full"
+            >
+              Смотреть модели
+            </Button>
           </div>
-        </section>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="rounded-lg border border-slate-800 overflow-hidden bg-slate-800/50"><img src="/images/kns-hero-1.png" alt="КНС канализационная насосная станция" className="w-full object-contain" /></div>
+            <div className="rounded-lg border border-slate-800 overflow-hidden bg-slate-800/50"><img src="/images/kns-hero-2.png" alt="КНС в корпусе SVT" className="w-full object-contain" /></div>
+          </div>
+        </div>
+      </section>
+
+      <main className="mx-auto max-w-[960px] px-4 sm:px-6 py-6 sm:py-8">
 
 
         <nav className="mb-8 flex flex-wrap gap-2">
