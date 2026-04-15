@@ -3,6 +3,8 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import CorporateHome from "./pages/CorporateHome";
+import AIChatWidget from "./components/ai/AIChatWidget";
 import Index from "./pages/Index";
 import Product from "./pages/Product";
 import Troynik from "./pages/Troynik";
@@ -64,8 +66,11 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <AIChatWidget />
         <Routes>
-          <Route path="/" element={<Index />} />
+          <Route path="/" element={<CorporateHome />} />
+          <Route path="/otvod-90" element={<Index />} />
+          <Route path="/otvod" element={<Index />} />
           <Route path="/60" element={<Index angle={60} />} />
           <Route path="/45" element={<Index angle={45} />} />
           <Route path="/30" element={<Index angle={30} />} />

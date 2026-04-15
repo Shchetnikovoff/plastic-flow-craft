@@ -1,0 +1,9 @@
+export { default as ProductGrid } from "./ProductGrid";
+export { default as AdvantagesGrid } from "./AdvantagesGrid";
+export { default as SpecTable } from "./SpecTable";
+export { default as ApplicationAreas } from "./ApplicationAreas";
+export { default as FeatureChecklist } from "./FeatureChecklist";
+export { default as DarkInfoBlock } from "./DarkInfoBlock";
+export { default as TestimonialsSection } from "./TestimonialsSection";
+export { default as FAQSection } from "./FAQSection";
+export { default as DescriptionBlock } from "./DescriptionBlock";
