@@ -1,7 +1,7 @@
 {
   "database": "dolt",
   "backend": "dolt",
-  "dolt_mode": "embedded",
+  "dolt_mode": "server",
   "dolt_database": "plastic_flow_craft",
   "project_id": "e569c078-6924-462d-b0a3-ec2736282315"
 }
