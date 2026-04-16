@@ -23,6 +23,8 @@ dist-ssr
 *.sln
 *.sw?
 .vercel
+__pycache__/
+*.pyc
 
 # Beads / Dolt files (added by bd init)
 .dolt/
