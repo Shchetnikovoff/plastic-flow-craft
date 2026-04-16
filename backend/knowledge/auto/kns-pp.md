@@ -1,0 +1,537 @@
+# kns-pp
+
+- source: knsPpProducts.ts
+
+## knsPpProducts
+
+### СЗПК.КНС.ПП.10-5
+- model: КНС-ПП 10-5
+- article: СЗПК.КНС.ПП.10-5
+- diameter: 1300
+- height: 2700
+- flow: 10
+- head: 5
+- maxFlow: 16
+- maxHead: 10
+- pumpCount: 2
+- pumpPower: 0.55
+- material: Полипропилен
+- price: 638500
+
+### СЗПК.КНС.ПП.10-10
+- model: КНС-ПП 10-10
+- article: СЗПК.КНС.ПП.10-10
+- diameter: 1300
+- height: 2700
+- flow: 10
+- head: 10
+- maxFlow: 20
+- maxHead: 14
+- pumpCount: 2
+- pumpPower: 0.75
+- material: Полипропилен
+- price: 638500
+
+### СЗПК.КНС.ПП.10-15
+- model: КНС-ПП 10-15
+- article: СЗПК.КНС.ПП.10-15
+- diameter: 1300
+- height: 2900
+- flow: 10
+- head: 15
+- maxFlow: 24
+- maxHead: 19
+- pumpCount: 2
+- pumpPower: 1.1
+- material: Полипропилен
+- price: 676500
+
+### СЗПК.КНС.ПП.15-10
+- model: КНС-ПП 15-10
+- article: СЗПК.КНС.ПП.15-10
+- diameter: 1300
+- height: 2900
+- flow: 15
+- head: 10
+- maxFlow: 24
+- maxHead: 19
+- pumpCount: 2
+- pumpPower: 1.1
+- material: Полипропилен
+- price: 676500
+
+### СЗПК.КНС.ПП.15-15
+- model: КНС-ПП 15-15
+- article: СЗПК.КНС.ПП.15-15
+- diameter: 1300
+- height: 2900
+- flow: 15
+- head: 15
+- maxFlow: 26
+- maxHead: 21
+- pumpCount: 2
+- pumpPower: 1.5
+- material: Полипропилен
+- price: 693000
+
+### СЗПК.КНС.ПП.20-10
+- model: КНС-ПП 20-10
+- article: СЗПК.КНС.ПП.20-10
+- diameter: 1300
+- height: 2900
+- flow: 20
+- head: 10
+- maxFlow: 30
+- maxHead: 16
+- pumpCount: 2
+- pumpPower: 2.2
+- material: Полипропилен
+- price: 703000
+
+### СЗПК.КНС.ПП.20-15
+- model: КНС-ПП 20-15
+- article: СЗПК.КНС.ПП.20-15
+- diameter: 1300
+- height: 2900
+- flow: 20
+- head: 15
+- maxFlow: 30
+- maxHead: 18
+- pumpCount: 2
+- pumpPower: 2.2
+- material: Полипропилен
+- price: 703000
+
+### СЗПК.КНС.ПП.10-20
+- model: КНС-ПП 10-20
+- article: СЗПК.КНС.ПП.10-20
+- diameter: 1300
+- height: 2900
+- flow: 10
+- head: 20
+- maxFlow: 20
+- maxHead: 25
+- pumpCount: 2
+- pumpPower: 2.2
+- material: Полипропилен
+- price: 711000
+
+### СЗПК.КНС.ПП.15-20
+- model: КНС-ПП 15-20
+- article: СЗПК.КНС.ПП.15-20
+- diameter: 1300
+- height: 2900
+- flow: 15
+- head: 20
+- maxFlow: 21
+- maxHead: 25
+- pumpCount: 2
+- pumpPower: 2.2
+- material: Полипропилен
+- price: 711000
+
+### СЗПК.КНС.ПП.15-25
+- model: КНС-ПП 15-25
+- article: СЗПК.КНС.ПП.15-25
+- diameter: 1500
+- height: 3000
+- flow: 15
+- head: 25
+- maxFlow: 21
+- maxHead: 30
+- pumpCount: 2
+- pumpPower: 3
+- material: Полипропилен
+- price: 834000
+
+### СЗПК.КНС.ПП.20-20
+- model: КНС-ПП 20-20
+- article: СЗПК.КНС.ПП.20-20
+- diameter: 1500
+- height: 2800
+- flow: 20
+- head: 20
+- maxFlow: 30
+- maxHead: 25
+- pumpCount: 2
+- pumpPower: 3
+- material: Полипропилен
+- price: 846000
+
+### СЗПК.КНС.ПП.20-25
+- model: КНС-ПП 20-25
+- article: СЗПК.КНС.ПП.20-25
+- diameter: 1500
+- height: 3200
+- flow: 20
+- head: 25
+- maxFlow: 30
+- maxHead: 30
+- pumpCount: 2
+- pumpPower: 4
+- material: Полипропилен
+- price: 859000
+
+### СЗПК.КНС.ПП.25-10
+- model: КНС-ПП 25-10
+- article: СЗПК.КНС.ПП.25-10
+- diameter: 1500
+- height: 3200
+- flow: 25
+- head: 10
+- maxFlow: 32
+- maxHead: 15
+- pumpCount: 2
+- pumpPower: 1.5
+- material: Полипропилен
+- price: 916000
+
+### СЗПК.КНС.ПП.25-20
+- model: КНС-ПП 25-20
+- article: СЗПК.КНС.ПП.25-20
+- diameter: 1500
+- height: 3200
+- flow: 25
+- head: 20
+- maxFlow: 32
+- maxHead: 25
+- pumpCount: 2
+- pumpPower: 3
+- material: Полипропилен
+- price: 923000
+
+### СЗПК.КНС.ПП.15-30
+- model: КНС-ПП 15-30
+- article: СЗПК.КНС.ПП.15-30
+- diameter: 1300
+- height: 3000
+- flow: 15
+- head: 30
+- maxFlow: 21
+- maxHead: 38
+- pumpCount: 2
+- pumpPower: 4
+- material: Полипропилен
+- price: 939000
+
+### СЗПК.КНС.ПП.25-25
+- model: КНС-ПП 25-25
+- article: СЗПК.КНС.ПП.25-25
+- diameter: 1500
+- height: 3300
+- flow: 25
+- head: 25
+- maxFlow: 32
+- maxHead: 30
+- pumpCount: 2
+- pumpPower: 5.5
+- material: Полипропилен
+- price: 943000
+
+### СЗПК.КНС.ПП.30-15
+- model: КНС-ПП 30-15
+- article: СЗПК.КНС.ПП.30-15
+- diameter: 1500
+- height: 3400
+- flow: 30
+- head: 15
+- maxFlow: 35
+- maxHead: 23
+- pumpCount: 2
+- pumpPower: 3
+- material: Полипропилен
+- price: 979000
+
+### СЗПК.КНС.ПП.20-30
+- model: КНС-ПП 20-30
+- article: СЗПК.КНС.ПП.20-30
+- diameter: 1500
+- height: 3200
+- flow: 20
+- head: 30
+- maxFlow: 30
+- maxHead: 35
+- pumpCount: 2
+- pumpPower: 4
+- material: Полипропилен
+- price: 987000
+
+### СЗПК.КНС.ПП.15-40
+- model: КНС-ПП 15-40
+- article: СЗПК.КНС.ПП.15-40
+- diameter: 1500
+- height: 3100
+- flow: 15
+- head: 40
+- maxFlow: 21
+- maxHead: 45
+- pumpCount: 2
+- pumpPower: 5.5
+- material: Полипропилен
+- price: 992800
+
+### СЗПК.КНС.ПП.40-10
+- model: КНС-ПП 40-10
+- article: СЗПК.КНС.ПП.40-10
+- diameter: 1500
+- height: 3400
+- flow: 40
+- head: 10
+- maxFlow: 52
+- maxHead: 15
+- pumpCount: 2
+- pumpPower: 2.2
+- material: Полипропилен
+- price: 998000
+
+### СЗПК.КНС.ПП.25-30
+- model: КНС-ПП 25-30
+- article: СЗПК.КНС.ПП.25-30
+- diameter: 1500
+- height: 3300
+- flow: 25
+- head: 30
+- maxFlow: 32
+- maxHead: 34
+- pumpCount: 2
+- pumpPower: 5.5
+- material: Полипропилен
+- price: 1027000
+
+### СЗПК.КНС.ПП.30-20
+- model: КНС-ПП 30-20
+- article: СЗПК.КНС.ПП.30-20
+- diameter: 1500
+- height: 3400
+- flow: 30
+- head: 20
+- maxFlow: 38
+- maxHead: 29
+- pumpCount: 2
+- pumpPower: 5.5
+- material: Полипропилен
+- price: 1046000
+
+### СЗПК.КНС.ПП.30-25
+- model: КНС-ПП 30-25
+- article: СЗПК.КНС.ПП.30-25
+- diameter: 1500
+- height: 3400
+- flow: 30
+- head: 25
+- maxFlow: 38
+- maxHead: 29
+- pumpCount: 2
+- pumpPower: 5.5
+- material: Полипропилен
+- price: 1046000
+
+### СЗПК.КНС.ПП.30-10
+- model: КНС-ПП 30-10
+- article: СЗПК.КНС.ПП.30-10
+- diameter: 1500
+- height: 3400
+- flow: 30
+- head: 10
+- maxFlow: 40
+- maxHead: 15
+- pumpCount: 2
+- pumpPower: 2.2
+- material: Полипропилен
+- price: 1056000
+
+### СЗПК.КНС.ПП.40-15
+- model: КНС-ПП 40-15
+- article: СЗПК.КНС.ПП.40-15
+- diameter: 1500
+- height: 3400
+- flow: 40
+- head: 15
+- maxFlow: 50
+- maxHead: 19
+- pumpCount: 2
+- pumpPower: 4
+- material: Полипропилен
+- price: 1102000
+
+### СЗПК.КНС.ПП.40-20
+- model: КНС-ПП 40-20
+- article: СЗПК.КНС.ПП.40-20
+- diameter: 1500
+- height: 3400
+- flow: 40
+- head: 20
+- maxFlow: 50
+- maxHead: 25
+- pumpCount: 2
+- pumpPower: 5.5
+- material: Полипропилен
+- price: 1102000
+
+### СЗПК.КНС.ПП.25-35
+- model: КНС-ПП 25-35
+- article: СЗПК.КНС.ПП.25-35
+- diameter: 1500
+- height: 3300
+- flow: 25
+- head: 35
+- maxFlow: 32
+- maxHead: 39
+- pumpCount: 2
+- pumpPower: 7.5
+- material: Полипропилен
+- price: 1114000
+
+### СЗПК.КНС.ПП.50-15
+- model: КНС-ПП 50-15
+- article: СЗПК.КНС.ПП.50-15
+- diameter: 1500
+- height: 3700
+- flow: 50
+- head: 15
+- maxFlow: 55
+- maxHead: 30
+- pumpCount: 2
+- pumpPower: 5.5
+- material: Полипропилен
+- price: 1130000
+
+### СЗПК.КНС.ПП.50-10
+- model: КНС-ПП 50-10
+- article: СЗПК.КНС.ПП.50-10
+- diameter: 1500
+- height: 3400
+- flow: 50
+- head: 10
+- maxFlow: 62
+- maxHead: 15
+- pumpCount: 2
+- pumpPower: 4
+- material: Полипропилен
+- price: 1137000
+
+### СЗПК.КНС.ПП.60-10
+- model: КНС-ПП 60-10
+- article: СЗПК.КНС.ПП.60-10
+- diameter: 2000
+- height: 3600
+- flow: 60
+- head: 10
+- maxFlow: 80
+- maxHead: 16
+- pumpCount: 2
+- pumpPower: 4
+- material: Полипропилен
+- price: 1474000
+
+### СЗПК.КНС.ПП.70-10
+- model: КНС-ПП 70-10
+- article: СЗПК.КНС.ПП.70-10
+- diameter: 2000
+- height: 3650
+- flow: 70
+- head: 10
+- maxFlow: 95
+- maxHead: 16
+- pumpCount: 2
+- pumpPower: 5.5
+- material: Полипропилен
+- price: 1500000
+
+### СЗПК.КНС.ПП.60-15
+- model: КНС-ПП 60-15
+- article: СЗПК.КНС.ПП.60-15
+- diameter: 2000
+- height: 3700
+- flow: 60
+- head: 15
+- maxFlow: 80
+- maxHead: 22
+- pumpCount: 2
+- pumpPower: 5.5
+- material: Полипропилен
+- price: 1521000
+
+### СЗПК.КНС.ПП.70-15
+- model: КНС-ПП 70-15
+- article: СЗПК.КНС.ПП.70-15
+- diameter: 2000
+- height: 3700
+- flow: 70
+- head: 15
+- maxFlow: 85
+- maxHead: 25
+- pumpCount: 2
+- pumpPower: 5.5
+- material: Полипропилен
+- price: 1521000
+
+### СЗПК.КНС.ПП.80-10
+- model: КНС-ПП 80-10
+- article: СЗПК.КНС.ПП.80-10
+- diameter: 2000
+- height: 3650
+- flow: 80
+- head: 10
+- maxFlow: 95
+- maxHead: 20
+- pumpCount: 2
+- pumpPower: 7.5
+- material: Полипропилен
+- price: 1524000
+
+### СЗПК.КНС.ПП.80-15
+- model: КНС-ПП 80-15
+- article: СЗПК.КНС.ПП.80-15
+- diameter: 2000
+- height: 3650
+- flow: 80
+- head: 15
+- maxFlow: 95
+- maxHead: 20
+- pumpCount: 2
+- pumpPower: 7.5
+- material: Полипропилен
+- price: 1524000
+
+### СЗПК.КНС.ПП.50-25
+- model: КНС-ПП 50-25
+- article: СЗПК.КНС.ПП.50-25
+- diameter: 2000
+- height: 3600
+- flow: 50
+- head: 25
+- maxFlow: 65
+- maxHead: 30
+- pumpCount: 2
+- pumpPower: 7.5
+- material: Полипропилен
+- price: 1543000
+
+### СЗПК.КНС.ПП.60-20
+- model: КНС-ПП 60-20
+- article: СЗПК.КНС.ПП.60-20
+- diameter: 2000
+- height: 3550
+- flow: 60
+- head: 20
+- maxFlow: 85
+- maxHead: 28
+- pumpCount: 2
+- pumpPower: 7.5
+- material: Полипропилен
+- price: 1566000
+
+### СЗПК.КНС.ПП.50-20
+- model: КНС-ПП 50-20
+- article: СЗПК.КНС.ПП.50-20
+- diameter: 2000
+- height: 3600
+- flow: 50
+- head: 20
+- maxFlow: 60
+- maxHead: 25
+- pumpCount: 2
+- pumpPower: 7.5
+- material: Полипропилен
+- price: 1604000
